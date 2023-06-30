@@ -1,7 +1,7 @@
 import { SPage, SPageListProps } from 'servisofts-component';
 
 import root from './root';
-// import carga from "./carga"
+import carga from "./carga"
 // import mapa from './mapa';
 // import login from "./login";
 // import registro from './registro';
@@ -13,7 +13,7 @@ export default SPage.combinePages("/", {
   // "": test,
   // "": carga,
   "": root,
-  // "carga": carga,
+  carga,
   // ...login,
   // mapa,
   // ...registro,

@@ -1,4 +1,4 @@
-// import { SModel } from "servisofts-model";
+import { SModel } from "servisofts-model";
 import Usuario from "servisofts-rn-usuario";
 import Roles_permisos from "servisofts-rn-roles_permisos";
 import Geolocation from "servisofts-rn-geolocation"
@@ -32,5 +32,5 @@ Chat.init({});
 
 export default {
     ...Model,
-    // ...SModel.declare(Model)
+    ...SModel.declare(Model)
 }

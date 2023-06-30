@@ -1,41 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SDate, SHr, SIcon, SImage, SNavigation, SPage, SStorage, SText, STheme, SThread, SView } from 'servisofts-component';
-import Model from '../Model';
+import { SHr, SIcon, SNavigation, SPage, STheme, SThread, SView } from 'servisofts-component';
 
-const IS_FIRST_INSTALL_KEY = "IS_FIRST_INSTALL_KEY"
-let ESCOGIO_DIRECCION = false;
 class index extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
+    state = {}
     componentDidMount() {
-        Model.restaurante.Action.getAll();
-        Model.horario.Action.getAll();
-        Model.pack.Action.getAll();
-        Model.costo_envio.Action.getAll();
-        let isFirst = false;
-        SStorage.getItem(IS_FIRST_INSTALL_KEY, (a) => {
-            isFirst = a;
-        })
         new SThread(2500, "carga_hilo", false).start(() => {
-            if (!isFirst) {
-                SStorage.setItem(IS_FIRST_INSTALL_KEY, new SDate().getTime() + "");
-                SNavigation.replace("/intro")
-                return;
-            }
-            if (!ESCOGIO_DIRECCION) {
-                ESCOGIO_DIRECCION = true;
-                SNavigation.replace("/direccion")
-                return;
-            }
-            SNavigation.replace("/root")
-
+            SNavigation.replace("/")
         })
-
     }
 
     renderFooter() {
