@@ -11,7 +11,7 @@ const theme: SThemeThemes = {
         info: "#DE5738",
         background: "#ffffff",
         card: "#eeeeee99",
-        accent:"#99CC00",
+        accent:"#151813",
         mapStyle: MapStyle,
         font:"OpenSans-SemiBold"
 
@@ -25,7 +25,7 @@ const theme: SThemeThemes = {
         info: "#DE5738",
         background: "#05253F",
         card: "#eeeeee99",
-        accent:"#99CC00",
+        accent:"#151813",
         mapStyle: MapStyle,
         font:"OpenSans-SemiBold"
     }

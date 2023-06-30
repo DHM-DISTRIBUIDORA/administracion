@@ -12,8 +12,8 @@ export default class SectionHeader extends Component {
     render() {
         return (
             <SView col={"xs-12"} center >
-                <SView col={"xs-12"} height={150} >
-                    <SIcon name={"logowhite"} fill={STheme.color.secondary} />
+                <SView col={"xs-12"} height={90} >
+                    <SIcon name={"LogoWhite"} fill={STheme.color.secondary} />
                 </SView>
                 <SHr height={20} />
                 <SView col={"xs-12"} height={50} row>

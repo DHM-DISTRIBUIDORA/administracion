@@ -23,7 +23,7 @@ export default class index extends Component {
 				height: 45,
 			}} center>
 				<SView height={23} colSquare center >
-					<SIcon name={icon} fill={color} />
+					<SIcon name={icon} stroke={color} fill={STheme.color.primary} />
 				</SView>
 				<SView height={2} />
 				<SText fontSize={8} center color={color}  >{title}</SText>
@@ -35,13 +35,18 @@ export default class index extends Component {
 			// <SView flex col={"xs-12"}>
 			// 		<SView col={"xs-12"} flex>
 			// 		</SView>
-			<SView col={"xs-12"} height={50} border={'transparent'} style={{ backgroundColor: STheme.color.primary }}>
+			<SView col={"xs-12"} height={60} border={'transparent'} 
+			style={{ 
+				backgroundColor: STheme.color.primary,
+				borderTopLeftRadius: 35 ,
+				borderTopRightRadius: 35
+				}}>
 				<SView col={'xs-12'} row height >
-					{this.getItem({ key: "root", title: 'Inicio', icon: 'MenuLocation', url: '/root' })}
-					{this.getItem({ key: "explorar", title: 'Explorar', icon: 'MenuExplorar', url: '/explorar' })}
+					{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
+					{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
 					{
 						!Model.usuario.Action.getKey() ?
-							(this.getItem({ key: "login", title: 'Cuenta', icon: 'Exit', url: '/login' }))
+							(this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' }))
 							: (this.getItem({ key: "favorito", title: 'Favoritos', icon: 'MenuFavoritos', url: '/favoritos' }))
 					}
 					{
