@@ -1,0 +1,31 @@
+{
+    key:"",
+    type:"emitir",
+    cliente:{
+        complemento:"",
+        ci:TOOOOOOODOOOOO,
+        id_tipo_documento_cliente:1,
+        tipo:2,
+        nombre:TOOOOOOODOOOOO,
+        email:TOOOOOOODOOOOO,
+        "codigo":3334,
+    },
+    factura:{
+        descuento_adicional:0,
+        isEnviarImpuestos:1,
+        codigo_sucursal:0,
+        descripcion_leyenda:"LEY PRUEBA",
+        monto_total:10.0,
+        codigo_metodo_pago:DELAPARAMETRICA,
+        codigo_cliente:522618,
+        detalle:[
+            {
+                precio_unitario:10.0,
+                descripcion_producto:"Tarifa de delivery tapeke. ",
+                codigo_producto:"DELAPARAMETRICA",
+                codigo_unidad_medida:DELAPARAMETRICA,
+                cantidad:1
+            }
+        ]
+    }
+}
