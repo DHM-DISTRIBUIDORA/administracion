@@ -6,7 +6,7 @@ class index extends Component {
     state = {}
     componentDidMount() {
         new SThread(2500, "carga_hilo", false).start(() => {
-            SNavigation.replace("/")
+            SNavigation.replace("/root")
         })
     }
 
@@ -22,15 +22,14 @@ class index extends Component {
     }
     render() {
         return (
-            <SPage hidden disableScroll >
+            <SPage hidden disableScroll center>
                 <SView col={"xs-12"} flex backgroundColor={STheme.color.primary} center onLayout={(evt) => {
                     this.setState({ layout: evt.nativeEvent.layout })
                 }}>
                     <SView col={"xs-6 sm-5 md-4 lg-3 xl-2 xxl-1.5"}>
-                        <SIcon name={"logowhite"} fill={STheme.color.secondary} />
+                        <SIcon name={"LogoWhite"} fill={STheme.color.white} />
                     </SView>
-                    <SHr height={100} />
-                    {this.renderFooter()}
+                    {/* {this.renderFooter()} */}
                 </SView>
             </SPage>
         );

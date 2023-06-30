@@ -35,13 +35,13 @@ export default class index extends Component {
 			// <SView flex col={"xs-12"}>
 			// 		<SView col={"xs-12"} flex>
 			// 		</SView>
-			<SView col={"xs-12"} height={50} border={'transparent'} style={{ backgroundColor: STheme.color.accent }}>
+			<SView col={"xs-12"} height={50} border={'transparent'} style={{ backgroundColor: STheme.color.primary }}>
 				<SView col={'xs-12'} row height >
-					{this.getItem({ key: "root", title: 'Descrubir', icon: 'MenuLocation', url: '/root' })}
+					{this.getItem({ key: "root", title: 'Inicio', icon: 'MenuLocation', url: '/root' })}
 					{this.getItem({ key: "explorar", title: 'Explorar', icon: 'MenuExplorar', url: '/explorar' })}
 					{
 						!Model.usuario.Action.getKey() ?
-							(this.getItem({ key: "login", title: 'Login', icon: 'Exit', url: '/login' }))
+							(this.getItem({ key: "login", title: 'Cuenta', icon: 'Exit', url: '/login' }))
 							: (this.getItem({ key: "favorito", title: 'Favoritos', icon: 'MenuFavoritos', url: '/favoritos' }))
 					}
 					{
