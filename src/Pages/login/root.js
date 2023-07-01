@@ -17,7 +17,7 @@ class login extends Component {
     render() {
 
         return (
-            <SPage footer={<AccentBar />}>
+            <SPage  footer={<AccentBar />} >
                 <SView col={"xs-12"} center>
                     <SView col={"xs-12"} backgroundColor={STheme.color.primary}>
                         <Container>

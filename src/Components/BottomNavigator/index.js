@@ -18,15 +18,16 @@ export default class index extends Component {
 		}} >
 			<SView style={{
 				borderRadius: 16,
-				backgroundColor: (isSelect ? "#ffffff44" : ""),
+				// backgroundColor: (isSelect ? "#ffffff44" : ""),
 				width: 55,
 				height: 45,
 			}} center>
 				<SView height={23} colSquare center >
-					<SIcon name={icon} stroke={color} fill={STheme.color.primary} />
+					{/* <SIcon name={icon} stroke={color} fill={STheme.color.primary} /> */}
+					<SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info  : STheme.color.white}  />
 				</SView>
 				<SView height={2} />
-				<SText fontSize={8} center color={color}  >{title}</SText>
+				<SText fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
 			</SView>
 		</SView>
 	}
@@ -52,7 +53,7 @@ export default class index extends Component {
 					{
 						!Model.usuario.Action.getKey() ?
 							null
-							: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' }))
+							: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/pedidos' }))
 					}
 					{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 				</SView>

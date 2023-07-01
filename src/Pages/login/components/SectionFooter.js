@@ -16,7 +16,7 @@ export default class SectionFooter extends Component {
 
                 <PButtom fontSize={20} onPress={this.props.onPress}>Login</PButtom>
                 <SHr height={20} />
-                <SText fontSize={14} color={STheme.color.lightBlack} style={{ textDecorationLine: 'underline' }} font={"LondonMM"} onPress={() => { SNavigation.navigate('/login/recuperar'); }}>¿Olvidaste tu correo o contraseña?</SText>
+                <SText fontSize={14} color={STheme.color.text} style={{ textDecorationLine: 'underline' }} font={"LondonMM"} onPress={() => { SNavigation.navigate('/login/recuperar'); }}>¿Olvidaste tu correo o contraseña?</SText>
             </SView>
         );
     }
