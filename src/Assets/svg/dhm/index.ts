@@ -13,6 +13,8 @@ import IconChecked, { ReactComponent as IconCheckedw } from './iconChecked.svg';
 import IconCheckedOk, { ReactComponent as IconCheckedOkW } from './iconCheckedOk.svg';
 import KMenu, { ReactComponent as KMenuW } from './menu.svg';
 import BtnMas, { ReactComponent as BtnMasW } from './btnMas.svg';
+import Menos, { ReactComponent as MenosW } from './menos.svg';
+import Mas, { ReactComponent as MasW } from './mas.svg';
 
 
 
@@ -33,6 +35,8 @@ const Assets = {
 	"IconCheckedOk": { Native: IconCheckedOk, Web: IconCheckedOkW },
 	"KMenu": { Native: KMenu, Web: KMenuW },
 	"BtnMas": { Native: BtnMas, Web: BtnMasW },
+	"Menos": { Native: Menos, Web: MenosW },
+	"Mas": { Native: Mas, Web: MasW },
 	
 	
 	

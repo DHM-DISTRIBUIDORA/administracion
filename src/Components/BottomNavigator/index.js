@@ -24,7 +24,7 @@ export default class index extends Component {
 			}} center>
 				<SView height={23} colSquare center >
 					{/* <SIcon name={icon} stroke={color} fill={STheme.color.primary} /> */}
-					<SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info  : STheme.color.white}  />
+					<SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} />
 				</SView>
 				<SView height={2} />
 				<SText fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
@@ -36,28 +36,32 @@ export default class index extends Component {
 			// <SView flex col={"xs-12"}>
 			// 		<SView col={"xs-12"} flex>
 			// 		</SView>
-			<SView col={"xs-12"} height={60} border={'transparent'} 
-			style={{ 
-				backgroundColor: STheme.color.primary,
-				borderTopLeftRadius: 35 ,
-				borderTopRightRadius: 35
-				}}>
-				<SView col={'xs-12'} row height >
-					{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
-					{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
-					{
-						!Model.usuario.Action.getKey() ?
-							(this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' }))
-							: (this.getItem({ key: "favorito", title: 'Favoritos', icon: 'MenuFavoritos', url: '/favoritos' }))
-					}
-					{
-						!Model.usuario.Action.getKey() ?
-							null
-							: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/pedidos' }))
-					}
-					{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
-				</SView>
-			</SView >
+			<>
+				<SView col={"xs-12"} height={60} border={'transparent'}
+					style={{
+						backgroundColor: STheme.color.primary,
+						borderTopLeftRadius: 35,
+						borderTopRightRadius: 35,
+						overFlow: 'hidden',
+					}}>
+					<SView col={'xs-12'} row height >
+						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
+						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
+						{
+							!Model.usuario.Action.getKey() ?
+								(this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' }))
+								: (this.getItem({ key: "favorito", title: 'Favoritos', icon: 'MenuFavoritos', url: '/favoritos' }))
+						}
+						{
+							!Model.usuario.Action.getKey() ?
+								null
+								: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/pedidos' }))
+						}
+						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
+					</SView>
+				</SView >
+				
+			</>
 			// </SView>
 		);
 	}

@@ -8,6 +8,7 @@ import registro from './registro';
 import explorar from './explorar';
 import favoritos from './favoritos';
 import pedidos from './pedidos';
+import producto from './producto';
 
 // import direccion from './direccion';
 // import perfil from './perfil';
@@ -23,6 +24,7 @@ export default SPage.combinePages("/", {
   "explorar": explorar,
   "favoritos": favoritos,
   "pedidos": pedidos,
+  ...producto
   // ...direccion,
   // ...perfil,
   // ...chat,

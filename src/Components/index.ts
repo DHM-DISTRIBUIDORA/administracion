@@ -12,6 +12,7 @@ import BotonRecargar from "./BotonRecargar"
 import Popups from "./Popups"
 import BtnRedes from "./BtnRedes"
 import Banner from "./Banner"
+import Producto from "./Producto"
 
 
 export {
@@ -28,5 +29,6 @@ export {
     BotonRecargar,
     Popups,
     BtnRedes,
-    Banner
+    Banner,
+    Producto
 }

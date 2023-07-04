@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView } from 'react-native'
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon } from 'servisofts-component';
+import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, TopBar, } from '../Components';
 import Model from '../Model';
 class index extends Component {
@@ -49,7 +49,9 @@ class index extends Component {
                 <SView col={"xs-12"}>
                     <SText fontSize={20} bold>MÁS VENDIDOS</SText>
                     <SView col={"xs-12"} flex style={{ alignItems: "flex-end" }}
-                        // onPress={() => { }}
+                        onPress={() => {
+                            SNavigation.navigate("/producto")
+                        }}
                     >
                         <SText color={STheme.color.primary} fontSize={16} bold>VER TODO</SText>
                     </SView>
