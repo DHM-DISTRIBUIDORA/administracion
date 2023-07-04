@@ -1,6 +1,6 @@
 
 import Logo, { ReactComponent as LogoW } from './logo.svg';
-import Logosolo, { ReactComponent as LogosoloW } from './logosolo.svg';
+import Logosolo, { ReactComponent as LogosoloW } from './logoSolo.svg';
 import Carga, { ReactComponent as CargaW } from './carga.svg';
 import LogoWhite, { ReactComponent as LogoWhiteW } from './logoWhite.svg';
 import BackArrow, { ReactComponent as BackArrowW } from './backArrow.svg';
@@ -15,6 +15,7 @@ import KMenu, { ReactComponent as KMenuW } from './menu.svg';
 import BtnMas, { ReactComponent as BtnMasW } from './btnMas.svg';
 import Menos, { ReactComponent as MenosW } from './menos.svg';
 import Mas, { ReactComponent as MasW } from './mas.svg';
+import Right, { ReactComponent as RightW } from './i-right.svg';
 
 
 
@@ -37,6 +38,7 @@ const Assets = {
 	"BtnMas": { Native: BtnMas, Web: BtnMasW },
 	"Menos": { Native: Menos, Web: MenosW },
 	"Mas": { Native: Mas, Web: MasW },
+	"Right": { Native: Right, Web: RightW },
 	
 	
 	

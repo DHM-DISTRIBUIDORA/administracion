@@ -85,7 +85,7 @@ class root extends Component {
                         <SView
                             col={'xs-11'}
                             onPress={() => {
-                                SNavigation.navigate('/terminos');
+                                SNavigation.navigate('/privacidad');
                             }}>
                             <SText
                                 color={STheme.color.text}
@@ -96,7 +96,7 @@ class root extends Component {
                         </SView>
                     </SView>
                     <SHr height={20} />
-                    <BtnSend onPress={() => this.form.submit()}>{"Registrar"}</BtnSend>
+                    <BtnSend onPress={() => this.form.submit()}>{"REGISTRAR"}</BtnSend>
                     <SHr height={30} />
                     {/* <SectionApis /> */}
                     <SHr height={35} />
