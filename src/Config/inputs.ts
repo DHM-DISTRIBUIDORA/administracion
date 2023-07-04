@@ -12,7 +12,7 @@ const inputs = () => {
             },
             "View": {
                 borderWidth: 2,
-                borderColor: "#E0E0E0" + "40",
+                borderColor: "#999999" + "40",
                 height: 55,
                 borderRadius: 16,
                 marginTop: 50,
@@ -22,7 +22,7 @@ const inputs = () => {
                 fontSize: 16,
                 paddingStart: 20,
                 color: STheme.color.text,
-                backgroundColor: "#E0E0E0" + "55",
+                backgroundColor: "#FFFFFF",
                 placeholderTextColor: STheme.color.gray,
                 height: 55,
                 borderRadius: 16,

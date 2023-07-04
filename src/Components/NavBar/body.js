@@ -147,11 +147,11 @@ export default class body extends React.Component {
             <SScrollView2 disableHorizontal contentContainerStyle={{ width: "100%" }} >
                 <SView col={"xs-12"} center  >
                     {this.renderIcon({ label: "Inicio", icon: "Inicio", path: "/root" })}
-                    {this.renderIcon({ label: "Mis direcciones", icon: "Direccion", path: "/direccion", requireUser: true })}
-                    {this.renderIcon({ label: "Mis compras", icon: "Compras", path: "/misCompras", requireUser: true })}
-                    {this.renderIcon({ label: "Mis cupones", icon: "mCupon", path: "/cupones", requireUser: true })}
-                    {this.renderIcon({ label: "Mi billetera", icon: "Billetera", path: "/billetera", requireUser: true })}
-                    {this.renderIcon({ label: "Notificaciones", icon: "mNotification", path: "/notificaciones", requireUser: true })}
+                    {this.renderIcon({ label: "Mis notificaciones", icon: "Direccion", path: "/direccion", requireUser: true })}
+                    {this.renderIcon({ label: "Avances por empresa", icon: "Compras", path: "/misCompras", requireUser: true })}
+                    {this.renderIcon({ label: "Respaldos", icon: "mCupon", path: "/cupones", requireUser: true })}
+                    {this.renderIcon({ label: "Conexiones", icon: "Billetera", path: "/billetera", requireUser: true })}
+                    {this.renderIcon({ label: "Configuración", icon: "mNotification", path: "/notificaciones", requireUser: true })}
 
                     {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })}
                     {this.renderIcon({ label: "Contactos", icon: "Contacto", path: "/contacto" })}

@@ -11,6 +11,9 @@ import BtnNavegar from "./BtnNavegar"
 import BotonRecargar from "./BotonRecargar"
 import Popups from "./Popups"
 import BtnRedes from "./BtnRedes"
+import Banner from "./Banner"
+import Producto from "./Producto"
+
 
 export {
     TopBar,
@@ -25,5 +28,7 @@ export {
     BtnNavegar,
     BotonRecargar,
     Popups,
-    BtnRedes
+    BtnRedes,
+    Banner,
+    Producto
 }

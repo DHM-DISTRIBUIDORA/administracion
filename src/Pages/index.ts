@@ -4,7 +4,12 @@ import root from './root';
 import carga from "./carga"
 // import mapa from './mapa';
 import login from "./login";
-// import registro from './registro';
+import registro from './registro';
+import explorar from './explorar';
+import favoritos from './favoritos';
+import pedidos from './pedidos';
+import producto from './producto';
+
 // import direccion from './direccion';
 // import perfil from './perfil';
 // import chat from './chat';
@@ -15,7 +20,11 @@ export default SPage.combinePages("/", {
   "root": root,
   ...login,
   // mapa,
-  // ...registro,
+  ...registro,
+  "explorar": explorar,
+  "favoritos": favoritos,
+  "pedidos": pedidos,
+  ...producto
   // ...direccion,
   // ...perfil,
   // ...chat,
