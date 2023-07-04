@@ -6,7 +6,7 @@ PODS:
   - AppAuth/ExternalUserAgent (1.6.0):
     - AppAuth/Core
   - boost-for-react-native (1.63.0)
-  - BVLinearGradient (2.6.2):
+  - BVLinearGradient (2.7.3):
     - React-Core
   - CocoaAsyncSocket (7.6.5)
   - DoubleConversion (1.1.6)
@@ -474,7 +474,7 @@ PODS:
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-component (2.11.9):
+  - servisofts-component (2.11.14):
     - React-Core
   - servisofts-socket (3.0.4):
     - CocoaAsyncSocket
@@ -686,11 +686,11 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   boost-for-react-native: 39c7adb57c4e60d6c5479dd8623128eb5b3f0f2c
-  BVLinearGradient: 34a999fda29036898a09c6a6b728b0b4189e1a44
+  BVLinearGradient: fbe308a1d19a8133f69e033abc85d8008644f5e3
   CocoaAsyncSocket: 065fd1e645c7abab64f7a6a2007a48038fdc6a99
   DoubleConversion: cf9b38bf0b2d048436d9a82ad2abe1404f11e7de
   FBLazyVector: fa8275d5086566e22a26ddc385ab5772e7f9b1bd
-  FBReactNativeSpec: f10aa1c5453fce214c025a6509e66012cb7e446a
+  FBReactNativeSpec: ac5edf47c48312ce0db300ab6f7cb719059f9846
   FBSDKCoreKit: 4afd6ff53d8133a433dbcda44451c9498f8c6ce4
   FBSDKLoginKit: 7181765f2524d7ebf82d9629066c8e6caafc99d0
   FBSDKShareKit: 0c0d51b3af47075a85ed9bea0e28b2fc70e3594b
@@ -759,10 +759,10 @@ SPEC CHECKSUMS:
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 1081cf2576b404ca804daf4934bb644cb506ff98
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-component: a59e8def726228e5c57e249211b2f8a22913bc9c
+  servisofts-component: 31e74f2829f862dcaeaed7e38bdcdacbcfeb1847
   servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 2ed7fae8e8f79b3c4e2bc25a9c1d4425b92c5da2
+PODFILE CHECKSUM: 8bcc87bc8ab2518f0b7f1a0e90d97b999a64b5ba
 
 COCOAPODS: 1.11.3
