@@ -25,7 +25,8 @@ class root extends Component {
                 <Header />
                 <Container>
                     <SView col={"xs-12"} center>
-                        <SText fontSize={26} color={STheme.color.white}>Regístrate</SText>
+                        <SHr height={20}/>
+                        <SText fontSize={26} color={STheme.color.text}>Regístrate</SText>
                     </SView>
                     <SForm
                         ref={(form) => { this.form = form; }}
