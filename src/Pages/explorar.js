@@ -1,73 +1,49 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container } from '../Components';
+import Model from '../Model';
 class index extends Component {
+
+    getComponent(obj) {
+        return <SView col={"xs-12"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15 }} center
+            onPress={() => {
+                
+            }}
+        >
+            <SHr />
+            <SView col={"xs-12"} row center>
+                <SView width={8} />
+                <SIcon name='Logosolo' height={25} width={25} />
+                <SView width={15} />
+                <SView flex >
+                    <SText color={STheme.color.white} fontSize={18} bold>{obj.nombre}</SText>
+                    <SText color={STheme.color.white} fontSize={8} >{obj.catcod}</SText>
+                </SView>
+                <SView width={20}>
+                    <SIcon name='Right' height={16} fill={STheme.color.primary} />
+                </SView>
+                <SView width={4} />
+            </SView>
+            <SHr />
+        </SView>
+    }
+    getLista() {
+        const cat = Model.dm_categorias.Action.getAll();
+        if (!cat) return <SLoad />
+        return <SList
+            data={cat}
+            limit={20}
+            order={[{ key: "nombre", order: "asc" }]}
+            render={obj => this.getComponent(obj)} />
+    }
     render() {
         return <SPage title={"Categorías"}
             footer={this.footer()}
         >
             <Container>
                 <SHr height={20} />
-                <SView col={"xs-12"} height={55} style={{ backgroundColor: STheme.color.primary, padding: 15, borderRadius: 15 }} row center
-                    onPress={() => {
-
-                    }}
-                >
-                    <SView col={"xs-11"} row>
-                        <SIcon name='Logosolo' height={23} width={20} />
-                        <SView width={15} />
-                        <SText color={STheme.color.white} fontSize={18} bold>Bebés</SText>
-                    </SView>
-                    <SView col={"xs-1"} row>
-                        <SIcon name='Right' height={16} fill={STheme.color.primary} />
-                    </SView>
-                </SView>
-                <SHr height={10} />
-                <SView col={"xs-12"} height={55} style={{ backgroundColor: STheme.color.primary, padding: 15, borderRadius: 15 }} row center
-                    onPress={() => {
-
-                    }}
-                >
-                    <SView col={"xs-11"} row>
-                        <SIcon name='Logosolo' height={23} width={20} />
-                        <SView width={15} />
-                        <SText color={STheme.color.white} fontSize={18} bold>Bebidas sin alcohol</SText>
-                    </SView>
-                    <SView col={"xs-1"} row>
-                        <SIcon name='Right' height={16} fill={STheme.color.primary} />
-                    </SView>
-                </SView>
-                <SHr height={10} />
-                <SView col={"xs-12"} height={55} style={{ backgroundColor: STheme.color.primary, padding: 15, borderRadius: 15 }} row center
-                    onPress={() => {
-
-                    }}
-                >
-                    <SView col={"xs-11"} row>
-                        <SIcon name='Logosolo' height={23} width={20} />
-                        <SView width={15} />
-                        <SText color={STheme.color.white} fontSize={18} bold>Despensa</SText>
-                    </SView>
-                    <SView col={"xs-1"} row>
-                        <SIcon name='Right' height={16} fill={STheme.color.primary} />
-                    </SView>
-                </SView>
-                <SHr height={10} />
-                <SView col={"xs-12"} height={55} style={{ backgroundColor: STheme.color.primary, padding: 15, borderRadius: 15 }} row center
-                    onPress={() => {
-
-                    }}
-                >
-                    <SView col={"xs-11"} row>
-                        <SIcon name='Logosolo' height={23} width={20} />
-                        <SView width={15} />
-                        <SText color={STheme.color.white} fontSize={18} bold>Higiene y cuidados</SText>
-                    </SView>
-                    <SView col={"xs-1"} row>
-                        <SIcon name='Right' height={16} fill={STheme.color.primary} />
-                    </SView>
-                </SView>
+                {this.getLista()}
             </Container>
         </SPage>
     }

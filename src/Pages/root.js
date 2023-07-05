@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView } from 'react-native'
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation } from 'servisofts-component';
+import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, TopBar, } from '../Components';
 import Model from '../Model';
 class index extends Component {
@@ -12,7 +12,7 @@ class index extends Component {
         };
     }
 
-   
+
 
     render_mas_vendidos() {
         var productos = Model.productos.Action.getAll();
@@ -38,7 +38,39 @@ class index extends Component {
         </SView>
     }
 
+
+    renderItem(obj) {
+        return <SView width={170} card
+            style={{
+                padding: 10,
+                borderRadius: 18,
+                borderWidth: 1,
+                borderColor: "#E2E2E2",
+
+            }}>
+            <SView col={"xs-12"} row height={115}>
+                <SImage src={require('../Assets/img/producto1.png')} style={{ resizeMode: "contain" }} />
+            </SView>
+            <SHr />
+            <SText fontSize={16}>{obj.nombre}</SText>
+            {/* <SText fontSize={14} color={STheme.color.gray}>12 x 100ml.</SText> */}
+            {/* <SHr height={20} /> */}
+            <SView flex />
+            <SView col={"xs-12"} row center>
+                <SView col={"xs-8"}>
+                    <SText fontSize={18} bold>Bs. {SMath.formatMoney(obj.Precio)}</SText>
+                </SView>
+                <SView col={"xs-4"} flex style={{ alignItems: "flex-end" }}
+                    onPress={() => { }}
+                >
+                    <SIcon name='BtnMas' height={45} />
+                </SView>
+            </SView>
+        </SView>
+    }
     render() {
+        let productos = Model.dm_productos.Action.getAll();
+        console.log(productos)
         return <SPage
             // hidden
             navBar={this.navBar()}
@@ -58,43 +90,23 @@ class index extends Component {
                         <SText color={STheme.color.primary} fontSize={16} bold>VER TODO</SText>
                     </SView>
                     <SHr />
-                    {/* {this.render_mas_vendidos()} */}
-                    <ScrollView
-                        horizontal
-                        contentContainerStyle={{
-                            width: null,
-                        }}>
-                        <SView width={170} card
-                            style={{
-                                padding: 10,
-                                borderRadius: 18,
-                                borderWidth: 1,
-                                borderColor: "#E2E2E2",
-
-                            }}>
-                            <SView col={"xs-12"} row height={115}>
-                                <SImage src={require('../Assets/img/producto1.png')} style={{ resizeMode: "contain" }} />
-                            </SView>
-                            <SHr />
-                            <SText fontSize={16}>Alcohol</SText>
-                            <SText fontSize={14} color={STheme.color.gray}>12 x 100ml.</SText>
-                            <SHr height={20} />
-                            <SView col={"xs-12"} row>
-                                <SView col={"xs-8"}>
-                                    <SText fontSize={18} bold>Bs. 4.99</SText>
-                                </SView>
-                                <SView col={"xs-4"} flex style={{ alignItems: "flex-end" }}
-                                    onPress={() => { }}
-                                >
-                                    <SIcon name='BtnMas' height={45} />
-                                </SView>
-                            </SView>
-                        </SView>
-                    </ScrollView>
-
                 </SView>
+
             </Container>
-        </SPage>
+
+            {/* {this.render_mas_vendidos()} */}
+            <SView col={"xs-12"}>
+                <ScrollView
+                    horizontal
+                    contentContainerStyle={{
+                        width: null,
+                    }}>
+                        <SView width={8}/>
+                    <SList horizontal data={productos} limit={10} render={obj => this.renderItem(obj)} />
+                </ScrollView>
+            </SView>
+
+        </SPage >
     }
 
     navBar() {
@@ -110,3 +122,4 @@ const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(index);
+
