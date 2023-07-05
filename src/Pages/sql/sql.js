@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ScrollView } from 'react-native'
 import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SButtom, SInput, STable2, SStorage, SList } from 'servisofts-component';
-import { Banner, BottomNavigator, Container, TopBar, } from '../Components';
+import { Banner, BottomNavigator, Container, TopBar, } from '../../Components';
 import SSocket from 'servisofts-socket'
 
 class index extends Component {
@@ -75,8 +75,8 @@ class index extends Component {
         />
     }
 
-    getCreateQuery(){
-        
+    getCreateQuery() {
+
     }
     getTableNames() {
         if (!this.state.tables) return <SLoad />
@@ -84,12 +84,14 @@ class index extends Component {
             buscador
             space={0}
             data={this.state.tables}
+            limit={40}
             render={(obj) => {
                 return <SView col={"xs-12"} onPress={() => {
                     this.setState({ tableSelect: obj })
                     // this.inp.setValue("SELECT * top 100 FROM " + obj.name)
                 }} style={{
                     backgroundColor: this.state?.tableSelect?.name == obj.name ? "#000" : "",
+                    padding: 4
                 }}>
                     <SText bold>{obj.name}</SText>
                 </SView>
@@ -111,7 +113,6 @@ class index extends Component {
                         <SLoad hidden={!this.state.loading} />
                         {this.getError()}
                         {this.getTable()}
-
                     </SView>
                 </SView>
             </SView>
