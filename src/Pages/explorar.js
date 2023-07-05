@@ -8,7 +8,7 @@ class index extends Component {
     getComponent(obj) {
         return <SView col={"xs-12"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15 }} center
             onPress={() => {
-                
+
             }}
         >
             <SHr />
@@ -31,9 +31,12 @@ class index extends Component {
     getLista() {
         const cat = Model.dm_categorias.Action.getAll();
         if (!cat) return <SLoad />
+        console.log(cat)
         return <SList
             data={cat}
             limit={20}
+            // filter={(a) => a.nivel == 1}
+            filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
             render={obj => this.getComponent(obj)} />
     }

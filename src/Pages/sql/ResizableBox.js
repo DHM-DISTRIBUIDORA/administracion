@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import { View, PanResponder } from 'react-native';
 
-class ResizableBox extends Component {
+
+type PropsType = {
+    direcction?: "top" | "bottom" | "left" | "right",
+    size: any,
+}
+class ResizableBox extends Component<PropsType> {
     constructor(props) {
         super(props);
 
@@ -12,7 +17,6 @@ class ResizableBox extends Component {
         this.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onPanResponderGrant: (evt, gestureState) => {
-                console.log("entor")
                 this.startWidth = this.state.width
             },
             onPanResponderMove: (evt, gestureState) => {

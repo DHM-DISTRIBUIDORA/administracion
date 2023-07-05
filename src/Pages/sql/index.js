@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { SView } from 'servisofts-component'
 import MenuBar from './MenuBar'
 import TabSelection from './TabSelection'
-import TreeView from './TreeView'
+import TreeView from './TreeView/index'
 
 
 type PropsType = {
