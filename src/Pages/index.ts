@@ -10,7 +10,7 @@ import favoritos from './favoritos';
 import pedidos from './pedidos';
 import producto from './producto';
 import test from './test';
-import sql from './sql';
+import sql from './sql/index';
 import privacidad from './privacidad';
 // import direccion from './direccion';
 // import perfil from './perfil';

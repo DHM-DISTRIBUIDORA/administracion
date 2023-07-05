@@ -1,6 +1,5 @@
-import productos from "./productos";
-import categoria from "./categoria";
+// import productos from "./productos";
+import dm_categorias from "./dm_categorias";
 export default {
-    productos,
-    categoria
+    dm_categorias
 }

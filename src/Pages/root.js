@@ -39,7 +39,6 @@ class index extends Component {
     }
 
     render() {
-
         return <SPage
             // hidden
             navBar={this.navBar()}
