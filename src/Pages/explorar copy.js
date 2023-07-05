@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SList2, SLoad, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView } from 'servisofts-component';
 import { BottomNavigator, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
 
     getComponent(obj) {
-        return <SView col={"xs-5.5"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15, marginBottom: 5 }}
+        return <SView col={"xs-12"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15 }} center
             onPress={() => {
 
             }}
         >
             <SHr />
-            <SView col={"xs-12"} row >
+            <SView col={"xs-12"} row center>
                 <SView width={8} />
-                <SIcon name='Categoria' height={60} width={60} />
-                <SView col={"xs-11"} style={{ padding: 7 }}>
+                <SIcon name='Logosolo' height={25} width={25} />
+                <SView width={15} />
+                <SView flex >
                     <SText color={STheme.color.white} fontSize={18} bold>{obj.nombre}</SText>
+                    <SText color={STheme.color.white} fontSize={8} >{obj.catcod}</SText>
                 </SView>
-                <SView height={0} />
-                <SView flex style={{ alignItems: "flex-end", marginRight:5}}>
-                    <SText color={STheme.color.white} fontSize={16} >{obj.catcod}</SText>
+                <SView width={20}>
+                    <SIcon name='Right' height={16} fill={STheme.color.primary} />
                 </SView>
+                <SView width={4} />
             </SView>
             <SHr />
         </SView>
@@ -30,13 +32,11 @@ class index extends Component {
         const cat = Model.dm_categorias.Action.getAll();
         if (!cat) return <SLoad />
         console.log(cat)
-        return <SList2
-            horizontal
+        return <SList
             data={cat}
             limit={20}
-            space={5}
-            filter={(a) => a.nivel == 1}
-            // filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
+            // filter={(a) => a.nivel == 1}
+            filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
             render={obj => this.getComponent(obj)} />
     }
