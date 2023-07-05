@@ -1,6 +1,6 @@
 
 import Logo, { ReactComponent as LogoW } from './logo.svg';
-import Logosolo, { ReactComponent as LogosoloW } from './logosolo.svg';
+import Logosolo, { ReactComponent as LogosoloW } from './logosolito.svg';
 import Carga, { ReactComponent as CargaW } from './carga.svg';
 import LogoWhite, { ReactComponent as LogoWhiteW } from './logoWhite.svg';
 import BackArrow, { ReactComponent as BackArrowW } from './backArrow.svg';
