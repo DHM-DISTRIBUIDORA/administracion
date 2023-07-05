@@ -25,7 +25,8 @@ class root extends Component {
                 <Header />
                 <Container>
                     <SView col={"xs-12"} center>
-                        <SText fontSize={26} color={STheme.color.white}>Regístrate</SText>
+                        <SHr height={20}/>
+                        <SText fontSize={26} color={STheme.color.text}>Regístrate</SText>
                     </SView>
                     <SForm
                         ref={(form) => { this.form = form; }}
@@ -84,7 +85,7 @@ class root extends Component {
                         <SView
                             col={'xs-11'}
                             onPress={() => {
-                                SNavigation.navigate('/terminos');
+                                SNavigation.navigate('/privacidad');
                             }}>
                             <SText
                                 color={STheme.color.text}
@@ -95,7 +96,7 @@ class root extends Component {
                         </SView>
                     </SView>
                     <SHr height={20} />
-                    <BtnSend onPress={() => this.form.submit()}>{"Registrar"}</BtnSend>
+                    <BtnSend onPress={() => this.form.submit()}>{"REGISTRAR"}</BtnSend>
                     <SHr height={30} />
                     {/* <SectionApis /> */}
                     <SHr height={35} />
