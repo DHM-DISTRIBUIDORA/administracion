@@ -12,6 +12,8 @@ class index extends Component {
         };
     }
 
+   
+
     render_mas_vendidos() {
         var productos = Model.productos.Action.getAll();
         if (!productos) return <SLoad />
@@ -37,6 +39,7 @@ class index extends Component {
     }
 
     render() {
+
         return <SPage
             // hidden
             navBar={this.navBar()}
