@@ -13,6 +13,7 @@ import Popups from "./Popups"
 import BtnRedes from "./BtnRedes"
 import Banner from "./Banner"
 import Producto from "./Producto"
+import Categoria from "./Categoria"
 
 
 export {
@@ -30,5 +31,7 @@ export {
     Popups,
     BtnRedes,
     Banner,
-    Producto
+    Producto,
+    Categoria
+
 }

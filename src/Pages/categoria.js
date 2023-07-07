@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView } from 'servisofts-component';
-import { BottomNavigator, Container } from '../Components';
+import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView, SNavigation } from 'servisofts-component';
+import { BottomNavigator, Categoria, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
 
-    getComponent(obj) {
-        return <SView col={"xs-12"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15 }} center
-            onPress={() => {
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {},
+        };
+        this.params = SNavigation.getAllParams();
 
+    }
+
+
+    getComponent(obj) {
+        return <SView col={"xs-12"} style={{ backgroundColor: this.params.color, borderRadius: 15 }} center
+            onPress={() => {
+                SNavigation.navigate("/producto", { pk: obj.catcod })
             }}
         >
             <SHr />
@@ -21,7 +31,7 @@ class index extends Component {
                     <SText color={STheme.color.white} fontSize={8} >{obj.catcod}</SText>
                 </SView>
                 <SView width={20}>
-                    <SIcon name='Right' height={16} fill={STheme.color.primary} />
+                    <SIcon name='Right' height={16} fill={this.params.color} />
                 </SView>
                 <SView width={4} />
             </SView>
@@ -36,9 +46,15 @@ class index extends Component {
             data={cat}
             limit={20}
             // filter={(a) => a.nivel == 1}
-            filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
+            filter={(a) => (a.catcod + "").startsWith(this.params.pk) && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
-            render={obj => this.getComponent(obj)} />
+            // render={obj => this.getComponent(obj)} 
+            render={(obj) => {
+                // console.log(obj)
+                return <Categoria.Card2 obj={obj} color={this.params.color}  />
+            }}
+        />
+
     }
     render() {
         return <SPage title={"Categorías"}
@@ -47,6 +63,7 @@ class index extends Component {
             <Container>
                 <SHr height={20} />
                 {this.getLista()}
+                <SHr height={20} />
             </Container>
         </SPage>
     }

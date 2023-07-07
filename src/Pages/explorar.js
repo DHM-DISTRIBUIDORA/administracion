@@ -1,52 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SList2, SLoad, SPage, SText, STheme, SView } from 'servisofts-component';
-import { BottomNavigator, Container } from '../Components';
+import { SHr, SIcon, SList, SList2, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { BottomNavigator, Categoria, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
 
-    getComponent(obj) {
-        return <SView col={"xs-5.5"} style={{ backgroundColor: STheme.color.primary, borderRadius: 15, marginBottom: 5 }}
-            onPress={() => {
-
-            }}
-        >
-            <SHr />
-            <SView col={"xs-12"} row >
-                <SView width={8} />
-                <SIcon name='Categoria' height={60} width={60} />
-                <SView col={"xs-11"} style={{ padding: 7 }}>
-                    <SText color={STheme.color.white} fontSize={18} bold>{obj.nombre}</SText>
-                </SView>
-                <SView height={0} />
-                <SView flex style={{ alignItems: "flex-end", marginRight:5}}>
-                    <SText color={STheme.color.white} fontSize={16} >{obj.catcod}</SText>
-                </SView>
-            </SView>
-            <SHr />
-        </SView>
-    }
+  
     getLista() {
+        var color = "";
+        var contador = 0;
+        const colores = ['#85BFD0', '#9B9AD9', '#90D598', '#F5AD76', '#F18684', '#E36188', '#76DEFC', '#D289E1', '#5097F8', '#17C3A5', '#A7C1D4', '#87e4ec'];
         const cat = Model.dm_categorias.Action.getAll();
         if (!cat) return <SLoad />
         console.log(cat)
         return <SList2
             horizontal
             data={cat}
-            limit={20}
-            space={5}
+            space={0}
             filter={(a) => a.nivel == 1}
-            // filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
-            render={obj => this.getComponent(obj)} />
+            // render={obj => this.getComponent(obj, contador)} />
+            render={(obj, i) => {
+                if (contador < colores.length) {
+                    color = colores[contador];
+                    contador++;
+                } else {
+                    contador = 0;
+                }
+                return <Categoria.Card obj={obj} color={color} />
+            }}
+        />
     }
     render() {
         return <SPage title={"Categorías"}
             footer={this.footer()}
         >
-            <Container>
+            <Container >
                 <SHr height={20} />
                 {this.getLista()}
+                <SHr height={20} />
             </Container>
         </SPage>
     }
