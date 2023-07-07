@@ -1,4 +1,4 @@
-package com.importadora_dhm_app;
+package com.distribuidora_dhm_app;
 
 import com.facebook.react.ReactActivity;
 
@@ -10,6 +10,6 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "importadora_dhm_app";
+    return "distribuidora_dhm_app";
   }
 }

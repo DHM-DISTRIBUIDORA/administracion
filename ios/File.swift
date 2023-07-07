@@ -1,6 +1,6 @@
 //
 //  File.swift
-//  importadora_dhm_app
+//  distribuidora_dhm_app
 //
 //  Created by Ricardo Paz Demiquel on 3/2/22.
 //

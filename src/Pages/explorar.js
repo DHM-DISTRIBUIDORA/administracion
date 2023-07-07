@@ -35,9 +35,9 @@ class index extends Component {
         return <SList
             data={cat}
             limit={20}
-            // filter={(a) => a.nivel == 1}
-            filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
-            order={[{ key: "nombre", order: "asc" }]}
+            filter={(a) => a.nivel == 1}
+            // filter={(a) => (a.catcod+"").startsWith("01") && a.nivel == 2}
+            order={[{ key: "catcod", order: "asc" }]}
             render={obj => this.getComponent(obj)} />
     }
     render() {

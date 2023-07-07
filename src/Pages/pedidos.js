@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SPage, SText, SView } from 'servisofts-component';
-import { BottomNavigator } from '../Components';
+import { SButtom, SHr, SNavigation, SPage, SText, SView } from 'servisofts-component';
+import { BottomNavigator, Container } from '../Components';
 class index extends Component {
     render() {
-        return <SPage 
-        hidden
-        footer={this.footer()}
+        return <SPage
+            hidden
+            footer={this.footer()}
         >
-            <SView col={"xs-12"}>
-                <SText >Holaa!! soy el favoritos</SText>
-            </SView>
+            <SHr />
+            <Container>
+                <SView col={"xs-12"} row>
+                    <SButtom type='danger' onPress={() => SNavigation.navigate("/clientes")}>IR A CLIENTES</SButtom>
+                    <SHr />
+                    <SButtom type='danger' onPress={() => SNavigation.navigate("/test")}>IR A TEST</SButtom>
+                    <SView width={8} />
+                    <SButtom type='danger' onPress={() => SNavigation.navigate("/sql")}>IR A SQL</SButtom>
+                </SView>
+            </Container>
         </SPage>
     }
 

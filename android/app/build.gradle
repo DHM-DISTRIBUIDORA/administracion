@@ -130,11 +130,11 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.importadora_dhm_app"
+        applicationId "com.distribuidora_dhm_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 40113
-        versionName "4.1.13"
+        versionCode 10000
+        versionName "1.0.0"
     }
     splits {
         abi {
@@ -153,9 +153,9 @@ android {
         }
         release {
             storeFile file('app.jks')
-            storePassword 'tapeke123.'
+            storePassword 'servisofts123.'
             keyAlias 'key0'
-            keyPassword 'tapeke123.'
+            keyPassword 'servisofts123.'
         }
     }
     buildTypes {

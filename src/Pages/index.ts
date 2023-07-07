@@ -12,6 +12,7 @@ import producto from './producto';
 import test from './test';
 import sql from './sql/index';
 import privacidad from './privacidad';
+import clientes from './clientes';
 // import direccion from './direccion';
 // import perfil from './perfil';
 // import chat from './chat';
@@ -29,7 +30,8 @@ export default SPage.combinePages("/", {
   test,
   sql,
   "privacidad": privacidad,
-  ...producto
+  ...producto,
+  ...clientes
   // ...direccion,
   // ...perfil,
   // ...chat,

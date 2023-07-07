@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, PanResponder } from 'react-native';
+import { View, PanResponder, Platform } from 'react-native';
 
 
 type PropsType = {
@@ -9,7 +9,7 @@ type PropsType = {
 class ResizableBox extends Component<PropsType> {
     constructor(props) {
         super(props);
-
+        console.log("entro acas ajc ajc ajc aj caj csj ")
         this.state = {
             width: this.props.width ?? 100,
         };
@@ -17,21 +17,21 @@ class ResizableBox extends Component<PropsType> {
         this.panResponder = PanResponder.create({
             onStartShouldSetPanResponder: () => true,
             onPanResponderGrant: (evt, gestureState) => {
+                // this.setEnabled(false);
                 this.startWidth = this.state.width
             },
             onPanResponderMove: (evt, gestureState) => {
-                console.log(this.startWidth, JSON.stringify(gestureState))
-                this.setState({
-                    width: this.startWidth + gestureState.dx,
-                });
+                this.setState({ width: this.startWidth + gestureState.dx, });
             },
             onPanResponderRelease: (evt, gestureState) => {
+                // this.setEnabled(true);
                 // this.setState({
                 //     width: this.state.width + gestureState.dx,
                 // });
             },
         });
     }
+
 
     render() {
         return (

@@ -1,6 +1,6 @@
 #!/bin/bash
 build_gradle_path="android/app/build.gradle"
-ios_project_pbxproj_path="ios/importadora_dhm_app.xcodeproj/project.pbxproj"
+ios_project_pbxproj_path="ios/distribuidora_dhm_app.xcodeproj/project.pbxproj"
 
 _replace_ios_version() {
     new_version=$1

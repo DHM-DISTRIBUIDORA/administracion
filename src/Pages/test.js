@@ -61,14 +61,12 @@ class index extends Component {
     }
     render() {
 
-        return <SPage>
-            <SView col={"xs-12"} row>
-                <SButtom onPress={this.hanldeRequest_categorias.bind(this)}>CATEGORIAS</SButtom>
-                <SButtom onPress={this.hanldeRequest_productos.bind(this)}>PRODUCTOS</SButtom>
-                <SButtom onPress={this.hanldeRequest_clientes.bind(this)}>CLIENTES</SButtom>
-                <SButtom onPress={this.hanldeRequest_zonas.bind(this)}>ZONAS</SButtom>
-            </SView>
-        </SPage>
+        return <SView col={"xs-12"} row>
+            <SButtom onPress={this.hanldeRequest_categorias.bind(this)}>CATEGORIAS</SButtom>
+            <SButtom onPress={this.hanldeRequest_productos.bind(this)}>PRODUCTOS</SButtom>
+            <SButtom onPress={this.hanldeRequest_clientes.bind(this)}>CLIENTES</SButtom>
+            <SButtom onPress={this.hanldeRequest_zonas.bind(this)}>ZONAS</SButtom>
+        </SView>
     }
 
 

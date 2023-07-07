@@ -32,7 +32,7 @@
 		7D23E02E09B64C2BAB96048C /* OpenSans-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0964344D652C4014B09AEC87 /* OpenSans-MediumItalic.ttf */; };
 		7E5D5F9597524594931580CB /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D28B82D4C3D45AD80AC4A49 /* Roboto-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		85DC4C6561CEDC15BD4C27E8 /* libPods-importadora_dhm_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F0D055081F029C2FCAD5D1 /* libPods-importadora_dhm_app.a */; };
+		85DC4C6561CEDC15BD4C27E8 /* libPods-distribuidora_dhm_app.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46F0D055081F029C2FCAD5D1 /* libPods-distribuidora_dhm_app.a */; };
 		98CDE9C9044740C5BCAE555F /* LondonBetween.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D28B3250F2C49399713DE99 /* LondonBetween.ttf */; };
 		9E01A789D21340EB956E3057 /* Athelas.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FFD9EEA3C88247169E73E4F9 /* Athelas.ttf */; };
 		A101A8E931294D9F837C4362 /* Oswald-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 67DA03991E19493EA4A017E1 /* Oswald-Light.ttf */; };
@@ -60,35 +60,35 @@
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
 		0964344D652C4014B09AEC87 /* OpenSans-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-MediumItalic.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-MediumItalic.ttf"; sourceTree = "<group>"; };
 		1097F26A9191413592300445 /* Oswald-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Bold.ttf"; path = "../node_modules/servisofts-component/font/Oswald-Bold.ttf"; sourceTree = "<group>"; };
-		13B07F961A680F5B00A75B9A /* importadora_dhm_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = importadora_dhm_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = importadora_dhm_app/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = importadora_dhm_app/AppDelegate.m; sourceTree = "<group>"; };
-		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = importadora_dhm_app/Images.xcassets; sourceTree = "<group>"; };
-		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = importadora_dhm_app/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = importadora_dhm_app/main.m; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* distribuidora_dhm_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = distribuidora_dhm_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = distribuidora_dhm_app/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = distribuidora_dhm_app/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = distribuidora_dhm_app/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = distribuidora_dhm_app/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = distribuidora_dhm_app/main.m; sourceTree = "<group>"; };
 		17CB060FF8804481ADF30475 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-LightItalic.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
 		1C9505872FA640B8A2FAFDB5 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Light.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-Light.ttf"; sourceTree = "<group>"; };
 		2223D95E77744A9CA06FC85B /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../node_modules/servisofts-component/font/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		2AEEC81AC1334751914023F0 /* LondonMM.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = LondonMM.ttf; path = "../node_modules/servisofts-component/font/LondonMM.ttf"; sourceTree = "<group>"; };
 		2EFA5105312B872D7D88789C /* Pods-ImageNotification.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageNotification.debug.xcconfig"; path = "Target Support Files/Pods-ImageNotification/Pods-ImageNotification.debug.xcconfig"; sourceTree = "<group>"; };
-		46F0D055081F029C2FCAD5D1 /* libPods-importadora_dhm_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-importadora_dhm_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		491625D3282A4AE100A9FAB5 /* importadora_dhm_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = importadora_dhm_app.entitlements; path = importadora_dhm_app/importadora_dhm_app.entitlements; sourceTree = "<group>"; };
+		46F0D055081F029C2FCAD5D1 /* libPods-distribuidora_dhm_app.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-distribuidora_dhm_app.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		491625D3282A4AE100A9FAB5 /* distribuidora_dhm_app.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = distribuidora_dhm_app.entitlements; path = distribuidora_dhm_app/distribuidora_dhm_app.entitlements; sourceTree = "<group>"; };
 		495A585E292B613B002F242E /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		495A585F292B613B002F242E /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		495A5861292B613B002F242E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49918E382A398AE5007DCF4A /* sound_a.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = sound_a.mp3; path = ../android/app/src/main/res/raw/sound_a.mp3; sourceTree = "<group>"; };
 		499E4D93283CDF83009E17FC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		499E4D95283CE52E009E17FC /* importadora_dhm_appRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = importadora_dhm_appRelease.entitlements; path = importadora_dhm_app/importadora_dhm_appRelease.entitlements; sourceTree = "<group>"; };
+		499E4D95283CE52E009E17FC /* distribuidora_dhm_appRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = distribuidora_dhm_appRelease.entitlements; path = distribuidora_dhm_app/distribuidora_dhm_appRelease.entitlements; sourceTree = "<group>"; };
 		49DC7FDF27AC04AC00B93FC3 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		5021CED1375C426C89CB8249 /* OpenSans-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBoldItalic.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
-		50AE628FD6660FE7B65A258E /* Pods-importadora_dhm_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-importadora_dhm_app.release.xcconfig"; path = "Target Support Files/Pods-importadora_dhm_app/Pods-importadora_dhm_app.release.xcconfig"; sourceTree = "<group>"; };
+		50AE628FD6660FE7B65A258E /* Pods-distribuidora_dhm_app.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-distribuidora_dhm_app.release.xcconfig"; path = "Target Support Files/Pods-distribuidora_dhm_app/Pods-distribuidora_dhm_app.release.xcconfig"; sourceTree = "<group>"; };
 		5A3CD8FBA8B9432CAF67F576 /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Medium.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-Medium.ttf"; sourceTree = "<group>"; };
 		6157C34A110C4BFD87A73BB4 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBold.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 		67DA03991E19493EA4A017E1 /* Oswald-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Light.ttf"; path = "../node_modules/servisofts-component/font/Oswald-Light.ttf"; sourceTree = "<group>"; };
 		7C6F04CF755A47D0A0253172 /* LondonTwo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = LondonTwo.ttf; path = "../node_modules/servisofts-component/font/LondonTwo.ttf"; sourceTree = "<group>"; };
 		7DCF74045D2142C5A575A9DD /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-ExtraBoldItalic.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = importadora_dhm_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		8F052C82BD49621EFFE245A7 /* Pods-importadora_dhm_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-importadora_dhm_app.debug.xcconfig"; path = "Target Support Files/Pods-importadora_dhm_app/Pods-importadora_dhm_app.debug.xcconfig"; sourceTree = "<group>"; };
+		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = distribuidora_dhm_app/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		8F052C82BD49621EFFE245A7 /* Pods-distribuidora_dhm_app.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-distribuidora_dhm_app.debug.xcconfig"; path = "Target Support Files/Pods-distribuidora_dhm_app/Pods-distribuidora_dhm_app.debug.xcconfig"; sourceTree = "<group>"; };
 		8FC310751E6A48EFA32544D3 /* Oswald-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Oswald-Regular.ttf"; path = "../node_modules/servisofts-component/font/Oswald-Regular.ttf"; sourceTree = "<group>"; };
 		908DA4F819D64311827D06D5 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-Regular.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		9412D54B5B2A4C3797EB935C /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "OpenSans-SemiBold.ttf"; path = "../node_modules/servisofts-component/font/OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -113,19 +113,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				85DC4C6561CEDC15BD4C27E8 /* libPods-importadora_dhm_app.a in Frameworks */,
+				85DC4C6561CEDC15BD4C27E8 /* libPods-distribuidora_dhm_app.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		13B07FAE1A68108700A75B9A /* importadora_dhm_app */ = {
+		13B07FAE1A68108700A75B9A /* distribuidora_dhm_app */ = {
 			isa = PBXGroup;
 			children = (
-				499E4D95283CE52E009E17FC /* importadora_dhm_appRelease.entitlements */,
+				499E4D95283CE52E009E17FC /* distribuidora_dhm_appRelease.entitlements */,
 				499E4D93283CDF83009E17FC /* GoogleService-Info.plist */,
-				491625D3282A4AE100A9FAB5 /* importadora_dhm_app.entitlements */,
+				491625D3282A4AE100A9FAB5 /* distribuidora_dhm_app.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -136,14 +136,14 @@
 				49DC7FDF27AC04AC00B93FC3 /* File.swift */,
 				49918E382A398AE5007DCF4A /* sound_a.mp3 */,
 			);
-			name = importadora_dhm_app;
+			name = distribuidora_dhm_app;
 			sourceTree = "<group>";
 		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
-				46F0D055081F029C2FCAD5D1 /* libPods-importadora_dhm_app.a */,
+				46F0D055081F029C2FCAD5D1 /* libPods-distribuidora_dhm_app.a */,
 				FF0C62F06920E6A65EB02428 /* libPods-ImageNotification.a */,
 			);
 			name = Frameworks;
@@ -162,8 +162,8 @@
 		730343C1BBA0FC7345F9E57B /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8F052C82BD49621EFFE245A7 /* Pods-importadora_dhm_app.debug.xcconfig */,
-				50AE628FD6660FE7B65A258E /* Pods-importadora_dhm_app.release.xcconfig */,
+				8F052C82BD49621EFFE245A7 /* Pods-distribuidora_dhm_app.debug.xcconfig */,
+				50AE628FD6660FE7B65A258E /* Pods-distribuidora_dhm_app.release.xcconfig */,
 				2EFA5105312B872D7D88789C /* Pods-ImageNotification.debug.xcconfig */,
 				B096EE08A44ABD5DD6898199 /* Pods-ImageNotification.release.xcconfig */,
 			);
@@ -180,7 +180,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
-				13B07FAE1A68108700A75B9A /* importadora_dhm_app */,
+				13B07FAE1A68108700A75B9A /* distribuidora_dhm_app */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				495A585D292B613B002F242E /* ImageNotification */,
 				83CBBA001A601CBA00E9B192 /* Products */,
@@ -196,7 +196,7 @@
 		83CBBA001A601CBA00E9B192 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				13B07F961A680F5B00A75B9A /* importadora_dhm_app.app */,
+				13B07F961A680F5B00A75B9A /* distribuidora_dhm_app.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -237,9 +237,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		13B07F861A680F5B00A75B9A /* importadora_dhm_app */ = {
+		13B07F861A680F5B00A75B9A /* distribuidora_dhm_app */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "importadora_dhm_app" */;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "distribuidora_dhm_app" */;
 			buildPhases = (
 				3160DBA8BC0B0E40638DC01F /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
@@ -255,9 +255,9 @@
 			);
 			dependencies = (
 			);
-			name = importadora_dhm_app;
-			productName = importadora_dhm_app;
-			productReference = 13B07F961A680F5B00A75B9A /* importadora_dhm_app.app */;
+			name = distribuidora_dhm_app;
+			productName = distribuidora_dhm_app;
+			productReference = 13B07F961A680F5B00A75B9A /* distribuidora_dhm_app.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -276,7 +276,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "importadora_dhm_app" */;
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "distribuidora_dhm_app" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -330,7 +330,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				13B07F861A680F5B00A75B9A /* importadora_dhm_app */,
+				13B07F861A680F5B00A75B9A /* distribuidora_dhm_app */,
 			);
 		};
 /* End PBXProject section */
@@ -418,7 +418,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-importadora_dhm_app-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-distribuidora_dhm_app-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -450,7 +450,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-importadora_dhm_app/Pods-importadora_dhm_app-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-distribuidora_dhm_app/Pods-distribuidora_dhm_app-resources.sh",
 				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
@@ -467,7 +467,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-importadora_dhm_app/Pods-importadora_dhm_app-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-distribuidora_dhm_app/Pods-distribuidora_dhm_app-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -488,15 +488,15 @@
 /* Begin XCBuildConfiguration section */
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F052C82BD49621EFFE245A7 /* Pods-importadora_dhm_app.debug.xcconfig */;
+			baseConfigurationReference = 8F052C82BD49621EFFE245A7 /* Pods-distribuidora_dhm_app.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = importadora_dhm_app/importadora_dhm_app.entitlements;
+				CODE_SIGN_ENTITLEMENTS = distribuidora_dhm_app/distribuidora_dhm_app.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40113;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = 36S3T8GU7Y;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -505,7 +505,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 				);
-				INFOPLIST_FILE = importadora_dhm_app/Info.plist;
+				INFOPLIST_FILE = distribuidora_dhm_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -514,9 +514,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.dhm;
-				PRODUCT_NAME = importadora_dhm_app;
+				PRODUCT_NAME = distribuidora_dhm_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "importadora_dhm_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "distribuidora_dhm_app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -526,15 +526,15 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50AE628FD6660FE7B65A258E /* Pods-importadora_dhm_app.release.xcconfig */;
+			baseConfigurationReference = 50AE628FD6660FE7B65A258E /* Pods-distribuidora_dhm_app.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = importadora_dhm_app/importadora_dhm_appRelease.entitlements;
+				CODE_SIGN_ENTITLEMENTS = distribuidora_dhm_app/distribuidora_dhm_appRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 40113;
+				CURRENT_PROJECT_VERSION = 10000;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -542,7 +542,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Base/Frameworks",
 				);
-				INFOPLIST_FILE = importadora_dhm_app/Info.plist;
+				INFOPLIST_FILE = distribuidora_dhm_app/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
@@ -551,9 +551,9 @@
 					"-lc++",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.servisofts.dhm-app";
-				PRODUCT_NAME = importadora_dhm_app;
+				PRODUCT_NAME = distribuidora_dhm_app;
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "importadora_dhm_app-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "distribuidora_dhm_app-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -678,7 +678,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "importadora_dhm_app" */ = {
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "distribuidora_dhm_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				13B07F941A680F5B00A75B9A /* Debug */,
@@ -687,7 +687,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "importadora_dhm_app" */ = {
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "distribuidora_dhm_app" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,

@@ -1,7 +1,7 @@
 {
-  "name": "importadora_dhm_app",
+  "name": "distribuidora_dhm_app",
   "version": "1.0.0",
-  "description": "importadora_dhm_app",
+  "description": "distribuidora_dhm_app",
   "scripts": {
     "start": "react-native start",
     "build": "react-scripts build",
@@ -54,7 +54,7 @@
     "react-redux": "7.2.4",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "servisofts-component": "2.11.14",
+    "servisofts-component": "2.11.15",
     "servisofts-model": "1.0.3",
     "servisofts-page": "1.0.7",
     "servisofts-rn-chat": "1.0.7",

@@ -24,7 +24,6 @@ export default class body extends React.Component {
     }
 
     item({ url, label, icon, onPress }) {
-        console.log(icon + " 999")
         return <SView col={"xs-11"} height={60} border={'transparent'} row onPress={() => {
             if (onPress) {
                 onPress();
@@ -95,7 +94,6 @@ export default class body extends React.Component {
                     alignItems: 'center',
                 }} row>
                     <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
-                        // textDecorationLine: 'underline',
                     }}>Ver perfil </SText>
                     <SIcon name="Ver" width={9} color="#fff" />
                 </SView>
@@ -156,6 +154,7 @@ export default class body extends React.Component {
                     {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })}
                     {this.renderIcon({ label: "Contactos", icon: "Contacto", path: "/contacto" })}
                     {this.renderIcon({ label: "Soporte", icon: "AppAlert", path: "/ayuda" })}
+                    {this.renderIcon({ label: "Sql", icon: "AppAlert", path: "/sql" })}
                     {this.renderIcon({
                         label: "Salir", icon: "Exit", requireUser: true,
                         onPress: () => {
