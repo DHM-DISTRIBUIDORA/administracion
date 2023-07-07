@@ -48,8 +48,8 @@ class index extends Component {
                 borderColor: "#E2E2E2",
 
             }}>
-            <SView col={"xs-12"} row height={115}>
-                <SImage src={require('../Assets/img/producto1.png')} style={{ resizeMode: "contain" }} />
+            <SView col={"xs-12"} row height={145}>
+                <SImage src={require('../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
             </SView>
             <SHr />
             <SText fontSize={16}>{obj.nombre}</SText>
@@ -105,7 +105,7 @@ class index extends Component {
                     <SList horizontal data={productos} limit={10} render={obj => this.renderItem(obj)} />
                 </ScrollView>
             </SView>
-
+              <SHr height={30} />      
         </SPage >
     }
 

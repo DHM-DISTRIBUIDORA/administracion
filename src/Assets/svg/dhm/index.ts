@@ -16,6 +16,8 @@ import BtnMas, { ReactComponent as BtnMasW } from './btnMas.svg';
 import Menos, { ReactComponent as MenosW } from './menos.svg';
 import Mas, { ReactComponent as MasW } from './mas.svg';
 import Right, { ReactComponent as RightW } from './i-right.svg';
+import Camara, { ReactComponent as CamaraW } from './camara.svg';
+import Categoria, { ReactComponent as CategoriaW } from './categoria.svg';
 
 
 
@@ -39,6 +41,10 @@ const Assets = {
 	"Menos": { Native: Menos, Web: MenosW },
 	"Mas": { Native: Mas, Web: MasW },
 	"Right": { Native: Right, Web: RightW },
+	"Camara": { Native: Camara, Web: CamaraW },
+	"Categoria": { Native: Categoria, Web: CategoriaW },
+	
+	
 	
 	
 	
