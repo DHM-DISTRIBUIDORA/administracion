@@ -87,8 +87,8 @@ yarn-error.log*
 /ios/distribuidora_dhm_app/Info.plist
 /ios/ExportOptions.plist
 /ios/Certificates.p12
-/ios/distribuidora_dhm_app.mobileprovision
-/ios/AuthKey_9T35KPG3Y9.p8
+/ios/dhm_app.mobileprovision
+/ios/AuthKey_5KCFQBMUQK.p8
 
 /android/app/google-services.json
 /android/app/service-account.json
