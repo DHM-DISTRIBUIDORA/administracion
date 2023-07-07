@@ -474,7 +474,7 @@ PODS:
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-component (2.11.14):
+  - servisofts-component (2.11.15):
     - React-Core
   - servisofts-socket (3.0.4):
     - CocoaAsyncSocket
@@ -540,7 +540,7 @@ DEPENDENCIES:
   - RNShare (from `../node_modules/react-native-share`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
-  - servisofts-component (from `../node_modules/servisofts-component`)
+  - servisofts-component (from `../../../servisofts-component/dist`)
   - servisofts-socket (from `../node_modules/servisofts-socket`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -677,7 +677,7 @@ EXTERNAL SOURCES:
   RNSVG:
     :path: "../node_modules/react-native-svg"
   servisofts-component:
-    :path: "../node_modules/servisofts-component"
+    :path: "../../../servisofts-component/dist"
   servisofts-socket:
     :path: "../node_modules/servisofts-socket"
   Yoga:
@@ -759,10 +759,10 @@ SPEC CHECKSUMS:
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 1081cf2576b404ca804daf4934bb644cb506ff98
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-component: 31e74f2829f862dcaeaed7e38bdcdacbcfeb1847
+  servisofts-component: 14f2c7de59c2552a215036dc2894e96744b51da8
   servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 8bcc87bc8ab2518f0b7f1a0e90d97b999a64b5ba
+PODFILE CHECKSUM: 371487c12c8e993518b56948bf9c76b506daf445
 
 COCOAPODS: 1.11.3

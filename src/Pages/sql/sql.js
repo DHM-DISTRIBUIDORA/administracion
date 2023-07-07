@@ -13,17 +13,17 @@ class index extends Component {
         };
     }
     componentDidMount() {
-        SSocket.sendPromise({
-            component: "dhm",
-            type: "get",
-            select: "select * from sysobjects where xtype = 'U'",
-        }).then((resp) => {
-            this.setState({ tables: resp.data, loading: false })
-            console.log(resp);
-        }).catch(e => {
-            this.setState({ error: e.error, loading: false })
-            console.error(e);
-        })
+        // SSocket.sendPromise({
+        //     component: "dhm",
+        //     type: "get",
+        //     select: "select * from sysobjects where xtype = 'U'",
+        // }).then((resp) => {
+        //     this.setState({ tables: resp.data, loading: false })
+        //     console.log(resp);
+        // }).catch(e => {
+        //     this.setState({ error: e.error, loading: false })
+        //     console.error(e);
+        // })
     }
 
     hanldeRequest_select() {
@@ -101,13 +101,10 @@ class index extends Component {
     render() {
         return <SPage disableScroll hidden>
             <SView col={"xs-12"} row height>
-                <SView col={"xs-3"} height>
-                    {this.getTableNames()}
-                </SView>
-                <SView col={"xs-9"} height>
-                    <SButtom onPress={this.hanldeRequest_select.bind(this)}>EXECUTE</SButtom>
+                <SView col={"xs-12"} height>
+                    <SButtom styleText={{ color: STheme.color.text }} onPress={this.hanldeRequest_select.bind(this)}>EXECUTE</SButtom>
                     <SView col={"xs-12"} height={200} card>
-                        <SInput ref={ref => this.inp = ref} type={"textArea"} customStyle="clean" height defaultValue={this.state.default} />
+                        <SInput ref={ref => this.inp = ref} type={"textArea"} height defaultValue={this.state.default} />
                     </SView>
                     <SView flex col={"xs-12"}>
                         <SLoad hidden={!this.state.loading} />
