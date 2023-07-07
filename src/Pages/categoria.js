@@ -14,30 +14,6 @@ class index extends Component {
 
     }
 
-
-    getComponent(obj) {
-        return <SView col={"xs-12"} style={{ backgroundColor: this.params.color, borderRadius: 15 }} center
-            onPress={() => {
-                SNavigation.navigate("/producto", { pk: obj.catcod })
-            }}
-        >
-            <SHr />
-            <SView col={"xs-12"} row center>
-                <SView width={8} />
-                <SIcon name='Logosolo' height={25} width={25} />
-                <SView width={15} />
-                <SView flex >
-                    <SText color={STheme.color.white} fontSize={18} bold>{obj.nombre}</SText>
-                    <SText color={STheme.color.white} fontSize={8} >{obj.catcod}</SText>
-                </SView>
-                <SView width={20}>
-                    <SIcon name='Right' height={16} fill={this.params.color} />
-                </SView>
-                <SView width={4} />
-            </SView>
-            <SHr />
-        </SView>
-    }
     getLista() {
         const cat = Model.dm_categorias.Action.getAll();
         if (!cat) return <SLoad />
@@ -48,9 +24,7 @@ class index extends Component {
             // filter={(a) => a.nivel == 1}
             filter={(a) => (a.catcod + "").startsWith(this.params.pk) && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
-            // render={obj => this.getComponent(obj)} 
             render={(obj) => {
-                // console.log(obj)
                 return <Categoria.Card2 obj={obj} color={this.params.color}  />
             }}
         />
