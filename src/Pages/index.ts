@@ -23,6 +23,7 @@ import rol from './rol';
 import _public from "./public"
 import dm_categorias from './dm_categorias';
 import dm_productos from './dm_productos';
+import usuario from './usuario';
 export default SPage.combinePages("/", {
   // "": test,
   "": carga,
@@ -40,6 +41,7 @@ export default SPage.combinePages("/", {
   "categoria": categoria,
 
   ...clientes,
+  ...usuario,
   // ...direccion,
   ...perfil,
   ...rol,

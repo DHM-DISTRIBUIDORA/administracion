@@ -44,7 +44,7 @@ class index extends Component {
                     ...this.data,
                     ...values
                 }
-
+                this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.data.key), "foto_p");
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
