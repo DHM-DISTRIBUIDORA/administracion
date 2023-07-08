@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SNavigation, SPage, STheme, SThread, SView } from 'servisofts-component';
+import Model from '../Model';
 
 class index extends Component {
     state = {}
     componentDidMount() {
         new SThread(2500, "carga_hilo", false).start(() => {
-            SNavigation.replace("/root")
+            if(Model.usuario.Action.getKey()){
+                SNavigation.replace("/root")
+            }else{
+                SNavigation.replace("/login")
+            }
         })
     }
 

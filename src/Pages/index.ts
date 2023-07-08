@@ -18,6 +18,9 @@ import clientes from './clientes';
 import perfil from './perfil';
 // import chat from './chat';
 // import ayuda from './ayuda';
+
+import rol from './rol';
+import _public from "./public"
 export default SPage.combinePages("/", {
   // "": test,
   "": carga,
@@ -37,6 +40,8 @@ export default SPage.combinePages("/", {
   ...clientes,
   // ...direccion,
   ...perfil,
+  ...rol,
+  ..._public
   // ...chat,
   // ...ayuda,
   // ...ayuda
