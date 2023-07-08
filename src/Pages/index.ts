@@ -21,6 +21,8 @@ import perfil from './perfil';
 
 import rol from './rol';
 import _public from "./public"
+import dm_categorias from './dm_categorias';
+import dm_productos from './dm_productos';
 export default SPage.combinePages("/", {
   // "": test,
   "": carga,
@@ -41,7 +43,9 @@ export default SPage.combinePages("/", {
   // ...direccion,
   ...perfil,
   ...rol,
-  ..._public
+  ..._public,
+  ...dm_categorias,
+  ...dm_productos
   // ...chat,
   // ...ayuda,
   // ...ayuda
