@@ -21,6 +21,8 @@ import dm_categorias from './dm_categorias';
 import dm_productos from './dm_productos';
 import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
+import dm_clientes from './dm_clientes';
+import ajustes from './ajustes';
 export default SPage.combinePages("/", {
   "": carga,
   "root": root,
@@ -34,14 +36,14 @@ export default SPage.combinePages("/", {
   "privacidad": privacidad,
   ...producto,
   "categoria": categoria,
-
   ...clientes,
   ...usuario,
-  // ...direccion,
   ...perfil,
   ...rol,
   ..._public,
   ...dm_categorias,
   ...dm_productos,
-  ...dm_usuarios
+  ...dm_usuarios,
+  ...dm_clientes,
+  ...ajustes,
 });

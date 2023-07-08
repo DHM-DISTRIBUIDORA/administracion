@@ -2,6 +2,7 @@
 import Logo, { ReactComponent as LogoW } from './logo.svg';
 import Logosolo, { ReactComponent as LogosoloW } from './logosolito.svg';
 import Carga, { ReactComponent as CargaW } from './carga.svg';
+import LogoClear, { ReactComponent as LogoClearW } from './logoClear.svg';
 import LogoWhite, { ReactComponent as LogoWhiteW } from './logoWhite.svg';
 import BackArrow, { ReactComponent as BackArrowW } from './backArrow.svg';
 import Inicio, { ReactComponent as InicioW } from './i-inicio.svg';
@@ -27,6 +28,7 @@ const Assets = {
 	"Logosolo": { Native: Logosolo, Web: LogosoloW },
 	"Carga": { Native: Carga, Web: CargaW },
 	"LogoWhite": { Native: LogoWhite, Web: LogoWhiteW },
+	"LogoClear": { Native: LogoClear, Web: LogoClearW },
 	"BackArrow": { Native: BackArrow, Web: BackArrowW },
 	"Inicio": { Native: Inicio, Web: InicioW },
 	"Explorar": { Native: Explorar, Web: ExplorarW },

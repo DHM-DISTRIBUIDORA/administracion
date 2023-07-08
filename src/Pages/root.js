@@ -19,9 +19,18 @@ export default class index extends Component {
     }
     render() {
         return <SPage preventBack >
-            <SHr />
+            <SHr height={8} />
+            <SView col={"xs-12"} center>
+                <SText fontSize={18} center>{"Bienvenido al sistema comercial"}</SText>
+                <SHr />
+                <SView width={200}>
+                    <SIcon name={"LogoClear"} fill={STheme.color.text} />
+                </SView>
+            </SView>
+            <SHr height={32} />
             <MenuPages path={"/"} permiso={"page"}>
                 <MenuButtom label={"Public"} url={"/public"} />
+                <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
                 <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
             </MenuPages>
         </SPage>
