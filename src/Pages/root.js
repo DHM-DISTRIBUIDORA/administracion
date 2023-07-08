@@ -3,7 +3,8 @@ import { SButtom, SHr, SIcon, SImage, SNavigation, SPage, SText, STheme, SView }
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import Model from '../Model';
-export default class index extends Component {
+import { connect } from 'react-redux';
+class index extends Component {
     getIconProfile() {
         return <SView col={"xs-12"} height>
             <SView col={"xs-12"} height style={{
@@ -37,3 +38,8 @@ export default class index extends Component {
         </SPage>
     }
 }
+
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(index);
