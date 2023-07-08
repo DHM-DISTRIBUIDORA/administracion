@@ -8,7 +8,7 @@ class index extends Component {
     getIconProfile() {
         return <SView col={"xs-12"} height>
             <SView col={"xs-12"} height style={{
-                padding: 8
+                // padding: 8
             }} >
                 <SIcon name={"Perfil"} />
             </SView>
