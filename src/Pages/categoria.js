@@ -1,41 +1,40 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SList2, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView, SNavigation } from 'servisofts-component';
 import { BottomNavigator, Categoria, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
 
-  
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: {},
+        };
+        this.params = SNavigation.getAllParams();
+
+    }
+
     getLista() {
-        var color = "";
-        var contador = 0;
-        const colores = ['#85BFD0', '#9B9AD9', '#90D598', '#F5AD76', '#F18684', '#E36188', '#76DEFC', '#D289E1', '#5097F8', '#17C3A5', '#A7C1D4', '#87e4ec'];
         const cat = Model.dm_categorias.Action.getAll();
         if (!cat) return <SLoad />
         console.log(cat)
-        return <SList2
-            horizontal
+        return <SList
             data={cat}
-            space={0}
-            filter={(a) => a.nivel == 1}
+            limit={20}
+            // filter={(a) => a.nivel == 1}
+            filter={(a) => (a.catcod + "").startsWith(this.params.pk) && a.nivel == 2}
             order={[{ key: "nombre", order: "asc" }]}
-            // render={obj => this.getComponent(obj, contador)} />
-            render={(obj, i) => {
-                if (contador < colores.length) {
-                    color = colores[contador];
-                    contador++;
-                } else {
-                    contador = 0;
-                }
-                return <Categoria.Card obj={obj} color={color} />
+            render={(obj) => {
+                return <Categoria.Card2 obj={obj} color={this.params.color}  />
             }}
         />
+
     }
     render() {
         return <SPage title={"Categorías"}
             footer={this.footer()}
         >
-            <Container >
+            <Container>
                 <SHr height={20} />
                 {this.getLista()}
                 <SHr height={20} />

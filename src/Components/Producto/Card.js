@@ -42,42 +42,57 @@ class index extends Component<ProductoCardPropsType> {
     //     this.props.onPress(this.props.data)
     // }
     render() {
-        var { key, nombre, proximo_horario, distancia } = this.props.data;
-
+        var active = true;
+        var { Precio, Stock, Unidad, catcod, idalm, nombre, prdcod, uxc } = this.props.data;
+        (Stock <= 0) ? active = false : active = true;
         return (
-            <SView col={"xs-12"} card row
+            <SView col={"xs-12"} card row {...this.props}
+                // pointerEvents="auto"
+                pointerEvents={!active ? 'none' : 'auto'} 
                 style={{
                     borderRadius: 15,
                     borderWidth: 1,
-                    borderColor: "#E2E2E2",
-                    padding: 10
+                    // borderColor: "#E2E2E2",
+                    padding: 10,
+                    opacity: active ? 1 : 0.6,
+                    borderColor: !active ? "#D20C0C" : "#E2E2E2"
                 }}
             >
-                <SView col={"xs-3"} height={115}>
+                <SView col={"xs-3"} height={105}>
                     {/* <SView col={"xs-12"} row height={115}> */}
-                    <SImage src={require('../../Assets/img/producto1.png')} style={{ resizeMode: "contain" }} />
+                    <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
+
                     {/* </SView> */}
                 </SView>
-                <SView col={"xs-9"}>
-                    <SText fontSize={16}>Alcohol Chico</SText>
-                    <SText fontSize={14} color={STheme.color.gray}>12 x 100ml</SText>
+                <SView col={"xs-0.5"}></SView>
+                <SView col={"xs-8.5"}>
+                    <SText fontSize={16}>{nombre}</SText>
+                    <SView col={"xs-12"} row>
+                        <SText fontSize={11} color={STheme.color.gray}>Stock: {Stock} </SText>
+                        <SView width={5}><SText fontSize={11}>|</SText></SView>
+                        <SText fontSize={11} color={STheme.color.gray}> Ud: {Unidad} </SText>
+                        <SView width={5}><SText fontSize={11}>|</SText></SView>
+                        <SText fontSize={11} color={STheme.color.gray}> UxC: {uxc}</SText>
+                    </SView>
+
+
                     <SHr />
                     <SView row>
-                        <SView col={"xs-8"} row center>
-                            <SView center width={45} height={45} style={{borderRadius:17, borderColor:"#E2E2E2", borderWidth:1}}>
+                        <SView col={"xs-7"} row center>
+                            <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}>
                                 <SIcon name='Menos' height={4} />
                             </SView>
-                            <SView  row  >
-                                <SView width={10}/>
-                                <SText fontSize={16}>2</SText>
-                                <SView width={10}/>
+                            <SView row  >
+                                <SView width={10} />
+                                <SText fontSize={16}>0</SText>
+                                <SView width={10} />
                             </SView>
-                            <SView center width={45} height={45} style={{borderRadius:17, borderColor:"#E2E2E2", borderWidth:1}}>
+                            <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}>
                                 <SIcon name='Mas' height={18} />
                             </SView>
                         </SView>
-                        <SView col={"xs-4"}>
-                            <SText fontSize={18} bold>Bs 4.99</SText>
+                        <SView col={"xs-5"} style={{ alignItems: "flex-end" }}>
+                            <SText fontSize={18} bold>Bs. {SMath.formatMoney(Precio)}</SText>
                             <SHr />
                             <PButtomSmall fontSize={13}>Añadir</PButtomSmall>
                         </SView>
