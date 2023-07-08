@@ -272,7 +272,7 @@
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = 36S3T8GU7Y;
 						LastSwiftMigration = 1310;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -494,10 +494,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = distribuidora_dhm_app/distribuidora_dhm_app.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 10001;
-				DEVELOPMENT_TEAM = 36S3T8GU7Y;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -515,7 +515,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = org.servisofts.dhm;
 				PRODUCT_NAME = distribuidora_dhm_app;
-				PROVISIONING_PROFILE_SPECIFIER = dhm_app;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "distribuidora_dhm_app-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

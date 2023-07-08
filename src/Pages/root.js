@@ -18,7 +18,6 @@ class index extends Component {
         var productos = Model.productos.Action.getAll();
         if (!productos) return <SLoad />
         return <SView col={"xs-12"} height={195}>
-
             <SList
                 horizontal
                 initSpace={8}
