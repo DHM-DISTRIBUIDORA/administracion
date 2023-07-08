@@ -33,6 +33,7 @@ export default class index extends Component {
                 <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
                 <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={<SIcon name={"Perfil"} />} />
             </MenuPages>
+            <SHr height={100} />
         </SPage>
     }
 }
