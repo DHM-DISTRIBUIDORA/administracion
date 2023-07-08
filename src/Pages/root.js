@@ -30,9 +30,9 @@ class index extends Component {
             </SView>
             <SHr height={32} />
             <MenuPages path={"/"} permiso={"page"}>
-                <MenuButtom label={"Public"} url={"/public"} />
+                <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                 <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
-                <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={<SIcon name={"Perfil"} />} />
             </MenuPages>
             <SHr height={100} />
         </SPage>
