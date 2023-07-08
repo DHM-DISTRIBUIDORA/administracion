@@ -10,6 +10,7 @@ import Pages from './Pages';
 import DeviceKey from "./Firebase/DeviceKey"
 import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
+import BackgroundImage from './Components/BackgroundImage';
 
 
 setProps(Config.socket);
@@ -20,11 +21,11 @@ const App = (props) => {
         <SComponentContainer
             debug
             socket={SSocket}
+            background={<BackgroundImage />}
             assets={Assets}
             inputs={Config.inputs}
             theme={{ themes: Config.theme, initialTheme: "default" }}
         >
-            <StatusBar />
             <SNavigation
                 props={{
                     navBar: TopBar,

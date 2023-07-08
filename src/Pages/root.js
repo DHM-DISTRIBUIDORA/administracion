@@ -10,7 +10,7 @@ class index extends Component {
             <SView col={"xs-12"} height style={{
                 padding: 8
             }} >
-                <SIcon name={"profile2"} fill={STheme.color.card} />
+                <SIcon name={"Perfil"} />
             </SView>
             <SImage
                 src={SSocket.api.root + "usuario/" + Model.usuario.Action.getKey()}
@@ -19,9 +19,9 @@ class index extends Component {
         </SView>
     }
     render() {
-        return <SPage preventBack >
+        return <SPage preventBack  >
             <SHr height={8} />
-            <SView col={"xs-12"} center>
+            <SView col={"xs-12"} center height={100}>
                 <SText fontSize={18} center>{"Bienvenido al sistema comercial"}</SText>
                 <SHr />
                 <SView width={200}>
@@ -29,11 +29,13 @@ class index extends Component {
                 </SView>
             </SView>
             <SHr height={32} />
-            <MenuPages path={"/"} permiso={"page"}>
-                <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
-                <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
-                <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={<SIcon name={"Perfil"} />} />
-            </MenuPages>
+            <SView col={"xs-12"} flex >
+                <MenuPages path={"/"} permiso={"page"}>
+                    <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
+                    <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
+                    <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                </MenuPages>
+            </SView>
             <SHr height={100} />
         </SPage>
     }

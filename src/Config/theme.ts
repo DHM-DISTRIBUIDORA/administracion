@@ -1,6 +1,8 @@
 import { SThemeThemes } from 'servisofts-component';
 import MapStyle from './mapStyle'
 
+
+// ------- Version blanco y negro -------
 // const theme: SThemeThemes = {
 //     default: {
 //         barStyle: 'dark-content',
@@ -27,33 +29,67 @@ import MapStyle from './mapStyle'
 //         // card: '#ffffff10'
 //     }
 // }
+
+// ------- Version Prueba1 -------
 const theme: SThemeThemes = {
     default: {
         barStyle: "light-content",
-        barColor: "#31C2F1",
+        barColor: "#F5F5F5",
         text: "#151813 ",
         primary: "#31C2F1",
         secondary: "#ffffff",
         info: "#151813",
         background: "#F5F5F5",
         card: "#ffffff99",
-        accent:"#151813",
+        accent: "#151813",
         mapStyle: MapStyle,
-        font:"OpenSans-SemiBold"
+        font: "OpenSans-SemiBold"
 
     },
     dark: {
         barStyle: "light-content",
-        barColor: "#31C2F1",
+        barColor: "#000000",
         text: "#ffffff",
         primary: "#31C2F1",
         secondary: "#ffffff",
         info: "#151813",
-        background: "#05253F",
+        background: "#000000",
         card: "#11304990",
-        accent:"#151813",
+        accent: "#151813",
         mapStyle: MapStyle,
-        font:"OpenSans-SemiBold"
+        font: "OpenSans-SemiBold"
     }
 }
+
+
+// //----- Version Liceth -------
+// const theme: SThemeThemes = {
+//     default: {
+//         barStyle: "light-content",
+//         barColor: "#31C2F1",
+//         text: "#151813 ",
+//         primary: "#31C2F1",
+//         secondary: "#ffffff",
+//         info: "#151813",
+//         background: "#F5F5F5",
+//         card: "#ffffff99",
+//         accent: "#151813",
+//         mapStyle: MapStyle,
+//         font: "OpenSans-SemiBold"
+
+//     },
+//     dark: {
+//         barStyle: "light-content",
+//         barColor: "#31C2F1",
+//         text: "#ffffff",
+//         primary: "#31C2F1",
+//         secondary: "#ffffff",
+//         info: "#151813",
+//         background: "#05253F",
+//         card: "#11304990",
+//         accent: "#151813",
+//         mapStyle: MapStyle,
+//         font: "OpenSans-SemiBold"
+//     }
+// }
 export default theme;
