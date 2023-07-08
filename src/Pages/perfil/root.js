@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup} from 'servisofts-component';
+import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup } from 'servisofts-component';
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
@@ -73,7 +73,6 @@ class index extends Component {
                             // color: "#fff"
                         }} font='LondonBetween'>{usuario["Nombres"] + " " + usuario["Apellidos"]} </SText>
                     </SView>
-                    <SHr />
 
 
                 </SView>
@@ -130,7 +129,7 @@ class index extends Component {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
                     <SHr height={10} />
-                    <PButtom fontSize={20}  onPress={() => {
+                    <PButtom fontSize={20} onPress={() => {
                         SPopup.confirm({
                             title: "Eliminar cuenta", message: "¿Estás seguro de eliminar la cuenta?", onPress: () => {
                                 Model.usuario.Action.editar({
@@ -145,6 +144,10 @@ class index extends Component {
                             }
                         })
                     }}>ELIMINAR CUENTA</PButtom>
+                    <SView height={30}></SView>
+                    <SButtom type={'outline'} onPress={() => {
+                        Model.usuario.Action.unlogin();
+                    }}>Cerrar sesión</SButtom>
                     <SView height={30}></SView>
                 </SView>
             </SView>

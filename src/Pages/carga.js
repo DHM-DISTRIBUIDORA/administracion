@@ -10,7 +10,7 @@ class index extends Component {
             if(Model.usuario.Action.getKey()){
                 SNavigation.replace("/root")
             }else{
-                SNavigation.replace("/login")
+                SNavigation.replace("/public")
             }
         })
     }
