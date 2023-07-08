@@ -28,11 +28,11 @@ class index extends Component {
     render() {
         return (
             <SPage hidden disableScroll center>
-                <SView col={"xs-12"} flex backgroundColor={STheme.color.primary} center onLayout={(evt) => {
+                <SView col={"xs-12"} flex  center onLayout={(evt) => {
                     this.setState({ layout: evt.nativeEvent.layout })
                 }}>
                     <SView col={"xs-6 sm-5 md-4 lg-3 xl-2 xxl-1.5"}>
-                        <SIcon name={"LogoWhite"} fill={STheme.color.white} />
+                        <SIcon name={"LogoClear"} fill={STheme.color.text} stroke={STheme.color.text}/>
                     </SView>
                     {/* {this.renderFooter()} */}
                 </SView>

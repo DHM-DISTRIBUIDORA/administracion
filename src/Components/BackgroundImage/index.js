@@ -30,7 +30,7 @@ export default class BackgroundImage extends Component<type> {
             opacity: 0.6,
             ...this.props.style,
         }}>
-            <SGradient colors={[STheme.color.primary, STheme.color.background, STheme.color.background]} />
+            <SGradient colors={[STheme.color.primary, STheme.color.background,  STheme.color.background]} deg={10} />
             {/* <SImage src={source} style={{
                 width: "100%",
                 height: "100%",
