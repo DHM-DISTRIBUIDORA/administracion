@@ -23,9 +23,11 @@ import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
 import ajustes from './ajustes';
+import wiki from './wiki';
 export default SPage.combinePages("/", {
   "": carga,
   "root": root,
+  wiki,
   ...login,
   ...registro,
   "explorar": explorar,

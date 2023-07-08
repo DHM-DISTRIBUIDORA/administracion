@@ -55,7 +55,7 @@
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
     "servisofts-component": "2.11.15",
-    "servisofts-model": "1.0.3",
+    "servisofts-model": "file:../../servisofts-model/dist",
     "servisofts-page": "1.0.8",
     "servisofts-rn-chat": "1.0.7",
     "servisofts-rn-geolocation": "1.0.3",
