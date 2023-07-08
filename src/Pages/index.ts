@@ -15,7 +15,7 @@ import privacidad from './privacidad';
 import categoria from './categoria';
 import clientes from './clientes';
 // import direccion from './direccion';
-// import perfil from './perfil';
+import perfil from './perfil';
 // import chat from './chat';
 // import ayuda from './ayuda';
 export default SPage.combinePages("/", {
@@ -34,9 +34,9 @@ export default SPage.combinePages("/", {
   ...producto,
   "categoria": categoria,
 
-  ...clientes
+  ...clientes,
   // ...direccion,
-  // ...perfil,
+  ...perfil,
   // ...chat,
   // ...ayuda,
   // ...ayuda

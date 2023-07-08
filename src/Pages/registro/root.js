@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { SForm, SHr, SNavigation, SPage, SPopup, SText, SView, STheme, SIcon } from 'servisofts-component';
 import { AccentBar } from '../../Components';
 import Container from '../../Components/Container';
+import CryptoJS from 'crypto-js';
+
 import Model from '../../Model';
 import BtnSend from './components/BtnSend';
 import Header from './components/Header';
@@ -50,14 +52,21 @@ class root extends Component {
                             RepPassword: { placeholder: "Repetir password", type: "password", isRequired: true },
                         }}
                         onSubmit={(values) => {
+                            
+                            if (values["Password"] != values["RepPassword"]) {
+                                SPopup.alert('Las contraseñas no coinciden');
+
+                                return null;
+                            }
 
                             if (this.state.envio == 0) {
                                 SPopup.alert('Debes aceptar los términos y condiciones');
                                 // var error = "Debes aceptar los términos y condiciones"
                                 // SPopup.open({ key: "errorRegistro", content: this.alertError(error) });
                             } else {
+                                var password = CryptoJS.MD5(values["Password"]).toString();
                                 Model.usuario.Action.registro({
-                                    data: { ...values }
+                                    data: { ...values, Password: password }
                                 }).then(resp => {
                                     SNavigation.replace('/');
 
