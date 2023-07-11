@@ -27,11 +27,12 @@ export default class QueryTool extends Component {
     }
     getTable() {
         if (!this.state.data) return null;
-        return <STable3
+        return <STable2
             header={[
                 { key: "index", label: "#" },
                 ...this.getHeaders(),
             ]}
+            limit={100}
             data={this.state.data ?? {}}
         />
     }
