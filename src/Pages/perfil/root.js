@@ -129,6 +129,10 @@ class index extends Component {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
                     <SHr height={10} />
+                    <PButtom type={'outline'} fontSize={20}  onPress={() => {
+                        Model.usuario.Action.unlogin();
+                    }}>CERRAR SESIÓN</PButtom>
+                    <SHr height={10} />
                     <PButtom fontSize={20} onPress={() => {
                         SPopup.confirm({
                             title: "Eliminar cuenta", message: "¿Estás seguro de eliminar la cuenta?", onPress: () => {
@@ -145,9 +149,7 @@ class index extends Component {
                         })
                     }}>ELIMINAR CUENTA</PButtom>
                     <SView height={30}></SView>
-                    <SButtom type={'outline'} onPress={() => {
-                        Model.usuario.Action.unlogin();
-                    }}>Cerrar sesión</SButtom>
+                    
                     <SView height={30}></SView>
                 </SView>
             </SView>
