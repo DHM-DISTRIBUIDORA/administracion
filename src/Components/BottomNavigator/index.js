@@ -24,7 +24,8 @@ export default class index extends Component {
 			}} center>
 				<SView height={23} colSquare center >
 					{/* <SIcon name={icon} stroke={color} fill={STheme.color.primary} /> */}
-					<SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} />
+					{/* <SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} /> */}
+					<SIcon name={icon} fill={isSelect ? STheme.color.info : color}  />
 				</SView>
 				<SView height={2} />
 				<SText fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>

@@ -20,7 +20,7 @@ class password extends Component {
         return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
             <SView col={"xs-11"} height={40} />
             <SView col={"xs-11"}  >
-                <SIcon name={"InputPassword"} height={100} />
+                <SIcon name={"Password"} height={100} fill={STheme.color.primary} />
             </SView>
             <SView col={"xs-11"} height={15} />
             <SView col={"xs-12"} center  >
@@ -45,10 +45,10 @@ class password extends Component {
     }
 
     onSubmit(values) {
-        if ((values["Password"].length <= 8) && (values["RepPassword"].length <= 8)) {
-            SPopup.open({ content: this.alertErrorPasswordLength() });
-            return null;
-        }
+        // if ((values["Password"].length <= 8) && (values["RepPassword"].length <= 8)) {
+        //     SPopup.open({ content: this.alertErrorPasswordLength() });
+        //     return null;
+        // }
         if (values["Password"] != values["RepPassword"]) {
             SPopup.open({ content: this.alertErrorPassword() });
             return null;
@@ -75,7 +75,7 @@ class password extends Component {
     render() {
         return (
             <SPage footer={<AccentBar />} >
-                <Header title={"Cambia la contraseña de acceso.\nRecuerda debe contener más de 8 caracteres."} />
+                <Header title={"Cambia la contraseña de acceso."} />
                 <Container>
                     <SForm
                         col={"xs-12"}

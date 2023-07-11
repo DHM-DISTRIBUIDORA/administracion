@@ -93,7 +93,7 @@ class index extends Component {
             <>
                 <SPage title={'Editar perfil'} onRefresh={() => {
                     Model.usuario.Action.CLEAR();
-                }} header={<AccentBar />}>
+                }} footer={<AccentBar />}>
                     <SView center>
                         <SView col={"xs-11 md-6 xl-4"} center>
                             <SView height={16} />
@@ -102,12 +102,12 @@ class index extends Component {
                         </SView> */}
                             {this.getForm()}
                             <SView height={16} />
-                            <SView col={"xs-11"} row center>
+                            <SView col={"xs-12"} row center>
                                 <PButtom fontSize={20} onPress={() => {
                                     this.form.submit();
                                 }}>CONFIRMAR</PButtom>
                             </SView>
-                            <SView height={36} />
+                            <SView height={20} />
                             <PButtom fontSize={20} onPress={() => {
                                  SNavigation.navigate("/perfil/changepass")
                                 }}>CAMBIAR CONTRASEÑA</PButtom>
