@@ -21,14 +21,12 @@ class index extends Component {
             order={[{ key: "nombre", order: "asc" }]}
             // render={obj => this.getComponent(obj, contador)} />
             render={(obj, i) => {
-                console.log(contador + " - "+colores.length)
                 if (contador < colores.length) {
                     color = colores[contador];
                     contador++;
                 } else {
                     contador = 1;
                 }
-                console.log(color)
                 return <Categoria.Card obj={obj} color={color} indice={contador}/>
             }}
         />
