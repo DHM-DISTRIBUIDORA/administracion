@@ -39,12 +39,12 @@ export default class index extends Component {
 			<>
 				<SView col={"xs-12"} height={60} border={'transparent'}
 					style={{
-						backgroundColor: STheme.color.primary,
+						// backgroundColor: STheme.color.primary,
 						borderTopLeftRadius: 35,
 						borderTopRightRadius: 35,
-						overFlow: 'hidden',
+						overflow: 'hidden',
 					}}>
-					<SView col={'xs-12'} row height >
+					<SView col={'xs-12'} row height style={{zIndex:100}}>
 						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
 						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
 						{
@@ -59,6 +59,7 @@ export default class index extends Component {
 						}
 						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 					</SView>
+					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{zIndex:99}} />
 				</SView >
 				
 			</>

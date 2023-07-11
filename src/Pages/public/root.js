@@ -12,8 +12,6 @@ class index extends Component {
         };
     }
 
-
-
     render_mas_vendidos() {
         var productos = Model.productos.Action.getAll();
         if (!productos) return <SLoad />
@@ -36,7 +34,6 @@ class index extends Component {
             {/* </SScrollView2> */}
         </SView>
     }
-
 
     renderItem(obj) {
         return <SView width={170} card
