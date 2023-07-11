@@ -110,7 +110,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/root"} />
+        return <BottomNavigator url={"/public"} />
     }
 
 }

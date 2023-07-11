@@ -46,7 +46,7 @@ export default class index extends Component {
 						overflow: 'hidden',
 					}}>
 					<SView col={'xs-12'} row height style={{zIndex:100}}>
-						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
+						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/public' })}
 						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
 						{
 							!Model.usuario.Action.getKey() ?

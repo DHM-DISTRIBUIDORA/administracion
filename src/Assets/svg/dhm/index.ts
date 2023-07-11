@@ -29,6 +29,10 @@ import Mexit, { ReactComponent as MexitW } from './m-exit.svg';
 import Mnotify, { ReactComponent as MnotifyW } from './m-notify.svg';
 import Msuport, { ReactComponent as MsuportW } from './m-suport.svg';
 import Mcontact, { ReactComponent as McontactW } from './m-contact.svg';
+import Message, { ReactComponent as MessageW } from './message.svg';
+
+
+
 
 
 
@@ -58,7 +62,7 @@ const Assets = {
 	"Categoria": { Native: Categoria, Web: CategoriaW },
 	"Home": { Native: Home, Web: HomeW },
 	"Perfil": { Native: Perfil, Web: PerfilW },
-	"Password": { Native: Password, Web: PasswordW },
+	"InputPassword": { Native: Password, Web: PasswordW },
 
 	"Mconf": { Native: Mconf, Web: MconfW },
 	"Minicio": { Native: Minicio, Web: MinicioW },
@@ -66,6 +70,8 @@ const Assets = {
 	"Mnotify": { Native: Mnotify, Web: MnotifyW },
 	"Msuport": { Native: Msuport, Web: MsuportW },
 	"Mcontact": { Native: Mcontact, Web: McontactW },
+	"Message": { Native: Message, Web: MessageW },
+	
 	
 	
 	

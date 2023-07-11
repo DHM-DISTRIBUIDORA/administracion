@@ -46,14 +46,10 @@ class recuperar_codigo extends Component {
                         <SView height={10} />
                         <SText fontSize={16} color="#000" center>Revise su bandeja de entrada e introduzca el código recibido. </SText>
                         <SView height={40} />
-                        <SView backgroundColor={STheme.color.primary} width={150} height={150} style={{
-                            borderRadius: 35,
-
-                        }} center >
+                       
                             <SView height={5} ></SView>
-                            <SIcon name={"Message"} width={110} height={110} />
-                        </SView>
-                        <SView height={26} />
+                            <SIcon name={"Message"} width={150} height={150} />
+                        <SView height={36} />
                         {this.getForm()}
                         <SView height={16} />
                         <SView col={"xs-11"} row center>
