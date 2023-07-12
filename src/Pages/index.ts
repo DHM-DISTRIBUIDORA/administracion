@@ -24,6 +24,7 @@ import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
 import tbemp from './tbemp';
+import tbzon from './tbzon';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
@@ -52,6 +53,7 @@ export default SPage.combinePages("/", {
   ...dm_usuarios,
   ...dm_clientes,
   ...tbemp,
+  ...tbzon,
   ...ajustes,
   ...distribucion,
 });
