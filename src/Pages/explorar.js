@@ -25,9 +25,9 @@ class index extends Component {
                     color = colores[contador];
                     contador++;
                 } else {
-                    contador = 0;
+                    contador = 1;
                 }
-                return <Categoria.Card obj={obj} color={color} />
+                return <Categoria.Card obj={obj} color={color} indice={contador}/>
             }}
         />
     }

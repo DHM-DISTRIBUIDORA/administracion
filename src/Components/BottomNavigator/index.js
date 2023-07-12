@@ -24,7 +24,8 @@ export default class index extends Component {
 			}} center>
 				<SView height={23} colSquare center >
 					{/* <SIcon name={icon} stroke={color} fill={STheme.color.primary} /> */}
-					<SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} />
+					{/* <SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} /> */}
+					<SIcon name={icon} fill={isSelect ? STheme.color.info : color}  />
 				</SView>
 				<SView height={2} />
 				<SText fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
@@ -39,13 +40,13 @@ export default class index extends Component {
 			<>
 				<SView col={"xs-12"} height={60} border={'transparent'}
 					style={{
-						backgroundColor: STheme.color.primary,
+						// backgroundColor: STheme.color.primary,
 						borderTopLeftRadius: 35,
 						borderTopRightRadius: 35,
-						overFlow: 'hidden',
+						overflow: 'hidden',
 					}}>
-					<SView col={'xs-12'} row height >
-						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/root' })}
+					<SView col={'xs-12'} row height style={{zIndex:100}}>
+						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/public' })}
 						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
 						{
 							!Model.usuario.Action.getKey() ?
@@ -59,6 +60,7 @@ export default class index extends Component {
 						}
 						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 					</SView>
+					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{zIndex:99}} />
 				</SView >
 				
 			</>

@@ -21,6 +21,19 @@ import Camara, { ReactComponent as CamaraW } from './camara.svg';
 import Categoria, { ReactComponent as CategoriaW } from './categoria.svg';
 import Home, { ReactComponent as HomeW } from './home.svg';
 import Perfil, { ReactComponent as PerfilW } from './perfil.svg';
+import Password, { ReactComponent as PasswordW } from './password.svg';
+
+import Mconf, { ReactComponent as MconfW } from './m-conf.svg';
+import Minicio, { ReactComponent as MinicioW } from './m-inicio.svg';
+import Mexit, { ReactComponent as MexitW } from './m-exit.svg';
+import Mnotify, { ReactComponent as MnotifyW } from './m-notify.svg';
+import Msuport, { ReactComponent as MsuportW } from './m-suport.svg';
+import Mcontact, { ReactComponent as McontactW } from './m-contact.svg';
+import Message, { ReactComponent as MessageW } from './message.svg';
+
+
+
+
 
 
 
@@ -49,6 +62,20 @@ const Assets = {
 	"Categoria": { Native: Categoria, Web: CategoriaW },
 	"Home": { Native: Home, Web: HomeW },
 	"Perfil": { Native: Perfil, Web: PerfilW },
+	"InputPassword": { Native: Password, Web: PasswordW },
+
+	"Mconf": { Native: Mconf, Web: MconfW },
+	"Minicio": { Native: Minicio, Web: MinicioW },
+	"Mexit": { Native: Mexit, Web: MexitW },
+	"Mnotify": { Native: Mnotify, Web: MnotifyW },
+	"Msuport": { Native: Msuport, Web: MsuportW },
+	"Mcontact": { Native: Mcontact, Web: McontactW },
+	"Message": { Native: Message, Web: MessageW },
+	
+	
+	
+	
+	
 	
 	
 	

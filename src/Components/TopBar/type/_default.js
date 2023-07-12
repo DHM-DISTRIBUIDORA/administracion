@@ -23,7 +23,7 @@ export default class index extends Component<TopBarPropsType> {
             }} col={"xs-12"} style={{
                 paddingBottom: 4,
             }} center height>
-                <SIcon height={18} name={"BackArrow"} fill={STheme.color.secondary} />
+                <SIcon height={18} name={"BackArrow"} fill={STheme.color.text} />
             </SView>
         </SView>
     }
@@ -33,7 +33,7 @@ export default class index extends Component<TopBarPropsType> {
                 {this.getBack()}
             </SView>
             <SView flex height center>
-                <SText color={STheme.color.secondary}>{this.props.title}</SText>
+                <SText color={STheme.color.text}>{this.props.title}</SText>
             </SView>
             <SView width={50} height></SView>
         </SView>)

@@ -44,9 +44,10 @@ class index extends Component {
                     limit={10}
                     render={(obj) => {
                         return <Producto.Card col={"xs-12"} width={0} data={obj}
-                            onPress={(data) => {
-                                // SNavigation.navigate("/producto", { pk: data.key })
-                            }} />
+                            // onPress={(data) => {
+                            //     SNavigation.navigate("/producto", { pk: data.key })
+                            // }} 
+                            />
                     }}
                 />
                 {/* <Producto.Card col={"xs-12"} width={0} data={this.state.productos} onPress={(data) => {
