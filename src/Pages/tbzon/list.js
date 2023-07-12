@@ -1,6 +1,7 @@
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
+import item from './item';
 // import item from './item';
 
 class index extends DPA.list {
@@ -8,6 +9,7 @@ class index extends DPA.list {
         super(props, {
             Parent: Parent,
             title: "Lista de " + Parent.name,
+            item: item,
             excludes: ['zterr','idterr','zest','zdia','zdmsest','zdesfin','znsuc','idgz','zmarc','sucreg'],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();

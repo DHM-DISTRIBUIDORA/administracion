@@ -12,12 +12,12 @@ class index extends DPA.item {
 
     $renderContent() {
         return <SView col={"xs-12"}>
-            {this.buildLabel({ label: "Código", value: this.data?.empcod })}
-            {this.buildLabel({ label: "Nombre", value: this.data?.empnom })}
-            {this.buildLabel({ label: "Dirección", value: this.data?.empdir })}
-            {this.buildLabel({ label: "Teléfono", value: this.data?.emptel })}
+            {this.buildLabel({ label: "Id", value: this.data?.idemp })}
+            {this.buildLabel({ label: "Código", value: this.data?.zcod })}
+            {this.buildLabel({ label: "Nombre Zona", value: this.data?.znom })}
+            {this.buildLabel({ label: "Tipo Zona", value: this.data?.ztipo })}
             <SView col={"xs-12"}  style={{alignItems: "flex-end"}}>
-                <SText fontSize={10} color={STheme.color.gray}>{this.data?.empfecmod}</SText>
+                <SText fontSize={10} color={STheme.color.gray}>{this.data?.zfecmod}</SText>
             </SView>
             <SHr height={5} />
         </SView>
