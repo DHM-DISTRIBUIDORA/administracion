@@ -23,6 +23,7 @@ import dm_productos from './dm_productos';
 import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
+import tbemp from './tbemp';
 import ajustes from './ajustes';
 import wiki from './wiki';
 export default SPage.combinePages("/", {
@@ -49,5 +50,6 @@ export default SPage.combinePages("/", {
   ...dm_productos,
   ...dm_usuarios,
   ...dm_clientes,
+  ...tbemp,
   ...ajustes,
 });
