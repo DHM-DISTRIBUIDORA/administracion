@@ -7,7 +7,7 @@ export default new SModel<Action, Reducer>({
         component: "tbemp"
     },
     Columns: {
-        "idemp ": { type: "text", pk: true },
+        "idemp": { type: "text", pk: true },
         "empcod": { type: "text", editable: true },
         "empnom": { type: "text", editable: true },
         "empdir": { type: "text", editable: true },
