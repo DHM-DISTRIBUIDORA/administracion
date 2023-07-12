@@ -8,8 +8,6 @@ import explorar from './explorar';
 import favoritos from './favoritos';
 import pedidos from './pedidos';
 import producto from './producto';
-import test from './test';
-import test2 from './test2';
 import sql from './sql/index';
 import privacidad from './privacidad';
 import categoria from './categoria';
@@ -24,7 +22,6 @@ import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
 import tbemp from './tbemp';
-import tbzon from './tbzon';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
@@ -37,8 +34,6 @@ export default SPage.combinePages("/", {
   "explorar": explorar,
   "favoritos": favoritos,
   "pedidos": pedidos,
-  test,
-  test2,
   sql,
   "privacidad": privacidad,
   ...producto,
@@ -53,7 +48,6 @@ export default SPage.combinePages("/", {
   ...dm_usuarios,
   ...dm_clientes,
   ...tbemp,
-  ...tbzon,
   ...ajustes,
   ...distribucion,
 });
