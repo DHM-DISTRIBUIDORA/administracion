@@ -9,6 +9,7 @@ import favoritos from './favoritos';
 import pedidos from './pedidos';
 import producto from './producto';
 import test from './test';
+import test2 from './test2';
 import sql from './sql/index';
 import privacidad from './privacidad';
 import categoria from './categoria';
@@ -34,6 +35,7 @@ export default SPage.combinePages("/", {
   "favoritos": favoritos,
   "pedidos": pedidos,
   test,
+  test2,
   sql,
   "privacidad": privacidad,
   ...producto,
