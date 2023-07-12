@@ -25,6 +25,7 @@ import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
 import ajustes from './ajustes';
 import wiki from './wiki';
+import distribucion from './distribucion';
 export default SPage.combinePages("/", {
   "": carga,
   "root": root,
@@ -50,4 +51,5 @@ export default SPage.combinePages("/", {
   ...dm_usuarios,
   ...dm_clientes,
   ...ajustes,
+  ...distribucion,
 });
