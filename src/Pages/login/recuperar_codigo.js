@@ -44,7 +44,7 @@ class recuperar_codigo extends Component {
                         <SView height={40} />
                         <SText fontSize={24} color={STheme.color.primary}  center>¡Mensaje Enviado!</SText>
                         <SView height={10} />
-                        <SText fontSize={16} color="#000" center>Revise su bandeja de entrada e introduzca el código recibido. </SText>
+                        <SText fontSize={16} color={STheme.color.text} center>Revise su bandeja de entrada e introduzca el código recibido. </SText>
                         <SView height={40} />
                        
                             <SView height={5} ></SView>
