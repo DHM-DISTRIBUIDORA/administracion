@@ -22,6 +22,8 @@ import Categoria, { ReactComponent as CategoriaW } from './categoria.svg';
 import Home, { ReactComponent as HomeW } from './home.svg';
 import Perfil, { ReactComponent as PerfilW } from './perfil.svg';
 import Password, { ReactComponent as PasswordW } from './password.svg';
+import InputEmail, { ReactComponent as InputEmailW } from './inputEmail.svg';
+import InputPhone, { ReactComponent as InputPhoneW } from './inputPhone.svg';
 
 import Mconf, { ReactComponent as MconfW } from './m-conf.svg';
 import Minicio, { ReactComponent as MinicioW } from './m-inicio.svg';
@@ -62,7 +64,9 @@ const Assets = {
 	"Categoria": { Native: Categoria, Web: CategoriaW },
 	"Home": { Native: Home, Web: HomeW },
 	"Perfil": { Native: Perfil, Web: PerfilW },
+	"InputEmail": { Native: InputEmail, Web: InputEmailW },
 	"InputPassword": { Native: Password, Web: PasswordW },
+	"InputPhone": { Native: InputPhone, Web: InputPhoneW },
 
 	"Mconf": { Native: Mconf, Web: MconfW },
 	"Minicio": { Native: Minicio, Web: MinicioW },
