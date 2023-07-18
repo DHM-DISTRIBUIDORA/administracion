@@ -7,7 +7,7 @@ class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: ["zterr","ztipo", "idterr", "zest","zdia","zdmsest","zdesfin","znsuc","idgz","zmarc","sucreg","zusumod","zfecmod"]
 
         });
     }
@@ -20,6 +20,7 @@ class index extends DPA.profile {
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
+    
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }

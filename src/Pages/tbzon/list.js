@@ -28,7 +28,7 @@ class index extends DPA.list {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $filter(data) {
-        return data.estado != 1
+        return data.zest != 1
     }
     $getData() {
         return Parent.model.Action.getAll();

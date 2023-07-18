@@ -8,7 +8,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: ["zterr","ztipo", "idterr", "zest","zdia","zdmsest","zdesfin","znsuc","idgz","zmarc","sucreg","zusumod","zfecmod"]
         });
     }
     $allowAccess() {
@@ -16,6 +16,13 @@ class index extends DPA.edit {
     }
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
+    }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["zcod"].label = "Código zona"
+        inp["idemp"].label = "Id empleado"
+        inp["znom"].label = "Nombre zona"
+        return inp;
     }
     
     $onSubmit(data) {
