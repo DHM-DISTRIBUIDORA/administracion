@@ -32,6 +32,7 @@ import Mnotify, { ReactComponent as MnotifyW } from './m-notify.svg';
 import Msuport, { ReactComponent as MsuportW } from './m-suport.svg';
 import Mcontact, { ReactComponent as McontactW } from './m-contact.svg';
 import Message, { ReactComponent as MessageW } from './message.svg';
+import Cola, { ReactComponent as ColaW } from './cola.svg';
 
 
 
@@ -75,6 +76,7 @@ const Assets = {
 	"Msuport": { Native: Msuport, Web: MsuportW },
 	"Mcontact": { Native: Mcontact, Web: McontactW },
 	"Message": { Native: Message, Web: MessageW },
+	"Cola": { Native: Cola, Web: ColaW },
 	
 	
 	

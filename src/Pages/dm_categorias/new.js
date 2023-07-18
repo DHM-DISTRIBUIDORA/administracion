@@ -14,6 +14,12 @@ class index extends DPA.new {
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
     }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["nombre"].label = "Nombre"
+        inp["nivel"].label = "Nivel"
+        return inp;
+    }
     $onSubmit(data) {
         Parent.model.Action.registro({
             data: data,
