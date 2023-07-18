@@ -32,7 +32,7 @@ const App = (props) => {
                     title: 'DHM', pages: Pages
                 }}
             />
-            {/* <SSocket
+            <SSocket
                 store={store}
                 identificarse={(props) => {
                     var usuario = props.state.usuarioReducer.usuarioLog;
@@ -47,7 +47,7 @@ const App = (props) => {
                         // }
                     };
                 }}
-            /> */}
+            />
             <NavBar />
         </SComponentContainer>
     </Redux>
