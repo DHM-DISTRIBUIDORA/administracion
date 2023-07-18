@@ -55,7 +55,7 @@
     "react-redux": "7.2.4",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "servisofts-component": "file:../../servisofts-component/dist",
+    "servisofts-component": "2.11.16",
     "servisofts-model": "1.0.5",
     "servisofts-page": "1.0.8",
     "servisofts-rn-chat": "1.0.7",
