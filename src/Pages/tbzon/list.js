@@ -11,7 +11,7 @@ class index extends DPA.list {
             Parent: Parent,
             title: "Lista de " + Parent.name,
             item: item,
-            excludes: ['zterr','idterr','zest','zdia','zdmsest','zdesfin','znsuc','idgz','zmarc','sucreg'],
+            excludes: ['zterr','ztipo','idterr','zest','zdia','zdmsest','zdesfin','znsuc','idgz','zmarc','sucreg'],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();
                 resolve();

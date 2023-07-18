@@ -16,7 +16,7 @@ class index extends DPA.item {
             {this.buildLabel({ label: "Id", value: this.data?.idz })}
             {this.buildLabel({ label: "Código", value: this.data?.zcod })}
             {this.buildLabel({ label: "Nombre Zona", value: this.data?.znom })}
-            {this.buildLabel({ label: "Tipo Zona", value: this.data?.ztipo })}
+            {/* {this.buildLabel({ label: "Tipo Zona", value: this.data?.ztipo })} */}
             <SView col={"xs-12"}  style={{alignItems: "flex-end"}}>
                 <SText fontSize={10} color={STheme.color.gray}>{this.data?.zfecmod}</SText>
             </SView>
