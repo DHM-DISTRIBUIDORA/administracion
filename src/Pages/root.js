@@ -18,8 +18,39 @@ class index extends Component {
             />
         </SView>
     }
+    datosUser() {
+        var dataUser = Model.usuario.Action.getUsuarioLog();
+        if (!dataUser) return <SLoad />
+        console.log(dataUser);
+        return <SView style={{ alignItems: "flex-end" }}>
+            <SView
+                style={{
+                    backgroundColor: STheme.color.primary + "50",
+                    padding: 6,
+                    borderTopLeftRadius: 25,
+                    borderBottomLeftRadius: 25,
+                    borderTopRightRadius: 15,
+                }}
+                width={165} row
+            >
+                <SView height={30} width={30}>
+                    <SImage
+                        src={SSocket.api.root + "usuario/" + Model.usuario.Action.getKey()}
+                        style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', }}
+                    />
+                </SView>
+                <SView width={5}/>
+                <SView flex style={{ alignItems: "flex-end" }}>
+                    <SText fontSize={12}>{dataUser?.Nombres}</SText>
+                    <SText fontSize={10}>{dataUser?.Correo}</SText>
+                </SView>
+                <SView width={4}/>
+            </SView>
+        </SView>
+    }
     render() {
         return <SPage preventBack  >
+            {this.datosUser()}
             <SHr height={8} />
             <SView col={"xs-12"} center height={100}>
                 <SView width={200} flex>

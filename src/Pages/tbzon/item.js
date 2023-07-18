@@ -13,7 +13,7 @@ class index extends DPA.item {
 
     $renderContent() {
         return <SView col={"xs-12"}>
-            {this.buildLabel({ label: "Id", value: this.data?.idemp })}
+            {this.buildLabel({ label: "Id", value: this.data?.idz })}
             {this.buildLabel({ label: "Código", value: this.data?.zcod })}
             {this.buildLabel({ label: "Nombre Zona", value: this.data?.znom })}
             {this.buildLabel({ label: "Tipo Zona", value: this.data?.ztipo })}
