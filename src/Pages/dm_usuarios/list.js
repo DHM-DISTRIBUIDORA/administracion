@@ -31,5 +31,7 @@ class index extends DPA.list {
     $getData() {
         return Parent.model.Action.getAll();
     }
+
+
 }
 export default connect(index);

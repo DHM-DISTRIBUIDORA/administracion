@@ -26,6 +26,9 @@ import tbzon from './tbzon';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
+import mapa from './mapa';
+import test2 from "./test2"
+import test from "./test"
 export default SPage.combinePages("/", {
   "": carga,
   "root": root,
@@ -51,5 +54,8 @@ export default SPage.combinePages("/", {
   ...tbemp,
   ...tbzon,
   ...ajustes,
+  ...mapa,
   ...distribucion,
+  test2,
+  test
 });

@@ -16,7 +16,9 @@ export default class index extends Component {
 
 
     render() {
-        return <STable4 data={values} />
+        return <SPage disableScroll>
+            <STable4 data={values} />
+        </SPage>
     }
 
 

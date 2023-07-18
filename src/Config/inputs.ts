@@ -29,10 +29,14 @@ const inputs = () => {
 
                 paddingStart: 8,
                 color: STheme.color.text,
+                placeholderTextColor: STheme.color.gray,
                 // backgroundColor: "#E0E0E0" + "55",
                 // height: 55,
                 // borderRadius: 16,
                 // backgroundColor: STheme.color.card,
+            },
+            "placeholder": {
+                color: STheme.color.gray,
             },
             error: {
                 // borderRadius: 16,

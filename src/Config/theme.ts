@@ -33,9 +33,9 @@ import MapStyle from './mapStyle'
 // ------- Version Prueba1 -------
 const theme: SThemeThemes = {
     default: {
-        barStyle: "light-content",
+        barStyle: "dark-content",
         barColor: "#F5F5F5",
-        text: "#151813 ",
+        text: "#151813",
         primary: "#31C2F1",
         secondary: "#ffffff",
         info: "#151813",

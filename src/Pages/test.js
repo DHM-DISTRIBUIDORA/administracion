@@ -1,22 +1,40 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native'
-import { STable3 } from 'servisofts-component';
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SButtom } from 'servisofts-component';
+import { Animated } from 'react-native';
+import Svg from "react-native-svg";
+import { Path, Rect, Line, Circle } from "react-native-svg";
 
-import tjson from "./test.json"
+const AnimatedPath = Animated.createAnimatedComponent(Path);
+const arrPaths = [
+    "M0 1H1L0 0",
+    "M0 1H26L0 0"
+    
+]
 
-const values = Object.values(tjson);
 export default class index extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
+    animValue = new Animated.Value(0)
+
+    componentDidMount() {
+        console.log("asdasd")
+        new Animated.timing(this.animValue, {
+            toValue: arrPaths.length,
+            duration: 1000 * arrPaths.length
+        }).start()
     }
-
     render() {
+        return <Svg
+            width="200"
+            height="200"
+            viewBox="0 0 26 26"
+        >
+            <AnimatedPath
 
-        return <STable3 data={values} />
+                d={this.animValue.interpolate({
+                    inputRange: [...arrPaths.map((a, i) => i)],
+                    outputRange: arrPaths
+                })}
+                fill="#FA790E" stroke="#fff" />
+        </Svg>
     }
 
 

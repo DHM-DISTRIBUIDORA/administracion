@@ -12,6 +12,16 @@ export default class BackgroundImage extends Component<type> {
         this.state = {
         };
     }
+
+    getGradient = (pros) => {
+        if (!this.state.layout) return null;
+        const { width, height } = this.state.layout
+        let deg = 35;
+        if (width > height) {
+            deg = 10;
+        }
+        return <SGradient colors={[STheme.color.primary, STheme.color.background, STheme.color.background]} deg={deg} />
+    }
     getBackground = () => {
         var source = this.props.source;
         if (!source) {
@@ -29,8 +39,10 @@ export default class BackgroundImage extends Component<type> {
             position: "absolute",
             opacity: 0.6,
             ...this.props.style,
+        }} onLayout={(e) => {
+            this.setState({ layout: e.nativeEvent.layout })
         }}>
-            <SGradient colors={[STheme.color.primary, STheme.color.background,  STheme.color.background]} deg={10} />
+            {this.getGradient()}
             {/* <SImage src={source} style={{
                 width: "100%",
                 height: "100%",

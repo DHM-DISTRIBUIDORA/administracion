@@ -22,9 +22,7 @@ class index extends Component {
         return <SPage preventBack  >
             <SHr height={8} />
             <SView col={"xs-12"} center height={100}>
-                <SText fontSize={18} center>{"Bienvenido al sistema comercial"}</SText>
-                <SHr />
-                <SView width={200}>
+                <SView width={200} flex>
                     <SIcon name={"LogoClear"} fill={STheme.color.text} stroke={STheme.color.text} />
                 </SView>
             </SView>

@@ -18,7 +18,7 @@ class index extends Component<CategoriaCardPropsType> {
         var { nombre, nivel, catcod } = this.props.obj;
 
         return (
-            <SView col={"xs-6"} style={{ padding: 5 }} >
+            <SView col={"xs-6"} style={{ padding: 5 }} height={155} >
             <SView col={"xs-12"} style={{ backgroundColor: this.props.color, borderRadius: 15 }} height
                 onPress={() => {
                     SNavigation.navigate("/categoria", { pk: catcod, color: this.props.color })
