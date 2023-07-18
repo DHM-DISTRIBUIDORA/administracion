@@ -12,7 +12,7 @@ export default new SModel<Action, Reducer>({
         "empnom": { type: "text", editable: true },
         "empdir": { type: "text", editable: true },
         "emptel": { type: "text", editable: true },
-        "idemt": { type: "integer", editable: true },
+        "idemt": { type: "integer", editable: true, fk: "tbemt" },
         "empcom": { type: "text", editable: true },
         "emppos": { type: "text", editable: true },
         "idus": { type: "integer", editable: true },
@@ -41,7 +41,7 @@ export default new SModel<Action, Reducer>({
         "empcolor": { type: "text", editable: true },
         "empmarc": { type: "text", editable: true },
         "sucreg": { type: "integer", editable: true },
-        
+
 
     },
     // image: {

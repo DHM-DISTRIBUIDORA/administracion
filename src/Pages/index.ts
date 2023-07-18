@@ -23,6 +23,7 @@ import dm_usuarios from './dm_usuarios';
 import dm_clientes from './dm_clientes';
 import tbemp from './tbemp';
 import tbzon from './tbzon';
+import tbemt from './tbemt';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
@@ -56,6 +57,7 @@ export default SPage.combinePages("/", {
   ...ajustes,
   ...mapa,
   ...distribucion,
+  ...tbemt,
   test2,
   test
 });

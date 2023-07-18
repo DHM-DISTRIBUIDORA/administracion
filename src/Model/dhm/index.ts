@@ -3,7 +3,7 @@ import dm_categorias from "./dm_categorias";
 import dm_clientes from "./dm_clientes";
 import dm_usuarios from "./dm_usuarios";
 import tbemp from "./tbemp";
-
+import tbemt from "./tbemt";
 import tbrutadia from "./tbrutadia";
 import tbzon from "./tbzon";
 export default {
@@ -13,5 +13,6 @@ export default {
     dm_usuarios,
     tbemp,
     tbrutadia,
-    tbzon
+    tbzon,
+    tbemt
 }

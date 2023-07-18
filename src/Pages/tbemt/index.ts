@@ -8,16 +8,16 @@ import _delete from './delete';
 import edit from './edit';
 import _new from "./new"
 export const Parent = {
-    name: "tbemp",
-    path: `/tbemp`,
-    model: Model.tbemp
+    name: "tbemt",
+    path: `/tbemt`,
+    model: Model.tbemt
 }
 export default SPage.combinePages(Parent.name, {
     "": list,
     list,
     table,
-    ...profile,
     "delete": _delete,
     "new": _new,
-    edit
+    edit,
+    ...profile,
 })
