@@ -1,13 +1,14 @@
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
-// import item from './item';
+import item from './item';
 
 class index extends DPA.list {
     constructor(props) {
         super(props, {
             Parent: Parent,
             title: "Lista de " + Parent.name,
+            item: item,
             excludes: [],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();

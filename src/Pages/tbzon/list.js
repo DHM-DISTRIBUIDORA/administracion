@@ -11,7 +11,7 @@ class index extends DPA.list {
             Parent: Parent,
             title: "Lista de " + Parent.name,
             item: item,
-            excludes: ['zterr','idterr','zest','zdia','zdmsest','zdesfin','znsuc','idgz','zmarc','sucreg'],
+            excludes: ['zterr','ztipo','idterr','zest','zdia','zdmsest','zdesfin','znsuc','idgz','zmarc','sucreg'],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();
                 resolve();
@@ -28,7 +28,7 @@ class index extends DPA.list {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $filter(data) {
-        return data.estado != 1
+        return data.zest != 1
     }
     $getData() {
         return Parent.model.Action.getAll();

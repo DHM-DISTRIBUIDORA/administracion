@@ -12,7 +12,7 @@ class index extends DPA.delete {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $onDelete() {
-        this.data.estado = 1;
+        this.data.zest = 1;
         Parent.model.Action.editar({
             data: this.data,
             key_usuario: Model.usuario.Action.getKey()

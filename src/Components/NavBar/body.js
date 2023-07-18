@@ -170,7 +170,7 @@ export default class body extends React.Component {
                     <SHr height={20} />
 
                     <SView col={"xs-9.5 md-5.8 xl-3.8"} center style={{ bottom: 0, }}>
-                        <SIcon name={"Logo"} height={70} />
+                        <SIcon name={"Logo"} height={70} fill={STheme.color.text} />
                     </SView>
                     <SView row >
                         <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {APPversion}</SText>
