@@ -7,12 +7,20 @@ class index extends DPA.new {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            // excludes: ['prdcod']
         });
     }
 
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
+    }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["catcod"].label = "Categoría"
+        inp["nombre"].label = "Nombre"
+        inp["uxc"].label = "Unidades por caja"
+        inp["idalm"].label = "Id almacén"
+        return inp;
     }
     $onSubmit(data) {
         Parent.model.Action.registro({
