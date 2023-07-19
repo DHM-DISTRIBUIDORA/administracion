@@ -37,6 +37,7 @@ import Tienda, { ReactComponent as TiendaW } from './tienda.svg';
 import Empleados, { ReactComponent as EmpleadosW } from './empleados.svg';
 import Zonas, { ReactComponent as ZonasW } from './zonas.svg';
 import Clientes, { ReactComponent as ClientesW } from './clientes.svg';
+import Carrito2, { ReactComponent as Carrito2W } from './carrito.svg';
 
 
 const Assets = {
@@ -80,6 +81,7 @@ const Assets = {
 	"Empleados": { Native: Empleados, Web: EmpleadosW },
 	"Zonas": { Native: Zonas, Web: ZonasW },
 	"Clientes": { Native: Clientes, Web: ClientesW },
+	"Carrito2": { Native: Carrito2, Web: Carrito2W },
 
 
 

@@ -14,6 +14,8 @@ import BtnRedes from "./BtnRedes"
 import Banner from "./Banner"
 import Producto from "./Producto"
 import Categoria from "./Categoria"
+import Carrito from "./Carrito"
+
 
 
 export {
@@ -32,6 +34,7 @@ export {
     BtnRedes,
     Banner,
     Producto,
-    Categoria
+    Categoria,
+    Carrito
 
 }
