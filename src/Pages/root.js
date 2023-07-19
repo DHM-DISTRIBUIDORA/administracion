@@ -30,6 +30,11 @@ class index extends Component {
                     borderTopLeftRadius: 25,
                     borderBottomLeftRadius: 25,
                     borderTopRightRadius: 15,
+                    borderBottomRightRadius: 15,
+
+                    
+                    position: "relative", top: 0,
+                    right: 10,
                 }}
                 width={165} row
             >
@@ -39,12 +44,15 @@ class index extends Component {
                         style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', }}
                     />
                 </SView>
-                <SView width={5}/>
+                <SView width={5} />
                 <SView flex style={{ alignItems: "flex-end" }}>
                     <SText fontSize={12}>{dataUser?.Nombres}</SText>
                     <SText fontSize={10}>{dataUser?.Correo}</SText>
                 </SView>
-                <SView width={4}/>
+                <SView width={4} />
+            </SView>
+            <SView style={{ position: "absolute", top: 18 }}>
+                <SIcon name='Cola' height={10} width={10} fill={STheme.color.primary + "50"} />
             </SView>
         </SView>
     }

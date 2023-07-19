@@ -10,7 +10,7 @@ export default new SModel<Action, Reducer>({
         "prdcod": { type: "text", pk: true },
         "catcod": { type: "text", fk: "dm_categorias", editable: true },
         "nombre": { type: "text", editable: true },
-        "unidad": { type: "text", editable: true },
+        "Unidad": { type: "text", editable: true },
         "uxc": { type: "text", editable: true },
         "Precio": { type: "text", editable: true },
         "Stock": { type: "text", editable: true },

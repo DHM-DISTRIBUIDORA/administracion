@@ -16,6 +16,14 @@ class index extends DPA.edit {
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["catcod"].label = "Categoría"
+        inp["nombre"].label = "Nombre"
+        inp["uxc"].label = "Unidades por caja"
+        inp["idalm"].label = "Id almacén"
+        return inp;
+    }
     
     $onSubmit(data) {
         Parent.model.Action.editar({
