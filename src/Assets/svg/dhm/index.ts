@@ -34,15 +34,13 @@ import Mcontact, { ReactComponent as McontactW } from './m-contact.svg';
 import Message, { ReactComponent as MessageW } from './message.svg';
 import Cola, { ReactComponent as ColaW } from './cola.svg';
 import Tienda, { ReactComponent as TiendaW } from './tienda.svg';
-
-
-
-
-
+import Empleados, { ReactComponent as EmpleadosW } from './empleados.svg';
+import Zonas, { ReactComponent as ZonasW } from './zonas.svg';
+import Clientes, { ReactComponent as ClientesW } from './clientes.svg';
 
 
 const Assets = {
-	
+
 	"Logo": { Native: Logo, Web: LogoW },
 	"Logosolo": { Native: Logosolo, Web: LogosoloW },
 	"Carga": { Native: Carga, Web: CargaW },
@@ -54,7 +52,7 @@ const Assets = {
 	"Login": { Native: Login, Web: LoginW },
 	"MenuFavoritos": { Native: MenuFavoritos, Web: MenuFavoritosW },
 	"MenuPedido": { Native: MenuPedido, Web: MenuPedidoW },
-	
+
 	"IconChecked": { Native: IconChecked, Web: IconCheckedw },
 	"IconCheckedOk": { Native: IconCheckedOk, Web: IconCheckedOkW },
 	"KMenu": { Native: KMenu, Web: KMenuW },
@@ -79,17 +77,20 @@ const Assets = {
 	"Message": { Native: Message, Web: MessageW },
 	"Cola": { Native: Cola, Web: ColaW },
 	"Tienda": { Native: Tienda, Web: TiendaW },
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	"Empleados": { Native: Empleados, Web: EmpleadosW },
+	"Zonas": { Native: Zonas, Web: ZonasW },
+	"Clientes": { Native: Clientes, Web: ClientesW },
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

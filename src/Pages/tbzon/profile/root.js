@@ -23,11 +23,17 @@ class index extends DPA.profile {
     $footer() {
         return <SView col={"xs-12"} >
             <SHr />
-            <SText fontSize={16} bold>Menu</SText>
+            <SText fontSize={16} bold>Menú</SText>
             <SHr />
-            <MenuPages path={Parent.path+"/profile/"} permiso={"ver"} params={{
+            {/* <MenuPages path={Parent.path+"/profile/"} permiso={"ver"} params={{
                 pk: this.pk
             }}>
+            </MenuPages> */}
+            <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
+                pk: this.pk
+            }} >
+                <MenuButtom url={Parent.path + "/profile/dm_clientes"} params={{ pk: this.pk }}
+                    icon={<SIcon name={"Clientes"} />} label={"Clientes"} />
             </MenuPages>
         </SView>
     }
