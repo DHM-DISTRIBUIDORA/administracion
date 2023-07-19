@@ -15,7 +15,7 @@ class index extends Component {
             <SPage title={'Mapas'}>
                 <SHr height={32} />
                 <MenuPages path={"/mapa/"} permiso={"view"}>
-                    <MenuButtom label={"Test"} url='/mapa/test' />
+                    <MenuButtom label={"Test"} url='/mapa/test' icon={<SIcon name={"Tienda"} />} />
                 </MenuPages>
             </SPage>
         );
