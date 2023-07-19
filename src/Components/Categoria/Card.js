@@ -32,9 +32,9 @@ class index extends Component<CategoriaCardPropsType> {
                         <SText color={STheme.color.white} fontSize={16} bold>{nombre}</SText>
                     </SView>
                     <SHr height={0} />
-                    <SView flex style={{ alignItems: "flex-end", marginRight: 5 }}>
+                    {/* <SView flex style={{ alignItems: "flex-end", marginRight: 5 }}>
                         <SText color={STheme.color.white} fontSize={16} >{catcod}</SText>
-                    </SView>
+                    </SView> */}
                 </SView>
                 <SHr />
             </SView>
