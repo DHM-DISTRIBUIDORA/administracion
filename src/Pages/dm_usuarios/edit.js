@@ -8,7 +8,8 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: ['idus','usumod','fecmod','usest','modpreven','idcentro','suctod','usultsuc','verval','selcob','pcpred','facauto']
+
         });
     }
     $allowAccess() {
@@ -17,8 +18,16 @@ class index extends DPA.edit {
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["usuario"].label = "Usuario"
+        inp["pass"].label = "Password"
+        inp["nombre"].label = "Nombre Completo"
+        return inp;
+    }
     
     $onSubmit(data) {
+        data.fecmod = ""
         Parent.model.Action.editar({
             data: {
                 ...this.data,
