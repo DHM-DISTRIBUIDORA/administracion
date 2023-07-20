@@ -27,9 +27,9 @@ class index extends DPA.list {
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
-    // $filter(data) {
-    //     return data.empest != "1"
-    // }
+    $filter(data) {
+        return data.prdest != "0"
+    }
     $getData() {
         return Parent.model.Action.getAll();
     }

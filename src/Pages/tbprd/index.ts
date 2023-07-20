@@ -5,6 +5,7 @@ import list from './list';
 import table from './table';
 import _delete from './delete';
 import edit from './edit';
+import profile from './profile';
 import _new from "./new"
 export const Parent = {
     name: "tbprd",
@@ -17,5 +18,6 @@ export default SPage.combinePages(Parent.name, {
     table,
     "delete": _delete,
     "new": _new,
+    profile,
     edit
 })
