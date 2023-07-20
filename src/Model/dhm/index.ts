@@ -6,6 +6,7 @@ import tbemp from "./tbemp";
 import tbemt from "./tbemt";
 import tbrutadia from "./tbrutadia";
 import tbzon from "./tbzon";
+import tbprd from "./tbprd";
 export default {
     dm_categorias,
     dm_productos,
@@ -14,5 +15,6 @@ export default {
     tbemp,
     tbrutadia,
     tbzon,
-    tbemt
+    tbemt,
+    tbprd 
 }

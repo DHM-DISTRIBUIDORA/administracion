@@ -88,7 +88,6 @@ class index extends Component<ProductoCardPropsType> {
                             // }}
                             >Añadir
                             </PButtomSmall> : <SView height={24} />}
-
                         </SView>
                     </SView>
                 </SView>
