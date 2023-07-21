@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView ,SNavigation} from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
@@ -43,7 +43,9 @@ class index extends Component<FloatPropsType> {
                 }}
                     onPress={() => {
                         // this.props.navigation.navigate('farmacia/carrito');
+                        SNavigation.navigate("/carrito")
                     }}
+                    
                 >
                     {/* <SIcon name={'Carrito'}
                     style={{
