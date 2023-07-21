@@ -15,13 +15,13 @@ class index extends Component<CategoriaCardPropsType> {
     }
   
     render() {
-        var { nombre, nivel, catcod } = this.props.obj;
+        var { linnom, nivel, lincod } = this.props.obj;
 
         return (
             <SView col={"xs-6"} style={{ padding: 5 }} height={155} >
             <SView col={"xs-12"} style={{ backgroundColor: this.props.color, borderRadius: 15 }} height
                 onPress={() => {
-                    SNavigation.navigate("/categoria", { pk: catcod, color: this.props.color })
+                    SNavigation.navigate("/categoria", { pk: lincod, color: this.props.color })
                 }}
             >
                 <SHr />
@@ -29,7 +29,7 @@ class index extends Component<CategoriaCardPropsType> {
                     <SView width={8} />
                     <SIcon name='Categoria' height={60} width={60} />
                     <SView col={"xs-11"} style={{ padding: 7 }}>
-                        <SText color={STheme.color.white} fontSize={16} bold>{nombre}</SText>
+                        <SText color={STheme.color.white} fontSize={16} bold>{linnom}</SText>
                     </SView>
                     <SHr height={0} />
                     {/* <SView flex style={{ alignItems: "flex-end", marginRight: 5 }}>

@@ -18,14 +18,15 @@ class index extends Component<ProductoCardPropsType> {
     enviarDatosItems = () => {
         const datos = {
             items: this.state.count,
-            precio: this.props.data.Precio,
+            precio: this.props.data.prdpoficial,
         };
         this.props.items(datos);
     };
 
     render() {
         var active = true;
-        var { Precio, Stock, Unidad, catcod, idalm, nombre, prdcod, uxc } = this.props.data;
+        var Stock = 10; // por determinar
+        var { prdpoficial, prdunid, catcod, idalm, prdnom, prdcod, prdcxu } = this.props.data;
         (Stock <= 0) ? active = false : active = true;
         return (
             <SView col={"xs-12"} card row {...this.props}
@@ -43,13 +44,13 @@ class index extends Component<ProductoCardPropsType> {
                 </SView>
                 <SView col={"xs-0.5"}></SView>
                 <SView col={"xs-8.5"}>
-                    <SText fontSize={16}>{nombre}</SText>
+                    <SText fontSize={16}>{prdnom}</SText>
                     <SView col={"xs-12"} row>
                         <SText fontSize={11} color={STheme.color.gray}>Stock: {Stock} </SText>
                         <SView width={5}><SText fontSize={11}>|</SText></SView>
-                        <SText fontSize={11} color={STheme.color.gray}> Ud: {Unidad} </SText>
+                        <SText fontSize={11} color={STheme.color.gray}> Ud: {prdunid} </SText>
                         <SView width={5}><SText fontSize={11}>|</SText></SView>
-                        <SText fontSize={11} color={STheme.color.gray}> UxC: {uxc}</SText>
+                        <SText fontSize={11} color={STheme.color.gray}> UxC: {prdcxu}</SText>
                     </SView>
 
                     <SHr />
@@ -78,7 +79,7 @@ class index extends Component<ProductoCardPropsType> {
                             </SView>
                         </SView>
                         <SView col={"xs-5"} style={{ alignItems: "flex-end" }}>
-                            <SText fontSize={18} bold>Bs. {SMath.formatMoney(Precio)}</SText>
+                            <SText fontSize={18} bold>Bs. {SMath.formatMoney(prdpoficial)}</SText>
                             <SHr />
                             {this.state.count >= 1 ? <PButtomSmall fontSize={13}
                                 onPress={this.enviarDatosItems}

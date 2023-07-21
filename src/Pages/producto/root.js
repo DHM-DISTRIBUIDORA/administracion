@@ -33,10 +33,11 @@ class index extends Component {
     getProductos() {
         let dato;
         var dataMostrar = [];
-        var productos = Model.dm_productos.Action.getAll();
+        // var productos = Model.dm_productos.Action.getAll();
+        var productos = Model.tbprd.Action.getAll();
         if (!productos) return <SLoad />
 
-        var objFinal = Object.values(productos).filter((a) => this.params.pk == a.catcod)
+        var objFinal = Object.values(productos).filter((a) => this.params.pk == a.idlinea)
         if (Object.keys(objFinal).length === 0) return <SText>No hay productos...</SText>;
         console.log(this.state.items + " aquii")
         return (
@@ -46,7 +47,7 @@ class index extends Component {
                     initSpace={8}
                     flex
                     data={objFinal}
-                    filter={(a) => a.catcod == this.params.pk}
+                    filter={(a) => a.idlinea == this.params.pk}
 
                     limit={10}
                     render={(obj) => {

@@ -9,6 +9,7 @@ import tbrutadia from "./tbrutadia";
 import tbzon from "./tbzon";
 import tbprd from "./tbprd";
 import tbcli from "./tbcli";
+import tbprdlin from "./tbprdlin";
 export default {
     dm_categorias,
     dm_productos,
@@ -19,5 +20,6 @@ export default {
     tbrutadia,
     tbzon,
     tbemt,
-    tbprd 
+    tbprd,
+    tbprdlin
 }

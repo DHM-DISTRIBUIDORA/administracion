@@ -25,6 +25,7 @@ import tbemp from './tbemp';
 import tbzon from './tbzon';
 import tbemt from './tbemt';
 import tbprd from './tbprd';
+import tbprdlin from './tbprdlin';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
@@ -58,6 +59,7 @@ export default SPage.combinePages("/", {
   ...tbemp,
   ...tbzon,
   ...tbprd,
+  ...tbprdlin,
   ...ajustes,
   ...mapa,
   ...distribucion,
