@@ -13,7 +13,6 @@ class index extends Component {
         // const cat = Model.dm_categorias.Action.getAll();
         const cat = Model.tbprdlin.Action.getAll()
         if (!cat) return <SLoad />
-        console.log(cat)
         return <SList2
             horizontal
             data={cat}

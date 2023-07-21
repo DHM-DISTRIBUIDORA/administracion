@@ -22,9 +22,6 @@ class index extends Component<FloatPropsType> {
         // var total = 100;
 
         const productos = Model.carrito.Action.getState().productos;
-        
-        console.log("sadasdasd",productos);
-        // var cantidad = 0;
         var distancia = 60
         if (this.props.bottom) distancia = this.props.bottom
 
