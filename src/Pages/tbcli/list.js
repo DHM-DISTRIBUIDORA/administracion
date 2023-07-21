@@ -1,13 +1,15 @@
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
-// import item from './item';
+import item from './item';
 
 class index extends DPA.list {
     constructor(props) {
         super(props, {
             Parent: Parent,
             title: "Lista de " + Parent.name,
+            item: item,
+            params:["idemp?"],
             excludes: [],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();
@@ -28,7 +30,7 @@ class index extends DPA.list {
         return data.estado != 0
     }
     $getData() {
-        return Parent.model.Action.getAll();
+        return Parent.model.Action.getAll({ ...this.$params });
     }
 }
 export default connect(index);

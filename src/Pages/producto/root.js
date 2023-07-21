@@ -38,7 +38,7 @@ class index extends Component {
         let dato;
         var dataMostrar = [];
         // var productos = Model.dm_productos.Action.getAll();
-        var productos = Model.tbprd.Action.getAll();
+        var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
 
         var objFinal = Object.values(productos).filter((a) => this.params.pk == a.idlinea)
