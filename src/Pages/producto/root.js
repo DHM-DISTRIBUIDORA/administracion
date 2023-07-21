@@ -12,7 +12,7 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // productos: {}
+            productos: [],
             items: 0,
             total: 0
         }
@@ -20,9 +20,13 @@ class index extends Component {
 
     };
 
-    recibirItems = (datos) => {
-        this.setState({ items: this.state.items + datos.items })
-        this.setState({ total: this.state.total + datos.precio })
+    recibirItems = ({ tbprd }) => {
+        // this.state.productos.push(tbprd)
+        let productos = Model.carrito.Action.getState().productos;
+        productos.push(tbprd);
+        Model.carrito.Action.setState({ productos });
+        // this.setState({ items: this.state.items + datos.items })
+        // this.setState({ total: this.state.total + datos.precio })
     };
 
     load_data() {
@@ -39,7 +43,6 @@ class index extends Component {
 
         var objFinal = Object.values(productos).filter((a) => this.params.pk == a.idlinea)
         if (Object.keys(objFinal).length === 0) return <SText>No hay productos...</SText>;
-        console.log(this.state.items + " aquii")
         return (
             <>
                 <SList
@@ -83,7 +86,7 @@ class index extends Component {
                 </Container>
 
             </SPage>
-            <Carrito.Float bottom={100} items={this.state.items} total={this.state.total} />
+            <Carrito.Float bottom={100} />
         </>
         );
     }

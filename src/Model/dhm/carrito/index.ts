@@ -4,7 +4,8 @@ import Reducer from "./Reducer";
 
 export default new SModel<Action, Reducer>({
     info: {
-        component: "carrito"
+        component: "carrito",
+        
     },
     Columns: {
         // "catcod": { type: "text", pk: true },

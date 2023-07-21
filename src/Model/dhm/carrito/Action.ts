@@ -3,13 +3,14 @@ export default class Action extends SAction {
 
     setState(data) {
         this._dispatch({
+            ...this.model.info,
             type: "setState",
-            data: data
+            ...data,
         });
     }
 
     getState() {
-        return this._getState().data
+        return this._getReducer()
     }
 
 }

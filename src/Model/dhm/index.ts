@@ -10,6 +10,8 @@ import tbzon from "./tbzon";
 import tbprd from "./tbprd";
 import tbcli from "./tbcli";
 import tbprdlin from "./tbprdlin";
+
+import carrito from "./carrito";
 export default {
     dm_categorias,
     dm_productos,
@@ -21,5 +23,6 @@ export default {
     tbzon,
     tbemt,
     tbprd,
-    tbprdlin
+    tbprdlin,
+    carrito
 }

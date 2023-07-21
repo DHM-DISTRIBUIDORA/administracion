@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
+import Model from '../../Model';
 export type FloatPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -19,14 +20,18 @@ class index extends Component<FloatPropsType> {
 
     render() {
         // var total = 100;
+
+        const productos = Model.carrito.Action.getState().productos;
+        
+        console.log("sadasdasd",productos);
         // var cantidad = 0;
         var distancia = 60
-        if(this.props.bottom) distancia = this.props.bottom
+        if (this.props.bottom) distancia = this.props.bottom
 
         return (
             <>
                 <SView center row style={{
-                    backgroundColor: STheme.color.primary ,
+                    backgroundColor: STheme.color.primary,
                     width: 117,
                     height: 54,
                     position: "absolute",
@@ -51,7 +56,7 @@ class index extends Component<FloatPropsType> {
                     </SView>
                     <SView col={"xs-8"} center height style={{ alignItems: 'flex-start', paddingLeft: 8 }} >
                         <SText fontSize={12} color={STheme.color.white}   >{`Bs. ${this.props.total}`}</SText>
-                        <SText fontSize={12} color={STheme.color.white} bold >{this.props.items} items</SText>
+                        <SText fontSize={12} color={STheme.color.white} bold >{productos.length} items</SText>
                     </SView>
                 </SView>
                 {/* <SView style={{ position: "absolute", top: distancia }}>
@@ -61,4 +66,7 @@ class index extends Component<FloatPropsType> {
         );
     }
 }
-export default (index);
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(index);
