@@ -27,9 +27,8 @@ class index extends Component<ProductoCardPropsType> {
 
     render() {
         var active = true;
-        var Stock = 10; // por determinar
-        var { prdpoficial, prdunid, catcod, idalm, prdnom, prdcod, prdcxu } = this.props.data;
-        (Stock <= 0) ? active = false : active = true;
+        var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu } = this.props.data;
+        (stock <= 0) ? active = false : active = true;
         return (
             <SView col={"xs-12"} card row {...this.props}
                 pointerEvents={!active ? 'none' : 'auto'}
@@ -48,7 +47,7 @@ class index extends Component<ProductoCardPropsType> {
                 <SView col={"xs-8.5"}>
                     <SText fontSize={16}>{prdnom}</SText>
                     <SView col={"xs-12"} row>
-                        <SText fontSize={11} color={STheme.color.gray}>Stock: {Stock} </SText>
+                        <SText fontSize={11} color={STheme.color.gray}>Stock: {stock} </SText>
                         <SView width={5}><SText fontSize={11}>|</SText></SView>
                         <SText fontSize={11} color={STheme.color.gray}> Ud: {prdunid} </SText>
                         <SView width={5}><SText fontSize={11}>|</SText></SView>
@@ -73,7 +72,7 @@ class index extends Component<ProductoCardPropsType> {
                             </SView>
                             <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
-                                    if (this.state.count >= Stock) return;
+                                    if (this.state.count >= stock) return;
                                     this.setState({ count: this.state.count + 1 })
                                 }}
                             >
