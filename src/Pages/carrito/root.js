@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SButtom, SForm, SHr, SIcon, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
-import { Container } from '../../Components';
+import { BottomNavigator, Carrito, Container } from '../../Components';
 
 class index extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ class index extends Component {
         })
     }
     render() {
-        return <SPage >
+        return <SPage  footer={this.footer()}>
             <Container>
                 <SText>Carrito</SText>
                 <SForm inputs={{
@@ -44,8 +44,14 @@ class index extends Component {
                     onSubmitName={"ENVIAR"}
                     onSubmit={this.handlePress}
                 />
+                <SHr height={15} />
+                <Carrito.Detalle />
             </Container>
         </SPage>
+    }
+
+    footer() {
+        return <BottomNavigator url={"/carrito"} />
     }
 }
 const initStates = (state) => {

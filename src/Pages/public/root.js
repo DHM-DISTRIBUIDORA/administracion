@@ -66,7 +66,7 @@ class index extends Component {
     }
     render() {
         let productos = Model.dm_productos.Action.getAll();
-        console.log(productos)
+        // console.log(productos)
         return <SPage
             // hidden
             navBar={this.navBar()}

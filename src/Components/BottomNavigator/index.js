@@ -56,7 +56,7 @@ export default class index extends Component {
 						{
 							!Model.usuario.Action.getKey() ?
 								null
-								: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/pedidos' }))
+								: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/carrito' }))
 						}
 						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 					</SView>

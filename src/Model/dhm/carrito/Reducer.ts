@@ -7,7 +7,7 @@ export default class Reducer extends SReducer {
   initialState(extra?: {}) {
 
     let initState = {
-      productos: [],
+      productos: {},
     };
     SStorage.getItem("carrito", (imt) => {
       if (!imt) return;
