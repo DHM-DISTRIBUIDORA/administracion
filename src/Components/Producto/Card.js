@@ -18,6 +18,7 @@ class index extends Component<ProductoCardPropsType> {
     enviarDatosItems = () => {
         const datos = {
             tbprd: this.props.data,
+            // tbprd: {[this.props.data]:{cantidad:this.state.count,data:{this.props.data}}},
             items: this.state.count,
             precio: this.props.data.prdpoficial,
         };

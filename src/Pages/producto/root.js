@@ -22,9 +22,17 @@ class index extends Component {
 
     recibirItems = ({ tbprd }) => {
         // this.state.productos.push(tbprd)
+
+        // let productos = Model.carrito.Action.getState().productos;
+        // productos.push(tbprd);
+        // Model.carrito.Action.setState({ productos });
+
         let productos = Model.carrito.Action.getState().productos;
         productos.push(tbprd);
         Model.carrito.Action.setState({ productos });
+
+
+
         // this.setState({ items: this.state.items + datos.items })
         // this.setState({ total: this.state.total + datos.precio })
     };
@@ -38,6 +46,7 @@ class index extends Component {
         let dato;
         var dataMostrar = [];
         // var productos = Model.dm_productos.Action.getAll();
+        // var productos = Model.tbprd.Action.getAll();
         var productos = Model.tbprd.Action.getAll();
         if (!productos) return <SLoad />
 
