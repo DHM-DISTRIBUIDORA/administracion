@@ -31,6 +31,8 @@ import distribucion from './distribucion';
 import mapa from './mapa';
 import test2 from "./test2"
 import test from "./test"
+import carrito from './carrito';
+import tbcli from './tbcli';
 export default SPage.combinePages("/", {
   "": carga,
   "root": root,
@@ -60,6 +62,8 @@ export default SPage.combinePages("/", {
   ...mapa,
   ...distribucion,
   ...tbemt,
+  ...carrito,
+  ...tbcli,
   test2,
   test
 });
