@@ -32,7 +32,7 @@ class index extends Component {
                     borderTopRightRadius: 15,
                     borderBottomRightRadius: 15,
 
-                    
+
                     position: "relative", top: 0,
                     right: 10,
                 }}
@@ -60,7 +60,13 @@ class index extends Component {
         return <SPage preventBack  >
             {this.datosUser()}
             <SHr height={8} />
+            <SView col={"xs-12"} center>
+                <SText center fontSize={18}>BIENVENIDO AL SISTEMA ADMINISTRATIVO</SText>
+                <SHr />
+                {/* <SText fontSize={18}>Bienvenido al sistema administrativo</SText> */}
+            </SView>
             <SView col={"xs-12"} center height={100}>
+
                 <SView width={200} flex>
                     <SIcon name={"LogoClear"} fill={STheme.color.text} stroke={STheme.color.text} />
                 </SView>
