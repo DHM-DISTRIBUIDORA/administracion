@@ -51,8 +51,10 @@ class index extends Component<DetallePropsType> {
         return (
             <>
                 <SView col={"xs-12"} >
+                    <SHr />
+                    <SText fontSize={16} bold>Detalle de pedido</SText>
+                    <SHr height={15} />
                     {this.cabeceraPedido()}
-
                     <SList
                         initSpace={8}
                         flex
