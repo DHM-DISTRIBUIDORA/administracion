@@ -12,7 +12,7 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            productos: [],
+            productos: {},
             items: 0,
             total: 0
         }
@@ -28,7 +28,11 @@ class index extends Component {
         // Model.carrito.Action.setState({ productos });
 
         let productos = Model.carrito.Action.getState().productos;
-        productos.push(tbprd);
+        // productos.push(tbprd);
+        // productos ={...tbprd}
+        Object.assign(productos, tbprd);
+        console.log(productos);
+
         Model.carrito.Action.setState({ productos });
 
 

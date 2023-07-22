@@ -64,9 +64,43 @@ class index extends Component {
             </SView>
         </SView>
     }
+
+    publicidadBanners() {
+        return <ScrollView
+            horizontal
+            contentContainerStyle={{
+                width: null,
+            }}>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner2.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner3.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner1.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner4.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner5.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+            <SView width={8} />
+            <SView width={250} height={250}>
+                <SImage src={require('../../Assets/img/banner6.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
+            </SView>
+        </ScrollView>
+    }
+
     render() {
         let productos = Model.dm_productos.Action.getAll();
-        console.log(productos)
+        // console.log(productos)
         return <SPage
             // hidden
             navBar={this.navBar()}
@@ -103,24 +137,8 @@ class index extends Component {
             </SView>
             <SHr height={25} />
             <SView col={"xs-12"}>
-                <ScrollView
-                    horizontal
-                    contentContainerStyle={{
-                        width: null,
-                    }}>
-                    <SView width={8} />
-                    <SView width={250} height={250}>
-                        <SImage src={require('../../Assets/img/banner2.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
-                    </SView>
-                    <SView width={8} />
-                    <SView width={250} height={250}>
-                        <SImage src={require('../../Assets/img/banner3.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
-                    </SView>
-                    <SView width={8} />
-                    <SView width={250} height={250}>
-                        <SImage src={require('../../Assets/img/banner1.jpg')} style={{ resizeMode: "contain", borderRadius: 8 }} />
-                    </SView>
-                </ScrollView>
+                {this.publicidadBanners()}
+
             </SView>
             <SHr height={30} />
         </SPage >
