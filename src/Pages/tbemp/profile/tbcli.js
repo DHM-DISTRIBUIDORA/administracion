@@ -43,7 +43,7 @@ export default connect(index);
 
 const Parent2 = {
     name: "Clientes del empleado",
-    path: `/tbzon`,
+    path: `/tbcli`,
     model: Model.tbcli
 }
 class Lista extends DPA.list {

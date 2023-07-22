@@ -4,6 +4,7 @@ import STable from "servisofts-table"
 
 export default class index extends Component {
     render() {
+        // return <STable4 data={[]}/>
         return <STable loadData={new Promise((resolve, reject) => {
             new SThread(1000, "asd", false).start(() => {
                 resolve([])

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SButtom, SHr, SIcon, SImage, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import Model from '../Model';
@@ -57,6 +57,10 @@ class index extends Component {
         </SView>
     }
     render() {
+        if (!Model.usuario.Action.getKey()) {
+            SNavigation.goBack();
+            return <SLoad />
+        }
         return <SPage preventBack  >
             {this.datosUser()}
             <SHr height={8} />
