@@ -42,7 +42,7 @@ export default connect(index);
 
 
 const Parent2 = {
-    name: "Zonas del empleado",
+    name: "Clientes del empleado",
     path: `/tbzon`,
     model: Model.tbcli
 }
@@ -58,9 +58,9 @@ class Lista extends DPA.list {
     }
 
     $filter(data) {
-        return data.zest == "0"
+        return data.cliest == "0"
     }
     $getData() {
-        return Parent2.model.Action.getAll({ idemp: this.props.pi.pk })
+        return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })
     }
 }
