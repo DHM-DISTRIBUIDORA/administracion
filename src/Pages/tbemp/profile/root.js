@@ -24,11 +24,20 @@ class index extends DPA.profile {
         return <SView col={"xs-12"} >
             <SHr />
             <SText fontSize={16} bold>Menú</SText>
-            <SHr />
+            {/* <SHr />
             <MenuPages path={Parent.path + "/profile/"} permiso={"ver"} params={{
                 pk: this.pk
             }} >
 
+            </MenuPages> */}
+            <SHr />
+            <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
+                pk: this.pk
+            }} >
+                <MenuButtom url={Parent.path + "/profile/tbzon"} params={{ pk: this.pk }}
+                    icon={<SIcon name={"Zonas"} />} label={"Zonas"} />
+                <MenuButtom url={Parent.path + "/profile/tbcli"} params={{ pk: this.pk }}
+                    icon={<SIcon name={"Clientes"} />} label={"Clientes"} />
             </MenuPages>
         </SView>
     }
