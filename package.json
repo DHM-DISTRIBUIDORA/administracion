@@ -63,6 +63,7 @@
     "servisofts-rn-roles_permisos": "1.0.4",
     "servisofts-rn-usuario": "1.0.11",
     "servisofts-socket": "3.0.4",
+    "servisofts-table": "file:../../servisofts-table/dist",
     "typescript": "^4.4.3",
     "xlsx": "^0.18.5",
     "xlsx-color": "^0.14.30"

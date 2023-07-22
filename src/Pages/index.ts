@@ -35,6 +35,7 @@ import test from "./test"
 import carrito from './carrito';
 import tbcli from './tbcli';
 export default SPage.combinePages("/", {
+  // "":test2,
   "": carga,
   "root": root,
   wiki,

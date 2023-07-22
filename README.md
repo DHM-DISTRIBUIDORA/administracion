@@ -1,6 +1,8 @@
 # DHM app
 
-
+### Para reparar el usb en ios mac
+sudo killall usbd
+sudo killall -STOP -c usbd
 
 ```
 SELECT 

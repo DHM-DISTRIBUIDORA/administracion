@@ -13,15 +13,15 @@ export default class Action extends SAction {
             return data;
         })
     }
-    getByKeyEmpleado(key: any, extra: {}, _default: any) {
-        return SSocket.sendPromise({
-            ...this.model.info,
-            type: "getByKeyEmpleado",
-            key: key + "",
-        }).then(e => {
-            const data = e.data[0];
-            if (!data) throw "Not found"
-            return data;
-        })
-    }
+    // getByKeyEmpleado(key: any, extra: {}, _default: any) {
+    //     return SSocket.sendPromise({
+    //         ...this.model.info,
+    //         type: "getByKeyEmpleado",
+    //         key: key + "",
+    //     }).then(e => {
+    //         const data = e.data[0];
+    //         if (!data) throw "Not found"
+    //         return data;
+    //     })
+    // }
 }
