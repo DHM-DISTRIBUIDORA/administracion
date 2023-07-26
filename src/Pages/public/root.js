@@ -9,11 +9,14 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            btn: 0
         };
     }
 
     render_mas_vendidos() {
-        var productos = Model.productos.Action.getAll();
+        // var productos = Model.productos.Action.getAll();
+        // if (!productos) return <SLoad />
+        var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
         return <SView col={"xs-12"} height={195}>
             <SList
@@ -48,17 +51,26 @@ class index extends Component {
                 <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
             </SView>
             <SHr />
-            <SText fontSize={16}>{obj.nombre}</SText>
+            <SText fontSize={16}>{obj.prdnom}</SText>
             {/* <SText fontSize={14} color={STheme.color.gray}>12 x 100ml.</SText> */}
             {/* <SHr height={20} /> */}
             <SView flex />
             <SView col={"xs-12"} row center>
                 <SView col={"xs-8"}>
-                    <SText fontSize={18} bold>Bs. {SMath.formatMoney(obj.Precio)}</SText>
+                    <SText fontSize={18} bold>Bs. {SMath.formatMoney(obj.prdpoficial)}</SText>
                 </SView>
                 <SView col={"xs-4"} flex style={{ alignItems: "flex-end" }}
-                    onPress={() => { }}
+                    onPress={() => {
+                        const data = {
+                            [obj.idprd]: { cantidad: 1, data: obj },
+                        }
+                        let productos_data = Model.carrito.Action.getState().productos;
+                        Object.assign(productos_data, data);
+                        Model.carrito.Action.setState({ productos_data });
+                        this.setState({ btn: 1 })
+                    }}
                 >
+                    {/* <SIcon name={(this.state.btn == 0) ? 'BtnMas' : 'Check2'} height={45} /> */}
                     <SIcon name='BtnMas' height={45} />
                 </SView>
             </SView>
@@ -99,7 +111,9 @@ class index extends Component {
     }
 
     render() {
-        let productos = Model.dm_productos.Action.getAll();
+        // let productos = Model.dm_productos.Action.getAll();
+        var productos = Model.tbprd.Action.getAllSimple();
+        if (!productos) return <SLoad />
         // console.log(productos)
         return <SPage
             // hidden
@@ -114,7 +128,7 @@ class index extends Component {
                     <SText fontSize={20} bold>MÁS VENDIDOS</SText>
                     <SView col={"xs-12"} flex style={{ alignItems: "flex-end" }}
                         onPress={() => {
-                            SNavigation.navigate("/producto")
+                            SNavigation.navigate("/explorar")
                         }}
                     >
                         <SText color={STheme.color.primary} fontSize={16} bold>VER TODO</SText>
@@ -132,7 +146,12 @@ class index extends Component {
                         width: null,
                     }}>
                     <SView width={8} />
-                    <SList horizontal data={productos} limit={10} render={obj => this.renderItem(obj)} />
+                    <SList
+                        horizontal
+                        filter={(a) => a.stock != 0}
+                        data={productos} limit={10}
+                        render={obj => this.renderItem(obj)}
+                    />
                 </ScrollView>
             </SView>
             <SHr height={25} />

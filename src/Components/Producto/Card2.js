@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
+import Model from '../../Model';
 export type ProductoCardPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -18,17 +19,17 @@ class index extends Component<ProductoCardPropsType> {
     enviarDatosItems = () => {
         const datos = {
             // tbprd: this.props.data,
-            tbprd: { [this.props.data.idprd]: { cantidad: this.state.count, data: this.props.data } },
+            tbprd: { [this.props.data.data.idprd]: { cantidad: this.state.count, data: this.props.data.data } },
             items: this.state.count,
-            precio: this.props.data.prdpoficial,
+            precio: this.props.data.data.prdpoficial,
         };
         this.props.items(datos);
     };
 
     render() {
         var active = true;
-        
-        var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu } = this.props.data.data;
+
+        var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data.data;
         (stock <= 0) ? active = false : active = true;
         return (
             <SView col={"xs-12"} card row {...this.props}
@@ -41,12 +42,26 @@ class index extends Component<ProductoCardPropsType> {
                     borderColor: !active ? "#D20C0C" : "#E2E2E2"
                 }}
             >
+                <SView col={"xs-12"} style={{ alignItems: "flex-end" , zIndex:999}}>
+                    <SView height={25} width={25}
+                        onPress={() => {
+                            const productos = Model.carrito.Action.removeItem(idprd)
+                        }}
+                        style={{ position: 'absolute', }}
+                    >
+                        <SIcon name='Delete2' height={18} fill={STheme.color.text} />
+                        {/* <SText>ELIMINAR</SText> */}
+                    </SView>
+                </SView>
+
                 <SView col={"xs-3"} height={105}>
                     <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
                 </SView>
                 <SView col={"xs-0.5"}></SView>
                 <SView col={"xs-8.5"}>
-                    <SText fontSize={16}>{prdnom}</SText>
+                    <SView col={"xs-11"}>
+                        <SText fontSize={16}>{prdnom}</SText>
+                    </SView>
                     <SView col={"xs-12"} row>
                         <SText fontSize={11} color={STheme.color.gray}>Stock: {stock} </SText>
                         <SView width={5}><SText fontSize={11}>|</SText></SView>

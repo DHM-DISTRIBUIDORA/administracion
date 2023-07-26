@@ -49,8 +49,12 @@ class index extends Component {
             },
             usumod: "SERVISOFTS",
 
-        },1000*60).then(e => {
+        }, 1000 * 60).then(e => {
+            this.setState({ loading: false, error: "" })
             SPopup.alert("¡Pedido Exitoso!")
+            Model.carrito.Action.removeAll()
+            SNavigation.navigate('/public');
+
         }).catch(e => {
             SPopup.alert("¡Hubo algún error!")
             console.error(e);
@@ -60,12 +64,12 @@ class index extends Component {
         return <SPage footer={this.footer()}>
             <Container>
                 <SText>Carrito</SText>
-                <SForm 
-                ref={(ref) => { this.form = ref; }}
-                inputs={{
-                    "idcli": { type: "number", label: "Codigo de cliente", defaultValue: 2683 },
-                    "nit": { type: "text", label: "CI / NIT", defaultValue: "6392496" },
-                }}
+                <SForm
+                    ref={(ref) => { this.form = ref; }}
+                    inputs={{
+                        "idcli": { type: "number", label: "Codigo de cliente", defaultValue: 2683 },
+                        "nit": { type: "text", label: "CI / NIT", defaultValue: "6392496" },
+                    }}
                     // onSubmitName={"ENVIAR"}
                     onSubmit={this.handlePress}
                 />
@@ -73,7 +77,9 @@ class index extends Component {
                 <Carrito.Detalle />
                 <SHr height={45} />
                 <PButtom primary
+                    loading={this.state.loading}
                     onPress={() => {
+                        this.setState({ loading: true, error: "" })
                         this.form.submit();
                     }} >ENVIAR</PButtom>
             </Container>
@@ -81,7 +87,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/carrito"} />
+        return <BottomNavigator url={"/carrito/pedido"} />
     }
 }
 const initStates = (state) => {

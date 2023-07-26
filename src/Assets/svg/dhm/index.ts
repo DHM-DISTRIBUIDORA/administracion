@@ -38,6 +38,8 @@ import Empleados, { ReactComponent as EmpleadosW } from './empleados.svg';
 import Zonas, { ReactComponent as ZonasW } from './zonas.svg';
 import Clientes, { ReactComponent as ClientesW } from './clientes.svg';
 import Carrito2, { ReactComponent as Carrito2W } from './carrito.svg';
+import Delete2, { ReactComponent as Delete2W } from './delete2.svg';
+import Check, { ReactComponent as CheckW } from './check.svg';
 
 
 const Assets = {
@@ -82,6 +84,10 @@ const Assets = {
 	"Zonas": { Native: Zonas, Web: ZonasW },
 	"Clientes": { Native: Clientes, Web: ClientesW },
 	"Carrito2": { Native: Carrito2, Web: Carrito2W },
+	"Delete2": { Native: Delete2, Web: Delete2W },
+	"Check2": { Native: Check, Web: CheckW },
+	
+
 
 
 

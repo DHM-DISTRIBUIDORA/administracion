@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SForm, SHr, SIcon, SList, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SForm, SHr, SIcon, SList, SLoad, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom, Producto } from '../../Components';
 import Model from '../../Model';
@@ -13,10 +13,25 @@ class index extends Component {
         };
     }
 
+    recibirItems = ({ tbprd }) => {
+
+        let productos = Model.carrito.Action.getState().productos;
+        Object.assign(productos, tbprd);
+        console.log(productos);
+
+        Model.carrito.Action.setState({ productos });
+
+
+
+        // this.setState({ items: this.state.items + datos.items })
+        // this.setState({ total: this.state.total + datos.precio })
+    };
+
     getProductos() {
         let dato;
         var dataMostrar = [];
         const productos = Model.carrito.Action.getState().productos;
+        if (!productos) return <SLoad />
         let total = 0;
         Object.keys(productos).map((key, index) => {
             total += productos[key].data.prdpoficial * productos[key].cantidad;
@@ -48,24 +63,28 @@ class index extends Component {
     }
 
     render() {
-        return <SPage footer={this.footer()}>
-            <Container>
-                <SText>Pedidos</SText>
+        return <>
+            <SPage footer={this.footer()}>
+                <Container>
+                    <SText>Pedidos</SText>
 
-                <SHr height={15} />
-                {this.getProductos()}
-                <SHr height={45} />
-                <PButtom primary
-                    onPress={() => {
-                        // this.form.submit();
-                    }} >ENVIAR</PButtom>
-                <SHr height={30} />
-            </Container>
-        </SPage>
+                    <SHr height={15} />
+                    {this.getProductos()}
+                    <SHr height={45} />
+                    <PButtom primary
+                        onPress={() => {
+                            // this.form.submit();
+                            SNavigation.navigate('/carrito')
+                        }} >ACEPTAR</PButtom>
+                    <SHr height={30} />
+                </Container>
+            </SPage>
+            <Carrito.Float bottom={100} />
+        </>
     }
 
     footer() {
-        return <BottomNavigator url={"/carrito"} />
+        return <BottomNavigator url={"/carrito/pedido"} />
     }
 }
 const initStates = (state) => {
