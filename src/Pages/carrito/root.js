@@ -50,10 +50,9 @@ class index extends Component {
             usumod: "SERVISOFTS",
 
         }).then(e => {
-            console.log("aaaa");
-            console.log(e.data)
-
+            SPopup.alert("¡Pedido Exitoso!")
         }).catch(e => {
+            SPopup.alert("¡Hubo algún error!")
             console.error(e);
         })
     }
