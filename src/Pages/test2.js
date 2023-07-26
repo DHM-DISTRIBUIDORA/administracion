@@ -5,10 +5,18 @@ import STable from "servisofts-table"
 export default class index extends Component {
     render() {
         // return <STable4 data={[]}/>
-        return <STable loadData={new Promise((resolve, reject) => {
-            new SThread(1000, "asd", false).start(() => {
-                resolve([])
-            })
-        })} />
+
+        return <SPage title={"Table"} disableScroll>
+            <STable
+                loadData={new Promise((resolve, reject) => {
+                    const data = require("./test.json")
+                    const arr = Object.values(data);
+                    const keys = Object.keys(arr[0]);
+                    resolve([
+                        keys,
+                        ...arr.map(obj => keys.map(k => obj[k]))
+                    ])
+                })} />
+        </SPage>
     }
 }

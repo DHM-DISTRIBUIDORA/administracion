@@ -39,8 +39,6 @@ class index extends DPA.profile {
 }
 export default connect(index);
 
-
-
 const Parent2 = {
     name: "Clientes del empleado",
     path: `/tbcli`,
