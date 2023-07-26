@@ -54,7 +54,7 @@ class recuperar extends Component {
                 <SView center>
                     <SView col={"xs-11 md-6 xl-4"} center>
                         <SView height={40} />
-                        <SText fontSize={16} color="#000" center>Le enviaremos un mensaje para configurar o restablecer su nueva contraseña. </SText>
+                        <SText fontSize={16} color={STheme.color.text} center >Le enviaremos un mensaje para configurar o restablecer su nueva contraseña. </SText>
                         <SView height={40} />
                         {this.getForm()}
                         <SView height={16} />

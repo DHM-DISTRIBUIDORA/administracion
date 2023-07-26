@@ -1,124 +1,101 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { ScrollView } from 'react-native'
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath } from 'servisofts-component';
-import { Banner, BottomNavigator, Container, TopBar, } from '../Components';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
+import SSocket from "servisofts-socket"
 import Model from '../Model';
+import { connect } from 'react-redux';
 class index extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
-    }
-
-
-
-    render_mas_vendidos() {
-        var productos = Model.productos.Action.getAll();
-        if (!productos) return <SLoad />
-        return <SView col={"xs-12"} height={195}>
-            <SList
-                horizontal
-                initSpace={8}
-                data={productos}
-                render={(data) => {
-                    return <SView card width={318} height={150} style={{
-                        overflow: "hidden"
-                    }}>
-                        <SText>{data}</SText>
-                        {/* <SImage src={SSocket.api.root + "productos/" + data.key} style={{
-                            resizeMode: "cover"
-                        }} /> */}
-                    </SView>
-                }}
+    getIconProfile() {
+        return <SView col={"xs-12"} height>
+            <SView col={"xs-12"} height style={{
+                // padding: 8
+            }} >
+                <SIcon name={"Perfil"} />
+            </SView>
+            <SImage
+                src={SSocket.api.root + "usuario/" + Model.usuario.Action.getKey()}
+                style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 12, borderColor: STheme.color.card, overflow: 'hidden', }}
             />
-            {/* </SScrollView2> */}
         </SView>
     }
+    datosUser() {
+        var dataUser = Model.usuario.Action.getUsuarioLog();
+        if (!dataUser) return <SLoad />
+        return <SView style={{ alignItems: "flex-end" }}>
+            <SView
+                style={{
+                    backgroundColor: STheme.color.primary + "50",
+                    padding: 6,
+                    borderTopLeftRadius: 25,
+                    borderBottomLeftRadius: 25,
+                    borderTopRightRadius: 15,
+                    borderBottomRightRadius: 15,
 
 
-    renderItem(obj) {
-        return <SView width={170} card
-            style={{
-                padding: 10,
-                borderRadius: 18,
-                borderWidth: 1,
-                borderColor: "#E2E2E2",
-
-            }}>
-            <SView col={"xs-12"} row height={145}>
-                <SImage src={require('../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
+                    position: "relative", top: 0,
+                    right: 10,
+                }}
+                width={165} row
+            >
+                <SView height={30} width={30}>
+                    <SImage
+                        src={SSocket.api.root + "usuario/" + Model.usuario.Action.getKey()}
+                        style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', }}
+                    />
+                </SView>
+                <SView width={5} />
+                <SView flex style={{ alignItems: "flex-end" }}>
+                    <SText fontSize={12}>{dataUser?.Nombres}</SText>
+                    <SText fontSize={10}>{dataUser?.Correo}</SText>
+                </SView>
+                <SView width={4} />
             </SView>
-            <SHr />
-            <SText fontSize={16}>{obj.nombre}</SText>
-            {/* <SText fontSize={14} color={STheme.color.gray}>12 x 100ml.</SText> */}
-            {/* <SHr height={20} /> */}
-            <SView flex />
-            <SView col={"xs-12"} row center>
-                <SView col={"xs-8"}>
-                    <SText fontSize={18} bold>Bs. {SMath.formatMoney(obj.Precio)}</SText>
-                </SView>
-                <SView col={"xs-4"} flex style={{ alignItems: "flex-end" }}
-                    onPress={() => { }}
-                >
-                    <SIcon name='BtnMas' height={45} />
-                </SView>
+            <SView style={{ position: "absolute", top: 18 }}>
+                <SIcon name='Cola' height={10} width={10} fill={STheme.color.primary + "50"} />
             </SView>
         </SView>
     }
     render() {
-        let productos = Model.dm_productos.Action.getAll();
-        console.log(productos)
-        return <SPage
-            // hidden
-            navBar={this.navBar()}
-            footer={this.footer()}
-        >
-            <SHr height={25} />
-            <Container>
-                <Banner />
-                <SHr height={20} />
-                <SView col={"xs-12"}>
-                    <SText fontSize={20} bold>MÁS VENDIDOS</SText>
-                    <SView col={"xs-12"} flex style={{ alignItems: "flex-end" }}
-                        onPress={() => {
-                            SNavigation.navigate("/producto")
-                        }}
-                    >
-                        <SText color={STheme.color.primary} fontSize={16} bold>VER TODO</SText>
-                    </SView>
-                    <SHr />
-                </SView>
-
-            </Container>
-
-            {/* {this.render_mas_vendidos()} */}
-            <SView col={"xs-12"}>
-                <ScrollView
-                    horizontal
-                    contentContainerStyle={{
-                        width: null,
-                    }}>
-                        <SView width={8}/>
-                    <SList horizontal data={productos} limit={10} render={obj => this.renderItem(obj)} />
-                </ScrollView>
+        if (!Model.usuario.Action.getKey()) {
+            SNavigation.goBack();
+            return <SLoad />
+        }
+        const user = Model.usuario.Action.getUsuarioLog();
+        return <SPage preventBack onRefresh={(resolve) => {
+            Model.usuario.Action.syncUserLog();
+            Model.usuarioPage.Action.CLEAR();
+            if (resolve) resolve();
+        }}  >
+            {this.datosUser()}
+            <SHr height={8} />
+            <SView col={"xs-12"} center>
+                <SText center fontSize={18}>BIENVENIDO AL SISTEMA ADMINISTRATIVO</SText>
+                <SHr />
+                {/* <SText fontSize={18}>Bienvenido al sistema administrativo</SText> */}
             </SView>
-              <SHr height={30} />      
-        </SPage >
-    }
+            <SView col={"xs-12"} center height={100}>
 
-    navBar() {
-        return <TopBar type={"menu"} title='' />
+                <SView width={200} flex>
+                    <SIcon name={"LogoClear"} fill={STheme.color.text} stroke={STheme.color.text} />
+                </SView>
+            </SView>
+            <SHr height={32} />
+            <SView col={"xs-12"} flex >
+                <MenuPages path={"/"} permiso={"page"}>
+                    <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
+                    <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} />
+                    {/* <MenuButtom label={"test2"} url={"/test2"} icon={<SIcon name={"Ajustes"} />} /> */}
+                    {user.idvendedor ? <MenuButtom label={"Funciones de vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Ajustes"} />} /> : null}
+                    {user.idtransportista ? <MenuButtom label={"Funciones de transportista"} url={"/test2"} icon={<SIcon name={"Ajustes"} />} /> : null}
+                    <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                </MenuPages>
+            </SView>
+            <SHr height={100} />
+        </SPage>
     }
-
-    footer() {
-        return <BottomNavigator url={"/root"} />
-    }
-
 }
+
 const initStates = (state) => {
     return { state }
 };
 export default connect(initStates)(index);
-

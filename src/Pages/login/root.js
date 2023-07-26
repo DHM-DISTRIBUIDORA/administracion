@@ -17,11 +17,11 @@ class login extends Component {
     render() {
 
         return (
-            <SPage  footer={<AccentBar />} >
+            <SPage hidden >
                 <SView col={"xs-12"} center>
                     <SView col={"xs-12"} backgroundColor={STheme.color.primary}>
                         <Container>
-                            {/* <SHr height={8} /> */}
+                            <SHr height={50} />
                             <SectionHeader />
                             <SHr height={16} />
                         </Container>

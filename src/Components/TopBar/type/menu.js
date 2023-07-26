@@ -13,7 +13,7 @@ export default class index extends Component<TopBarPropsType> {
             borderBottomLeftRadius: 8, borderBottomRightRadius: 8,
         }}>
             <SView width={50} height center onPress={() => { NavBar.open(); }}>
-                <SIcon name={"KMenu"} width={25} />
+                <SIcon name={"KMenu"} width={25} fill={STheme.color.text}/>
             </SView>
             <SView flex center height>
                 <SText color={STheme.color.secondary} fontSize={18}>{this.props.title}</SText>

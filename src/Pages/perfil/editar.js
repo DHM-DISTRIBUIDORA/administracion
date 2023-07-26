@@ -30,10 +30,10 @@ class index extends Component {
             }}
             inputs={{
                 foto_p: { type: "image", isRequired: false, defaultValue: SSocket.api.root + "usuario/" + this.data?.key + "?date=" + new Date().getTime(), col: "xs-4", style: { borderRadius: 100, overflow: 'hidden', width: 140, height: 140, borderWidth: 1, borderColor: STheme.color.lightGray, alignItems: "center", } },
-                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"], icon: <SIcon name={"InputUser"} width={40} height={30} /> },
-                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos, icon: <SIcon name={"InputUser"} width={40} height={30} /> },
+                Nombres: { label: "Nombres", isRequired: true, defaultValue: this.data["Nombres"],  },
+                Apellidos: { label: "Apellidos", isRequired: true, defaultValue: this.data.Apellidos,  },
                 "Telefono": { label: "Telefono", defaultValue: this.data["Telefono"], type: "phone" },
-                Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo, icon: <SIcon name={"InputEmail"} width={40} height={30} /> },
+                Correo: { label: "Correo", type: "email", isRequired: true, defaultValue: this.data.Correo,  },
                 // ...(isApi ? {} : {
                 //     Password: { label: "Contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputPassword"} width={40} height={30} /> },
                 //     RepPassword: { label: "Repetir contraseña", type: "password", isRequired: true, defaultValue: this.data.Password, icon: <SIcon name={"InputRePassword"} width={40} height={30} /> }
@@ -44,7 +44,7 @@ class index extends Component {
                     ...this.data,
                     ...values
                 }
-
+                this.form.uploadFiles(Model.usuario._get_image_upload_path(SSocket.api, this.data.key), "foto_p");
                 Model.usuario.Action.editar({
                     data: finalObj,
                     key_usuario: Model.usuario.Action.getKey()
@@ -78,7 +78,7 @@ class index extends Component {
         return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
             <SView col={"xs-11"} height={40} />
             <SView col={"xs-11"}  >
-                <SIcon name={"InputPassword"} height={100} />
+                <SIcon name={"InputPassword"} height={100} fill={STheme.color.primary} />
             </SView>
             <SView col={"xs-11"} height={15} />
             <SView col={"xs-12"} center  >
@@ -93,7 +93,7 @@ class index extends Component {
             <>
                 <SPage title={'Editar perfil'} onRefresh={() => {
                     Model.usuario.Action.CLEAR();
-                }} header={<AccentBar />}>
+                }} footer={<AccentBar />}>
                     <SView center>
                         <SView col={"xs-11 md-6 xl-4"} center>
                             <SView height={16} />
@@ -102,12 +102,12 @@ class index extends Component {
                         </SView> */}
                             {this.getForm()}
                             <SView height={16} />
-                            <SView col={"xs-11"} row center>
+                            <SView col={"xs-12"} row center>
                                 <PButtom fontSize={20} onPress={() => {
                                     this.form.submit();
                                 }}>CONFIRMAR</PButtom>
                             </SView>
-                            <SView height={36} />
+                            <SView height={20} />
                             <PButtom fontSize={20} onPress={() => {
                                  SNavigation.navigate("/perfil/changepass")
                                 }}>CAMBIAR CONTRASEÑA</PButtom>

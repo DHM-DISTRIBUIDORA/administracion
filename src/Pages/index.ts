@@ -2,42 +2,71 @@ import { SPage, SPageListProps } from 'servisofts-component';
 
 import root from './root';
 import carga from "./carga"
-// import mapa from './mapa';
 import login from "./login";
 import registro from './registro';
 import explorar from './explorar';
 import favoritos from './favoritos';
 import pedidos from './pedidos';
 import producto from './producto';
-import test from './test';
 import sql from './sql/index';
 import privacidad from './privacidad';
 import categoria from './categoria';
 import clientes from './clientes';
-// import direccion from './direccion';
 import perfil from './perfil';
-// import chat from './chat';
-// import ayuda from './ayuda';
+
+import rol from './rol';
+import _public from "./public"
+import dm_categorias from './dm_categorias';
+import dm_productos from './dm_productos';
+import usuario from './usuario';
+import dm_usuarios from './dm_usuarios';
+import dm_clientes from './dm_clientes';
+import tbemp from './tbemp';
+import tbzon from './tbzon';
+import tbemt from './tbemt';
+import tbprd from './tbprd';
+import tbprdlin from './tbprdlin';
+import ajustes from './ajustes';
+import wiki from './wiki';
+import distribucion from './distribucion';
+import mapa from './mapa';
+import test2 from "./test2"
+import test from "./test"
+import carrito from './carrito';
+import tbcli from './tbcli';
 export default SPage.combinePages("/", {
-  // "": test,
+  // "":test,
   "": carga,
   "root": root,
+  wiki,
   ...login,
-  // mapa,
   ...registro,
   "explorar": explorar,
   "favoritos": favoritos,
   "pedidos": pedidos,
-  test,
   sql,
   "privacidad": privacidad,
   ...producto,
   "categoria": categoria,
-
   ...clientes,
-  // ...direccion,
+  ...usuario,
   ...perfil,
-  // ...chat,
-  // ...ayuda,
-  // ...ayuda
+  ...rol,
+  ..._public,
+  ...dm_categorias,
+  ...dm_productos,
+  ...dm_usuarios,
+  ...dm_clientes,
+  ...tbemp,
+  ...tbzon,
+  ...tbprd,
+  ...tbprdlin,
+  ...ajustes,
+  ...mapa,
+  ...distribucion,
+  ...tbemt,
+  ...carrito,
+  ...tbcli,
+  test2,
+  test
 });

@@ -15,15 +15,15 @@ class index extends Component {
     }
 
     getLista() {
-        const cat = Model.dm_categorias.Action.getAll();
+        // const cat = Model.dm_categorias.Action.getAll();
+        const cat = Model.tbprdlin.Action.getAll();
         if (!cat) return <SLoad />
-        console.log(cat)
         return <SList
             data={cat}
             limit={20}
             // filter={(a) => a.nivel == 1}
-            filter={(a) => (a.catcod + "").startsWith(this.params.pk) && a.nivel == 2}
-            order={[{ key: "nombre", order: "asc" }]}
+            filter={(a) => (a.lincod + "").startsWith(this.params.pk) && a.linniv == 2}
+            order={[{ key: "linnom", order: "asc" }]}
             render={(obj) => {
                 return <Categoria.Card2 obj={obj} color={this.params.color}  />
             }}

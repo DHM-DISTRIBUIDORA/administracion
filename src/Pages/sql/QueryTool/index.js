@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import TextArea from './TextArea'
-import { STable2, STable3, SText, SView } from 'servisofts-component'
+import { STable2, STable3, STable4, SText, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 export default class QueryTool extends Component {
     state = {
@@ -27,11 +27,13 @@ export default class QueryTool extends Component {
     }
     getTable() {
         if (!this.state.data) return null;
-        return <STable3
+        // return <STable4 data={this.state.data}/>
+        return <STable2
             header={[
                 { key: "index", label: "#" },
                 ...this.getHeaders(),
             ]}
+            limit={100}
             data={this.state.data ?? {}}
         />
     }

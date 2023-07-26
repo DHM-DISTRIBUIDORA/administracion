@@ -8,8 +8,8 @@ export default new SModel<Action, Reducer>({
     },
     Columns: {
         "catcod": { type: "text", pk: true },
-        "nombre": { type: "text", },
-        "nivel": { type: "integer", },
+        "nombre": { type: "text", editable: true },
+        "nivel": { type: "integer", editable: true },
     },
     Action,
     Reducer,

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup} from 'servisofts-component';
+import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup } from 'servisofts-component';
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
@@ -73,7 +73,6 @@ class index extends Component {
                             // color: "#fff"
                         }} font='LondonBetween'>{usuario["Nombres"] + " " + usuario["Apellidos"]} </SText>
                     </SView>
-                    <SHr />
 
 
                 </SView>
@@ -90,7 +89,7 @@ class index extends Component {
         return <SView row col={"xs-12"} center>
             <SHr />
             <SHr />
-            <SIcon name={icon} width={40} height={30} />
+            <SIcon name={icon} width={25} height={25} fill={STheme.color.text} />
             <SView width={16} />
             <SText>{text}</SText>
             <SView flex />
@@ -111,12 +110,13 @@ class index extends Component {
     }
 
     render() {
-        return (<SPage title={'Editar perfil'} onRefresh={(callback) => {
+        return (<SPage title={'Editar perfil'} onRefresh={(resolve) => {
             // Model.usuario.Action.CLEAR();
-            // Model.usuario.Action.syncUserLog*
+            Model.usuario.Action.syncUserLog()
             // console.log
+            resolve();
 
-        }} header={<AccentBar />}>
+        }} footer={<AccentBar />}>
             <SView col={"xs-12"} center>
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
                     {/* <SView height={80}></SView> */}
@@ -130,7 +130,11 @@ class index extends Component {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
                     <SHr height={10} />
-                    <PButtom fontSize={20}  onPress={() => {
+                    <PButtom type={'outline'} fontSize={20} onPress={() => {
+                        Model.usuario.Action.unlogin();
+                    }}>CERRAR SESIÓN</PButtom>
+                    <SHr height={10} />
+                    <PButtom fontSize={20} onPress={() => {
                         SPopup.confirm({
                             title: "Eliminar cuenta", message: "¿Estás seguro de eliminar la cuenta?", onPress: () => {
                                 Model.usuario.Action.editar({
@@ -145,6 +149,8 @@ class index extends Component {
                             }
                         })
                     }}>ELIMINAR CUENTA</PButtom>
+                    <SView height={30}></SView>
+
                     <SView height={30}></SView>
                 </SView>
             </SView>

@@ -120,7 +120,7 @@ export default class body extends React.Component {
             SNavigation.navigate(path); NavBar.close();
         }}  >
             <SView col={"xs-10"} height style={{ justifyContent: 'flex-start', }} row center>
-                <SIcon fill="#666666" name={icon} width={32} height={31} />
+                <SIcon fill="#666666" name={icon} width={20} height={20} />
                 <SText style={{ paddingLeft: 5, color: "#666666", fontSize: 16 }} >{label}</SText>
             </SView>
             <SView col={"xs-2"} height style={{ justifyContent: 'flex-end', }} row center>
@@ -144,19 +144,19 @@ export default class body extends React.Component {
             <SHr height={20} />
             <SScrollView2 disableHorizontal contentContainerStyle={{ width: "100%" }} >
                 <SView col={"xs-12"} center  >
-                    {this.renderIcon({ label: "Inicio", icon: "Inicio", path: "/root" })}
-                    {this.renderIcon({ label: "Mis notificaciones", icon: "Direccion", path: "/direccion", requireUser: true })}
+                    {this.renderIcon({ label: "Inicio", icon: "Minicio", path: "/root" })}
+                    {this.renderIcon({ label: "Mis notificaciones", icon: "Mnotify", path: "/direccion", requireUser: true })}
                     {this.renderIcon({ label: "Avances por empresa", icon: "Compras", path: "/misCompras", requireUser: true })}
                     {this.renderIcon({ label: "Respaldos", icon: "mCupon", path: "/cupones", requireUser: true })}
                     {this.renderIcon({ label: "Conexiones", icon: "Billetera", path: "/billetera", requireUser: true })}
-                    {this.renderIcon({ label: "Configuración", icon: "mNotification", path: "/notificaciones", requireUser: true })}
+                    {this.renderIcon({ label: "Configuración", icon: "Mconf", path: "/root", requireUser: true })}
 
-                    {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })}
-                    {this.renderIcon({ label: "Contactos", icon: "Contacto", path: "/contacto" })}
-                    {this.renderIcon({ label: "Soporte", icon: "AppAlert", path: "/ayuda" })}
-                    {this.renderIcon({ label: "Sql", icon: "AppAlert", path: "/sql" })}
+                    {/* {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })} */}
+                    {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })}
+                    {this.renderIcon({ label: "Soporte", icon: "Msuport", path: "/ayuda" })}
+                    {this.renderIcon({ label: "Sql", icon: "Msuport", path: "/sql" })}
                     {this.renderIcon({
-                        label: "Salir", icon: "Exit", requireUser: true,
+                        label: "Salir", icon: "Mexit", requireUser: true,
                         onPress: () => {
                             // Model._events.CLEAR();
                             Model.usuario.Action.unlogin();
@@ -164,13 +164,13 @@ export default class body extends React.Component {
                             NavBar.close();
                         }
                     })}
-                    {this.renderIcon({ label: "Login", icon: "Exit", path: "/login", noWithUser: true })}
+                    {this.renderIcon({ label: "Login", icon: "Mexit", path: "/login", noWithUser: true })}
 
 
                     <SHr height={20} />
 
                     <SView col={"xs-9.5 md-5.8 xl-3.8"} center style={{ bottom: 0, }}>
-                        <SIcon name={"Logo"} height={70} />
+                        <SIcon name={"Logo"} height={70} fill={STheme.color.text} />
                     </SView>
                     <SView row >
                         <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {APPversion}</SText>

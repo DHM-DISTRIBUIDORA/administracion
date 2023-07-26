@@ -27,7 +27,7 @@ class root extends Component {
                 <Header />
                 <Container>
                     <SView col={"xs-12"} center>
-                        <SHr height={20}/>
+                        <SHr height={20} />
                         <SText fontSize={26} color={STheme.color.text}>Regístrate</SText>
                     </SView>
                     <SForm
@@ -52,7 +52,7 @@ class root extends Component {
                             RepPassword: { placeholder: "Repetir password", type: "password", isRequired: true },
                         }}
                         onSubmit={(values) => {
-                            
+
                             if (values["Password"] != values["RepPassword"]) {
                                 SPopup.alert('Las contraseñas no coinciden');
 
@@ -68,6 +68,16 @@ class root extends Component {
                                 Model.usuario.Action.registro({
                                     data: { ...values, Password: password }
                                 }).then(resp => {
+                                    Model.usuario.Action.loginByKey({
+                                        usuario: values["Correo"],
+                                        password: password
+
+                                    }).then(resp => {
+                                        SNavigation.reset("/");
+                                    }).catch(e => {
+                                        SPopup.alert("Error al iniciar con el nuevo usuario");
+                                        SNavigation.reset("/");
+                                    })
                                     SNavigation.replace('/');
 
                                 }).catch(e => {
