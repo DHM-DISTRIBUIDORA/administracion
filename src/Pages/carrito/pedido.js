@@ -17,7 +17,6 @@ class index extends Component {
 
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, tbprd);
-        console.log(productos);
 
         Model.carrito.Action.setState({ productos });
 
@@ -49,7 +48,6 @@ class index extends Component {
 
                     // limit={10}
                     render={(obj) => {
-                        console.log(obj)
                         return <Producto.Card2 col={"xs-12"} width={0} data={obj}
                             items={this.recibirItems} total={this.state.total}
                         // onPress={(data) => {
