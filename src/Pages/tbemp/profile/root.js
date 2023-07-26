@@ -60,7 +60,6 @@ class index extends DPA.profile {
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-
                     <SText bold fontSize={18}>{cant}</SText>
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>

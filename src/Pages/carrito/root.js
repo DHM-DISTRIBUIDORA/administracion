@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SForm, SHr, SIcon, SNavigation, SPage, SPopup, SStorage, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SForm, SHr, SIcon, SInput, SLoad, SNavigation, SPage, SPopup, SStorage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
 
 
 class index extends Component {
+    state = {
+        client: {}
+    };
     constructor(props) {
         super(props);
-        this.state = {
-        };
+
     }
-    componentDidMount(){
-        SStorage.getItem("tbcli_a_comprar", resp=>{
-            if(!resp) return;
-            // resp.
+    componentDidMount() {
+        SStorage.getItem("tbcli_a_comprar", resp => {
+            if (!resp) return;
+            try {
+                const clidata = JSON.parse(resp);
+                this.setState({
+                    client: clidata
+                })
+            } catch (e) {
+                console.error(e);
+            }
         })
     }
 
     handlePress = ({ idcli, nit }) => {
-
-        //Format data producto
+        if (this.state.loading) return;
+        this.setState({ loading: true, error: "" })
         const productos = Model.carrito.Action.getState().productos;
-        let total = 0;
         let dataProducto = []
         Object.keys(productos).map((key, index) => {
-            // total += productos[key].data.prdpoficial * productos[key].cantidad;
             dataProducto.push({
                 idprd: productos[key].data.idprd,
                 vdcan: productos[key].cantidad,
@@ -34,9 +41,6 @@ class index extends Component {
                 vdunid: productos[key].data.prdunid,
             })
         });
-
-        console.log(dataProducto);
-
         SSocket.sendPromise({
             component: "tbven",
             type: "generarNotaEntrega",
@@ -45,10 +49,6 @@ class index extends Component {
                 idcli: idcli,
                 vnit: nit,
                 vdet: "VENTA DESDE APP SERVISOFTS",
-                // productos: [
-                //     { idprd: 349, vdcan: 1, vdpre: 4.00, vdunid: "BOLSA" },
-                //     { idprd: 348, vdcan: 2, vdpre: 16.00, vdunid: "BOLSA" },
-                // ]
                 productos: [
                     ...dataProducto
                 ]
@@ -57,12 +57,12 @@ class index extends Component {
 
         }, 1000 * 60).then(e => {
             this.setState({ loading: false, error: "" })
-            SPopup.alert("¡Pedido Exitoso!")
             Model.carrito.Action.removeAll()
-            SNavigation.navigate('/public');
-
+            SNavigation.replace("/carrito/notaventa", { idven: e.data.idven })
+            // SPopup.alert("¡Pedido Exitoso!")
+            // SNavigation.navigate('/public');
         }).catch(e => {
-            SPopup.alert("¡Hubo algún error!")
+            this.setState({ loading: false, error: e.error })
             console.error(e);
         })
     }
@@ -70,25 +70,27 @@ class index extends Component {
         return <SPage footer={this.footer()}>
             <Container>
                 <SText>Carrito</SText>
-                <SForm
-                    ref={(ref) => { this.form = ref; }}
-                    inputs={{
-                        "idcli": { type: "number", label: "Codigo de cliente", defaultValue: 2683 },
-                        "nit": { type: "text", label: "CI / NIT", defaultValue: "6392496" },
-                    }}
-                    // onSubmitName={"ENVIAR"}
-                    onSubmit={this.handlePress}
-                />
+                <SHr />
+                <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText>
+                <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
+                    this.state.client.clinit = val;
+                }} />
                 <SHr height={15} />
                 <Carrito.Detalle />
                 <SHr height={45} />
+
+                <SText color={STheme.color.danger}>{this.state.error}</SText>
+                <SHr />
                 <PButtom primary
                     loading={this.state.loading}
                     onPress={() => {
-                        this.setState({ loading: true, error: "" })
-                        this.form.submit();
+                        this.handlePress({
+                            idcli: this.state?.client?.idcli,
+                            nit: this.state.client.clinit
+                        });
                     }} >ENVIAR</PButtom>
             </Container>
+
         </SPage>
     }
 
