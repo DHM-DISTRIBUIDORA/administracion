@@ -24,6 +24,8 @@ Usuario.init({
         "Correo": { type: "text", notNull: true, editable: true },
         "Telefono": { type: "text", notNull: true, editable: true },
         "Password": { type: "text", notNull: true, editable: true },
+        "idvendedor": { type: "text",  editable: true },
+        "idtransportista": { type: "text",  editable: true },
     },
 });
 Roles_permisos.init({});

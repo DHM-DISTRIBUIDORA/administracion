@@ -110,10 +110,11 @@ class index extends Component {
     }
 
     render() {
-        return (<SPage title={'Editar perfil'} onRefresh={(callback) => {
+        return (<SPage title={'Editar perfil'} onRefresh={(resolve) => {
             // Model.usuario.Action.CLEAR();
-            // Model.usuario.Action.syncUserLog*
+            Model.usuario.Action.syncUserLog()
             // console.log
+            resolve();
 
         }} footer={<AccentBar />}>
             <SView col={"xs-12"} center>
@@ -129,7 +130,7 @@ class index extends Component {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</PButtom>
                     <SHr height={10} />
-                    <PButtom type={'outline'} fontSize={20}  onPress={() => {
+                    <PButtom type={'outline'} fontSize={20} onPress={() => {
                         Model.usuario.Action.unlogin();
                     }}>CERRAR SESIÓN</PButtom>
                     <SHr height={10} />
@@ -149,7 +150,7 @@ class index extends Component {
                         })
                     }}>ELIMINAR CUENTA</PButtom>
                     <SView height={30}></SView>
-                    
+
                     <SView height={30}></SView>
                 </SView>
             </SView>

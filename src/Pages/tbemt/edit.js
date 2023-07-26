@@ -7,7 +7,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: [ ]
         });
     }
     $allowAccess() {
@@ -18,6 +18,7 @@ class index extends DPA.edit {
     }
     
     $onSubmit(data) {
+  
         Parent.model.Action.editar({
             data: {
                 ...this.data,

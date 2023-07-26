@@ -8,7 +8,7 @@ class index extends DPA.new {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: [ "empmarc"]
         });
     }
 
@@ -16,6 +16,7 @@ class index extends DPA.new {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
     }
     $onSubmit(data) {
+        delete data["empmarc"]
         Parent.model.Action.registro({
             data: data,
             key_usuario: Model.usuario.Action.getKey()

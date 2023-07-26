@@ -8,7 +8,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: [ "empmarc"]
         });
     }
     $allowAccess() {
@@ -19,11 +19,14 @@ class index extends DPA.edit {
     }
     
     $onSubmit(data) {
+        let dataFinal = {
+            ...this.data,
+            ...data
+        }
+        delete dataFinal["image_profile"]
+        delete dataFinal["empmarc"]
         Parent.model.Action.editar({
-            data: {
-                ...this.data,
-                ...data
-            },
+            data: dataFinal,
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
             SNavigation.goBack();

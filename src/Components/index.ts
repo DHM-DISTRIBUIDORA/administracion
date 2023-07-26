@@ -16,7 +16,7 @@ import Producto from "./Producto"
 import Categoria from "./Categoria"
 import Carrito from "./Carrito"
 
-
+import Usuario from "./Usuario"
 
 export {
     TopBar,
@@ -35,6 +35,7 @@ export {
     Banner,
     Producto,
     Categoria,
-    Carrito
+    Carrito,
+    Usuario
 
 }

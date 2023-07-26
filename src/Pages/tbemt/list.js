@@ -8,7 +8,8 @@ class index extends DPA.list {
         super(props, {
             Parent: Parent,
             title: "Lista de " + Parent.name,
-            excludes: [],
+            excludes: ["idemt"],
+            itemType: "2",
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();
                 resolve();

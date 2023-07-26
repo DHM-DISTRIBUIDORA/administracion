@@ -11,6 +11,7 @@ import DeviceKey from "./Firebase/DeviceKey"
 import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
 import BackgroundImage from './Components/BackgroundImage';
+import Model from './Model';
 
 
 setProps(Config.socket);
@@ -19,7 +20,7 @@ DeviceKey.init();
 const App = (props) => {
     return <Redux>
         <SComponentContainer
-            debug
+            // debug
             socket={SSocket}
             background={<BackgroundImage />}
             assets={Assets}
@@ -36,6 +37,9 @@ const App = (props) => {
                 store={store}
                 identificarse={(props) => {
                     var usuario = props.state.usuarioReducer.usuarioLog;
+                    // if(usuario){
+                    //     Model.usuario.Action.syncUserLog();
+                    // }
                     return {
                         data: usuario ? usuario : {},
                         deviceKey: DeviceKey.getKey(),

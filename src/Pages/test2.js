@@ -9,7 +9,7 @@ export default class index extends Component {
         return <SPage title={"Table"} disableScroll>
             <STable
                 loadData={new Promise((resolve, reject) => {
-                    const data = require("./test.json")
+                    const data = require("./test2.json")
                     const arr = Object.values(data);
                     const keys = Object.keys(arr[0]);
                     resolve([

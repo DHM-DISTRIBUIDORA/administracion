@@ -11,10 +11,10 @@ export default new SModel<Action, Reducer>({
         "emtnom": { type: "text", pk: true, editable: true },
 
     },
-    // image: {
-    //     api: "root",
-    //     name: "productos"
-    // },
+    image: {
+        api: "root",
+        name: "tbemt"
+    },
     Action,
     Reducer,
 });

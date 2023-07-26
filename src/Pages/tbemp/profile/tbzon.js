@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import { SHr, SImage, SInput, SList, SLoad, SText, SView } from 'servisofts-component';
@@ -24,6 +25,7 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $allowAccess() {
+        if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {

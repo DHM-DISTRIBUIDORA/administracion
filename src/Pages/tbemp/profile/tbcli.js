@@ -1,6 +1,7 @@
+import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SImage, SInput, SList, SLoad, SText, SView } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, SView } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
@@ -24,6 +25,7 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $allowAccess() {
+        if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
@@ -57,6 +59,11 @@ class Lista extends DPA.list {
 
     $filter(data) {
         return data.cliest == "0"
+    }
+
+    $onSelect(data) {
+        SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
+        SNavigation.navigate("/public")
     }
     $getData() {
         return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })
