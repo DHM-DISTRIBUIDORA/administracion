@@ -49,7 +49,7 @@ class index extends Component {
             },
             usumod: "SERVISOFTS",
 
-        }).then(e => {
+        },1000*60).then(e => {
             SPopup.alert("¡Pedido Exitoso!")
         }).catch(e => {
             SPopup.alert("¡Hubo algún error!")
