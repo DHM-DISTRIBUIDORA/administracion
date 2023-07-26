@@ -21,7 +21,6 @@ class index extends Component {
     datosUser() {
         var dataUser = Model.usuario.Action.getUsuarioLog();
         if (!dataUser) return <SLoad />
-        console.log(dataUser);
         return <SView style={{ alignItems: "flex-end" }}>
             <SView
                 style={{

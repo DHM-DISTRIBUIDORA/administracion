@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SForm, SHr, SIcon, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SForm, SHr, SIcon, SNavigation, SPage, SPopup, SStorage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
@@ -11,6 +11,12 @@ class index extends Component {
         super(props);
         this.state = {
         };
+    }
+    componentDidMount(){
+        SStorage.getItem("tbcli_a_comprar", resp=>{
+            if(!resp) return;
+            // resp.
+        })
     }
 
     handlePress = ({ idcli, nit }) => {

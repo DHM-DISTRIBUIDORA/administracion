@@ -141,7 +141,6 @@ class index extends DPA.profile {
         let users = Model.usuario.Action.getAll();
         if (!users) return <SLoad />
         let user = Object.values(users).find(o => o[key] == this.pk)
-        console.log(user)
         return <SView col={"xs-12"}>
             <SText >Usuario:</SText>
             <Usuario.Select
