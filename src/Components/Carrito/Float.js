@@ -44,7 +44,7 @@ class index extends Component<FloatPropsType> {
                 }}
                     onPress={() => {
                         // this.props.navigation.navigate('farmacia/carrito');
-                        SNavigation.navigate("/carrito")
+                        SNavigation.navigate("/carrito/pedido")
                     }}
 
                 >
