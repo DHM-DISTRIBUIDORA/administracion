@@ -42,7 +42,7 @@ class index extends Component<ProductoCardPropsType> {
                     borderColor: !active ? "#D20C0C" : "#E2E2E2"
                 }}
             >
-                <SView col={"xs-12"} style={{ alignItems: "flex-end" , zIndex:999}}>
+                <SView col={"xs-12"} style={{ alignItems: "flex-end", zIndex: 999 }}>
                     <SView height={25} width={25}
                         onPress={() => {
                             const productos = Model.carrito.Action.removeItem(idprd)
@@ -76,8 +76,10 @@ class index extends Component<ProductoCardPropsType> {
                             <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count <= 0) return;
-                                    this.setState({ count: this.state.count - 1 });
-                                }}
+                                    // this.setState({ count: this.state.count - 1 });
+
+                                    this.state.count = this.state.count - 1
+                                    this.enviarDatosItems()                                }}
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
@@ -90,7 +92,8 @@ class index extends Component<ProductoCardPropsType> {
                             <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count >= stock) return;
-                                    this.setState({ count: this.state.count + 1 })
+                                    this.state.count = this.state.count + 1
+                                    this.enviarDatosItems()
                                 }}
                             >
                                 <SIcon name='Mas' height={18} />
@@ -99,14 +102,10 @@ class index extends Component<ProductoCardPropsType> {
                         <SView col={"xs-5"} style={{ alignItems: "flex-end" }}>
                             <SText fontSize={18} bold>Bs. {SMath.formatMoney(prdpoficial)}</SText>
                             <SHr />
-                            {this.state.count >= 1 ? <PButtomSmall fontSize={13}
+                            {/* {this.state.count >= 1 ? <PButtomSmall fontSize={13}
                                 onPress={this.enviarDatosItems}
-                            // onPress={() => {
-                            //     this.enviarDatosItems
-
-                            // }}
                             >Añadir
-                            </PButtomSmall> : <SView height={24} />}
+                            </PButtomSmall> : <SView height={24} />} */}
                         </SView>
                     </SView>
                 </SView>
