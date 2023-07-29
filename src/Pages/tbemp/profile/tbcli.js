@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, SView } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
@@ -14,6 +14,12 @@ class index extends DPA.profile {
             item: item,
             excludes: []
         });
+        this.state = {
+            select: {
+                "mapa": true,
+            },
+            // ...this.state,
+        }
     }
     $allowBack() {
         return true;
@@ -36,6 +42,25 @@ class index extends DPA.profile {
             <Lista pi={this} onSelect={this.$params.onSelect} />
         </SView>
         )
+    }
+    optionItem({ key, label, color ,icon, root}) {
+        var select = !!this.state.select[key]
+        return <SView height={35} center style={{
+            paddingLeft: 8,
+            paddingRight: 8,
+            opacity: select ? 1 : 0.5,
+            backgroundColor: color + "AA"
+        }} onPress={() => {
+            SNavigation.navigate(root,{ pk: this.pk })
+        }} row>
+            {!select ? null : <> <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} /></>}
+            <SText>{label}</SText>
+        </SView>
+    }
+    $menu() {
+        let menu = super.$menu();
+        menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card , icon:'Imap', root:"/tbemp/profile/tbclimapa"}) })
+        return menu;
     }
 
 }
