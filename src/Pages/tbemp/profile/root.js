@@ -74,9 +74,17 @@ class index extends DPA.profile {
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,
                     overflow: "hidden",
-                }}>
+                }} >
+                   
                     <SImage src={Model.tbemp._get_image_download_path(SSocket.api, this.pk)} style={{
-                        resizeMode: "cover"
+                        resizeMode: "cover",
+                        zIndex:99,
+                        backgroundColor:STheme.color.white
+                    }} />
+                     <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
+                        resizeMode: "cover", 
+                        position: "absolute",
+                        top:0
                     }} />
                 </SView>
                 <SHr />
