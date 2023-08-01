@@ -56,7 +56,7 @@ class NavBar extends React.Component {
 			SNavigation.navigate("/login")
 			this.fadeOut();
 		}}>
-			<SText color={STheme.color.secondary} fontSize={18} center>{"Inicia sesión en tapeke."}</SText>
+			<SText color={STheme.color.secondary} fontSize={18} center>{"Inicia sesión en DHM."}</SText>
 			{/* <SText color={STheme.color.l} fontSize={12} center>{"Algunas funciones se encuentran desactivadas hasta que inicies session con un usuario."}</SText> */}
 		</SView>;
 		return <SView row col={"xs-12"}>

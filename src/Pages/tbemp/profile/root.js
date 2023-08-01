@@ -91,13 +91,13 @@ class index extends DPA.profile {
                     label: "Cantidad de clientes",
                     cant: this.state.cantidad_clientes,
                     icon: <SIcon name='Clientes' />,
-                    onPress: () => SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk })
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
                     label: "Cantidad de zonas",
                     cant: this.state.cantidad_zonas,
                     icon: <SIcon name='Zonas' />,
-                    onPress: () => SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk })
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }): null,
                 })}
                 {this.ItemCard({
                     label: "Compras",
