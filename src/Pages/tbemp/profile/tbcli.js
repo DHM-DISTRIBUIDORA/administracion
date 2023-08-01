@@ -43,7 +43,7 @@ class index extends DPA.profile {
         </SView>
         )
     }
-    optionItem({ key, label, color ,icon, root}) {
+    optionItem({ key, label, color, icon, root }) {
         var select = !!this.state.select[key]
         return <SView height={35} center style={{
             paddingLeft: 8,
@@ -51,7 +51,7 @@ class index extends DPA.profile {
             opacity: select ? 1 : 0.5,
             backgroundColor: color + "AA"
         }} onPress={() => {
-            SNavigation.navigate(root,{ pk: this.pk })
+            SNavigation.navigate(root, { pk: this.pk })
         }} row>
             {!select ? null : <> <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} /></>}
             <SText>{label}</SText>
@@ -59,13 +59,12 @@ class index extends DPA.profile {
     }
     $menu() {
         let menu = super.$menu();
-        menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card , icon:'Imap', root:"/tbemp/profile/tbclimapa"}) })
+        menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card, icon: 'Imap', root: "/tbemp/profile/tbclimapa" }) })
         return menu;
     }
 
 }
 export default connect(index);
-
 const Parent2 = {
     name: "Clientes del empleado",
     path: `/tbcli`,
@@ -73,6 +72,7 @@ const Parent2 = {
 }
 class Lista extends DPA.list {
     constructor(props) {
+        Model.tbcli.Action.CLEAR();
         super(props, {
             type: "componentTitle",
             Parent: Parent2,
@@ -92,5 +92,6 @@ class Lista extends DPA.list {
     }
     $getData() {
         return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })
+        // return Parent2.model.Action.getAll({ cliidemp: this.props.route.params.pk})
     }
 }
