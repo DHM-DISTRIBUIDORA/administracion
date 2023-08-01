@@ -23,7 +23,6 @@ export default class index extends Component {
         };
     }
 
-
     getMarkers(data) {
         if (!data) return null;
 
@@ -43,16 +42,12 @@ export default class index extends Component {
         if (lista.length === 0) {
             return 0; // O cualquier valor que desees retornar si la lista está vacía
         } else {
-
             Object.values(lista).map((obj) => {
                 if (!obj.clilat || !obj.clilon) return null;
                 suma = suma + obj[atributo]
                 contador++;
                 console.log(obj[atributo])
             })
-            console.log(suma)
-            console.log(contador)
-            //   const suma = lista.reduce((acumulador, obj) => acumulador + obj[atributo], 0);
             return suma / contador;
         }
     }
@@ -65,19 +60,20 @@ export default class index extends Component {
         latPadre = this.calcularPromedio(data, 'clilat');
         longPadre = this.calcularPromedio(data, 'clilon');
 
-
-
         return <SPage title={'Mapa Test'} disableScroll>
-            <SMapView initialRegion={{
-                // latitude: -17.783799,
-                // longitude: -63.180,
-                latitude:  latPadre ,
-                longitude:  longPadre ,
-                latitudeDelta: 0.1,
-                longitudeDelta: 0.1
-            }}>
-                {this.getMarkers(data)}
-            </SMapView>
+            {(isNaN(longPadre)) ?
+                <SText center>NO HAY DATOS EN MAPA</SText>
+                :
+                <SMapView initialRegion={{
+                    // latitude: -17.783799,
+                    // longitude: -63.180,
+                    latitude: latPadre,
+                    longitude: longPadre,
+                    latitudeDelta: 0.1,
+                    longitudeDelta: 0.1
+                }}>
+                    {this.getMarkers(data)}
+                </SMapView>}
         </SPage>
     }
 }
