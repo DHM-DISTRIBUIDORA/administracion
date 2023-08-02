@@ -2,8 +2,9 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
 import item from '../item';
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate } from 'servisofts-component';
 import SSocket from "servisofts-socket"
+import { PButtom } from '../../../Components';
 
 
 class index extends DPA.profile {
@@ -11,7 +12,12 @@ class index extends DPA.profile {
         cantidad_compras: 0,
         maxima_compra: 0,
         cantidad_pedidos: 0,
-        minima_compra: 0
+        minima_compra: 0,
+        primer_compra: "0000-00-00",
+        ultima_compra: "0000-00-00"
+        // primer_compra: new SDate(),
+        // ultima_compra: new SDate()
+
     }
     constructor(props) {
         super(props, {
@@ -77,6 +83,27 @@ class index extends DPA.profile {
         </SView>
     }
 
+    getGrafo() {
+        return <>
+            <SView col={"xs-12"} >
+                <SText>GRÁFICO DE COMPRAS Y PEDIDOS</SText>
+                <SHr />
+                <SView col={"xs-12 md-12"} height={300} padding={6}  >
+                    <SView card flex col={"xs-12"} style={{
+                        borderRadius: 14,
+                        borderBottomWidth: 4,
+                        borderLeftWidth: 3,
+                        borderRightWidth: 1,
+                        borderColor: STheme.color.card,
+                        padding: 15
+                    }} row center>
+                        
+                    </SView>
+                </SView>
+            </SView>
+        </>
+    }
+
     $item(obj) {
 
         // console.log(Model.tbemp._get_image_download_path(SSocket.api, this.pk) + "__lll")
@@ -132,7 +159,7 @@ class index extends DPA.profile {
                     cant: (this.state.maxima_compra).toFixed(2),
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'ImaxCompra',
-                    color: '#A5236E',
+                    color: '#B622B5',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
@@ -143,10 +170,28 @@ class index extends DPA.profile {
                     color: '#00A0AA',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
-
-
-
+                {this.ItemCard({
+                    label: "Primer compra",
+                    cant: this.state.primer_compra.split(' ')[0],
+                    // icon: <SIcon name='Ipedidos' />,
+                    icon: 'Ifirst',
+                    color: '#DC7D3C',
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })}
+                {this.ItemCard({
+                    label: "Última compra",
+                    cant: this.state.ultima_compra.split(' ')[0],
+                    // icon: <SIcon name='Ipedidos' />,
+                    icon: 'Ilast',
+                    color: '#FF64B4',
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })}
+                <SHr height={20} />
+                {this.getGrafo()}
             </SView>
+            <SHr height={20}/>
+            <PButtom onPress={() => {
+                }}>HACER PEDIDO</PButtom>
             <SHr />
         </SView>
     }

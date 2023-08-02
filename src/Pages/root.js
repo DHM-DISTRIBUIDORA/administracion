@@ -30,8 +30,6 @@ class index extends Component {
                     borderBottomLeftRadius: 25,
                     borderTopRightRadius: 15,
                     borderBottomRightRadius: 15,
-
-
                     position: "relative", top: 0,
                     right: 10,
                 }}
