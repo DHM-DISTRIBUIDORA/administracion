@@ -41,6 +41,10 @@ import Carrito2, { ReactComponent as Carrito2W } from './carrito.svg';
 import Delete2, { ReactComponent as Delete2W } from './delete2.svg';
 import Check, { ReactComponent as CheckW } from './check.svg';
 import Imap, { ReactComponent as ImapW } from './map.svg';
+import Icompras, { ReactComponent as IcomprasW } from './icompras.svg';
+import Ipedidos, { ReactComponent as IpedidosW } from './ipedidos.svg';
+import ImaxCompra, { ReactComponent as ImaxCompraW } from './imaxCompra.svg';
+import IminCompra, { ReactComponent as IminCompraW } from './iminCompra.svg';
 
 
 const Assets = {
@@ -88,6 +92,10 @@ const Assets = {
 	"Delete2": { Native: Delete2, Web: Delete2W },
 	"Check2": { Native: Check, Web: CheckW },
 	"Imap": { Native: Imap, Web: ImapW },
+	"Icompras": { Native: Icompras, Web: IcomprasW },
+	"Ipedidos": { Native: Ipedidos, Web: IpedidosW },
+	"ImaxCompra": { Native: ImaxCompra, Web: ImaxCompraW },
+	"IminCompra": { Native: IminCompra, Web: IminCompraW },
 	
 
 
