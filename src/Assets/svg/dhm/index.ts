@@ -45,6 +45,8 @@ import Icompras, { ReactComponent as IcomprasW } from './icompras.svg';
 import Ipedidos, { ReactComponent as IpedidosW } from './ipedidos.svg';
 import ImaxCompra, { ReactComponent as ImaxCompraW } from './imaxCompra.svg';
 import IminCompra, { ReactComponent as IminCompraW } from './iminCompra.svg';
+import Ilast, { ReactComponent as IlastW } from './ilast.svg';
+import Ifirst, { ReactComponent as IfirstW } from './ifirst.svg';
 
 
 const Assets = {
@@ -96,7 +98,9 @@ const Assets = {
 	"Ipedidos": { Native: Ipedidos, Web: IpedidosW },
 	"ImaxCompra": { Native: ImaxCompra, Web: ImaxCompraW },
 	"IminCompra": { Native: IminCompra, Web: IminCompraW },
-	
+	"Ilast": { Native: Ilast, Web: IlastW },
+	"Ifirst": { Native: Ifirst, Web: IfirstW },
+
 
 
 
