@@ -8,4 +8,4 @@ const MapStyle = [
     ]
   },
 ]
-export default MapStyle;
+export default MapStyle;  

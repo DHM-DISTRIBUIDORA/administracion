@@ -61,7 +61,7 @@ class index extends Component {
             return <SLoad />
         }
         const user = Model.usuario.Action.getUsuarioLog();
-        return <SPage preventBack onRefresh={(resolve) => {
+        return <SPage preventBack hidden onRefresh={(resolve) => {
             Model.usuario.Action.syncUserLog();
             Model.usuarioPage.Action.CLEAR();
             if (resolve) resolve();
@@ -69,7 +69,7 @@ class index extends Component {
             {this.datosUser()}
             <SHr height={8} />
             <SView col={"xs-12"} center>
-                <SText center fontSize={18}>BIENVENIDO AL SISTEMA ADMINISTRATIVO</SText>
+                {/* <SText center fontSize={18}>BIENVENIDO AL SISTEMA ADMINISTRATIVO</SText> */}
                 <SHr />
                 {/* <SText fontSize={18}>Bienvenido al sistema administrativo</SText> */}
             </SView>
