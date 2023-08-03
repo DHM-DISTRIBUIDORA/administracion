@@ -88,8 +88,8 @@ class index extends DPA.profile {
                     position: "absolute",
                     top: 0, right: 0,
                     padding: 5,
-                    borderBottomLeftRadius:10,
-                    borderBottomRightRadius:10
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10
                 }}>
                 <SIcon name='Clientes' height={20} width={20} />
                 <SView width={7} />
