@@ -104,7 +104,7 @@ class index extends DPA.profile {
                                 // endSpace:20
                             }}
                             data={[
-                                { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" },
+                                { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" ,},
                                 { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" },
                             ]} />
                     </SView>
@@ -155,7 +155,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Icompras' />,
                     icon: 'Icompras',
                     color: '#8CB45F',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
                     label: "Cantidad de pedidos",
@@ -163,7 +163,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Máxima compra",
@@ -171,7 +171,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'ImaxCompra',
                     color: '#B622B5',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Mínima compra",
@@ -179,7 +179,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'IminCompra',
                     color: '#00A0AA',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Primer compra",
@@ -187,7 +187,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ifirst',
                     color: '#DC7D3C',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Última compra",
@@ -195,7 +195,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ilast',
                     color: '#FF64B4',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 <SHr height={20} />
                 {this.getGrafo()}
