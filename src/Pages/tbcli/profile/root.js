@@ -5,6 +5,7 @@ import item from '../item';
 import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate } from 'servisofts-component';
 import SSocket from "servisofts-socket"
 import { PButtom } from '../../../Components';
+import SCharts from 'servisofts-charts';
 
 
 class index extends DPA.profile {
@@ -97,7 +98,14 @@ class index extends DPA.profile {
                         borderColor: STheme.color.card,
                         padding: 15
                     }} row center>
-                        
+                        <SCharts type='torta'
+                            config={{
+                                // endSpace:20
+                            }}
+                            data={[
+                                { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" },
+                                { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" },
+                            ]} />
                     </SView>
                 </SView>
             </SView>
@@ -189,9 +197,9 @@ class index extends DPA.profile {
                 <SHr height={20} />
                 {this.getGrafo()}
             </SView>
-            <SHr height={20}/>
+            <SHr height={20} />
             <PButtom onPress={() => {
-                }}>HACER PEDIDO</PButtom>
+            }}>HACER PEDIDO</PButtom>
             <SHr />
         </SView>
     }

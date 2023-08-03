@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad, SNavigation } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import Model from '../../../Model';
 import { Parent } from ".."
+import { connect } from 'react-redux';
 
 
 // const Parent2 = {
@@ -11,16 +12,16 @@ import { Parent } from ".."
 //     model: Model.tbcli
 // }
 
-const Marker = React.memo(({ }) => <SView width={20} height={20} center onPress={() => {
-}}>
+const Marker = React.memo(({ onPress }) => <SView width={20} height={20} center onPress={onPress}>
     <SIcon name={"Marker"} fill={STheme.color.text} />
 </SView>, (prevProps, nextProps) => prevProps === nextProps);
-export default class index extends Component {
+class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
             // ...this.state,
         };
+        this.pk = SNavigation.getParam("pk")
     }
 
     getMarkers(data) {
@@ -28,10 +29,16 @@ export default class index extends Component {
 
         return Object.values(data).map((obj) => {
             if (!obj.clilat || !obj.clilon) return null;
+            const onPress = () => {
+                SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
+                console.log(obj);
+            }
             return <SMapView.SMarker
                 latitude={parseFloat(obj?.clilat ?? 0)}
-                longitude={parseFloat(obj?.clilon ?? 0)} >
-                <Marker />
+                longitude={parseFloat(obj?.clilon ?? 0)}
+
+            >
+                <Marker onPress={onPress} />
             </SMapView.SMarker>
         })
     }
@@ -46,7 +53,6 @@ export default class index extends Component {
                 if (!obj.clilat || !obj.clilon) return null;
                 suma = suma + obj[atributo]
                 contador++;
-                console.log(obj[atributo])
             })
             return suma / contador;
         }
@@ -57,6 +63,7 @@ export default class index extends Component {
         if (!data) return <SLoad />
         var latPadre;
         var longPadre;
+
         latPadre = this.calcularPromedio(data, 'clilat');
         longPadre = this.calcularPromedio(data, 'clilon');
 
@@ -77,3 +84,8 @@ export default class index extends Component {
         </SPage>
     }
 }
+
+const initStates = (state) => {
+    return { state }
+};
+export default connect(initStates)(index);
