@@ -28,6 +28,7 @@ module.exports = (async () => {
     },
     watchFolders: [
         // path.resolve(__dirname, '../../servisofts-component/dist'),
+        path.resolve(__dirname, '../../servisofts-charts/dist'),
         // path.resolve(__dirname, '../../servisofts-table/dist'),
       // path.resolve(__dirname, '../../chat/library/dist'),
 

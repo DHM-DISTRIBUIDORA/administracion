@@ -29,11 +29,9 @@ class index extends DPA.profile {
                 pk: this.pk
             }}>
             </MenuPages> */}
-            <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
+            <MenuPages path={Parent.path + "/profile/"} permiso={"ver"} params={{
                 pk: this.pk
             }} >
-                <MenuButtom url={Parent.path + "/profile/dm_clientes"} params={{ pk: this.pk }}
-                    icon={<SIcon name={"Clientes"} />} label={"Clientes"} />
             </MenuPages>
         </SView>
     }
