@@ -1,16 +1,16 @@
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SImage, SInput, SList, SLoad, SText, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
-// import item2 from '../../dm_clientes/';
+import item2 from '../../tbcli/item';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
             params: ["onSelect?"],
-            item:item,
+            item: item,
             excludes: []
         });
     }
@@ -36,6 +36,26 @@ class index extends DPA.profile {
         )
     }
 
+    optionItem({ key, label, color, icon, root }) {
+        // var select = !!this.state.select[key]
+        return <SView height={35} center style={{
+            paddingLeft: 8,
+            paddingRight: 8,
+            opacity: 1,
+            backgroundColor: color + "AA"
+        }} onPress={() => {
+            SNavigation.navigate(root, { pk: this.pk })
+        }} row>
+            <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} />
+            <SText>{label}</SText>
+        </SView>
+    }
+    $menu() {
+        let menu = super.$menu();
+        menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card, icon: 'Imap', root: "/tbzon/profile/tbclimapa" }) })
+        return menu;
+    }
+
 }
 export default connect(index);
 
@@ -43,16 +63,17 @@ export default connect(index);
 
 const Parent2 = {
     name: "Clientes en la zona",
-    path: `/dm_clientes`,
-    model: Model.dm_clientes
+    path: `/tbcli`,
+    model: Model.tbcli
 }
 class Lista extends DPA.list {
     constructor(props) {
+        Model.tbcli.Action.CLEAR();
         super(props, {
             type: "componentTitle",
             Parent: Parent2,
             title: Parent2.name,
-            // item: item2,
+            item: item2,
             excludes: []
         });
     }
@@ -61,6 +82,6 @@ class Lista extends DPA.list {
     //     return data.zest == "0"
     // }
     $getData() {
-        return Parent2.model.Action.getAllBy({ zona: this.props.pi.pk })
+        return Parent2.model.Action.getAll({ idz: this.props.pi.pk })
     }
 }
