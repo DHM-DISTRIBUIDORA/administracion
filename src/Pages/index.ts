@@ -31,6 +31,7 @@ import test2 from "./test2"
 import test from "./test"
 import carrito from './carrito';
 import tbcli from './tbcli';
+import tbven from './tbven';
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -61,6 +62,7 @@ export default SPage.combinePages("/", {
   ...tbemt,
   ...carrito,
   ...tbcli,
+  ...tbven,
   test2,
   test
 });

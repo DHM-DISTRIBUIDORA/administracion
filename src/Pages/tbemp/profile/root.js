@@ -74,20 +74,20 @@ class index extends DPA.profile {
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,
                     overflow: "hidden",
-                    backgroundColor:STheme.color.white
+                    backgroundColor: STheme.color.white
                 }} center>
-                   
-                    
-                     <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
-                        resizeMode: "contain", 
+
+
+                    <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
+                        resizeMode: "contain",
                         position: "absolute",
-                        zIndex:90,
-                        top:0,
-                        width:50
+                        zIndex: 90,
+                        top: 0,
+                        width: 50
                     }} />
                     <SImage src={Model.tbemp._get_image_download_path(SSocket.api, this.pk)} style={{
                         resizeMode: "cover",
-                        zIndex:99,
+                        zIndex: 99,
                         // backgroundColor:STheme.color.white
                     }} />
                 </SView>
@@ -109,7 +109,7 @@ class index extends DPA.profile {
                     label: "Cantidad de zonas",
                     cant: this.state.cantidad_zonas,
                     icon: <SIcon name='Zonas' />,
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }): null,
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Compras",
@@ -120,11 +120,13 @@ class index extends DPA.profile {
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
                     icon: <SIcon name='Ingreso' />,
+                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
                 })}
                 {this.ItemCard({
                     label: "Pedidos",
                     cant: this.state.cantidad_pedidos,
                     icon: <SIcon name='Paquete' />,
+
                 })}
             </SView>
             <SHr />

@@ -13,6 +13,7 @@ import tbprdlin from "./tbprdlin";
 
 import carrito from "./carrito";
 import tbven from "./tbven";
+import tbvd from "./tbvd";
 export default {
     // dm_categorias,
     // dm_productos,
@@ -26,5 +27,6 @@ export default {
     tbprd,
     tbprdlin,
     carrito,
-    tbven
+    tbven,
+    tbvd
 }

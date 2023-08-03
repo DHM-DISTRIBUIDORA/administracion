@@ -105,7 +105,7 @@ class index extends DPA.profile {
                                 // endSpace:20
                             }}
                             data={[
-                                { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" ,},
+                                { key: "compras", val: this.state.cantidad_ventas, color: "#8CB45F66", },
                                 { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" }
                             ]} />
                     </SView>
@@ -118,7 +118,7 @@ class index extends DPA.profile {
         // console.log("rrrr")
         // console.log(obj)
         // console.log(Model.tbemp._get_image_download_path(SSocket.api, this.pk) + "__lll")
-        if(!obj) return <SLoad/>
+        if (!obj) return <SLoad />
         return <SView col={"xs-12"} center>
             <SHr />
             <SView col={"xs-12"} height={200} center>
@@ -156,6 +156,7 @@ class index extends DPA.profile {
                     // icon: <SIcon name='Icompras' />,
                     icon: 'Icompras',
                     color: '#8CB45F',
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk }),
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
@@ -204,7 +205,7 @@ class index extends DPA.profile {
             <SHr height={20} />
             <PButtom onPress={() => {
                 SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
-                SNavigation.navigate("/public",{idcli: obj.idcli })
+                SNavigation.navigate("/public", { idcli: obj.idcli })
             }}>HACER PEDIDO</PButtom>
             <SHr />
         </SView>
