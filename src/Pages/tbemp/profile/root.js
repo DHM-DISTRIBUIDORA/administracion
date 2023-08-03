@@ -126,12 +126,6 @@ class index extends DPA.profile {
                     cant: this.state.cantidad_pedidos,
                     icon: <SIcon name='Paquete' />,
                 })}
-                {/* {this.ItemCard({
-                    label: "No lo se",
-                    cant: this.state.cantidad_pedidos,
-                    icon: <SIcon name='Paquete' />,
-                })} */}
-
             </SView>
             <SHr />
         </SView>
@@ -171,15 +165,6 @@ class index extends DPA.profile {
     }
     $footer() {
         return <SView col={"xs-12"} center>
-
-            {/* <SView col={"xs-12 md-6"}>
-                <SChart type='torta' data={[
-                    { key: "ventas", val: 100, label: "Ventas", },
-                    { key: "compras", val: 10, label: "Compras" },
-                    { key: "otros", val: 20, label: "Otros" ,},
-                ]}
-                 />
-            </SView> */}
             <SHr />
             {this.getUser()}
             <SHr />

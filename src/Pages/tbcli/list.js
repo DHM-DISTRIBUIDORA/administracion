@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
@@ -9,11 +11,11 @@ class index extends DPA.list {
             Parent: Parent,
             title: "Lista de " + Parent.name,
             item: item,
-            params:["idemp?"],
+            params: ["idemp?"],
             excludes: [],
             onRefresh: (resolve) => {
                 Parent.model.Action.CLEAR();
-                resolve();
+                if (resolve) resolve();
             }
         });
     }

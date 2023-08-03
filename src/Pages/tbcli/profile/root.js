@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
@@ -105,7 +106,7 @@ class index extends DPA.profile {
                             }}
                             data={[
                                 { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" ,},
-                                { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" },
+                                { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" }
                             ]} />
                     </SView>
                 </SView>

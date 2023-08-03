@@ -34,6 +34,7 @@ class index extends DPA.profile {
         if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
+
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
@@ -52,9 +53,11 @@ class index extends DPA.profile {
             backgroundColor: color + "AA"
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
-        }} row>
-            {!select ? null : <> <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} /></>}
-            <SText>{label}</SText>
+        }} >
+            <SView row col={"xs-12"} center>
+                {!select ? null : <><SIcon name={icon} width={12} height={12} fill={STheme.color.text} /><SView width={8} /></>}
+                <SText center>{label}</SText>
+            </SView>
         </SView>
     }
     $menu() {
@@ -90,9 +93,12 @@ class Lista extends DPA.list {
     //     SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
     //     SNavigation.navigate("/public")
     // }
+    $order() {
+        return [{ key: "pedidos", order: "desc" }]
+    }
     $onSelect(data) {
         // SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
-        SNavigation.navigate("/tbcli/profile", { pk: data.idcli})
+        SNavigation.navigate("/tbcli/profile", { pk: data.idcli })
     }
     $getData() {
         return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })

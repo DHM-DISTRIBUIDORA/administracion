@@ -1,3 +1,5 @@
+import React, { Component } from 'react';
+
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
@@ -81,6 +83,9 @@ class Lista extends DPA.list {
     // $filter(data) {
     //     return data.zest == "0"
     // }
+    $order() {
+        return [{ key: "pedidos", order: "desc" }]
+    }
     $getData() {
         return Parent2.model.Action.getAll({ idz: this.props.pi.pk })
     }
