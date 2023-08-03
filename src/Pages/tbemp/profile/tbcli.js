@@ -86,9 +86,13 @@ class Lista extends DPA.list {
         return data.cliest == "0"
     }
 
+    // $onSelect(data) {
+    //     SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
+    //     SNavigation.navigate("/public")
+    // }
     $onSelect(data) {
-        SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
-        SNavigation.navigate("/public")
+        // SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
+        SNavigation.navigate("/tbcli/profile", { pk: data.idcli})
     }
     $getData() {
         return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })

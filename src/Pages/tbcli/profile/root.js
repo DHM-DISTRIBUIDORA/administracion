@@ -27,6 +27,7 @@ class index extends DPA.profile {
             excludes: []
 
         });
+        this.pk = SNavigation.getParam("pk");
 
     }
 
@@ -113,8 +114,10 @@ class index extends DPA.profile {
     }
 
     $item(obj) {
-
+        // console.log("rrrr")
+        // console.log(obj)
         // console.log(Model.tbemp._get_image_download_path(SSocket.api, this.pk) + "__lll")
+        if(!obj) return <SLoad/>
         return <SView col={"xs-12"} center>
             <SHr />
             <SView col={"xs-12"} height={200} center>
@@ -199,6 +202,8 @@ class index extends DPA.profile {
             </SView>
             <SHr height={20} />
             <PButtom onPress={() => {
+                SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
+                SNavigation.navigate("/public",{idcli: obj.idcli })
             }}>HACER PEDIDO</PButtom>
             <SHr />
         </SView>

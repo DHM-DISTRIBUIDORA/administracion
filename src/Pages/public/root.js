@@ -12,10 +12,13 @@ class index extends Component {
         super(props);
         this.state = {
             btn: 0,
-            client: {}
+            // client: {}
         };
+        this.idcli = SNavigation.getParam("idcli")
     }
+
     componentDidMount() {
+        console.log("ppppp")
         SStorage.getItem("tbcli_a_comprar", resp => {
             if (!resp) return;
             try {
@@ -28,10 +31,10 @@ class index extends Component {
             }
         })
     }
+    
 
     datosUser() {
-        // var dataUser = Model.usuario.Action.getUsuarioLog();
-        // if (!dataUser) return <SLoad />
+        if(!this.state.client) return;
         return <SView style={{ alignItems: "flex-end" }}>
             <SView
                 style={{
@@ -44,7 +47,7 @@ class index extends Component {
                     position: "relative", top: 0,
                     right: 10,
                 }}
-                width={165} row
+                width={185} row
             >
                 <SView height={30} width={30}>
                     <SImage
@@ -54,8 +57,8 @@ class index extends Component {
                 </SView>
                 <SView width={5} />
                 <SView flex style={{ alignItems: "flex-end" }}>
-                    <SText fontSize={12}>{this.state?.client?.clinom}</SText>
-                    <SText fontSize={10}>{this.state?.client?.clitel}</SText>
+                    <SText fontSize={11}>Cliente: {this.state?.client?.clinom}</SText>
+                    <SText fontSize={10}>Celular: {this.state?.client?.clitel}</SText>
                 </SView>
                 <SView width={4} />
             </SView>
@@ -136,16 +139,18 @@ class index extends Component {
     }
 
     render() {
-        // let productos = Model.dm_productos.Action.getAll();
         var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
-        // console.log(productos)
+        // if (Object.keys(this.state.client).length === {}) return <SLoad />
+       
+       
         return <SPage
             // hidden
             navBar={this.navBar()}
             footer={this.footer()}
         >
-            {(Object.keys(this.state.client).length === 0) ? null : this.datosUser()}
+            {/* {(!this.state?.client) ? "" : this.datosUser()} */}
+            {this.datosUser()}
             <SHr height={10} />
             <Container>
                 <Banner />
