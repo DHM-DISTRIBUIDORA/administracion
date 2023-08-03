@@ -48,6 +48,9 @@ import IminCompra, { ReactComponent as IminCompraW } from './iminCompra.svg';
 import Ilast, { ReactComponent as IlastW } from './ilast.svg';
 import Ifirst, { ReactComponent as IfirstW } from './ifirst.svg';
 import Ieliminar, { ReactComponent as IeliminarW } from './ieliminar.svg';
+import Iclients, { ReactComponent as IclientsW } from './iclients.svg';
+import Iventas, { ReactComponent as IventasW } from './iventas.svg';
+import Izonas, { ReactComponent as IzonasW } from './izonas.svg';
 
 
 const Assets = {
@@ -102,6 +105,9 @@ const Assets = {
 	"Ilast": { Native: Ilast, Web: IlastW },
 	"Ifirst": { Native: Ifirst, Web: IfirstW },
 	"Ieliminar": { Native: Ieliminar, Web: IeliminarW },
+	"Iclients": { Native: Iclients, Web: IclientsW },
+	"Iventas": { Native: Iventas, Web: IventasW },
+	"Izonas": { Native: Izonas, Web: IzonasW },
 
 
 

@@ -44,17 +44,26 @@ class index extends DPA.profile {
     }
 
 
-    ItemCard = ({ label, cant, icon, onPress }) => {
-        return <SView col={"xs-12 md-6"} height={70} padding={6} onPress={onPress} >
+    ItemCard = ({ label, cant, icon, color, onPress }) => {
+        return <SView col={"xs-12 md-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
                 borderBottomWidth: 4,
                 borderLeftWidth: 3,
                 borderRightWidth: 1,
                 borderColor: STheme.color.card,
+                padding: 15
             }} row center>
-                <SView width={50} center padding={4} height>
+                {/* <SView width={50} center padding={4} height>
                     {icon ? icon : null}
+                </SView> */}
+                <SView width={50} center padding={4} height
+                    style={{
+                        backgroundColor: color + "40",
+                        borderRadius: 50
+                    }}
+                >
+                    <SIcon name={icon} fill={color} height={30} />
                 </SView>
                 <SView width={4} />
                 <SView flex height style={{
@@ -69,7 +78,24 @@ class index extends DPA.profile {
     }
     $item(obj) {
         return <SView col={"xs-12"} center>
-            <SHr />
+            <SView col={"xs-12"}
+                style={{
+                    borderBottomColor: STheme.color.card, borderBottomWidth: 5,
+                    position: "absolute", top: 0
+                }} />
+            <SView width={120} height={40} row center card
+                style={{
+                    position: "absolute",
+                    top: 0, right: 0,
+                    padding: 5,
+                    borderBottomLeftRadius: 10,
+                    borderBottomRightRadius: 10
+                }}>
+                <SIcon name='Clientes' height={20} width={20} />
+                <SView width={7} />
+                <SText fontSize={12}>EMPLEADOS</SText>
+            </SView>
+            <SHr height={30} />
             <SView col={"xs-12"} height={200} center>
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,
@@ -102,31 +128,41 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Cantidad de clientes",
                     cant: this.state.cantidad_clientes,
-                    icon: <SIcon name='Clientes' />,
+                    // icon: <SIcon name='Iclients' />,
+                    icon: 'Iclients',
+                    color: '#1DA1F2',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
                     label: "Cantidad de zonas",
                     cant: this.state.cantidad_zonas,
-                    icon: <SIcon name='Zonas' />,
+                    icon: 'Izonas',
+                    color: '#833AB4',
+                    // icon: <SIcon name='Zonas' />,
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Compras",
                     cant: this.state.cantidad_compras,
-                    icon: <SIcon name='Egreso' />,
+                    // icon: <SIcon name='Egreso' />,
+                    icon: 'Icompras',
+                    color: '#8CB45F',
                 })}
                 {this.ItemCard({
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
                     icon: <SIcon name='Ingreso' />,
                     onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
+                    // icon: <SIcon name='Ingreso' />,
+                    icon: 'Iventas',
+                    color: '#DE6D3B',
                 })}
                 {this.ItemCard({
                     label: "Pedidos",
                     cant: this.state.cantidad_pedidos,
-                    icon: <SIcon name='Paquete' />,
-
+                    // icon: <SIcon name='Paquete' />,
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
                 })}
             </SView>
             <SHr />
