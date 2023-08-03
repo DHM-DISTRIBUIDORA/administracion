@@ -11,12 +11,12 @@ import SCharts from 'servisofts-charts';
 
 class index extends DPA.profile {
     state = {
-        cantidad_compras: 0,
-        maxima_compra: 0,
+        cantidad_ventas: 0,
+        maxima_venta: 0,
         cantidad_pedidos: 0,
-        minima_compra: 0,
-        primer_compra: "0000-00-00",
-        ultima_compra: "0000-00-00"
+        minima_venta: 0,
+        primer_venta: "0000-00-00",
+        ultima_venta: "0000-00-00"
         // primer_compra: new SDate(),
         // ultima_compra: new SDate()
 
@@ -151,8 +151,8 @@ class index extends DPA.profile {
                 justifyContent: "space-between"
             }}>
                 {this.ItemCard({
-                    label: "Cantidad de compras",
-                    cant: this.state.cantidad_compras,
+                    label: "Cantidad de ventas",
+                    cant: this.state.cantidad_ventas,
                     // icon: <SIcon name='Icompras' />,
                     icon: 'Icompras',
                     color: '#8CB45F',
@@ -167,32 +167,32 @@ class index extends DPA.profile {
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Máxima compra",
-                    cant: (this.state.maxima_compra).toFixed(2),
+                    label: "Máxima venta",
+                    cant: (this.state.maxima_venta).toFixed(2),
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'ImaxCompra',
                     color: '#B622B5',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Mínima compra",
-                    cant: (this.state.minima_compra).toFixed(2),
+                    label: "Mínima venta",
+                    cant: (this.state.minima_venta).toFixed(2),
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'IminCompra',
                     color: '#00A0AA',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Primer compra",
-                    cant: this.state.primer_compra.split(' ')[0],
+                    label: "Primer venta",
+                    cant: this.state.primer_venta.split(' ')[0],
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ifirst',
                     color: '#DC7D3C',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Última compra",
-                    cant: this.state.ultima_compra.split(' ')[0],
+                    label: "Última venta",
+                    cant: this.state.ultima_venta.split(' ')[0],
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ilast',
                     color: '#FF64B4',
