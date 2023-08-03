@@ -16,11 +16,8 @@ import perfil from './perfil';
 
 import rol from './rol';
 import _public from "./public"
-import dm_categorias from './dm_categorias';
-import dm_productos from './dm_productos';
 import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
-import dm_clientes from './dm_clientes';
 import tbemp from './tbemp';
 import tbzon from './tbzon';
 import tbemt from './tbemt';
@@ -53,10 +50,7 @@ export default SPage.combinePages("/", {
   ...perfil,
   ...rol,
   ..._public,
-  ...dm_categorias,
-  ...dm_productos,
   ...dm_usuarios,
-  ...dm_clientes,
   ...tbemp,
   ...tbzon,
   ...tbprd,
