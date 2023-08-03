@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SGradient, SHr, SIcon, SImage, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
+import { SGradient, SHr, SIcon, SImage, SLoad, SMath, SNavigation, SText, STheme, SView } from 'servisofts-component';
 import Model from '../../../Model';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
@@ -14,6 +14,8 @@ class index extends DPA.profile {
         cantidad_compras: 0,
         cantidad_ventas: 0,
         cantidad_pedidos: 0,
+        monto_total_pedidos: 0,
+        monto_total_ventas: 0
     }
     constructor(props) {
         super(props, { Parent: Parent, excludes: [] });
@@ -44,7 +46,9 @@ class index extends DPA.profile {
     }
 
 
-    ItemCard = ({ label, cant, icon, color, onPress }) => {
+    ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
+        var montoOk = "";
+        if (monto != "") montoOk = "Bs. " + monto;
         return <SView col={"xs-12 md-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
@@ -69,7 +73,13 @@ class index extends DPA.profile {
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-                    <SText bold fontSize={18}>{cant}</SText>
+                    <SText bold fontSize={18}>{montoOk}</SText>
+                    {(montoOk == "")
+                        ?
+                        <SText bold fontSize={18}>{cant}</SText>
+                        :
+                        <SText bold fontSize={14}>({cant})</SText>}
+                    <SText bold fontSize={17}></SText>
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
 
@@ -138,6 +148,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Cantidad de clientes",
                     cant: this.state.cantidad_clientes,
+                    monto: "",
                     // icon: <SIcon name='Iclients' />,
                     icon: 'Iclients',
                     color: '#1DA1F2',
@@ -146,6 +157,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Cantidad de zonas",
                     cant: this.state.cantidad_zonas,
+                    monto: "",
                     icon: 'Izonas',
                     color: '#833AB4',
                     // icon: <SIcon name='Zonas' />,
@@ -154,6 +166,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Compras",
                     cant: this.state.cantidad_compras,
+                    monto: "",
                     // icon: <SIcon name='Egreso' />,
                     icon: 'Icompras',
                     color: '#8CB45F',
@@ -161,6 +174,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
+                    monto: SMath.formatMoney(this.state.monto_total_ventas),
                     // icon: <SIcon name='Ingreso' />,
                     onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
                     icon: 'Iventas',
@@ -169,6 +183,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Pedidos",
                     cant: this.state.cantidad_pedidos,
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos),
                     // icon: <SIcon name='Paquete' />,
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
