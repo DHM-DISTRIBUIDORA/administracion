@@ -47,6 +47,7 @@ import ImaxCompra, { ReactComponent as ImaxCompraW } from './imaxCompra.svg';
 import IminCompra, { ReactComponent as IminCompraW } from './iminCompra.svg';
 import Ilast, { ReactComponent as IlastW } from './ilast.svg';
 import Ifirst, { ReactComponent as IfirstW } from './ifirst.svg';
+import Ieliminar, { ReactComponent as IeliminarW } from './ieliminar.svg';
 
 
 const Assets = {
@@ -100,6 +101,7 @@ const Assets = {
 	"IminCompra": { Native: IminCompra, Web: IminCompraW },
 	"Ilast": { Native: Ilast, Web: IlastW },
 	"Ifirst": { Native: Ifirst, Web: IfirstW },
+	"Ieliminar": { Native: Ieliminar, Web: IeliminarW },
 
 
 

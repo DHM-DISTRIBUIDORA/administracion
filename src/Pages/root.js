@@ -64,6 +64,7 @@ class index extends Component {
             Model.usuarioPage.Action.CLEAR();
             if (resolve) resolve();
         }}  >
+            <SHr height={10} />
             {this.datosUser()}
             <SHr height={8} />
             <SView col={"xs-12"} center>

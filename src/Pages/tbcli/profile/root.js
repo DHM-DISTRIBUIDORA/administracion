@@ -144,7 +144,7 @@ class index extends DPA.profile {
                 </SView>
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.clinom}`}</SText>
-                <SText>{`${obj.idcli} - ${obj.clicod}`}</SText>
+                <SText>{`${obj.idcli} | ${obj.clicod}`}</SText>
             </SView>
             <SHr />
             <SView col={"xs-12"} center row style={{

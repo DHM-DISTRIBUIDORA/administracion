@@ -31,11 +31,24 @@ class index extends Component {
             }
         })
     }
-    
+
 
     datosUser() {
-        if(!this.state.client) return;
+        if (!this.state.client) return;
         return <SView style={{ alignItems: "flex-end" }}>
+            <SView row style={{ position: "absolute", right: 175, top: 2, zIndex: 100 }}
+                onPress={() => {
+                    SStorage.removeItem('tbcli_a_comprar');
+
+                    SNavigation.replace("/public")
+                }}
+            >
+                <SIcon name='Ieliminar' height={25} width={25} fill={STheme.color.danger} />
+            </SView>
+            <SView row>
+                <SText fontSize={13}>(CLIENTE)</SText>
+                <SView width={15} />
+            </SView>
             <SView
                 style={{
                     backgroundColor: STheme.color.primary + "50",
@@ -49,20 +62,27 @@ class index extends Component {
                 }}
                 width={185} row
             >
-                <SView height={30} width={30}>
+                <SView height={30} width={30} center>
+                    <SImage src={require('../../Assets/img/sinFoto.png')} style={{
+                        resizeMode: "contain",
+                        position: "absolute",
+                        zIndex: 90,
+                        top: 0,
+                        width: 15
+                    }} />
                     <SImage
                         src={SSocket.api.root + "tbcli/" + this.state?.client?.idcli}
-                        style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', }}
+                        style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', zIndex: 99, }}
                     />
                 </SView>
                 <SView width={5} />
                 <SView flex style={{ alignItems: "flex-end" }}>
-                    <SText fontSize={11}>Cliente: {this.state?.client?.clinom}</SText>
+                    <SText fontSize={11}>{this.state?.client?.clinom}</SText>
                     <SText fontSize={10}>Celular: {this.state?.client?.clitel}</SText>
                 </SView>
                 <SView width={4} />
             </SView>
-            <SView style={{ position: "absolute", top: 18 }}>
+            <SView style={{ position: "absolute", top: 28 }}>
                 <SIcon name='Cola' height={10} width={10} fill={STheme.color.primary + "50"} />
             </SView>
         </SView>
@@ -142,8 +162,8 @@ class index extends Component {
         var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
         // if (Object.keys(this.state.client).length === {}) return <SLoad />
-       
-       
+
+
         return <SPage
             // hidden
             navBar={this.navBar()}
