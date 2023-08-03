@@ -151,9 +151,8 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
-                    icon: <SIcon name='Ingreso' />,
-                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
                     // icon: <SIcon name='Ingreso' />,
+                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
                     icon: 'Iventas',
                     color: '#DE6D3B',
                 })}
