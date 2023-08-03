@@ -76,12 +76,12 @@ class index extends DPA.profile {
             </SView>
         </SView>
     }
-    $item(obj) {
-        return <SView col={"xs-12"} center>
+    marcador() {
+        return <SView col={"xs-12"}>
             <SView col={"xs-12"}
                 style={{
                     borderBottomColor: STheme.color.card, borderBottomWidth: 5,
-                    position: "absolute", top: 0
+
                 }} />
             <SView width={120} height={40} row center card
                 style={{
@@ -95,7 +95,17 @@ class index extends DPA.profile {
                 <SView width={7} />
                 <SText fontSize={12}>EMPLEADOS</SText>
             </SView>
-            <SHr height={30} />
+        </SView>
+    }
+    $render() {
+        return <>
+            {this.marcador()}
+            {super.$render()}
+        </>
+    }
+
+    $item(obj) {
+        return <SView col={"xs-12"} center>
             <SView col={"xs-12"} height={200} center>
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,

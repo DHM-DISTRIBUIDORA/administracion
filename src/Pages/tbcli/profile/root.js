@@ -3,7 +3,7 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
 import item from '../item';
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath } from 'servisofts-component';
 import SSocket from "servisofts-socket"
 import { PButtom } from '../../../Components';
 import SCharts from 'servisofts-charts';
@@ -160,8 +160,23 @@ class index extends DPA.profile {
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
+                    label: "Monto total de ventas",
+                    cant: "Bs. " + SMath.formatMoney(this.state.monto_total_ventas ?? 0),
+                    icon: 'Icompras',
+                    color: '#8CB45F',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+                })}
+                {this.ItemCard({
                     label: "Cantidad de pedidos",
                     cant: this.state.cantidad_pedidos,
+                    // icon: <SIcon name='Ipedidos' />,
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })}
+                {this.ItemCard({
+                    label: "Monto total de pedidos",
+                    cant: "Bs. " + SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     // icon: <SIcon name='Ipedidos' />,
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
