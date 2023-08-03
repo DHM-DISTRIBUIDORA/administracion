@@ -4,11 +4,11 @@ import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisof
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
-export type ProductoCardPropsType = {
+export type ProductoCard2PropsType = {
     data: any,
     onPress?: (obj) => {},
 }
-class index extends Component<ProductoCardPropsType> {
+class index extends Component<ProductoCard2PropsType> {
     constructor(props) {
         super(props);
         this.state = {

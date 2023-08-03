@@ -1,5 +1,6 @@
 import { SThemeThemes } from 'servisofts-component';
 import MapStyle from './mapStyle'
+import MapStyleDark from './mapStyleDark';
 
 
 // ------- Version blanco y negro -------
@@ -56,7 +57,7 @@ const theme: SThemeThemes = {
         background: "#000000",
         card: "#11304990",
         accent: "#151813",
-        mapStyle: MapStyle,
+        mapStyle: MapStyleDark,
         font: "OpenSans-SemiBold"
     }
 }

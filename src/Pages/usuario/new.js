@@ -44,11 +44,10 @@ class index extends DPA.new {
                     },
                     key_usuario: Model.usuario.Action.getKey()
                 }).then((tesp) => {
-
                     if (this._params.onSelect) {
                         this._params.onSelect(resp.data);
                         SNavigation.goBack();
-                        return;
+                        // return;
                     } else {
                         SNavigation.replace("/usuario/profile", { pk: resp.data.key })
                     }
@@ -59,16 +58,13 @@ class index extends DPA.new {
                 if (this._params.onSelect) {
                     this._params.onSelect(resp.data);
                     SNavigation.goBack();
-                    return;
+                    // return;
                 }
-
             }
-
-            // SNavigation.replace("/usuario/profile", { pk: resp.data.key });
+            SNavigation.replace("/usuario/profile", { pk: resp.data.key });
         }).catch(e => {
             SPopup.alert("Ya existe un usuario con el dato, " + e.error_dato)
             console.error(e);
-
         })
     }
 

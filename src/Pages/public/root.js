@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import SSocket from "servisofts-socket"
 import { FlatList, ScrollView } from 'react-native'
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath } from 'servisofts-component';
+import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, TopBar, } from '../../Components';
 import Model from '../../Model';
 const FotoPerfil = require('../../Assets/img/foto.png')
@@ -10,8 +11,61 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            btn: 0
+            btn: 0,
+            // client: {}
         };
+        this.idcli = SNavigation.getParam("idcli")
+    }
+
+    componentDidMount() {
+        console.log("ppppp")
+        SStorage.getItem("tbcli_a_comprar", resp => {
+            if (!resp) return;
+            try {
+                const clidata = JSON.parse(resp);
+                this.setState({
+                    client: clidata
+                })
+            } catch (e) {
+                console.error(e);
+            }
+        })
+    }
+    
+
+    datosUser() {
+        if(!this.state.client) return;
+        return <SView style={{ alignItems: "flex-end" }}>
+            <SView
+                style={{
+                    backgroundColor: STheme.color.primary + "50",
+                    padding: 6,
+                    borderTopLeftRadius: 25,
+                    borderBottomLeftRadius: 25,
+                    borderTopRightRadius: 15,
+                    borderBottomRightRadius: 15,
+                    position: "relative", top: 0,
+                    right: 10,
+                }}
+                width={185} row
+            >
+                <SView height={30} width={30}>
+                    <SImage
+                        src={SSocket.api.root + "tbcli/" + this.state?.client?.idcli}
+                        style={{ position: "absolute", resizeMode: "cover", borderWidth: 2, borderRadius: 25, borderColor: STheme.color.card, overflow: 'hidden', }}
+                    />
+                </SView>
+                <SView width={5} />
+                <SView flex style={{ alignItems: "flex-end" }}>
+                    <SText fontSize={11}>Cliente: {this.state?.client?.clinom}</SText>
+                    <SText fontSize={10}>Celular: {this.state?.client?.clitel}</SText>
+                </SView>
+                <SView width={4} />
+            </SView>
+            <SView style={{ position: "absolute", top: 18 }}>
+                <SIcon name='Cola' height={10} width={10} fill={STheme.color.primary + "50"} />
+            </SView>
+        </SView>
     }
 
 
@@ -85,16 +139,19 @@ class index extends Component {
     }
 
     render() {
-        // let productos = Model.dm_productos.Action.getAll();
         var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
-        // console.log(productos)
+        // if (Object.keys(this.state.client).length === {}) return <SLoad />
+       
+       
         return <SPage
             // hidden
             navBar={this.navBar()}
             footer={this.footer()}
         >
-            <SHr height={25} />
+            {/* {(!this.state?.client) ? "" : this.datosUser()} */}
+            {this.datosUser()}
+            <SHr height={10} />
             <Container>
                 <Banner />
                 <SHr height={20} />

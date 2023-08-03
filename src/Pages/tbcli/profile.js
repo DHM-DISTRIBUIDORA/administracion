@@ -1,11 +1,13 @@
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
+import item from './item';
 
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
+            item: item,
             excludes: []
 
         });

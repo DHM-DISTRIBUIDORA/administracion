@@ -68,10 +68,10 @@ export default new SModel<Action, Reducer>({
         "climpdoc": { type: "text", editable: true },
         "sucreg": { type: "text", editable: true },
     },
-    // image: {
-    //     api: "root",
-    //     name: "productos"
-    // },
+    image: {
+        api: "root",
+        name: "tbcli"
+    },
     Action,
     Reducer,
 });
