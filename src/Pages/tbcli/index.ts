@@ -13,7 +13,8 @@ import profile from './profile/index';
 export const Parent = {
     name: "tbcli",
     path: `/tbcli`,
-    model: Model.tbcli
+    model: Model.tbcli,
+    title : "cliente"
 }
 export default SPage.combinePages(Parent.name, {
     "": list,

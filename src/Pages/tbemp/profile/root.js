@@ -6,7 +6,7 @@ import Model from '../../../Model';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import SChart from "servisofts-charts"
-import { Usuario } from '../../../Components';
+import { Header, Usuario } from '../../../Components';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -18,7 +18,11 @@ class index extends DPA.profile {
         monto_total_ventas: 0
     }
     constructor(props) {
-        super(props, { Parent: Parent, excludes: [] });
+        super(props, {
+            Parent: Parent,
+            excludes: [],
+            title: "Perfil de " + Parent.title,
+        });
 
     }
     componentDidMount() {
@@ -79,37 +83,19 @@ class index extends DPA.profile {
                         <SText bold fontSize={18}>{cant}</SText>
                         :
                         <SText bold fontSize={14}>({cant})</SText>}
-                    <SText bold fontSize={17}></SText>
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
-
             </SView>
         </SView>
     }
-    marcador() {
-        return <SView col={"xs-12"}>
-            <SView col={"xs-12"}
-                style={{
-                    borderBottomColor: STheme.color.card, borderBottomWidth: 5,
 
-                }} />
-            <SView width={120} height={40} row center card
-                style={{
-                    position: "absolute",
-                    top: 0, right: 0,
-                    padding: 5,
-                    borderBottomLeftRadius: 10,
-                    borderBottomRightRadius: 10
-                }}>
-                <SIcon name='Clientes' height={20} width={20} />
-                <SView width={7} />
-                <SText fontSize={12}>EMPLEADOS</SText>
-            </SView>
-        </SView>
-    }
     $render() {
         return <>
-            {this.marcador()}
+            <Header.Modulo
+                width={120}
+                titulo="EMPLEADOS"
+                icon="Empleados"
+            />
             {super.$render()}
         </>
     }
@@ -122,8 +108,6 @@ class index extends DPA.profile {
                     overflow: "hidden",
                     backgroundColor: STheme.color.white
                 }} center>
-
-
                     <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
                         resizeMode: "contain",
                         position: "absolute",
@@ -134,7 +118,6 @@ class index extends DPA.profile {
                     <SImage src={Model.tbemp._get_image_download_path(SSocket.api, this.pk)} style={{
                         resizeMode: "cover",
                         zIndex: 99,
-                        // backgroundColor:STheme.color.white
                     }} />
                 </SView>
                 <SHr />
@@ -149,7 +132,6 @@ class index extends DPA.profile {
                     label: "Cantidad de clientes",
                     cant: this.state.cantidad_clientes,
                     monto: "",
-                    // icon: <SIcon name='Iclients' />,
                     icon: 'Iclients',
                     color: '#1DA1F2',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
@@ -160,31 +142,27 @@ class index extends DPA.profile {
                     monto: "",
                     icon: 'Izonas',
                     color: '#833AB4',
-                    // icon: <SIcon name='Zonas' />,
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Compras",
                     cant: this.state.cantidad_compras,
                     monto: "",
-                    // icon: <SIcon name='Egreso' />,
                     icon: 'Icompras',
                     color: '#8CB45F',
                 })}
                 {this.ItemCard({
-                    label: "Ventas",
+                    label: "Total ventas",
                     cant: this.state.cantidad_ventas,
                     monto: SMath.formatMoney(this.state.monto_total_ventas),
-                    // icon: <SIcon name='Ingreso' />,
                     onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
                     icon: 'Iventas',
                     color: '#DE6D3B',
                 })}
                 {this.ItemCard({
-                    label: "Pedidos",
+                    label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
                     monto: SMath.formatMoney(this.state.monto_total_pedidos),
-                    // icon: <SIcon name='Paquete' />,
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                 })}
@@ -218,7 +196,6 @@ class index extends DPA.profile {
                             data: { ...user, [key]: "" }, key_usuario: Model.usuario.Action.getKey()
                         })
                     }
-
                     Model.usuario.Action.editar({
                         data: { ...usr, [key]: this.pk }, key_usuario: Model.usuario.Action.getKey()
                     })
