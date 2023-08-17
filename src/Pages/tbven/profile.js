@@ -4,6 +4,7 @@ import { Parent } from "."
 import Model from '../../Model';
 import item from './item';
 import { SList, SLoad, SMath, SText, SView } from 'servisofts-component';
+import { Carrito } from '../../Components';
 
 class index extends DPA.profile {
     constructor(props) {
@@ -32,21 +33,20 @@ class index extends DPA.profile {
         return Parent.model.Action.getByKey(this.pk);
     }
     $footer() {
-        let detalle = Model.tbvd.Action.getAll({ idven: this.pk })
-        const productos = Model.tbprd.Action.getAll();
-        if (!detalle) return <SLoad />
-        if (!productos) return <SLoad />
-        return <SView col={"xs-12"}>
-            <SList data={detalle} render={vd => {
-                const producto = productos[vd.idprd]
-                return <SView>
-                    {/* <SText>{vd?.idvd}</SText> */}
-                    {/* <SText>{vd?.vdunid}</SText> */}
-                    <SText>{producto?.prdnom}</SText>
-                    <SText>Bs. {SMath.formatMoney(vd?.vdpre)}   X   {vd?.vdcan}</SText>
-                </SView>
-            }} />
-        </SView>
+        // let detalle = Model.tbvd.Action.getAll({ idven: this.pk })
+        // const productos = Model.tbprd.Action.getAll();
+        // if (!detalle) return <SLoad />
+        // if (!productos) return <SLoad />
+        // return <SView col={"xs-12"}>
+        //     <SList data={detalle} render={vd => {
+        //         const producto = productos[vd.idprd]
+        //         return <SView>
+        //             <SText>{producto?.prdnom}</SText>
+        //             <SText>Bs. {SMath.formatMoney(vd?.vdpre)}   X   {vd?.vdcan}</SText>
+        //         </SView>
+        //     }} />
+        // </SView>
+        return <Carrito.DetalleVenta idven ={this.pk} />
     }
 
 

@@ -10,7 +10,8 @@ import _new from "./new"
 export const Parent = {
     name: "tbemp",
     path: `/tbemp`,
-    model: Model.tbemp
+    model: Model.tbemp,
+    title:"empleado"
 }
 export default SPage.combinePages(Parent.name, {
     "": list,

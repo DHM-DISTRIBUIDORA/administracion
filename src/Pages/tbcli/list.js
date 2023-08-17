@@ -9,7 +9,7 @@ class index extends DPA.list {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            title: "Lista de " + Parent.name,
+            title: "Lista de " + Parent.title+ "s",
             item: item,
             params: ["idemp?"],
             excludes: [],
