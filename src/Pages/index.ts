@@ -32,6 +32,9 @@ import test from "./test"
 import carrito from './carrito';
 import tbcli from './tbcli';
 import tbven from './tbven';
+import test3 from './test3';
+
+import { Example } from "servisofts-charts"
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -64,5 +67,7 @@ export default SPage.combinePages("/", {
   ...tbcli,
   ...tbven,
   test2,
-  test
+  test3,
+  test,
+  "chart": Example
 });

@@ -21,7 +21,7 @@ DeviceKey.init();
 const App = (props) => {
     return <Redux>
         <SComponentContainer
-            // debug
+            debug
             socket={SSocket}
             background={<BackgroundImage />}
             assets={Assets}

@@ -14,6 +14,7 @@ import tbprdlin from "./tbprdlin";
 import carrito from "./carrito";
 import tbven from "./tbven";
 import tbvd from "./tbvd";
+import background_location from "./background_location";
 export default {
     // dm_categorias,
     // dm_productos,
@@ -28,5 +29,6 @@ export default {
     tbprdlin,
     carrito,
     tbven,
-    tbvd
+    tbvd,
+    background_location
 }
