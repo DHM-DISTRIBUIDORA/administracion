@@ -3,10 +3,11 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
 import item from '../item';
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath, SMarker } from 'servisofts-component';
 import SSocket from "servisofts-socket"
 import { Header, PButtom } from '../../../Components';
 import SCharts from 'servisofts-charts';
+import SMapView from "servisofts-component/Component/SMapView";
 
 
 class index extends DPA.profile {
@@ -121,6 +122,54 @@ class index extends DPA.profile {
         </>
     }
 
+    getUbicacion(objeto) {
+        console.log(objeto)
+        console.log("aquiiii")
+        if ((objeto.clilan == "") || (objeto.clilon == "")) return;
+        return <>
+            <SView col={"xs-12"} >
+                <SHr height={20} />
+                <SText>UBICACIÓN TIENDA</SText>
+                <SHr />
+                <SView col={"xs-12 md-12"} height={300} padding={6}  >
+                    <SView card flex col={"xs-12"} style={{
+                        borderRadius: 14,
+                        borderBottomWidth: 4,
+                        borderLeftWidth: 3,
+                        borderRightWidth: 1,
+                        borderColor: STheme.color.card,
+                        padding: 15
+                    }} row center>
+                        <SMapView
+                            initialRegion={{
+                                latitude: objeto.clilat,
+                                longitude: objeto.clilon,
+                                latitudeDelta: 0.0222,
+                                longitudeDelta: 0.0221,
+                            }}
+                            // options={{
+                            //     fullscreenControl: true,
+                            //     zoomControl: true,
+                            //     gestureHandling: "none",
+                            //     scrollwheel: true,
+                            // }}
+                            preventCenter
+                        >
+                            <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
+                                <SIcon name="MarcadorMapa" width={35} height={55} />
+                            </SMarker>
+                        </SMapView>
+                        {/* <SView col={"xs-12"} height style={{
+                            position: "absolute"
+                        }} withoutFeedback>
+                        </SView> */}
+                    </SView>
+                </SView>
+            </SView>
+        </>
+
+    }
+
     $render() {
         return <>
             <Header.Modulo
@@ -207,8 +256,11 @@ class index extends DPA.profile {
                     color: '#FF64B4',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
+
+                {this.getUbicacion(obj)}
                 <SHr height={20} />
                 {this.getGrafo()}
+
             </SView>
             <SHr height={20} />
             <PButtom onPress={() => {

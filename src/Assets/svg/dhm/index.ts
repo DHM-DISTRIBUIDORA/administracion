@@ -51,6 +51,7 @@ import Ieliminar, { ReactComponent as IeliminarW } from './ieliminar.svg';
 import Iclients, { ReactComponent as IclientsW } from './iclients.svg';
 import Iventas, { ReactComponent as IventasW } from './iventas.svg';
 import Izonas, { ReactComponent as IzonasW } from './izonas.svg';
+import MarcadorMapa, { ReactComponent as MarcadorMapaW } from './marcadorMapa.svg';
 
 
 const Assets = {
@@ -108,6 +109,8 @@ const Assets = {
 	"Iclients": { Native: Iclients, Web: IclientsW },
 	"Iventas": { Native: Iventas, Web: IventasW },
 	"Izonas": { Native: Izonas, Web: IzonasW },
+	"MarcadorMapa": { Native: MarcadorMapa, Web: MarcadorMapaW },
+	
 
 
 

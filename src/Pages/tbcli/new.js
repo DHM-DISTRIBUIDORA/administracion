@@ -10,10 +10,28 @@ class index extends DPA.new {
             Parent: Parent,
             excludes: []
         });
+        this.state = {
+            ubicacion: null
+        };
     }
 
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
+    }
+    $inputs() {
+        var inp = super.$inputs();
+        inp["clilat"].onPress = (evt) => {
+            SNavigation.navigate("/tbcli/mapa", {
+                callback: (resp) => {
+                    console.log(resp)
+                    this.setState({ ubicacion: resp })
+                }
+            });
+        }
+        if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
+        if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
+
+        return inp;
     }
     $onSubmit(data) {
         Parent.model.Action.registro({

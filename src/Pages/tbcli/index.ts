@@ -9,6 +9,8 @@ import edit from './edit';
 import _new from "./new"
 import find from './find';
 import profile from './profile/index';
+import mapa from './mapa';
+
 
 export const Parent = {
     name: "tbcli",
@@ -25,5 +27,6 @@ export default SPage.combinePages(Parent.name, {
     "new":_new,
     edit,
     find,
+    "mapa": mapa,
     ...profile
 })
