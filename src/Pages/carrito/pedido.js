@@ -5,7 +5,6 @@ import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom, Producto } from '../../Components';
 import Model from '../../Model';
 
-
 class index extends Component {
     constructor(props) {
         super(props);
@@ -14,17 +13,44 @@ class index extends Component {
     }
 
     recibirItems = ({ tbprd }) => {
-
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, tbprd);
 
         Model.carrito.Action.setState({ productos });
-
-
-
         // this.setState({ items: this.state.items + datos.items })
         // this.setState({ total: this.state.total + datos.precio })
     };
+    sinPedidos() {
+        return <>
+            <SView col={"xs-12"}  >
+                <SHr height={30} />
+                <SView col={"xs-12"} center height style={{ backgroundColor: STheme.color.primary, borderRadius: 12 }}>
+                    <SView col={"xs-12"} row center   >
+                        <SView col={"xs-11"} border={'transparent'}  >
+                            <SHr height={20} />
+                            <SText fontSize={22} color={STheme.color.white} bold center> NO SE ENCONTRÓ NINGÚN PEDIDO</SText>
+                            <SHr height={20} />
+                            <SText fontSize={18} color={STheme.color.white} center   >Parece que aún no has hecho ningún pedido</SText>
+                        </SView>
+                    </SView>
+                    <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
+                        <SHr height={20} />
+                        <SIcon name="MPedido" height={180}></SIcon >
+                    </SView>
+                    <SView col={"xs-12"} row center   >
+                        <SView col={"xs-10"} border={'transparent'} center>
+                            <SHr height={20} />
+                            <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
+                                SNavigation.navigate("/explorar")
+                            }} >COMPRAR</PButtom>
+                        </SView>
+                        <SHr height={30} />
+                    </SView>
+                </SView>
+                <SHr height={30} />
+            </SView>
+        </>
+    }
 
     getProductos() {
         let dato;
@@ -35,17 +61,16 @@ class index extends Component {
         Object.keys(productos).map((key, index) => {
             total += productos[key].data.prdpoficial * productos[key].cantidad;
         });
-
-        // var objFinal = Object.values(productos).filter((a) => this.params.pk == a.idlinea)
-        // if (Object.keys(objFinal).length === 0) return <SText>No hay productos...</SText>;
+        if (Object.keys(productos).length === 0) return this.sinPedidos();
         return (
             <>
+                <SText>Pedidos</SText>
+                <SHr height={15} />
                 <SList
                     initSpace={8}
                     flex
                     data={productos}
                     // filter={(a) => a.idlinea == this.params.pk}
-
                     // limit={10}
                     render={(obj) => {
                         return <Producto.Card2 col={"xs-12"} width={0} data={obj}
@@ -56,25 +81,22 @@ class index extends Component {
                         />
                     }}
                 />
+                <SHr height={45} />
+                <PButtom primary
+                    onPress={() => {
+                        // this.form.submit();
+                        SNavigation.navigate('/carrito')
+                    }} >ACEPTAR</PButtom>
+                <SHr height={30} />
             </>
         )
     }
 
     render() {
         return <>
-            <SPage footer={this.footer()}>
-                <Container>
-                    <SText>Pedidos</SText>
-
-                    <SHr height={15} />
+            <SPage footer={this.footer()} >
+                <Container >
                     {this.getProductos()}
-                    <SHr height={45} />
-                    <PButtom primary
-                        onPress={() => {
-                            // this.form.submit();
-                            SNavigation.navigate('/carrito')
-                        }} >ACEPTAR</PButtom>
-                    <SHr height={30} />
                 </Container>
             </SPage>
             <Carrito.Float bottom={100} />
