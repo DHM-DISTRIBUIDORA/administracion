@@ -26,16 +26,30 @@ class index extends DPA.edit {
 
     $inputs() {
         var inp = super.$inputs();
-        inp["clilat"].onPress = (evt) => {
-            SNavigation.navigate("/tbcli/mapa", {
-                callback: (resp) => {
-                    console.log(resp)
-                    this.setState({ ubicacion: resp })
-                }
-            });
-        }
+
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
+        // if (this.state?.ubicacion?.clilat) this.data?.clilat = this.state?.ubicacion?.clilat;
+        // if (this.state?.ubicacion?.clilon) this.data?.clilon= this.state?.ubicacion?.clilon;
+        console.log(this.data?.clilat + " / " + this.state?.ubicacion?.clilat)
+        console.log("lll")
+        inp["clilat"].onPress = (evt) => {
+            SNavigation.navigate("/tbcli/mapa",
+                {
+
+                    // lon:this.state?.ubicacion?.clilon,
+                    callback: (resp) => {
+                        this.setState({ ubicacion: resp })
+                    },
+                    lat: (this.data?.clilat == 0) ? this.state?.ubicacion?.clilat : this.data?.clilat,
+                    lon: (this.data?.clilon == 0) ? this.state?.ubicacion?.clilon : this.data?.clilon,
+
+
+                },
+
+            )
+
+        }
 
         return inp;
     }

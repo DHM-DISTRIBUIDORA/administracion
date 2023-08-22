@@ -17,6 +17,12 @@ class index extends Component {
         this.hiddeDescripcion = SNavigation.getParam("hiddeDescripcion");
         this.hiddeReferencia = SNavigation.getParam("hiddeReferencia");
 
+
+
+        this.lat = SNavigation.getParam("lat");
+        this.lon = SNavigation.getParam("lon");
+        this.all = SNavigation.getAllParams()
+
         // if (typeof this.callback != "function") {
         //     SNavigation.replace("/")
         // }
@@ -144,10 +150,19 @@ class index extends Component {
         </SView>
     }
     render() {
+        console.log(this?.all?.lat + " - " + this?.all?.lon)
         return (
             <SPage center disableScroll>
                 <SText>mapitaaaa</SText>
                 <GeolocationMapSelect
+
+                    initialRegion={{
+                        latitude: (this?.all?.lat != 0) ? this?.all?.lat : -17.783799,
+                        longitude: (this?.all?.lon != 0) ? this?.all?.lon : -63.180,
+                        latitudeDelta: 0.1,
+                        longitudeDelta: 0.1
+
+                    }}
                     ref={(map) => this.map = map}
                     icon={<SIcon name="MarcadorMapa" width={25} height={40} />}
                     onChange={(evt) => {
