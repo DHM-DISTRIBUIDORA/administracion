@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Parent } from '.';
+
 import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SInput, SPopup } from 'servisofts-component';
 // import { AccentBar, PButtom } from '../../Components';
 import Model from '../../Model';
@@ -13,7 +15,11 @@ class index extends Component {
         this.state = {
 
         };
+        this.pk = SNavigation.getParam("pk");
+
         this.callback = SNavigation.getParam("callback");
+        this.obj = SNavigation.getParam("obj");
+        this.callback2 = SNavigation.getParam("callback2");
         this.hiddeDescripcion = SNavigation.getParam("hiddeDescripcion");
         this.hiddeReferencia = SNavigation.getParam("hiddeReferencia");
 
@@ -116,9 +122,23 @@ class index extends Component {
                         clilon: this.state?.data?.longitude,
                         // direccion: this.state?.data?.direccion,
                     }
+                    console.log(this.pk + " ppp")
                     if (this.callback) {
                         this.callback(data);
                         SNavigation.goBack();
+                    }
+                    if (this.callback2) {
+                        Parent.model.Action.editar({
+                            data: {
+                                ...this.obj,
+                                ...data
+                            },
+                            key_usuario: Model.usuario.Action.getKey()
+                        }).then((resp) => {
+                            SNavigation.goBack();
+                        }).catch(e => {
+                            console.error(e);
+                        })
                     }
                 }}>ELEGIR ESTA UBICACIÓN</Btn>
             </SView>
@@ -129,7 +149,7 @@ class index extends Component {
         return (
             <SPage center disableScroll>
                 <SText>Ubicación en Mapa</SText>
-                <SHr/>
+                <SHr />
                 <GeolocationMapSelect
                     initialRegion={{
                         latitude: (this?.all?.lat != 0) ? this?.all?.lat : -17.783799,

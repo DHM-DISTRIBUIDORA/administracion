@@ -163,6 +163,36 @@ class index extends DPA.profile {
                             position: "absolute"
                         }} withoutFeedback>
                         </SView> */}
+
+                    </SView>
+                    <SHr height={10} />
+                    <SView style={{ alignItems: "flex-end" }} height={50}>
+                        <SView center width={170} height={35} backgroundColor={STheme.color.primary}
+                            style={{ borderRadius: 8 }}
+                            onPress={() => {
+                                // let newLat;
+                                // let newLon;
+                                // if (this.state?.ubicacion?.clilat) {
+                                //     newLat = this.state?.ubicacion?.clilat;
+                                //     newLon = this.state?.ubicacion?.clilon;
+                                // } else {
+                                //     newLat = this.data?.clilat;
+                                //     newLon = this.data?.clilon;
+                                // }
+                                SNavigation.navigate("/tbcli/mapa",
+                                    {
+                                        callback2: (resp) => {
+                                            this.setState({ ubicacion: resp })
+                                        },
+                                        lat: objeto.clilat,
+                                        lon: objeto.clilon,
+                                        pk: this.pk,
+                                        obj:objeto
+                                    },
+                                )
+                            }}>
+                            <SText color={STheme.color.white}>EDITAR UBICACIÓN</SText>
+                        </SView>
                     </SView>
                 </SView>
             </SView>

@@ -26,7 +26,7 @@ class index extends DPA.edit {
 
     $inputs() {
         var inp = super.$inputs();
-
+        console.log(this.state?.ubicacion?.clilat + " / " + this.state?.ubicacion?.clilon)
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
         inp["clilat"].onPress = (evt) => {
@@ -48,7 +48,8 @@ class index extends DPA.edit {
                         this.setState({ ubicacion: resp })
                     },
                     lat: newLat,
-                    lon: newLon
+                    lon: newLon,
+                    pk: this.pk
                 },
             )
         }
