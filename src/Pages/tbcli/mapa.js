@@ -17,21 +17,13 @@ class index extends Component {
         this.hiddeDescripcion = SNavigation.getParam("hiddeDescripcion");
         this.hiddeReferencia = SNavigation.getParam("hiddeReferencia");
 
-
-
         this.lat = SNavigation.getParam("lat");
         this.lon = SNavigation.getParam("lon");
         this.all = SNavigation.getAllParams()
-
-        // if (typeof this.callback != "function") {
-        //     SNavigation.replace("/")
-        // }
     }
 
     getImput() {
         if (this.hiddeDescripcion) return null;
-        // if (this.hiddeReferencia) return null;
-        //  if (!this.props.state.direccion_usuarioReducer.miDireccion) return null;
         return <SView col={"xs-12"} >
             <SInput fontSize={16} placeholder={"Nombre de la Ubicación"}
                 isRequired={true}
@@ -58,11 +50,7 @@ class index extends Component {
                     <SInput
                         height={48}
                         style={{
-                            // backgroundColor: STheme.color.card + 1,
                             backgroundColor: STheme.color.card,
-                            // height: 55,
-                            // borderRadius: 16,
-                            // color: STheme.color.text,
                             fontSize: 14
                         }}
                         editable={false}
@@ -132,18 +120,6 @@ class index extends Component {
                         this.callback(data);
                         SNavigation.goBack();
                     }
-                    // else {
-                    //     this.setState({ loading: true })
-                    //     Model.direccion_usuario.Action.registro({
-                    //         data: data,
-                    //         key_usuario: Model.usuario.Action.getKey(),
-                    //     }).then((resp) => {
-                    //         this.setState({ loading: false })
-                    //         SNavigation.goBack();
-                    //     }).catch((e) => {
-                    //         this.setState({ loading: false })
-                    //     })
-                    // }
                 }}>ELEGIR ESTA UBICACIÓN</Btn>
             </SView>
             <SHr height={10} />
@@ -155,13 +131,11 @@ class index extends Component {
             <SPage center disableScroll>
                 <SText>mapitaaaa</SText>
                 <GeolocationMapSelect
-
                     initialRegion={{
                         latitude: (this?.all?.lat != 0) ? this?.all?.lat : -17.783799,
                         longitude: (this?.all?.lon != 0) ? this?.all?.lon : -63.180,
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1
-
                     }}
                     ref={(map) => this.map = map}
                     icon={<SIcon name="MarcadorMapa" width={25} height={40} />}
