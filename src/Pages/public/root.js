@@ -5,6 +5,7 @@ import { FlatList, ScrollView } from 'react-native'
 import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, TopBar, } from '../../Components';
 import Model from '../../Model';
+import pedidos from '../pedidos';
 const FotoPerfil = require('../../Assets/img/foto.png')
 class index extends Component {
 
@@ -12,7 +13,9 @@ class index extends Component {
         super(props);
         this.state = {
             btn: 0,
-            // client: {}
+            pedidos: [],
+            select: false,
+            pro: 0
         };
         this.idcli = SNavigation.getParam("idcli")
     }
@@ -87,15 +90,27 @@ class index extends Component {
             </SView>
         </SView>
     }
-
+    cambiar() {
+        return this.setState({ select: false })
+    }
 
     renderItem(obj) {
+        // console.log(this.state.select + " render")
+        // console.log(this.state.pro + " pppp" + obj.idprd)
+        // console.log(this.state.pedidos)
+
+        if (this.state.pedidos.indexOf(obj.idprd) != -1) {
+            this.state.select = true
+        } else {
+            this.state.select = false
+        }
         return <SView width={170} height={280} card
             style={{
                 padding: 9,
                 borderRadius: 18,
                 borderWidth: 1,
                 borderColor: STheme.color.card,
+                backgroundColor: (this.state.select) ? "#82D2F5" : STheme.color.card
             }}>
             <SView col={"xs-12"} height={145} card>
                 <SImage src={FotoPerfil} style={{ resizeMode: "contain" }} />
@@ -117,16 +132,19 @@ class index extends Component {
                         let productos_data = Model.carrito.Action.getState().productos;
                         Object.assign(productos_data, data);
                         Model.carrito.Action.setState({ productos_data });
-                        this.setState({ btn: 1 })
+                        this.setState({ select: true })
+                        this.setState({ pro: obj.idprd })
+                        // this.setState( {pedidos: [pedidos, obj.idprd]} )
+                        this.setState(prevState => ({
+                            pedidos: [...prevState.pedidos, obj.idprd]
+                        }));
                     }}
                 >
-                    {/* <SIcon name={(this.state.btn == 0) ? 'BtnMas' : 'Check2'} height={45} /> */}
-                    <SIcon name='BtnMas' height={30} />
+                    <SIcon name={(this.state.select == false) ? 'BtnMas' : 'Check2'} height={45} />
                 </SView>
             </SView>
         </SView>
     }
-
 
     publicidadItem({ src }) {
         return <SView width={140} height={140} padding={4}>
@@ -163,7 +181,6 @@ class index extends Component {
         if (!productos) return <SLoad />
         // if (Object.keys(this.state.client).length === {}) return <SLoad />
 
-
         return <SPage
             // hidden
             navBar={this.navBar()}
@@ -186,7 +203,6 @@ class index extends Component {
                     </SView>
                     <SHr />
                 </SView>
-
             </Container>
             <SView col={"xs-12"}>
                 <ScrollView
