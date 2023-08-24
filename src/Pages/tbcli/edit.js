@@ -29,28 +29,31 @@ class index extends DPA.edit {
 
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
-        // if (this.state?.ubicacion?.clilat) this.data?.clilat = this.state?.ubicacion?.clilat;
-        // if (this.state?.ubicacion?.clilon) this.data?.clilon= this.state?.ubicacion?.clilon;
         console.log(this.data?.clilat + " / " + this.state?.ubicacion?.clilat)
         console.log("lll")
         inp["clilat"].onPress = (evt) => {
+            let newLat;
+            let newLon;
+            if (inp["clilat"].value == "") {
+                newLat = 0;
+                newLon = 0;
+            } else if (this.state?.ubicacion?.clilat) {
+                newLat = this.state?.ubicacion?.clilat;
+                newLon = this.state?.ubicacion?.clilon;
+            } else {
+                newLat = this.data?.clilat;
+                newLon = this.data?.clilon;
+            }
             SNavigation.navigate("/tbcli/mapa",
                 {
-
-                    // lon:this.state?.ubicacion?.clilon,
                     callback: (resp) => {
                         this.setState({ ubicacion: resp })
                     },
-                    lat: (this.data?.clilat == 0) ? this.state?.ubicacion?.clilat : this.data?.clilat,
-                    lon: (this.data?.clilon == 0) ? this.state?.ubicacion?.clilon : this.data?.clilon,
-
-
+                    lat: newLat,
+                    lon: newLon
                 },
-
             )
-
         }
-
         return inp;
     }
 
