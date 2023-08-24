@@ -29,8 +29,6 @@ class index extends DPA.edit {
 
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
-        console.log(this.data?.clilat + " / " + this.state?.ubicacion?.clilat)
-        console.log("lll")
         inp["clilat"].onPress = (evt) => {
             let newLat;
             let newLon;

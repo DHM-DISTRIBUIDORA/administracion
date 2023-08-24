@@ -126,10 +126,10 @@ class index extends Component {
         </SView>
     }
     render() {
-        console.log(this?.all?.lat + " - " + this?.all?.lon)
         return (
             <SPage center disableScroll>
-                <SText>mapitaaaa</SText>
+                <SText>Ubicación en Mapa</SText>
+                <SHr/>
                 <GeolocationMapSelect
                     initialRegion={{
                         latitude: (this?.all?.lat != 0) ? this?.all?.lat : -17.783799,
