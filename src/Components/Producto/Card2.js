@@ -79,7 +79,9 @@ class index extends Component<ProductoCard2PropsType> {
                                     // this.setState({ count: this.state.count - 1 });
 
                                     this.state.count = this.state.count - 1
-                                    this.enviarDatosItems()                                }}
+                                    this.enviarDatosItems()
+                                }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
@@ -95,6 +97,7 @@ class index extends Component<ProductoCard2PropsType> {
                                     this.state.count = this.state.count + 1
                                     this.enviarDatosItems()
                                 }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Mas' height={18} />
                             </SView>

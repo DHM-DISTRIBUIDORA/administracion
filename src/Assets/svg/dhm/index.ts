@@ -52,6 +52,9 @@ import Iclients, { ReactComponent as IclientsW } from './iclients.svg';
 import Iventas, { ReactComponent as IventasW } from './iventas.svg';
 import Izonas, { ReactComponent as IzonasW } from './izonas.svg';
 import MarcadorMapa, { ReactComponent as MarcadorMapaW } from './marcadorMapa.svg';
+import MPedido, { ReactComponent as MPedidoW } from './mPedido.svg';
+import IConductores, { ReactComponent as IConductoresW } from './iConductores.svg';
+import MProductos, { ReactComponent as MProductosW } from './mProductos.svg';
 
 
 const Assets = {
@@ -110,6 +113,11 @@ const Assets = {
 	"Iventas": { Native: Iventas, Web: IventasW },
 	"Izonas": { Native: Izonas, Web: IzonasW },
 	"MarcadorMapa": { Native: MarcadorMapa, Web: MarcadorMapaW },
+	"MPedido": { Native: MPedido, Web: MPedidoW },
+	"IConductores": { Native: IConductores, Web: IConductoresW },
+	"MProductos": { Native: MProductos, Web: MProductosW },
+	
+	
 	
 
 

@@ -5,8 +5,6 @@ import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 import { AccentBar, BottomNavigator, Carrito, Container, PButtom, Producto } from '../../Components';
-// import usuario_dato from '../../Model/tapeke/usuario_dato';
-
 
 class index extends Component {
     constructor(props) {
@@ -21,30 +19,48 @@ class index extends Component {
     };
 
     recibirItems = ({ tbprd }) => {
-        // this.state.productos.push(tbprd)
-
-        // let productos = Model.carrito.Action.getState().productos;
-        // productos.push(tbprd);
-        // Model.carrito.Action.setState({ productos });
-
         let productos = Model.carrito.Action.getState().productos;
-        // productos.push(tbprd);
-        // productos ={...tbprd}
         Object.assign(productos, tbprd);
         console.log(productos);
-
         Model.carrito.Action.setState({ productos });
-
-
-
-        // this.setState({ items: this.state.items + datos.items })
-        // this.setState({ total: this.state.total + datos.precio })
     };
 
     load_data() {
         this.data = Model.usuario.Action.getUsuarioLog();
         return this.data;
 
+    }
+
+    sinProductos() {
+        return <>
+            <SView col={"xs-12"}  >
+                <SHr height={30} />
+                <SView col={"xs-12"} center height style={{ backgroundColor: STheme.color.primary, borderRadius: 12 }}>
+                    <SView col={"xs-12"} row center   >
+                        <SView col={"xs-11"} border={'transparent'}  >
+                            <SHr height={20} />
+                            <SText fontSize={22} color={STheme.color.white} bold center>NO HAY PRODUCTOS DISPONIBLES</SText>
+                            <SHr height={20} />
+                            <SText fontSize={18} color={STheme.color.white} center   >Lamentablemente no hay productos para mostrar en esta categoría</SText>
+                        </SView>
+                    </SView>
+                    <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
+                        <SHr height={20} />
+                        <SIcon name="MProductos" height={170}></SIcon >
+                    </SView>
+                    <SView col={"xs-12"} row center   >
+                        <SView col={"xs-10"} border={'transparent'} center>
+                            <SHr height={20} />
+                            <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
+                                SNavigation.navigate("/explorar")
+                            }} >BUSCAR OTROS</PButtom>
+                        </SView>
+                        <SHr height={30} />
+                    </SView>
+                </SView>
+                <SHr height={30} />
+            </SView>
+        </>
     }
     getProductos() {
         let dato;
@@ -53,9 +69,10 @@ class index extends Component {
         if (!productos) return <SLoad />
 
         var objFinal = Object.values(productos).filter((a) => this.params.pk == a.idlinea)
-        if (Object.keys(objFinal).length === 0) return <SText>No hay productos...</SText>;
+        if (Object.keys(objFinal).length === 0) return this.sinProductos();
         return (
             <>
+                <SHr height={20} />
                 <SList
                     buscador
                     initSpace={8}
@@ -73,29 +90,21 @@ class index extends Component {
                         />
                     }}
                 />
+                <SHr height={30} />
             </>
         )
     }
 
-
     render() {
         return (<>
             <SPage title={'PRODUCTOS'} onRefresh={(callback) => {
-
             }}
                 footer={this.footer()}
             >
                 <Container center>
-                    {/* <SView height={80}></SView> */}
-                    <SHr height={20} />
-                    {this.getProductos()}
-                    <SView height={10}></SView>
-                    {/* <PButtom fontSize={20} onPress={() => {
-                        SNavigation.navigate("/perfil/editar", { key: this.data.key });
-                    }}>CONTINUAR</PButtom> */}
-                    <SView height={30}></SView>
-                </Container>
 
+                    {this.getProductos()}
+                </Container>
             </SPage>
             <Carrito.Float bottom={100} />
         </>

@@ -26,17 +26,33 @@ class index extends DPA.edit {
 
     $inputs() {
         var inp = super.$inputs();
-        inp["clilat"].onPress = (evt) => {
-            SNavigation.navigate("/tbcli/mapa", {
-                callback: (resp) => {
-                    console.log(resp)
-                    this.setState({ ubicacion: resp })
-                }
-            });
-        }
+        console.log(this.state?.ubicacion?.clilat + " / " + this.state?.ubicacion?.clilon)
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
-
+        inp["clilat"].onPress = (evt) => {
+            let newLat;
+            let newLon;
+            if (inp["clilat"].value == "") {
+                newLat = 0;
+                newLon = 0;
+            } else if (this.state?.ubicacion?.clilat) {
+                newLat = this.state?.ubicacion?.clilat;
+                newLon = this.state?.ubicacion?.clilon;
+            } else {
+                newLat = this.data?.clilat;
+                newLon = this.data?.clilon;
+            }
+            SNavigation.navigate("/tbcli/mapa",
+                {
+                    callback: (resp) => {
+                        this.setState({ ubicacion: resp })
+                    },
+                    lat: newLat,
+                    lon: newLon,
+                    pk: this.pk
+                },
+            )
+        }
         return inp;
     }
 

@@ -11,7 +11,8 @@ export default new SModel<Action, Reducer>({
         "fecha_on": { type: "timestamp", label: "Fecha de creacion" },
         "estado": { type: "integer" },
         "latitude": { type: "double" },
-        "longitude": { type: "double" }
+        "longitude": { type: "double" },
+        "key_usuario": { type: "text", fk: "usuario" }
     },
 
     Action,

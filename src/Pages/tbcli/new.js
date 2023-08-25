@@ -23,7 +23,6 @@ class index extends DPA.new {
         inp["clilat"].onPress = (evt) => {
             SNavigation.navigate("/tbcli/mapa", {
                 callback: (resp) => {
-                    console.log(resp)
                     this.setState({ ubicacion: resp })
                 }
             });
