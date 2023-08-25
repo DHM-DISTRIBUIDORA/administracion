@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
+import Background from 'servisofts-component/img/Background';
 export type ProductoCardPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -12,10 +13,12 @@ class index extends Component<ProductoCardPropsType> {
         super(props);
         this.state = {
             count: 0,
+            select: false
         };
     }
 
     enviarDatosItems = () => {
+        this.setState({ select: true });
         const datos = {
             // tbprd: this.props.data,
             tbprd: { [this.props.data.idprd]: { cantidad: this.state.count, data: this.props.data } },
@@ -37,7 +40,8 @@ class index extends Component<ProductoCardPropsType> {
                     borderWidth: 1,
                     padding: 10,
                     opacity: active ? 1 : 0.6,
-                    borderColor: !active ? "#D20C0C" : "#E2E2E2"
+                    borderColor: !active ? "#D20C0C" : "#E2E2E2",
+                    backgroundColor: this.state.select ? STheme.color.primary + "30" : STheme.color.card
                 }}
             >
                 <SView col={"xs-3"} height={105}>
@@ -62,6 +66,7 @@ class index extends Component<ProductoCardPropsType> {
                                     if (this.state.count <= 0) return;
                                     this.setState({ count: this.state.count - 1 });
                                 }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
@@ -75,6 +80,7 @@ class index extends Component<ProductoCardPropsType> {
                                     if (this.state.count >= stock) return;
                                     this.setState({ count: this.state.count + 1 })
                                 }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Mas' height={18} />
                             </SView>

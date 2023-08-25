@@ -87,7 +87,14 @@ class index extends Component {
                         // this.form.submit();
                         SNavigation.navigate('/carrito')
                     }} >ACEPTAR</PButtom>
+                <SHr height={10} />
+                <PButtom secondary
+                    onPress={() => {
+                        Model.carrito.Action.removeAll()
+                        SNavigation.replace('/public')
+                    }} >ELIMINAR PEDIDOS</PButtom>
                 <SHr height={30} />
+
             </>
         )
     }
