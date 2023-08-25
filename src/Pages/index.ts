@@ -27,14 +27,15 @@ import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
 import mapa from './mapa';
-import test2 from "./test2"
-import test from "./test"
 import carrito from './carrito';
 import tbcli from './tbcli';
 import tbven from './tbven';
 import test3 from './test3';
+import reportes from './reportes';
 
-import { Example } from "servisofts-charts"
+import test2 from "./test2"
+import test from "./test"
+// import { Example } from "servisofts-charts"
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -66,8 +67,9 @@ export default SPage.combinePages("/", {
   ...carrito,
   ...tbcli,
   ...tbven,
+  ...reportes,
   test2,
   test3,
   test,
-  "chart": Example
+  // "chart": Example
 });
