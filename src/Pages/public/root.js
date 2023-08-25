@@ -110,9 +110,9 @@ class index extends Component {
                 borderRadius: 18,
                 borderWidth: 1,
                 borderColor: STheme.color.card,
-                backgroundColor: (this.state.select) ? "#82D2F5" : STheme.color.card
+                backgroundColor: (this.state.select) ? "#82D2F570" : STheme.color.card
             }}>
-            <SView col={"xs-12"} height={145} card>
+            <SView col={"xs-12"} height={145} >
                 <SImage src={FotoPerfil} style={{ resizeMode: "contain" }} />
             </SView>
             <SHr />
