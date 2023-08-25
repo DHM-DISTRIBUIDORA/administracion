@@ -106,7 +106,6 @@ class index extends Component {
                     {this.getProductos()}
                 </Container>
             </SPage>
-            <Carrito.Float bottom={100} />
         </>
         );
     }

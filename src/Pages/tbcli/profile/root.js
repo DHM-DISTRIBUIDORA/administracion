@@ -28,10 +28,8 @@ class index extends DPA.profile {
             item: item,
             excludes: [],
             title: "Perfil de " + Parent.title,
-
         });
         this.pk = SNavigation.getParam("pk");
-
     }
 
     componentDidMount() {
@@ -247,7 +245,7 @@ class index extends DPA.profile {
                     monto: SMath.formatMoney(this.state?.monto_total_ventas),
                     icon: 'Icompras',
                     color: '#8CB45F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk }),
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo:"VF" }),
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
@@ -256,7 +254,7 @@ class index extends DPA.profile {
                     monto: SMath.formatMoney(this.state.monto_total_pedidos),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo:"VD" }),
                 })}
                 {this.ItemCard({
                     label: "Máxima venta",

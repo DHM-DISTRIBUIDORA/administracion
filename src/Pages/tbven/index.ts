@@ -6,6 +6,7 @@ import table from './table';
 import _delete from './delete';
 import edit from './edit';
 import profile from './profile';
+import recibo from './recibo';
 import _new from "./new"
 export const Parent = {
     name: "tbven",
@@ -19,5 +20,6 @@ export default SPage.combinePages(Parent.name, {
     "delete": _delete,
     "new": _new,
     profile,
-    edit
+    edit,
+    recibo
 })
