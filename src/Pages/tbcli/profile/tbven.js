@@ -13,8 +13,13 @@ class index extends DPA.profile {
             Parent: Parent,
             params: ["onSelect?"],
             item: item,
-            excludes: []
+            excludes: [],
         });
+        this.state = {
+            tipo: "gg"
+
+        };
+        var tipo = SNavigation.getParam("tipo");
     }
     $allowBack() {
         return true;
@@ -85,6 +90,9 @@ class Lista extends DPA.list {
     // }
     $order() {
         return [{ key: "vfec", order: "desc" }]
+    }
+    $filter(data) {
+        return data.vtipo == SNavigation.getParam("tipo")
     }
     $getData() {
         return Parent2.model.Action.getAll({ idcli: this.props.pi.pk })

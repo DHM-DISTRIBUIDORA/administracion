@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import { SView, SText, STheme, SGradient, SIcon, SNavigation } from 'servisofts-component'
 import Model from '../../Model';
+import Carrito from '../Carrito';
 
 export default class index extends Component {
 	constructor(props) {
@@ -62,7 +63,7 @@ export default class index extends Component {
 					</SView>
 					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{zIndex:99}} />
 				</SView >
-				
+				<Carrito.Float bottom={100} />
 			</>
 			// </SView>
 		);
