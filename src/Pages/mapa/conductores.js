@@ -28,21 +28,22 @@ class Mapa extends Component {
         })
     }
     render() {
-        let usuarios = Model.usuario.Action.getAll();
+        let usuarios = Model.usuario.Action.getAll() ?? {};
         let conductores = Model.background_location.Action.getAll();
-        if (!usuarios) return <SLoad />
+        // if (!usuarios) return <SLoad />
         if (!conductores) {
             conductores = {};
         }
+       
         return (
             <SPage
                 title={`Conductores`}
                 disableScroll
             >
-                {(Object.keys(conductores).length === 0) ?  <SView height={40} center backgroundColor={STheme.color.primary}><SText color={STheme.color.white}>Actualmente no hay conductores disponibles.</SText></SView> : null }
-                <SView></SView>
+                {/* {(Object.keys(conductores).length === 0) ? <SView height={40} center backgroundColor={STheme.color.primary}><SText color={STheme.color.white}>Actualmente no hay conductores disponibles.</SText></SView> : null}
+                <SView></SView> */}
                 <SView center height >
-                    <SMapView initialRegion={{
+                    <SMapView ref={ref => this.map = ref} initialRegion={{
                         latitude: -17.783799,
                         longitude: -63.180,
                         latitudeDelta: 0.1,

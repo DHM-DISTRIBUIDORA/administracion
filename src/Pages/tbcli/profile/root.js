@@ -60,7 +60,7 @@ class index extends DPA.profile {
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
         var montoOk = "";
-        if (monto) montoOk = "Bs. " + monto;
+        if (monto) montoOk = "Bs. " + (monto ?? 1);
         return <SView col={"xs-12 md-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
@@ -85,9 +85,9 @@ class index extends DPA.profile {
                     <SText bold fontSize={18}>{montoOk}</SText>
                     {(montoOk == "")
                         ?
-                        <SText bold fontSize={18}>{cant}</SText>
+                        <SText bold fontSize={18}>{cant ?? 0}</SText>
                         :
-                        <SText bold fontSize={14}>({cant})</SText>}
+                        <SText bold fontSize={14}>({cant ?? 0})</SText>}
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
             </SView>
@@ -113,8 +113,8 @@ class index extends DPA.profile {
                                 // endSpace:20
                             }}
                             data={[
-                                { key: "compras", val: this.state.cantidad_ventas, color: "#8CB45F66", },
-                                { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" }
+                                { key: "compras", val: this.state?.cantidad_ventas ?? 0, color: "#8CB45F66", },
+                                { key: "pedidos", val: this.state?.cantidad_pedidos ?? 0, color: "#FA5A5F" }
                             ]} />
                     </SView>
                 </SView>
@@ -123,76 +123,66 @@ class index extends DPA.profile {
     }
 
     getUbicacion(objeto) {
-        console.log(objeto)
-        console.log("aquiiii")
-        if ((objeto.clilan == "") || (objeto.clilon == "")) return;
+        // console.log(objeto)
+        // console.log("aquiiii")
+        // if ((objeto.clilan == "") || (objeto.clilon == "")) return;
         return <>
             <SView col={"xs-12"} >
                 <SHr height={20} />
                 <SText>UBICACIÓN TIENDA</SText>
                 <SHr />
-                <SView col={"xs-12 md-12"} height={300} padding={6}  >
-                    <SView card flex col={"xs-12"} style={{
-                        borderRadius: 14,
-                        borderBottomWidth: 4,
-                        borderLeftWidth: 3,
-                        borderRightWidth: 1,
-                        borderColor: STheme.color.card,
-                        padding: 15
-                    }} row center>
-                        <SMapView
-                            initialRegion={{
-                                latitude: objeto.clilat,
-                                longitude: objeto.clilon,
-                                latitudeDelta: 0.0222,
-                                longitudeDelta: 0.0221,
-                            }}
-                            // options={{
-                            //     fullscreenControl: true,
-                            //     zoomControl: true,
-                            //     gestureHandling: "none",
-                            //     scrollwheel: true,
-                            // }}
-                            preventCenter
-                        >
-                            <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
-                                <SIcon name="MarcadorMapa" width={35} height={55} />
-                            </SMarker>
-                        </SMapView>
-                        {/* <SView col={"xs-12"} height style={{
-                            position: "absolute"
-                        }} withoutFeedback>
-                        </SView> */}
-
-                    </SView>
-                    <SHr height={10} />
-                    <SView style={{ alignItems: "flex-end" }} height={50}>
-                        <SView center width={170} height={35} backgroundColor={STheme.color.primary}
-                            style={{ borderRadius: 8 }}
-                            onPress={() => {
-                                // let newLat;
-                                // let newLon;
-                                // if (this.state?.ubicacion?.clilat) {
-                                //     newLat = this.state?.ubicacion?.clilat;
-                                //     newLon = this.state?.ubicacion?.clilon;
-                                // } else {
-                                //     newLat = this.data?.clilat;
-                                //     newLon = this.data?.clilon;
-                                // }
-                                SNavigation.navigate("/tbcli/mapa",
-                                    {
-                                        callback2: (resp) => {
-                                            this.setState({ ubicacion: resp })
-                                        },
-                                        lat: objeto.clilat,
-                                        lon: objeto.clilon,
-                                        pk: this.pk,
-                                        obj:objeto
-                                    },
-                                )
-                            }}>
-                            <SText color={STheme.color.white}>EDITAR UBICACIÓN</SText>
+                {((objeto?.clilan == "") || (objeto?.clilon == "")) ? null :
+                    <SView col={"xs-12 md-12"} height={300} padding={6}  >
+                        <SView card flex col={"xs-12"} style={{
+                            borderRadius: 14,
+                            borderBottomWidth: 4,
+                            borderLeftWidth: 3,
+                            borderRightWidth: 1,
+                            borderColor: STheme.color.card,
+                            padding: 15
+                        }} row center>
+                            <SMapView
+                                initialRegion={{
+                                    latitude: objeto.clilat,
+                                    longitude: objeto.clilon,
+                                    latitudeDelta: 0.0222,
+                                    longitudeDelta: 0.0221,
+                                }} preventCenter
+                                options={{
+                                    zoomControl:false,
+                                    fullscreenControl:false,
+                                    mapTypeControl:false,
+                                    rotateControl:false,
+                                    streetViewControl:false,
+                                }}
+                            >
+                                <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
+                                    <SIcon name="MarcadorMapa" width={35} height={55} />
+                                </SMarker>
+                            </SMapView>
                         </SView>
+                    </SView>
+
+                }
+
+                <SHr height={10} />
+                <SView style={{ alignItems: "flex-end" }} height={50}>
+                    <SView center width={170} height={35} backgroundColor={STheme.color.primary}
+                        style={{ borderRadius: 8 }}
+                        onPress={() => {
+                            SNavigation.navigate("/tbcli/mapa",
+                                {
+                                    callback2: (resp) => {
+                                        this.setState({ ubicacion: resp })
+                                    },
+                                    lat: objeto?.clilat,
+                                    lon: objeto?.clilon,
+                                    pk: this.pk,
+                                    obj: objeto
+                                },
+                            )
+                        }}>
+                        <SText color={STheme.color.white}>EDITAR UBICACIÓN</SText>
                     </SView>
                 </SView>
             </SView>
@@ -244,7 +234,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Total ventas",
                     cant: this.state.cantidad_ventas ?? 0,
-                    monto: SMath.formatMoney(this.state?.monto_total_ventas),
+                    monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
                     icon: 'Icompras',
                     color: '#8CB45F',
                     onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk }),
@@ -253,21 +243,21 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_total_pedidos),
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Máxima venta",
-                    cant: (this.state.maxima_venta).toFixed(2),
+                    cant: (this.state.maxima_venta??0).toFixed(2),
                     icon: 'ImaxCompra',
                     color: '#B622B5',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Mínima venta",
-                    cant: (this.state.minima_venta).toFixed(2),
+                    cant: (this.state.minima_venta??0).toFixed(2),
                     icon: 'IminCompra',
                     color: '#00A0AA',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,

@@ -12,4 +12,31 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "distribuidora_dhm_app";
   }
+
+  //Esto lo agrege por que el backgroun location tiraba cuando lo cerraba
+  public static int cant = 0;
+
+  @Override
+  protected void onResume() {
+    super.onResume();
+    if(cant>1){
+      cant=0;
+    }else{
+      if(cant>0){
+        this.recreate();
+      }
+    }
+
+  }
+
+  @Override
+  protected void onStop() {
+    super.onStop();
+  }
+
+  @Override
+  protected void onDestroy() {
+    cant+=1;
+    super.onDestroy();
+  }
 }

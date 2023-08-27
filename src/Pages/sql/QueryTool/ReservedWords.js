@@ -10,6 +10,11 @@ export const SQL = {
     "\\bcount\\b": "#ff0000",
     "\\bas\\b": "#ff0000",
     "\\btop\\b": "#ff0000",
+    "\\bgroup\\b": "#ff0000",
+    "\\border\\b": "#ff0000",
+    "\\bby\\b": "#ff0000",
+    "\\bdesc\\b": "#ff0000",
+    "\\basc\\b": "#ff0000",
     "'.*?'": "#CE9178",
     "--.*": "#699754"
 }

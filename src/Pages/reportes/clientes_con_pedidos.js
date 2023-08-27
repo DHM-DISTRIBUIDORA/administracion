@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SLoad, SMath, SPage, STable2, SView } from 'servisofts-component'
+import { SLoad, SMath, SNavigation, SPage, SPopup, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
 export default class index extends Component {
+    componentDidMount() {
+        if (!SNavigation.getParam("idemp")) {
+            SNavigation.goBack();
+            SPopup.alert("Usted no tiene un idemp")
+        }
+    }
     getData({ fecha_inicio, fecha_fin }) {
 
         const request = {
@@ -10,6 +16,7 @@ export default class index extends Component {
             type: "getAllPedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
+            idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {

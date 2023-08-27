@@ -13,11 +13,13 @@ import StatusBar from './Components/StatusBar';
 import BackgroundImage from './Components/BackgroundImage';
 import Model from './Model';
 import { version } from "../package.json"
+import BackgroundLocation from './BackgroundLocation';
 
 
 setProps(Config.socket);
 // Firebase.init();
 DeviceKey.init();
+BackgroundLocation();
 const App = (props) => {
     return <Redux>
         <SComponentContainer

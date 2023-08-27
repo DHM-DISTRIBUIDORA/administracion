@@ -110,7 +110,7 @@ class index extends Component {
                 borderRadius: 18,
                 borderWidth: 1,
                 borderColor: STheme.color.card,
-                backgroundColor: (this.state.select) ? STheme.color.primary +"30" : STheme.color.card
+                backgroundColor: (this.state.select) ? STheme.color.primary + "30" : STheme.color.card
             }}>
             <SView col={"xs-12"} height={145} >
                 <SImage src={FotoPerfil} style={{ resizeMode: "contain" }} />
@@ -213,7 +213,7 @@ class index extends Component {
                     <SView width={8} />
                     <SList
                         horizontal
-                        filter={(a) => a.stock != 0}
+                        filter={(a) => a.stock != 0 && a.prdest != "0"}
                         data={productos} limit={10}
                         render={obj => this.renderItem(obj)}
                     />

@@ -6,6 +6,7 @@ import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
 import item2 from '../../tbcli/item';
+import { Text, TouchableOpacity, View } from 'react-native';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
@@ -46,19 +47,29 @@ class index extends DPA.profile {
     }
     optionItem({ key, label, color, icon, root }) {
         var select = !!this.state.select[key]
-        return <SView height={35} center style={{
+        return <TouchableOpacity style={{
+            justifyContent: "center",
+            alignItems: "center",
             paddingLeft: 8,
+            height: 35,
             paddingRight: 8,
             opacity: select ? 1 : 0.5,
-            backgroundColor: color + "AA"
+            backgroundColor: color + "AA",
+            // flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+            flexDirection: "row"
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
         }} >
-            <SView row col={"xs-12"} center>
-                {!select ? null : <><SIcon name={icon} width={12} height={12} fill={STheme.color.text} /><SView width={8} /></>}
-                <SText center>{label}</SText>
+
+            <SView width={12} height={12}>
+                <SIcon name={icon} fill={STheme.color.text} />
             </SView>
-        </SView>
+            <SView width={8} />
+            <SText width={(((label + "").length) * 10)}>{label}</SText>
+        </TouchableOpacity>
     }
     $menu() {
         let menu = super.$menu();

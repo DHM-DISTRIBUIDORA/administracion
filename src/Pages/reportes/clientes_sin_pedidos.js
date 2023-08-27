@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
+import { SLoad, SMath, SNavigation, SPage, SPopup, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
 export default class index extends Component {
     componentDidMount(){
         if(!SNavigation.getParam("idemp")){
             SNavigation.goBack();
+            SPopup.alert("Usted no tiene un idemp")
         }
     }
     getData({ fecha_inicio, fecha_fin }) {
