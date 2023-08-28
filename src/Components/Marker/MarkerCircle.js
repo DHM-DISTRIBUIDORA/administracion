@@ -18,12 +18,12 @@ const Cantidad = ({ cantidad }) => {
         <SText fontSize={14} color={STheme.color.white}>{cantidad}</SText>
     </SView>
 }
-export default ({ latitude, longitude, cantidad, src, label, onPress, size = 50 }) => {
+export default ({ latitude, longitude, cantidad, src, label, onPress, size = 50, content, borderColor }) => {
     // console.log();
     return <SMapView.SMarker latitude={latitude} longitude={longitude} width={size} onPress={onPress} >
         <SView width={size} height={size} borderRadius={100} backgroundColor={STheme.color.card} onPress={onPress} style={{
             borderWidth: 2,
-            borderColor: STheme.color.text,
+            borderColor: borderColor ?? STheme.color.text,
         }}>
             <SView style={{
                 position: "absolute",
@@ -38,9 +38,17 @@ export default ({ latitude, longitude, cantidad, src, label, onPress, size = 50 
                     resizeMode: "cover"
                 }} />
             </SView>
+            <SView style={{
+                position: "absolute",
+                width: "100%",
+                height: "100%",
+                borderRadius: 100,
+            }} center>
+                {!content ? null : <SText fontSize={8} center >{content}</SText>}
+            </SView>
             <Cantidad cantidad={cantidad} />
         </SView>
-        {!label ? null : <SText center>{label}</SText>}
+        {!label ? null : <SText fontSize={8} center >{label}</SText>}
     </SMapView.SMarker>
 }
 // export default ({ latitude, longitude, cantidad, src, label, onPress }) => {

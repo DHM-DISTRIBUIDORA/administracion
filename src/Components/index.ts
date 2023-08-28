@@ -16,8 +16,9 @@ import Producto from "./Producto"
 import Categoria from "./Categoria"
 import Carrito from "./Carrito"
 import Header from "./Header"
-
+import Btn from "./Btn"
 import Usuario from "./Usuario"
+import Visitas from "./Visitas"
 
 export {
     TopBar,
@@ -38,5 +39,7 @@ export {
     Categoria,
     Carrito,
     Usuario,
-    Header
+    Header,
+    Btn,
+    Visitas
 }

@@ -11,6 +11,7 @@ class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
+            // itemType:"",
             params: ["onSelect?"],
             item: item,
             excludes: []

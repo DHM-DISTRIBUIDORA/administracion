@@ -21,35 +21,33 @@ class index extends Component {
         // this.setState({ total: this.state.total + datos.precio })
     };
     sinPedidos() {
-        return <>
-            <SView col={"xs-12"}  >
-                <SHr height={30} />
-                <SView col={"xs-12"} center height style={{ backgroundColor: STheme.color.primary, borderRadius: 12 }}>
-                    <SView col={"xs-12"} row center   >
-                        <SView col={"xs-11"} border={'transparent'}  >
-                            <SHr height={20} />
-                            <SText fontSize={22} color={STheme.color.white} bold center> NO SE ENCONTRÓ NINGÚN PEDIDO</SText>
-                            <SHr height={20} />
-                            <SText fontSize={18} color={STheme.color.white} center   >Parece que aún no has hecho ningún pedido</SText>
-                        </SView>
-                    </SView>
-                    <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
+        return <SView col={"xs-12"} height>
+            <SHr height={30} />
+            <SView col={"xs-12"} center flex style={{ backgroundColor: STheme.color.primary, borderRadius: 12 }}>
+                <SView col={"xs-12"} row center   >
+                    <SView col={"xs-11"} border={'transparent'}  >
                         <SHr height={20} />
-                        <SIcon name="MPedido" height={180}></SIcon >
-                    </SView>
-                    <SView col={"xs-12"} row center   >
-                        <SView col={"xs-10"} border={'transparent'} center>
-                            <SHr height={20} />
-                            <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
-                                SNavigation.navigate("/explorar")
-                            }} >COMPRAR</PButtom>
-                        </SView>
-                        <SHr height={30} />
+                        <SText fontSize={22} color={STheme.color.white} bold center> NO SE ENCONTRÓ NINGÚN PEDIDO</SText>
+                        <SHr height={20} />
+                        <SText fontSize={18} color={STheme.color.white} center   >Parece que aún no has hecho ningún pedido</SText>
                     </SView>
                 </SView>
-                <SHr height={30} />
+                <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
+                    <SHr height={20} />
+                    <SIcon name="MPedido" height={180}></SIcon >
+                </SView>
+                <SView col={"xs-12"} row center   >
+                    <SView col={"xs-10"} border={'transparent'} center>
+                        <SHr height={20} />
+                        <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
+                            SNavigation.navigate("/explorar")
+                        }} >COMPRAR</PButtom>
+                    </SView>
+                    <SHr height={30} />
+                </SView>
             </SView>
-        </>
+            <SHr height={30} />
+        </SView>
     }
 
     getProductos() {
@@ -63,7 +61,7 @@ class index extends Component {
         });
         if (Object.keys(productos).length === 0) return this.sinPedidos();
         return (
-            <>
+            <SView col={"xs-12"} flex center >
                 <SText>Pedidos</SText>
                 <SHr height={15} />
                 <SList
@@ -95,14 +93,14 @@ class index extends Component {
                     }} >ELIMINAR PEDIDOS</PButtom>
                 <SHr height={30} />
 
-            </>
+            </SView>
         )
     }
 
     render() {
         return <>
-            <SPage footer={this.footer()} >
-                <Container >
+            <SPage footer={this.footer()}  >
+                <Container flex  >
                     {this.getProductos()}
                 </Container>
             </SPage>

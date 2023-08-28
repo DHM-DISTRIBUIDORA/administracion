@@ -55,6 +55,8 @@ import MarcadorMapa, { ReactComponent as MarcadorMapaW } from './marcadorMapa.sv
 import MPedido, { ReactComponent as MPedidoW } from './mPedido.svg';
 import IConductores, { ReactComponent as IConductoresW } from './iConductores.svg';
 import MProductos, { ReactComponent as MProductosW } from './mProductos.svg';
+import VendedorIcon, { ReactComponent as VendedorIconW } from './vendedorIcon.svg';
+import Trasnportista, { ReactComponent as TrasnportistaW } from './trasnportista.svg';
 
 
 const Assets = {
@@ -116,9 +118,11 @@ const Assets = {
 	"MPedido": { Native: MPedido, Web: MPedidoW },
 	"IConductores": { Native: IConductores, Web: IConductoresW },
 	"MProductos": { Native: MProductos, Web: MProductosW },
-	
-	
-	
+	"Vendedor": { Native: VendedorIcon, Web: VendedorIconW },
+	"Trasnportista": { Native: Trasnportista, Web: TrasnportistaW },
+
+
+
 
 
 

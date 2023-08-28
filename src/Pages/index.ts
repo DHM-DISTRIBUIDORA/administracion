@@ -32,9 +32,9 @@ import tbcli from './tbcli';
 import tbven from './tbven';
 import test3 from './test3';
 import reportes from './reportes';
-
 import test2 from "./test2"
 import test from "./test"
+import vendedor from './vendedor';
 // import { Example } from "servisofts-charts"
 export default SPage.combinePages("/", {
   // "":test,
@@ -68,6 +68,7 @@ export default SPage.combinePages("/", {
   ...tbcli,
   ...tbven,
   ...reportes,
+  ...vendedor,
   test2,
   test3,
   test,

@@ -72,7 +72,7 @@ export default class SectionForm extends Component {
                                     SNavigation.navigate("/login");
                                     this.fadeOut();
                                 } else {
-                                    SNavigation.goBack();
+                                    SNavigation.reset("/")
                                 }
                                
                             }).catch((e) => {

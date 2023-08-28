@@ -102,7 +102,7 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
                 height: 33,
                 position: "absolute",
                 transform: [{
-                    translateX: this.animValue.interpolate({ inputRange: [0, 1], outputRange: [0, -(this.props.width ?? 35)] })
+                    translateX: this.animValue.interpolate({ inputRange: [0, 1], outputRange: [0, -(this.props.width / 2)] })
                 }]
                 // right: ,
             }}
@@ -115,7 +115,7 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
                 transform: [{
                     translateX: this.animValue.interpolate({
                         inputRange: [0, 1],
-                        outputRange: [4, (this.props.width ?? 100) - 25]
+                        outputRange: [4, (this.props.width ?? 100) - 37]
                     })
                 }]
             }}

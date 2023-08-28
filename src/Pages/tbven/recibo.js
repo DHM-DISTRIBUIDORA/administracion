@@ -27,6 +27,7 @@ class index extends DPA.profile {
 
 
     $allowAccess() {
+        return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
@@ -34,8 +35,6 @@ class index extends DPA.profile {
     }
     $item() {
         if (!this.state?.obj) return <SLoad />
-        console.log(this.state?.obj)
-        console.log("holaaa")
         return <>
             <SHr height={20} />
             <SText fontSize={24} bold style={{ textDecorationLine: 'underline' }} >RECIBO DE VENTA </SText>

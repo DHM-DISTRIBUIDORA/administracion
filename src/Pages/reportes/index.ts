@@ -6,6 +6,7 @@ import clientes_con_pedidos from "./clientes_con_pedidos"
 import clientes_con_pedidos_mapa from "./clientes_con_pedidos_mapa"
 import clientes_sin_pedidos from "./clientes_sin_pedidos"
 import clientes_sin_pedidos_mapa from "./clientes_sin_pedidos_mapa"
+import visita_vendedor from "./visita_vendedor"
 
 export default SPage.combinePages("reportes", {
     "": root,
@@ -13,5 +14,6 @@ export default SPage.combinePages("reportes", {
     usuarios,
     clientes_con_pedidos_mapa,
     clientes_sin_pedidos,
-    clientes_sin_pedidos_mapa
+    clientes_sin_pedidos_mapa,
+    visita_vendedor
 });
