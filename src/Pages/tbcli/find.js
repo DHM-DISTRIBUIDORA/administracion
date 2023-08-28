@@ -1,5 +1,7 @@
+import React, { Component } from 'react';
+
 import { Text, View } from 'react-native'
-import React, { Component } from 'react'
+
 import { SForm, SPage, SPopup } from 'servisofts-component'
 import { Container } from '../../Components'
 import Model from '../../Model'

@@ -6,10 +6,12 @@ import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
 import item2 from '../../tbcli/item';
+import { Text, TouchableOpacity, View } from 'react-native';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
+            // itemType:"",
             params: ["onSelect?"],
             item: item,
             excludes: []
@@ -34,6 +36,7 @@ class index extends DPA.profile {
         if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
+
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
@@ -45,17 +48,29 @@ class index extends DPA.profile {
     }
     optionItem({ key, label, color, icon, root }) {
         var select = !!this.state.select[key]
-        return <SView height={35} center style={{
+        return <TouchableOpacity style={{
+            justifyContent: "center",
+            alignItems: "center",
             paddingLeft: 8,
+            height: 35,
             paddingRight: 8,
             opacity: select ? 1 : 0.5,
-            backgroundColor: color + "AA"
+            backgroundColor: color + "AA",
+            // flexDirection: "row",
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1,
+            flexDirection: "row"
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
-        }} row>
-            {!select ? null : <> <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} /></>}
-            <SText>{label}</SText>
-        </SView>
+        }} >
+
+            <SView width={12} height={12}>
+                <SIcon name={icon} fill={STheme.color.text} />
+            </SView>
+            <SView width={8} />
+            <SText width={(((label + "").length) * 10)}>{label}</SText>
+        </TouchableOpacity>
     }
     $menu() {
         let menu = super.$menu();
@@ -90,9 +105,12 @@ class Lista extends DPA.list {
     //     SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
     //     SNavigation.navigate("/public")
     // }
+    $order() {
+        return [{ key: "pedidos", order: "desc" }]
+    }
     $onSelect(data) {
         // SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))
-        SNavigation.navigate("/tbcli/profile", { pk: data.idcli})
+        SNavigation.navigate("/tbcli/profile", { pk: data.idcli })
     }
     $getData() {
         return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })

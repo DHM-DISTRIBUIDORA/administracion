@@ -9,7 +9,7 @@ class index extends DPA.list {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            title: "Lista de " + Parent.name,
+            title: "Lista de " + Parent.title + "s",
             item: item,
             //excludes: ['usest','iniciales','modpreven','idcentro','suctod','usultsuc','verval','selcob','autcred','pcpred','facauto','uimpr'],
             onRefresh: (resolve) => {
@@ -33,5 +33,6 @@ class index extends DPA.list {
     $getData() {
         return Parent.model.Action.getAll();
     }
+
 }
 export default connect(index);

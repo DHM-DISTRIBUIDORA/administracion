@@ -47,6 +47,16 @@ import ImaxCompra, { ReactComponent as ImaxCompraW } from './imaxCompra.svg';
 import IminCompra, { ReactComponent as IminCompraW } from './iminCompra.svg';
 import Ilast, { ReactComponent as IlastW } from './ilast.svg';
 import Ifirst, { ReactComponent as IfirstW } from './ifirst.svg';
+import Ieliminar, { ReactComponent as IeliminarW } from './ieliminar.svg';
+import Iclients, { ReactComponent as IclientsW } from './iclients.svg';
+import Iventas, { ReactComponent as IventasW } from './iventas.svg';
+import Izonas, { ReactComponent as IzonasW } from './izonas.svg';
+import MarcadorMapa, { ReactComponent as MarcadorMapaW } from './marcadorMapa.svg';
+import MPedido, { ReactComponent as MPedidoW } from './mPedido.svg';
+import IConductores, { ReactComponent as IConductoresW } from './iConductores.svg';
+import MProductos, { ReactComponent as MProductosW } from './mProductos.svg';
+import VendedorIcon, { ReactComponent as VendedorIconW } from './vendedorIcon.svg';
+import Trasnportista, { ReactComponent as TrasnportistaW } from './trasnportista.svg';
 
 
 const Assets = {
@@ -100,6 +110,19 @@ const Assets = {
 	"IminCompra": { Native: IminCompra, Web: IminCompraW },
 	"Ilast": { Native: Ilast, Web: IlastW },
 	"Ifirst": { Native: Ifirst, Web: IfirstW },
+	"Ieliminar": { Native: Ieliminar, Web: IeliminarW },
+	"Iclients": { Native: Iclients, Web: IclientsW },
+	"Iventas": { Native: Iventas, Web: IventasW },
+	"Izonas": { Native: Izonas, Web: IzonasW },
+	"MarcadorMapa": { Native: MarcadorMapa, Web: MarcadorMapaW },
+	"MPedido": { Native: MPedido, Web: MPedidoW },
+	"IConductores": { Native: IConductores, Web: IConductoresW },
+	"MProductos": { Native: MProductos, Web: MProductosW },
+	"Vendedor": { Native: VendedorIcon, Web: VendedorIconW },
+	"Trasnportista": { Native: Trasnportista, Web: TrasnportistaW },
+
+
+
 
 
 

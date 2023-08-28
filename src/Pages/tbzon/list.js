@@ -30,6 +30,10 @@ class index extends DPA.list {
     $filter(data) {
         return data.zest != 1
     }
+    $order() {
+        // return [{ key: "pedidos", order: "desc" }]
+        return [{ key: "ventas", order: "desc" }]
+    }
     $getData() {
         return Parent.model.Action.getAll();
     }

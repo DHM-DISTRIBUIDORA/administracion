@@ -4,7 +4,8 @@ import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, 
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
-import { AccentBar, PButtom } from '../../Components';
+import { AccentBar, Btn, PButtom } from '../../Components';
+import { MenuButtom } from 'servisofts-rn-roles_permisos';
 // import usuario_dato from '../../Model/tapeke/usuario_dato';
 
 
@@ -124,17 +125,23 @@ class index extends Component {
                     {this.getPerfil()}
                     <SView height={10}></SView>
                     {this.getDatos()}
-                    <SView height={50}></SView>
-
-                    <PButtom fontSize={20} onPress={() => {
+                    <SHr h={50} />
+                    <Btn col={"xs-11"} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
-                    }}>EDITAR</PButtom>
-                    <SHr height={10} />
-                    <PButtom type={'outline'} fontSize={20} onPress={() => {
+                    }}>EDITAR</Btn>
+                    <SHr h={16} />
+                    <Btn col={"xs-11"} row onPress={() => {
+                        STheme.change()
+                    }}>{STheme.getTheme() == "default" ? <SIcon name='Moon' width={20} /> : <SIcon name='Sun' width={20} fill={"#fff"} />} {`CAMBIAR A TEMA ${STheme.getTheme() == "default" ? "OSCURO" : "CLARO"}`}</Btn>
+                    <SHr h={16} />
+                    <Btn col={"xs-11"} type='danger' onPress={() => {
                         Model.usuario.Action.unlogin();
-                    }}>CERRAR SESIÓN</PButtom>
-                    <SHr height={10} />
-                    <PButtom fontSize={20} onPress={() => {
+                    }}>CERRAR SESIÓN</Btn>
+                    <SHr height={100} />
+                    {/* <MenuButtom label={STheme.getTheme() == "default" ? "Oscuro" : "Claro"} icon={} onPress={() => {
+                        STheme.change()
+                    }} /> */}
+                    <Btn col={"xs-11"} type='danger' backgroundColor={STheme.color.danger + "44"} onPress={() => {
                         SPopup.confirm({
                             title: "Eliminar cuenta", message: "¿Estás seguro de eliminar la cuenta?", onPress: () => {
                                 Model.usuario.Action.editar({
@@ -148,10 +155,7 @@ class index extends Component {
                                 Model.usuario.Action.unlogin();
                             }
                         })
-                    }}>ELIMINAR CUENTA</PButtom>
-                    <SView height={30}></SView>
-
-                    <SView height={30}></SView>
+                    }}>ELIMINAR CUENTA</Btn>
                 </SView>
             </SView>
         </SPage>

@@ -8,7 +8,9 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: [ "empmarc"]
+            excludes: [ "empmarc"],
+            title: "Perfil de " + Parent.title,
+
         });
     }
     $allowAccess() {

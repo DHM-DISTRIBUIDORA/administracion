@@ -12,15 +12,10 @@ class index extends Component<FloatPropsType> {
     constructor(props) {
         super(props);
         this.state = {
-            // items: 0,
-            // total: 0
         };
     }
 
-
     render() {
-        // var total = 100;
-
         const productos = Model.carrito.Action.getState().productos;
         let total = 0;
         Object.keys(productos).map((key, index) => {
@@ -28,7 +23,6 @@ class index extends Component<FloatPropsType> {
         });
         var distancia = 60
         if (this.props.bottom) distancia = this.props.bottom
-
         return (
             <>
                 <SView center row style={{
@@ -39,8 +33,9 @@ class index extends Component<FloatPropsType> {
                     bottom: distancia, right: 0,
                     borderTopLeftRadius: 25,
                     borderBottomLeftRadius: 25,
-                    //borderTopRightRadius: 15,
-                    //borderBottomRightRadius: 15,
+                    borderWidth:1,
+                    borderColor: STheme.color.white,
+                    borderRightWidth:0
                 }}
                     onPress={() => {
                         // this.props.navigation.navigate('farmacia/carrito');
@@ -62,9 +57,6 @@ class index extends Component<FloatPropsType> {
                         <SText fontSize={12} color={STheme.color.white} bold >{Object.keys(productos).length} items</SText>
                     </SView>
                 </SView>
-                {/* <SView style={{ position: "absolute", top: distancia }}>
-                    <SIcon name='Cola' height={10} width={10} fill={STheme.color.primary + "50"} />
-                </SView> */}
             </>
         );
     }

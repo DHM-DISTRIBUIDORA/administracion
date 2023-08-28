@@ -33,7 +33,7 @@ class index extends Component<ProductoCard2PropsType> {
         (stock <= 0) ? active = false : active = true;
         return (
             <SView col={"xs-12"} card row {...this.props}
-                pointerEvents={!active ? 'none' : 'auto'}
+                // pointerEvents={!active ? 'none' : 'auto'}
                 style={{
                     borderRadius: 15,
                     borderWidth: 1,
@@ -42,17 +42,6 @@ class index extends Component<ProductoCard2PropsType> {
                     borderColor: !active ? "#D20C0C" : "#E2E2E2"
                 }}
             >
-                <SView col={"xs-12"} style={{ alignItems: "flex-end", zIndex: 999 }}>
-                    <SView height={25} width={25}
-                        onPress={() => {
-                            const productos = Model.carrito.Action.removeItem(idprd)
-                        }}
-                        style={{ position: 'absolute', }}
-                    >
-                        <SIcon name='Delete2' height={18} fill={STheme.color.text} />
-                        {/* <SText>ELIMINAR</SText> */}
-                    </SView>
-                </SView>
 
                 <SView col={"xs-3"} height={105}>
                     <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
@@ -79,7 +68,9 @@ class index extends Component<ProductoCard2PropsType> {
                                     // this.setState({ count: this.state.count - 1 });
 
                                     this.state.count = this.state.count - 1
-                                    this.enviarDatosItems()                                }}
+                                    this.enviarDatosItems()
+                                }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
@@ -95,6 +86,7 @@ class index extends Component<ProductoCard2PropsType> {
                                     this.state.count = this.state.count + 1
                                     this.enviarDatosItems()
                                 }}
+                                backgroundColor={STheme.color.white}
                             >
                                 <SIcon name='Mas' height={18} />
                             </SView>
@@ -108,6 +100,19 @@ class index extends Component<ProductoCard2PropsType> {
                             </PButtomSmall> : <SView height={24} />} */}
                         </SView>
                     </SView>
+                </SView>
+                <SView height={25} width={25}
+                    style={{
+                        position: "absolute",
+                        top: 8,
+                        right: 8
+                    }}
+                    onPress={() => {
+                        const productos = Model.carrito.Action.removeItem(idprd)
+                    }}
+                >
+                    <SIcon name='Delete2' height={18} fill={STheme.color.text} />
+                    {/* <SText>ELIMINAR</SText> */}
                 </SView>
             </SView>
         );

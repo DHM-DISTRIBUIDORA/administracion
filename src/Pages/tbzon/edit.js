@@ -8,7 +8,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: ["zterr","ztipo", "idterr", "zest","zdia","zdmsest","zdesfin","znsuc","idgz","zmarc","sucreg","zusumod","zfecmod"]
+            excludes: ["zterr","ztipo", "idterr", "zest","zdmsest","zdesfin","znsuc","idgz","zmarc","sucreg","zusumod","zfecmod"]
         });
     }
     $allowAccess() {

@@ -16,11 +16,8 @@ import perfil from './perfil';
 
 import rol from './rol';
 import _public from "./public"
-import dm_categorias from './dm_categorias';
-import dm_productos from './dm_productos';
 import usuario from './usuario';
 import dm_usuarios from './dm_usuarios';
-import dm_clientes from './dm_clientes';
 import tbemp from './tbemp';
 import tbzon from './tbzon';
 import tbemt from './tbemt';
@@ -30,10 +27,15 @@ import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
 import mapa from './mapa';
-import test2 from "./test2"
-import test from "./test"
 import carrito from './carrito';
 import tbcli from './tbcli';
+import tbven from './tbven';
+import test3 from './test3';
+import reportes from './reportes';
+import test2 from "./test2"
+import test from "./test"
+import vendedor from './vendedor';
+// import { Example } from "servisofts-charts"
 export default SPage.combinePages("/", {
   // "":test,
   "": carga,
@@ -53,10 +55,7 @@ export default SPage.combinePages("/", {
   ...perfil,
   ...rol,
   ..._public,
-  ...dm_categorias,
-  ...dm_productos,
   ...dm_usuarios,
-  ...dm_clientes,
   ...tbemp,
   ...tbzon,
   ...tbprd,
@@ -67,6 +66,11 @@ export default SPage.combinePages("/", {
   ...tbemt,
   ...carrito,
   ...tbcli,
+  ...tbven,
+  ...reportes,
+  ...vendedor,
   test2,
-  test
+  test3,
+  test,
+  // "chart": Example
 });

@@ -1,21 +1,23 @@
+import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
 import item from '../item';
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath, SMarker, SPopup } from 'servisofts-component';
 import SSocket from "servisofts-socket"
-import { PButtom } from '../../../Components';
+import { Btn, Header, PButtom, Visitas } from '../../../Components';
 import SCharts from 'servisofts-charts';
+import SMapView from "servisofts-component/Component/SMapView";
 
 
 class index extends DPA.profile {
     state = {
-        cantidad_compras: 0,
-        maxima_compra: 0,
+        cantidad_ventas: 0,
+        maxima_venta: 0,
         cantidad_pedidos: 0,
-        minima_compra: 0,
-        primer_compra: "0000-00-00",
-        ultima_compra: "0000-00-00"
+        minima_venta: 0,
+        primer_venta: "0000-00-00",
+        ultima_venta: "0000-00-00"
         // primer_compra: new SDate(),
         // ultima_compra: new SDate()
 
@@ -24,10 +26,12 @@ class index extends DPA.profile {
         super(props, {
             Parent: Parent,
             item: item,
-            excludes: []
-
+            excludes: [],
+            title: "Perfil de " + Parent.title,
         });
         this.pk = SNavigation.getParam("pk");
+        this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
+        this.visita = SNavigation.getParam("visita");
 
     }
 
@@ -49,14 +53,17 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $allowAccess() {
+        if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
 
-    ItemCard = ({ label, cant, icon, color, onPress }) => {
-        return <SView col={"xs-12 md-6"} height={100} padding={6} onPress={onPress} >
+    ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
+        var montoOk = "";
+        if (monto) montoOk = "Bs. " + (monto ?? 1);
+        return <SView col={"xs-6 md-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
                 borderBottomWidth: 4,
@@ -65,20 +72,24 @@ class index extends DPA.profile {
                 borderColor: STheme.color.card,
                 padding: 15
             }} row center>
-                <SView width={50} center padding={4} height
+                <SView width={38} center height={38} padding={8}
                     style={{
                         backgroundColor: color + "40",
                         borderRadius: 50
                     }}
                 >
-                    <SIcon name={icon} fill={color} height={30} />
-                    {/* {icon ? icon : null} */}
+                    <SIcon name={icon} fill={color} />
                 </SView>
                 <SView width={4} />
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-                    <SText bold fontSize={18}>{cant}</SText>
+                    <SText bold fontSize={14}>{montoOk}</SText>
+                    {(montoOk == "")
+                        ?
+                        <SText bold fontSize={14}>{cant ?? 0}</SText>
+                        :
+                        <SText bold fontSize={14}>({cant ?? 0})</SText>}
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
             </SView>
@@ -104,8 +115,8 @@ class index extends DPA.profile {
                                 // endSpace:20
                             }}
                             data={[
-                                { key: "compras", val: this.state.cantidad_compras, color: "#8CB45F66" ,},
-                                { key: "pedidos", val: this.state.cantidad_pedidos, color: "#FA5A5F" },
+                                { key: "compras", val: this.state?.cantidad_ventas ?? 0, color: "#8CB45F66", },
+                                { key: "pedidos", val: this.state?.cantidad_pedidos ?? 0, color: "#FA5A5F" }
                             ]} />
                     </SView>
                 </SView>
@@ -113,11 +124,92 @@ class index extends DPA.profile {
         </>
     }
 
+    getUbicacion(objeto) {
+        // console.log(objeto)
+        // console.log("aquiiii")
+        // if ((objeto.clilan == "") || (objeto.clilon == "")) return;
+        return <>
+            <SView col={"xs-12"} >
+                <SHr height={20} />
+                <SText>UBICACIÓN TIENDA</SText>
+                <SHr />
+                {((objeto?.clilan == "") || (objeto?.clilon == "")) ? null :
+                    <SView col={"xs-12 md-12"} height={300} padding={6}  >
+                        <SView card flex col={"xs-12"} style={{
+                            borderRadius: 14,
+                            borderBottomWidth: 4,
+                            borderLeftWidth: 3,
+                            borderRightWidth: 1,
+                            borderColor: STheme.color.card,
+                            padding: 15
+                        }} row center>
+                            <SMapView
+                                initialRegion={{
+                                    latitude: objeto.clilat,
+                                    longitude: objeto.clilon,
+                                    latitudeDelta: 0.0222,
+                                    longitudeDelta: 0.0221,
+                                }} preventCenter
+                                options={{
+                                    zoomControl: false,
+                                    fullscreenControl: false,
+                                    mapTypeControl: false,
+                                    rotateControl: false,
+                                    streetViewControl: false,
+                                }}
+                            >
+                                <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
+                                    <SIcon name="MarcadorMapa" width={35} height={55} />
+                                </SMarker>
+                            </SMapView>
+                            <SView col={"xs-12"} height style={{
+                                position: "absolute"
+                            }} withoutFeedback>
+
+                            </SView>
+                        </SView>
+                    </SView>
+
+                }
+
+                <SHr height={10} />
+                <SView style={{ alignItems: "flex-end" }} height={50}>
+                    <SView center width={170} height={35} backgroundColor={STheme.color.primary}
+                        style={{ borderRadius: 8 }}
+                        onPress={() => {
+                            SNavigation.navigate("/tbcli/mapa",
+                                {
+                                    callback2: (resp) => {
+                                        this.setState({ ubicacion: resp })
+                                    },
+                                    lat: objeto?.clilat,
+                                    lon: objeto?.clilon,
+                                    pk: this.pk,
+                                    obj: objeto
+                                },
+                            )
+                        }}>
+                        <SText color={STheme.color.white}>EDITAR UBICACIÓN</SText>
+                    </SView>
+                </SView>
+            </SView>
+        </>
+
+    }
+
+    $render() {
+        return <>
+            <Header.Modulo
+                width={120}
+                titulo="CLIENTES"
+                icon="Clientes"
+            />
+            {super.$render()}
+        </>
+    }
+
     $item(obj) {
-        // console.log("rrrr")
-        // console.log(obj)
-        // console.log(Model.tbemp._get_image_download_path(SSocket.api, this.pk) + "__lll")
-        if(!obj) return <SLoad/>
+        if (!obj) return <SLoad />
         return <SView col={"xs-12"} center>
             <SHr />
             <SView col={"xs-12"} height={200} center>
@@ -126,8 +218,6 @@ class index extends DPA.profile {
                     overflow: "hidden",
                     backgroundColor: STheme.color.white
                 }} center>
-
-
                     <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
                         resizeMode: "contain",
                         position: "absolute",
@@ -138,73 +228,106 @@ class index extends DPA.profile {
                     <SImage src={Model.tbcli._get_image_download_path(SSocket.api, this.pk)} style={{
                         resizeMode: "cover",
                         zIndex: 99,
-                        // backgroundColor:STheme.color.white
                     }} />
                 </SView>
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.clinom}`}</SText>
-                <SText>{`${obj.idcli} - ${obj.clicod}`}</SText>
+                <SText>{`${obj.idcli} | ${obj.clicod}`}</SText>
             </SView>
-            <SHr />
+
+            <Btn col={"xs-11"} onPress={() => {
+                SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
+                SNavigation.navigate("/public", { idcli: obj.idcli })
+            }}>REALIZAR PEDIDO</Btn>
+            <SHr h={16} />
+            {this.onVisitaSuccess ? <><Btn col={"xs-11"} onPress={() => {
+                SPopup.openContainer({
+                    key: "popup_concretar_visita",
+                    render: (e) => {
+
+                        const opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
+                        return <SView col={"xs-12"} padding={8} center>
+                            <SHr />
+                            <SText fontSize={20}>Cuentanos como te fue en la visita?</SText>
+                            <SHr />
+                            <SHr />
+                            <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
+                            <SHr />
+                            <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} />
+                            <SHr />
+                            <Btn padding={8} onPress={() => {
+                                this.onVisitaSuccess({
+                                    descripcion: this.visita_descripcion.getValue(),
+                                    tipo: this.visita_tipo.getValue()
+                                });
+                                SPopup.close("popup_concretar_visita");
+                            }}>CONFIRMAR</Btn>
+                            <SHr />
+                        </SView>
+                    }
+                })
+
+            }}>CONCRETAR VISITA</Btn><SHr /></> : null}
+            <Visitas.Detalle data={this.visita} />
+
+
+            {this.getUbicacion(obj)}
+            <SHr height={20} />
+
             <SView col={"xs-12"} center row style={{
                 justifyContent: "space-between"
             }}>
                 {this.ItemCard({
-                    label: "Cantidad de compras",
-                    cant: this.state.cantidad_compras,
-                    // icon: <SIcon name='Icompras' />,
+                    label: "Total ventas",
+                    cant: this.state.cantidad_ventas ?? 0,
+                    monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
                     icon: 'Icompras',
                     color: '#8CB45F',
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF" }),
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
-                    label: "Cantidad de pedidos",
+                    label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    // icon: <SIcon name='Ipedidos' />,
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),
                 })}
                 {this.ItemCard({
-                    label: "Máxima compra",
-                    cant: (this.state.maxima_compra).toFixed(2),
-                    // icon: <SIcon name='Ipedidos' />,
+                    label: "Máxima venta",
+                    cant: (this.state.maxima_venta ?? 0).toFixed(2),
                     icon: 'ImaxCompra',
                     color: '#B622B5',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Mínima compra",
-                    cant: (this.state.minima_compra).toFixed(2),
-                    // icon: <SIcon name='Ipedidos' />,
+                    label: "Mínima venta",
+                    cant: (this.state.minima_venta ?? 0).toFixed(2),
                     icon: 'IminCompra',
                     color: '#00A0AA',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Primer compra",
-                    cant: this.state.primer_compra.split(' ')[0],
-                    // icon: <SIcon name='Ipedidos' />,
+                    label: "Primer venta",
+                    cant: this.state.primer_venta.split(' ')[0],
                     icon: 'Ifirst',
                     color: '#DC7D3C',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
-                    label: "Última compra",
-                    cant: this.state.ultima_compra.split(' ')[0],
-                    // icon: <SIcon name='Ipedidos' />,
+                    label: "Última venta",
+                    cant: this.state.ultima_venta.split(' ')[0],
                     icon: 'Ilast',
                     color: '#FF64B4',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
-                <SHr height={20} />
-                {this.getGrafo()}
+
+
+                {/* {this.getGrafo()} */}
+
             </SView>
-            <SHr height={20} />
-            <PButtom onPress={() => {
-                SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
-                SNavigation.navigate("/public",{idcli: obj.idcli })
-            }}>HACER PEDIDO</PButtom>
+
             <SHr />
         </SView>
     }

@@ -6,7 +6,10 @@ import Model from '../../Model';
 
 class index extends DPA.delete {
     constructor(props) {
-        super(props, { Parent: Parent, });
+        super(props, { 
+            Parent: Parent,
+             title: "Eliminar " + Parent.title,
+        });
     }
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })

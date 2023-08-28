@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SGradient, SHr, SIcon, SImage, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
+import { SDate, SGradient, SHr, SIcon, SImage, SLoad, SMath, SNavigation, SText, STheme, SView } from 'servisofts-component';
 import Model from '../../../Model';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import SChart from "servisofts-charts"
-import { Usuario } from '../../../Components';
+import { Header, Usuario } from '../../../Components';
+import ZonasDelDia from './components/ZonasDelDia';
+import IniciarTransporte from './components/IniciarTransporte';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -14,9 +16,16 @@ class index extends DPA.profile {
         cantidad_compras: 0,
         cantidad_ventas: 0,
         cantidad_pedidos: 0,
+        monto_total_pedidos: 0,
+        monto_total_ventas: 0
     }
     constructor(props) {
-        super(props, { Parent: Parent, excludes: [] });
+        super(props, {
+            Parent: Parent,
+            excludes: [],
+            title: "Perfil de " + Parent.title,
+        });
+
 
     }
     componentDidMount() {
@@ -37,6 +46,7 @@ class index extends DPA.profile {
     }
     $allowAccess() {
         if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
+        if (Model.usuario.Action.getUsuarioLog()?.idtransportista == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
@@ -44,94 +54,127 @@ class index extends DPA.profile {
     }
 
 
-    ItemCard = ({ label, cant, icon, onPress }) => {
-        return <SView col={"xs-12 md-6"} height={70} padding={6} onPress={onPress} >
+    ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
+        var montoOk = "";
+        if (monto != "") montoOk = "Bs. " + monto;
+        return <SView col={"xs-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
                 borderBottomWidth: 4,
                 borderLeftWidth: 3,
                 borderRightWidth: 1,
                 borderColor: STheme.color.card,
+                padding: 15
             }} row center>
-                <SView width={50} center padding={4} height>
+                {/* <SView width={50} center padding={4} height>
                     {icon ? icon : null}
+                </SView> */}
+                <SView width={50} center padding={4} height
+                    style={{
+                        backgroundColor: color + "40",
+                        borderRadius: 50
+                    }}
+                >
+                    <SIcon name={icon} fill={color} height={30} />
                 </SView>
                 <SView width={4} />
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-                    <SText bold fontSize={18}>{cant}</SText>
+                    <SText bold fontSize={14}>{montoOk}</SText>
+                    {(montoOk == "")
+                        ?
+                        <SText bold fontSize={14}>{cant}</SText>
+                        :
+                        <SText bold fontSize={14}>({cant})</SText>}
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
-
             </SView>
         </SView>
     }
+
+    $render() {
+        return <>
+            <Header.Modulo
+                width={120}
+                titulo="EMPLEADOS"
+                icon="Empleados"
+            />
+            {super.$render()}
+        </>
+    }
+
     $item(obj) {
         return <SView col={"xs-12"} center>
-            <SHr />
-            <SView col={"xs-12"} height={200} center>
+            <SHr h={30} />
+            <SView col={"xs-12"} center>
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,
                     overflow: "hidden",
-                    backgroundColor:STheme.color.white
+                    backgroundColor: STheme.color.white
                 }} center>
-                   
-                    
-                     <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
-                        resizeMode: "contain", 
+                    <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
+                        resizeMode: "contain",
                         position: "absolute",
-                        zIndex:90,
-                        top:0,
-                        width:50
+                        zIndex: 90,
+                        top: 0,
+                        width: 50
                     }} />
                     <SImage src={Model.tbemp._get_image_download_path(SSocket.api, this.pk)} style={{
                         resizeMode: "cover",
-                        zIndex:99,
-                        // backgroundColor:STheme.color.white
+                        zIndex: 99,
                     }} />
                 </SView>
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.empnom}`}</SText>
                 <SText>{`${obj.idemp} - ${obj.empcod}`}</SText>
+                {/* <SText>{`${obj.}`}</SText> */}
             </SView>
-            <SHr />
+            <SHr h={30} />
+            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
+            {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} /> : null}
+            <SHr h={30} />
             <SView col={"xs-12"} center row style={{
                 justifyContent: "space-between"
             }}>
                 {this.ItemCard({
-                    label: "Cantidad de clientes",
+                    label: "Clientes",
                     cant: this.state.cantidad_clientes,
-                    icon: <SIcon name='Clientes' />,
+                    monto: "",
+                    icon: 'Iclients',
+                    color: '#1DA1F2',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
-                    label: "Cantidad de zonas",
+                    label: "Zonas",
                     cant: this.state.cantidad_zonas,
-                    icon: <SIcon name='Zonas' />,
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }): null,
+                    monto: "",
+                    icon: 'Izonas',
+                    color: '#833AB4',
+                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
                 {this.ItemCard({
                     label: "Compras",
                     cant: this.state.cantidad_compras,
-                    icon: <SIcon name='Egreso' />,
+                    monto: "",
+                    icon: 'Icompras',
+                    color: '#8CB45F',
                 })}
                 {this.ItemCard({
-                    label: "Ventas",
+                    label: "Total ventas",
                     cant: this.state.cantidad_ventas,
-                    icon: <SIcon name='Ingreso' />,
-                })}
-                {this.ItemCard({
-                    label: "Pedidos",
-                    cant: this.state.cantidad_pedidos,
-                    icon: <SIcon name='Paquete' />,
+                    monto: SMath.formatMoney(this.state.monto_total_ventas),
+                    // onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
+                    icon: 'Iventas',
+                    color: '#DE6D3B',
                 })}
                 {/* {this.ItemCard({
-                    label: "No lo se",
+                    label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    icon: <SIcon name='Paquete' />,
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos),
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
                 })} */}
-
             </SView>
             <SHr />
         </SView>
@@ -162,7 +205,6 @@ class index extends DPA.profile {
                             data: { ...user, [key]: "" }, key_usuario: Model.usuario.Action.getKey()
                         })
                     }
-
                     Model.usuario.Action.editar({
                         data: { ...usr, [key]: this.pk }, key_usuario: Model.usuario.Action.getKey()
                     })
@@ -171,15 +213,6 @@ class index extends DPA.profile {
     }
     $footer() {
         return <SView col={"xs-12"} center>
-
-            {/* <SView col={"xs-12 md-6"}>
-                <SChart type='torta' data={[
-                    { key: "ventas", val: 100, label: "Ventas", },
-                    { key: "compras", val: 10, label: "Compras" },
-                    { key: "otros", val: 20, label: "Otros" ,},
-                ]}
-                 />
-            </SView> */}
             <SHr />
             {this.getUser()}
             <SHr />

@@ -31,7 +31,7 @@ class index extends Component<DetallePropsType> {
                     <SText fontSize={12}>PRECIO</SText>
                 </SView>
                 <SView col={"xs-2.5"} style={{ alignItems: "flex-end" }}>
-                    <SText fontSize={12}>TOTAL</SText>
+                    <SText fontSize={12}>SUBTOTAL</SText>
                 </SView>
             </SView>
             <SHr />

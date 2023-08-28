@@ -4,6 +4,7 @@ import SSocket from 'servisofts-socket'
 import Model from '../../../Model';
 import { Parent } from ".."
 import { connect } from 'react-redux';
+import MarkerCircle from '../../../Components/Marker/MarkerCircle';
 
 
 // const Parent2 = {
@@ -31,15 +32,24 @@ class index extends Component {
             if (!obj.clilat || !obj.clilon) return null;
             const onPress = () => {
                 SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
-                console.log(obj);
             }
+            //     // SNavigation.navigate("/tbcli/profile", { pk: data.idcli + "" })
+            return MarkerCircle({
+                latitude: parseFloat(obj?.clilat ?? 0),
+                longitude: parseFloat(obj?.clilon ?? 0),
+                src: SSocket.api.root + "tbcli/" + obj?.idcli,
+                label: obj?.idcli,
+                size:40,
+                onPress: onPress
+                // cantidad: obj?.cantidad
+            })
             return <SMapView.SMarker
                 latitude={parseFloat(obj?.clilat ?? 0)}
                 longitude={parseFloat(obj?.clilon ?? 0)}
 
             >
                 <Marker onPress={onPress} />
-            </SMapView.SMarker>
+            </SMapView.SMarker >
         })
     }
 
@@ -67,7 +77,7 @@ class index extends Component {
         latPadre = this.calcularPromedio(data, 'clilat');
         longPadre = this.calcularPromedio(data, 'clilon');
 
-        return <SPage title={'Mapa Test'} disableScroll>
+        return <SPage title={'Mapa de clientes'} disableScroll>
             {(isNaN(longPadre)) ?
                 <SText center>NO HAY DATOS EN MAPA</SText>
                 :
@@ -79,6 +89,7 @@ class index extends Component {
                     latitudeDelta: 0.1,
                     longitudeDelta: 0.1
                 }}>
+                    <></>
                     {this.getMarkers(data)}
                 </SMapView>}
         </SPage>
