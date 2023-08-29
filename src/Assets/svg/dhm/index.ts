@@ -60,6 +60,10 @@ import Trasnportista, { ReactComponent as TrasnportistaW } from './trasnportista
 import MProductoMasV, { ReactComponent as MProductoMasVW } from './mProductoMasV.svg';
 import MconPedidos, { ReactComponent as MconPedidosW } from './mconPedidos.svg';
 import MsinPedidos, { ReactComponent as MsinPedidosW } from './msinPedidos.svg';
+import MListUser, { ReactComponent as MListUserW } from './mListUser.svg';
+import MSinPedidosMap, { ReactComponent as MSinPedidosMapW } from './mSinPedidosMap.svg';
+import MConPedidosMap, { ReactComponent as MConPedidosMapW } from './mConPedidosMap.svg';
+import MVisit, { ReactComponent as MVisitW } from './mVisit.svg';
 
 
 const Assets = {
@@ -126,6 +130,12 @@ const Assets = {
 	"MProductoMasV": { Native: MProductoMasV, Web: MProductoMasVW },
 	"MconPedidos": { Native: MconPedidos, Web: MconPedidosW },
 	"MsinPedidos": { Native: MsinPedidos, Web: MsinPedidosW },
+	"MListUser": { Native: MListUser, Web: MListUserW },
+	"MSinPedidosMap": { Native: MSinPedidosMap, Web: MSinPedidosMapW },
+	"MConPedidosMap": { Native: MConPedidosMap, Web: MConPedidosMapW },
+	"MVisit": { Native: MVisit, Web: MVisitW },
+	
+	
 	
 
 
