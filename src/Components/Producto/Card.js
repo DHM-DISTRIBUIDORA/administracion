@@ -76,7 +76,7 @@ export default class index extends Component<ProductoCardPropsType> {
                 </SView>
                 <SView width={8} />
                 <SView width={80} height={80} card>
-                    <SImage src={""} />
+                    <SImage src={require('../../Assets/img/foto.png')}/>
                 </SView>
             </SView>
             <SHr />
