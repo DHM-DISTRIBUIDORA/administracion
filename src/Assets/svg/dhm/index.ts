@@ -57,6 +57,9 @@ import IConductores, { ReactComponent as IConductoresW } from './iConductores.sv
 import MProductos, { ReactComponent as MProductosW } from './mProductos.svg';
 import VendedorIcon, { ReactComponent as VendedorIconW } from './vendedorIcon.svg';
 import Trasnportista, { ReactComponent as TrasnportistaW } from './trasnportista.svg';
+import MProductoMasV, { ReactComponent as MProductoMasVW } from './mProductoMasV.svg';
+import MconPedidos, { ReactComponent as MconPedidosW } from './mconPedidos.svg';
+import MsinPedidos, { ReactComponent as MsinPedidosW } from './msinPedidos.svg';
 
 
 const Assets = {
@@ -120,6 +123,10 @@ const Assets = {
 	"MProductos": { Native: MProductos, Web: MProductosW },
 	"Vendedor": { Native: VendedorIcon, Web: VendedorIconW },
 	"Trasnportista": { Native: Trasnportista, Web: TrasnportistaW },
+	"MProductoMasV": { Native: MProductoMasV, Web: MProductoMasVW },
+	"MconPedidos": { Native: MconPedidos, Web: MconPedidosW },
+	"MsinPedidos": { Native: MsinPedidos, Web: MsinPedidosW },
+	
 
 
 
