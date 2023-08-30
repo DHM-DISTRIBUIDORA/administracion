@@ -218,17 +218,35 @@ class index extends DPA.profile {
                     overflow: "hidden",
                     backgroundColor: STheme.color.white
                 }} center>
-                    <SImage src={require('../../../Assets/img/sinFoto.png')} style={{
+                    <SImage enablePreview src={require('../../../Assets/img/sinFoto.png')} style={{
                         resizeMode: "contain",
                         position: "absolute",
                         zIndex: 90,
                         top: 0,
                         width: 50
                     }} />
-                    <SImage src={Model.tbcli._get_image_download_path(SSocket.api, this.pk)} style={{
+                    <SImage enablePreview src={Model.tbcli._get_image_download_path(SSocket.api, this.pk)} style={{
                         resizeMode: "cover",
                         zIndex: 99,
                     }} />
+                </SView>
+                <SView style={{
+                    position: "absolute",
+                    right: "35%"
+                }}
+                onPress={()=>{
+                    SNavigation.navigate("/tbcli/edit", { pk: this.pk })
+                }}
+                >
+                    <SView width={45} height={45}
+                        backgroundColor={STheme.color.primary}
+                        style={{
+                            borderRadius: 50
+                        }}
+                        center
+                    >
+                        <SIcon name="Icamera" width={25} height={25} />
+                    </SView>
                 </SView>
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.clinom}`}</SText>

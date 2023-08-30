@@ -80,6 +80,7 @@ export default new SModel<Action, Reducer>({
         "prdpmayconUS": { type: "double",  editable: true },
         "prdpmaycreUS": { type: "double",  editable: true },
         "prdpminconUS": { type: "double",  editable: true },
+        
         "prdpmincreUS": { type: "double",  editable: true },
         "prdpespconUS": { type: "double",  editable: true },
         "prdpespcreUS": { type: "double",  editable: true },
