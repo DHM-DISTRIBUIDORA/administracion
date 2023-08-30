@@ -225,7 +225,7 @@ class index extends DPA.profile {
                         top: 0,
                         width: 50
                     }} />
-                    <SImage enablePreview src={Model.tbcli._get_image_download_path(SSocket.api, this.pk)} style={{
+                    <SImage enablePreview src={Model.tbcli._get_image_download_path(SSocket.api, this.pk) + "?date=" + new Date().getTime()} style={{
                         resizeMode: "cover",
                         zIndex: 99,
                     }} />
@@ -234,9 +234,9 @@ class index extends DPA.profile {
                     position: "absolute",
                     right: "35%"
                 }}
-                onPress={()=>{
-                    SNavigation.navigate("/tbcli/edit", { pk: this.pk })
-                }}
+                    onPress={() => {
+                        SNavigation.navigate("/tbcli/edit", { pk: this.pk })
+                    }}
                 >
                     <SView width={45} height={45}
                         backgroundColor={STheme.color.primary}
