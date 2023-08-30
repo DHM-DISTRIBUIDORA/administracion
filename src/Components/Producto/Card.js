@@ -78,7 +78,6 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView width={80} height={80} card>
                     {/* <SImage src={require('../../Assets/img/foto.png')}/>  */}
                     <SImage enablePreview src={SSocket.api.root + "tbprd/" + idprd}/> 
-                    
                 </SView>
             </SView>
             <SHr />

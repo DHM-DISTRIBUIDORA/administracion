@@ -44,7 +44,8 @@ class index extends Component<ProductoCard2PropsType> {
             >
 
                 <SView col={"xs-3"} height={105}>
-                    <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
+                    {/* <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} /> */}
+                    <SImage enablePreview src={SSocket.api.root + "tbprd/" + idprd} style={{ resizeMode: "contain", borderRadius:4, overflow: "hidden" }}/> 
                 </SView>
                 <SView col={"xs-0.5"}></SView>
                 <SView col={"xs-8.5"}>
