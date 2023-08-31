@@ -1,7 +1,7 @@
 import React from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
-import { SNavigation, SPopup } from 'servisofts-component';
+import { SLoad, SNavigation, SPopup } from 'servisofts-component';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket'
 
@@ -10,7 +10,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: ['idprd','prdstmax','prdstmin','prdcom','prdmrc','barracod','barratipo','barramio','prdice','prddes','prdprec','prdest','prddesc','prdcms','prdtip','prdcb1','prdcb2','prdcb3','prdcb4','prdcb5','prdcb6','prdcb7','prdcb8','prdctaing','prdctacos','prdcms2','idanp','prdkxu','prduvdef','prdcodunilever','prdtvol','prdklxc','prduniua','prdskxc','idunicat','prdunides','idpg','prddim','prdvol','prdmed','prusumod','prfecmod','prdfoto','prdpxgr','prdeqpt','prdcap','idmarca','idmotor','prdmedidarep','prdbal','prdancho','prdalto','sucreg','idlinea','prdpmaycon','prdpmaycre','prdpmincon','prdpmincre','prdpespcon','prdpespcre','prdpsmcon','prdpsmcre','prdpagcon','prdpagcre','prdpagcre','prdabs','prdabs','prddst','prdpxv','prduxcdes','prduxd','prduxddes','prdpoficialUS','prdpmayconUS','prdpmaycreUS','prdpminconUS','prdpmincreUS','prdpespconUS','prdpespcreUS','prdpsmconUS','prdpsmcreUS','prdpagconUS','prdpagcreUS','prdp6con','prdp6cre','prdp7con','prdp7cre','prdp6conus','prdp6creus','prdp6creus','prdp7conus','prdp7creus']
+            excludes: ['idprd', 'prdstmax', 'prdstmin', 'prdcom', 'prdmrc', 'barracod', 'barratipo', 'barramio', 'prdice', 'prddes', 'prdprec', 'prdest', 'prddesc', 'prdcms', 'prdtip', 'prdcb1', 'prdcb2', 'prdcb3', 'prdcb4', 'prdcb5', 'prdcb6', 'prdcb7', 'prdcb8', 'prdctaing', 'prdctacos', 'prdcms2', 'idanp', 'prdkxu', 'prduvdef', 'prdcodunilever', 'prdtvol', 'prdklxc', 'prduniua', 'prdskxc', 'idunicat', 'prdunides', 'idpg', 'prddim', 'prdvol', 'prdmed', 'prusumod', 'prfecmod', 'prdfoto', 'prdpxgr', 'prdeqpt', 'prdcap', 'idmarca', 'idmotor', 'prdmedidarep', 'prdbal', 'prdancho', 'prdalto', 'sucreg', 'idlinea', 'prdpmaycon', 'prdpmaycre', 'prdpmincon', 'prdpmincre', 'prdpespcon', 'prdpespcre', 'prdpsmcon', 'prdpsmcre', 'prdpagcon', 'prdpagcre', 'prdpagcre', 'prdabs', 'prdabs', 'prddst', 'prdpxv', 'prduxcdes', 'prduxd', 'prduxddes', 'prdpoficialUS', 'prdpmayconUS', 'prdpmaycreUS', 'prdpminconUS', 'prdpmincreUS', 'prdpespconUS', 'prdpespcreUS', 'prdpsmconUS', 'prdpsmcreUS', 'prdpagconUS', 'prdpagcreUS', 'prdp6con', 'prdp6cre', 'prdp7con', 'prdp7cre', 'prdp6conus', 'prdp6creus', 'prdp6creus', 'prdp7conus', 'prdp7creus']
 
         });
     }
@@ -34,17 +34,17 @@ class index extends DPA.edit {
             }
         }
         inp["prdcod"].label = "Código"
-        inp["prdcod"].style = {pointerEvents: "none" }
+        inp["prdcod"].style = { pointerEvents: "none" }
         inp["prdnom"].label = "Nombre producto"
-        inp["prdnom"].style = {pointerEvents: "none" }
+        inp["prdnom"].style = { pointerEvents: "none" }
         inp["prdunid"].label = "Unidad producto"
-        inp["prdunid"].style = {pointerEvents: "none" }
+        inp["prdunid"].style = { pointerEvents: "none" }
         inp["prdcxu"].label = "Unidad por caja"
-        inp["prdcxu"].style = {pointerEvents: "none" }
+        inp["prdcxu"].style = { pointerEvents: "none" }
 
         // inp["idlinea"].label = "Id línea"
         inp["prdpoficial"].label = "Precio Oficial"
-        inp["prdpoficial"].style = {pointerEvents: "none" }
+        inp["prdpoficial"].style = { pointerEvents: "none" }
 
 
         // inp["prdpmaycon"].label = "Precio por mayor al contado"
@@ -58,7 +58,7 @@ class index extends DPA.edit {
         // inp["prdpagcon"].label = "Precio prdpagcon al contado"
         // inp["prdpagcre"].label = "Precio prdpagcre al crédito"
         inp["prdcor"].label = "Detalle producto"
-        inp["prdcor"].style = {pointerEvents: "none" }
+        inp["prdcor"].style = { pointerEvents: "none" }
 
 
         // inp["prdabs"].label = "Nose prdabs"
@@ -95,7 +95,7 @@ class index extends DPA.edit {
         // inp["prdp6creus"].label = "Precio 6 al crédito en US"
         // inp["prdp7conus"].label = "Precio 7 al contado en US"
         // inp["prdp7creus"].label = "Precio 7 al crédito en US"
-        
+
         return inp;
     }
 
@@ -106,7 +106,7 @@ class index extends DPA.edit {
             "foto"
         );
     }
-    
+
     $onSubmit(data) {
 
         data.prdest = 1
@@ -118,6 +118,9 @@ class index extends DPA.edit {
         data.prfecmod = ""
         data.prdeqpt = 1
 
+        if (this.state.loading) return;
+        this.setState({ loading: true })
+
         Parent.model.Action.editar({
             data: {
                 ...this.data,
@@ -125,11 +128,17 @@ class index extends DPA.edit {
             },
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
+            this.setState({ loading: false })
             SNavigation.goBack();
         }).catch(e => {
+            this.setState({ loading: false })
             console.error(e);
 
         })
+    }
+
+    $submitName() {
+        return !this.state.loading ? "Aceptar" : <SLoad />
     }
 }
 

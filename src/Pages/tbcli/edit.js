@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
-import { SNavigation, SPopup, SText } from 'servisofts-component';
+import { SLoad, SNavigation, SPopup, SText } from 'servisofts-component';
 import Model from '../../Model';
 import SSocket from 'servisofts-socket'
 
@@ -18,6 +18,7 @@ class index extends DPA.edit {
         };
     }
     $allowAccess() {
+        return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
     $getData() {
@@ -57,6 +58,8 @@ class index extends DPA.edit {
     }
 
     $onSubmit(data) {
+        if (this.state.loading) return;
+        this.setState({loading: true })
         Parent.model.Action.editar({
             data: {
                 ...this.data,
@@ -64,12 +67,19 @@ class index extends DPA.edit {
             },
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
+            this.setState({loading: false })
             SNavigation.goBack();
         }).catch(e => {
+            this.setState({loading: false })
             console.error(e);
 
         })
     }
+    $submitName() {
+        return !this.state.loading ? "Aceptar" : <SLoad />
+    }
+    
+   
 }
 
 export default connect(index);
