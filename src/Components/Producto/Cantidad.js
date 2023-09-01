@@ -15,7 +15,6 @@ export default class index extends Component<CantidadPropsType> {
         super(props);
         this.state = {
             count: 1,
-            visible: "hidden",
             isVisible: false,
             bandera: false,
         };
@@ -27,14 +26,11 @@ export default class index extends Component<CantidadPropsType> {
                 this.setState({ isVisible: false });
             }, 5000);
         }
-
     }
 
     componentWillUnmount() {
-        // Limpiar el temporizador cuando el componente se desmonte
         clearTimeout(this.timer);
     }
-
 
     handleMostrarBloque = () => {
         console.log("handleMostrarBloque")
@@ -44,7 +40,8 @@ export default class index extends Component<CantidadPropsType> {
             this.setState({ isVisible: true });
 
         });
-        this.setState({ count: this.state?.count })
+        // this.setState({ count: this.state?.count })
+        // this.state.count =
         this.pushCars()
     }
 
@@ -53,13 +50,10 @@ export default class index extends Component<CantidadPropsType> {
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, { [this.props.data.idprd]: { cantidad: this.state?.count, data: this.props.data } });
         Model.carrito.Action.setState({ productos });
-
         this.componentDidMount()
     }
 
-
     handleAddCarrito = () => {
-
         if (!this.state.isVisible) {
             this.timer = setTimeout(() => {
                 this.setState({ isVisible: true });
@@ -67,20 +61,16 @@ export default class index extends Component<CantidadPropsType> {
             });
         }
 
-
         console.log("handleAddCarrito")
-
-        this.setState({ count: this.state?.count + 1 })
+        // this.setState({ count: this.state?.count + 1 })
+        this.state.count = this.state.count + 1
 
         console.log("Cantidad: " + this.state?.count);
 
         this.pushCars();
-
     }
 
     handleDeleteCarrito = () => {
-
-
         if (!this.state.isVisible) {
             this.timer = setTimeout(() => {
                 this.setState({ isVisible: true });
@@ -88,28 +78,34 @@ export default class index extends Component<CantidadPropsType> {
             });
         }
 
-
         console.log("handleAddCarrito")
-
-        this.setState({ count: this.state?.count - 1 })
-
+        // this.setState({ count: this.state?.count - 1 })
+        this.state.count = this.state.count - 1
 
         console.log("Cantidad: " + this.state?.count);
 
         this.pushCars();
 
     }
+
+    renderDetalle() {
+        var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
+        return <SView col={"xs-12"} row>
+            <SText fontSize={11} color={STheme.color.gray}>Stock: {stock} </SText>
+            <SView width={5}><SText fontSize={11}>|</SText></SView>
+            <SText fontSize={11} color={STheme.color.gray}> Ud: {prdunid} </SText>
+            <SView width={5}><SText fontSize={11}>|</SText></SView>
+            <SText fontSize={11} color={STheme.color.gray}> UxC: {prdcxu}</SText>
+        </SView>
+    }
+
     render() {
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
         const productos = Model.carrito.Action.getState().productos ?? {};
         if (!productos) return <SLoad />
         let incar = productos[idprd];
-
-        console.log("cantidad now RENDER: " + incar?.cantidad)
-
         return <SView col={"xs-12"} card center padding={8} >
-
-            {/* <SView flex row col={"xs-12"}>
+            <SView flex row col={"xs-12"}>
                 <SView flex >
                     <SText fontSize={16} bold>{prdnom}</SText>
                     {this.renderDetalle()}
@@ -132,11 +128,10 @@ export default class index extends Component<CantidadPropsType> {
                     }}
                     /> 
                 </SView>
-            </SView> */}
+            </SView>
             <SHr />
             <SHr />
             <SView col={"xs-12"} row style={{ justifyContent: "flex-end" }} >
-
                 {
                     (this.state.isVisible)
                         ?
@@ -146,17 +141,21 @@ export default class index extends Component<CantidadPropsType> {
                             borderWidth: 1,
                             borderRadius: 5,
                             borderColor: STheme.color.text,
-                            width: 150,
+                            width: 130,
                             backgroundColor: STheme.color.white,
                             zIndex: 99,
                             height: 40
-                            // visibility: this.state.visible
                         }}
                             row
                             center
                         >
                             {(incar?.cantidad == 1) ?
-                                <SView width={30} height={30} card center onPress={this.handleDeleteCarrito}
+                                <SView width={30} height={30} card center
+                                    onPress={() => {
+                                        Model.carrito.Action.removeItem(idprd);
+                                        this.setState({ isVisible: false });
+
+                                    }}
                                     style={{
                                         backgroundColor: STheme.color.lightGray + "50"
                                     }}
@@ -169,19 +168,18 @@ export default class index extends Component<CantidadPropsType> {
                                         backgroundColor: STheme.color.lightGray + "50"
                                     }}
                                 >
-                                    <SText fontSize={23} bold >{"-"}</SText>
+                                    <SText fontSize={23} bold color={STheme.color.black} >{"-"}</SText>
                                 </SView>
                             }
-
-                            <SView width={30} height={30} card center >
-                                <SText fontSize={15} bold >{incar?.cantidad}</SText>
+                            <SView width={30} height={30} center >
+                                <SText fontSize={15} bold color={STheme.color.black}>{incar?.cantidad}</SText>
                             </SView>
                             <SView width={30} height={30} card center onPress={this.handleAddCarrito}
                                 style={{
                                     backgroundColor: STheme.color.lightGray + "50"
                                 }}
                             >
-                                <SText fontSize={23} bold >{"+"}</SText>
+                                <SText fontSize={23} bold color={STheme.color.black} >{"+"}</SText>
                             </SView>
                         </SView>
                         :
@@ -194,9 +192,7 @@ export default class index extends Component<CantidadPropsType> {
                 >
                     {incar?.cantidad > 0 ? <SText fontSize={16} bold color={STheme.color.background} >{incar?.cantidad}</SText> : <SText fontSize={23} bold >{"+"}</SText>}
                 </SView >
-
             </SView>
-
         </SView>
     }
 }
