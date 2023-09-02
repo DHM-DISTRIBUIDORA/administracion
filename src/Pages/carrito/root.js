@@ -28,7 +28,53 @@ class index extends Component {
         })
     }
 
-    handlePress = ({ idcli, nit }) => {
+    handlePressPedido = (client) => {
+        // nit: this.state.client.clinit
+        const { idcli, clinit } = client;
+        if (this.state.loading) return;
+        this.setState({ loading: true, error: "" })
+        const productos = Model.carrito.Action.getState().productos;
+        let dataProducto = []
+        Object.keys(productos).map((key, index) => {
+            const prd = productos[key].data;
+            dataProducto.push({
+                idprd: prd.idprd,
+                vdcan: productos[key].cantidad,
+                prdcod: prd.prdcod,
+                vdpre: prd.prdpoficial,
+                vdunid: prd.prdunid,
+            })
+        });
+        SSocket.sendPromise({
+            component: "dm_cabfac",
+            type: "registro",
+            estado: "cargando",
+            data: {
+                idcli: idcli,
+                vnit: clinit,
+                vdet: "VENTA DESDE APP SERVISOFTS",
+                productos: dataProducto
+            },
+            usumod: "SERVISOFTS",
+
+        }, 1000 * 60).then(e => {
+            this.setState({ loading: false, error: "" })
+            console.error(e);
+            alert("EXITO")
+            // Model.carrito.Action.removeAll()
+            // SNavigation.replace("/carrito/notaventa", { idven: e.data.idven })
+            // SNavigation.replace("/tbven/recibo", { pk: e.data.idven })
+
+            // SPopup.alert("¡Pedido Exitoso!")
+            // SNavigation.navigate('/public');
+        }).catch(e => {
+            this.setState({ loading: false, error: e.error })
+            console.error(e);
+        })
+    }
+    handlePress = (client) => {
+        // nit: this.state.client.clinit
+        const { idcli, clinit } = client;
         if (this.state.loading) return;
         this.setState({ loading: true, error: "" })
         const productos = Model.carrito.Action.getState().productos;
@@ -47,7 +93,7 @@ class index extends Component {
             estado: "cargando",
             data: {
                 idcli: idcli,
-                vnit: nit,
+                vnit: clinit,
                 vdet: "VENTA DESDE APP SERVISOFTS",
                 productos: [
                     ...dataProducto
@@ -86,11 +132,16 @@ class index extends Component {
                 <PButtom primary
                     loading={this.state.loading}
                     onPress={() => {
-                        this.handlePress({
-                            idcli: this.state?.client?.idcli,
-                            nit: this.state.client.clinit
-                        });
-                    }} >ENVIAR</PButtom>
+                        this.handlePress(this.state?.client)
+
+                    }} >VENTA</PButtom>
+                <SHr h={50} />
+                <PButtom primary
+                    loading={this.state.loading}
+                    onPress={() => {
+                        this.handlePressPedido(this.state?.client)
+
+                    }} >PEDIDO</PButtom>
             </Container>
 
         </SPage>

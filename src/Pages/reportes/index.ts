@@ -12,6 +12,7 @@ export default SPage.combinePages("reportes", {
     "": root,
     productos_mas_vendidos,
     usuarios,
+    clientes_con_pedidos,
     clientes_con_pedidos_mapa,
     clientes_sin_pedidos,
     clientes_sin_pedidos_mapa,

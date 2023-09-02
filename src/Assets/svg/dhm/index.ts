@@ -39,6 +39,8 @@ import Zonas, { ReactComponent as ZonasW } from './zonas.svg';
 import Clientes, { ReactComponent as ClientesW } from './clientes.svg';
 import Carrito2, { ReactComponent as Carrito2W } from './carrito.svg';
 import Delete2, { ReactComponent as Delete2W } from './delete2.svg';
+import Delete3, { ReactComponent as Delete3W } from './delete3.svg';
+
 import Check, { ReactComponent as CheckW } from './check.svg';
 import Imap, { ReactComponent as ImapW } from './map.svg';
 import Icompras, { ReactComponent as IcomprasW } from './icompras.svg';
@@ -57,6 +59,14 @@ import IConductores, { ReactComponent as IConductoresW } from './iConductores.sv
 import MProductos, { ReactComponent as MProductosW } from './mProductos.svg';
 import VendedorIcon, { ReactComponent as VendedorIconW } from './vendedorIcon.svg';
 import Trasnportista, { ReactComponent as TrasnportistaW } from './trasnportista.svg';
+import MProductoMasV, { ReactComponent as MProductoMasVW } from './mProductoMasV.svg';
+import MconPedidos, { ReactComponent as MconPedidosW } from './mconPedidos.svg';
+import MsinPedidos, { ReactComponent as MsinPedidosW } from './msinPedidos.svg';
+import MListUser, { ReactComponent as MListUserW } from './mListUser.svg';
+import MSinPedidosMap, { ReactComponent as MSinPedidosMapW } from './mSinPedidosMap.svg';
+import MConPedidosMap, { ReactComponent as MConPedidosMapW } from './mConPedidosMap.svg';
+import MVisit, { ReactComponent as MVisitW } from './mVisit.svg';
+import Icamera, { ReactComponent as IcameraW } from './icamera.svg';
 
 
 const Assets = {
@@ -102,6 +112,7 @@ const Assets = {
 	"Clientes": { Native: Clientes, Web: ClientesW },
 	"Carrito2": { Native: Carrito2, Web: Carrito2W },
 	"Delete2": { Native: Delete2, Web: Delete2W },
+	"Delete3": { Native: Delete3, Web: Delete3W },
 	"Check2": { Native: Check, Web: CheckW },
 	"Imap": { Native: Imap, Web: ImapW },
 	"Icompras": { Native: Icompras, Web: IcomprasW },
@@ -120,6 +131,17 @@ const Assets = {
 	"MProductos": { Native: MProductos, Web: MProductosW },
 	"Vendedor": { Native: VendedorIcon, Web: VendedorIconW },
 	"Trasnportista": { Native: Trasnportista, Web: TrasnportistaW },
+	"MProductoMasV": { Native: MProductoMasV, Web: MProductoMasVW },
+	"MconPedidos": { Native: MconPedidos, Web: MconPedidosW },
+	"MsinPedidos": { Native: MsinPedidos, Web: MsinPedidosW },
+	"MListUser": { Native: MListUser, Web: MListUserW },
+	"MSinPedidosMap": { Native: MSinPedidosMap, Web: MSinPedidosMapW },
+	"MConPedidosMap": { Native: MConPedidosMap, Web: MConPedidosMapW },
+	"MVisit": { Native: MVisit, Web: MVisitW },
+	"Icamera": { Native: Icamera, Web: IcameraW },
+	
+	
+	
 
 
 

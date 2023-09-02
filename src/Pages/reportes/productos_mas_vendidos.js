@@ -20,7 +20,7 @@ export default class index extends Component {
     }
     render() {
         return (
-            <SPage title="Productos mas vendidos" disableScroll>
+            <SPage title="Productos más vendidos" disableScroll>
                 <SelectEntreFechas onChange={e => this.getData(e)} />
                 <SView flex>
                     <STable2
