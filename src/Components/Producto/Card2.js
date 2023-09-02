@@ -35,16 +35,35 @@ class index extends Component<ProductoCard2PropsType> {
             <SView col={"xs-12"} card row {...this.props}
                 // pointerEvents={!active ? 'none' : 'auto'}
                 style={{
-                    borderRadius: 15,
+                    borderRadius: 4,
                     borderWidth: 1,
                     padding: 10,
                     opacity: active ? 1 : 0.6,
-                    borderColor: !active ? "#D20C0C" : "#E2E2E2"
+                    borderColor: !active ? "#D20C0C" : STheme.color.card
                 }}
             >
 
                 <SView col={"xs-3"} height={105}>
-                    <SImage src={require('../../Assets/img/foto.png')} style={{ resizeMode: "contain" }} />
+                    <SImage src={require('../../Assets/img/foto.png')}
+                        style={{
+                            resizeMode: "contain",
+                            position: "absolute",
+                            zIndex: 90,
+                            top: 0,
+                        }}
+                    />
+                    <SImage enablePreview src={SSocket.api.root + "tbprd/" + idprd}
+                        style={{
+                            resizeMode: "contain",
+                            borderRadius: 4,
+                            overflow: "hidden",
+                            position: "absolute",
+                            zIndex: 99,
+                            top: 0,
+                            backgroundColor:"#ffffff50"
+
+                        }}
+                    />
                 </SView>
                 <SView col={"xs-0.5"}></SView>
                 <SView col={"xs-8.5"}>
@@ -62,7 +81,7 @@ class index extends Component<ProductoCard2PropsType> {
                     <SHr />
                     <SView row>
                         <SView col={"xs-7"} row center>
-                            <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            <SView center width={45} height={45} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count <= 0) return;
                                     // this.setState({ count: this.state.count - 1 });
@@ -70,7 +89,7 @@ class index extends Component<ProductoCard2PropsType> {
                                     this.state.count = this.state.count - 1
                                     this.enviarDatosItems()
                                 }}
-                                backgroundColor={STheme.color.white}
+                                backgroundColor={STheme.color.card}
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
@@ -80,13 +99,13 @@ class index extends Component<ProductoCard2PropsType> {
                                 {/* <SText fontSize={16}>{this.props?.data?.cantidad}</SText> */}
                                 <SView width={10} />
                             </SView>
-                            <SView center width={45} height={45} style={{ borderRadius: 17, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            <SView center width={45} height={45} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count >= stock) return;
                                     this.state.count = this.state.count + 1
                                     this.enviarDatosItems()
                                 }}
-                                backgroundColor={STheme.color.white}
+                                backgroundColor={STheme.color.card}
                             >
                                 <SIcon name='Mas' height={18} />
                             </SView>

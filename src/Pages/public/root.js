@@ -26,11 +26,12 @@ class index extends Component {
             limit={10}
             buscador
             order={[{ key: "stock", order: "desc" }]}
-            render={obj => <Producto.Card
+            // render={obj => <Producto.Card 
+            render={obj => <Producto.Cantidad
                 col={"xs-12"}
                 width={0}
                 data={obj}
-                
+
             />} />
     }
     render() {
