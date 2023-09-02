@@ -29,7 +29,7 @@ export default class MapaComponent extends Component {
                 longitude: o.clilon,
                 src: SRC.tbcli(o.idcli),
                 borderColor: !visitas[o.idcli] ? STheme.color.danger : STheme.color.success,
-                content: o.clicod,
+                content: o.clinom,
                 onPress: () => {
                     // this.realizarVisita(o);
                     if (!visitas[o.idcli]) {
