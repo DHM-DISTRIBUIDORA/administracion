@@ -22,14 +22,8 @@ export default class AgregarUbicacion extends Component<PropsType> {
         super(props);
         this.state = {
         };
-
     }
-    // componentDidMount() {
-    //     Sounds.play()
-    //     new SThread(3500, "detalle_del_pedido", true).start(() => {
-    //         TapekeComprado.close();
-    //     })
-    // }
+  
     render() {
         return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
             <SView col={"xs-11"} height={40} />
@@ -38,7 +32,7 @@ export default class AgregarUbicacion extends Component<PropsType> {
             </SView>
             <SView col={"xs-11"} height={15} />
             <SView col={"xs-12"} center  >
-                <SText center color={STheme.color.darkGray} style={{ fontSize: 18, fontWeight: "bold" }}>Debes AGREGAR UBICACIÓN para concretar la visita.</SText>
+                <SText center color={STheme.color.text} style={{ fontSize: 18, fontWeight: "bold" }}>Debes AGREGAR UBICACIÓN para concretar la visita.</SText>
             </SView>
             <SHr height={10} />
             {/* <SView col={"xs-12"} center  >
