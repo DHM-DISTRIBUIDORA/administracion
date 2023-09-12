@@ -79,7 +79,7 @@
     "@types/react-native": "^0.61.17",
     "metro-react-native-babel-preset": "^0.64.0",
     "react-error-overlay": "^6.0.11",
-    "react-scripts": "4.0.1"
+    "react-scripts": "^4.0.1"
   },
   "browserslist": {
     "production": [
