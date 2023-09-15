@@ -64,7 +64,6 @@ class index extends Component {
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: e?.data?.idven,
                 onBack: () => {
-                    
                     SNavigation.replace("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor })
                 }
             })

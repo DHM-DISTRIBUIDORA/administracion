@@ -61,96 +61,91 @@ export default class root extends Component {
                 clientes_filter = clientes_data.filter(a => !a.clilat || !a.clilon)
         }
 
-        return <SPage title={(this.state?.ubicacion) ? ((this.state?.ubicacion == "true") ? "CLIENTES CON UBICACIÓN" : "CLIENTES SIN UBICACIÓN") : "MIS CLIENTES"}>
-            <Container>
-                <SView col={"xs-12"} center row padding={4} height={50}>
-                    <SView width={4} />
-                    <SView flex center>
-                        <SList
-                            initSpace={8}
-                            flex
-                            space={5}
-                            buscador
-                            limit={10}
-                            data={clientes_filter}
-                            order={[{ key: "clinom", order: "asc" }]}
-                            render={(vd) => {
-                                return <>
-                                    <SView col={"xs-12"} row center
-                                        style={{
-                                            padding: 12,
-                                            borderWidth: 1,
-                                            borderColor: STheme.color.gray,
-                                            borderRadius: 4
-                                        }}
-                                        onPress={() => {
-                                            if (!vd.clilat || !vd.clilon) {
-                                                SPopup.open({ content: <Popups.AgregarUbicacion/> });
-                                            }
-                                            if (!visitas[vd.idcli]) {
-                                                SNavigation.navigate("/tbcli/profile", {
-                                                    // SNavigation.navigate("/vendedor/cliente", {
-                                                    pk: vd.idcli + "",
+        return <SPage
+            title={(this.state?.ubicacion) ? ((this.state?.ubicacion == "true") ? "CLIENTES CON UBICACIÓN" : "CLIENTES SIN UBICACIÓN") : "MIS CLIENTES"}
+            disableScroll
+        >
+            <Container flex>
+                <SList
+                    initSpace={8}
+                    space={5}
+                    buscador
+                    // limit={20}
+                    data={clientes_filter}
+                    order={[{ key: "clinom", order: "asc" }]}
+                    render={(vd) => {
+                        return <>
+                            <SView col={"xs-12"} row center
+                                style={{
+                                    padding: 12,
+                                    borderWidth: 1,
+                                    borderColor: STheme.color.gray,
+                                    borderRadius: 4
+                                }}
+                                onPress={() => {
+                                    if (!vd.clilat || !vd.clilon) {
+                                        SPopup.open({ content: <Popups.AgregarUbicacion /> });
+                                    }
+                                    if (!visitas[vd.idcli]) {
+                                        SNavigation.navigate("/tbcli/profile", {
+                                            // SNavigation.navigate("/vendedor/cliente", {
+                                            pk: vd.idcli + "",
 
-                                                    onVisitaSuccess: ({ descripcion, tipo }) => {
-                                                        setState({ loading: true })
-                                                        SSocket.sendPromise({
-                                                            component: "visita_vendedor",
-                                                            type: "registro",
-                                                            estado: "cargando",
-                                                            key_usuario: Model.usuario.Action.getKey(),
-                                                            data: {
-                                                                idemp: state.idemp,
-                                                                idcli: vd.idcli,
-                                                                descripcion: descripcion,
-                                                                tipo: tipo,
-                                                                fecha: state.curdate.toString("yyyy-MM-dd")
-                                                            }
-                                                        }).then(e => {
-                                                            state.visitas[vd.idcli] = e.data;
-                                                            setState({ loading: false })
-                                                            SNavigation.goBack();
-                                                        }).catch(e => {
-                                                            console.error(e)
-                                                            setState({ loading: false })
-                                                        })
+                                            onVisitaSuccess: ({ descripcion, tipo }) => {
+                                                setState({ loading: true })
+                                                SSocket.sendPromise({
+                                                    component: "visita_vendedor",
+                                                    type: "registro",
+                                                    estado: "cargando",
+                                                    key_usuario: Model.usuario.Action.getKey(),
+                                                    data: {
+                                                        idemp: state.idemp,
+                                                        idcli: vd.idcli,
+                                                        descripcion: descripcion,
+                                                        tipo: tipo,
+                                                        fecha: state.curdate.toString("yyyy-MM-dd")
                                                     }
-                                                })
-                                            } else {
-                                                SNavigation.navigate("/tbcli/profile", {
-                                                    pk: vd.idcli + "",
-                                                    visita: visitas[vd.idcli],
+                                                }).then(e => {
+                                                    state.visitas[vd.idcli] = e.data;
+                                                    setState({ loading: false })
+                                                    SNavigation.goBack();
+                                                }).catch(e => {
+                                                    console.error(e)
+                                                    setState({ loading: false })
                                                 })
                                             }
-                                        }}
-                                    >
-                                        <SView col={"xs-9"} >
-                                            <SText fontSize={12}>{vd?.clinom}</SText>
+                                        })
+                                    } else {
+                                        SNavigation.navigate("/tbcli/profile", {
+                                            pk: vd.idcli + "",
+                                            visita: visitas[vd.idcli],
+                                        })
+                                    }
+                                }}
+                            >
+                                <SView col={"xs-9"} >
+                                    <SText fontSize={12}>{vd?.clinom}</SText>
+                                </SView>
+                                <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>
+                                    {this.state.visitas[vd.idcli] ?
+                                        <SView center>
+                                            <SIcon name='VisitSi' height={25} width={25} fill={STheme.color.success} />
+                                            <SHr height={2} />
+                                            <SText fontSize={7.5}>YA VISITADO</SText>
                                         </SView>
-                                        <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>
-                                            {this.state.visitas[vd.idcli] ?
-                                                <SView center>
-                                                    <SIcon name='VisitSi' height={25} width={25} fill={STheme.color.success} />
-                                                    <SHr height={2} />
-                                                    <SText fontSize={7.5}>YA VISITADO</SText>
-                                                </SView>
-                                                :
-                                                <SView center>
-                                                    <SIcon name='VisitNo' height={25} width={25} fill={STheme.color.danger} />
-                                                    <SHr height={2} />
-                                                    <SText fontSize={7.5}>POR VISITAR</SText>
-                                                </SView>
-                                            }
+                                        :
+                                        <SView center>
+                                            <SIcon name='VisitNo' height={25} width={25} fill={STheme.color.danger} />
+                                            <SHr height={2} />
+                                            <SText fontSize={7.5}>POR VISITAR</SText>
                                         </SView>
-                                    </SView>
-                                </>
-                            }}
-                        />
-                    </SView>
-                </SView>
-                <SHr height={30} />
+                                    }
+                                </SView>
+                            </SView>
+                        </>
+                    }}
+                />
             </Container>
-
             <SLoad type='window' hidden={!this.state.loading} />
         </SPage>
     }

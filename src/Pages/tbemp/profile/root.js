@@ -144,7 +144,7 @@ class index extends DPA.profile {
                         monto: "",
                         icon: 'IconPedido',
                         color: '#EB1C24',
-                        onPress: () =>  SNavigation.navigate("/tbemp/profile/tbtg", { pk: this.pk }) 
+                        onPress: () => SNavigation.navigate("/tbemp/profile/tbtg", { pk: this.pk })
                     }) : null}
                 {this.ItemCard({
                     label: "Clientes",
@@ -177,13 +177,14 @@ class index extends DPA.profile {
                     icon: 'Iventas',
                     color: '#DE6D3B',
                 })}
-                {/* {this.ItemCard({
+                {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
                     monto: SMath.formatMoney(this.state.monto_total_pedidos),
+                    onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk }),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                })} */}
+                })}
             </SView>
             <SHr />
         </SView>

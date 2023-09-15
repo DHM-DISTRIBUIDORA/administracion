@@ -6,12 +6,14 @@ import tbcli from "./tbcli";
 import tbclimapa from "./tbclimapa";
 import tbven from "./tbven";
 import tbtg from "./tbtg";
+import pedidos from "./pedidos";
 export default SPage.combinePages("profile", {
     "": root,
     tbzon,
     tbcli,
     tbclimapa,
     tbven,
-    tbtg
+    tbtg,
+    pedidos
 
 })

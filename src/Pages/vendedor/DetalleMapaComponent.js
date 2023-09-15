@@ -34,17 +34,17 @@ export default ({ state }) => {
         center
     >
         <SView row col={"xs-12"}>
-            <Card label={"Clientes con ubicación"} value={clientes_con_ubicacion.length} backgroundColor={STheme.color.success + "99"} onPress={() => {
+            <Card label={"Clientes con ubicación"} value={clientes_con_ubicacion.length} backgroundColor={STheme.color.success + "AA"} onPress={() => {
                 SNavigation.navigate("/vendedor/list", { pk: state.idemp, ubicacion: "true" })
             }} />
-            <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "99"} onPress={() => {
+            <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "AA"} onPress={() => {
                 SNavigation.navigate("/vendedor/list", { pk: state.idemp, ubicacion: "false" })
             }} />
             <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`} 
             onPress={()=>{
                 SNavigation.navigate("/vendedor/list", { pk: state.idemp})
             }}
-            backgroundColor={STheme.color.primary + "99"}
+            backgroundColor={STheme.color.primary + "AA"}
             />
         </SView>
     </SView>
