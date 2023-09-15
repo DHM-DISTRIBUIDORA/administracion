@@ -44,7 +44,7 @@ class index extends Component {
     }
 
     navBar() {
-        return <TopBar  url={"/pedidos"}  />
+        return <TopBar  url={"/pedidos"} type='menu' />
     }
 
     footer() {

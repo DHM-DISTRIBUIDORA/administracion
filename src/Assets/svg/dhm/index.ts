@@ -72,6 +72,7 @@ import VisitSi, { ReactComponent as VisitSiW } from './visitSi.svg';
 import VisitNo, { ReactComponent as VisitNoW } from './visitNo.svg';
 import SinUbicacion, { ReactComponent as SinUbicacionW } from './sinUbicacion.svg';
 import IconoPedido, { ReactComponent as IconoPedidoW } from './iconoPedido.svg';
+import IconTerminos, { ReactComponent as IconTerminosW } from './iconTerminos.svg';
 
 const Assets = {
 
@@ -148,6 +149,8 @@ const Assets = {
 	"VisitNo": { Native: VisitNo, Web: VisitNoW },
 	"SinUbicacion": { Native: SinUbicacion, Web: SinUbicacionW },
 	"IconoPedido": { Native: IconoPedido, Web: IconoPedidoW },
+	"IconTerminos": { Native: IconTerminos, Web: IconTerminosW },
+	
 	
 }
 
