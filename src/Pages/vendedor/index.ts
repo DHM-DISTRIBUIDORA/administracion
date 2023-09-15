@@ -5,10 +5,11 @@ import root from './root';
 import cliente from './cliente';
 import list from './list';
 import sinc from './sinc';
+import location from '../info/location';
 
 export default SPage.combinePages("vendedor", {
-    "": root,
-    // "": sinc,
+    // "": root,
+    "": location,
     root,
     sinc,
     cliente,

@@ -9,7 +9,9 @@ class index extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // idemp: "",
         };
+        this.state.idemp = SNavigation.getParam("idemp")
     }
 
     recibirItems = ({ tbprd }) => {
@@ -40,7 +42,7 @@ class index extends Component {
                     <SView col={"xs-10"} border={'transparent'} center>
                         <SHr height={20} />
                         <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
-                            SNavigation.replace("/public")
+                             SNavigation.navigate("/vendedor/root", { idemp: this.state.idemp })
                         }} >ACEPTAR</PButtom>
                     </SView>
                     <SHr height={30} />
