@@ -37,6 +37,7 @@ import reportes from './reportes';
 import vendedor from './vendedor';
 import dm_cabfac from './dm_cabfac';
 import transporte from './transporte';
+import info from './info';
 
 // import { Example } from "servisofts-charts"
 import test3 from './test3';
@@ -85,6 +86,7 @@ export default SPage.combinePages("/", {
   ...reportes,
   ...vendedor,
   ...transporte,
+  ...info,
   // test2,
   // test3,
   // test,
