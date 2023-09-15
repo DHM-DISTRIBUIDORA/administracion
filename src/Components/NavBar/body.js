@@ -153,7 +153,7 @@ export default class body extends React.Component {
 
                     {/* {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })} */}
                     {/* {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })} */}
-                    {this.renderIcon({ label: "Términos y condiciones", icon: "IconTerminos", path: "/privacidad" })}
+                    {this.renderIcon({ label: "Términos y condiciones", icon: "IconTerminos", path: "/privacy" })}
 
                     {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })}
                     {/* {this.renderIcon({ label: "Soporte", icon: "Msuport", path: "/ayuda" })} */}

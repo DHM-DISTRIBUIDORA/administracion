@@ -59,6 +59,7 @@ export default SPage.combinePages("/", {
   "pedidos": pedidos,
   sql,
   "privacidad": privacidad,
+  "privacy": privacidad,
   ...producto,
   "categoria": categoria,
   ...dm_cabfac,

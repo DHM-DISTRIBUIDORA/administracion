@@ -14,38 +14,38 @@ class index extends Component {
                 <SText bold center fontSize={16}>TÉRMINOS Y CONDICIONES DE USO PARA LA APLICACIÓN DHM</SText>
                 <SHr height={25} />
                 <SText style={{textAlign: 'justify'}}>
-                    Al descargar, instalar y/o usar la aplicación "HDM Distribuidora" (en adelante, "la Aplicación"), usted acepta los siguientes términos y condiciones:</SText>
+                    Al descargar, instalar y/o usar la aplicación "DHM Distribuidora" (en adelante, "la Aplicación"), usted acepta los siguientes términos y condiciones:</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                    Propiedad y Licencia: HDM Distribuidora y sus licenciantes son propietarios exclusivos de la Aplicación. Al descargar y usar la Aplicación, se le otorga una licencia limitada, no exclusiva y no transferible para usarla. No está permitido distribuir, vender, alquilar, sub-licenciar o realizar acciones que comprometan los derechos de propiedad de la Aplicación.
+                    Propiedad y Licencia: DHM Distribuidora y sus licenciantes son propietarios exclusivos de la Aplicación. Al descargar y usar la Aplicación, se le otorga una licencia limitada, no exclusiva y no transferible para usarla. No está permitido distribuir, vender, alquilar, sub-licenciar o realizar acciones que comprometan los derechos de propiedad de la Aplicación.
                 </SText>
                 <SText style={{textAlign: 'justify'}}>
                     <SHr />
-                    Uso Personal: La Aplicación está diseñada exclusivamente para su uso personal y no comercial. No debe ser utilizada para fines comerciales sin el consentimiento explícito de HDM Distribuidora.</SText>
+                    Uso Personal: La Aplicación está diseñada exclusivamente para su uso personal y no comercial. No debe ser utilizada para fines comerciales sin el consentimiento explícito de DHM Distribuidora.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Uso Aceptable: Usted se compromete a no utilizar la Aplicación de manera fraudulenta, ilegal, abusiva o de cualquier otra forma que pueda dañar, deshabilitar o sobrecargar la Aplicación o los servidores de HDM Distribuidora.</SText>
+                Uso Aceptable: Usted se compromete a no utilizar la Aplicación de manera fraudulenta, ilegal, abusiva o de cualquier otra forma que pueda dañar, deshabilitar o sobrecargar la Aplicación o los servidores de DHM Distribuidora.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Actualizaciones: HDM Distribuidora puede ofrecer actualizaciones y mejoras de la Aplicación en cualquier momento. Estas actualizaciones pueden incluir correcciones de errores, mejoras en funciones o completamente nuevas versiones.</SText>
+                Actualizaciones: DHM Distribuidora puede ofrecer actualizaciones y mejoras de la Aplicación en cualquier momento. Estas actualizaciones pueden incluir correcciones de errores, mejoras en funciones o completamente nuevas versiones.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Datos e Información del Usuario: Al usar la Aplicación, se le puede solicitar que proporcione cierta información. La recopilación y uso de esta información están regidos por la Política de Privacidad de HDM Distribuidora.</SText>
+                Datos e Información del Usuario: Al usar la Aplicación, se le puede solicitar que proporcione cierta información. La recopilación y uso de esta información están regidos por la Política de Privacidad de DHM Distribuidora.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Contenidos Generados por el Usuario: Si envía comentarios, ideas o retroalimentación, acepta que HDM Distribuidora pueda usarlos sin restricción y sin compensación hacia usted.</SText>
+                Contenidos Generados por el Usuario: Si envía comentarios, ideas o retroalimentación, acepta que DHM Distribuidora pueda usarlos sin restricción y sin compensación hacia usted.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
                 Restricciones Técnicas: No está permitido intentar acceder al código fuente de la Aplicación, realizar ingeniería inversa, o de cualquier forma intentar descifrar el código fuente.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Responsabilidades: HDM Distribuidora no garantiza que la Aplicación esté libre de errores o que siempre esté disponible. No se responsabiliza de daños directos o indirectos derivados del uso o imposibilidad de uso de la Aplicación.</SText>
+                Responsabilidades: DHM Distribuidora no garantiza que la Aplicación esté libre de errores o que siempre esté disponible. No se responsabiliza de daños directos o indirectos derivados del uso o imposibilidad de uso de la Aplicación.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Terminación: HDM Distribuidora se reserva el derecho de terminar o suspender su acceso a la Aplicación en cualquier momento y por cualquier motivo.</SText>
+                Terminación: DHM Distribuidora se reserva el derecho de terminar o suspender su acceso a la Aplicación en cualquier momento y por cualquier motivo.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Cambios a los Términos y Condiciones: HDM Distribuidora puede modificar estos términos y condiciones en cualquier momento. Al continuar usando la Aplicación después de cualquier modificación, acepta y está de acuerdo con las modificaciones.</SText>
+                Cambios a los Términos y Condiciones: DHM Distribuidora puede modificar estos términos y condiciones en cualquier momento. Al continuar usando la Aplicación después de cualquier modificación, acepta y está de acuerdo con las modificaciones.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
                 Legislación y Jurisdicción: Estos términos y condiciones se rigen por las leyes [del país o estado en cuestión]. Cualquier disputa relacionada con la Aplicación será resuelta en los tribunales [del país o estado en cuestión].</SText>
