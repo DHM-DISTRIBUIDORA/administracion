@@ -19,7 +19,7 @@ target 'distribuidora_dhm_app' do
 
   # pod 'react-native-image-resizer', :path => '../node_modules/react-native-image-resizer'
 
-  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+  # pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 #  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'

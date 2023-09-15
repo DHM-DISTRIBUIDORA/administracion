@@ -11,7 +11,37 @@ class index extends Component {
         >
             <Container>
                 <SHr height={40} />
-                <SText bold center fontSize={16}>TÉRMINOS Y CONDICIONES DE USO PARA LA APLICACIÓN DHM</SText>
+                <SText bold center fontSize={16} >{`TÉRMINOS Y CONDICIONES DE USO PARA LA APLICACIÓN DHM`}</SText>
+                <SText fontSize={14} justify>{`
+
+Al descargar, instalar y/o usar la aplicación "DHM Distribuidora" (en adelante, "la Aplicación"), usted acepta los siguientes términos y condiciones:
+
+Propiedad y Licencia: DHM Distribuidora y sus licenciantes son propietarios exclusivos de la Aplicación. Al descargar y usar la Aplicación, se le otorga una licencia limitada, no exclusiva y no transferible para usarla. No está permitido distribuir, vender, alquilar, sub-licenciar o realizar acciones que comprometan los derechos de propiedad de la Aplicación.
+
+Uso Personal: La Aplicación está diseñada exclusivamente para su uso personal y no comercial. No debe ser utilizada para fines comerciales sin el consentimiento explícito de DHM Distribuidora.
+
+Uso Aceptable: Usted se compromete a no utilizar la Aplicación de manera fraudulenta, ilegal, abusiva o de cualquier otra forma que pueda dañar, deshabilitar o sobrecargar la Aplicación o los servidores de DHM Distribuidora.
+
+Actualizaciones: DHM Distribuidora puede ofrecer actualizaciones y mejoras de la Aplicación en cualquier momento. Estas actualizaciones pueden incluir correcciones de errores, mejoras en funciones o completamente nuevas versiones.
+
+Datos e Información del Usuario: Al usar la Aplicación, se le puede solicitar que proporcione cierta información. La recopilación y uso de esta información están regidos por la Política de Privacidad de DHM Distribuidora.
+
+Uso de Ubicación: La Aplicación utilizará la ubicación en segundo plano únicamente para aquellos usuarios que sean repartidores y deseen realizar entregas de productos. Esta función está reservada exclusivamente para empleados de DHM Distribuidora. Los clientes no necesitan la función de ubicación en segundo plano para acceder a la tienda en la Aplicación.
+
+Contenidos Generados por el Usuario: Si envía comentarios, ideas o retroalimentación, acepta que DHM Distribuidora pueda usarlos sin restricción y sin compensación hacia usted.
+
+Restricciones Técnicas: No está permitido intentar acceder al código fuente de la Aplicación, realizar ingeniería inversa, o de cualquier forma intentar descifrar el código fuente.
+
+Responsabilidades: DHM Distribuidora no garantiza que la Aplicación esté libre de errores o que siempre esté disponible. No se responsabiliza de daños directos o indirectos derivados del uso o imposibilidad de uso de la Aplicación.
+
+Terminación: DHM Distribuidora se reserva el derecho de terminar o suspender su acceso a la Aplicación en cualquier momento y por cualquier motivo.
+
+Cambios a los Términos y Condiciones: DHM Distribuidora puede modificar estos términos y condiciones en cualquier momento. Al continuar usando la Aplicación después de cualquier modificación, acepta y está de acuerdo con las modificaciones.
+
+Legislación y Jurisdicción: Estos términos y condiciones se rigen por las leyes [del país o estado en cuestión]. Cualquier disputa relacionada con la Aplicación será resuelta en los tribunales [del país o estado en cuestión].
+                    
+                  `}</SText>
+                {/* <SText bold center fontSize={16}>TÉRMINOS Y CONDICIONES DE USO PARA LA APLICACIÓN DHM</SText>
                 <SHr height={25} />
                 <SText style={{textAlign: 'justify'}}>
                     Al descargar, instalar y/o usar la aplicación "DHM Distribuidora" (en adelante, "la Aplicación"), usted acepta los siguientes términos y condiciones:</SText>
@@ -48,7 +78,7 @@ class index extends Component {
                 Cambios a los Términos y Condiciones: DHM Distribuidora puede modificar estos términos y condiciones en cualquier momento. Al continuar usando la Aplicación después de cualquier modificación, acepta y está de acuerdo con las modificaciones.</SText>
                 <SHr />
                 <SText style={{textAlign: 'justify'}}>
-                Legislación y Jurisdicción: Estos términos y condiciones se rigen por las leyes [del país o estado en cuestión]. Cualquier disputa relacionada con la Aplicación será resuelta en los tribunales [del país o estado en cuestión].</SText>
+                Legislación y Jurisdicción: Estos términos y condiciones se rigen por las leyes [del país o estado en cuestión]. Cualquier disputa relacionada con la Aplicación será resuelta en los tribunales [del país o estado en cuestión].</SText> */}
                 <SHr height={40} />
             </Container>
         </SPage>
