@@ -52,12 +52,12 @@ export default class index extends Component {
 						{
 							!Model.usuario.Action.getKey() ?
 								(this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' }))
-								: (this.getItem({ key: "favorito", title: 'Favoritos', icon: 'MenuFavoritos', url: '/favoritos' }))
+								: (this.getItem({ key: "favorito", title: 'Mis pedidos', icon: 'IconoPedido', url: '/pedidos' }))
 						}
 						{
 							!Model.usuario.Action.getKey() ?
 								null
-								: (this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/carrito/pedido' }))
+								: (this.getItem({ key: "pedido", title: 'Carrito', icon: 'MenuPedido', url: '/carrito/pedido' }))
 						}
 						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 					</SView>
