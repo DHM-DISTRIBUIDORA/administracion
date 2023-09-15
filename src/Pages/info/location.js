@@ -31,7 +31,7 @@ class index extends Component {
                         <SHr height={20} />
                         <SText fontSize={22} color={STheme.color.white} bold center>AUTORIZAR TU UBICACIÓN</SText>
                         <SHr height={20} />
-                        <SText fontSize={16} color={STheme.color.white} center   >DHM recopila datos de ubicación para habilitar el seguimiento de actividad física incluso cuando la aplicación está cerrada o no está en uso.</SText>
+                        <SText fontSize={16} color={STheme.color.white} center   >DHM recopila datos de su ubicación en segundo plano para habilitar el seguimiento de los envios y vicitas de nuestros transportistas incluso cuando la aplicación está cerrada o no está en uso.</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
@@ -55,7 +55,7 @@ class index extends Component {
 
     render() {
         return <>
-            <SPage footer={this.footer()}  >
+            <SPage   >
                 <Container flex  >
                     {this.getLocation()}
                 </Container>
