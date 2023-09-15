@@ -59,10 +59,14 @@ class index extends Component {
 
         }, 1000 * 60).then(e => {
             this.setState({ loading: false, error: "" })
-            console.error(e);
-            alert("EXITO")
             // Model.carrito.Action.removeAll()
             // SNavigation.replace("/carrito/notaventa", { idven: e.data.idven })
+            SNavigation.replace("/dm_cabfac/recibo", {
+                pk: e?.data?.idven,
+                onBack: () => {
+                    SNavigation.replace("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor })
+                }
+            })
             // SNavigation.replace("/tbven/recibo", { pk: e.data.idven })
 
             // SPopup.alert("¡Pedido Exitoso!")
@@ -129,19 +133,19 @@ class index extends Component {
 
                 <SText color={STheme.color.danger}>{this.state.error}</SText>
                 <SHr />
-                <PButtom primary
+                {/* <PButtom primary
                     loading={this.state.loading}
                     onPress={() => {
                         this.handlePress(this.state?.client)
 
                     }} >VENTA</PButtom>
-                <SHr h={50} />
+                <SHr h={50} /> */}
                 <PButtom primary
                     loading={this.state.loading}
                     onPress={() => {
                         this.handlePressPedido(this.state?.client)
 
-                    }} >PEDIDO</PButtom>
+                    }} >REALIZAR PEDIDO</PButtom>
             </Container>
 
         </SPage>

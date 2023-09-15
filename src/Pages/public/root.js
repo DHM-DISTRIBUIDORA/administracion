@@ -23,11 +23,12 @@ class index extends Component {
         if (!productos) return <SLoad />
         return <SList
             data={productos}
-            limit={10}
+            limit={30}
             buscador
             order={[{ key: "stock", order: "desc" }]}
-            // render={obj => <Producto.Card 
-            render={obj => <Producto.Cantidad
+            // filter={}
+            render={obj => <Producto.Card 
+            // render={obj => <Producto.Cantidad
                 col={"xs-12"}
                 width={0}
                 data={obj}
@@ -43,7 +44,7 @@ class index extends Component {
     }
 
     navBar() {
-        return <TopBar type={"menu"} title='' />
+        return <TopBar  url={"/pedidos"} type='menu' />
     }
 
     footer() {

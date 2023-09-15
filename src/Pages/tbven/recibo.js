@@ -8,11 +8,11 @@ import { Carrito, PButtom } from '../../Components';
 
 class index extends DPA.profile {
     constructor(props) {
-        super(props, {
+       super(props, {
             Parent: Parent,
             item: item,
             excludes: ['usest', 'iniciales', 'modpreven', 'idcentro', 'suctod', 'usultsuc', 'verval', 'selcob', 'autcred', 'pcpred', 'facauto', 'uimpr'],
-            // obj: {}
+            // obj: {} 
             title: "Venta exitosa"
         });
     }
@@ -31,7 +31,7 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
-        return Parent.model.Action.getVenta({ idven: this.pk });
+        return this.state?.obj;
     }
     $item() {
         if (!this.state?.obj) return <SLoad />
@@ -75,19 +75,8 @@ class index extends DPA.profile {
         </>
     }
     $footer() {
-        // let detalle = Model.tbvd.Action.getAll({ idven: this.pk })
-        // const productos = Model.tbprd.Action.getAll();
-        // if (!detalle) return <SLoad />
-        // if (!productos) return <SLoad />
-        // return <SView col={"xs-12"}>
-        //     <SList data={detalle} render={vd => {
-        //         const producto = productos[vd.idprd]
-        //         return <SView>
-        //             <SText>{producto?.prdnom}</SText>
-        //             <SText>Bs. {SMath.formatMoney(vd?.vdpre)}   X   {vd?.vdcan}</SText>
-        //         </SView>
-        //     }} />
-        // </SView>
+
+        if (!this.state?.obj) return <SLoad />
         return <>
             <Carrito.DetalleVenta idven={this.pk} />
             <SHr height={20} />

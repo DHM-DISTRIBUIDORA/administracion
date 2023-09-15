@@ -28,32 +28,6 @@ export default class root extends Component {
         })
     }
 
-    // realizarVisita(o, { descripcion, tipo }) {
-    //     if (this.state.loading) return null;
-    //     if (this.state.visitas[o.idcli]) return null;
-    //     this.setState({ loading: true })
-    //     SSocket.sendPromise({
-    //         component: "visita_vendedor",
-    //         type: "registro",
-    //         estado: "cargando",
-    //         key_usuario: Model.usuario.Action.getKey(),
-    //         data: {
-    //             idemp: this.idemp,
-    //             idcli: o.idcli,
-    //             descripcion: descripcion,
-    //             tipo: tipo,
-    //             fecha: this.state.curdate.toString("yyyy-MM-dd")
-    //         }
-    //     }).then(e => {
-    //         this.state.visitas[o.idcli] = e.data;
-    //         this.setState({ loading: false })
-    //     }).catch(e => {
-    //         console.error(e)
-    //         this.setState({ loading: false })
-    //     })
-    // }
-
-
 
     render() {
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>

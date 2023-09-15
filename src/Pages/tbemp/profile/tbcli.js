@@ -7,6 +7,7 @@ import Model from '../../../Model';
 import item from "../item"
 import item2 from '../../tbcli/item';
 import { Text, TouchableOpacity, View } from 'react-native';
+import StoreTemp from '../../../StoreTemp';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
@@ -97,6 +98,11 @@ class Lista extends DPA.list {
         });
     }
 
+    componentDidMount() {
+        StoreTemp.getItem("clientes").then(e => {
+            this.setState({ data: e })
+        })
+    }
     $filter(data) {
         return data.cliest == "0"
     }
@@ -113,7 +119,7 @@ class Lista extends DPA.list {
         SNavigation.navigate("/tbcli/profile", { pk: data.idcli })
     }
     $getData() {
-        return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })
+        return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk }) ?? this.state.data
         // return Parent2.model.Action.getAll({ cliidemp: this.props.route.params.pk})
     }
 }

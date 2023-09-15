@@ -23,6 +23,7 @@ import tbzon from './tbzon';
 import tbemt from './tbemt';
 import tbprd from './tbprd';
 import tbprdlin from './tbprdlin';
+import tbtg from './tbtg';
 import ajustes from './ajustes';
 import wiki from './wiki';
 import distribucion from './distribucion';
@@ -30,14 +31,24 @@ import mapa from './mapa';
 import carrito from './carrito';
 import tbcli from './tbcli';
 import tbven from './tbven';
-import test3 from './test3';
+import tbalm from './tbalm';
 import reportes from './reportes';
+
+import vendedor from './vendedor';
+import dm_cabfac from './dm_cabfac';
+import transporte from './transporte';
+
+// import { Example } from "servisofts-charts"
+import test3 from './test3';
 import test2 from "./test2"
 import test from "./test"
-import vendedor from './vendedor';
-// import { Example } from "servisofts-charts"
+import storage from "./storage"
+// export default SPage.combinePages("/", {
+//   "":storage,
+// });
+
 export default SPage.combinePages("/", {
-  // "":test,
+  // "":storage,
   "": carga,
   "root": root,
   wiki,
@@ -48,8 +59,10 @@ export default SPage.combinePages("/", {
   "pedidos": pedidos,
   sql,
   "privacidad": privacidad,
+  "privacy": privacidad,
   ...producto,
   "categoria": categoria,
+  ...dm_cabfac,
   ...clientes,
   ...usuario,
   ...perfil,
@@ -60,17 +73,20 @@ export default SPage.combinePages("/", {
   ...tbzon,
   ...tbprd,
   ...tbprdlin,
+  ...tbtg,
   ...ajustes,
   ...mapa,
   ...distribucion,
   ...tbemt,
   ...carrito,
   ...tbcli,
+  ...tbalm,
   ...tbven,
   ...reportes,
   ...vendedor,
-  test2,
-  test3,
-  test,
+  ...transporte,
+  // test2,
+  // test3,
+  // test,
   // "chart": Example
 });

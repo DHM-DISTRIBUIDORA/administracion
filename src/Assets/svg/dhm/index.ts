@@ -67,7 +67,12 @@ import MSinPedidosMap, { ReactComponent as MSinPedidosMapW } from './mSinPedidos
 import MConPedidosMap, { ReactComponent as MConPedidosMapW } from './mConPedidosMap.svg';
 import MVisit, { ReactComponent as MVisitW } from './mVisit.svg';
 import Icamera, { ReactComponent as IcameraW } from './icamera.svg';
-
+import IconPedido, { ReactComponent as IconPedidoW } from './iconPedido.svg';
+import VisitSi, { ReactComponent as VisitSiW } from './visitSi.svg';
+import VisitNo, { ReactComponent as VisitNoW } from './visitNo.svg';
+import SinUbicacion, { ReactComponent as SinUbicacionW } from './sinUbicacion.svg';
+import IconoPedido, { ReactComponent as IconoPedidoW } from './iconoPedido.svg';
+import IconTerminos, { ReactComponent as IconTerminosW } from './iconTerminos.svg';
 
 const Assets = {
 
@@ -139,27 +144,14 @@ const Assets = {
 	"MConPedidosMap": { Native: MConPedidosMap, Web: MConPedidosMapW },
 	"MVisit": { Native: MVisit, Web: MVisitW },
 	"Icamera": { Native: Icamera, Web: IcameraW },
+	"IconPedido": { Native: IconPedido, Web: IconPedidoW },
+	"VisitSi": { Native: VisitSi, Web: VisitSiW },
+	"VisitNo": { Native: VisitNo, Web: VisitNoW },
+	"SinUbicacion": { Native: SinUbicacion, Web: SinUbicacionW },
+	"IconoPedido": { Native: IconoPedido, Web: IconoPedidoW },
+	"IconTerminos": { Native: IconTerminos, Web: IconTerminosW },
 	
 	
-	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 export default Assets;

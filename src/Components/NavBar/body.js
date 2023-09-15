@@ -146,15 +146,18 @@ export default class body extends React.Component {
                 <SView col={"xs-12"} center  >
                     {this.renderIcon({ label: "Inicio", icon: "Minicio", path: "/root" })}
                     {this.renderIcon({ label: "Mis notificaciones", icon: "Mnotify", path: "/direccion", requireUser: true })}
-                    {this.renderIcon({ label: "Avances por empresa", icon: "Compras", path: "/misCompras", requireUser: true })}
-                    {this.renderIcon({ label: "Respaldos", icon: "mCupon", path: "/cupones", requireUser: true })}
-                    {this.renderIcon({ label: "Conexiones", icon: "Billetera", path: "/billetera", requireUser: true })}
+                    {/* {this.renderIcon({ label: "Avances por empresa", icon: "Compras", path: "/misCompras", requireUser: true })} */}
+                    {/* {this.renderIcon({ label: "Respaldos", icon: "mCupon", path: "/cupones", requireUser: true })} */}
+                    {/* {this.renderIcon({ label: "Conexiones", icon: "Billetera", path: "/billetera", requireUser: true })} */}
                     {this.renderIcon({ label: "Configuración", icon: "Mconf", path: "/root", requireUser: true })}
 
                     {/* {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })} */}
+                    {/* {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })} */}
+                    {this.renderIcon({ label: "Términos y condiciones", icon: "IconTerminos", path: "/privacy" })}
+
                     {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })}
-                    {this.renderIcon({ label: "Soporte", icon: "Msuport", path: "/ayuda" })}
-                    {this.renderIcon({ label: "Sql", icon: "Msuport", path: "/sql" })}
+                    {/* {this.renderIcon({ label: "Soporte", icon: "Msuport", path: "/ayuda" })} */}
+                    {/* {this.renderIcon({ label: "Sql", icon: "Msuport", path: "/sql" })} */}
                     {this.renderIcon({
                         label: "Salir", icon: "Mexit", requireUser: true,
                         onPress: () => {

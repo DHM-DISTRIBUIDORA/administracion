@@ -14,13 +14,20 @@ import BackgroundImage from './Components/BackgroundImage';
 import Model from './Model';
 import { version } from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
-
+import SDB from 'servisofts-db'
 
 setProps(Config.socket);
 // Firebase.init();
 DeviceKey.init();
-BackgroundLocation();
+// BackgroundLocation();
 const App = (props) => {
+    // SDB.init({
+    //     dbName: "namedb",
+    //     version: 1,
+    //     tables: {
+    //         "usuarios": { keyPath: "key" }
+    //     }
+    // })
     return <Redux>
         <SComponentContainer
             debug

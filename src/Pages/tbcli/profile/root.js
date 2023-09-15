@@ -189,7 +189,7 @@ class index extends DPA.profile {
                                 },
                             )
                         }}>
-                        <SText color={STheme.color.white}>EDITAR UBICACIÓN</SText>
+                        <SText color={STheme.color.white}>{((objeto?.clilan == "") || (objeto?.clilon == "")) ? "AGREGAR UBICACIÓN" : "EDITAR UBICACIÓN"}</SText>
                     </SView>
                 </SView>
             </SView>
@@ -266,7 +266,7 @@ class index extends DPA.profile {
                         const opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
                         return <SView col={"xs-12"} padding={8} center>
                             <SHr />
-                            <SText fontSize={20}>Cuentanos como te fue en la visita?</SText>
+                            <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
                             <SHr />
                             <SHr />
                             <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
