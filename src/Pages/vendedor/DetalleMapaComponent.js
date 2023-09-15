@@ -1,16 +1,19 @@
 import React, { Component } from 'react'
-import { SLoad, SMapView, SNavigation, SText, STheme, SView } from 'servisofts-component'
+import { SHr, SLoad, SMapView, SNavigation, SText, STheme, SView } from 'servisofts-component'
 
 
 const Card = ({ label, value, backgroundColor, onPress }) => {
     return <SView width={100} height={100} center padding={8}>
         <SView col={"xs-12"} flex card center style={{
-            backgroundColor: backgroundColor ?? STheme.color.card
+            backgroundColor: backgroundColor ?? STheme.color.card,
+            borderWidth: 2,
+            borderColor: backgroundColor
         }} onPress={onPress}>
             <SView flex center>
-                <SText fontSize={18}>{value}</SText>
+                <SText fontSize={18} color={STheme.color.text}>{value}</SText>
             </SView>
-            <SText center fontSize={10} color={STheme.color.gray}>{label}</SText>
+            <SText center fontSize={10} color={STheme.color.text}>{label}</SText>
+            <SHr height={15}/>
         </SView>
     </SView>
 }
@@ -31,13 +34,18 @@ export default ({ state }) => {
         center
     >
         <SView row col={"xs-12"}>
-            <Card label={"Clientes con ubicacion"} value={clientes_con_ubicacion.length} backgroundColor={STheme.color.success + "99"} onPress={() => {
-                SNavigation.navigate("/tbemp/profile/tbcli", { pk: state.idemp })
+            <Card label={"Clientes con ubicación"} value={clientes_con_ubicacion.length} backgroundColor={STheme.color.success + "99"} onPress={() => {
+                SNavigation.navigate("/vendedor/list", { pk: state.idemp, ubicacion: "true" })
             }} />
-            <Card label={"Clientes sin ubicacion"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "99"} onPress={() => {
-                SNavigation.navigate("/tbemp/profile/tbcli", { pk: state.idemp })
+            <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "99"} onPress={() => {
+                SNavigation.navigate("/vendedor/list", { pk: state.idemp, ubicacion: "false" })
             }} />
-            <Card label={"visitas"} value={`${clientes_visitados.length} / ${clientes.length}`} />
+            <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`} 
+            onPress={()=>{
+                SNavigation.navigate("/vendedor/list", { pk: state.idemp})
+            }}
+            backgroundColor={STheme.color.primary + "99"}
+            />
         </SView>
     </SView>
 }
