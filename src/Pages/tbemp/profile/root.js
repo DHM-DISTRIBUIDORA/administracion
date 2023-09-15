@@ -137,6 +137,15 @@ class index extends DPA.profile {
             <SView col={"xs-12"} center row style={{
                 justifyContent: "space-between"
             }}>
+                {obj.idemt == 4 ?
+                    this.ItemCard({
+                        label: "Pedidos",
+                        cant: this.state.cantidad_clientes,
+                        monto: "",
+                        icon: 'IconPedido',
+                        color: '#EB1C24',
+                        onPress: () =>  SNavigation.navigate("/tbemp/profile/tbtg", { pk: this.pk }) 
+                    }) : null}
                 {this.ItemCard({
                     label: "Clientes",
                     cant: this.state.cantidad_clientes,

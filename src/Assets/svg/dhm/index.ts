@@ -67,6 +67,7 @@ import MSinPedidosMap, { ReactComponent as MSinPedidosMapW } from './mSinPedidos
 import MConPedidosMap, { ReactComponent as MConPedidosMapW } from './mConPedidosMap.svg';
 import MVisit, { ReactComponent as MVisitW } from './mVisit.svg';
 import Icamera, { ReactComponent as IcameraW } from './icamera.svg';
+import IconPedido, { ReactComponent as IconPedidoW } from './iconPedido.svg';
 
 
 const Assets = {
@@ -139,6 +140,8 @@ const Assets = {
 	"MConPedidosMap": { Native: MConPedidosMap, Web: MConPedidosMapW },
 	"MVisit": { Native: MVisit, Web: MVisitW },
 	"Icamera": { Native: Icamera, Web: IcameraW },
+	"IconPedido": { Native: IconPedido, Web: IconPedidoW },
+	
 	
 	
 	

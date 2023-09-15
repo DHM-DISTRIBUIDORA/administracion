@@ -41,4 +41,14 @@ export default class Action extends SAction {
             fecha: sdate.toString("yyyy-MM-dd")
         })
     }
+    getEntregas({ idemp, sdate }) {
+        // dia: , fecha: this.state.curdate.toString("yyyy-MM-dd") }
+        return SSocket.sendPromise({
+            ...this.model.info,
+            type: "getClientesDia",
+            idemp: idemp + "",
+            dia: sdate.date.getDay(),
+            fecha: sdate.toString("yyyy-MM-dd")
+        })
+    }
 }

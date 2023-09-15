@@ -28,5 +28,7 @@ target 'distribuidora_dhm_app' do
 
   pod 'RNSound', :path => '../node_modules/react-native-sound'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
 end
 

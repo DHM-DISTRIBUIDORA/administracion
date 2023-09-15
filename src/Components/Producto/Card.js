@@ -5,6 +5,7 @@ import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Background from 'servisofts-component/img/Background';
 import Model from '../../Model';
+import Cantidad from './Cantidad';
 export type ProductoCardPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -57,12 +58,12 @@ export default class index extends Component<ProductoCardPropsType> {
         </SView>
     }
 
-    handleAddCarrito = () => {
-        let productos = Model.carrito.Action.getState().productos;
-        Object.assign(productos, { [this.props.data.idprd]: { cantidad: 1, data: this.props.data } });
-        // console.log(productos);
-        Model.carrito.Action.setState({ productos });
-    }
+    // handleAddCarrito = () => {
+    //     let productos = Model.carrito.Action.getState().productos;
+    //     Object.assign(productos, { [this.props.data.idprd]: { cantidad: 1, data: this.props.data } });
+    //     // console.log(productos);
+    //     Model.carrito.Action.setState({ productos });
+    // }
     render() {
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
         const productos = Model.carrito.Action.getState().productos ?? {};
@@ -77,20 +78,20 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView width={8} />
                 <SView width={80} height={80} card>
                     <SImage src={require('../../Assets/img/foto.png')}
-                    style={{
-                        position: "absolute",
-                        zIndex: 90,
-                        top: 0,
-                    }}
-                    />  
+                        style={{
+                            position: "absolute",
+                            zIndex: 90,
+                            top: 0,
+                        }}
+                    />
                     <SImage enablePreview src={SSocket.api.root + "tbprd/" + idprd}
-                     style={{
-                        position: "absolute",
-                        zIndex: 99,
-                        top: 0,
-                        backgroundColor:"#ffffff50"
-                    }}
-                    /> 
+                        style={{
+                            position: "absolute",
+                            zIndex: 99,
+                            top: 0,
+                            backgroundColor: "#ffffff50"
+                        }}
+                    />
                 </SView>
             </SView>
             <SHr />
@@ -99,14 +100,18 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView flex height style={{ justifyContent: "flex-end" }}>
                     <SText fontSize={16}>Bs.{SMath.formatMoney(prdpoficial, 2)}</SText>
                 </SView>
-                <SView width={30} height={30} card center onPress={this.handleAddCarrito}
-                    style={{
-                        backgroundColor: (incar?.cantidad > 0 ? STheme.color.text : STheme.color.card)
-                    }}
-                >
-                    {incar?.cantidad > 0 ? <SText fontSize={16} bold color={STheme.color.background} >{incar.cantidad}</SText> : <SText fontSize={23} bold >{"+"}</SText>}
+                <Cantidad defaultValue={incar?.cantidad ?? 0}
+                    limit={this.props?.data?.stock ?? 0}
+                    onChange={(cant) => {
 
-                </SView>
+                        Object.assign(productos, { [this.props?.data?.idprd]: { cantidad: cant, data: this.props?.data } });
+                        // console.log(productos);
+                        if (cant <= 0) {
+                            delete productos[this.props?.data?.idprd]
+                        }
+                        Model.carrito.Action.setState({ productos });
+                    }} />
+
             </SView>
 
 

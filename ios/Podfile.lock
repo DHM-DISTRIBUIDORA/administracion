@@ -437,6 +437,8 @@ PODS:
   - RNGoogleSignin (7.2.2):
     - GoogleSignIn (~> 6.1.0)
     - React-Core
+  - RNPermissions (3.9.0):
+    - React-Core
   - RNReanimated (2.13.0):
     - DoubleConversion
     - FBLazyVector
@@ -540,6 +542,7 @@ DEPENDENCIES:
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
+  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
@@ -674,6 +677,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
+  RNPermissions:
+    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -765,6 +770,7 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: 7580e6618798be9d090524bb31538378f92ce746
+  RNPermissions: 96d77273ec6e3e865503565a9efebef95e6ad80a
   RNReanimated: e164e3683722a8fd34f116d30ea8ba010660d3f0
   RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
@@ -775,6 +781,6 @@ SPEC CHECKSUMS:
   servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 371487c12c8e993518b56948bf9c76b506daf445
+PODFILE CHECKSUM: 67cda0c3b0d1121625f4ffcdfdbde2b22563c127
 
 COCOAPODS: 1.11.3
