@@ -24,6 +24,7 @@ import Perfil, { ReactComponent as PerfilW } from './perfil.svg';
 import Password, { ReactComponent as PasswordW } from './password.svg';
 import InputEmail, { ReactComponent as InputEmailW } from './inputEmail.svg';
 import InputPhone, { ReactComponent as InputPhoneW } from './inputPhone.svg';
+import IProductos, { ReactComponent as IProductosW } from './iProductos.svg';
 
 import Mconf, { ReactComponent as MconfW } from './m-conf.svg';
 import Minicio, { ReactComponent as MinicioW } from './m-inicio.svg';
@@ -152,9 +153,8 @@ const Assets = {
 	"IconoPedido": { Native: IconoPedido, Web: IconoPedidoW },
 	"IconTerminos": { Native: IconTerminos, Web: IconTerminosW },
 	"IconLocation": { Native: IconLocation, Web: IconLocationW },
-	
-	
-	
+	"IProductos": { Native: IProductos, Web: IProductosW },
+
 }
 
 export default Assets;

@@ -9,6 +9,7 @@ import SChart from "servisofts-charts"
 import { Header, Usuario } from '../../../Components';
 import ZonasDelDia from './components/ZonasDelDia';
 import IniciarTransporte from './components/IniciarTransporte';
+import { SelectEntreFechas } from '../../../Components/Fechas';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -28,16 +29,38 @@ class index extends DPA.profile {
 
 
     }
-    componentDidMount() {
-        SSocket.sendPromise({
+    // componentDidMount() {
+    //     SSocket.sendPromise({
+    //         component: "dhm",
+    //         type: "perfilEmp",
+    //         idemp: this.pk + ""
+    //     }).then((e) => {
+    //         const obj = e.data[0]
+    //         this.setState({ ...obj })
+    //     }).catch(e => console.error(e))
+    // }
+
+    getData({ fecha_inicio, fecha_fin }) {
+        console.log(this.pk)
+        console.log("ENTRO A FECHAS")
+        const request = {
             component: "dhm",
             type: "perfilEmp",
-            idemp: this.pk + ""
-        }).then((e) => {
+            fecha_inicio: fecha_inicio,
+            fecha_fin: fecha_fin,
+            idemp: SNavigation.getParam("pk")
+            // idemp: this.pk + ""
+        }
+        this.setState({ loading: true })
+        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             const obj = e.data[0]
+            console.log(obj)
             this.setState({ ...obj })
-        }).catch(e => console.error(e))
+        }).catch(e => {
+            console.error(e)
+        })
     }
+
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
@@ -132,6 +155,7 @@ class index extends DPA.profile {
             </SView>
             <SHr h={30} />
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
+            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getData(e)} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} /> : null}
             <SHr h={30} />
             <SView col={"xs-12"} center row style={{

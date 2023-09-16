@@ -19,6 +19,24 @@ class index extends DPA.edit {
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
     }
+
+    $inputs() {
+        var inp = super.$inputs();
+
+        inp["idemt"].label = "Id tipo empleado"
+        inp["idemt"].editable = false;
+        inp["idemt"].value = this.state.idemt;
+        inp["idemt"].onPress = () => {
+            SNavigation.navigate("/tbemt", {
+                onSelect: (emt) => {
+                    console.log(emt);
+                    this.setState({ idemt: emt.idemt })
+                }
+            })
+        }
+
+        return inp;
+    }
     
     $onSubmit(data) {
         let dataFinal = {

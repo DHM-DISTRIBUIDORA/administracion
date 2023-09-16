@@ -15,6 +15,25 @@ class index extends DPA.new {
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
     }
+
+    $inputs() {
+        var inp = super.$inputs();
+
+        inp["idemt"].label = "Id tipo empleado"
+        inp["idemt"].editable = false;
+        inp["idemt"].value = this.state.idemt;
+        inp["idemt"].onPress = () => {
+            SNavigation.navigate("/tbemt", {
+                onSelect: (emt) => {
+                    console.log(emt);
+                    this.setState({ idemt: emt.idemt })
+                }
+            })
+        }
+
+        return inp;
+    }
+    
     $onSubmit(data) {
         delete data["empmarc"]
         Parent.model.Action.registro({
