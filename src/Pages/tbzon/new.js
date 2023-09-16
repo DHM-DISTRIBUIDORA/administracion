@@ -20,6 +20,16 @@ class index extends DPA.new {
         var inp = super.$inputs();
         inp["zcod"].label = "Código zona"
         inp["idemp"].label = "Id empleado"
+        inp["idemp"].editable = false;
+        inp["idemp"].value = this.state.idemp;
+        inp["idemp"].onPress = () => {
+            SNavigation.navigate("/tbemp", {
+                onSelect: (emp) => {
+                    console.log(emp);
+                    this.setState({ idemp: emp.idemp })
+                }
+            })
+        }
         inp["znom"].label = "Nombre zona"
         return inp;
     }
