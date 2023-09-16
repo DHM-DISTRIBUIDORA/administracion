@@ -39,11 +39,13 @@ import dm_cabfac from './dm_cabfac';
 import transporte from './transporte';
 import info from './info';
 
-// import { Example } from "servisofts-charts"
 import test3 from './test3';
 import test2 from "./test2"
 import test from "./test"
-import storage from "./storage"
+
+// import storage from "./storage"
+// import { Example } from "servisofts-charts"
+
 // export default SPage.combinePages("/", {
 //   "":storage,
 // });

@@ -1,9 +1,9 @@
 // Import the functions you need from the SDKs you need
 //import messaging from '@react-native-firebase/messaging';
 //
-import { Alert } from 'react-native';
+import { Alert, Linking } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
-import { Notifications } from 'react-native-notifications';
+// import { Notifications, } from 'react-native-notifications';
 import DeviceKey from './DeviceKey';
 
 const sleep = ms => {
@@ -12,9 +12,23 @@ const sleep = ms => {
 
 
 class Firebase {
+    static async getInitialURL() {
+        messaging()
+            .getInitialNotification()
+            .then(remoteMessage => {
+                console.log("entro aca en el initiallll", remoteMessage);
+                if (remoteMessage?.data?.deepLink) Linking.openURL(remoteMessage.data.deepLink)
+            })
+        // Notifications.getInitialNotification().then(notification => {
+        //     if (!notification) return;
+        //     const { deepLink = null } = notification?.payload || {};
+        //     if (deepLink) Linking.openURL(deepLink);
 
+        // })
+    }
     static async init() {
         try {
+
 
             await sleep(500);
             // await messaging().hasPermission();
@@ -33,6 +47,7 @@ class Firebase {
             // await messaging().setAutoInitEnabled(true);
             messaging().getToken().then(fcmToken => {
                 if (fcmToken) {
+                    console.log(fcmToken)
                     DeviceKey.setKey(fcmToken);
                 }
             }).catch(err => {
@@ -40,13 +55,21 @@ class Firebase {
             });
             messaging().setBackgroundMessageHandler(async remoteMessage => {
                 console.log('Message handled in the background!', remoteMessage);
+                // if (remoteMessage.data.deepLink) Linking.openURL(remoteMessage.data.deepLink)
             });
+
             const unsubscribe = messaging().onMessage(async remoteMessage => {
                 console.log('Message received. ', remoteMessage);
-                
-                Notifications.postLocalNotification(remoteMessage.notification);
-                // Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+                // if (remoteMessage.data.deepLink) Linking.openURL(remoteMessage.data.deepLink)
             });
+
+            // Notification tap
+            messaging().onNotificationOpenedApp(remoteMessage => {
+                console.log('Notification caused app to open from background state:', remoteMessage);
+                if (remoteMessage.data.deepLink) Linking.openURL(remoteMessage.data.deepLink)
+            });
+
+
         } catch (e) {
             console.log(e)
         }
