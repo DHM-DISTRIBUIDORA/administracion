@@ -204,7 +204,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_total_pedidos),
+                    monto: SMath.formatMoney(this.state.monto_pedidos),
                     onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk }),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
