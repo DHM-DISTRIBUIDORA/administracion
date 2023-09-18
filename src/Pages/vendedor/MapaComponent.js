@@ -6,7 +6,7 @@ import SSocket from 'servisofts-socket'
 import Model from '../../Model';
 import { Btn } from '../../Components';
 
-
+// react-native-maps-super-cluster
 
 export default class MapaComponent extends Component {
 

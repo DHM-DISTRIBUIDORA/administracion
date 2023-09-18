@@ -44,6 +44,7 @@ export default class index extends Component {
         this.time("read");
         SDB.getItem(keyStore).then(e => {
             this.timeEnd("read");
+            // console.log(e);
             this.setState({ data: e })
         
         }).catch(e => {
@@ -62,7 +63,7 @@ export default class index extends Component {
             "type": "getAll",
             "cabecera": "registro_administrador",
             // "fecha_edit": "2022-09-10T17:00:50",
-            // "fecha_edit": "2023-09-10T17:00:50",
+            "fecha_edit": "2023-09-10T17:00:50",
             "servicio": {
                 "key": "b98d744a-6629-4c80-b513-f007c884e8e1"
             }
@@ -72,6 +73,8 @@ export default class index extends Component {
             this.save(Object.values(e.data))
             this.setState({ loading: "usuarios cargados" });
             // console.log(e);
+        }).catch((e)=>{
+            console.error(e);
         })
     }
     render() {
@@ -83,7 +86,7 @@ export default class index extends Component {
                     <Btn onPress={() => console.log("ESTA BIEn")}>debug</Btn>
                     <Btn onPress={this.pedirUsuarios.bind(this)}>PEDIR USUARIOS</Btn>
                     <Btn onPress={async () => {
-                        await this.save(new Array(100).fill({ key: SUuid(), "nombre": "Juan" }))
+                        await this.save(new Array(10).fill({ key: SUuid(), "nombre": "Juan", "desrcripcion":"Hola, Mi nombre es juan \n soy pro activo." }))
                         // this.read()
                     }}>ADD USER</Btn>
                     <Btn onPress={async () => {
@@ -97,7 +100,7 @@ export default class index extends Component {
                 <SText>{this.state.loading}</SText>
                 <SText>{!this.state.data ? "SIN DATA" : this.state.data.length} </SText>
             </Container>
-            <STable
+            {/* <STable
                 ref={(ref) => this.table = ref}
                 loadData={new Promise((ok, error) => {
                     SDB.getItem(keyStore).then(e => {
@@ -114,7 +117,7 @@ export default class index extends Component {
                         console.error(e);
                     })
                 })}
-            />
+            /> */}
         </SPage>
     }
 
