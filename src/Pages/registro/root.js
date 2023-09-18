@@ -44,10 +44,10 @@ class root extends Component {
                             Nombres: { placeholder: "Nombre", isRequired: true, defaultValue: defaultData.Nombres },
                             Apellidos: { placeholder: "Apellidos", isRequired: true, defaultValue: defaultData.Apellidos },
                             Correo: { placeholder: "Correo", type: "email", isRequired: true, defaultValue: defaultData.Correo },
-                            FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: false, type: "date", isRequired: true },
+                            FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: false, type: "date"},
                             //telefono: { placeholder: "Celular", isRequired: true, type: "telefono", isRequired:true},
                             Telefono: { placeholder: "Celular", isRequired: false, isRequired: true },
-                            CI: { placeholder: "Carnet de Identidad", isRequired: false, isRequired: true },
+                            CI: { placeholder: "Carnet de Identidad", isRequired: false },
                             Password: { placeholder: "Password", isRequired: true, type: "password" },
                             RepPassword: { placeholder: "Repetir password", type: "password", isRequired: true },
                         }}
