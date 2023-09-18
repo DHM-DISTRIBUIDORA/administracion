@@ -8,6 +8,7 @@ import SSocket from "servisofts-socket"
 import { Btn, Header, PButtom, Visitas } from '../../../Components';
 import SCharts from 'servisofts-charts';
 import SMapView from "servisofts-component/Component/SMapView";
+import { SelectEntreFechas } from '../../../Components/Fechas';
 
 
 class index extends DPA.profile {
@@ -30,22 +31,28 @@ class index extends DPA.profile {
             title: "Perfil de " + Parent.title,
         });
         this.pk = SNavigation.getParam("pk");
+        this.visita = SNavigation.getParam("visita", false);
         this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
         this.visita = SNavigation.getParam("visita");
 
     }
 
     componentDidMount() {
+
+    }
+
+    loadData({ fecha_inicio, fecha_fin }) {
         SSocket.sendPromise({
             component: "tbcli",
             type: "getPerfil",
-            idcli: this.pk + ""
+            idcli: this.pk + "",
+            fecha_inicio,
+            fecha_fin
         }).then((e) => {
             const obj = e.data[0]
             this.setState({ ...obj })
         }).catch(e => console.error(e))
     }
-
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
@@ -258,7 +265,7 @@ class index extends DPA.profile {
                 SNavigation.navigate("/public", { idcli: obj.idcli })
             }}>REALIZAR PEDIDO</Btn>
             <SHr h={16} />
-            {this.onVisitaSuccess ? <><Btn col={"xs-11"} onPress={() => {
+            {this.visita ? <><Btn col={"xs-11"} onPress={() => {
                 SPopup.openContainer({
                     key: "popup_concretar_visita",
                     render: (e) => {
@@ -274,10 +281,10 @@ class index extends DPA.profile {
                             <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} />
                             <SHr />
                             <Btn padding={8} onPress={() => {
-                                this.onVisitaSuccess({
-                                    descripcion: this.visita_descripcion.getValue(),
-                                    tipo: this.visita_tipo.getValue()
-                                });
+                                // this.onVisitaSuccess({
+                                //     descripcion: this.visita_descripcion.getValue(),
+                                //     tipo: this.visita_tipo.getValue()
+                                // });
                                 SPopup.close("popup_concretar_visita");
                             }}>CONFIRMAR</Btn>
                             <SHr />
@@ -290,6 +297,9 @@ class index extends DPA.profile {
 
 
             {this.getUbicacion(obj)}
+            <SelectEntreFechas onChange={e => {
+                this.loadData(e)
+            }} />
             <SHr height={20} />
 
             <SView col={"xs-12"} center row style={{
@@ -307,7 +317,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
+                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                     onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),
