@@ -59,8 +59,8 @@ class index extends Component {
 
         }, 1000 * 60).then(e => {
             this.setState({ loading: false, error: "" })
-            // Model.carrito.Action.removeAll()
             // SNavigation.replace("/carrito/notaventa", { idven: e.data.idven })
+            Model.carrito.Action.removeAll()
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: e?.data?.idven,
                 onBack: () => {

@@ -66,6 +66,8 @@ export default class MapaComponent extends Component {
                 }}
                 onClusterPress={(data, markers) => {
                     console.log(data, markers);
+                    console.log(state.idemp)
+                    SNavigation.navigate("/vendedor/list", { pk: state.idemp, datas: markers })
                 }}
                 renderMarker={renderCluster}
                 renderCluster={renderCluster}
