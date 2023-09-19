@@ -41,6 +41,12 @@
 		D2D7B2DEE361444A923E6599 /* LondonTwo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7C6F04CF755A47D0A0253172 /* LondonTwo.ttf */; };
 		D3143BFF59CB45A7BE55224F /* hello_baby.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ECDA71A955BD4520A05570BA /* hello_baby.ttf */; };
 		E6D9A166BE9740F08FE7613B /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6157C34A110C4BFD87A73BB4 /* OpenSans-ExtraBold.ttf */; };
+		F08DA09DDD494C8FACDC01BD /* Montserrat-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B52C519B936C4E388F4E2213 /* Montserrat-ExtraBold.ttf */; };
+		0D9310526DD4412CAEF3B8D2 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E340CB699065458FB625DCC8 /* Montserrat-Regular.ttf */; };
+		F7E607ECCD264F7DBBA9D861 /* Montserrat.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7527132FEDBF4DF1A974559B /* Montserrat.ttf */; };
+		17CC744E9F9D4D87ACF8C899 /* SF-Mono-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24D050F66EF64F539EDCF669 /* SF-Mono-Regular.ttf */; };
+		A488EB45E5A1466493B788B1 /* SF-Mono-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0797D76A15E54C8084E00422 /* SF-Mono-Semibold.ttf */; };
+		79AA1422D283470FA0D9BD62 /* SF-Mono.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 99B99B14AA5C48C2B240DD38 /* SF-Mono.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -106,6 +112,12 @@
 		F437B8965BDC4A4683DC2338 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Regular.ttf"; path = "../node_modules/servisofts-component/font/Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		FF0C62F06920E6A65EB02428 /* libPods-ImageNotification.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ImageNotification.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFD9EEA3C88247169E73E4F9 /* Athelas.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Athelas.ttf; path = "../node_modules/servisofts-component/font/Athelas.ttf"; sourceTree = "<group>"; };
+		B52C519B936C4E388F4E2213 /* Montserrat-ExtraBold.ttf */ = {isa = PBXFileReference; name = "Montserrat-ExtraBold.ttf"; path = "../node_modules/servisofts-component/font/Montserrat-ExtraBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E340CB699065458FB625DCC8 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; name = "Montserrat-Regular.ttf"; path = "../node_modules/servisofts-component/font/Montserrat-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		7527132FEDBF4DF1A974559B /* Montserrat.ttf */ = {isa = PBXFileReference; name = "Montserrat.ttf"; path = "../node_modules/servisofts-component/font/Montserrat.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		24D050F66EF64F539EDCF669 /* SF-Mono-Regular.ttf */ = {isa = PBXFileReference; name = "SF-Mono-Regular.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0797D76A15E54C8084E00422 /* SF-Mono-Semibold.ttf */ = {isa = PBXFileReference; name = "SF-Mono-Semibold.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono-Semibold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		99B99B14AA5C48C2B240DD38 /* SF-Mono.ttf */ = {isa = PBXFileReference; name = "SF-Mono.ttf"; path = "../node_modules/servisofts-component/font/SF-Mono.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -230,6 +242,12 @@
 				AA0E6DC0CE8746ABAFADB78F /* Oswald-Medium.ttf */,
 				8FC310751E6A48EFA32544D3 /* Oswald-Regular.ttf */,
 				C253EF39543A4D26A950260A /* Oswald-SemiBold.ttf */,
+				B52C519B936C4E388F4E2213 /* Montserrat-ExtraBold.ttf */,
+				E340CB699065458FB625DCC8 /* Montserrat-Regular.ttf */,
+				7527132FEDBF4DF1A974559B /* Montserrat.ttf */,
+				24D050F66EF64F539EDCF669 /* SF-Mono-Regular.ttf */,
+				0797D76A15E54C8084E00422 /* SF-Mono-Semibold.ttf */,
+				99B99B14AA5C48C2B240DD38 /* SF-Mono.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -370,6 +388,12 @@
 				06BD3C3CF44C406C9AEBE6D8 /* Oswald-Medium.ttf in Resources */,
 				21B4691F010C4FB3AC96749E /* Oswald-Regular.ttf in Resources */,
 				2B7B23D1A24242D580E9376B /* Oswald-SemiBold.ttf in Resources */,
+				F08DA09DDD494C8FACDC01BD /* Montserrat-ExtraBold.ttf in Resources */,
+				0D9310526DD4412CAEF3B8D2 /* Montserrat-Regular.ttf in Resources */,
+				F7E607ECCD264F7DBBA9D861 /* Montserrat.ttf in Resources */,
+				17CC744E9F9D4D87ACF8C899 /* SF-Mono-Regular.ttf in Resources */,
+				A488EB45E5A1466493B788B1 /* SF-Mono-Semibold.ttf in Resources */,
+				79AA1422D283470FA0D9BD62 /* SF-Mono.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

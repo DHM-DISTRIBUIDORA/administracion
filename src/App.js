@@ -14,7 +14,6 @@ import BackgroundImage from './Components/BackgroundImage';
 import Model from './Model';
 import { version } from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
-import SDB from 'servisofts-db'
 
 setProps(Config.socket);
 Firebase.init();
@@ -59,12 +58,12 @@ const App = (props) => {
                     return {
                         data: usuario ? usuario : {},
                         deviceKey: DeviceKey.getKey(),
-                        // firebase: {
-                        //     platform: Platform.OS,
-                        //     token: DeviceKey.getKey(),
-                        //     key_usuario: usuario?.key,
-                        //     app: "client"
-                        // }
+                        firebase: {
+                            platform: Platform.OS,
+                            token: DeviceKey.getKey(),
+                            key_usuario: usuario?.key,
+                            app: "client"
+                        }
                     };
                 }}
             />
