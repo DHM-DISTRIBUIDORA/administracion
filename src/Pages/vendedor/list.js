@@ -15,6 +15,7 @@ export default class root extends Component {
             curdate: new SDate(),
             idemp: SNavigation.getParam("pk"),
             ubicacion: SNavigation.getParam("ubicacion"),
+            datas: SNavigation.getParam("datas"),
         }
     }
     componentDidMount() {
@@ -59,6 +60,16 @@ export default class root extends Component {
             (this.state?.ubicacion == "true") ?
                 clientes_filter = clientes_data.filter(a => !!a.clilat && !!a.clilon) :
                 clientes_filter = clientes_data.filter(a => !a.clilat || !a.clilon)
+        }
+        if (this.state?.datas) {
+            // clientes_filter = this.state?.datas;
+
+            clientes_filter = this.state?.datas.map(item => ({
+                "idcli": item.id,
+                "clinom": item.clinom,
+                "clilat": item.location.latitude,
+                "clilon": item.location.longitude
+              }));
         }
 
         return <SPage
@@ -145,6 +156,7 @@ export default class root extends Component {
                         </>
                     }}
                 />
+                <SHr height={30}/>
             </Container>
             <SLoad type='window' hidden={!this.state.loading} />
         </SPage>
