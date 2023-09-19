@@ -312,7 +312,7 @@ PODS:
     - React-jsi (= 0.64.4)
     - React-perflogger (= 0.64.4)
   - React-jsinspector (0.64.4)
-  - react-native-cameraroll (4.1.2):
+  - react-native-cameraroll (5.8.0):
     - React-Core
   - react-native-compressor (1.6.1):
     - NextLevelSessionExporter
@@ -341,7 +341,7 @@ PODS:
     - Google-Maps-iOS-Utils (= 2.1.0)
     - GoogleMaps (= 3.5.0)
     - React
-  - react-native-image-picker (4.7.3):
+  - react-native-image-picker (5.0.1):
     - React-Core
   - react-native-image-resizer (1.4.5):
     - React-Core
@@ -417,6 +417,8 @@ PODS:
     - React-perflogger (= 0.64.4)
   - RNAppleAuthentication (2.2.2):
     - React-Core
+  - RNCAsyncStorage (1.19.3):
+    - React-Core
   - RNCMaskedView (0.1.11):
     - React
   - RNFBApp (14.12.0):
@@ -436,8 +438,6 @@ PODS:
     - React-Core
   - RNGoogleSignin (7.2.2):
     - GoogleSignIn (~> 6.1.0)
-    - React-Core
-  - RNPermissions (3.9.0):
     - React-Core
   - RNReanimated (2.13.0):
     - DoubleConversion
@@ -480,7 +480,7 @@ PODS:
     - React-Core
   - servisofts-background-location (1.0.4):
     - React-Core
-  - servisofts-component (2.11.18):
+  - servisofts-component (2.11.24):
     - React-Core
   - servisofts-socket (3.0.4):
     - CocoaAsyncSocket
@@ -509,7 +509,7 @@ DEPENDENCIES:
   - React-jsi (from `../node_modules/react-native/ReactCommon/jsi`)
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
-  - "react-native-cameraroll (from `../node_modules/@react-native-community/cameraroll`)"
+  - "react-native-cameraroll (from `../node_modules/@react-native-camera-roll/camera-roll`)"
   - react-native-compressor (from `../node_modules/react-native-compressor`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
@@ -534,6 +534,7 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNAppleAuthentication (from `../node_modules/@invertase/react-native-apple-authentication`)"
+  - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBMessaging (from `../node_modules/@react-native-firebase/messaging`)"
@@ -542,14 +543,13 @@ DEPENDENCIES:
   - RNFS (from `../node_modules/react-native-fs`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
-  - RNPermissions (from `../node_modules/react-native-permissions`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNShare (from `../node_modules/react-native-share`)
   - RNSound (from `../node_modules/react-native-sound`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - servisofts-background-location (from `../node_modules/servisofts-background-location`)
-  - servisofts-component (from `../node_modules/servisofts-component`)
+  - servisofts-component (from `../../../servisofts-component/dist`)
   - servisofts-socket (from `../node_modules/servisofts-socket`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -612,7 +612,7 @@ EXTERNAL SOURCES:
   React-jsinspector:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-cameraroll:
-    :path: "../node_modules/@react-native-community/cameraroll"
+    :path: "../node_modules/@react-native-camera-roll/camera-roll"
   react-native-compressor:
     :path: "../node_modules/react-native-compressor"
   react-native-document-picker:
@@ -661,6 +661,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNAppleAuthentication:
     :path: "../node_modules/@invertase/react-native-apple-authentication"
+  RNCAsyncStorage:
+    :path: "../node_modules/@react-native-async-storage/async-storage"
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNFBApp:
@@ -677,8 +679,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/@react-native-google-signin/google-signin"
-  RNPermissions:
-    :path: "../node_modules/react-native-permissions"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -692,7 +692,7 @@ EXTERNAL SOURCES:
   servisofts-background-location:
     :path: "../node_modules/servisofts-background-location"
   servisofts-component:
-    :path: "../node_modules/servisofts-component"
+    :path: "../../../servisofts-component/dist"
   servisofts-socket:
     :path: "../node_modules/servisofts-socket"
   Yoga:
@@ -737,14 +737,14 @@ SPEC CHECKSUMS:
   React-jsi: 64f80675a66899bf0f4a58b8e3908966fa516234
   React-jsiexecutor: 8c077bef1c64430b6034f27df1000d194551e2eb
   React-jsinspector: d4f6973dd474357dbaaf6f52f31ffc713bf3e766
-  react-native-cameraroll: 60ac50a5209777cbccfe8d7a62d0743a9da87060
+  react-native-cameraroll: af4d7dd786786d15e8b9bcc54e4d535fa1e08e47
   react-native-compressor: 17b13a98c06ffa9262182a78be27099b443fd162
   react-native-document-picker: 644b4c5658f9d781a2ac4c4625ef414c8f797083
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-fetch-blob: 0cbdf9764c75d9438c162427395f4bc35a857d5a
   react-native-geolocation: 205c5f619aea7bd54067b7b51e0781cae2f37151
   react-native-google-maps: 0a989abda71059db2caa98b9dacca7a8f38a47d0
-  react-native-image-picker: ae1202414bd5c37c00b2a701daa5b6194a06b7d9
+  react-native-image-picker: afd1d63b9c59a6c1a0daab715cd9c130ae4deea2
   react-native-image-resizer: 506412a2bdd70dde64a61e13505ce10f61a04369
   react-native-maps: f4b89da81626ad7f151a8bfcb79733295d31ce5c
   react-native-notifications: 3de8ef9cd800e5db0225d9aa46b228d2b94ce51e
@@ -762,6 +762,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 5b441857030bb6c3abaa7517f333cb01875ae499
   ReactCommon: b4a65d2d6e9eeffd4b32dde1245962b3f43907d0
   RNAppleAuthentication: 0571c08da8c327ae2afc0261b48b4a515b0286a6
+  RNCAsyncStorage: 99ccc5d8a0acd7ec3b2663c50aa812ad8bb2f3e1
   RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
@@ -770,17 +771,16 @@ SPEC CHECKSUMS:
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: 7580e6618798be9d090524bb31538378f92ce746
-  RNPermissions: 96d77273ec6e3e865503565a9efebef95e6ad80a
   RNReanimated: e164e3683722a8fd34f116d30ea8ba010660d3f0
   RNScreens: fd535547baa4ef8aeaee1a8b1e3ffd17b8df44a4
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 1081cf2576b404ca804daf4934bb644cb506ff98
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   servisofts-background-location: bade40e7d6f0663bc44bd6f1198255e158884b1b
-  servisofts-component: c623a4e2517626776f10c93a4ba33f4124bbbdf9
+  servisofts-component: 5965d621a845e9978ce334f31075233f57298c4f
   servisofts-socket: 5997e69ddd8c542bbe14d8a2eb42eb2900ea474d
   Yoga: d1fc3575b8b68891ff5ef3c276daa855e841eb32
 
-PODFILE CHECKSUM: 67cda0c3b0d1121625f4ffcdfdbde2b22563c127
+PODFILE CHECKSUM: cddb732aaec2c14dcc9e2922487ed74ba82d4d19
 
 COCOAPODS: 1.11.3

@@ -115,9 +115,11 @@ class index extends Component {
             // Model.usuario.Action.CLEAR();
             Model.usuario.Action.syncUserLog()
             // console.log
-            resolve();
+            if (resolve) {
+                resolve();
+            }
 
-        }} footer={<AccentBar />}>
+        }}>
             <SView col={"xs-12"} center>
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
                     {/* <SView height={80}></SView> */}
