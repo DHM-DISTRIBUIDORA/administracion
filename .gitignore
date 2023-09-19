@@ -100,8 +100,9 @@ yarn-error.log*
 /public/firebase-messaging-sw.js
 
 /src/LoginApi/config.ts
-/src/Config/socket.ts
 /src/Firebase/index.js
+/src/Config/socket.ts
+
 
 # END
 .eslintcache
