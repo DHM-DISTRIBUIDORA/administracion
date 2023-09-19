@@ -9,8 +9,8 @@ const Cantidad = ({ cantidad }) => {
         position: "absolute",
         width: 30,
         height: 30,
-        right: -10,
-        top: -10,
+        right: 0,
+        top: 0,
         borderRadius: 100,
         overflow: "hidden",
         backgroundColor: STheme.color.danger,
@@ -18,33 +18,35 @@ const Cantidad = ({ cantidad }) => {
         <SText fontSize={14} color={STheme.color.white}>{cantidad}</SText>
     </SView>
 }
-export default ({ latitude, longitude, cantidad, src, label, onPress, size = 50, content, borderColor }) => {
+export default ({ latitude, longitude, key, cantidad, src, label, onPress, size = 60, content, borderColor }) => {
     // console.log();
-    return <SMapView.SMarker latitude={latitude} longitude={longitude} width={size} onPress={onPress} >
-        <SView width={size} height={size} borderRadius={100} backgroundColor={STheme.color.card} onPress={onPress} style={{
-            borderWidth: 2,
-            borderColor: borderColor ?? STheme.color.text,
-        }}>
-            <SView style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                borderRadius: 100,
-                overflow: "hidden",
+    return <SMapView.SMarker key={key} latitude={latitude} longitude={longitude} width={size} onPress={onPress} >
+        <SView width={size} height={size} padding={4} center>
+            <SView flex col={"xs-12"} borderRadius={100} backgroundColor={STheme.color.card} onPress={onPress} style={{
+                borderWidth: 2,
+                borderColor: borderColor ?? STheme.color.text,
             }}>
-                <SImage src={src} style={{
+                <SView style={{
+                    position: "absolute",
                     width: "100%",
                     height: "100%",
-                    resizeMode: "cover"
-                }} />
-            </SView>
-            <SView style={{
-                position: "absolute",
-                width: "100%",
-                height: "100%",
-                borderRadius: 100,
-            }} center>
-                {!content ? null : <SText fontSize={8} center >{content}</SText>}
+                    borderRadius: 100,
+                    overflow: "hidden",
+                }}>
+                    <SImage src={src} style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "cover"
+                    }} />
+                </SView>
+                <SView style={{
+                    position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 100,
+                }} center>
+                    {!content ? null : <SText fontSize={8} center >{content}</SText>}
+                </SView>
             </SView>
             <Cantidad cantidad={cantidad} />
         </SView>

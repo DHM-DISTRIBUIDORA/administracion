@@ -54,6 +54,19 @@ class index extends DPA.edit {
                 },
             )
         }
+
+        inp["idz"].label = "Id zona"
+        inp["idz"].editable = false;
+        inp["idz"].value = this.state.idz;
+        inp["idz"].onPress = () => {
+            SNavigation.navigate("/tbzon", {
+                onSelect: (zona) => {
+                    console.log(zona);
+                    this.setState({ idz: zona.idz })
+                }
+            })
+        }
+
         return inp;
     }
 

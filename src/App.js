@@ -6,7 +6,7 @@ import Redux, { store } from './Redux';
 import Config from "./Config";
 import Assets from './Assets';
 import Pages from './Pages';
-// import Firebase from './Firebase';
+import Firebase from './Firebase';
 import DeviceKey from "./Firebase/DeviceKey"
 import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
@@ -17,9 +17,9 @@ import BackgroundLocation from './BackgroundLocation';
 import SDB from 'servisofts-db'
 
 setProps(Config.socket);
-// Firebase.init();
+Firebase.init();
 DeviceKey.init();
-// BackgroundLocation();
+BackgroundLocation();
 const App = (props) => {
     // SDB.init({
     //     dbName: "namedb",
@@ -38,6 +38,12 @@ const App = (props) => {
             theme={{ themes: Config.theme, initialTheme: "default" }}
         >
             <SNavigation
+                linking={{
+                    prefixes: ["https://dhm.servisofts.com/app/", "http://dhm.servisofts.com/app/", 'dhm://app/'],
+                    getInitialURL: () => {
+                        Firebase.getInitialURL();
+                    }
+                }}
                 props={{
                     navBar: TopBar,
                     title: 'DHM', pages: Pages

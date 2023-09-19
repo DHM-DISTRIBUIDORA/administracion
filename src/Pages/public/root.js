@@ -39,6 +39,7 @@ class index extends Component {
         return <SPage navBar={this.navBar()} footer={this.footer()}>
             <Container>
                 {this.renderProductos()}
+                <SHr height={20}/>
             </Container>
         </SPage >
     }

@@ -56,6 +56,14 @@ export default class index extends Component {
                 </SView>
                 <SView style={{
                     position: "absolute",
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: 100,
+                }} center>
+                    <SText fontSize={8} center >{data.clinom}</SText>
+                </SView>
+                <SView style={{
+                    position: "absolute",
                     width: 30,
                     height: 30,
                     right: -10,
@@ -76,8 +84,8 @@ export default class index extends Component {
             if (!o.clilat || !o.clilon) return;
             arrLatLng.push({ latitude: o.clilat, longitude: o.clilon, data: o })
         })
-        if (!arrLatLng) return <SText>Eror</SText>
-        if (!arrLatLng.length) return <SText>Eror</SText>
+        if (!arrLatLng) return <SText>Clientes sin ubicación</SText>
+        if (!arrLatLng.length) return <SText>Clientes sin ubicación</SText>
         return <SMapView ref={map => {
             if (map) this.map = map
             this.map.fitToCoordinates(arrLatLng, {})

@@ -30,6 +30,18 @@ class index extends DPA.new {
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
         if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
 
+        inp["idz"].label = "Id zona"
+        inp["idz"].editable = false;
+        inp["idz"].value = this.state.idz;
+        inp["idz"].onPress = () => {
+            SNavigation.navigate("/tbzon", {
+                onSelect: (zona) => {
+                    console.log(zona);
+                    this.setState({ idz: zona.idz })
+                }
+            })
+        }
+
         return inp;
     }
     $onSubmit(data) {

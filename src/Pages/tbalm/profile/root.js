@@ -37,7 +37,7 @@ class index extends DPA.profile {
                 <MenuButtom
                     url={Parent.path + "/profile/tbprd"}
                     params={{ pk: this.pk }}
-                    icon={<SIcon name={"Producto"} />} label={"Productos"} />
+                    icon={<SIcon name={"IProductos"} />} label={"Productos"} />
             </MenuPages>
         </SView>
     }
