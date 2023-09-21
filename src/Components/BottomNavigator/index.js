@@ -29,7 +29,7 @@ export default class index extends Component {
 					<SIcon name={icon} fill={isSelect ? STheme.color.info : color}  />
 				</SView>
 				<SView height={2} />
-				<SText fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
+				<SText font='TT-Norms-Pro-Regular' fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
 			</SView>
 		</SView>
 	}

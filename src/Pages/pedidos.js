@@ -15,7 +15,7 @@ class index extends Component {
         SSocket.sendPromise({
             component: "dm_cabfac",
             type: "getPedidos",
-            idcli: 803,
+            idcli: 21872,
 
 
         }).then(e => {
