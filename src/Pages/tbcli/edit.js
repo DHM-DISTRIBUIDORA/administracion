@@ -10,7 +10,9 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: [],
+            excludes: ["climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
+                "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
+                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcat","idcanal",],
             title: "Editar " + Parent.title,
         });
         this.state = {
@@ -72,7 +74,7 @@ class index extends DPA.edit {
 
     $onSubmit(data) {
         if (this.state.loading) return;
-        this.setState({loading: true })
+        this.setState({ loading: true })
         Parent.model.Action.editar({
             data: {
                 ...this.data,
@@ -80,10 +82,10 @@ class index extends DPA.edit {
             },
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
-            this.setState({loading: false })
+            this.setState({ loading: false })
             SNavigation.goBack();
         }).catch(e => {
-            this.setState({loading: false })
+            this.setState({ loading: false })
             console.error(e);
 
         })
@@ -91,8 +93,8 @@ class index extends DPA.edit {
     $submitName() {
         return !this.state.loading ? "Aceptar" : <SLoad />
     }
-    
-   
+
+
 }
 
 export default connect(index);

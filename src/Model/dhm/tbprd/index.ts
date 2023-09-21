@@ -105,10 +105,10 @@ export default new SModel<Action, Reducer>({
         "sucreg": { type: "integer",  editable: true },
 
     },
-    // image: {
-    //     api: "root",
-    //     name: "productos"
-    // },
+    image: {
+        api: "root",
+        name: "tbprd"
+    },
     Action,
     Reducer,
 });
