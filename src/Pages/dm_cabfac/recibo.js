@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
-import { Container, PButtom } from '../../Components';
+import { Btn, Container, PButtom } from '../../Components';
 import Model from '../../Model';
 class recibo extends Component {
     constructor(props) {
@@ -157,6 +157,10 @@ class recibo extends Component {
                     <SHr h={20} />
                     {this.cabeceraVenta()}
                     {this.detalle()}
+                    <Btn onPress={() => {
+                        console.log(Model.carrito.Action.getState().productos)
+                        console.log(this.state.data)
+                    }}>{"Editar"}</Btn>
                     {!this.onBack ? null :
                         <PButtom primary
                             loading={this.state.loading}

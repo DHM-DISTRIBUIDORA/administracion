@@ -72,9 +72,9 @@ export default class SectionForm extends Component {
                                     SNavigation.navigate("/login");
                                     this.fadeOut();
                                 } else {
-                                    SNavigation.reset("/")
+                                    SNavigation.replace("/");
                                 }
-                               
+
                             }).catch((e) => {
                                 if (e?.error == "error_password") {
                                     this.setState({ loading: false, error: "Usuario o contraseña incorrectos." })

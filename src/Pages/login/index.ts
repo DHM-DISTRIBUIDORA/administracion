@@ -4,10 +4,13 @@ import root from "./root"
 import recuperar from './recuperar';
 import recuperar_codigo from './recuperar_codigo';
 import recuperar_pass from './recuperar_pass';
+import codigo from './codigo';
 export default SPage.combinePages("login", {
-    "": root,
+    "": codigo,
+    user: root,
+    codigo,
     recuperar,
     recuperar_codigo,
-    recuperar_pass
+    recuperar_pass,
 
 });

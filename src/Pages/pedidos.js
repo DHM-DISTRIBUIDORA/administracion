@@ -5,22 +5,25 @@ import { BottomNavigator, Container, TopBar } from '../Components';
 
 import SSocket, { setProps } from 'servisofts-socket';
 import Pedido from '../Components/Pedido';
+import Model from '../Model';
 class index extends Component {
 
     constructor(props) {
         super(props)
+        this.idcli = Model.tbcli.Action.getCliente()?.idcli
     }
 
     componentDidMount() {
+
         SSocket.sendPromise({
             component: "dm_cabfac",
             type: "getPedidos",
-            idcli: 803,
+            idcli: this.idcli,
 
 
         }).then(e => {
             console.log(e);
-            this.setState({ data: e.data })
+            this.setState({ data: e.data ?? [] })
         }).catch(e => {
             console.error(e);
         })
@@ -35,13 +38,13 @@ class index extends Component {
             // filter={(a) => a.nivel == 1}
             order={[{ key: "idven", order: "desc" }]}
             render={(obj) => {
-                return <Pedido.Card data={obj}  />
+                return <Pedido.Card data={obj} />
             }}
         />
     }
     render() {
         return <SPage
-        title={"Mis pedidos"}
+            title={"Mis pedidos"}
             // hidden
             footer={this.footer()}
         >
@@ -50,7 +53,7 @@ class index extends Component {
                 <SView col={"xs-12"} row>
                     {this.getLista()}
                 </SView>
-                <SHr height={30}/>
+                <SHr height={30} />
             </Container>
         </SPage>
     }

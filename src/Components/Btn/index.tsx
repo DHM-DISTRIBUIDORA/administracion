@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { SText, STextProps, SView, SViewProps } from 'servisofts-component'
 import _default from "./type/default"
 import danger from "./type/danger"
+import { SLoad } from 'servisofts-component'
 
 const types = {
     default: _default,
@@ -18,6 +19,7 @@ export type ButtomType = {
 type BotoncitoPropsType = {
     onPress: () => any,
     children?: any,
+    loading?: boolean,
     type: keyof typeof types,
 
 } & SViewProps
@@ -43,8 +45,8 @@ export default class Btn extends Component<BotoncitoPropsType> {
         }
 
         // @ts-ignore
-        return <SView  {...typeSelect.viewProps} {...this.props} style={{ ...typeSelect.viewProps?.style ?? {}, ...style ?? {} }}  onPress={this.props.onPress}>
-            {CONTENIDO}
+        return <SView  {...typeSelect.viewProps} {...this.props} style={{ ...typeSelect.viewProps?.style ?? {}, ...style ?? {} }} onPress={this.props.onPress}>
+            {this.props.loading ? <SLoad /> : CONTENIDO}
         </SView >
     }
 }

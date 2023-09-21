@@ -322,7 +322,7 @@ class index extends DPA.profile {
                     color: '#FF5A5F',
                     onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),
                 })}
-                {this.ItemCard({
+                {/* {this.ItemCard({
                     label: "Máxima venta",
                     cant: (this.state.maxima_venta ?? 0).toFixed(2),
                     icon: 'ImaxCompra',
@@ -335,8 +335,8 @@ class index extends DPA.profile {
                     icon: 'IminCompra',
                     color: '#00A0AA',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
-                })}
-                {this.ItemCard({
+                })} */}
+                {/* {this.ItemCard({
                     label: "Primer venta",
                     cant: this.state.primer_venta.split(' ')[0],
                     icon: 'Ifirst',
@@ -349,7 +349,7 @@ class index extends DPA.profile {
                     icon: 'Ilast',
                     color: '#FF64B4',
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
-                })}
+                })} */}
 
 
                 {/* {this.getGrafo()} */}

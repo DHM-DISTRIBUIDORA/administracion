@@ -38,7 +38,8 @@ import vendedor from './vendedor';
 import dm_cabfac from './dm_cabfac';
 import transporte from './transporte';
 import info from './info';
-
+import buscar_cliente_codigo from './buscar_cliente_codigo';
+import version_required from './version_required';
 // import test3 from './test3';
 // import test2 from "./test2"
 // import test from "./test"
@@ -89,6 +90,8 @@ export default SPage.combinePages("/", {
   ...vendedor,
   ...transporte,
   ...info,
+  version_required,
+  buscar_cliente_codigo
   // test2,
   // test3,
   // test,
