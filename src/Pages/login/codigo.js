@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SInput, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
-import { AccentBar, Btn, Container } from '../../Components';
+import { AccentBar, BottomNavigator, Btn, Container } from '../../Components';
 // import SectionApis from './components/SectionApis';
 import SectionFooter from './components/SectionFooter';
 import SectionForm from './components/SectionForm';
@@ -33,7 +33,7 @@ class login extends Component {
     render() {
 
         return (
-            <SPage hidden >
+            <SPage hidden footer={<BottomNavigator url={"/login"} />} >
                 <SView col={"xs-12"} center>
                     <SView col={"xs-12"} backgroundColor={STheme.color.primary}>
                         <Container>
