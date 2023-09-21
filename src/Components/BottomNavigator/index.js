@@ -26,12 +26,31 @@ export default class index extends Component {
 				<SView height={23} colSquare center >
 					{/* <SIcon name={icon} stroke={color} fill={STheme.color.primary} /> */}
 					{/* <SIcon name={icon} stroke={isSelect ? STheme.color.info : color} fill={isSelect ? STheme.color.info : STheme.color.white} /> */}
-					<SIcon name={icon} fill={isSelect ? STheme.color.info : color}  />
+					<SIcon name={icon} fill={isSelect ? STheme.color.info : color} />
 				</SView>
 				<SView height={2} />
 				<SText font='TT-Norms-Pro-Regular' fontSize={8} center color={isSelect ? STheme.color.info : color}  >{title}</SText>
 			</SView>
 		</SView>
+	}
+
+	getLogin() {
+		let user = Model.usuario.Action.getUsuarioLog();
+		let cliente = Model.tbcli.Action.getCliente();
+		if (user || cliente) return null;
+		return this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' })
+	}
+	getFavorito() {
+		let user = Model.usuario.Action.getUsuarioLog();
+		let cliente = Model.tbcli.Action.getCliente();
+		if (!user && !cliente) return null;
+		return this.getItem({ key: "favorito", title: 'Mis pedidos', icon: 'IconoPedido', url: '/pedidos' });
+	}
+	getPedido() {
+		let user = Model.usuario.Action.getUsuarioLog();
+		let cliente = Model.tbcli.Action.getCliente();
+		if (!user && !cliente) return null;
+		return this.getItem({ key: "pedido", title: 'Carrito', icon: 'MenuPedido', url: '/carrito/pedido' })
 	}
 	render() {
 		return (
@@ -46,22 +65,15 @@ export default class index extends Component {
 						borderTopRightRadius: 35,
 						overflow: 'hidden',
 					}}>
-					<SView col={'xs-12'} row height style={{zIndex:100}}>
+					<SView col={'xs-12'} row height style={{ zIndex: 100 }}>
 						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/public' })}
 						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
-						{
-							!Model.usuario.Action.getKey() ?
-								(this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' }))
-								: (this.getItem({ key: "favorito", title: 'Mis pedidos', icon: 'IconoPedido', url: '/pedidos' }))
-						}
-						{
-							!Model.usuario.Action.getKey() ?
-								null
-								: (this.getItem({ key: "pedido", title: 'Carrito', icon: 'MenuPedido', url: '/carrito/pedido' }))
-						}
+						{this.getLogin()}
+						{this.getFavorito()}
+						{this.getPedido()}
 						{/* {this.getItem({ key: "pedido", title: 'Pedidos', icon: 'MenuPedido', url: '/compras' })} */}
 					</SView>
-					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{zIndex:99}} />
+					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{ zIndex: 99 }} />
 				</SView >
 				<Carrito.Float bottom={100} />
 			</>

@@ -18,6 +18,13 @@ class index extends Component {
 
     }
     componentDidMount() {
+        const cliente = Model.tbcli.Action.getCliente();
+        if (cliente) {
+            this.setState({
+                client: cliente
+            })
+            return;
+        }
         SStorage.getItem("tbcli_a_comprar", resp => {
             if (!resp) return;
             try {

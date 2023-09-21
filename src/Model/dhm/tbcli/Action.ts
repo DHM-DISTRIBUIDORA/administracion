@@ -1,7 +1,19 @@
+import { SStorage } from "servisofts-component";
 import { SAction } from "servisofts-model";
 import SSocket from 'servisofts-socket'
 export default class Action extends SAction {
 
+    getCliente = () => {
+        var reducer = this._getReducer()
+        return reducer.cliente;
+    }
+    setCliente = (cliente) => {
+        this._dispatch({
+            component: "tbcli",
+            type: "setCliente",
+            data: cliente,
+        })
+    }
     find(key: any, extra: {}, _default: any) {
         return SSocket.sendPromise({
             ...this.model.info,
@@ -10,6 +22,17 @@ export default class Action extends SAction {
         }).then(e => {
             const data = e.data[0];
             if (!data) throw "Not found"
+            return data;
+        })
+    }
+    getByCode(code: any, extra: {}, _default: any) {
+        return SSocket.sendPromise({
+            ...this.model.info,
+            type: "getByCode",
+            code: code + "",
+        }).then(e => {
+            const data = e.data[0];
+            if (!data) throw { error: `No existe el codigo de cliente '${code}'` }
             return data;
         })
     }

@@ -22,7 +22,7 @@ class login extends Component {
                     <SView col={"xs-12"} backgroundColor={STheme.color.primary}>
                         <Container>
                             <SHr height={50} />
-                            <SectionHeader />
+                            <SectionHeader select={"user"} />
                             <SHr height={16} />
                         </Container>
                     </SView>
