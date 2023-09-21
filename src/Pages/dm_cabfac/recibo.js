@@ -36,33 +36,37 @@ class recibo extends Component {
             <SView col={"xs-12"} row >
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SText fontSize={14} bold  >FECHA: </SText>
-                    <SText fontSize={14} color={STheme.color.lightGray}>{new SDate(this.state?.data?.vfec, "yyyy-MM-dd hh:mm:ss.s").toString("DAY, dd de MON del yyyy")} a las {new SDate(this.state?.data?.vhora, "yyyy-MM-dd hh:mm:ss.s").toString("hh:mm:ss")}</SText>
+                    <SText fontSize={14} color={STheme.color.gray}>{new SDate(this.state?.data?.vfec, "yyyy-MM-dd hh:mm:ss.s").toString("DAY, dd de MON del yyyy")} a las {new SDate(this.state?.data?.vhora, "yyyy-MM-dd hh:mm:ss.s").toString("hh:mm:ss")}</SText>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14} bold >NIT/CI: </SText>
-                    <SText color={STheme.color.lightGray}>{this.state?.data?.nit}</SText>
+                    <SText color={STheme.color.gray}>{this.state?.data?.nit}</SText>
                 </SView>
             </SView>
             {/* <SHr height={5} /> */}
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SText fontSize={14} bold >NOMBRE: </SText>
-                    <SText color={STheme.color.lightGray}>{this.state?.data?.nombrecliente}</SText>
+                    <SText color={STheme.color.gray}>{this.state?.data?.nombrecliente}</SText>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14} bold >ID CLIENTE: </SText>
-                    <SText color={STheme.color.lightGray}>{this.state?.data?.clicod}</SText>
+                    <SText color={STheme.color.gray}>{this.state?.data?.clicod}</SText>
                 </SView>
             </SView>
             {/* <SHr height={5} /> */}
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
-                    <SText fontSize={14} bold >DETALLE: </SText>
-                    <SText color={STheme.color.lightGray}>{this.state?.data?.vobs}</SText>
+                    <SView width={70} style={{ alignItems: "flex-start" }} row>
+                        <SText fontSize={14} bold >DETALLE: </SText>
+                    </SView>
+                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} flex>
+                        <SText color={STheme.color.gray}>{this.state?.data?.vobs}</SText>
+                    </SView>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14} bold >ID VENTA: </SText>
-                    <SText color={STheme.color.lightGray}>{this.state?.data?.idven}</SText>
+                    <SText color={STheme.color.gray}>{this.state?.data?.idven}</SText>
                 </SView>
             </SView>
 
