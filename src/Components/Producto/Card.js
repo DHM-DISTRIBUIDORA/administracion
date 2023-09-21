@@ -50,7 +50,7 @@ export default class index extends Component<ProductoCardPropsType> {
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
 
         return <SView col={"xs-12"} row>
-            <SText fontSize={11} color={STheme.color.gray}>Stock: {stock} </SText>
+            <SText font={'AcherusGrotesque-Regular'} fontSize={11} color={STheme.color.gray}>Stock: {stock} </SText>
             <SView width={5}><SText fontSize={11}>|</SText></SView>
             <SText fontSize={11} color={STheme.color.gray}> Ud: {prdunid} </SText>
             <SView width={5}><SText fontSize={11}>|</SText></SView>
@@ -72,7 +72,7 @@ export default class index extends Component<ProductoCardPropsType> {
 
             <SView flex row col={"xs-12"}>
                 <SView flex >
-                    <SText fontSize={16} bold>{prdnom}</SText>
+                    <SText font={'AcherusGrotesque-Bold'} fontSize={16} bold>{prdnom}</SText>
                     {this.renderDetalle()}
                 </SView>
                 <SView width={8} />

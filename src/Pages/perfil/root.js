@@ -4,6 +4,8 @@ import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, 
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import { Parent } from "."
+
 import { AccentBar, Btn, PButtom } from '../../Components';
 import { MenuButtom } from 'servisofts-rn-roles_permisos';
 // import usuario_dato from '../../Model/tapeke/usuario_dato';
@@ -12,7 +14,9 @@ import { MenuButtom } from 'servisofts-rn-roles_permisos';
 class index extends Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            idcli: 21872
+        };
     }
 
     load_data() {
@@ -37,7 +41,13 @@ class index extends Component {
         // 	this.fadeOut();
         // }}></SView>
         return (
-            <SView center>
+            <SView col={"xs-12"} center>
+                <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
+                    <SHr height={10} />
+                    <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MIS DATOS</SText>
+                    <SHr height={10} />
+                </SView>
+                <SHr height={10} />
                 <SView style={{
                     width: 140,
                     height: 140,
@@ -58,10 +68,7 @@ class index extends Component {
                         overflow: "hidden",
                     }} border={STheme.color.card}>
                         <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
-
                             style={{ resizeMode: 'cover', }} />
-
-
                     </SView>
                 </SView>
                 <SHr />
@@ -74,8 +81,6 @@ class index extends Component {
                             // color: "#fff"
                         }} font='LondonBetween'>{usuario["Nombres"] + " " + usuario["Apellidos"]} </SText>
                     </SView>
-
-
                 </SView>
             </SView>
         )
@@ -110,6 +115,63 @@ class index extends Component {
         </SView>
     }
 
+    getVendedor() {
+        //cliidemp
+        //TODO
+        // var dataCliente = Model.tbcli.Action.getByKey({key:this.state.idcli});
+        var dataCliente = Model.tbcli.Action.getByKey((this.state.idcli).toString());
+        if (!dataCliente) return <SLoad />;
+        var dataVendedor = Model.tbemp.Action.getByKey(dataCliente.cliidemp + "");
+        if (!dataVendedor) return <SLoad />;
+
+        console.log(dataVendedor);
+
+        return <SView col={"xs-12"}>
+            <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
+                <SHr height={10} />
+                <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MI VENDEDOR</SText>
+                <SHr height={10} />
+            </SView>
+            <SHr height={20} />
+            <SView col={"xs-12"} center row>
+                <SView width={120} >
+                    <SView width={100} height={100} card style={{
+                        borderRadius: 28,
+                        overflow: "hidden",
+                        backgroundColor: STheme.color.white
+                    }} center>
+                        <SImage src={require('../../Assets/img/foto.png')} style={{
+                            resizeMode: "contain",
+                            position: "absolute",
+                            zIndex: 90,
+                            top: 0,
+                            width: 50
+                        }} />
+                        <SImage src={Model.tbemp._get_image_download_path(SSocket.api, dataCliente?.cliidemp)} style={{
+                            resizeMode: "cover",
+                            zIndex: 99,
+                        }} />
+                    </SView>
+                </SView>
+                <SView col={"xs-9"} flex>
+                    <SText bold fontSize={16}>{`${dataVendedor?.empnom}`}</SText>
+                    <SText>{`${dataVendedor?.idemp} - ${dataVendedor?.empcod}`}</SText>
+                </SView>
+                <SHr />
+
+                {/* <SText>{`${obj.}`}</SText> */}
+            </SView>
+        </SView>
+    }
+
+    getRepartidor() {
+        return <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
+            <SHr height={10} />
+            <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MI REPARTIDOR</SText>
+            <SHr height={10} />
+        </SView>
+    }
+
     render() {
         return (<SPage title={'Editar perfil'} onRefresh={(resolve) => {
             // Model.usuario.Action.CLEAR();
@@ -127,7 +189,13 @@ class index extends Component {
                     {this.getPerfil()}
                     <SView height={10}></SView>
                     {this.getDatos()}
-                    <SHr h={50} />
+                    <SHr h={30} />
+                    {(this.state?.idcli) ? this.getVendedor() : null}
+                    <SHr h={30} />
+                    {(this.state?.idcli) ? this.getRepartidor() : null}
+
+                    <SHr h={20} />
+
                     <Btn col={"xs-11"} onPress={() => {
                         SNavigation.navigate("/perfil/editar", { key: this.data.key });
                     }}>EDITAR</Btn>
@@ -139,7 +207,7 @@ class index extends Component {
                     <Btn col={"xs-11"} type='danger' onPress={() => {
                         Model.usuario.Action.unlogin();
                     }}>CERRAR SESIÓN</Btn>
-                    <SHr height={100} />
+                    <SHr height={15} />
                     {/* <MenuButtom label={STheme.getTheme() == "default" ? "Oscuro" : "Claro"} icon={} onPress={() => {
                         STheme.change()
                     }} /> */}
@@ -159,6 +227,8 @@ class index extends Component {
                         })
                     }}>ELIMINAR CUENTA</Btn>
                 </SView>
+                <SHr height={30} />
+
             </SView>
         </SPage>
         );
