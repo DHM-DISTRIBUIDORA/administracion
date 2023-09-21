@@ -40,11 +40,15 @@ export default class SelectEntreFechas extends Component<SelectEntreFechasProps>
         return <SView col="xs-12" row >
             <SView row col={"xs-12 sm-6"} padding={4} center>
                 <SText>Desde: </SText>
-                <SInput flex type='date' height={30} defaultValue={this.state.fecha_inicio} onChangeText={this.handleChange.bind(this, "fecha_inicio")} />
+                <SInput flex type='date' style={{
+                    padding: 0
+                }} height={30} defaultValue={this.state.fecha_inicio} onChangeText={this.handleChange.bind(this, "fecha_inicio")} />
             </SView>
             <SView row col={"xs-12 sm-6"} padding={4} center>
                 <SText>Hasta: </SText>
-                <SInput flex type='date' height={30} defaultValue={this.state.fecha_fin} onChangeText={this.handleChange.bind(this, "fecha_fin")} />
+                <SInput flex type='date' height={30} style={{
+                    padding: 0
+                }} defaultValue={this.state.fecha_fin} onChangeText={this.handleChange.bind(this, "fecha_fin")} />
             </SView>
         </SView>
     }

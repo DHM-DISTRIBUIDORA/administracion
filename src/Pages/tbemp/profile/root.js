@@ -104,12 +104,12 @@ class index extends DPA.profile {
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-                    <SText bold fontSize={14}>{montoOk}</SText>
                     {(montoOk == "")
                         ?
                         <SText bold fontSize={14}>{cant}</SText>
                         :
                         <SText bold fontSize={14}>({cant})</SText>}
+                    <SText fontSize={14}>{montoOk}</SText>
                     <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
                 </SView>
             </SView>
@@ -155,9 +155,9 @@ class index extends DPA.profile {
             </SView>
             <SHr h={30} />
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
-            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getData(e)} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} /> : null}
             <SHr h={30} />
+            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getData(e)} /> : null}
             <SView col={"xs-12"} center row style={{
                 justifyContent: "space-between"
             }}>
@@ -186,29 +186,30 @@ class index extends DPA.profile {
                     color: '#833AB4',
                     onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
                 })}
-                {this.ItemCard({
+                {/* {this.ItemCard({
                     label: "Compras",
                     cant: this.state.cantidad_compras,
                     monto: "",
                     icon: 'Icompras',
                     color: '#8CB45F',
-                })}
+                })} */}
                 {this.ItemCard({
-                    label: "Total ventas",
-                    cant: this.state.cantidad_ventas,
-                    monto: SMath.formatMoney(this.state.monto_total_ventas),
-                    // onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
-                    icon: 'Iventas',
-                    color: '#DE6D3B',
-                })}
-                {this.ItemCard({
-                    label: "Total pedidos",
+                    label: "Pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_pedidos),
+                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
                     onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk }),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                 })}
+                {this.ItemCard({
+                    label: "Ventas",
+                    cant: this.state.cantidad_ventas,
+                    monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
+                    // onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
+                    icon: 'Iventas',
+                    color: '#DE6D3B',
+                })}
+
             </SView>
             <SHr />
         </SView>

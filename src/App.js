@@ -62,7 +62,12 @@ const App = (props) => {
                             platform: Platform.OS,
                             token: DeviceKey.getKey(),
                             key_usuario: usuario?.key,
-                            app: "client"
+                            app: "client",
+                            descripcion: Platform.select({
+                                "web": `Web ${window.navigator.userAgent}`,
+                                "android": `Android ${Platform?.constants?.Version}, ${Platform?.constants?.Manufacturer} ${Platform?.constants?.Brand} ${Platform?.constants?.Model}`,
+                                "ios": `IOS ${Platform?.Version}, ${Platform?.constants?.systemName}`,
+                            }),
                         }
                     };
                 }}
