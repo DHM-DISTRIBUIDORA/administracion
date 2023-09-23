@@ -20,7 +20,7 @@ export default class SectionHeader extends Component {
                     <SView col={"xs-4"} height >
                         <PButtom2 outline={this.props.select != "codigo"} onPress={() => {
                             SNavigation.replace("/login")
-                        }}>Codigo</PButtom2>
+                        }}>Código</PButtom2>
                     </SView>
                     <SView col={"xs-4"} height >
                         <PButtom2 outline={this.props.select != "user"} onPress={() => {

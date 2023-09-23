@@ -29,7 +29,7 @@ class index extends Component {
         return (
             <SPage title={''}>
                 <Container>
-                    <SText fontSize={18} bold>Ingrese su codigo de cliente</SText>
+                    <SText fontSize={18} bold>Ingrese su código de cliente</SText>
                     <SHr h={32} />
                     <SView col={"xs-12"} row>
                         <SView flex>

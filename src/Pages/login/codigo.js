@@ -46,7 +46,7 @@ class login extends Component {
                         <SHr height={32} />
                         <SInput ref={ref => this.input = ref}
                             type='number'
-                            placeholder={"Codigo de cliente"}
+                            placeholder={"Código de cliente"}
                         />
                         <SText color={STheme.color.danger}>{this.state.error}</SText>
                         <SHr h={32} />
