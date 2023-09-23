@@ -15,6 +15,8 @@ class index extends DPA.profile {
             item: item,
             excludes: []
         });
+        
+      
     }
     $allowBack() {
         return true;
@@ -78,11 +80,18 @@ class Lista extends DPA.list {
             item: item2,
             excludes: []
         });
+        this.fecha_inicio = SNavigation.getParam("fecha_inicio");
+        this.fecha_fin = SNavigation.getParam("fecha_fin");
     }
 
-    // $filter(data) {
-    //     return data.zest == "0"
-    // }
+    $filter(data) {
+        if (this.fecha_inicio) {
+            return data.idemp == this.props.pi.pk && data.vfec >= this.fecha_inicio && data.vfec <= this.fecha_fin
+        } else {
+            return data.idemp == this.props.pi.pk
+        }
+        
+    }
     $order() {
         return [{ key: "vfec", order: "desc" }]
     }

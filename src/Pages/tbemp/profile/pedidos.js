@@ -50,17 +50,25 @@ class pedidos extends Component {
         return (
             <SPage title={'Pedidos'} >
                 <Container >
-                    <SView col={"xs-12"} center>
-                        <SText fontSize={20} bold >Pedidos entre: </SText>
-                        <SText fontSize={20} bold >{this.fecha_inicio} , {this.fecha_fin}</SText>
-                    </SView>
+
+                    {(this.fecha_inicio) ?
+                        <SView col={"xs-12"} center>
+                            <SText fontSize={20} bold >Pedidos entre: </SText>
+                            <SText fontSize={20} bold >{this.fecha_inicio} , {this.fecha_fin}</SText>
+                        </SView> : null }
+
                     <SHr height={20} />
                     <SList
                         limit={20}
                         data={this.state.data}
                         render={this.component.bind(this)}
                         order={[{ key: "idven", order: "desc" }]}
-                        filter={(a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin}
+                        {...this.fecha_inicio ?
+                            {
+                                filter: (a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin
+                            } : null}
+                        // filter={(a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin} : null}
+
                         buscador={true}
                     />
                 </Container>

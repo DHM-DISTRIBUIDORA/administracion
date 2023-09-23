@@ -207,7 +207,7 @@ class index extends DPA.profile {
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
                     monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
-                    // onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
+                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                     icon: 'Iventas',
                     color: '#DE6D3B',
                 })}
