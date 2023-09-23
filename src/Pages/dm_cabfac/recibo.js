@@ -50,7 +50,7 @@ class recibo extends Component {
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.nombrecliente}</SText>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
-                    <SText font={'AcherusGrotesque-Bold'}  fontSize={14} bold >ID CLIENTE: </SText>
+                    <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold >ID CLIENTE: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.clicod}</SText>
                 </SView>
             </SView>
@@ -58,10 +58,10 @@ class recibo extends Component {
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SView width={70} style={{ alignItems: "flex-start" }} row>
-                        <SText font={'AcherusGrotesque-Bold'}  fontSize={14} bold >DETALLE: </SText>
+                        <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold >DETALLE: </SText>
                     </SView>
                     <SView col={"xs-9"} style={{ alignItems: "baseline" }} flex>
-                        <SText font={'AcherusGrotesque-Regular'}  color={STheme.color.gray}>{this.state?.data?.vobs}</SText>
+                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.vobs}</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
@@ -157,10 +157,12 @@ class recibo extends Component {
                     <SHr h={20} />
                     {this.cabeceraVenta()}
                     {this.detalle()}
+                    <SHr height={20} />
                     <Btn onPress={() => {
                         console.log(Model.carrito.Action.getState().productos)
                         console.log(this.state.data)
                     }}>{"Editar"}</Btn>
+                    <SHr height={20} />
                     {!this.onBack ? null :
                         <PButtom primary
                             loading={this.state.loading}
@@ -170,7 +172,7 @@ class recibo extends Component {
                     }
                 </Container>
                 {/* <SText>{JSON.stringify(this.state.data)}</SText> */}
-
+                <SHr height={30} />
             </SPage>
         );
     }

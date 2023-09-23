@@ -18,7 +18,7 @@ class login extends Component {
     handleOnPress = () => {
         const code = this.input.getValue();
         if (!code) {
-            this.setState({ error: "Debe ingresar un codigo de cliente." });
+            this.setState({ error: "Debe ingresar un código de cliente." });
             return;
         }
         this.setState({ loading: true, error: "" })
@@ -56,7 +56,7 @@ class login extends Component {
                         >Login</Btn>
 
                         <SHr h={32} />
-                        <SText fontSize={14} underLine>{"No tienes un codigo?  Click aqui."}</SText>
+                        <SText fontSize={14} underLine>{"¿No tienes un código?  Click aquí."}</SText>
                         <SHr height={50} />
                     </Container>
                 </SView>
