@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SList, SMath, SNavigation, SPage, SText, SView } from 'servisofts-component';
+import { SDate, SHr, SList, SMath, SNavigation, SPage, SText, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { Container } from '../../../Components';
 class pedidos extends Component {
@@ -9,6 +9,8 @@ class pedidos extends Component {
         this.state = {
         };
         this.idemp = SNavigation.getParam("pk")
+        this.fecha_inicio = SNavigation.getParam("fecha_inicio");
+        this.fecha_fin = SNavigation.getParam("fecha_fin");
     }
 
     componentDidMount() {
@@ -46,10 +48,31 @@ class pedidos extends Component {
     }
     render() {
         return (
-            <SPage title={'pedidos'} >
+            <SPage title={'Pedidos'} >
                 <Container >
-                    <SList limit={20} data={this.state.data} render={this.component.bind(this)} order={[{ key: "idven", order: "desc" },]} />
+
+                    {(this.fecha_inicio) ?
+                        <SView col={"xs-12"} center>
+                            <SText fontSize={20} bold >Pedidos entre: </SText>
+                            <SText fontSize={20} bold >{this.fecha_inicio} , {this.fecha_fin}</SText>
+                        </SView> : null }
+
+                    <SHr height={20} />
+                    <SList
+                        limit={20}
+                        data={this.state.data}
+                        render={this.component.bind(this)}
+                        order={[{ key: "idven", order: "desc" }]}
+                        {...this.fecha_inicio ?
+                            {
+                                filter: (a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin
+                            } : null}
+                        // filter={(a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin} : null}
+
+                        buscador={true}
+                    />
                 </Container>
+                <SHr height={30} />
             </SPage>
         );
     }

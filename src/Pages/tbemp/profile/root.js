@@ -51,6 +51,7 @@ class index extends DPA.profile {
             idemp: SNavigation.getParam("pk")
             // idemp: this.pk + ""
         }
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin})
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             const obj = e.data[0]
@@ -128,6 +129,7 @@ class index extends DPA.profile {
     }
 
     $item(obj) {
+        // console.log(this.state?.fecha_inicio + " AQUII")
         return <SView col={"xs-12"} center>
             <SHr h={30} />
             <SView col={"xs-12"} center>
@@ -197,7 +199,7 @@ class index extends DPA.profile {
                     label: "Pedidos",
                     cant: this.state.cantidad_pedidos,
                     monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
-                    onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk }),
+                    onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                 })}
@@ -205,7 +207,7 @@ class index extends DPA.profile {
                     label: "Ventas",
                     cant: this.state.cantidad_ventas,
                     monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
-                    // onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk }),
+                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                     icon: 'Iventas',
                     color: '#DE6D3B',
                 })}

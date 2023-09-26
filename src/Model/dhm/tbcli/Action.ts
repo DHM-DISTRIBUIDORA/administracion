@@ -32,7 +32,7 @@ export default class Action extends SAction {
             code: code + "",
         }).then(e => {
             const data = e.data[0];
-            if (!data) throw { error: `No existe el codigo de cliente '${code}'` }
+            if (!data) throw { error: `No existe el código de cliente '${code}'` }
             return data;
         })
     }
