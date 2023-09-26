@@ -96,10 +96,13 @@ class index extends Component<ProductoCard2PropsType> {
                                 {/* <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText> */}
                                 <SInput width={42} type="number" value={this.props?.data.cantidad} onChangeText={(val) => {
                                     if (this.state?.count) {
+                                        if (val == "") val = 1
                                         this.state.count = parseInt(val);
                                         this.enviarDatosItems();
                                         console.log(this.state?.count + " - count - ");
                                     }
+
+                                    console.log(val + " - AQUI");
                                 }}
                                     style={{
                                         textAlign: "center",
