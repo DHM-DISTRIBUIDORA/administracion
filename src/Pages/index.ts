@@ -40,7 +40,7 @@ import transporte from './transporte';
 import info from './info';
 import buscar_cliente_codigo from './buscar_cliente_codigo';
 import version_required from './version_required';
-// import test3 from './test3';
+import test3 from './test3';
 // import test2 from "./test2"
 // import test from "./test"
 
@@ -52,7 +52,7 @@ import version_required from './version_required';
 // });
 
 export default SPage.combinePages("/", {
-  // "":storage,
+  // "":test3,
   "": carga,
   "root": root,
   wiki,
@@ -91,9 +91,9 @@ export default SPage.combinePages("/", {
   ...transporte,
   ...info,
   version_required,
-  buscar_cliente_codigo
+  buscar_cliente_codigo,
   // test2,
-  // test3,
+  test3,
   // test,
   // "chart": Example
 });

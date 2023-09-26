@@ -19,7 +19,8 @@ export default class root extends Component {
         this.setState({ loading: true })
         SSocket.sendPromise({
             component: "tbtg",
-            type: "getAll",
+            // type: "getAll",
+            type: "getPedidosDespachados",
             idemp: this.state.idemp
         }).then((e) => {
             this.setState({
@@ -34,7 +35,6 @@ export default class root extends Component {
 
     render() {
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
-
             <SView col={"xs-12"} center row padding={4} height={50}>
                 <SwitchRastreo height={18} width={80} />
                 <SView width={4} />
