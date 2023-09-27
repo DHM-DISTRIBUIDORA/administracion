@@ -13,6 +13,8 @@ export default class root extends Component {
             // curdate: new SDate("2023-08-28", "yyyy-MM-dd"),
             curdate: new SDate(),
             idemp: SNavigation.getParam("idemp"),
+            fecha_inicio: SNavigation.getParam("fecha_inicio"),
+            fecha_fin: SNavigation.getParam("fecha_fin"),
         }
     }
     componentDidMount() {
@@ -20,12 +22,16 @@ export default class root extends Component {
         SSocket.sendPromise({
             component: "tbtg",
             // type: "getAll",
+            // fecha: this.state.curdate.toString("yyyy-MM-dd"),
+            fecha_inicio:this.state.fecha_inicio,
+            fecha_fin:this.state.fecha_fin,
             type: "getPedidosDespachados",
             idemp: this.state.idemp
         }).then((e) => {
             this.setState({
                 loading: false,
                 data: Object.values(e.data),
+                visitas: e.visitas
             })
         }).catch(e => {
             this.setState({ loading: false })

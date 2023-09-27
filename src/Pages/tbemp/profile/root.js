@@ -26,6 +26,7 @@ class index extends DPA.profile {
             excludes: [],
             title: "Perfil de " + Parent.title,
         });
+        this.idemp = SNavigation.getParam("pk")
 
 
     }
@@ -46,7 +47,7 @@ class index extends DPA.profile {
             type: "perfilEmp",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("pk")
+            idemp: this.idemp
             // idemp: this.pk + ""
         }
         this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
@@ -66,7 +67,7 @@ class index extends DPA.profile {
             type: "perfilTransportista",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("pk")
+            idemp: this.idemp
             // idemp: this.pk + ""
         }
         this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
@@ -242,7 +243,7 @@ class index extends DPA.profile {
             </SView>
             <SHr h={30} />
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
-            {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} /> : null}
+            {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha_inicio={this.state?.fecha_inicio} fecha_fin={this.state?.fecha_fin} /> : null}
             <SHr h={30} />
             {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
