@@ -40,9 +40,7 @@ class index extends DPA.profile {
     //     }).catch(e => console.error(e))
     // }
 
-    getData({ fecha_inicio, fecha_fin }) {
-        console.log(this.pk)
-        console.log("ENTRO A FECHAS")
+    getDataVendedor({ fecha_inicio, fecha_fin }) {
         const request = {
             component: "dhm",
             type: "perfilEmp",
@@ -51,7 +49,27 @@ class index extends DPA.profile {
             idemp: SNavigation.getParam("pk")
             // idemp: this.pk + ""
         }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin})
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
+        this.setState({ loading: true })
+        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
+            const obj = e.data[0]
+            console.log(obj)
+            this.setState({ ...obj })
+        }).catch(e => {
+            console.error(e)
+        })
+    }
+
+    getDataTransportista({ fecha_inicio, fecha_fin }) {
+        const request = {
+            component: "dhm",
+            type: "perfilTransportista",
+            fecha_inicio: fecha_inicio,
+            fecha_fin: fecha_fin,
+            idemp: SNavigation.getParam("pk")
+            // idemp: this.pk + ""
+        }
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             const obj = e.data[0]
@@ -128,6 +146,73 @@ class index extends DPA.profile {
         </>
     }
 
+    getCardsClient(obj) {
+        return <SView col={"xs-12"} center row style={{
+            justifyContent: "space-between"
+        }}>
+            {this.ItemCard({
+                label: "Clientes",
+                cant: this.state.cantidad_clientes,
+                monto: "",
+                icon: 'Iclients',
+                color: '#1DA1F2',
+                onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+            })}
+            {this.ItemCard({
+                label: "Zonas",
+                cant: this.state.cantidad_zonas,
+                monto: "",
+                icon: 'Izonas',
+                color: '#833AB4',
+                onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+            })}
+            {this.ItemCard({
+                label: "Pedidos",
+                cant: this.state.cantidad_pedidos,
+                monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                icon: 'Ipedidos',
+                color: '#FF5A5F',
+            })}
+            {this.ItemCard({
+                label: "Ventas",
+                cant: this.state.cantidad_ventas,
+                monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
+                onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                icon: 'Iventas',
+                color: '#DE6D3B',
+            })}
+
+        </SView>
+    }
+    getCardsTransportista(obj) {
+        return <SView col={"xs-12"} center row style={{
+            justifyContent: "space-between"
+        }}>
+            {this.ItemCard({
+                label: "Clientes con pedidos",
+                cant: this.state.cantidad_clientes_con_pedido ?? 0,
+                monto: "",
+                icon: 'Iclients',
+                color: '#1DA1F2',
+                // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+            })}
+            {/* {this.ItemCard({
+                label: "Entregas",
+                cant: this.state.cantidad_zonas,
+                monto: "",
+                icon: 'Izonas',
+                color: '#833AB4',
+            })} */}
+            {this.ItemCard({
+                label: "Productos",
+                cant: this.state.cantidad_total_items ?? 0,
+                monto: SMath.formatMoney(this.state.monto_total_items ?? 0),
+                icon: 'Ipedidos',
+                color: '#FF5A5F',
+            })}
+        </SView>
+    }
     $item(obj) {
         // console.log(this.state?.fecha_inicio + " AQUII")
         return <SView col={"xs-12"} center>
@@ -159,60 +244,10 @@ class index extends DPA.profile {
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} /> : null}
             <SHr h={30} />
-            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getData(e)} /> : null}
-            <SView col={"xs-12"} center row style={{
-                justifyContent: "space-between"
-            }}>
-                {obj.idemt == 4 ?
-                    this.ItemCard({
-                        label: "Pedidos",
-                        cant: this.state.cantidad_clientes,
-                        monto: "",
-                        icon: 'IconPedido',
-                        color: '#EB1C24',
-                        onPress: () => SNavigation.navigate("/tbemp/profile/tbtg", { pk: this.pk })
-                    }) : null}
-                {this.ItemCard({
-                    label: "Clientes",
-                    cant: this.state.cantidad_clientes,
-                    monto: "",
-                    icon: 'Iclients',
-                    color: '#1DA1F2',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
-                })}
-                {this.ItemCard({
-                    label: "Zonas",
-                    cant: this.state.cantidad_zonas,
-                    monto: "",
-                    icon: 'Izonas',
-                    color: '#833AB4',
-                    onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
-                })}
-                {/* {this.ItemCard({
-                    label: "Compras",
-                    cant: this.state.cantidad_compras,
-                    monto: "",
-                    icon: 'Icompras',
-                    color: '#8CB45F',
-                })} */}
-                {this.ItemCard({
-                    label: "Pedidos",
-                    cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
-                    onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
-                    icon: 'Ipedidos',
-                    color: '#FF5A5F',
-                })}
-                {this.ItemCard({
-                    label: "Ventas",
-                    cant: this.state.cantidad_ventas,
-                    monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
-                    onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
-                    icon: 'Iventas',
-                    color: '#DE6D3B',
-                })}
-
-            </SView>
+            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
+            {obj.idemt == 1 ? this.getCardsClient(obj) : null}
+            {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
+            {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
             <SHr />
         </SView>
     }

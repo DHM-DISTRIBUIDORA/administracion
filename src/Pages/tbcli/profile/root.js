@@ -32,8 +32,10 @@ class index extends DPA.profile {
         });
         this.pk = SNavigation.getParam("pk");
         this.visita = SNavigation.getParam("visita", false);
-        this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
-        this.visita = SNavigation.getParam("visita");
+        this.visitaType = SNavigation.getParam("visitaType", false);
+        this.idemp = SNavigation.getParam("idemp", 0);
+        // this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
+        // this.visita = SNavigation.getParam("visita");
 
     }
 
@@ -50,8 +52,34 @@ class index extends DPA.profile {
             fecha_fin
         }).then((e) => {
             const obj = e.data[0]
+            console.log("tbcli getPerfil", obj)
             this.setState({ ...obj })
         }).catch(e => console.error(e))
+    }
+
+    visitaRegistro({ descripcion, tipo }) {
+        this.setState({ loading: true })
+        SSocket.sendPromise({
+            component: this.visitaType == "transporte" ? "visita_transportista" : "visita_vendedor",
+            type: "registro",
+            estado: "cargando",
+            key_usuario: Model.usuario.Action.getKey(),
+            data: {
+                idemp: this.idemp,
+                idcli: this.pk,
+                descripcion: descripcion,
+                tipo: tipo,
+                fecha: new SDate().toString("yyyy-MM-dd")
+            }
+        }).then(e => {
+            // state.visitas[o.idcli] = e.data;
+            this.setState({ loading: false })
+            SNavigation.goBack();
+
+        }).catch(e => {
+            console.error(e)
+            this.setState({ loading: false })
+        })
     }
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
@@ -265,7 +293,7 @@ class index extends DPA.profile {
                 SNavigation.navigate("/public", { idcli: obj.idcli })
             }}>REALIZAR PEDIDO</Btn>
             <SHr h={16} />
-            {this.visita ? <><Btn col={"xs-11"} onPress={() => {
+            {(this.visitaType && !this.visita) ? <><Btn col={"xs-11"} onPress={() => {
                 SPopup.openContainer({
                     key: "popup_concretar_visita",
                     render: (e) => {
@@ -281,6 +309,10 @@ class index extends DPA.profile {
                             <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} />
                             <SHr />
                             <Btn padding={8} onPress={() => {
+                                this.visitaRegistro({
+                                    descripcion: this.visita_descripcion.getValue(),
+                                    tipo: this.visita_tipo.getValue(),
+                                })
                                 // this.onVisitaSuccess({
                                 //     descripcion: this.visita_descripcion.getValue(),
                                 //     tipo: this.visita_tipo.getValue()
@@ -317,7 +349,7 @@ class index extends DPA.profile {
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
                     onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),

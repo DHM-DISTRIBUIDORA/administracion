@@ -30,15 +30,15 @@ class index extends Component {
             this.data = cliente;
             
             this.data = {
-                "Nombres": cliente.clinom,
+                "Nombres": cliente?.clinom,
                 "Apellidos": "",
-                "Direccion": cliente.clidir,
-                "Telefono": cliente.clitel,
-                "key": cliente.idcli,
-                "idz": cliente.idz
+                "Direccion": cliente?.clidir,
+                "Telefono": cliente?.clitel,
+                "key": cliente?.idcli,
+                "idz": cliente?.idz
             };
             // this.setState({ idcli: cliente.idcli });
-            this.state.idcli = cliente.idcli;
+            this.state.idcli = cliente?.idcli;
         }
         // return this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' })
 
@@ -286,7 +286,7 @@ class index extends Component {
                         NavBar.close();
 
                     }}>CERRAR SESIÓN</Btn>
-                    <SHr height={15} />
+                    <SHr height={200} />
                     {/* <MenuButtom label={STheme.getTheme() == "default" ? "Oscuro" : "Claro"} icon={} onPress={() => {
                         STheme.change()
                     }} /> */}

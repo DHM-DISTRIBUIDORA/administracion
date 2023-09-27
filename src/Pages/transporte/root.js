@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { SBuscador, SDate, SHr, SInput, SLoad, SMapView, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component'
 import Model from '../../Model'
 import SSocket from 'servisofts-socket'
-import MapaComponent from './MapaComponent';
+import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
 export default class root extends Component {
@@ -25,7 +25,7 @@ export default class root extends Component {
         }).then((e) => {
             this.setState({
                 loading: false,
-                data: e.data,
+                data: Object.values(e.data),
             })
         }).catch(e => {
             this.setState({ loading: false })
