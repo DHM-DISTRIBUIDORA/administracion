@@ -25,6 +25,7 @@ export default class index extends Component {
 					bottom: 40,
 					width: 50,
 					height: 50,
+					// borderWidth:1,
 					// borderWidth: STheme.color.secondary + "22",
 					// borderColor: STheme.color.secondary + "22",
 					justifyContent: "center",
@@ -32,12 +33,12 @@ export default class index extends Component {
 					// margin: 4,
 					...this.props.style
 				}}>
-				<SIcon name={"AgregarTap"} fill="#fff"/>
-				{/* <Svg name={"Add"} style={{
+				{/* <SIcon name={"AgregarTap"} fill="#fff"/> */}
+				<SIcon name={"Reload"} style={{
 					width: "100%",
 					height: "100%",
 					// fill:"#C31"
-				}} /> */}
+				}} />
 			</SView >
 			// </SView>
 		);

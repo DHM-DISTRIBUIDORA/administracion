@@ -84,6 +84,9 @@ class Lista extends DPA.list {
         this.fecha_fin = SNavigation.getParam("fecha_fin");
     }
 
+    $allowTable(){
+        return true
+    }
     $filter(data) {
         if (this.fecha_inicio) {
             return data.idemp == this.props.pi.pk && data.vfec >= this.fecha_inicio && data.vfec <= this.fecha_fin

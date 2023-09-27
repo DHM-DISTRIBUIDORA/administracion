@@ -44,10 +44,13 @@ export default class index extends Component<PedidoCardHPropsType> {
         if (!idven) return null;
         return <SView col={"xs-12"} row style={{ justifyContent: "flex-end" }}>
             <SView col={"xs-12"} row style={{ justifyContent: "flex-end" }}>
-                <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/dm_cabfac/recibo", { pk: idven }) }} >
+                {!this.props.delivery ? null : <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/pedidos/mapa_conductor", { pk: idven }) }} >
+                    Delivery
+                </PButtomSmall2>}
+                <SView width={8} />
+                <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/tbven/recibo", { pk: idven }) }} >
                     Detalle
                 </PButtomSmall2>
-                <SView width={8} />
             </SView>
         </SView>
     }

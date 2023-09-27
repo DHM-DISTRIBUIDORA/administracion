@@ -47,6 +47,10 @@ class index extends Component {
             // hidden
             footer={this.footer()}
             header={<Pedido.BotonesPedidos url={"/pedidos/historico"}  />}
+            onRefresh={(callback) => {
+                this.componentDidMount()
+                if (callback) callback()
+            }}
         >
             <SHr />
             <Container>

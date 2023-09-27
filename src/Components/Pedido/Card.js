@@ -47,10 +47,10 @@ export default class index extends Component<PedidoCardPropsType> {
                 <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/dm_cabfac/recibo", { pk: idven }) }} >
                     Detalle
                 </PButtomSmall2>
-                <SView width={8} />
+                {/* <SView width={8} />
                 <PButtomSmall2 backgroundColor='#62875F' width={90} onPress={() => { SNavigation.navigate("/pedidos/mapa_conductor", { pk: idven }) }} >
                     Repartidor
-                </PButtomSmall2>
+                </PButtomSmall2> */}
             </SView>
         </SView>
     }

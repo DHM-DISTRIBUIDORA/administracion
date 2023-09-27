@@ -37,7 +37,7 @@ class index extends Component<BotonesPedidosPropsType> {
                 borderBottomRightRadius: radius
             }
         }
-        return <SView col={"xs-6"} center height={40} style={{
+        return <SView col={"xs-4"} center height={40} style={{
             backgroundColor: !select ? STheme.color.primary : null,
             borderWidth: 2,
             borderColor: STheme.color.primary,
@@ -48,7 +48,7 @@ class index extends Component<BotonesPedidosPropsType> {
                 SNavigation.navigate(url);
             }
         }}>
-            <SText fontSize={18} color={!select ? STheme.color.white : STheme.color.text}>{label}</SText>
+            <SText fontSize={14} bold color={!select ? STheme.color.white : STheme.color.text}>{label}</SText>
         </SView>
     }
     render() {
@@ -56,7 +56,8 @@ class index extends Component<BotonesPedidosPropsType> {
             <Container>
                 <SView col={"xs-12"} row>
                     <SHr height={5} />
-                    {this.getButtom({ label: "PEDIDOS", url: "/pedidos", corner: "left" })}
+                    {this.getButtom({ label: "PENDIENTES", url: "/pedidos", corner: "left" })}
+                    {this.getButtom({ label: "EN DELIVERY", url: "/pedidos/delivery", corner: "center" })}
                     {this.getButtom({ label: "HISTORICO", url: "/pedidos/historico", corner: "right" })}
                     <SHr height={5} />
                 </SView>

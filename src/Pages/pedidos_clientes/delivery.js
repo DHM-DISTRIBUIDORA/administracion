@@ -6,6 +6,7 @@ import { BottomNavigator, Container, TopBar } from '../../Components';
 import SSocket, { setProps } from 'servisofts-socket';
 import Pedido from '../../Components/Pedido';
 import Model from '../../Model';
+import { SelectEntreFechas } from '../../Components/Fechas';
 class index extends Component {
 
     constructor(props) {
@@ -16,10 +17,9 @@ class index extends Component {
     componentDidMount() {
 
         SSocket.sendPromise({
-            component: "dm_cabfac",
-            type: "getPedidos",
+            component: "tbven",
+            type: "getPedidosDelivery",
             idcli: this.idcli,
-
 
         }).then(e => {
             console.log(e);
@@ -32,18 +32,13 @@ class index extends Component {
     getLista() {
         const data = this.state?.data;
         if (!data) return <SLoad />
-
-        console.log(data)
-        if (data.length <= 0) {
-            return <SText>No hay datos</SText>
-        }
         return <SList
             data={data}
             limit={20}
             // filter={(a) => a.nivel == 1}
             order={[{ key: "idven", order: "desc" }]}
             render={(obj) => {
-                return <Pedido.Card data={obj} />
+                return <Pedido.CardH data={obj} delivery/>
             }}
         />
     }
@@ -52,7 +47,7 @@ class index extends Component {
             title={"Mis pedidos"}
             // hidden
             footer={this.footer()}
-            header={<Pedido.BotonesPedidos url={"/pedidos"} />}
+            header={<Pedido.BotonesPedidos url={"/pedidos/delivery"} />}
             onRefresh={(callback) => {
                 this.componentDidMount()
                 if (callback) callback()
