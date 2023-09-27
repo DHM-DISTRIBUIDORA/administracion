@@ -45,13 +45,63 @@ export default class body extends React.Component {
     }
     renderUserData() {
         var usuario = Model.usuario.Action.getUsuarioLog();
-        if (!usuario) return <SView col={"xs-12"} center height onPress={() => {
+        var cliente = Model.tbcli.Action.getCliente();
+        if (!usuario && !cliente) return <SView col={"xs-12"} center height onPress={() => {
             SNavigation.navigate("/login")
             NavBar.close();
         }}>
             <SText color={STheme.color.secondary} fontSize={18} center>{"Inicia sesión en DHM."}</SText>
             {/* <SText color={STheme.color.l} fontSize={12} center>{"Algunas funciones se encuentran desactivadas hasta que inicies session con un usuario."}</SText> */}
         </SView>;
+        if (cliente) {
+            return <SView row col={"xs-12"}>
+                <SView col={"xs-3"} center style={{ textAlign: "right" }} height>
+                    <SView style={{
+                        width: 50,
+                        height: 50, borderRadius: 30, overflow: "hidden", borderWidth: 1, borderColor: "#fff"
+                    }}>
+                        <SView style={{
+                            position: "absolute"
+                        }}>
+                            <SIcon name='InputUser' />
+                        </SView>
+                        <SView style={{
+                            position: "absolute"
+                        }}>
+                            <SImage src={SSocket.api.root + "tbcli/" + cliente?.idcli} style={{
+                                width: "100%",
+                                height: "100%",
+                                resizeMode: "cover"
+                            }} />
+                        </SView>
+                        <SImage src={SSocket.api.root + "tbcli/" + cliente?.idcli + "?date=" + new Date().getTime()} style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "cover"
+                        }} />
+                    </SView>
+                </SView>
+                <SView col={"xs-9"} onPress={() => {
+                    SNavigation.navigate('perfil');
+                    NavBar.close();
+                }}>
+                    <SText
+                        style={{ color: "#fff", fontSize: 20, }}>{cliente?.clinom}</SText>
+                    {/* style={{ color: "#fff", fontSize: 20, }}>Editar</SText> */}
+                    <SView height={22} onPress={() => {
+                        SNavigation.navigate('/perfil')
+                        NavBar.close();
+                    }} style={{
+                        // paddingLeft: 6,
+                        alignItems: 'center',
+                    }} row>
+                        <SText fontSize={12} color={"#eee"} font='LondonTwo' style={{
+                        }}>Ver perfil </SText>
+                        <SIcon name="Ver" width={9} color="#fff" />
+                    </SView>
+                </SView>
+            </SView>
+        }
         return <SView row col={"xs-12"}>
             <SView col={"xs-3"} center style={{ textAlign: "right" }} height>
                 <SView style={{
@@ -103,12 +153,12 @@ export default class body extends React.Component {
 
     renderIcon({ label, path, icon, onPress, requireUser, noWithUser }) {
         if (requireUser) {
-            if (!Model.usuario.Action.getKey()) {
+            if (!Model.usuario.Action.getKey() && !Model.tbcli.Action.getCliente()) {
                 return null;
             }
         }
         if (noWithUser) {
-            if (Model.usuario.Action.getKey()) {
+            if (Model.usuario.Action.getKey() || Model.tbcli.Action.getCliente()) {
                 return null;
             }
         }
@@ -133,8 +183,8 @@ export default class body extends React.Component {
         // if (!this.state.width) return null;
         // var usuario = this.props?.state?.usuarioReducer?.usuarioLog;
         // if (!usuario) {
-            // SNavigation.reset('/');
-            // return <SView />
+        // SNavigation.reset('/');
+        // return <SView />
         // }
         // if (!this.state.load) return <SLoad />
         return <>
@@ -162,6 +212,7 @@ export default class body extends React.Component {
                         label: "Salir", icon: "Mexit", requireUser: true,
                         onPress: () => {
                             // Model._events.CLEAR();
+                            Model.tbcli.Action.setCliente(null);
                             Model.usuario.Action.unlogin();
                             SNavigation.reset("/");
                             NavBar.close();

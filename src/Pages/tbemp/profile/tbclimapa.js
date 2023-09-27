@@ -25,34 +25,46 @@ class index extends Component {
         this.pk = SNavigation.getParam("pk")
     }
 
-    getMarkers(data) {
+
+    renderMapa(data) {
         if (!data) return null;
 
-        return Object.values(data).map((obj) => {
+        var latPadre = this.calcularPromedio(data, 'clilat');
+        var longPadre = this.calcularPromedio(data, 'clilon');
+        let arr = [];
+        Object.values(data).map((obj) => {
             if (!obj.clilat || !obj.clilon) return null;
-            const onPress = () => {
-                SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
-            }
-            //     // SNavigation.navigate("/tbcli/profile", { pk: data.idcli + "" })
+            arr.push({ id: obj.idcli, clinom: obj.clinom, location: { latitude: obj.clilat, longitude: obj.clilon } })
+        });
+        const HanndleOnPress = (obj) => {
+            SNavigation.navigate("/tbcli/profile", { pk: obj.id })
+        }
+        const RenderMarker = (obj, onPress) => {
             return MarkerCircle({
-                latitude: parseFloat(obj?.clilat ?? 0),
-                longitude: parseFloat(obj?.clilon ?? 0),
-                src: SSocket.api.root + "tbcli/" + obj?.idcli,
-                label: obj?.idcli,
-                size:40,
-                onPress: onPress
+                latitude: obj?.location.latitude,
+                longitude: obj?.location.longitude,
+                src: SSocket.api.root + "tbcli/" + obj?.id,
+                label: obj.clinom,
+                size: 40,
+                cantidad: obj.count > 1 ? obj.count : 0,
+                onPress: obj.count <= 1 ? HanndleOnPress.bind(this, obj) : onPress,
                 // cantidad: obj?.cantidad
             })
-            return <SMapView.SMarker
-                latitude={parseFloat(obj?.clilat ?? 0)}
-                longitude={parseFloat(obj?.clilon ?? 0)}
-
-            >
-                <Marker onPress={onPress} />
-            </SMapView.SMarker >
-        })
+        }
+        return <SMapView.Cluster initialRegion={{
+            latitude: latPadre,
+            longitude: longPadre,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
+        }}
+            renderMarker={RenderMarker}
+            renderCluster={RenderMarker}
+            data={arr}
+        >
+            <></>
+            {/* {this.getMarkers(data)} */}
+        </SMapView.Cluster>
     }
-
     calcularPromedio(lista, atributo) {
         let suma = 0;
         let contador = 0;
@@ -71,27 +83,9 @@ class index extends Component {
     render() {
         var data = Model.tbcli.Action.getAll({ cliidemp: this.pk })
         if (!data) return <SLoad />
-        var latPadre;
-        var longPadre;
-
-        latPadre = this.calcularPromedio(data, 'clilat');
-        longPadre = this.calcularPromedio(data, 'clilon');
 
         return <SPage title={'Mapa de clientes'} disableScroll>
-            {(isNaN(longPadre)) ?
-                <SText center>NO HAY DATOS EN MAPA</SText>
-                :
-                <SMapView initialRegion={{
-                    // latitude: -17.783799,
-                    // longitude: -63.180,
-                    latitude: latPadre,
-                    longitude: longPadre,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1
-                }}>
-                    <></>
-                    {this.getMarkers(data)}
-                </SMapView>}
+            {this.renderMapa(data)}
         </SPage>
     }
 }

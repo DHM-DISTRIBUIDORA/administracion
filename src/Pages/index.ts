@@ -6,7 +6,7 @@ import login from "./login";
 import registro from './registro';
 import explorar from './explorar';
 import favoritos from './favoritos';
-import pedidos from './pedidos';
+import pedidos_clientes from './pedidos_clientes';
 import producto from './producto';
 import sql from './sql/index';
 import privacidad from './privacidad';
@@ -38,8 +38,9 @@ import vendedor from './vendedor';
 import dm_cabfac from './dm_cabfac';
 import transporte from './transporte';
 import info from './info';
-
-// import test3 from './test3';
+import buscar_cliente_codigo from './buscar_cliente_codigo';
+import version_required from './version_required';
+import test3 from './test3';
 // import test2 from "./test2"
 // import test from "./test"
 
@@ -51,7 +52,7 @@ import info from './info';
 // });
 
 export default SPage.combinePages("/", {
-  // "":storage,
+  // "":test3,
   "": carga,
   "root": root,
   wiki,
@@ -59,7 +60,7 @@ export default SPage.combinePages("/", {
   ...registro,
   "explorar": explorar,
   "favoritos": favoritos,
-  "pedidos": pedidos,
+  ...pedidos_clientes,
   sql,
   "privacidad": privacidad,
   "privacy": privacidad,
@@ -89,8 +90,10 @@ export default SPage.combinePages("/", {
   ...vendedor,
   ...transporte,
   ...info,
+  version_required,
+  buscar_cliente_codigo,
   // test2,
-  // test3,
+  test3,
   // test,
   // "chart": Example
 });

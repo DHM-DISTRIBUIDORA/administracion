@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SInput, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
@@ -60,7 +60,7 @@ class index extends Component<ProductoCard2PropsType> {
                             position: "absolute",
                             zIndex: 99,
                             top: 0,
-                            backgroundColor:"#ffffff50"
+                            backgroundColor: "#ffffff50"
 
                         }}
                     />
@@ -81,11 +81,9 @@ class index extends Component<ProductoCard2PropsType> {
                     <SHr />
                     <SView row>
                         <SView col={"xs-7"} row center>
-                            <SView center width={45} height={45} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            <SView center width={40} height={40} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count <= 0) return;
-                                    // this.setState({ count: this.state.count - 1 });
-
                                     this.state.count = this.state.count - 1
                                     this.enviarDatosItems()
                                 }}
@@ -93,13 +91,30 @@ class index extends Component<ProductoCard2PropsType> {
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
-                            <SView row  >
-                                <SView width={10} />
-                                <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText>
-                                {/* <SText fontSize={16}>{this.props?.data?.cantidad}</SText> */}
-                                <SView width={10} />
+                            <SView width={3} />
+                            <SView row width={46} center>
+                                {/* <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText> */}
+                                <SInput width={42} type="number" value={this.props?.data.cantidad} onChangeText={(val) => {
+                                    if (this.state?.count) {
+                                        if (val == "") val = 1
+                                        this.state.count = parseInt(val);
+                                        this.enviarDatosItems();
+                                        console.log(this.state?.count + " - count - ");
+                                    }
+
+                                    console.log(val + " - AQUI");
+                                }}
+                                    style={{
+                                        textAlign: "center",
+                                        backgroundColor: STheme.color.lightGray + "30",
+                                        // paddingLeft: 0,
+                                        paddingRight: 4,
+                                        fontSize: 14
+                                    }}
+                                />
                             </SView>
-                            <SView center width={45} height={45} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            {/* <SView width={10} /> */}
+                            <SView center width={40} height={40} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count >= stock) return;
                                     this.state.count = this.state.count + 1

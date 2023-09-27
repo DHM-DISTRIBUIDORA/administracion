@@ -19,7 +19,8 @@ class index extends DPA.profile {
             tipo: "gg"
 
         };
-        var tipo = SNavigation.getParam("tipo");
+        
+       
     }
     $allowBack() {
         return true;
@@ -83,17 +84,27 @@ class Lista extends DPA.list {
             item: item2,
             excludes: []
         });
+        this.fecha_inicio = SNavigation.getParam("fecha_inicio");
+        this.fecha_fin = SNavigation.getParam("fecha_fin");
+        this.tipo = SNavigation.getParam("tipo");
     }
 
-    // $filter(data) {
-    //     return data.zest == "0"
-    // }
+    $filter(data) {
+        // return data.zest == "0"
+        if (this.fecha_inicio) {
+            // return data.idemp == this.props.pi.pk && data.vfec >= this.fecha_inicio && data.vfec <= this.fecha_fin && data.vtipo == SNavigation.getParam("tipo")
+            return  data.vtipo == this.tipo && data.vfec >= this.fecha_inicio && data.vfec <= this.fecha_fin
+        } else {
+            // return data.idemp == this.props.pi.pk
+            return data.vtipo == this.tipo
+        }
+    }
     $order() {
         return [{ key: "vfec", order: "desc" }]
     }
-    $filter(data) {
-        return data.vtipo == SNavigation.getParam("tipo")
-    }
+    // $filter(data) {
+    //     return data.vtipo == SNavigation.getParam("tipo")
+    // }
     $getData() {
         return Parent2.model.Action.getAll({ idcli: this.props.pi.pk })
     }

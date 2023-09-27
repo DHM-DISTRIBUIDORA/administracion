@@ -45,7 +45,7 @@ export default connect(index);
 
 const Parent2 = {
     name: "Productos",
-    path: `/tbemp`,
+    path: `/tbprd`,
     model: Model.tbprd
 }
 class Lista extends DPA.list {

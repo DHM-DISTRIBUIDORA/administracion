@@ -1,7 +1,32 @@
 import React, { Component } from 'react';
 import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
+import sql from '../sql/sql';
 
+const pedidos_donde_se_hicieron = `
+SELECT  *
+FROM (
+	select 
+		dm_cabfac.clicod,
+		MAX(dm_cabfac.vlatitud) as lat,
+		MAX(dm_cabfac.vlongitud) as lng
+	from dm_cabfac
+	where 
+		vlatitud <> 0
+	and vlongitud <> 0
+	group by dm_cabfac.clicod
+) sq1 JOIN dm_clientes ON sq1.clicod = dm_clientes.clicod
+            `
+const clientes_ubicacion = `
+	select 
+        tbcli.idcli,
+		tbcli.clilat as lat,
+		tbcli.clilon as lng
+	from tbcli
+	where 
+        tbcli.clilat <> 0
+	and tbcli.clilon <> 0 
+            `
 
 export default class index extends Component {
     constructor(props) {
@@ -14,21 +39,7 @@ export default class index extends Component {
         SSocket.sendPromise({
             component: "dhm",
             type: "get",
-            select: `
-            SELECT  *
-FROM (
-	select 
-		dm_cabfac.clicod,
-		MAX(dm_cabfac.vlatitud) as lat,
-		MAX(dm_cabfac.vlongitud) as lng
-	from dm_cabfac
-	where 
-		vlatitud <> 0
-	and vlongitud <> 0
-	group by dm_cabfac.clicod
-) sq1 JOIN dm_clientes ON sq1.clicod = dm_clientes.clicod
-
-            `,
+            select: clientes_ubicacion,
         }).then((resp) => {
             this.setState({ error: "", data: resp.data, loading: false })
             console.log(resp);

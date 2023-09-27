@@ -21,7 +21,7 @@ export default class find extends Component {
             <SPage>
                 <Container>
                     <SForm inputs={{
-                        "idcli": { type: "number", label: "Codigo de cliente", defaultValue: 2683 },
+                        "idcli": { type: "number", label: "Código de cliente", defaultValue: 2683 },
                     }}
                         onSubmitName={"ENVIAR"}
                         onSubmit={this.handlePress}

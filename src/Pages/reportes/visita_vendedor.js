@@ -49,7 +49,7 @@ export default class index extends Component {
                             { key: "index" },
                             { key: "idemp", width: 70 },
                             // { key: "idcli", width: 70 },
-                            { key: "tbcli/0/clicod", label: "Codigo de cliente", width: 200 },
+                            { key: "tbcli/0/clicod", label: "Código de cliente", width: 200 },
                             { key: "tbcli/0/clinom", label: "Nombre de cliente", width: 200 },
                             { key: "fecha", width: 80, render: a => new SDate(a).toString("yyyy-MM-dd") },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm") },

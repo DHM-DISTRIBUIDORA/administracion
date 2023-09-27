@@ -12,9 +12,19 @@ class index extends Component {
     };
     constructor(props) {
         super(props);
+        this.state = {
+            detalle: "",
+        }
 
     }
     componentDidMount() {
+        const cliente = Model.tbcli.Action.getCliente();
+        if (cliente) {
+            this.setState({
+                client: cliente
+            })
+            return;
+        }
         SStorage.getItem("tbcli_a_comprar", resp => {
             if (!resp) return;
             try {
@@ -52,7 +62,7 @@ class index extends Component {
             data: {
                 idcli: idcli,
                 vnit: clinit,
-                vdet: "VENTA DESDE APP SERVISOFTS",
+                vdet: "VENTA DESDE APP SERVISOFTS - " + this.state.detalle,
                 productos: dataProducto
             },
             usumod: "SERVISOFTS",
@@ -98,7 +108,7 @@ class index extends Component {
             data: {
                 idcli: idcli,
                 vnit: clinit,
-                vdet: "VENTA DESDE APP SERVISOFTS",
+                vdet: "VENTA DESDE APP SERVISOFTS - " + this.state.detalle,
                 productos: [
                     ...dataProducto
                 ]
@@ -119,6 +129,8 @@ class index extends Component {
         })
     }
     render() {
+        console.log(this.state?.client)
+        console.log(this.state?.detalle + " detalle")
         return <SPage footer={this.footer()}>
             <Container>
                 <SText>Carrito</SText>
@@ -126,6 +138,9 @@ class index extends Component {
                 <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText>
                 <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
                     this.state.client.clinit = val;
+                }} />
+                <SInput type='textArea' style={{padding:10}} label="DETALLE" defaultValue={this.state?.detalle} onChangeText={(val) => {
+                    this.state.detalle = val;
                 }} />
                 <SHr height={15} />
                 <Carrito.Detalle />
@@ -147,7 +162,7 @@ class index extends Component {
 
                     }} >REALIZAR PEDIDO</PButtom>
             </Container>
-
+            <SHr height={30} />
         </SPage>
     }
 
