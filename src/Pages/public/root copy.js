@@ -5,7 +5,7 @@ import { FlatList, ScrollView } from 'react-native'
 import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, TopBar, } from '../../Components';
 import Model from '../../Model';
-import pedidos from '../pedidos';
+import pedidos from '../pedidos_clientes/root';
 const FotoPerfil = require('../../Assets/img/foto.png')
 class index extends Component {
 

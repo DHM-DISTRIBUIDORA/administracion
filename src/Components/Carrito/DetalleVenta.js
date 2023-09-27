@@ -50,6 +50,7 @@ class index extends Component<DetalleVentaPropsType> {
     render() {
         let detalle = Model.tbvd.Action.getAll({ idven: this.props?.idven })
         let total = 0;
+        console.log(this.props?.idven + " -KDSFKSDJFKSDJF")
 
         const productos = Model.tbprd.Action.getAll();
         if (!detalle) return <SLoad />

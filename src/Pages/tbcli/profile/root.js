@@ -52,6 +52,7 @@ class index extends DPA.profile {
             const obj = e.data[0]
             this.setState({ ...obj })
         }).catch(e => console.error(e))
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
     }
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
@@ -311,16 +312,16 @@ class index extends DPA.profile {
                     monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
                     icon: 'Icompras',
                     color: '#8CB45F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF" }),
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" , fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin}),
                 })}
                 {/* {this.ItemCard({
                     label: "Máxima venta",

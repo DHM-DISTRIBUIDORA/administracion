@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SButtom, SHr, SList, SLoad, SNavigation, SPage, SText, SView } from 'servisofts-component';
-import { BottomNavigator, Container, TopBar } from '../Components';
+import { BottomNavigator, Container, TopBar } from '../../Components';
 
 import SSocket, { setProps } from 'servisofts-socket';
-import Pedido from '../Components/Pedido';
-import Model from '../Model';
+import Pedido from '../../Components/Pedido';
+import Model from '../../Model';
 class index extends Component {
 
     constructor(props) {
@@ -16,10 +16,9 @@ class index extends Component {
     componentDidMount() {
 
         SSocket.sendPromise({
-            component: "dm_cabfac",
-            type: "getPedidos",
+            component: "tbven",
+            type: "getAll",
             idcli: this.idcli,
-
 
         }).then(e => {
             console.log(e);
@@ -38,15 +37,16 @@ class index extends Component {
             // filter={(a) => a.nivel == 1}
             order={[{ key: "idven", order: "desc" }]}
             render={(obj) => {
-                return <Pedido.Card data={obj} />
+                return <Pedido.CardH data={obj} />
             }}
         />
     }
     render() {
         return <SPage
-            title={"Mis pedidos"}
+            title={"Historico de pedidos"}
             // hidden
             footer={this.footer()}
+            header={<Pedido.BotonesPedidos url={"/pedidos/historico"}  />}
         >
             <SHr />
             <Container>
