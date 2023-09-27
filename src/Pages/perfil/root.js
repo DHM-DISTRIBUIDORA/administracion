@@ -28,7 +28,7 @@ class index extends Component {
             this.data = user;
         } else {
             this.data = cliente;
-            
+
             this.data = {
                 "Nombres": cliente?.clinom,
                 "Apellidos": "",
@@ -44,7 +44,7 @@ class index extends Component {
 
         // this.data = Model.usuario.Action.getUsuarioLog();
 
-        
+
         return this.data;
     }
 
@@ -99,7 +99,7 @@ class index extends Component {
                             top: 0,
                             // width: 50
                         }} />
-                        <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
+                        <SImage src={SSocket.api.root + (usuario?.Apellidos != "" ? "usuario/" : "tbcli/") + usuario?.key + "?date=" + new Date().getTime()}
                             style={{ resizeMode: 'cover', zIndex: 99, }} />
                     </SView>
                 </SView>
@@ -195,15 +195,15 @@ class index extends Component {
     }
 
     getRepartidor() {
-      
+
         let dataZona = Model.tbzon.Action.getByKey(this.data.idz + "");
         if (!dataZona) return <SLoad />;
         if (dataZona.idemp == 0) return <SText>NO TIENE REPARTIDOR ASIGNADO</SText>;
 
         let dataRepartidor = Model.tbemp.Action.getByKey(dataZona.idemp + "");
-        
+
         if (!dataRepartidor) return <SLoad />;
-        
+
         return <SView col={"xs-12"}>
             <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
                 <SHr height={10} />
