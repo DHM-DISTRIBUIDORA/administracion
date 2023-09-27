@@ -12,7 +12,7 @@ export const store = createStore(
 );
 Model._events.setStore(store)
 
-const Redux = (props) => {
+const Redux = (props:any) => {
     return (<ProviderRedux store={store} >
         {props.children}
     </ProviderRedux>)

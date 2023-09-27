@@ -7,7 +7,7 @@ export default class Action extends SAction {
     getCurrentLocation() {
         return this._getReducer().location
     }
-    onChange(data, type) {
+    onChange(data:any, type:any) {
         var obj = {
             component: "background_location",
             type: "onChange",

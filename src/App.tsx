@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { SComponentContainer, SNavigation, SText, STheme } from 'servisofts-component';
 import SSocket, { setProps } from 'servisofts-socket';
 import Redux, { store } from './Redux';
@@ -12,14 +12,14 @@ import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
 import BackgroundImage from './Components/BackgroundImage';
 import Model from './Model';
-import { version } from "../package.json"
+import packageInfo from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
 
 setProps(Config.socket);
 Firebase.init();
 DeviceKey.init();
 BackgroundLocation();
-const App = (props) => {
+function App(): JSX.Element {
     // SDB.init({
     //     dbName: "namedb",
     //     version: 1,
@@ -31,10 +31,10 @@ const App = (props) => {
         <SComponentContainer
             debug
             socket={SSocket}
-            background={<BackgroundImage />}
+            // background={<BackgroundImage />}
             assets={Assets}
             inputs={Config.inputs}
-            theme={{ themes: Config.theme, initialTheme: "default" }}
+            theme={{ themes: Config.theme, initialTheme: "default"}}
         >
             <SNavigation
                 linking={{
@@ -50,7 +50,7 @@ const App = (props) => {
             />
             <SSocket
                 store={store}
-                identificarse={(props) => {
+                identificarse={(props:any) => {
                     var usuario = props.state.usuarioReducer.usuarioLog;
                     // if(usuario){
                     //     Model.usuario.Action.syncUserLog();
@@ -73,8 +73,9 @@ const App = (props) => {
                 }}
             />
             <NavBar />
-            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{version}</SText>
+            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
         </SComponentContainer>
     </Redux>
 }
+
 export default App;
