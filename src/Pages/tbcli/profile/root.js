@@ -84,6 +84,10 @@ class index extends DPA.profile {
             this.setState({ loading: false })
         })
     }
+    $allowNew() {
+        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
+    }
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }

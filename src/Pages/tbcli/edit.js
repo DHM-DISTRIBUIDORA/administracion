@@ -10,9 +10,9 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: ["climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
+            excludes: ["cliape","clizona","climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
                 "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
-                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcat","idcanal",],
+                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcat","idcanal","clicel"],
             title: "Editar " + Parent.title,
         });
         this.state = {
@@ -56,6 +56,19 @@ class index extends DPA.edit {
                 },
             )
         }
+        inp["clicod"].label = "Código de cliente"
+        inp["clinom"].label = "Nombre completo"
+        inp["clinit"].label = "NIT"
+        inp["clidir"].label = "Dirección"
+        inp["clitel"].label = "Teléfono"
+        inp["cliemail"].label = "Correo electrónico"
+        inp["clitipgar"].label = "Tipo de Garantía"
+        inp["cliforpag"].label = "Forma de pago"
+        inp["clitipdoc"].label = "Tipo de documento"
+        inp["clirazon"].label = "Razón"
+        inp["clilat"].label = "Latitud"
+        inp["clilon"].label = "Longitud"
+        inp["cliidtipo"].label = "Id Tipo"
 
         inp["idz"].label = "Id zona"
         inp["idz"].editable = false;

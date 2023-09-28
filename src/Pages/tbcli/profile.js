@@ -14,6 +14,7 @@ class index extends DPA.profile {
 
         });
     }
+  
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }

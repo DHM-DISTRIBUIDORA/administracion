@@ -76,6 +76,7 @@ import IconoPedido, { ReactComponent as IconoPedidoW } from './iconoPedido.svg';
 import IconTerminos, { ReactComponent as IconTerminosW } from './iconTerminos.svg';
 import IconLocation, { ReactComponent as IconLocationW } from './iconLocation.svg';
 import InputDireccion, { ReactComponent as InputDireccionW } from './inputDireccion.svg';
+import Icarnet, { ReactComponent as IcarnetW } from './icarnet.svg';
 
 
 const Assets = {
@@ -157,6 +158,7 @@ const Assets = {
 	"IconLocation": { Native: IconLocation, Web: IconLocationW },
 	"IProductos": { Native: IProductos, Web: IProductosW },
 	"InputDireccion": { Native: InputDireccion, Web: InputDireccionW },
+	"Icarnet": { Native: Icarnet, Web: IcarnetW },
 	
 
 }
