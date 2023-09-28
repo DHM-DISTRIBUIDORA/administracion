@@ -35,41 +35,38 @@ class recibo extends Component {
         return <>
             <SView col={"xs-12"} row >
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold  >FECHA: </SText>
+                    <SText fontSize={14} bold  >FECHA: </SText>
                     <SText font={'AcherusGrotesque-Regular'} fontSize={14} color={STheme.color.gray}>{new SDate(this.state?.data?.vfec, "yyyy-MM-dd hh:mm:ss.s").toString("DAY, dd de MON del yyyy")} a las {new SDate(this.state?.data?.vhora, "yyyy-MM-dd hh:mm:ss.s").toString("hh:mm:ss")}</SText>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
-                    <SText fontSize={14} bold font={'AcherusGrotesque-Bold'}>NIT/CI: </SText>
+                    <SText fontSize={14} bold >NIT/CI: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.nit}</SText>
                 </SView>
             </SView>
-            {/* <SHr height={5} /> */}
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold >NOMBRE: </SText>
+                    <SText fontSize={14} bold >NOMBRE: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.nombrecliente}</SText>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold >ID CLIENTE: </SText>
+                    <SText fontSize={14} bold >ID CLIENTE: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.clicod}</SText>
                 </SView>
             </SView>
-            {/* <SHr height={5} /> */}
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SView width={70} style={{ alignItems: "flex-start" }} row>
-                        <SText font={'AcherusGrotesque-Bold'} fontSize={14} bold >DETALLE: </SText>
+                        <SText fontSize={14} bold >DETALLE: </SText>
                     </SView>
-                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} flex>
+                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
                         <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.vobs}</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
-                    <SText fontSize={14} font={'AcherusGrotesque-Bold'}  >ID VENTA: </SText>
+                    <SText fontSize={14}   >ID VENTA: </SText>
                     <SText color={STheme.color.gray} font={'AcherusGrotesque-Regular'} >{this.state?.data?.idven}</SText>
                 </SView>
             </SView>
-
         </>
     }
     cabeceraVenta() {
@@ -84,16 +81,16 @@ class recibo extends Component {
                 }}
             >
                 <SView col={"xs-1.5"} center>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={12}>CANT</SText>
+                    <SText fontSize={12}>CANT</SText>
                 </SView>
                 <SView col={"xs-5.5"} center>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={12}>DETALLE</SText>
+                    <SText fontSize={12}>DETALLE</SText>
                 </SView>
                 <SView col={"xs-2.5"} style={{ alignItems: "flex-end" }}>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={12}>PRECIO</SText>
+                    <SText fontSize={12}>PRECIO</SText>
                 </SView>
                 <SView col={"xs-2.5"} style={{ alignItems: "flex-end" }}>
-                    <SText font={'AcherusGrotesque-Bold'} fontSize={12}>SUBTOTAL</SText>
+                    <SText fontSize={12}>SUBTOTAL</SText>
                 </SView>
             </SView>
             <SView col={"xs-12"} style={{ borderColor: STheme.color.gray, borderBottomWidth: 1 }} />
@@ -147,33 +144,32 @@ class recibo extends Component {
         </>
     }
     render() {
-        return (
-            <SPage >
-                <Container>
-                    <SHr height={20} />
-                    <SText font={'TT-Norms-Pro-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >PEDIDO</SText>
-                    <SHr height={30} />
-                    {this.item()}
-                    <SHr h={20} />
-                    {this.cabeceraVenta()}
-                    {this.detalle()}
-                    <SHr height={20} />
-                    <Btn onPress={() => {
-                        console.log(Model.carrito.Action.getState().productos)
-                        console.log(this.state.data)
-                    }}>{"Editar"}</Btn>
-                    <SHr height={20} />
-                    {!this.onBack ? null :
-                        <PButtom primary
-                            loading={this.state.loading}
-                            onPress={() => {
-                                this.onBack();
-                            }} >SALIR</PButtom>
-                    }
-                </Container>
-                {/* <SText>{JSON.stringify(this.state.data)}</SText> */}
+        return (<SPage >
+            <Container>
+                <SHr height={20} />
+                <SText font={'TT-Norms-Pro-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >PEDIDO</SText>
                 <SHr height={30} />
-            </SPage>
+                {this.item()}
+                <SHr h={20} />
+                {this.cabeceraVenta()}
+                {this.detalle()}
+                <SHr height={20} />
+                <Btn onPress={() => {
+                    console.log(Model.carrito.Action.getState().productos)
+                    console.log(this.state.data)
+                }}>{"Editar"}</Btn>
+                <SHr height={20} />
+                {!this.onBack ? null :
+                    <PButtom primary
+                        loading={this.state.loading}
+                        onPress={() => {
+                            this.onBack();
+                        }} >SALIR</PButtom>
+                }
+            </Container>
+            {/* <SText>{JSON.stringify(this.state.data)}</SText> */}
+            <SHr height={30} />
+        </SPage>
         );
     }
 }

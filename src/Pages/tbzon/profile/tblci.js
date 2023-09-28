@@ -48,7 +48,7 @@ class index extends DPA.profile {
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
         }} row>
-            <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} />
+            <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /><SView width={8} />
             <SText>{label}</SText>
         </SView>
     }

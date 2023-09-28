@@ -283,7 +283,7 @@ class index extends Component {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
                         SNavigation.reset("/");
-                        NavBar.close();
+                        // NavBar.close();
 
                     }}>CERRAR SESIÓN</Btn>
                     <SHr height={200} />
