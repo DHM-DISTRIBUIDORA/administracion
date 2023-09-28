@@ -57,7 +57,7 @@
     "redux-thunk": "^2.3.0",
     "servisofts-background-location": "2.0.1",
     "servisofts-charts": "1.0.1",
-    "servisofts-component": "file:../../servisofts-component/dist",
+    "servisofts-component": "3.0.3",
     "servisofts-db": "1.0.1",
     "servisofts-model": "1.0.5",
     "servisofts-page": "1.0.8",
