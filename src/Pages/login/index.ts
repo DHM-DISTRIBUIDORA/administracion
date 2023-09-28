@@ -5,6 +5,7 @@ import recuperar from './recuperar';
 import recuperar_codigo from './recuperar_codigo';
 import recuperar_pass from './recuperar_pass';
 import codigo from './codigo';
+import confirmar from './confirmar';
 export default SPage.combinePages("login", {
     "": codigo,
     user: root,
@@ -12,5 +13,6 @@ export default SPage.combinePages("login", {
     recuperar,
     recuperar_codigo,
     recuperar_pass,
+    confirmar
 
 });
