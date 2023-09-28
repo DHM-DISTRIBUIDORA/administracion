@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SInput, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
 import { AccentBar, BottomNavigator, Btn, Container } from '../../Components';
 // import SectionApis from './components/SectionApis';
-import SectionFooter from './components/SectionFooter';
-import SectionForm from './components/SectionForm';
 import SectionHeader from './components/SectionHeader';
 import Model from '../../Model';
 
@@ -23,18 +21,11 @@ class login extends Component {
         }
         this.setState({ loading: true, error: "" })
         Model.tbcli.Action.getByCode(code).then(e => {
-            // Model.tbcli.Action.setCliente(e);
-            // SNavigation.replace("/");
-            // if (e.estado != "exito") return;
-
-            console.log("eeeeew", e);
             SNavigation.navigate("/login/confirmar", { pk: e.idcli });
-
 
             this.setState({ loading: false })
         }).catch(e => {
             this.setState({ loading: false, error: e.error })
-            // this.setState({ error: "Debe ingresar un código de cliente." });
 
         })
     }
@@ -62,7 +53,6 @@ class login extends Component {
                             onPress={this.handleOnPress}
                             loading={this.state.loading}
                         >Login</Btn>
-
                         <SHr h={32} />
                         <SText fontSize={14} underLine>{"¿No tienes un código?  Click aquí."}</SText>
                         <SHr height={50} />

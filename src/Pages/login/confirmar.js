@@ -16,8 +16,6 @@ class login extends Component {
         this.state = {
         };
         this.pk = SNavigation.getParam("pk")
-        console.log(this.pk)
-
     }
 
     componentDidMount() {
@@ -44,35 +42,18 @@ class login extends Component {
             idcli: this.pk,
             clitel: code
 
-
         }).then(e => {
-            console.log("eeeeee");
-            console.log(e);
-            // this.setState({ data: e.data[0] })
-
-             Model.tbcli.Action.setCliente(e.cliente);
+            Model.tbcli.Action.setCliente(e.cliente);
             SNavigation.replace("/");
             this.setState({ loading: false })
-
         }).catch(e => {
             console.error(e);
             this.setState({ loading: false, error: e.error })
         })
 
-
-        // Model.tbcli.Action.getByCode(code).then(e => {
-        //     // Model.tbcli.Action.setcliente(e);
-        //     // SNavigation.replace("/");
-
-        //     this.setState({ loading: false })
-        // }).catch(e => {
-        //     this.setState({ loading: false, error: e.error })
-        // })
     }
     render() {
-        console.log("eeeeee")
-        console.log(this.state.data);
-        if (!this.state.data) return <SLoad />
+        if (!this.state?.data) return <SLoad />
         return (
             <SPage hidden footer={<BottomNavigator url={"/login"} carrito={"no"} />} >
                 <SView col={"xs-12"} center>
