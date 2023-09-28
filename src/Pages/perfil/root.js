@@ -126,9 +126,16 @@ class index extends Component {
         return <SView row col={"xs-12"} center>
             <SHr />
             <SHr />
-            <SIcon name={icon} width={25} height={25} fill={STheme.color.text} />
+            <SView col={"xs-1"}>
+                <SIcon name={icon} width={25} height={25} fill={STheme.color.text} />
+            </SView>
+            <SView col={"xs-0.5"} />
+            <SView col={"xs-10.5"}>
+                <SText>{text}</SText>
+            </SView>
+
             <SView width={16} />
-            <SText>{text}</SText>
+
             <SView flex />
         </SView>
     }

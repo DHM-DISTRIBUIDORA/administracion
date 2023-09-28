@@ -23,11 +23,19 @@ class login extends Component {
         }
         this.setState({ loading: true, error: "" })
         Model.tbcli.Action.getByCode(code).then(e => {
-            Model.tbcli.Action.setCliente(e);
-            SNavigation.replace("/");
+            // Model.tbcli.Action.setCliente(e);
+            // SNavigation.replace("/");
+            // if (e.estado != "exito") return;
+
+            console.log("eeeeew", e);
+            SNavigation.navigate("/login/confirmar", { pk: e.idcli });
+
+
             this.setState({ loading: false })
         }).catch(e => {
             this.setState({ loading: false, error: e.error })
+            // this.setState({ error: "Debe ingresar un código de cliente." });
+
         })
     }
     render() {
