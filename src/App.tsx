@@ -18,7 +18,7 @@ import BackgroundLocation from './BackgroundLocation';
 setProps(Config.socket);
 Firebase.init();
 DeviceKey.init();
-BackgroundLocation();
+// BackgroundLocation();
 function App(): JSX.Element {
     // SDB.init({
     //     dbName: "namedb",
@@ -31,7 +31,7 @@ function App(): JSX.Element {
         <SComponentContainer
             debug
             socket={SSocket}
-            // background={<BackgroundImage />}
+            background={<BackgroundImage />}
             assets={Assets}
             inputs={Config.inputs}
             theme={{ themes: Config.theme, initialTheme: "default"}}
@@ -63,11 +63,11 @@ function App(): JSX.Element {
                             token: DeviceKey.getKey(),
                             key_usuario: usuario?.key,
                             app: "client",
-                            descripcion: Platform.select({
-                                "web": `Web ${window.navigator.userAgent}`,
-                                "android": `Android ${Platform?.constants?.Version}, ${Platform?.constants?.Manufacturer} ${Platform?.constants?.Brand} ${Platform?.constants?.Model}`,
-                                "ios": `IOS ${Platform?.Version}, ${Platform?.constants?.systemName}`,
-                            }),
+                            // descripcion: Platform.select({
+                            //     "web": `Web ${window.navigator.userAgent}`,
+                            //     "android": `Android ${Platform?.constants?.Version}, ${Platform?.constants?.Manufacturer} ${Platform?.constants?.Brand} ${Platform?.constants?.Model}`,
+                            //     "ios": `IOS ${Platform?.Version}, ${Platform?.constants?.systemName}`,
+                            // }),
                         }
                     };
                 }}

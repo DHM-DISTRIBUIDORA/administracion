@@ -14,20 +14,7 @@ const arr = [
 export default class test3 extends Component {
 
     render() {
-        return <SPage>
-            <Btn onPress={() => {
-                try {
-                    // SSocket.Instance.socket.close();
-                    SSocket.Instance.onClose();
-                } catch (e) {
-                    console.error(e);
-                }
-                SSocket.getSession();
 
-                console.log("Reconectando");
-            }}>RECONECTAR</Btn>
-        </SPage>
-        return <SView><SText>Hola</SText></SView>
         return (
             <STable2
                 header={[

@@ -22,7 +22,7 @@ export default class Action extends SAction {
         return true;
     }
 
-    getByKeyAsync(key_usuario) {
+    getByKeyAsync(key_usuario:any) {
         return new Promise((resolve, reject) => {
             SSocket.sendPromise({
                 ...this.model.info,

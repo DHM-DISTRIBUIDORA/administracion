@@ -1,5 +1,5 @@
 import { SInputsCofig, STheme } from 'servisofts-component';
-const inputs = () => {
+const inputs = (): SInputsCofig => {
     return {
         default: {
             LabelStyle: {

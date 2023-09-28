@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@invertase/react-native-apple-authentication": "2.2.2",
+    "@mapbox/geo-viewport": "^0.4.0",
     "@react-native-async-storage/async-storage": "^1.19.1",
     "@react-native-camera-roll/camera-roll": "5.8.0",
     "@react-native-community/geolocation": "3.1.0",
@@ -45,7 +46,7 @@
     "react-native-notifications": "4.2.4",
     "react-native-reanimated": "2.17.0",
     "react-native-safe-area-context": "^3.2.0",
-    "react-native-screens": "3.21.1",
+    "react-native-screens": "3.25.0",
     "react-native-share": "^7.3.9",
     "react-native-sound": "^0.11.2",
     "react-native-svg": "^12.1.1",
@@ -56,7 +57,7 @@
     "redux-thunk": "^2.3.0",
     "servisofts-background-location": "2.0.1",
     "servisofts-charts": "1.0.1",
-    "servisofts-component": "3.0.2",
+    "servisofts-component": "file:../../servisofts-component/dist",
     "servisofts-db": "1.0.1",
     "servisofts-model": "1.0.5",
     "servisofts-page": "1.0.8",
@@ -64,12 +65,11 @@
     "servisofts-rn-geolocation": "1.0.3",
     "servisofts-rn-roles_permisos": "1.0.4",
     "servisofts-rn-usuario": "1.0.11",
-    "servisofts-socket": "4.0.1",
+    "servisofts-socket": "4.0.3",
     "servisofts-table": "1.0.2",
-    "xlsx": "^0.18.5",
-    "xlsx-color": "^0.14.30",
     "supercluster": "^6.0.2",
-    "@mapbox/geo-viewport": "^0.4.0"
+    "xlsx": "^0.18.5",
+    "xlsx-color": "^0.14.30"
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
