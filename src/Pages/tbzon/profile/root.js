@@ -17,6 +17,8 @@ class index extends DPA.profile {
         );
     }
 
+   
+
     // $inputs() {
     //     var inp = super.$inputs();
     //     inp["zcod"].label = "Código zona"
@@ -38,6 +40,16 @@ class index extends DPA.profile {
     }
     $getData() {
         return Parent.model.Action.getByKey(this.pk);
+    }
+    $renderContent() {
+        console.log(this.data)
+        return <SView col={"xs-12"} row>
+            {this.buildLabel({ label: "Código zona", value: this.data?.zcod })}
+            {/* {this.buildLabel({ label: "Nombre", value: this.data?.clinom })}
+            {this.buildLabel({ label: "Direccion", value: this.data?.clidir })}
+            {this.buildLabel({ label: "Pedidos", value: this.data?.pedidos })}
+            {this.buildLabel({ label: "Ventas", value: this.data?.ventas })} */}
+        </SView>
     }
     $footer() {
         return <SView col={"xs-12"} >
