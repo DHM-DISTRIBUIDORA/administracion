@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
+import { SDate, SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
@@ -15,8 +15,8 @@ class index extends DPA.profile {
             item: item,
             excludes: []
         });
-        
-      
+
+
     }
     $allowBack() {
         return true;
@@ -50,7 +50,8 @@ class index extends DPA.profile {
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
         }} row>
-            <SIcon name={icon} width={12} height={12} fill={STheme.color.text} /> <SView width={8} />
+            <SIcon name={icon} width={12} height={12} fill={STheme.color.text} />
+            <SView width={8} />
             <SText>{label}</SText>
         </SView>
     }
@@ -84,16 +85,16 @@ class Lista extends DPA.list {
         this.fecha_fin = SNavigation.getParam("fecha_fin");
     }
 
-    $allowTable(){
+    $allowTable() {
         return true
     }
     $filter(data) {
         if (this.fecha_inicio) {
-            return data.idemp == this.props.pi.pk && data.vfec >= this.fecha_inicio && data.vfec <= this.fecha_fin
+            return data.idemp == this.props.pi.pk && new SDate(data.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(data.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") <= this.fecha_fin
         } else {
             return data.idemp == this.props.pi.pk
         }
-        
+
     }
     $order() {
         return [{ key: "vfec", order: "desc" }]
