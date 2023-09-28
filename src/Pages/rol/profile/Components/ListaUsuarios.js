@@ -1,3 +1,4 @@
+import React, { Component } from 'react'
 import { SNavigation } from 'servisofts-component';
 import DPA, { connect } from 'servisofts-page';
 import Model from '../../../../Model';
