@@ -67,8 +67,8 @@ class index extends DPA.new {
         // console.log(data);
 
         if(data.clilat == null || data.clilon == null){
-            data.clilat = "";
-            data.clilon = "";
+            data.clilat = 0;
+            data.clilon = 0;
         }
         // console.log("bbbbbb");
         // console.log(data);
