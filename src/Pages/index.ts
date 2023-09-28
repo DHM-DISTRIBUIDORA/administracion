@@ -6,7 +6,7 @@ import login from "./login";
 import registro from './registro';
 import explorar from './explorar';
 import favoritos from './favoritos';
-import pedidos from './pedidos';
+import pedidos_clientes from './pedidos_clientes';
 import producto from './producto';
 import sql from './sql/index';
 import privacidad from './privacidad';
@@ -60,7 +60,7 @@ export default SPage.combinePages("/", {
   ...registro,
   "explorar": explorar,
   "favoritos": favoritos,
-  "pedidos": pedidos,
+  ...pedidos_clientes,
   sql,
   "privacidad": privacidad,
   "privacy": privacidad,

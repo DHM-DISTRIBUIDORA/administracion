@@ -69,7 +69,7 @@ export default class root extends Component {
                 "clinom": item.clinom,
                 "clilat": item.location.latitude,
                 "clilon": item.location.longitude
-              }));
+            }));
         }
 
         return <SPage
@@ -97,41 +97,12 @@ export default class root extends Component {
                                     if (!vd.clilat || !vd.clilon) {
                                         SPopup.open({ content: <Popups.AgregarUbicacion /> });
                                     }
-                                    if (!visitas[vd.idcli]) {
-                                        SNavigation.navigate("/tbcli/profile", {
-                                            // SNavigation.navigate("/vendedor/cliente", {
-                                            pk: vd.idcli + "",
-
-                                            onVisitaSuccess: ({ descripcion, tipo }) => {
-                                                setState({ loading: true })
-                                                SSocket.sendPromise({
-                                                    component: "visita_vendedor",
-                                                    type: "registro",
-                                                    estado: "cargando",
-                                                    key_usuario: Model.usuario.Action.getKey(),
-                                                    data: {
-                                                        idemp: state.idemp,
-                                                        idcli: vd.idcli,
-                                                        descripcion: descripcion,
-                                                        tipo: tipo,
-                                                        fecha: state.curdate.toString("yyyy-MM-dd")
-                                                    }
-                                                }).then(e => {
-                                                    state.visitas[vd.idcli] = e.data;
-                                                    setState({ loading: false })
-                                                    SNavigation.goBack();
-                                                }).catch(e => {
-                                                    console.error(e)
-                                                    setState({ loading: false })
-                                                })
-                                            }
-                                        })
-                                    } else {
-                                        SNavigation.navigate("/tbcli/profile", {
-                                            pk: vd.idcli + "",
-                                            visita: visitas[vd.idcli],
-                                        })
-                                    }
+                                    SNavigation.navigate("/tbcli/profile", {
+                                        pk: vd.idcli + "",
+                                        idemp: this.props?.state?.idemp,
+                                        visitaType: "venta",
+                                        visita: visitas[vd.idcli],
+                                    })
                                 }}
                             >
                                 <SView col={"xs-9"} >
@@ -156,7 +127,7 @@ export default class root extends Component {
                         </>
                     }}
                 />
-                <SHr height={30}/>
+                <SHr height={30} />
             </Container>
             <SLoad type='window' hidden={!this.state.loading} />
         </SPage>

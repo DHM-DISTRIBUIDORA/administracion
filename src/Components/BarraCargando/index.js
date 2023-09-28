@@ -33,7 +33,7 @@ export default class BarraCargando extends PureComponent {
                 translateX: this.animValue.interpolate({ inputRange: [0, 1], outputRange: [-50, this.state.size + 50] })
             }]
         }}>
-            <SView width={50} height={4} style={{ borderRadius: 8, backgroundColor: STheme.color.primary, }}  {...this.props}/>
+            <SView width={50} height={4} style={{ borderRadius: 8, backgroundColor: "#FFAA23", }}  {...this.props}/>
         </SView>
     }
     render() {

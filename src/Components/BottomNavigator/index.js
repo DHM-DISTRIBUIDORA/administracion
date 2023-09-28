@@ -8,7 +8,10 @@ export default class index extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			showCarrito: true,
 		};
+
+		// this.props.carrito ?? this.setState({ showCarrito: false })
 	}
 
 	getItem({ key, title, icon, url, params }) {
@@ -75,7 +78,7 @@ export default class index extends Component {
 					</SView>
 					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{ zIndex: 99 }} />
 				</SView >
-				<Carrito.Float bottom={100} />
+				{(this.props.carrito != "no") ? <Carrito.Float bottom={100} /> : null}
 			</>
 			// </SView>
 		);

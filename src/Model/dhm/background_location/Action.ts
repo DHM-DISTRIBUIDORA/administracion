@@ -21,4 +21,18 @@ export default class Action extends SAction {
         this._dispatch(obj);
         return true;
     }
+
+    getByKeyAsync(key_usuario) {
+        return new Promise((resolve, reject) => {
+            SSocket.sendPromise({
+                ...this.model.info,
+                type: "getByKey",
+                key_usuario: key_usuario ?? Model.usuario.Action.getKey()
+            }).then((resp) => {
+                resolve(resp)
+            }).catch(resp => {
+                reject(resp)
+            })
+        })
+    }
 }

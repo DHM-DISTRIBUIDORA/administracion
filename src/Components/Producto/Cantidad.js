@@ -1,11 +1,12 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SIcon, SText, STheme, SThread, SView } from 'servisofts-component'
+import { SIcon, SText, STheme, SThread, SUuid, SView } from 'servisofts-component'
 
 export default class Cantidad extends Component {
     state = {
         cantidad: this.props.defaultValue ?? 0,
-        open: false
+        open: false,
+        key: SUuid()
     }
 
 
@@ -14,7 +15,7 @@ export default class Cantidad extends Component {
     }
     show() {
         this.setState({ open: true });
-        new SThread(1500, "Cantidad_hilo", true).start(() => {
+        new SThread(1500, "Cantidad_hilo_"+this.state.key, true).start(() => {
             this.handleEnd();
             this.setState({ open: false });
 
@@ -50,8 +51,8 @@ export default class Cantidad extends Component {
             </SView>
             <SView width={size} height={size} card center
                 onPress={() => {
-                    if(this.props.limit){
-                        if(this.props.limit<=this.state.cantidad){
+                    if (this.props.limit) {
+                        if (this.props.limit <= this.state.cantidad) {
                             return;
                         }
                     }

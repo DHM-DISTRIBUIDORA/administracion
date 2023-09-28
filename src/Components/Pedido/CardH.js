@@ -6,12 +6,12 @@ import PButtomSmall2 from '../PButtomSmall2';
 import Background from 'servisofts-component/img/Background';
 import Model from '../../Model';
 // import Cantidad from './Cantidad';
-export type PedidoCardPropsType = {
+export type PedidoCardHPropsType = {
     data: any,
     onPress?: (obj) => {},
     onSelect?: (itm) => any
 }
-export default class index extends Component<PedidoCardPropsType> {
+export default class index extends Component<PedidoCardHPropsType> {
     constructor(props) {
         super(props);
         this.state = {
@@ -44,13 +44,13 @@ export default class index extends Component<PedidoCardPropsType> {
         if (!idven) return null;
         return <SView col={"xs-12"} row style={{ justifyContent: "flex-end" }}>
             <SView col={"xs-12"} row style={{ justifyContent: "flex-end" }}>
-                <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/dm_cabfac/recibo", { pk: idven }) }} >
+                {!this.props.delivery ? null : <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/pedidos/mapa_conductor", { pk: idven }) }} >
+                    Delivery
+                </PButtomSmall2>}
+                <SView width={8} />
+                <PButtomSmall2 width={70} onPress={() => { SNavigation.navigate("/tbven/recibo", { pk: idven }) }} >
                     Detalle
                 </PButtomSmall2>
-                {/* <SView width={8} />
-                <PButtomSmall2 backgroundColor='#62875F' width={90} onPress={() => { SNavigation.navigate("/pedidos/mapa_conductor", { pk: idven }) }} >
-                    Repartidor
-                </PButtomSmall2> */}
             </SView>
         </SView>
     }

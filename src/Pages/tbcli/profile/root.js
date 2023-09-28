@@ -32,8 +32,11 @@ class index extends DPA.profile {
         });
         this.pk = SNavigation.getParam("pk");
         this.visita = SNavigation.getParam("visita", false);
-        this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
-        this.visita = SNavigation.getParam("visita");
+        this.visitaType = SNavigation.getParam("visitaType", false);
+        this.idemp = SNavigation.getParam("idemp", 0);
+        this.tbvd = SNavigation.getParam("tbvd", 0);
+        // this.onVisitaSuccess = SNavigation.getParam("onVisitaSuccess");
+        // this.visita = SNavigation.getParam("visita");
 
     }
 
@@ -50,8 +53,40 @@ class index extends DPA.profile {
             fecha_fin
         }).then((e) => {
             const obj = e.data[0]
+            console.log("tbcli getPerfil", obj)
             this.setState({ ...obj })
         }).catch(e => console.error(e))
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
+    }
+
+    visitaRegistro({ descripcion, tipo, monto }) {
+        this.setState({ loading: true })
+        SSocket.sendPromise({
+            component: this.visitaType == "transporte" ? "visita_transportista" : "visita_vendedor",
+            type: "registro",
+            estado: "cargando",
+            key_usuario: Model.usuario.Action.getKey(),
+            data: {
+                idemp: this.idemp,
+                idcli: this.pk,
+                descripcion: descripcion,
+                tipo: tipo,
+                monto: monto,
+                fecha: new SDate().toString("yyyy-MM-dd")
+            }
+        }).then(e => {
+            // state.visitas[o.idcli] = e.data;
+            this.setState({ loading: false })
+            SNavigation.goBack();
+
+        }).catch(e => {
+            console.error(e)
+            this.setState({ loading: false })
+        })
+    }
+    $allowNew() {
+        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
@@ -152,8 +187,8 @@ class index extends DPA.profile {
                         }} row center>
                             <SMapView
                                 initialRegion={{
-                                    latitude: objeto.clilat,
-                                    longitude: objeto.clilon,
+                                    latitude: objeto?.clilat,
+                                    longitude: objeto?.clilon,
                                     latitudeDelta: 0.0222,
                                     longitudeDelta: 0.0221,
                                 }} preventCenter
@@ -165,7 +200,7 @@ class index extends DPA.profile {
                                     streetViewControl: false,
                                 }}
                             >
-                                <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
+                                <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
                                     <SIcon name="MarcadorMapa" width={35} height={55} />
                                 </SMarker>
                             </SMapView>
@@ -215,6 +250,55 @@ class index extends DPA.profile {
         </>
     }
 
+    getDetalleCarga() {
+        if (!this.tbvd) return null;
+        if (typeof this.tbvd != "object") return null;
+        let productos = Model.tbprd.Action.getAll();
+        if (!productos) return <SLoad />
+        let total = 0;
+        this.tbvd.map(o => {
+            total += o.vdcan * o.vdpre
+        })
+        return <SView col={"xs-12"} center card padding={8}>
+            <SText bold>CARGA</SText>
+            <SList
+                data={this.tbvd}
+                render={(itm) => {
+                    const producto = productos[itm.idprd]
+                    return <SView col={"xs-12"} card padding={8} row center>
+                        <SView width={40} height={40} >
+                            <SImage src={require('../../../Assets/img/foto.png')}
+                                style={{
+                                    position: "absolute",
+                                    zIndex: 90,
+                                    top: 0,
+                                }}
+                            />
+                            <SImage enablePreview src={SSocket.api.root + "tbprd/" + itm.idprd}
+                                style={{
+                                    position: "absolute",
+                                    zIndex: 99,
+                                    top: 0,
+                                    backgroundColor: "#ffffff50"
+                                }}
+                            />
+                        </SView>
+                        <SView width={8} />
+                        <SView flex>
+                            <SText>{producto.prdnom}</SText>
+                            <SText>{itm.vdcan}  x   Bs. {SMath.formatMoney(itm.vdpre)}</SText>
+                            <SText col={"xs-12"} style={{
+                                textAlign:"right"
+                            }} bold>Bs. {SMath.formatMoney(itm.vdcan * itm.vdpre)}</SText>
+                        </SView>
+
+                    </SView>
+                }}
+            />
+
+            <SText bold>Total = Bs. {SMath.formatMoney(total)} </SText>
+        </SView>
+    }
     $item(obj) {
         if (!obj) return <SLoad />
         return <SView col={"xs-12"} center>
@@ -265,12 +349,17 @@ class index extends DPA.profile {
                 SNavigation.navigate("/public", { idcli: obj.idcli })
             }}>REALIZAR PEDIDO</Btn>
             <SHr h={16} />
-            {this.visita ? <><Btn col={"xs-11"} onPress={() => {
+            {(this.visitaType && !this.visita) ? <><Btn col={"xs-11"} onPress={() => {
                 SPopup.openContainer({
                     key: "popup_concretar_visita",
                     render: (e) => {
 
-                        const opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
+                        let opts = []
+                        if (this.visitaType == "venta") {
+                            opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
+                        } else if (this.visitaType == "transporte") {
+                            opts = ["RECIBIO CONFORME", "NO PAGO", "SE ENCONTRABA CERRADO"]
+                        }
                         return <SView col={"xs-12"} padding={8} center>
                             <SHr />
                             <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
@@ -278,9 +367,23 @@ class index extends DPA.profile {
                             <SHr />
                             <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
                             <SHr />
+                            {(this.visitaType == "transporte") ? <SInput ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} /> : null}
+                            <SHr />
                             <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} />
+
                             <SHr />
                             <Btn padding={8} onPress={() => {
+                                let monto = 0;
+                                if (this.visitaType == "venta") {
+                                    monto = 0;
+                                } else if (this.visitaType == "transporte") {
+                                    monto = this.total_pagado.getValue();
+                                }
+                                this.visitaRegistro({
+                                    descripcion: this.visita_descripcion.getValue(),
+                                    tipo: this.visita_tipo.getValue(),
+                                    monto: monto
+                                })
                                 // this.onVisitaSuccess({
                                 //     descripcion: this.visita_descripcion.getValue(),
                                 //     tipo: this.visita_tipo.getValue()
@@ -294,8 +397,9 @@ class index extends DPA.profile {
 
             }}>CONCRETAR VISITA</Btn><SHr /></> : null}
             <Visitas.Detalle data={this.visita} />
-
-
+            <SHr h={8} />
+            {this.getDetalleCarga()}
+            <SHr h={8} />
             {this.getUbicacion(obj)}
             <SelectEntreFechas onChange={e => {
                 this.loadData(e)
@@ -311,16 +415,16 @@ class index extends DPA.profile {
                     monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
                     icon: 'Icompras',
                     color: '#8CB45F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF" }),
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                     // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {this.ItemCard({
                     label: "Total pedidos",
                     cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD" }),
+                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 })}
                 {/* {this.ItemCard({
                     label: "Máxima venta",

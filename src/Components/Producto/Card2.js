@@ -4,6 +4,7 @@ import { SHr, SIcon, SImage, SInput, SMath, SPage, SText, STheme, SView } from '
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
+import { TextInput } from 'react-native';
 export type ProductoCard2PropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -81,7 +82,7 @@ class index extends Component<ProductoCard2PropsType> {
                     <SHr />
                     <SView row>
                         <SView col={"xs-7"} row center>
-                            <SView center width={40} height={40} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            <SView center width={35} height={35} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count <= 0) return;
                                     this.state.count = this.state.count - 1
@@ -91,27 +92,53 @@ class index extends Component<ProductoCard2PropsType> {
                             >
                                 <SIcon name='Menos' height={4} />
                             </SView>
-                            <SView width={3} />
-                            <SView row width={46} center>
-                                {/* <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText> */}
-                                <SInput width={42} type="number" value={this.props?.data.cantidad} onChangeText={(val) => {
-                                    if (this.state?.count) {
-                                        this.state.count = parseInt(val);
-                                        this.enviarDatosItems();
-                                        console.log(this.state?.count + " - count - ");
-                                    }
+                            {/* <SView width={2} /> */}
+                            {/* <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText> */}
+                            <SView flex height={35} >
+                                <TextInput defaultValue={(this.state.count ?? 0) + ""} style={{
+                                    flex: 1,
+                                    height: 40,
+                                    borderRadius: 4,
+                                    backgroundColor: STheme.color.lightGray + "30",
+                                    textAlign: "center",
+                                    color: STheme.color.text
                                 }}
-                                    style={{
-                                        textAlign: "center",
-                                        backgroundColor: STheme.color.lightGray + "30",
-                                        // paddingLeft: 0,
-                                        paddingRight: 4,
-                                        fontSize: 14
+                                    keyboardType={"numeric"}
+                                    inputMode={"numeric"}
+                                    onChangeText={(val) => {
+                                        if (this.state?.count) {
+                                            if (val == "") val = 1
+                                            this.state.count = parseInt(val);
+                                            this.enviarDatosItems();
+                                            console.log(this.state);
+                                        }
                                     }}
                                 />
                             </SView>
+                            {/* <SInput type="number" defaultValue={this.props?.data?.cantidad ?? 0} onChangeText={(val) => {
+                                // if (this.state?.count) {
+                                //     if (val == "") val = 1
+                                //     this.state.count = parseInt(val);
+                                //     this.enviarDatosItems();
+                                //     console.log(this.state?.count + " - count - ");
+                                // }
+
+                                // console.log(val + " - AQUI");
+                            }}
+                                // placeholder={"as"}
+                                style={{
+                                    textAlign: "center",
+                                    backgroundColor: STheme.color.lightGray + "30",
+                                    padding: 0,
+                                    margin: 0,
+                                    // paddingLeft: 0,
+                                    // paddingRight: 0,
+                                    fontSize: 10
+                                }}
+                            /> */}
+                            {/* <SView width={4} /> */}
                             {/* <SView width={10} /> */}
-                            <SView center width={40} height={40} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
+                            <SView center width={35} height={35} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count >= stock) return;
                                     this.state.count = this.state.count + 1

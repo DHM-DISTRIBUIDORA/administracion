@@ -28,23 +28,23 @@ class index extends Component {
             this.data = user;
         } else {
             this.data = cliente;
-            
+
             this.data = {
-                "Nombres": cliente.clinom,
+                "Nombres": cliente?.clinom,
                 "Apellidos": "",
-                "Direccion": cliente.clidir,
-                "Telefono": cliente.clitel,
-                "key": cliente.idcli,
-                "idz": cliente.idz
+                "Direccion": cliente?.clidir,
+                "Telefono": cliente?.clitel,
+                "key": cliente?.idcli,
+                "idz": cliente?.idz
             };
             // this.setState({ idcli: cliente.idcli });
-            this.state.idcli = cliente.idcli;
+            this.state.idcli = cliente?.idcli;
         }
         // return this.getItem({ key: "login", title: 'Cuenta', icon: 'Login', url: '/login' })
 
         // this.data = Model.usuario.Action.getUsuarioLog();
 
-        
+
         return this.data;
     }
 
@@ -99,7 +99,7 @@ class index extends Component {
                             top: 0,
                             // width: 50
                         }} />
-                        <SImage src={SSocket.api.root + "usuario/" + usuario?.key + "?date=" + new Date().getTime()}
+                        <SImage src={SSocket.api.root + (usuario?.Apellidos != "" ? "usuario/" : "tbcli/") + usuario?.key + "?date=" + new Date().getTime()}
                             style={{ resizeMode: 'cover', zIndex: 99, }} />
                     </SView>
                 </SView>
@@ -126,9 +126,16 @@ class index extends Component {
         return <SView row col={"xs-12"} center>
             <SHr />
             <SHr />
-            <SIcon name={icon} width={25} height={25} fill={STheme.color.text} />
+            <SView col={"xs-1"}>
+                <SIcon name={icon} width={25} height={25} fill={STheme.color.text} />
+            </SView>
+            <SView col={"xs-0.5"} />
+            <SView col={"xs-10.5"}>
+                <SText>{text}</SText>
+            </SView>
+
             <SView width={16} />
-            <SText>{text}</SText>
+
             <SView flex />
         </SView>
     }
@@ -195,15 +202,15 @@ class index extends Component {
     }
 
     getRepartidor() {
-      
+
         let dataZona = Model.tbzon.Action.getByKey(this.data.idz + "");
         if (!dataZona) return <SLoad />;
         if (dataZona.idemp == 0) return <SText>NO TIENE REPARTIDOR ASIGNADO</SText>;
 
         let dataRepartidor = Model.tbemp.Action.getByKey(dataZona.idemp + "");
-        
+
         if (!dataRepartidor) return <SLoad />;
-        
+
         return <SView col={"xs-12"}>
             <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
                 <SHr height={10} />
@@ -283,10 +290,10 @@ class index extends Component {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
                         SNavigation.reset("/");
-                        NavBar.close();
+                        // NavBar.close();
 
                     }}>CERRAR SESIÓN</Btn>
-                    <SHr height={15} />
+                    <SHr height={200} />
                     {/* <MenuButtom label={STheme.getTheme() == "default" ? "Oscuro" : "Claro"} icon={} onPress={() => {
                         STheme.change()
                     }} /> */}

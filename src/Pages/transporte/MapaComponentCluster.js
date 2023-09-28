@@ -13,13 +13,15 @@ export default class MapaComponent extends Component {
         this.map.fitToCoordinates(arrLatLng2, {})
     }
 
-    handlePressClient = (data, visita) => {
+    handlePressClient = (data, visita, tbvd) => {
+        console.log(tbvd);
         SNavigation.navigate("/tbcli/profile", {
             // SNavigation.navigate("/vendedor/cliente", {
             pk: data.id + "",
             idemp: this.props?.state?.idemp,
-            visitaType: "venta",
+            visitaType: "transporte",
             visita: visita,
+            tbvd:tbvd
         })
     }
     render() {
@@ -31,7 +33,7 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
-            data.push({ id: o.idcli, clinom: o.clinom, visita: o.visita, location: { latitude: o.clilat, longitude: o.clilon } });
+            data.push({ id: o.idcli, clinom: o.clinom, tbvd: o.tbvd, location: { latitude: o.clilat, longitude: o.clilon } });
             dataLatLng.push({ latitude: o.clilat, longitude: o.clilon });
         });
 
@@ -39,9 +41,8 @@ export default class MapaComponent extends Component {
             let onPress = onPressCluster;
             const visita = this.props.state?.visitas[data.id];
             if (data.count == 1) {
-                onPress = this.handlePressClient.bind(this, data, visita)
+                onPress = this.handlePressClient.bind(this, data, visita, data.tbvd)
             }
-
             return MarkerCircle({
                 borderColor: !visita ? "" : "#0f0",
                 latitude: data.location.latitude, longitude: data.location.longitude,
