@@ -83,10 +83,10 @@ class index extends Component {
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                     {/* <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} /> */}
-                    <MenuButtom label={"Test"} url={"/test3"} icon={<SIcon name={"Profanity"} />} />
+                    {/* <MenuButtom label={"Test"} url={"/test3"} icon={<SIcon name={"Profanity"} />} />
                     <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
-                    }} icon={<SIcon name={"Icon2"} />} />
+                    }} icon={<SIcon name={"Icon2"} />} /> */}
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />

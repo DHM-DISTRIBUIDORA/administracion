@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 // import PButtom from '../../../Components/PButtom'
-import { SText, STheme, SView, SNavigation, SImage, SIcon, SHr } from 'servisofts-component';
+import { SText, STheme, SView, SNavigation, SImage, SIcon, SHr, SLoad } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 
 export default class CardUser extends Component {
@@ -12,7 +12,8 @@ export default class CardUser extends Component {
     }
 
     render() {
-        console.log(this.props.datas)
+        if (!this.props.datas) return <SLoad />
+
         var { idcli, clinom, clinit, clidir } = this.props.datas;
         return (
             <SView col={"xs-12"}

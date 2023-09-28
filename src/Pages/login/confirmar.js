@@ -43,6 +43,7 @@ class login extends Component {
             clitel: code
 
         }).then(e => {
+            if (!e.cliente) throw { error: "Ocurrio algun error desconocido." }
             Model.tbcli.Action.setCliente(e.cliente);
             SNavigation.replace("/");
             this.setState({ loading: false })
@@ -53,7 +54,6 @@ class login extends Component {
 
     }
     render() {
-        if (!this.state?.data) return <SLoad />
         return (
             <SPage hidden footer={<BottomNavigator url={"/login"} carrito={"no"} />} >
                 <SView col={"xs-12"} center>
@@ -76,7 +76,7 @@ class login extends Component {
                         <SHr height={32} />
                         <SInput ref={ref => this.input = ref}
                             type='number'
-                            placeholder={"Teléfono de cliente"}
+                            placeholder={"Teléfono"}
                         />
                         <SText color={STheme.color.danger}>{this.state.error}</SText>
                         <SHr h={32} />
