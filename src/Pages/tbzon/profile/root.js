@@ -9,13 +9,24 @@ import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 class index extends DPA.profile {
     constructor(props) {
         super(
-            props, 
-            { 
-                Parent: Parent, 
-                excludes: ["zterr", "ztipo", "idterr", "zest", "zdmsest", "zdesfin", "znsuc", "idgz", "zmarc", "sucreg", "zusumod", "zfecmod"] 
+            props,
+            {
+                Parent: Parent,
+                excludes: ["zterr", "ztipo", "idterr", "zest", "zdmsest", "zdesfin", "znsuc", "idgz", "zmarc", "sucreg", "zusumod", "zfecmod"]
             }
-            );
+        );
     }
+
+    // $inputs() {
+    //     var inp = super.$inputs();
+    //     inp["zcod"].label = "Código zona"
+    //     inp["idemp"].label = "Id empleado"
+    //     inp["znom"].label = "Nombre zona"
+    //     inp["zdia"].label = "Día"
+    //     return inp;
+    // }
+
+
     $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }

@@ -187,8 +187,8 @@ class index extends DPA.profile {
                         }} row center>
                             <SMapView
                                 initialRegion={{
-                                    latitude: objeto.clilat,
-                                    longitude: objeto.clilon,
+                                    latitude: objeto?.clilat,
+                                    longitude: objeto?.clilon,
                                     latitudeDelta: 0.0222,
                                     longitudeDelta: 0.0221,
                                 }} preventCenter
@@ -200,7 +200,7 @@ class index extends DPA.profile {
                                     streetViewControl: false,
                                 }}
                             >
-                                <SMarker lat={objeto.clilat} lng={objeto.clilon}  >
+                                <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
                                     <SIcon name="MarcadorMapa" width={35} height={55} />
                                 </SMarker>
                             </SMapView>

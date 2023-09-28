@@ -63,6 +63,17 @@ class index extends DPA.new {
         return inp;
     }
     $onSubmit(data) {
+        // console.log("aaaaaa");
+        // console.log(data);
+
+        if(data.clilat == null || data.clilon == null){
+            data.clilat = "";
+            data.clilon = "";
+        }
+        // console.log("bbbbbb");
+        // console.log(data);
+
+       
         Parent.model.Action.registro({
             data: data,
             key_usuario: Model.usuario.Action.getKey()
