@@ -86,6 +86,7 @@ class index extends DPA.edit {
     }
 
     $onSubmit(data) {
+        data.cliest = 0;
         if (this.state.loading) return;
         this.setState({ loading: true })
         Parent.model.Action.editar({

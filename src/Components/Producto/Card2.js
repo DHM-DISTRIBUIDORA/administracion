@@ -32,6 +32,9 @@ class index extends Component<ProductoCard2PropsType> {
 
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data.data;
         (stock <= 0) ? active = false : active = true;
+
+        console.log(this.props.data.cantidad + " - data");
+        console.log(this.state.count + " - state");
         return (
             <SView col={"xs-12"} card row {...this.props}
                 // pointerEvents={!active ? 'none' : 'auto'}
@@ -85,7 +88,7 @@ class index extends Component<ProductoCard2PropsType> {
                             <SView center width={35} height={35} style={{ borderRadius: 4, borderColor: "#E2E2E2", borderWidth: 1 }}
                                 onPress={() => {
                                     if (this.state.count <= 0) return;
-                                    this.state.count = this.state.count - 1
+                                    this.state.count = this.state.count - 1 
                                     this.enviarDatosItems()
                                 }}
                                 backgroundColor={STheme.color.card}
@@ -95,7 +98,10 @@ class index extends Component<ProductoCard2PropsType> {
                             {/* <SView width={2} /> */}
                             {/* <SText fontSize={16}>{this.state?.count ? this.state.count : this.props?.data?.cantidad}</SText> */}
                             <SView flex height={35} >
-                                <TextInput defaultValue={(this.state.count ?? 0) + ""} style={{
+                            
+                                
+                                {/* <TextInput value={this.state.count !== null && this.state.count !== undefined ? this.state.count.toString() : ""}  style={{ */}
+                                <TextInput value={(this.state.count ?? 0) + ""}  style={{
                                     flex: 1,
                                     height: 40,
                                     borderRadius: 4,

@@ -9,7 +9,7 @@ export default class Reducer extends SReducer {
     let initState = {
       productos: {},
     };
-    SStorage.getItem("carrito", (imt) => {
+    SStorage.getItem("carrito", (imt:any) => {
       if (!imt) return;
       let productos = JSON.parse(imt);
       if (!productos) return;

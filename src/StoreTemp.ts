@@ -1,11 +1,11 @@
 import { SStorage } from "servisofts-component";
 const MY_STORAGE_KEY = "storage";
 class StoreTemp {
-    store = {}
+    store:any = {}
 
     constructor() {
         console.log("Cargo el store")
-        SStorage.getItem(MY_STORAGE_KEY, (v) => {
+        SStorage.getItem(MY_STORAGE_KEY, (v:any) => {
             if (!v) return;
             this.store = JSON.parse(v);
         })

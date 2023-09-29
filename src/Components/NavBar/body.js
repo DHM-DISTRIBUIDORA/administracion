@@ -3,7 +3,7 @@ import { SView, SImage, SNavigation, STheme, SIcon, SText, SScrollView2, SThread
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
-import { version as APPversion } from "../../../package.json";
+import packageInfo from "../../../package.json";
 import NavBar from '.';
 
 
@@ -227,7 +227,7 @@ export default class body extends React.Component {
                         <SIcon name={"Logo"} height={70} fill={STheme.color.text} />
                     </SView>
                     <SView row >
-                        <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {APPversion}</SText>
+                        <SText style={{ paddingLeft: 5, paddingTop: 2, color: "#666666", fontSize: 18 }} font={"LondonMM"}>Version {packageInfo.version}</SText>
                     </SView>
                 </SView>
                 <SHr height={50} />

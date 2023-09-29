@@ -20,6 +20,7 @@ class index extends DPA.profile {
         this.state = {
             select: {
                 "mapa": true,
+                "new": true,
             },
             // ...this.state,
         }
@@ -70,12 +71,13 @@ class index extends DPA.profile {
                 <SIcon name={icon} fill={STheme.color.text} />
             </SView>
             <SView width={8} />
-            <SText width={(((label + "").length) * 10)}>{label}</SText>
+            <SText color={STheme.color.text} width={(((label + "").length) * 10)}>{label}</SText>
         </TouchableOpacity>
     }
     $menu() {
         let menu = super.$menu();
         menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card, icon: 'Imap', root: "/tbemp/profile/tbclimapa" }) })
+        menu.push({ children: this.optionItem({ key: "new", label: "+ Crear cliente", color: STheme.color.card, icon: 'Imapp', root: "/tbcli/new" }) })
         return menu;
     }
 
@@ -103,6 +105,11 @@ class Lista extends DPA.list {
             this.setState({ data: e })
         })
     }
+
+    // $allowNew() {
+    //     return true
+    //     return Parent2.model.Action.getPermiso({ url: Parent.path, permiso: "new" });
+    // }
     $filter(data) {
         return data.cliest == "0"
     }
