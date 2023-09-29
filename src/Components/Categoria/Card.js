@@ -29,7 +29,7 @@ class index extends Component<CategoriaCardPropsType> {
                     <SView width={8} />
                     <SIcon name='Categoria' height={60} width={60} />
                     <SView col={"xs-11"} style={{ padding: 7 }}>
-                        <SText font='TT-Norms-Pro-Bold' color={STheme.color.white} fontSize={16} bold>{linnom}</SText>
+                        <SText font='AcherusGrotesque-Bold' color={STheme.color.white} fontSize={16} bold>{linnom}</SText>
                     </SView>
                     <SHr height={0} />
                     {/* <SView flex style={{ alignItems: "flex-end", marginRight: 5 }}>

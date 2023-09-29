@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad, SNavigation } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad, SNavigation, SInput, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import Model from '../../../Model';
 import { Parent } from ".."
 import { connect } from 'react-redux';
 import MarkerCircle from '../../../Components/Marker/MarkerCircle';
+import PopupAutoCompleteCliente from './components/PopupAutoCompleteCliente';
+import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
 
 
 // const Parent2 = {
@@ -60,6 +62,7 @@ class index extends Component {
             renderMarker={RenderMarker}
             renderCluster={RenderMarker}
             data={arr}
+            ref={(map) => this.map = map}
         >
             <></>
             {/* {this.getMarkers(data)} */}
@@ -80,11 +83,49 @@ class index extends Component {
         }
     }
 
+    buscador(data) {
+        return <SView col={"xs-12"} height={50} row center>
+            <SInput
+                        height={48}
+                        style={{
+                            backgroundColor: STheme.color.card + 1,
+                            // height: 55,
+                            // borderRadius: 16,
+                            // color: STheme.color.text,
+                            fontSize: 14
+                        }}
+                        editable={false}
+                        placeholder={"Busca una cliente..."}
+                        // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 40)}${this.state?.data?.direccion.length > 40 ? "..." : ""}` : ""}
+                        value={data?.clinom}
+                        onPress={() => {
+                            SPopup.open({
+                                key: "autocomplete", content:
+                                    <PopupAutoCompleteCliente  callback={(resp) => {
+                                        SPopup.close("autocomplete");
+                                        this.state.data = resp;
+                                        console.log(resp)
+                                        this.map.getMap().animateToRegion({
+                                            ...resp,
+                                            latitudeDelta: 0.01,
+                                            longitudeDelta: 0.01
+                                        }, 1000);
+
+                                        this.setState({ ...this.state });
+                                    }} />
+                            });
+                        }}
+                        iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
+                    />
+        </SView>
+    }
+
     render() {
         var data = Model.tbcli.Action.getAll({ cliidemp: this.pk })
         if (!data) return <SLoad />
 
         return <SPage title={'Mapa de clientes'} disableScroll>
+            {this.buscador(data)}
             {this.renderMapa(data)}
         </SPage>
     }

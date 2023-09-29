@@ -1,7 +1,7 @@
 import { SAction } from "servisofts-model";
 export default class Action extends SAction {
 
-    setState(data) {
+    setState(data:any) {
         this._dispatch({
             ...this.model.info,
             type: "setState",
@@ -13,7 +13,7 @@ export default class Action extends SAction {
         return this._getReducer()
     }
 
-    removeItem(key_item) {
+    removeItem(key_item:any) {
         let dato = this.getState();
         delete dato.productos[key_item];
         this.setState(dato)

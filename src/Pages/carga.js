@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { SHr, SIcon, SNavigation, SPage, STheme, SThread, SView } from 'servisofts-component';
 import Model from '../Model';
 import SSocket from 'servisofts-socket'
-import { version } from "../../package.json"
+import packageInfo from "../../package.json";
 const versionToNumber = (v) => {
     const array = v.split("\.");
     const vl = 100;
@@ -38,7 +38,7 @@ class index extends Component {
             type: "getVersion",
         }).then(e => {
             const versionRequired = e.data
-            if (versionToNumber(versionRequired) > versionToNumber(version)) {
+            if (versionToNumber(versionRequired) > versionToNumber(packageInfo.version)) {
                 SNavigation.replace("/version_required")
             }
         }).catch(e => {

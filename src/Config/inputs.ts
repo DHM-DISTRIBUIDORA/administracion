@@ -1,10 +1,10 @@
 import { SInputsCofig, STheme } from 'servisofts-component';
-const inputs = () => {
+const inputs = (): SInputsCofig => {
     return {
         default: {
             LabelStyle: {
                 position: "absolute",
-                top: -8,
+                top: -10,
                 left: 0,
                 fontSize: 12,
                 width: "100%",

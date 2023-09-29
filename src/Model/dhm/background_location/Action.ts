@@ -7,7 +7,7 @@ export default class Action extends SAction {
     getCurrentLocation() {
         return this._getReducer().location
     }
-    onChange(data, type) {
+    onChange(data:any, type:any) {
         var obj = {
             component: "background_location",
             type: "onChange",
@@ -22,7 +22,7 @@ export default class Action extends SAction {
         return true;
     }
 
-    getByKeyAsync(key_usuario) {
+    getByKeyAsync(key_usuario:any) {
         return new Promise((resolve, reject) => {
             SSocket.sendPromise({
                 ...this.model.info,

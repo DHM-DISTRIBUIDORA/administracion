@@ -67,7 +67,7 @@ class index extends Component {
             <SView col={"xs-12"} center>
                 <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
                     <SHr height={10} />
-                    <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MIS DATOS</SText>
+                    <SText style={{ alignItems: "flex-start" }} font='AcherusGrotesque-Bold'>MIS DATOS</SText>
                     <SHr height={10} />
                 </SView>
                 <SHr height={10} />
@@ -163,7 +163,7 @@ class index extends Component {
         return <SView col={"xs-12"}>
             <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
                 <SHr height={10} />
-                <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MI VENDEDOR</SText>
+                <SText style={{ alignItems: "flex-start" }} font='AcherusGrotesque-Bold'>MI VENDEDOR</SText>
                 <SHr height={10} />
             </SView>
             <SHr height={20} />
@@ -214,7 +214,7 @@ class index extends Component {
         return <SView col={"xs-12"}>
             <SView col={"xs-12"} style={{ borderTopWidth: 1, borderBottomWidth: 1, borderColor: STheme.color.lightGray }}>
                 <SHr height={10} />
-                <SText style={{ alignItems: "flex-start" }} font='TT-Norms-Pro-Bold'>MI REPARTIDOR</SText>
+                <SText style={{ alignItems: "flex-start" }} font='AcherusGrotesque-Bold'>MI REPARTIDOR</SText>
                 <SHr height={10} />
             </SView>
             <SHr height={20} />

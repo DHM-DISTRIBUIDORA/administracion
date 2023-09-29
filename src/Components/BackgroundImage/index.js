@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { SGradient, SImage, STheme, SView } from 'servisofts-component';
-type type = {
-    source: Object,
-    contraste: String
+type typeProps = {
+    source?: Object,
+    contraste?: String
 
 }
-export default class BackgroundImage extends Component<type> {
+export default class BackgroundImage extends Component<typeProps> {
     constructor(props) {
         super(props);
         this.state = {
