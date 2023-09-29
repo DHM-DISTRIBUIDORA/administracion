@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SInput, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
-import { AccentBar, BottomNavigator, Btn, Container } from '../../Components';
+import { AccentBar, BottomNavigator, Btn, Container, PButtom } from '../../Components';
 // import SectionApis from './components/SectionApis';
 import SectionHeader from './components/SectionHeader';
 import Model from '../../Model';
@@ -48,11 +48,11 @@ class login extends Component {
                             placeholder={"Código de cliente"}
                         />
                         <SText color={STheme.color.danger}>{this.state.error}</SText>
-                        <SHr h={32} />
-                        <Btn width={80}
+                        <SHr h={42} />
+                        <PButtom fontSize={20}
                             onPress={this.handleOnPress}
                             loading={this.state.loading}
-                        >Login</Btn>
+                        >Login</PButtom>
                         <SHr h={32} />
                         <SText fontSize={14} underLine>{"¿No tienes un código?  Click aquí."}</SText>
                         <SHr height={50} />

@@ -27,8 +27,8 @@ function App(): JSX.Element {
     //         "usuarios": { keyPath: "key" }
     //     }
     // })
-    return <Redux>
-        <SComponentContainer
+    // @ts-ignore
+    return <Redux><SComponentContainer
             debug
             socket={SSocket}
             background={<BackgroundImage />}
