@@ -8,7 +8,7 @@ export default class Reducer extends SReducer {
             if (action.data && typeof action.data == "object") {
                 if (Array.isArray(action.data)) {
                     state.data = {};
-                    action.data.map((o) => state.data[o[this.model.pk]] = o);
+                    action.data.map((o:any) => state.data[o[this.model.pk]] = o);
                     return;
                 }
             }

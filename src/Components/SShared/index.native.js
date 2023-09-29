@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, Platform, PermissionsAndroid } from 'react-native';
 import Share from 'react-native-share';
-import RNFetchBlob from 'react-native-fetch-blob';
-import RNFS from 'react-native-fs';
+// import RNFetchBlob from 'react-native-fetch-blob';
+import RNFetchBlob from 'react-native-blob-util'
 import CameraRoll from "@react-native-camera-roll/camera-roll";
 import { SUuid } from 'servisofts-component';
 export default class SShared extends Component {

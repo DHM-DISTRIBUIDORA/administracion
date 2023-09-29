@@ -147,7 +147,7 @@ class recibo extends Component {
         return (<SPage >
             <Container>
                 <SHr height={20} />
-                <SText font={'TT-Norms-Pro-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >PEDIDO</SText>
+                <SText font={'AcherusGrotesque-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >PEDIDO</SText>
                 <SHr height={30} />
                 {this.item()}
                 <SHr h={20} />

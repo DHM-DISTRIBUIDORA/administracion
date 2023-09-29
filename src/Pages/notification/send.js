@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { SInput, SPage, STable2, SLoad, SText, SView, SHr, SPopup, SNavigation, SStorage } from 'servisofts-component'
-import { Btn, Container } from '../Components'
+import { Btn, Container } from '../../Components'
 
 import SSocket from 'servisofts-socket'
 
-export default class test3 extends Component {
+export default class send extends Component {
     state = {
         descripcion: "Notificacion por tags.",
         observacion: "Prueba de notificaciones por tags.",

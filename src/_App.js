@@ -12,7 +12,7 @@ import { NavBar, TopBar } from './Components';
 import StatusBar from './Components/StatusBar';
 import BackgroundImage from './Components/BackgroundImage';
 import Model from './Model';
-import { version } from "../package.json"
+import packageInfo from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
 
 setProps(Config.socket);
@@ -73,7 +73,7 @@ const App = (props) => {
                 }}
             />
             <NavBar />
-            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{version}</SText>
+            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
         </SComponentContainer>
     </Redux>
 }

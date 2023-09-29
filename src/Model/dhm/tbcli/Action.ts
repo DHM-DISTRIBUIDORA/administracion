@@ -7,7 +7,7 @@ export default class Action extends SAction {
         var reducer = this._getReducer()
         return reducer.cliente;
     }
-    setCliente = (cliente) => {
+    setCliente = (cliente: any) => {
         this._dispatch({
             component: "tbcli",
             type: "setCliente",
@@ -19,7 +19,7 @@ export default class Action extends SAction {
             ...this.model.info,
             type: "getByKey",
             key: key + "",
-        }).then(e => {
+        }).then((e: any) => {
             const data = e.data[0];
             if (!data) throw "Not found"
             return data;
@@ -30,7 +30,7 @@ export default class Action extends SAction {
             ...this.model.info,
             type: "getByCode",
             code: code + "",
-        }).then(e => {
+        }).then((e: any) => {
             const data = e.data[0];
             if (!data) throw { error: `No existe el código de cliente '${code}'` }
             return data;
@@ -54,7 +54,7 @@ export default class Action extends SAction {
         }
         return data[key];
     }
-    getClientesDia({ idemp, sdate }) {
+    getClientesDia({ idemp, sdate }: any) {
         // dia: , fecha: this.state.curdate.toString("yyyy-MM-dd") }
         return SSocket.sendPromise({
             ...this.model.info,
@@ -64,7 +64,7 @@ export default class Action extends SAction {
             fecha: sdate.toString("yyyy-MM-dd")
         })
     }
-    getEntregas({ idemp, sdate }) {
+    getEntregas({ idemp, sdate }:any) {
         // dia: , fecha: this.state.curdate.toString("yyyy-MM-dd") }
         return SSocket.sendPromise({
             ...this.model.info,

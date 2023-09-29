@@ -9,14 +9,16 @@ class index extends DPA.new {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: ["idcli","clicod","cliape","clizona","climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
-            "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
-            "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcat","idcanal","clicel"],
+            excludes: ["idcli", "clicod", "cliape", "clizona", "climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
+                "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
+                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo", "climz", "clifing", "idconf", "cliuv", "idds", "climon", "idcat", "idcanal", "clicel"],
             title: "Nuevo " + Parent.title,
         });
         this.state = {
             ubicacion: null
         };
+        this.pk = SNavigation.getParam("pk");
+        console.log("pk - ", this.pk);
     }
 
     $allowAccess() {
@@ -28,7 +30,9 @@ class index extends DPA.new {
             SNavigation.navigate("/tbcli/mapa", {
                 callback: (resp) => {
                     this.setState({ ubicacion: resp })
-                }
+                },
+                lat: 0,
+                lon: 0,
             });
         }
         if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
@@ -66,14 +70,17 @@ class index extends DPA.new {
         // console.log("aaaaaa");
         // console.log(data);
 
-        if(data.clilat == null || data.clilon == null){
+        if (data.clilat == null || data.clilon == null) {
             data.clilat = 0;
             data.clilon = 0;
         }
+
+        if (this.pk) data.cliidemp = this.pk;
+        data.cliest = 0;
         // console.log("bbbbbb");
         // console.log(data);
 
-       
+
         Parent.model.Action.registro({
             data: data,
             key_usuario: Model.usuario.Action.getKey()

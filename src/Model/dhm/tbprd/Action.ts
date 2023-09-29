@@ -5,9 +5,12 @@ export default class Action extends SAction {
     getAllSimple(extra?: { idalm?: any }) {
         var reducer = this._getReducer();
         var data = reducer.dataSimple;
+
         if (extra?.idalm != reducer.idalm) {
             data = null;
-            reducer.idalm = extra.idalm;
+            if (extra?.idalm) {
+                reducer.idalm = extra.idalm;
+            }
         }
         if (!data) {
             if (reducer.estado == "cargando")
