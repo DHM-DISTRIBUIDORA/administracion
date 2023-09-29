@@ -4,7 +4,7 @@ const inputs = (): SInputsCofig => {
         default: {
             LabelStyle: {
                 position: "absolute",
-                top: -8,
+                top: -10,
                 left: 0,
                 fontSize: 12,
                 width: "100%",
