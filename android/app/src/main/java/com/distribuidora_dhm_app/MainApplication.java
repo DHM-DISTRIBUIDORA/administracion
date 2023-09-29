@@ -1,7 +1,6 @@
 package com.distribuidora_dhm_app;
 
 import android.app.Application;
-// import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.rnfs.RNFSPackage;
@@ -18,8 +17,11 @@ import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 
+import android.content.Context;
+import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.bridge.JSIModulePackage; // <- add this
 import com.swmansion.reanimated.ReanimatedJSIModulePackage; // <- add this
+import java.lang.reflect.InvocationTargetException;
 
 // import java.lang.reflect.InvocationTargetException;
 import java.util.List;
