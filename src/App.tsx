@@ -1,6 +1,6 @@
 import React from 'react';
 import { Platform, Text } from 'react-native';
-import { SComponentContainer, SNavigation, SText, STheme } from 'servisofts-component';
+import { SComponentContainer, SNavigation, SPopup, SText, STheme } from 'servisofts-component';
 import SSocket, { setProps } from 'servisofts-socket';
 import Redux, { store } from './Redux';
 import Config from "./Config";
@@ -20,6 +20,7 @@ Firebase.init();
 DeviceKey.init();
 // BackgroundLocation();
 function App(): JSX.Element {
+
     // SDB.init({
     //     dbName: "namedb",
     //     version: 1,
