@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SInput, SLoad, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
-import { AccentBar, BottomNavigator, Btn, Container } from '../../Components';
+import { AccentBar, BottomNavigator, Btn, Container, PButtom } from '../../Components';
 // import SectionApis from './components/SectionApis';
 import SectionFooter from './components/SectionFooter';
 import SectionForm from './components/SectionForm';
@@ -80,10 +80,10 @@ class login extends Component {
                         />
                         <SText color={STheme.color.danger}>{this.state.error}</SText>
                         <SHr h={32} />
-                        <Btn width={80}
+                        <PButtom fontSize={20}
                             onPress={this.handleOnPress}
                             loading={this.state.loading}
-                        >Ingresar</Btn>
+                        >Ingresar</PButtom>
                         <SHr height={50} />
                     </Container>
                 </SView>
