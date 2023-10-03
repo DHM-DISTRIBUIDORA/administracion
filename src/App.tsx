@@ -17,8 +17,8 @@ import Socket from './Socket';
 Firebase.init();
 // BackgroundLocation();
 function App(): JSX.Element {
-    return <Redux>
-        <SComponentContainer
+    // @ts-ignore
+    return <Redux><SComponentContainer
             debug
             socket={SSocket}
             background={<BackgroundImage />}

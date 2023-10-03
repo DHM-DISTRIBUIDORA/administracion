@@ -45,7 +45,7 @@ import notification from './notification';
 // import test2 from "./test2"
 // import test from "./test"
 
-// import storage from "./storage"
+import storage from "./storage"
 // import { Example } from "servisofts-charts"
 
 // export default SPage.combinePages("/", {
@@ -54,7 +54,8 @@ import notification from './notification';
 
 export default SPage.combinePages("/", {
   // "":test3,
-  "": carga,
+  "": storage,
+  // "": carga,
   "root": root,
   wiki,
   ...login,

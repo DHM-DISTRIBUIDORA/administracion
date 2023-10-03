@@ -58,7 +58,7 @@
     "servisofts-background-location": "2.0.1",
     "servisofts-charts": "1.0.1",
     "servisofts-component": "3.0.3",
-    "servisofts-db": "1.0.1",
+    "servisofts-db": "file:../../servisofts-db/dist",
     "servisofts-model": "1.0.5",
     "servisofts-page": "1.0.8",
     "servisofts-rn-chat": "1.0.7",
@@ -69,7 +69,8 @@
     "servisofts-table": "1.0.2",
     "supercluster": "^6.0.2",
     "xlsx": "^0.18.5",
-    "xlsx-color": "^0.14.30"
+    "xlsx-color": "^0.14.30",
+    "realm": "^12.2.0"
   },
   "resolutions": {
     "react-error-overlay": "6.0.9"
