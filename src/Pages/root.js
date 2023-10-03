@@ -84,6 +84,7 @@ class index extends Component {
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                     {/* <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} /> */}
                     <MenuButtom label={"Test"} url={"/test3"} icon={<SIcon name={"Profanity"} />} />
+                    <MenuButtom label={"Test Map"} url={"/test_map"} icon={<SIcon name={"Profanity"} />} />
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
                     }} icon={<SIcon name={"Icon2"} />} /> */}

@@ -176,7 +176,12 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
      implementation("androidx.swiperefreshlayout:swiperefreshlayout:1.0.0")
     implementation "com.google.android.gms:play-services-auth:${safeExtGet('googlePlayServicesAuthVersion', '19.2.0')}"
-    
+
+    implementation(project(':react-native-community_geolocation')){
+        exclude group: 'com.google.android.gms'
+    }
+    implementation 'com.google.android.gms:play-services-location:20.0.0'
+
     // implementation 'androidx.work:work-runtime:2.7.1'// Agregado cuando subi a api lvl 31 error en react-native-reanimated
     // implementation 'androidx.work:work-runtime:2.7.1'
     implementation 'androidx.work:work-runtime-ktx:2.7.0'

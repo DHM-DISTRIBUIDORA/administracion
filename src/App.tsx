@@ -16,7 +16,7 @@ import BackgroundLocation from './BackgroundLocation';
 import Socket from './Socket';
 
 Firebase.init();
-// BackgroundLocation();
+BackgroundLocation();
 function App(): JSX.Element {
     return <Redux>
         <SComponentContainer

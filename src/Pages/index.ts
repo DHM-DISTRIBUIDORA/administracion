@@ -42,6 +42,7 @@ import buscar_cliente_codigo from './buscar_cliente_codigo';
 import version_required from './version_required';
 import test3 from './test3';
 import notification from './notification';
+import test_map from "./test_map"
 // import test2 from "./test2"
 // import test from "./test"
 
@@ -53,6 +54,8 @@ import notification from './notification';
 // });
 
 export default SPage.combinePages("/", {
+  // "":test_map,
+
   // "":test3,
   "": carga,
   "root": root,
@@ -96,6 +99,7 @@ export default SPage.combinePages("/", {
   buscar_cliente_codigo,
   // test2,
   test3,
+  test_map
   // test,
   // "chart": Example
 });

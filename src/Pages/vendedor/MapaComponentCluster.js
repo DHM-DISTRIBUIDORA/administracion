@@ -70,6 +70,10 @@ export default class MapaComponent extends Component {
                     latitudeDelta: 0.1,
                     longitudeDelta: 0.1,
                 }}
+                showsMyLocationButton={true}
+                showsCompass={true}
+                showsUserLocation={true}
+                followsUserLocation={true}
                 onClusterPress={(data, markers) => {
                     console.log(data, markers);
                     console.log(state.idemp)
