@@ -2,6 +2,7 @@ import { SPage } from 'servisofts-component';
 
 import root from './root';
 import recibo from './recibo';
+import editar from './editar';
 
 export const Parent = {
     name: "dm_cabfac",
@@ -9,5 +10,6 @@ export const Parent = {
 }
 export default SPage.combinePages(Parent.name, {
     "": root,
-    recibo
+    recibo,
+    editar
 });
