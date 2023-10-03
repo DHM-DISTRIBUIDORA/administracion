@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { Platform, Text } from 'react-native';
 import { SComponentContainer, SNavigation, SText, STheme } from 'servisofts-component';
