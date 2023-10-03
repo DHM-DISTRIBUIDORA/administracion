@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 import MarkerCircle from '../../../Components/Marker/MarkerCircle';
 import PopupAutoCompleteCliente from './components/PopupAutoCompleteCliente';
 import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
+import { Container } from '../../../Components';
 
 
 // const Parent2 = {
@@ -23,6 +24,7 @@ class index extends Component {
         super(props);
         this.state = {
             // ...this.state,
+            coordenadas: null,
         };
         this.pk = SNavigation.getParam("pk")
     }
@@ -42,27 +44,45 @@ class index extends Component {
             SNavigation.navigate("/tbcli/profile", { pk: obj.id })
         }
         const RenderMarker = (obj, onPress) => {
+            console.log(this.state?.data?.latitude + " data---" + obj?.location.latitude + "- obj")
+            if (this.state?.data) obj.count = 0
+            console.log(obj.count)
+
+            if (this.state?.data) {
+                if (this.state?.data?.idcli != obj?.id) {
+                    return null
+                }
+            }
+
+
+            ////if(this.state?.data?.latitude == 0) SPopup.alert("Cliente no tiene ubicación registrada")
             return MarkerCircle({
-                latitude: obj?.location.latitude,
-                longitude: obj?.location.longitude,
+                latitude: (this.state?.data) ? this.state?.data?.latitude : obj?.location.latitude,
+                longitude: (this.state?.data) ? this.state?.data?.longitude : obj?.location.longitude,
                 src: SSocket.api.root + "tbcli/" + obj?.id,
                 label: obj.clinom,
+                // label: (this.state?.data?.idcli ==  obj?.id) 
                 size: 40,
                 cantidad: obj.count > 1 ? obj.count : 0,
                 onPress: obj.count <= 1 ? HanndleOnPress.bind(this, obj) : onPress,
-                // cantidad: obj?.cantidad
+               
             })
         }
+        console.log("valor data")
+        console.log(this.state?.data)
         return <SMapView.Cluster initialRegion={{
             latitude: latPadre,
             longitude: longPadre,
             latitudeDelta: 0.1,
-            longitudeDelta: 0.1
+            longitudeDelta: 0.1,
         }}
             renderMarker={RenderMarker}
             renderCluster={RenderMarker}
             data={arr}
-            ref={(map) => this.map = map}
+            ref={map => {
+                this.map = map;
+            }}
+
         >
             <></>
             {/* {this.getMarkers(data)} */}
@@ -84,40 +104,33 @@ class index extends Component {
     }
 
     buscador(data) {
-        return <SView col={"xs-12"} height={50} row center>
+        return <Container >
             <SInput
-                        height={48}
-                        style={{
-                            backgroundColor: STheme.color.card + 1,
-                            // height: 55,
-                            // borderRadius: 16,
-                            // color: STheme.color.text,
-                            fontSize: 14
-                        }}
-                        editable={false}
-                        placeholder={"Busca una cliente..."}
-                        // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 40)}${this.state?.data?.direccion.length > 40 ? "..." : ""}` : ""}
-                        value={data?.clinom}
-                        onPress={() => {
-                            SPopup.open({
-                                key: "autocomplete", content:
-                                    <PopupAutoCompleteCliente  callback={(resp) => {
-                                        SPopup.close("autocomplete");
-                                        this.state.data = resp;
-                                        console.log(resp)
-                                        this.map.getMap().animateToRegion({
-                                            ...resp,
-                                            latitudeDelta: 0.01,
-                                            longitudeDelta: 0.01
-                                        }, 1000);
-
-                                        this.setState({ ...this.state });
-                                    }} />
-                            });
-                        }}
-                        iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
-                    />
-        </SView>
+                height={48}
+                style={{
+                    backgroundColor: STheme.color.card,
+                    borderRadius: 16,
+                    color: STheme.color.primary,
+                    fontSize: 14
+                }}
+                editable={false}
+                placeholder={"Busca una cliente..."}
+                // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 40)}${this.state?.data?.direccion.length > 40 ? "..." : ""}` : ""}
+                value={data?.clinom}
+                onPress={() => {
+                    SPopup.open({
+                        key: "autocomplete", content:
+                            <PopupAutoCompleteCliente callback={(resp) => {
+                                SPopup.close("autocomplete");
+                                this.state.data = resp;
+                                this.setState({ ...this.state });
+                            }} />
+                    });
+                }}
+                iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
+            />
+            <SHr height={20} />
+        </Container>
     }
 
     render() {

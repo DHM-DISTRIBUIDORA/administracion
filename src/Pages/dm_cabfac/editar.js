@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
-import { Btn, Container, PButtom } from '../../Components';
+import { Btn, Container, PButtom, Producto } from '../../Components';
 import Model from '../../Model';
-class recibo extends Component {
+class editar extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -143,30 +143,74 @@ class recibo extends Component {
             </SView>
         </>
     }
+
+    getProductos() {
+        if (!this.state?.data) return <SLoad />
+        const { dm_detfac } = this.state.data;
+        const productos = Model.tbprd.Action.getAll();
+        let total = 0;
+        if (!dm_detfac) return <SLoad />
+        if (!productos) return <SLoad />
+        Object.keys(dm_detfac).map((key, index) => {
+            total += dm_detfac[key].vdpre * dm_detfac[key].vdcan;
+        });
+        return (
+            <SView col={"xs-12"} flex center >
+               
+                <SList
+                    initSpace={8}
+                    flex
+                    data={dm_detfac}
+                    // filter={(a) => a.idlinea == this.params.pk}
+                    // limit={10}
+                    render={(obj) => {
+                        console.log("AQUII");
+                        console.log(obj);
+                        return <Producto.Card3 col={"xs-12"} width={0} data={obj}
+                            items={this.recibirItems} total={this.state.total}
+                        // onPress={(data) => {
+                        //     SNavigation.navigate("/producto", { pk: data.key })
+                        // }} 
+                        />
+                    }}
+                />
+                <SHr height={45} />
+                <PButtom primary
+                    onPress={() => {
+                        // this.form.submit();
+                        SNavigation.navigate('/carrito')
+                    }} >ACEPTAR</PButtom>
+                <SHr height={10} />
+                <PButtom secondary
+                    onPress={() => {
+                        Model.carrito.Action.removeAll()
+                        SNavigation.replace('/public')
+                    }} >ELIMINAR PEDIDOS</PButtom>
+                    <SHr height={10} />
+                    <PButtom primary
+                    onPress={() => {
+                        // this.form.submit();
+                        SNavigation.navigate('/public')
+                    }} >SEGUIR COMPRANDO</PButtom>
+                <SHr height={30} />
+
+            </SView>
+        )
+    }
+
     render() {
         return (<SPage >
             <Container>
                 <SHr height={20} />
-                <SText font={'AcherusGrotesque-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >PEDIDO</SText>
+                <SText font={'AcherusGrotesque-Bold'} fontSize={24} bold style={{ textDecorationLine: 'underline' }} >EDITAR PEDIDO</SText>
                 <SHr height={30} />
                 {this.item()}
                 <SHr h={20} />
-                {this.cabeceraVenta()}
-                {this.detalle()}
+                {/* {this.cabeceraVenta()} */}
+                {/* {this.detalle()} */}
+                {this.getProductos()}
                 <SHr height={20} />
-                <PButtom primary onPress={() => {
-                    console.log(Model.carrito.Action.getState().productos)
-                    console.log(this.state.data)
-                    SNavigation.navigate("/dm_cabfac/editar", {pk: this.idven})
-                }}>{"EDITAR"}</PButtom>
-                <SHr height={20} />
-                {!this.onBack ? null :
-                    <PButtom secondary
-                        loading={this.state.loading}
-                        onPress={() => {
-                            this.onBack();
-                        }} >SALIR</PButtom>
-                }
+               
             </Container>
             {/* <SText>{JSON.stringify(this.state.data)}</SText> */}
             <SHr height={30} />
@@ -177,4 +221,4 @@ class recibo extends Component {
 const initStates = (state) => {
     return { state }
 };
-export default connect(initStates)(recibo);
+export default connect(initStates)(editar);
