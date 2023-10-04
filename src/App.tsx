@@ -14,7 +14,7 @@ import packageInfo from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
 import Socket from './Socket';
 
-Firebase.init();
+// Firebase.init();
 // BackgroundLocation();
 function App(): JSX.Element {
     // @ts-ignore

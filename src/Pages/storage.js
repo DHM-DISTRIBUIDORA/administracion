@@ -111,19 +111,6 @@ export default class index extends Component {
             }).catch(e => {
                 timeEnd("save_users")
             })
-            // for (let index = 0; index < arrData.length; index++) {
-            //     const usr = arrData[index];
-            //     try {
-            //         await SDB.insert("usuario", usr)
-            //     } catch (error) {
-            //         console.error(error)
-            //     }
-
-            // }
-            // Object.values(e.data).map(async (usr) => {
-
-            // })
-            // console.log(e);
         }).catch((e) => {
             console.error(e);
         })
