@@ -1,8 +1,40 @@
-import { SStorage } from "servisofts-component";
+import { SStorage, SUuid } from "servisofts-component";
 import { SAction } from "servisofts-model";
 import SSocket from 'servisofts-socket'
+import DataBase from "../../../DataBase";
 export default class Action extends SAction {
 
+
+    editar(extra?: { data: any }): Promise<unknown> {
+        return new Promise(async (resolve, reject) => {
+            if (!extra) return;
+            extra.data.sync_type = "update";
+            const update = await DataBase.tbcli.update(extra?.data)
+            this._dispatch({
+                ...this.model.info,
+                type: "editar",
+                estado: "exito",
+                data: update
+            })
+            resolve(update);
+        })
+    }
+
+    registro(extra?: { data: any }): Promise<unknown> {
+        return new Promise(async (resolve, reject) => {
+            if (!extra) return;
+            extra.data.sync_type = "insert";
+            extra.data.key = SUuid();
+            const data = await DataBase.tbcli.insert(extra?.data)
+            this._dispatch({
+                ...this.model.info,
+                type: "registro",
+                estado: "exito",
+                data: extra?.data
+            })
+            resolve(extra?.data);
+        })
+    }
     getCliente = () => {
         var reducer = this._getReducer()
         return reducer.cliente;
@@ -64,7 +96,7 @@ export default class Action extends SAction {
             fecha: sdate.toString("yyyy-MM-dd")
         })
     }
-    getEntregas({ idemp, sdate }:any) {
+    getEntregas({ idemp, sdate }: any) {
         // dia: , fecha: this.state.curdate.toString("yyyy-MM-dd") }
         return SSocket.sendPromise({
             ...this.model.info,
@@ -74,4 +106,10 @@ export default class Action extends SAction {
             fecha: sdate.toString("yyyy-MM-dd")
         })
     }
+
+    // editar(extra?: any): Promise<unknown> {
+    //     return new Promise((resolve, reject) => {
+    //         return DataBase.tbcli.update(extra.data);
+    //     })
+    // }
 }

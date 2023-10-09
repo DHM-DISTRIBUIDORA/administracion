@@ -8,6 +8,7 @@ import { Parent } from "."
 
 import { AccentBar, Btn, PButtom } from '../../Components';
 import { MenuButtom } from 'servisofts-rn-roles_permisos';
+import DataBase from '../../DataBase';
 // import usuario_dato from '../../Model/tapeke/usuario_dato';
 
 
@@ -289,6 +290,7 @@ class index extends Component {
                     <Btn col={"xs-11"} type='danger' onPress={() => {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
+                        DataBase.clear();
                         SNavigation.reset("/");
                         // NavBar.close();
 

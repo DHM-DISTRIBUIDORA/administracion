@@ -5,6 +5,7 @@ import Model from '../../Model';
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
 import packageInfo from "../../../package.json";
 import NavBar from '.';
+import DataBase from '../../DataBase';
 
 
 export default class body extends React.Component {
@@ -214,6 +215,7 @@ export default class body extends React.Component {
                             // Model._events.CLEAR();
                             Model.tbcli.Action.setCliente(null);
                             Model.usuario.Action.unlogin();
+                            DataBase.clear();
                             SNavigation.reset("/");
                             NavBar.close();
                         }

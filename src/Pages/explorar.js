@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SList2, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SList, SList2, SLoad, SNavigation, SPage, SText, STheme, SThread, SView } from 'servisofts-component';
 import { BottomNavigator, Categoria, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
 
-  
+    state = {
+        load: false
+    }
+
+    componentDidMount() {
+        new SThread(10, "load").start(() => {
+            this.setState({ load: true })
+        })
+    }
     getLista() {
         var color = "";
         var contador = 0;
@@ -27,19 +35,23 @@ class index extends Component {
                 } else {
                     contador = 1;
                 }
-                return <Categoria.Card obj={obj} color={color} indice={contador}/>
+                return <Categoria.Card obj={obj} color={color} indice={contador} />
             }}
         />
+    }
+    renderData() {
+        if (!this.state.load) return <SLoad />
+        return <Container >
+            <SHr height={20} />
+            {this.getLista()}
+            <SHr height={20} />
+        </Container>
     }
     render() {
         return <SPage title={"Categorías"}
             footer={this.footer()}
         >
-            <Container >
-                <SHr height={20} />
-                {this.getLista()}
-                <SHr height={20} />
-            </Container>
+            {this.renderData()}
         </SPage>
     }
 

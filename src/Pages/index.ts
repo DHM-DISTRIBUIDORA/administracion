@@ -40,12 +40,12 @@ import transporte from './transporte';
 import info from './info';
 import buscar_cliente_codigo from './buscar_cliente_codigo';
 import version_required from './version_required';
-import test3 from './test3';
+import notification_manager from './notification_manager';
 import notification from './notification';
 // import test2 from "./test2"
 // import test from "./test"
 
-// import storage from "./storage"
+import storage from "./storage"
 // import { Example } from "servisofts-charts"
 
 // export default SPage.combinePages("/", {
@@ -54,6 +54,7 @@ import notification from './notification';
 
 export default SPage.combinePages("/", {
   // "":test3,
+  // "": storage,
   "": carga,
   "root": root,
   wiki,
@@ -94,8 +95,9 @@ export default SPage.combinePages("/", {
   ...notification,
   version_required,
   buscar_cliente_codigo,
+  storage,
   // test2,
-  test3,
+  notification_manager,
   // test,
   // "chart": Example
 });

@@ -1,0 +1,72 @@
+import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
+import SSocket from 'servisofts-socket';
+import Model from '../Model';
+
+
+export default new class tbzon extends TableAbstract {
+
+    scheme: Scheme = {
+        name: this.constructor.name,
+        primaryKey: "idz",
+        properties: {
+            sync_type: "string?",
+            "idemp": "int?",
+            "idgz": "int?",
+            "idterr": "int?",
+            "idz": "int?",
+            "pedidos": "int?",
+            "sucreg": "int?",
+            "ventas": "int?",
+            "zcod": "string?",
+            "zdesfin": "int?",
+            "zdia": "int?",
+            "zest": "int?",
+            "zfecmod": "string?",
+            "znom": "string?",
+            "znsuc": "int?",
+            "ztipo": "string?",
+            "zusumod": "string?",
+        }
+    }
+
+    sync(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            // let usrLog = Model.usuario.Action.getUsuarioLog();
+            // if (!usrLog?.idvendedor) {
+            //     return reject({
+            //         estado: "error",
+            //         error: "idvendedor not found"
+            //     })
+            // }
+            SSocket.sendPromise2({
+                "component": "tbzon",
+                "type": "getAll",
+                "estado": "cargando",
+                // "idemp": usrLog.idvendedor
+            }).then((e: any) => {
+                SDB.deleteAll(this.scheme.name).then((ex:any) => {
+                    SDB.insertArray(this.scheme.name, e.data).then((a:any) => {
+                        resolve(e);
+                    })
+                })
+            }).catch(e => {
+                console.error(e)
+                reject(e);
+            })
+        })
+
+    }
+    loadToReducer = async () => {
+        const e = await this.all()
+        // Model.usuarioPage.Action._getReducer().data = data;
+        Model.tbemp.Action._dispatch({
+            "component": "tbzon",
+            "type": "getAll",
+            estado: "exito",
+            data: e,
+        })
+    }
+}();
+
+
+

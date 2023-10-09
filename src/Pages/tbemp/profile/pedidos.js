@@ -4,6 +4,7 @@ import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, SView } fro
 import SSocket from 'servisofts-socket'
 import { Container } from '../../../Components';
 import Model from '../../../Model';
+import DataBase from '../../../DataBase';
 class pedidos extends Component {
     constructor(props) {
         super(props);
@@ -15,13 +16,21 @@ class pedidos extends Component {
     }
 
     componentDidMount() {
-        SSocket.sendPromise({
-            component: "dm_cabfac",
-            type: "getPedidos",
-            idemp: this.idemp
-        }).then((a) => {
-            this.setState({ data: a.data })
+
+        DataBase.dm_cabfac.all().then(dt => {
+            let data = dt.map((a) => {
+                // a.detalle = JSON.parse(a.detalle);
+                return a;
+            })
+            this.setState({ data: data })
         })
+        // SSocket.sendPromise({
+        //     component: "dm_cabfac",
+        //     type: "getPedidos",
+        //     idemp: this.idemp
+        // }).then((a) => {
+        //     this.setState({ data: a.data })
+        // })
     }
 
     component = (obj) => {
@@ -73,7 +82,7 @@ class pedidos extends Component {
                         limit={20}
                         data={this.state.data}
                         render={this.component.bind(this)}
-                        order={[{ key: "idven", order: "desc" }]}
+                        order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
                         {...this.fecha_inicio ?
                             {
                                 filter: (a) => new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") <= this.fecha_fin
