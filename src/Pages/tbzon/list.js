@@ -25,6 +25,7 @@ class index extends DPA.list {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "table" });
     }
     $allowAccess() {
+        if (Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $filter(data) {

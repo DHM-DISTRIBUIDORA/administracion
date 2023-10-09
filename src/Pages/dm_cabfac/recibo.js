@@ -4,6 +4,7 @@ import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SVi
 import SSocket from 'servisofts-socket'
 import { Btn, Container, PButtom } from '../../Components';
 import Model from '../../Model';
+import DataBase from '../../DataBase';
 class recibo extends Component {
     constructor(props) {
         super(props);
@@ -16,18 +17,23 @@ class recibo extends Component {
 
 
     componentDidMount() {
-        SSocket.sendPromise({
-            component: "dm_cabfac",
-            type: "getPedido",
-            idven: this.idven,
 
-
-        }).then(e => {
-            console.log(e);
-            this.setState({ data: e.data[0] })
-        }).catch(e => {
-            console.error(e);
+        DataBase.dm_cabfac.objectForPrimaryKey(this.idven).then((e) => {
+            // e.detalle = JSON.parse(e.detalle);
+            this.setState({ data: e })
         })
+        // SSocket.sendPromise({
+        //     component: "dm_cabfac",
+        //     type: "getPedido",
+        //     idven: this.idven,
+
+
+        // }).then(e => {
+        //     console.log(e);
+        //     this.setState({ data: e.data[0] })
+        // }).catch(e => {
+        //     console.error(e);
+        // })
     }
 
     item() {
@@ -100,19 +106,19 @@ class recibo extends Component {
 
     detalle() {
         if (!this.state?.data) return <SLoad />
-        const { dm_detfac } = this.state.data;
+        const { detalle } = this.state.data;
         const productos = Model.tbprd.Action.getAll();
         let total = 0;
-        if (!dm_detfac) return <SLoad />
+        if (!detalle) return <SLoad />
         if (!productos) return <SLoad />
-        Object.keys(dm_detfac).map((key, index) => {
-            total += dm_detfac[key].vdpre * dm_detfac[key].vdcan;
+        Object.keys(detalle).map((key, index) => {
+            total += detalle[key].vdpre * detalle[key].vdcan;
         });
         return <>
             <SList
                 initSpace={8}
                 flex
-                data={dm_detfac}
+                data={detalle}
                 order={[{ key: "prdnom", order: "asc" }]}
                 render={(vd) => {
                     const producto = Object.values(productos).find(a => a.prdcod == vd.prdcod)
@@ -155,9 +161,21 @@ class recibo extends Component {
                 {this.detalle()}
                 <SHr height={20} />
                 <Btn onPress={() => {
-                    console.log(Model.carrito.Action.getState().productos)
-                    console.log(this.state.data)
+                    SNavigation.navigate("/dm_cabfac/edit", { pk: this.state.data.idven })
                 }}>{"Editar"}</Btn>
+                <SHr height={20} />
+                <Btn onPress={() => {
+                    DataBase.dm_cabfac.update({
+                        ...this.state.data,
+                        sync_type: "delete"
+                    }).then(e => {
+                        console.log("Exito al eliminar")
+                    }).catch(e => {
+                        console.error(e)
+                    })
+                    // console.log(Model.carrito.Action.getState().productos)
+                    // console.log(this.state.data)
+                }}>{"Eliminar"}</Btn>
                 <SHr height={20} />
                 {!this.onBack ? null :
                     <PButtom primary

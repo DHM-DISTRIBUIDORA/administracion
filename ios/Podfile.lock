@@ -560,7 +560,7 @@ PODS:
     - React-jsi (= 0.71.4)
     - React-logger (= 0.71.4)
     - React-perflogger (= 0.71.4)
-  - RealmJS (12.2.0):
+  - RealmJS (11.10.1):
     - React
   - RNAppleAuthentication (2.2.2):
     - React-Core
@@ -627,7 +627,7 @@ PODS:
     - React-Core
   - servisofts-background-location (2.0.1):
     - React-Core
-  - servisofts-component (3.0.3):
+  - servisofts-component (3.0.4):
     - React-Core
   - servisofts-socket (4.0.3):
     - CocoaAsyncSocket
@@ -985,7 +985,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: ad17efcfb2fa8f6bfd8ac0cf48d96668b8b28e0b
   React-runtimeexecutor: 8fa50b38df6b992c76537993a2b0553d3b088004
   ReactCommon: b49a4b00ca6d181ff74b17c12b2d59ac4add0bde
-  RealmJS: a480cb21d4b0ba82c843c77c3a211770411eec75
+  RealmJS: 8deebf00c84f499c654bc585583c54f55b586751
   RNAppleAuthentication: 0571c08da8c327ae2afc0261b48b4a515b0286a6
   RNCAsyncStorage: c913ede1fa163a71cea118ed4670bbaaa4b511bb
   RNCMaskedView: 0e1bc4bfa8365eba5fbbb71e07fbdc0555249489
@@ -1002,7 +1002,7 @@ SPEC CHECKSUMS:
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   servisofts-background-location: b5e9b23aae51b1e9a282225e774ef859ea3e818a
-  servisofts-component: 7d52d0e3bfd0a2601c8b5d7b7675bf364394243c
+  servisofts-component: 756ad156e4111e9f5112b7be53a7cc32489e3f3f
   servisofts-socket: 6a02027d3e01a63c83395a96d96c5f03de3fef4c
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0

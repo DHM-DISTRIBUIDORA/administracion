@@ -9,9 +9,9 @@ export default new SModel<Action, Reducer>({
     Columns: {
         "idcli": { type: "text", pk: true },
         "clicod": { type: "text", editable: true },
-        "clinom": { type: "text", editable: true },
+        "clinom": { type: "text", editable: true, notNull: true },
         "cliape": { type: "text", editable: true },
-        "clinit": { type: "text", editable: true },
+        "clinit": { type: "text", editable: true, notNull: true },
         "clidir": { type: "text", editable: true },
         "cliloc": { type: "text", editable: true },
         "clizona": { type: "text", editable: true },

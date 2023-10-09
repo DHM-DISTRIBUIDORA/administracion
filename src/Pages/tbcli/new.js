@@ -22,6 +22,7 @@ class index extends DPA.new {
     }
 
     $allowAccess() {
+        if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
     }
     $inputs() {

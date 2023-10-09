@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView, SNavigation } from 'servisofts-component';
+import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView, SNavigation, SThread } from 'servisofts-component';
 import { BottomNavigator, Categoria, Container } from '../Components';
 import Model from '../Model';
 class index extends Component {
@@ -9,9 +9,16 @@ class index extends Component {
         super(props);
         this.state = {
             data: {},
+            load: false
         };
         this.params = SNavigation.getAllParams();
 
+    }
+
+    componentDidMount() {
+        new SThread(10, "load").start(() => {
+            this.setState({ load: true })
+        })
     }
 
     getLista() {
@@ -25,20 +32,24 @@ class index extends Component {
             filter={(a) => (a.lincod + "").startsWith(this.params.pk) && a.linniv == 2}
             order={[{ key: "linnom", order: "asc" }]}
             render={(obj) => {
-                return <Categoria.Card2 obj={obj} color={this.params.color}  />
+                return <Categoria.Card2 obj={obj} color={this.params.color} />
             }}
         />
 
+    }
+    renderContainer() {
+        if (!this.state.load) return <SLoad />
+        return <Container>
+            <SHr height={20} />
+            {this.getLista()}
+            <SHr height={20} />
+        </Container>
     }
     render() {
         return <SPage title={"Categorías"}
             footer={this.footer()}
         >
-            <Container>
-                <SHr height={20} />
-                {this.getLista()}
-                <SHr height={20} />
-            </Container>
+            {this.renderContainer()}
         </SPage>
     }
 

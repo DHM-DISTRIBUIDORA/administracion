@@ -15,6 +15,7 @@ class index extends DPA.profile {
             // itemType:"",
             params: ["onSelect?"],
             item: item,
+            title:"Clientes del empleado",
             excludes: []
         });
         this.state = {
@@ -90,7 +91,7 @@ const Parent2 = {
 }
 class Lista extends DPA.list {
     constructor(props) {
-        Model.tbcli.Action.CLEAR();
+        // Model.tbcli.Action.CLEAR();
         super(props, {
             type: "componentTitle",
             Parent: Parent2,
@@ -98,12 +99,6 @@ class Lista extends DPA.list {
             item: item2,
             excludes: []
         });
-    }
-
-    componentDidMount() {
-        StoreTemp.getItem("clientes").then(e => {
-            this.setState({ data: e })
-        })
     }
 
     // $allowNew() {
@@ -126,7 +121,7 @@ class Lista extends DPA.list {
         SNavigation.navigate("/tbcli/profile", { pk: data.idcli })
     }
     $getData() {
-        return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk }) ?? this.state.data
+        return Parent2.model.Action.getAll({ cliidemp: this.props.pi.pk })
         // return Parent2.model.Action.getAll({ cliidemp: this.props.route.params.pk})
     }
 }

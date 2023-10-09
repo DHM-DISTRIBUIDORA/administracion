@@ -10,6 +10,7 @@ export const store = createStore(
     {},
     applyMiddleware(reduxThunk),
 );
+
 Model._events.setStore(store)
 
 const Redux = (props:any) => {

@@ -7,6 +7,7 @@ import SSocket from 'servisofts-socket'
 import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
+import DataBase from '../../DataBase'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -17,20 +18,49 @@ export default class root extends Component {
         }
     }
     componentDidMount() {
-        this.setState({ loading: true })
-        Model.tbcli.Action.getClientesDia({ idemp: this.state.idemp, sdate: this.state.curdate }).then((e) => {
-            this.setState({
-                loading: false,
-                data: e.data, visitas: e.visitas
-            })
-        }).catch(e => {
-            this.setState({ loading: false })
-            console.error(e);
-        })
+        this.loadDataAsync();
+        // this.setState({ loading: true })
+
+        // Model.tbcli.Action.getClientesDia({ idemp: this.state.idemp, sdate: this.state.curdate }).then((e) => {
+        //     this.setState({
+        //         loading: false,
+        //         data: e.data, visitas: e.visitas
+        //     })
+        // }).catch(e => {
+        //     this.setState({ loading: false })
+        //     console.error(e);
+        // })
     }
 
+    async loadDataAsync() {
+        this.setState({ loading: true })
+        try {
+
+            const zonas = await DataBase.tbzon.filtered("zdia == $0", new Date().getUTCDay());
+            let query = "";
+            zonas.map((zon, i) => {
+                if (i > 0) {
+                    query += " || "
+                }
+                query += ` idz == ${zon.idz} `
+            })
+            const clientes = await DataBase.tbcli.filtered(query);
+            // console.log("zonas", zonas);
+            console.log("cliente", clientes);
+            this.setState({
+                loading: false,
+                data: clientes,
+                visitas: []
+            })
+
+        } catch (error) {
+            this.setState({ loading: false })
+            console.error(error);
+        }
+    }
 
     render() {
+        console.log("asldalsda")
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
             <SView col={"xs-12"} center row padding={4} height={50}>
                 <SwitchRastreo height={18} width={80} />

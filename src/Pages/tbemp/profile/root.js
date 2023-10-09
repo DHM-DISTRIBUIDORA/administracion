@@ -10,6 +10,7 @@ import { Header, Usuario } from '../../../Components';
 import ZonasDelDia from './components/ZonasDelDia';
 import IniciarTransporte from './components/IniciarTransporte';
 import { SelectEntreFechas } from '../../../Components/Fechas';
+import DataBase from '../../../DataBase';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -30,34 +31,37 @@ class index extends DPA.profile {
 
 
     }
-    // componentDidMount() {
-    //     SSocket.sendPromise({
-    //         component: "dhm",
-    //         type: "perfilEmp",
-    //         idemp: this.pk + ""
-    //     }).then((e) => {
-    //         const obj = e.data[0]
-    //         this.setState({ ...obj })
-    //     }).catch(e => console.error(e))
-    // }
 
-    getDataVendedor({ fecha_inicio, fecha_fin }) {
-        const request = {
-            component: "dhm",
-            type: "perfilEmp",
-            fecha_inicio: fecha_inicio,
-            fecha_fin: fecha_fin,
-            idemp: this.idemp
-            // idemp: this.pk + ""
-        }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
-        this.setState({ loading: true })
-        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-            const obj = e.data[0]
-            console.log(obj)
-            this.setState({ ...obj })
-        }).catch(e => {
-            console.error(e)
+    async getDataVendedor({ fecha_inicio, fecha_fin }) {
+        // const request = {
+        //     component: "dhm",
+        //     type: "perfilEmp",
+        //     fecha_inicio: fecha_inicio,
+        //     fecha_fin: fecha_fin,
+        //     idemp: this.idemp
+        //     // idemp: this.pk + ""
+        // }
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin, loading: true })
+        // SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
+        //     const obj = e.data[0]
+        //     console.log(obj)
+        //     this.setState({ ...obj })
+        // }).catch(e => {
+        //     console.error(e)
+        // })
+        console.log(fecha_inicio, fecha_fin)
+        // DataBase.dm_cabfac.all().then(e => {
+        //     console.log(e);
+        // });
+        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, fecha_inicio+" 00:00:00.0", fecha_fin+" 00:00:00.0").then((e) => {
+            console.log("cantidad_pedidos", e)
+            this.setState({ cantidad_pedidos: e.length })
+        })
+        DataBase.tbzon.filtered(`idemp == ${this.idemp}`).then((e) => {
+            this.setState({ cantidad_zonas: e.length })
+        })
+        DataBase.tbcli.all().then((e) => {
+            this.setState({ cantidad_clientes: e.length })
         })
     }
 
@@ -157,7 +161,7 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Iclients',
                 color: '#1DA1F2',
-                onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+                onPress: () => SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk })
             })}
             {this.ItemCard({
                 label: "Zonas",
@@ -165,12 +169,13 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Izonas',
                 color: '#833AB4',
-                onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                onPress: () => SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }),
             })}
             {this.ItemCard({
                 label: "Pedidos",
                 cant: this.state.cantidad_pedidos,
-                monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                // monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                monto: "",
                 onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Ipedidos',
                 color: '#FF5A5F',
@@ -247,8 +252,8 @@ class index extends DPA.profile {
             <SHr h={30} />
             {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
-            {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
-            {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
+            {/* {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
+            {obj.idemt == 4 ? this.getCardsTransportista(obj) : null} */}
             <SHr />
         </SView>
     }
@@ -267,6 +272,7 @@ class index extends DPA.profile {
         if (!key) return <SText>Usuario no configurado.</SText>
         let users = Model.usuario.Action.getAll();
         if (!users) return <SLoad />
+        // console.log(users)
         let user = Object.values(users).find(o => o[key] == this.pk)
         return <SView col={"xs-12"}>
             <SText >Usuario:</SText>

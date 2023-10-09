@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import Model from '../Model';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import { connect } from 'react-redux';
+
 class index extends Component {
+
     getIconProfile() {
         return <SView col={"xs-12"} height>
             <SView col={"xs-12"} height style={{
@@ -82,8 +84,8 @@ class index extends Component {
             <SView col={"xs-12"} flex >
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
-                    {/* <MenuButtom label={"Ajustes"} url={"/ajustes"} icon={<SIcon name={"Ajustes"} />} /> */}
-                    <MenuButtom label={"Test"} url={"/test3"} icon={<SIcon name={"Profanity"} />} />
+                    <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Ajustes"} />} />
+                    {/* <MenuButtom label={"Notifications Manager"} url={"/notification_manager"} icon={<SIcon name={"Profanity"} />} /> */}
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
                     }} icon={<SIcon name={"Icon2"} />} /> */}
@@ -92,7 +94,7 @@ class index extends Component {
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
                 </MenuPages>
             </SView>
-            <SHr height={100} />
+            {/* <SHr height={100} /> */}
         </SPage>
     }
 }

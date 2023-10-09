@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage } from 'servisofts-component';
+import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage, SThread } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, Producto, TopBar, } from '../../Components';
 import Model from '../../Model';
 import { FlatList } from 'react-native';
 class index extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-        };
+    state = {
+        load: false
     }
 
+    componentDidMount() {
+        new SThread(10, "load").start(() => {
+            this.setState({ load: true })
+        })
+    }
     recibirItems = ({ tbprd }) => {
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, tbprd);
@@ -27,25 +30,28 @@ class index extends Component {
             buscador
             order={[{ key: "stock", order: "desc" }]}
             // filter={}
-            render={obj => <Producto.Card 
-            // render={obj => <Producto.Cantidad
+            render={obj => <Producto.Card
+                // render={obj => <Producto.Cantidad
                 col={"xs-12"}
                 width={0}
                 data={obj}
 
             />} />
     }
+    renderContainer() {
+        return <Container>
+            {this.renderProductos()}
+            <SHr height={20} />
+        </Container>
+    }
     render() {
         return <SPage navBar={this.navBar()} footer={this.footer()}>
-            <Container>
-                {this.renderProductos()}
-                <SHr height={20}/>
-            </Container>
+            {this.state.load ? this.renderContainer() : <SLoad />}
         </SPage >
     }
 
     navBar() {
-        return <TopBar  url={"/pedidos"} type='menu' />
+        return <TopBar url={"/pedidos"} type='menu' />
     }
 
     footer() {
