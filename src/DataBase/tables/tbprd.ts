@@ -1,25 +1,26 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
-import Model from '../Model';
+import Model from '../../Model';
 
 
-export default new class tbprdlin extends TableAbstract {
+export default new class tbprd extends TableAbstract {
 
     scheme: Scheme = {
         name: this.constructor.name,
-        primaryKey: "idlinea",
+        primaryKey: "idprd",
         properties: {
             sync_type: "string?",
-            "lincod": "string?",
-            "linicefv": "string?",
+            "idprd": "int?",
+            "prdcor": "string?",
+            "prdcod": "string?",
+            "prduxcdes": "string?",
             "idlinea": "int?",
-            "idctaing": "int?",
-            "idctacos": "int?",
-            "linniv": "int?",
-            "idctacosdoc": "int?",
-            "linice": "int?",
-            "linnom": "string?",
-            "idctaingdoc": "int?"
+            "prdcxu": "int?",
+            "prduxd": "int?",
+            "prdunid": "string?",
+            "prdpoficial": "int?",
+            "stock": "int?",
+            "prdnom": "string?",
         }
     }
 
@@ -27,11 +28,11 @@ export default new class tbprdlin extends TableAbstract {
         return new Promise((resolve, reject) => {
             SSocket.sendPromise2({
                 "version": "1.0",
-                "component": "tbprdlin",
-                "type": "getAll",
+                "component": "tbprd",
+                "type": "getAllSimple",
                 "estado": "cargando"
             }).then((e: any) => {
-                SDB.deleteAll(this.scheme.name).then(ex => {
+                SDB.deleteAll(this.scheme.name).then((ex) => {
                     SDB.insertArray(this.scheme.name, e.data).then(a => {
                         resolve(e);
                     })
@@ -48,7 +49,14 @@ export default new class tbprdlin extends TableAbstract {
         // Model.usuarioPage.Action._getReducer().data = data;
         Model.tbprd.Action._dispatch({
             "version": "1.0",
-            "component": "tbprdlin",
+            "component": "tbprd",
+            "type": "getAllSimple",
+            estado: "exito",
+            data: e,
+        })
+        Model.tbprd.Action._dispatch({
+            "version": "1.0",
+            "component": "tbprd",
             "type": "getAll",
             estado: "exito",
             data: e,

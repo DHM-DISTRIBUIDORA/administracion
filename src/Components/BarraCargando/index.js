@@ -11,6 +11,7 @@ export default class BarraCargando extends PureComponent {
         this.animValue = new Animated.Value(0);
     }
     componentDidMount() {
+        
         this.anim_rotar();
     }
 
@@ -43,7 +44,6 @@ export default class BarraCargando extends PureComponent {
                 onLayout={(event) => {
                     this.setState({ size: event.nativeEvent.layout.width })
                 }}
-
             >
                 {this.getBar()}
             </SView>

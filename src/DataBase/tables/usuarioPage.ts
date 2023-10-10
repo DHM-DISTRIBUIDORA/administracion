@@ -1,6 +1,6 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
-import Model from '../Model';
+import Model from '../../Model';
 
 
 export default new class usuarioPage extends TableAbstract {

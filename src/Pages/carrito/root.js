@@ -53,12 +53,14 @@ class index extends Component {
             try {
                 tbcat = await DataBase.tbcat.objectForPrimaryKey(tbcli.idcat)
             } catch (error) {
-
+                console.error(error)
             }
 
             if (!tbcat?.catnom) {
                 tbcat = { catnom: "Tienda de Barrio" };
             }
+
+            console.log("tbcat", tbcat)
             const tbemp = await DataBase.tbemp.objectForPrimaryKey(tbzon.idemp)
             console.log("tbemp", tbemp)
 
@@ -111,6 +113,7 @@ class index extends Component {
                 }
             })
         } catch (error) {
+            console.error(error);
             this.setState({ loading: false, error: error })
         }
 

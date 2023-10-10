@@ -95,7 +95,7 @@ export default SPage.combinePages("/", {
   ...notification,
   version_required,
   buscar_cliente_codigo,
-  storage,
+  ...storage,
   // test2,
   notification_manager,
   // test,

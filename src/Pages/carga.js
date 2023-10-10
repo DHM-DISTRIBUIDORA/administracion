@@ -16,7 +16,7 @@ const versionToNumber = (v) => {
     console.log(vn)
     return vn;
 }
-class index extends Component {
+export default class index extends Component {
     state = {}
 
     componentWillUnmount() {
@@ -37,6 +37,7 @@ class index extends Component {
             component: "enviroments",
             type: "getVersion",
         }).then(e => {
+            if (!e.data) return;
             const versionRequired = e.data
             if (versionToNumber(versionRequired) > versionToNumber(packageInfo.version)) {
                 SNavigation.replace("/version_required")
@@ -71,7 +72,3 @@ class index extends Component {
         );
     }
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(index);
