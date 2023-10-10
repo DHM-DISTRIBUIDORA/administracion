@@ -13,11 +13,11 @@ import BackgroundImage from './Components/BackgroundImage';
 import packageInfo from "../package.json"
 import BackgroundLocation from './BackgroundLocation';
 import Socket from './Socket';
-import DataBase from './DataBase';
 
-// Firebase.init();
-// BackgroundLocation();
-DataBase.init();
+import DataBaseContainer from './DataBase/DataBaseContainer';
+
+Firebase.init();
+BackgroundLocation();
 
 function App(): JSX.Element {
     // @ts-ignore
@@ -29,18 +29,20 @@ function App(): JSX.Element {
         inputs={Config.inputs}
         theme={{ themes: Config.theme, initialTheme: "default" }}
     >
-        <SNavigation
-            linking={{
-                prefixes: ["https://dhm.servisofts.com/app/", "http://dhm.servisofts.com/app/", 'dhm://app/'],
-                getInitialURL: () => {
-                    Firebase.getInitialURL();
-                }
-            }}
-            props={{ navBar: TopBar, title: 'DHM', pages: Pages }}
-        />
+        <DataBaseContainer>
+            <SNavigation
+                linking={{
+                    prefixes: ["https://dhm.servisofts.com/app/", "http://dhm.servisofts.com/app/", 'dhm://app/'],
+                    getInitialURL: () => {
+                        Firebase.getInitialURL();
+                    }
+                }}
+                props={{ navBar: TopBar, title: 'DHM', pages: Pages }}
+            />
+            <NavBar />
+            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
+        </DataBaseContainer>
         <Socket store={store} />
-        <NavBar />
-        <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
     </SComponentContainer>
     </Redux>
 }

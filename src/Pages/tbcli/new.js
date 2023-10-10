@@ -22,7 +22,6 @@ class index extends DPA.new {
     }
 
     $allowAccess() {
-        if (Model.usuario.Action.getUsuarioLog()?.idvendedor == this.pk) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" })
     }
     $inputs() {
@@ -77,7 +76,9 @@ class index extends DPA.new {
         }
 
         if (this.pk) data.cliidemp = this.pk;
+        
         data.cliest = 0;
+
         // console.log("bbbbbb");
         // console.log(data);
 
@@ -86,7 +87,8 @@ class index extends DPA.new {
             data: data,
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
-            this.$submitFile(resp.data.key);
+            console.log("asdasdasdad")
+            // this.$submitFile(resp.data.key);
             SNavigation.goBack();
         }).catch(e => {
             console.error(e);

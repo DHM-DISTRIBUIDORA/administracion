@@ -31,6 +31,7 @@ class index extends DPA.list {
     //     return data.empest != "1"
     // }
     $getData() {
+        console.log(Parent.model.Action.getAll())
         return Parent.model.Action.getAll();
     }
 

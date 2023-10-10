@@ -54,7 +54,7 @@ class index extends DPA.new {
             data: data,
             key_usuario: Model.usuario.Action.getKey()
         }).then((resp) => {
-            this.$submitFile(resp.data.key);
+            // this.$submitFile(resp.data.idcli);
             SNavigation.goBack();
         }).catch(e => {
             console.error(e);

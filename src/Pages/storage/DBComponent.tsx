@@ -1,11 +1,20 @@
 import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from "react";
-import { SHr, SIcon, SLoad, SPopup, SText, STheme, SView } from "servisofts-component"
+import { SHr, SIcon, SLoad, SNavigation, SPopup, SText, STheme, SView } from "servisofts-component"
 import SDB, { TableAbstract } from 'servisofts-db';
-import DataBase from ".";
+import DataBase from "../../DataBase";
 import SSocket from "servisofts-socket";
 import STable from "servisofts-table";
 import { Dimensions } from "react-native";
+let times: any = {};
 
+const time = (key: any) => {
+    console.log("start time " + key)
+    times[key] = new Date().getTime();
+}
+const timeEnd = (key: any) => {
+    console.log(key + ":", new Date().getTime() - times[key], "ms");
+    delete times[key]
+}
 
 const BTN = forwardRef(({ onPress, label }: any, ref) => {
     const [state, setState] = useState({ loading: false, color: STheme.color.text });
@@ -30,28 +39,7 @@ const BTN = forwardRef(({ onPress, label }: any, ref) => {
     </SView>
 });
 
-// SPopup.open({
-//     key: "table-aa",
-//     content: <SView col={"xs-12"} height={Dimensions.get("window").height*0.75} withoutFeedback>
-//         <STable
-//             loadData={new Promise((ok, error) => {
-//                 table.all().then(e => {
-//                     let allKeysSet = new Set();
-//                     e.forEach((obj: any) => {
-//                         Object.keys(obj).forEach(key => allKeysSet.add(key));
-//                     });
-//                     const allKeys = Array.from(allKeysSet);
-//                     // console.log(e) 
-//                     let arrData = e.map((obj: any) => allKeys.map((k: any) => obj[k]));
-//                     arrData.splice(0, 0, allKeys)
-//                     ok(arrData)
-//                 }).catch(e => {
-//                     console.error(e);
-//                 })
-//             })}
-//         />
-//     </SView>
-// })
+
 
 const subirCambios = async (table: TableAbstract) => {
     const _insert = await table.filtered("sync_type == 'insert'");
@@ -83,7 +71,7 @@ const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
     }))
 
     table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'").then(e => {
-        if (e.length > 0) setCantidad(e.length);
+        if (e.length > 0) setCantidad(e.length+"");
         else setCantidad("");
     })
     return <SView col={"xs-12"} padding={8} row center style={{
@@ -91,6 +79,7 @@ const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
         borderTopColor: "#666"
     }}>
         <SView flex onPress={() => {
+            SNavigation.navigate("/storage/table", { table: table.scheme.name })
         }}>
             <SText bold fontSize={20}>{table.scheme.name}</SText>
             <SText fontSize={10}>{cantidad}</SText>
@@ -101,10 +90,14 @@ const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
         }} />
         <SView width={8} />
         <BTN label={"Upload"} onPress={async () => {
+            time("subirCambios")
             await subirCambios(table)
-            await table.sync()
-            DataBase.init();
-            setCantidad("");
+            timeEnd("subirCambios")
+            // time("table.sync")
+            // await table.sync()
+            // timeEnd("table.sync")
+            // DataBase.init();
+            // setCantidad("");
             return true;
         }} />
     </SView>

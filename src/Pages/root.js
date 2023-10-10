@@ -4,6 +4,7 @@ import SSocket from "servisofts-socket"
 import Model from '../Model';
 import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import { connect } from 'react-redux';
+import DataBaseContainer from '../DataBase/DataBaseContainer';
 
 class index extends Component {
 
@@ -85,6 +86,9 @@ class index extends Component {
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                     <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Ajustes"} />} />
+                    <MenuButtom label={"syncronizar"}  onPress={()=>{
+                        DataBaseContainer.sync();
+                    }} icon={<SIcon name={"Reload"} />} />
                     {/* <MenuButtom label={"Notifications Manager"} url={"/notification_manager"} icon={<SIcon name={"Profanity"} />} /> */}
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083

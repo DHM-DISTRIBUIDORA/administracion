@@ -15,7 +15,7 @@ class index extends DPA.profile {
             // itemType:"",
             params: ["onSelect?"],
             item: item,
-            title:"Clientes del empleado",
+            title: "Clientes del empleado",
             excludes: []
         });
         this.state = {
@@ -62,23 +62,21 @@ class index extends DPA.profile {
             // flexDirection: "row",
             justifyContent: "center",
             alignItems: "center",
-            flex: 1,
             flexDirection: "row"
         }} onPress={() => {
             SNavigation.navigate(root, { pk: this.pk })
         }} >
-
-            <SView width={12} height={12}>
+            {!icon ? null : <><SView width={12} height={12}>
                 <SIcon name={icon} fill={STheme.color.text} />
             </SView>
-            <SView width={8} />
-            <SText color={STheme.color.text} width={(((label + "").length) * 10)}>{label}</SText>
+                <SView width={8} /></>}
+            <SText color={STheme.color.text} >{label}</SText>
         </TouchableOpacity>
     }
     $menu() {
         let menu = super.$menu();
+        menu.push({ children: this.optionItem({ key: "new", label: "+ Crear cliente", color: STheme.color.card, root: "/tbcli/new" }) })
         menu.push({ children: this.optionItem({ key: "mapa", label: "En Mapa", color: STheme.color.card, icon: 'Imap', root: "/tbemp/profile/tbclimapa" }) })
-        menu.push({ children: this.optionItem({ key: "new", label: "+ Crear cliente", color: STheme.color.card, icon: 'Imapp', root: "/tbcli/new" }) })
         return menu;
     }
 

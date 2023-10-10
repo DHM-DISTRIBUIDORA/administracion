@@ -14,7 +14,7 @@ export default class Action extends SAction {
                 ...this.model.info,
                 type: "editar",
                 estado: "exito",
-                data: update
+                data: extra?.data
             })
             resolve(update);
         })
@@ -24,7 +24,9 @@ export default class Action extends SAction {
         return new Promise(async (resolve, reject) => {
             if (!extra) return;
             extra.data.sync_type = "insert";
-            extra.data.key = SUuid();
+            const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
+
+            extra.data.idcli = (cantidad.length + 1) * -1;
             const data = await DataBase.tbcli.insert(extra?.data)
             this._dispatch({
                 ...this.model.info,

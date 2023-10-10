@@ -89,13 +89,14 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
     $allowEdit() {
+        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
     $allowDelete() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $allowAccess() {
-        if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {

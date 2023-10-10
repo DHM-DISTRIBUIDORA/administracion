@@ -44,10 +44,10 @@ export default new SModel<Action, Reducer>({
 
 
     },
-    image: {
-        api: "root",
-        name: "tbemp"
-    },
+    // image: {
+    //     api: "root",
+    //     name: "tbemp"
+    // },
     // image: {
     //     api: "root",
     //     name: "productos"
