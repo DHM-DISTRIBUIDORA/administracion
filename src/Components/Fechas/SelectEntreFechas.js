@@ -10,20 +10,15 @@ type SelectEntreFechasProps = {
     onChange: (data: DataType) => void
 } & DataType
 export default class SelectEntreFechas extends Component<SelectEntreFechasProps> {
-    static defaultProps: SelectEntreFechasProps = {
-        // fecha_inicio: new SDate().setDay(1).toString("yyyy-MM-dd"),
-        // fecha_fin: new SDate().setDay(1).addMonth(1).setDay(-1).toString("yyyy-MM-dd"),
-        fecha_inicio: new SDate().toString("yyyy-MM-dd"),
-        fecha_fin: new SDate().toString("yyyy-MM-dd"),
-    }
-
     constructor(props) {
         super(props);
 
         this.state = {
-            fecha_inicio: this.props.fecha_inicio ?? SelectEntreFechas.defaultProps.fecha_inicio,
-            fecha_fin: this.props.fecha_fin ?? SelectEntreFechas.defaultProps.fecha_fin,
+            fecha_inicio: this.props.fecha_inicio ?? new SDate().toString("yyyy-MM-dd"),
+            fecha_fin: this.props.fecha_fin ?? new SDate().toString("yyyy-MM-dd"),
         }
+
+       
         // this.state.fecha_inicio = SNavigation.getParam("fecha_inicio", SelectEntreFechas.defaultProps.fecha_inicio)
         // this.state.fecha_fin = SNavigation.getParam("fecha_inicio", SelectEntreFechas.defaultProps.fecha_fin)
     }

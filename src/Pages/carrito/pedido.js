@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SForm, SHr, SIcon, SList, SLoad, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SForm, SHr, SIcon, SList, SLoad, SNavigation, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom, Producto } from '../../Components';
 import Model from '../../Model';
@@ -12,6 +12,11 @@ class index extends Component {
         };
     }
 
+    componentDidMount() {
+        new SThread(10, "load").start(() => {
+            this.setState({ load: true })
+        })
+    }
     recibirItems = ({ tbprd }) => {
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, tbprd);
@@ -27,9 +32,9 @@ class index extends Component {
                 <SView col={"xs-12"} row center   >
                     <SView col={"xs-11"} border={'transparent'}  >
                         <SHr height={20} />
-                        <SText fontSize={22} color={STheme.color.white} bold center> NO SE ENCONTRÓ NINGÚN PEDIDO</SText>
+                        <SText fontSize={22} color={STheme.color.white} bold center> NO SE ENCONTRÓ NINGÚN PRODUCTO</SText>
                         <SHr height={20} />
-                        <SText fontSize={18} color={STheme.color.white} center   >Parece que aún no has hecho ningún pedido</SText>
+                        <SText fontSize={18} color={STheme.color.white} center   >Agrega productos a tu carrito de compras.</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-11"} center height={230} style={{ overflow: 'hidden' }}>
@@ -40,7 +45,7 @@ class index extends Component {
                     <SView col={"xs-10"} border={'transparent'} center>
                         <SHr height={20} />
                         <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
-                            SNavigation.navigate("/explorar")
+                            SNavigation.navigate("/public/explorar")
                         }} >COMPRAR</PButtom>
                     </SView>
                     <SHr height={30} />
@@ -55,6 +60,7 @@ class index extends Component {
         var dataMostrar = [];
         const productos = Model.carrito.Action.getState().productos;
         if (!productos) return <SLoad />
+        if (!this.state.load) return <SLoad />
         let total = 0;
         Object.keys(productos).map((key, index) => {
             total += productos[key].data.prdpoficial * productos[key].cantidad;
@@ -62,8 +68,8 @@ class index extends Component {
         if (Object.keys(productos).length === 0) return this.sinPedidos();
         return (
             <SView col={"xs-12"} flex center >
-                <SText>Pedidos</SText>
-                <SHr height={15} />
+                {/* <SText>Pedidos</SText> */}
+                {/* <SHr height={15} /> */}
                 <SList
                     initSpace={8}
                     flex
@@ -99,7 +105,7 @@ class index extends Component {
 
     render() {
         return <>
-            <SPage footer={this.footer()}  >
+            <SPage footer={this.footer()} title={"Carrito"} >
                 <Container flex  >
                     {this.getProductos()}
                 </Container>

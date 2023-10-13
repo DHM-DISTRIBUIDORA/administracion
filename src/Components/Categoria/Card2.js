@@ -19,9 +19,7 @@ class index extends Component<CategoriaCardPropsType> {
 
         return (
             <SView col={"xs-12"} style={{ backgroundColor: this.props.color, borderRadius: 15 }} center
-            onPress={() => {
-                SNavigation.navigate("/producto", { pk: idlinea })
-            }}
+            onPress={this.props.onPress}
         >
             <SHr />
             <SView col={"xs-12"} row center>

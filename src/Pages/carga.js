@@ -4,6 +4,8 @@ import { SHr, SIcon, SNavigation, SPage, STheme, SThread, SView } from 'servisof
 import Model from '../Model';
 import SSocket from 'servisofts-socket'
 import packageInfo from "../../package.json";
+import DataBase from '../DataBase';
+import DataBaseContainer from '../DataBase/DataBaseContainer';
 const versionToNumber = (v) => {
     const array = v.split("\.");
     const vl = 100;
@@ -24,6 +26,7 @@ export default class index extends Component {
     }
     componentDidMount() {
         this.run = true;
+        
         new SThread(2500, "carga_hilo", false).start(() => {
             if (!this.run) return;
             if (Model.usuario.Action.getKey()) {

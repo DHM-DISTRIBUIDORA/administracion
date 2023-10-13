@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SList, SLoad, SPage, SText, STheme, SView, SNavigation, SThread } from 'servisofts-component';
-import { BottomNavigator, Categoria, Container } from '../Components';
-import Model from '../Model';
+import { BottomNavigator, Categoria, Container } from '../../Components';
+import Model from '../../Model';
 class index extends Component {
 
     constructor(props) {
@@ -32,7 +32,9 @@ class index extends Component {
             filter={(a) => (a.lincod + "").startsWith(this.params.pk) && a.linniv == 2}
             order={[{ key: "linnom", order: "asc" }]}
             render={(obj) => {
-                return <Categoria.Card2 obj={obj} color={this.params.color} />
+                return <Categoria.Card2 obj={obj} color={this.params.color} onPress={() => {
+                    SNavigation.navigate("/public/producto", { pk: obj.idlinea })
+                }} />
             }}
         />
 
@@ -54,7 +56,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/explorar"} />
+        return <BottomNavigator url={"/public/explorar"} />
     }
 
 }

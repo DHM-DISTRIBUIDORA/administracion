@@ -24,7 +24,7 @@ export default new class usuarioPage extends TableAbstract {
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {
             let usrLog = Model.usuario.Action.getUsuarioLog();
-            if(!usrLog) return reject({
+            if(!usrLog?.key) return reject({
                 estado: "error",
                 error: "user not found"
             })

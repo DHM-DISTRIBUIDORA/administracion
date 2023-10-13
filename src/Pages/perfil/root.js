@@ -9,6 +9,7 @@ import { Parent } from "."
 import { AccentBar, Btn, PButtom } from '../../Components';
 import { MenuButtom } from 'servisofts-rn-roles_permisos';
 import DataBase from '../../DataBase';
+import DataBaseContainer from '../../DataBase/DataBaseContainer';
 // import usuario_dato from '../../Model/tapeke/usuario_dato';
 
 
@@ -291,6 +292,7 @@ class index extends Component {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
                         DataBase.clear();
+                        DataBaseContainer.sync();
                         SNavigation.reset("/");
                         // NavBar.close();
 

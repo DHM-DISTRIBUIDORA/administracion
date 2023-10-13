@@ -16,7 +16,11 @@ import Socket from './Socket';
 
 import DataBaseContainer from './DataBase/DataBaseContainer';
 
-Firebase.init();
+try{
+    Firebase.init();
+}catch(e){
+    console.log(e);
+}
 BackgroundLocation();
 
 function App(): JSX.Element {

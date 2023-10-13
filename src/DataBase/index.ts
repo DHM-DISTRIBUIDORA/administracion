@@ -9,12 +9,13 @@ import dm_cabfac from './tables/dm_cabfac'
 import tbcli from './tables/tbcli'
 import tbcat from "./tables/tbcat";
 import background_location from './tables/background_location'
-
+import sync_data from './tables/sync_data'
+import visita_vendedor from './tables/visita_vendedor'
 import { SThread } from 'servisofts-component'
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 3,
-    tables: [usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location]
+    version: 6,
+    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor]
 }
 
 export default {
@@ -35,6 +36,7 @@ export default {
     clear: () => {
         DB.tables.map(t => t.deleteAll())
     },
+    sync_data,
     usuarioPage,
     usuario,
     tbemp,
@@ -44,7 +46,8 @@ export default {
     dm_cabfac,
     tbcli,
     tbcat,
-    background_location
+    background_location,
+    visita_vendedor
 }
 
 

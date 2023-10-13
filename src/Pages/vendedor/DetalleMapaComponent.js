@@ -13,7 +13,7 @@ const Card = ({ label, value, backgroundColor, onPress }) => {
                 <SText fontSize={18} color={STheme.color.text}>{value}</SText>
             </SView>
             <SText center fontSize={10} color={STheme.color.text}>{label}</SText>
-            <SHr height={15}/>
+            <SHr height={15} />
         </SView>
     </SView>
 }
@@ -23,7 +23,7 @@ export default ({ state }) => {
     const visitas = state.visitas ?? {};
     const clientes_con_ubicacion = clientes.filter(a => !!a.clilat && !!a.clilon)
     const clientes_sin_ubicacion = clientes.filter(a => !a.clilat || !a.clilon)
-    const clientes_visitados = clientes.filter(a => !!visitas[a.idcli])
+    const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idcli == a.idcli))
 
 
     return <SView col={"xs-12"}
@@ -40,11 +40,11 @@ export default ({ state }) => {
             <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "AA"} onPress={() => {
                 SNavigation.navigate("/vendedor/list", { pk: state.idemp, ubicacion: "false" })
             }} />
-            <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`} 
-            onPress={()=>{
-                SNavigation.navigate("/vendedor/list", { pk: state.idemp})
-            }}
-            backgroundColor={STheme.color.primary + "AA"}
+            <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`}
+                onPress={() => {
+                    SNavigation.navigate("/vendedor/list", { pk: state.idemp })
+                }}
+                backgroundColor={STheme.color.primary + "AA"}
             />
         </SView>
     </SView>
