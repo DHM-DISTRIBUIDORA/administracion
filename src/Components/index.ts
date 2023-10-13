@@ -41,5 +41,6 @@ export {
     Usuario,
     Header,
     Btn,
-    Visitas
+    Visitas,
+    
 }

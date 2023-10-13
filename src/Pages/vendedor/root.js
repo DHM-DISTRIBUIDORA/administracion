@@ -44,13 +44,18 @@ export default class root extends Component {
                 }
                 query += ` idz == ${zon.idz} `
             })
-            const clientes = await DataBase.tbcli.filtered(query);
+            let clientes = []
+            if (query) {
+                clientes = await DataBase.tbcli.filtered(query);
+            }
+
+            const visitas = await DataBase.visita_vendedor.all();
             // console.log("zonas", zonas);
             console.log("cliente", clientes);
             this.setState({
                 loading: false,
                 data: clientes,
-                visitas: []
+                visitas: visitas
             })
 
         } catch (error) {

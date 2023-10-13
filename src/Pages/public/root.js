@@ -4,6 +4,7 @@ import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SL
 import { Banner, BottomNavigator, Container, Producto, TopBar, } from '../../Components';
 import Model from '../../Model';
 import { FlatList } from 'react-native';
+import DataBase from '../../DataBase';
 class index extends Component {
 
     state = {
@@ -14,6 +15,9 @@ class index extends Component {
         new SThread(10, "load").start(() => {
             this.setState({ load: true })
         })
+        DataBase.tbprd.all().then((e) => {
+            this.setState({ data: e })
+        })
     }
     recibirItems = ({ tbprd }) => {
         let productos = Model.carrito.Action.getState().productos;
@@ -22,7 +26,9 @@ class index extends Component {
         Model.carrito.Action.setState({ productos });
     };
     renderProductos() {
-        var productos = Model.tbprd.Action.getAllSimple();
+        let productos = this.state.data;
+        if (!this.state.load) return <SLoad />
+        // var productos = Model.tbprd.Action.getAllSimple();
         if (!productos) return <SLoad />
         return <SList
             data={productos}
@@ -46,7 +52,7 @@ class index extends Component {
     }
     render() {
         return <SPage navBar={this.navBar()} footer={this.footer()}>
-            {this.state.load ? this.renderContainer() : <SLoad />}
+            {this.renderContainer()}
         </SPage >
     }
 
@@ -59,8 +65,9 @@ class index extends Component {
     }
 
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(index);
+// const initStates = (state) => {
+//     return { state }
+// };
+// export default connect(initStates)(index);
+export default (index);
 

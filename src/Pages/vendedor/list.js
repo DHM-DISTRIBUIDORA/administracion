@@ -7,6 +7,7 @@ import MapaComponent from './MapaComponent';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
 import { Container, Popups } from '../../Components'
+import DataBase from '../../DataBase'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -18,19 +19,39 @@ export default class root extends Component {
             datas: SNavigation.getParam("datas"),
         }
     }
+
     componentDidMount() {
-        this.setState({ loading: true })
-        Model.tbcli.Action.getClientesDia({ idemp: this.state.idemp, sdate: this.state.curdate }).then((e) => {
-            this.setState({
-                loading: false,
-                data: e.data, visitas: e.visitas
-            })
-        }).catch(e => {
-            this.setState({ loading: false })
-            console.error(e);
-        })
+        this.loadDataAsync()
     }
 
+
+    async loadDataAsync() {
+        this.setState({ loading: true })
+        try {
+            const zonas = await DataBase.tbzon.filtered("zdia == $0", new Date().getUTCDay());
+            let query = "";
+            zonas.map((zon, i) => {
+                if (i > 0) {
+                    query += " || "
+                }
+                query += ` idz == ${zon.idz} `
+            })
+            let clientes = []
+            if (query) {
+                clientes = await DataBase.tbcli.filtered(query);
+            }
+            const visitas = await DataBase.visita_vendedor.all();
+            this.setState({
+                loading: false,
+                data: clientes,
+                visitas: visitas
+            })
+
+        } catch (error) {
+            this.setState({ loading: false })
+            console.error(error);
+        }
+    }
     alertSinCoordenadas() {
         return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
             <SView col={"xs-11"} height={40} />
@@ -53,7 +74,7 @@ export default class root extends Component {
         if (!this.state?.data) return <SLoad />;
         var clientes_data = this.state?.data
         var clientes_filter = [];
-        var visitas = this.state.visitas ?? {};
+        var visitas = this.state.visitas ?? [];
 
         clientes_filter = clientes_data;
         if (this.state?.ubicacion) {
@@ -63,7 +84,6 @@ export default class root extends Component {
         }
         if (this.state?.datas) {
             // clientes_filter = this.state?.datas;
-
             clientes_filter = this.state?.datas.map(item => ({
                 "idcli": item.id,
                 "clinom": item.clinom,
@@ -85,6 +105,7 @@ export default class root extends Component {
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
+                        const curvisita = visitas.find(a => a.idcli == vd.idcli);
                         return <>
                             <SView col={"xs-12"} row center
                                 style={{
@@ -101,7 +122,7 @@ export default class root extends Component {
                                         pk: vd.idcli + "",
                                         idemp: this.props?.state?.idemp,
                                         visitaType: "venta",
-                                        visita: visitas[vd.idcli],
+                                        visita: curvisita,
                                     })
                                 }}
                             >
@@ -109,7 +130,7 @@ export default class root extends Component {
                                     <SText fontSize={12}>{vd?.clinom}</SText>
                                 </SView>
                                 <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>
-                                    {this.state.visitas[vd.idcli] ?
+                                    {curvisita ?
                                         <SView center>
                                             <SIcon name='VisitSi' height={25} width={25} fill={STheme.color.success} />
                                             <SHr height={2} />

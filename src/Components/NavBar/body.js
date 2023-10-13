@@ -6,6 +6,7 @@ import Model from '../../Model';
 import packageInfo from "../../../package.json";
 import NavBar from '.';
 import DataBase from '../../DataBase';
+import DataBaseContainer from '../../DataBase/DataBaseContainer';
 
 
 export default class body extends React.Component {
@@ -205,6 +206,11 @@ export default class body extends React.Component {
                     {/* {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })} */}
                     {/* {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })} */}
                     {this.renderIcon({ label: "Politicas", icon: "IconTerminos", path: "/privacy" })}
+                    {this.renderIcon({
+                        label: "Storage", icon: "Reload", onPress: () => {
+                            DataBaseContainer.sync();
+                        }
+                    })}
 
                     {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })}
                     {/* {this.renderIcon({ label: "Soporte", icon: "Msuport", path: "/ayuda" })} */}

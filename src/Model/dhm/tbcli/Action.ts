@@ -1,4 +1,4 @@
-import { SStorage, SUuid } from "servisofts-component";
+import { SDate, SStorage, SUuid } from "servisofts-component";
 import { SAction } from "servisofts-model";
 import SSocket from 'servisofts-socket'
 import DataBase from "../../../DataBase";
@@ -9,6 +9,7 @@ export default class Action extends SAction {
         return new Promise(async (resolve, reject) => {
             if (!extra) return;
             extra.data.sync_type = "update";
+            extra.data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0")
             const update = await DataBase.tbcli.update(extra?.data)
             this._dispatch({
                 ...this.model.info,
@@ -24,6 +25,7 @@ export default class Action extends SAction {
         return new Promise(async (resolve, reject) => {
             if (!extra) return;
             extra.data.sync_type = "insert";
+            extra.data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0")
             const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
 
             extra.data.idcli = (cantidad.length + 1) * -1;

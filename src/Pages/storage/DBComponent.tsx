@@ -5,6 +5,7 @@ import DataBase from "../../DataBase";
 import SSocket from "servisofts-socket";
 import STable from "servisofts-table";
 import { Dimensions } from "react-native";
+import DataBaseContainer from "../../DataBase/DataBaseContainer";
 let times: any = {};
 
 const time = (key: any) => {
@@ -41,26 +42,15 @@ const BTN = forwardRef(({ onPress, label }: any, ref) => {
 
 
 
-const subirCambios = async (table: TableAbstract) => {
-    const _insert = await table.filtered("sync_type == 'insert'");
-    const _update = await table.filtered("sync_type == 'update'");
-    const _delete = await table.filtered("sync_type == 'delete'");
 
-    const respuesta = await SSocket.sendPromise({
-        component: table.scheme.name,
-        type: "uploadChanges",
-        insert: _insert,
-        update: _update,
-        delete: _delete,
-    }, 1000 * 60 * 5)
-
-    return true;
-}
 const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
     const syncRef = useRef<any>();
     const [cantidad, setCantidad] = useState("");
     const { table } = props;
 
+    useEffect(() => {
+        loadChanges()
+    }, [])
     const sync = async () => {
         await syncRef.current.handleOnPress();
         return true;
@@ -70,10 +60,14 @@ const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
         sync: sync
     }))
 
-    table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'").then(e => {
-        if (e.length > 0) setCantidad(e.length+"");
-        else setCantidad("");
-    })
+    const loadChanges = async () => {
+        table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'").then(e => {
+            if (e.length > 0) setCantidad(e.length + "");
+            else setCantidad("");
+        })
+    }
+
+
     return <SView col={"xs-12"} padding={8} row center style={{
         borderTopWidth: 1,
         borderTopColor: "#666"
@@ -85,19 +79,8 @@ const TableItem = forwardRef((props: { table: TableAbstract }, ref) => {
             <SText fontSize={10}>{cantidad}</SText>
         </SView>
         <BTN ref={syncRef} label={"sync"} onPress={async () => {
-            await table.sync()
-            return true;
-        }} />
-        <SView width={8} />
-        <BTN label={"Upload"} onPress={async () => {
-            time("subirCambios")
-            await subirCambios(table)
-            timeEnd("subirCambios")
-            // time("table.sync")
-            // await table.sync()
-            // timeEnd("table.sync")
-            // DataBase.init();
-            // setCantidad("");
+            await DataBaseContainer.syncTable(table.scheme.name)
+            loadChanges();
             return true;
         }} />
     </SView>

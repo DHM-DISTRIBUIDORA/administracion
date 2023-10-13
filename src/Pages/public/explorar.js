@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SList, SList2, SLoad, SNavigation, SPage, SText, STheme, SThread, SView } from 'servisofts-component';
-import { BottomNavigator, Categoria, Container } from '../Components';
-import Model from '../Model';
+import { BottomNavigator, Categoria, Container } from '../../Components';
+import Model from '../../Model';
 class index extends Component {
 
     state = {
@@ -35,7 +35,9 @@ class index extends Component {
                 } else {
                     contador = 1;
                 }
-                return <Categoria.Card obj={obj} color={color} indice={contador} />
+                return <Categoria.Card obj={obj} color={color} indice={contador} onPress={() => {
+                    SNavigation.navigate("/public/categoria", { pk: obj.lincod, color: color })
+                }} />
             }}
         />
     }
@@ -56,7 +58,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/explorar"} />
+        return <BottomNavigator url={"/public/explorar"} />
     }
 
 }

@@ -32,6 +32,21 @@ class index extends DPA.profile {
 
     }
 
+    componentDidMount() {
+        console.log("nSASA DAKJS DASD JASD");
+    }
+    // componentDidMount() {
+    //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
+    //         // Tu código aquí será ejecutado cada vez que la pantalla esté enfocada
+            
+    //         // ...
+    //     });
+    // }
+    // componentWillUnmount() {
+    //     this._unsubscribe();
+    // }
+
+
     async getDataVendedor({ fecha_inicio, fecha_fin }) {
         // const request = {
         //     component: "dhm",
@@ -50,19 +65,28 @@ class index extends DPA.profile {
         //     console.error(e)
         // })
         console.log(fecha_inicio, fecha_fin)
-        // DataBase.dm_cabfac.all().then(e => {
-        //     console.log(e);
-        // });
-        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, fecha_inicio+" 00:00:00.0", fecha_fin+" 00:00:00.0").then((e) => {
-            console.log("cantidad_pedidos", e)
+        DataBase.dm_cabfac.all().then(e => {
+            console.log(e.length);
+        });
+        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0").then((e) => {
             this.setState({ cantidad_pedidos: e.length })
         })
         DataBase.tbzon.filtered(`idemp == ${this.idemp}`).then((e) => {
             this.setState({ cantidad_zonas: e.length })
         })
-        DataBase.tbcli.all().then((e) => {
+        DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`).then((e) => {
             this.setState({ cantidad_clientes: e.length })
         })
+
+        // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+        // let query = "";
+        // zonas.map((z, i) => {
+        //     if (i > 0) query += " || "
+        //     query += `idz == ${z.idz}`
+        // })
+        // DataBase.tbcli.filtered(query).then((e) => {
+        //     this.setState({ cantidad_clientes: e.length })
+        // })
     }
 
     getDataTransportista({ fecha_inicio, fecha_fin }) {

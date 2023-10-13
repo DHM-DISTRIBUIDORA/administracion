@@ -3,12 +3,13 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
 import Model from '../../../Model';
 import item from '../item';
-import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath, SMarker, SPopup } from 'servisofts-component';
+import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath, SMarker, SPopup, SUuid } from 'servisofts-component';
 import SSocket from "servisofts-socket"
 import { Btn, Header, PButtom, Visitas } from '../../../Components';
 import SCharts from 'servisofts-charts';
 import SMapView from "servisofts-component/Component/SMapView";
 import { SelectEntreFechas } from '../../../Components/Fechas';
+import DataBase from '../../../DataBase';
 
 
 class index extends DPA.profile {
@@ -61,6 +62,26 @@ class index extends DPA.profile {
 
     visitaRegistro({ descripcion, tipo, monto }) {
         this.setState({ loading: true })
+        const data = {
+            sync_type: "insert",
+            key: SUuid(),
+            key_usuario: Model.usuario.Action.getKey(),
+            idemp: Model.usuario.Action.getUsuarioLog()?.idvendedor,
+            idcli: this.pk,
+            descripcion: descripcion,
+            tipo: tipo,
+            monto: monto,
+            fecha: new SDate().toString("yyyy-MM-dd"),
+        }
+        DataBase.visita_vendedor.insert(data).then(e => {
+            this.setState({ loading: false })
+            SNavigation.goBack();
+
+        }).catch(e => {
+            console.error(e)
+            this.setState({ loading: false })
+        })
+        return;
         SSocket.sendPromise({
             component: this.visitaType == "transporte" ? "visita_transportista" : "visita_vendedor",
             type: "registro",
@@ -289,7 +310,7 @@ class index extends DPA.profile {
                             <SText>{producto.prdnom}</SText>
                             <SText>{itm.vdcan}  x   Bs. {SMath.formatMoney(itm.vdpre)}</SText>
                             <SText col={"xs-12"} style={{
-                                textAlign:"right"
+                                textAlign: "right"
                             }} bold>Bs. {SMath.formatMoney(itm.vdcan * itm.vdpre)}</SText>
                         </SView>
 
@@ -347,6 +368,7 @@ class index extends DPA.profile {
 
             <Btn col={"xs-11"} onPress={() => {
                 SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
+                //  Model.carrito.Action.removeAll()
                 SNavigation.navigate("/public", { idcli: obj.idcli })
             }}>REALIZAR PEDIDO</Btn>
             <SHr h={16} />

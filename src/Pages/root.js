@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
 import SSocket from "servisofts-socket"
 import Model from '../Model';
-import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SNotification, SDate } from 'servisofts-component';
 import { connect } from 'react-redux';
 import DataBaseContainer from '../DataBase/DataBaseContainer';
+import DataBase from '../DataBase';
+// import { SNotification } from '../Components';
 
 class index extends Component {
 
@@ -62,13 +64,20 @@ class index extends Component {
             return <SLoad />
         }
         const user = Model.usuario.Action.getUsuarioLog();
-        return <SPage preventBack hidden onRefresh={(resolve) => {
+        return <SPage preventBack hidden onRefresh={async (resolve) => {
             Model.usuario.Action.syncUserLog();
-            Model.usuarioPage.Action.CLEAR();
+            // Model.usuarioPage.Action.CLEAR();
+            try {
+                await DataBase.usuarioPage.sync();
+                await DataBase.usuarioPage.loadToReducer()
+            } catch (error) {
+                console.error(error)
+            }
+
             if (resolve) resolve();
         }}  >
             <SHr height={10} />
-            {this.datosUser()}
+            {/* {this.datosUser()} */}
             <SHr height={8} />
             <SView col={"xs-12"} center>
                 {/* <SText center fontSize={18}>BIENVENIDO AL SISTEMA ADMINISTRATIVO</SText> */}
@@ -86,9 +95,16 @@ class index extends Component {
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                     <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Ajustes"} />} />
-                    <MenuButtom label={"syncronizar"}  onPress={()=>{
+                    <MenuButtom label={"syncronizar"} onPress={() => {
                         DataBaseContainer.sync();
-                    }} icon={<SIcon name={"Reload"} />} />
+                    }} icon={<SIcon name={"Reload"} fill={STheme.color.text} />} />
+                    {/* <MenuButtom label={"Notificate"} onPress={() => {
+                        SNotification.send({
+                            title: "Notificacion de prueba",
+                            body: new SDate().toString("yyyy-MM-dd hh:mm:ss"),
+                            image: "http://192.168.2.1:30049/usuario/7929777a-8cea-4c34-aec8-a22bb7439fac"
+                        })
+                    }} icon={<SIcon name={"Profanity"} />} /> */}
                     {/* <MenuButtom label={"Notifications Manager"} url={"/notification_manager"} icon={<SIcon name={"Profanity"} />} /> */}
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083

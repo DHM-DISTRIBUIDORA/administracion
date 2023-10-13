@@ -66,11 +66,11 @@ export default class index extends Component<ProductoCardPropsType> {
     // }
     render() {
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
-        const productos = Model.carrito.Action.getState().productos ?? {};
-        let incar = productos[idprd];
-        return <SView col={"xs-12"} card center padding={8}>
+        // const productos = Model.carrito.Action.getState().productos ?? {};
+        // let incar = productos[idprd];
+        return <SView col={"xs-12"} card center padding={8} height={150}>
 
-            <SView flex row col={"xs-12"}>
+            <SView flex row col={"xs-12"} height={80}>
                 <SView flex >
                     <SText font={'AcherusGrotesque-Bold'} fontSize={16} bold>{prdnom}</SText>
                     {this.renderDetalle()}
@@ -100,17 +100,22 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView flex height style={{ justifyContent: "flex-end" }}>
                     <SText fontSize={16}>Bs.{SMath.formatMoney(prdpoficial, 2)}</SText>
                 </SView>
-                <Cantidad defaultValue={incar?.cantidad ?? 0}
+                <Cantidad
+                    key={this.props.data.idprd}
+                    data={this.props.data}
+                    // defaultValue={0}
                     limit={this.props?.data?.stock ?? 0}
-                    onChange={(cant) => {
+                // onChange={(cant) => {
 
-                        Object.assign(productos, { [this.props?.data?.idprd]: { cantidad: cant, data: this.props?.data } });
-                        // console.log(productos);
-                        if (cant <= 0) {
-                            delete productos[this.props?.data?.idprd]
-                        }
-                        Model.carrito.Action.setState({ productos });
-                    }} />
+                //     // Object.assign(productos, { [this.props?.data?.idprd]: { cantidad: cant, data: this.props?.data } });
+                //     // console.log(productos);
+                //     Model.carrito.Action.setItem(this.props?.data?.idprd, { cantidad: cant, data: this.props?.data })
+                //     // if (cant <= 0) {
+                //     //     delete productos[this.props?.data?.idprd]
+                //     // }
+                //     // Model.carrito.Action.setState({ productos });
+                // }}
+                />
 
             </SView>
 
@@ -119,3 +124,5 @@ export default class index extends Component<ProductoCardPropsType> {
         </SView>
     }
 }
+
+// con

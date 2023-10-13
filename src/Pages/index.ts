@@ -4,13 +4,11 @@ import root from './root';
 import carga from "./carga"
 import login from "./login";
 import registro from './registro';
-import explorar from './explorar';
 import favoritos from './favoritos';
 import pedidos_clientes from './pedidos_clientes';
 import producto from './producto';
 import sql from './sql/index';
 import privacidad from './privacidad';
-import categoria from './categoria';
 import clientes from './clientes';
 import perfil from './perfil';
 
@@ -60,14 +58,12 @@ export default SPage.combinePages("/", {
   wiki,
   ...login,
   ...registro,
-  "explorar": explorar,
   "favoritos": favoritos,
   ...pedidos_clientes,
   sql,
   "privacidad": privacidad,
   "privacy": privacidad,
   ...producto,
-  "categoria": categoria,
   ...dm_cabfac,
   ...clientes,
   ...usuario,

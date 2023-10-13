@@ -70,7 +70,7 @@ export default class index extends Component {
 					}}>
 					<SView col={'xs-12'} row height style={{ zIndex: 100 }}>
 						{this.getItem({ key: "root", title: 'Inicio', icon: 'Inicio', url: '/public' })}
-						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/explorar' })}
+						{this.getItem({ key: "explorar", title: 'Explorar', icon: 'Explorar', url: '/public/explorar' })}
 						{this.getLogin()}
 						{this.getFavorito()}
 						{this.getPedido()}
@@ -78,7 +78,7 @@ export default class index extends Component {
 					</SView>
 					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{ zIndex: 99 }} />
 				</SView >
-				{(this.props.carrito != "no") ? <Carrito.Float bottom={100} /> : null}
+				{(this.props.carrito != "no") ? <Carrito.Float bottom={68} /> : null}
 			</>
 			// </SView>
 		);

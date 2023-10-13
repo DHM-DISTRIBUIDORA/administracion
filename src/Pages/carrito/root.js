@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SDate, SForm, SHr, SIcon, SInput, SLoad, SNavigation, SPage, SPopup, SStorage, SText, STheme, SUuid, SView } from 'servisofts-component';
+import { SButtom, SDate, SForm, SHr, SIcon, SInput, SLoad, SNavigation, SPage, SPopup, SStorage, SText, STheme, SThread, SUuid, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
@@ -18,7 +18,9 @@ class index extends Component {
         }
 
     }
+
     componentDidMount() {
+
         const cliente = Model.tbcli.Action.getCliente();
         if (cliente) {
             this.setState({
@@ -39,6 +41,10 @@ class index extends Component {
         })
     }
 
+
+    loadData() {
+
+    }
     handlePressPedido = async (tbcli) => {
         if (this.state.loading) return;
         // console.error(client)
@@ -104,12 +110,16 @@ class index extends Component {
             }
 
             await DataBase.dm_cabfac.insert(dm_cabfac);
+            Model.carrito.Action.removeAll()
             this.setState({ loading: false, error: "" })
-            // Model.carrito.Action.removeAll()
+
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: idven,
                 onBack: () => {
-                    SNavigation.replace("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor })
+                    SNavigation.reset("/root")
+                    new SThread(500, "sadad").start(() => {
+                        SNavigation.navigate("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor, reload: new Date().getTime() })
+                    })
                 }
             })
         } catch (error) {

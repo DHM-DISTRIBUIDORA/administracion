@@ -37,7 +37,10 @@ export default class MapaComponent extends Component {
 
         const renderCluster = (data, onPressCluster, keys) => {
             let onPress = onPressCluster;
-            const visita = this.props.state?.visitas[data.id];
+            let visita;
+            if (this.props.state?.visitas) {
+                visita = this.props.state?.visitas.find(a => a.idcli == data.id);
+            }
             if (data.count == 1) {
                 onPress = this.handlePressClient.bind(this, data, visita)
             }
@@ -75,6 +78,7 @@ export default class MapaComponent extends Component {
                     console.log(state.idemp)
                     SNavigation.navigate("/vendedor/list", { pk: state.idemp, datas: markers })
                 }}
+                showsUserLocation={true}
                 renderMarker={renderCluster}
                 renderCluster={renderCluster}
                 data={data}
