@@ -7,7 +7,7 @@ import { SDate } from 'servisofts-component';
 export default new class visita_vendedor extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "visita_vendedor",
         primaryKey: "key",
         properties: {
             sync_type: "string?",

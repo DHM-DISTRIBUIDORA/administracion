@@ -8,7 +8,7 @@ import { SDate } from 'servisofts-component';
 export default new class tbcli extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "tbcli",
         primaryKey: "idcli",
         properties: {
             sync_type: "string?",

@@ -6,7 +6,7 @@ import Model from '../../Model';
 export default new class tbprdlin extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "tbprdlin",
         primaryKey: "idlinea",
         properties: {
             sync_type: "string?",

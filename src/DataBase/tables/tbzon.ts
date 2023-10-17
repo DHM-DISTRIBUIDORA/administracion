@@ -6,7 +6,7 @@ import Model from '../../Model';
 export default new class tbzon extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "tbzon",
         primaryKey: "idz",
         properties: {
             sync_type: "string?",

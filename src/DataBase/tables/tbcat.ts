@@ -6,7 +6,7 @@ import Model from '../../Model';
 export default new class tbcat extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "tbcat",
         primaryKey: "idcat",
         properties: {
             sync_type: "string?",
