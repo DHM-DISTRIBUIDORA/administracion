@@ -111,7 +111,8 @@ yarn-error.log*
 /src/Firebase/index.js
 /src/Config/socket.ts
 
-
+/.ssh/id_rsa
+/.ssh/config
 
 
 # END
