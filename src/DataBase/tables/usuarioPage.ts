@@ -6,7 +6,7 @@ import Model from '../../Model';
 export default new class usuarioPage extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "usuarioPage",
         primaryKey: "key",
         properties: {
             sync_type: "string?",

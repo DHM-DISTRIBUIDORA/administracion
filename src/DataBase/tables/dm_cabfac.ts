@@ -6,7 +6,7 @@ import Model from '../../Model';
 export default new class dm_cabfac extends TableAbstract {
 
     scheme: Scheme = {
-        name: this.constructor.name,
+        name: "background_location",
         primaryKey: "idven",
         properties: {
             sync_type: "string?",
