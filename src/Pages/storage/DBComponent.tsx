@@ -6,6 +6,7 @@ import SSocket from "servisofts-socket";
 import STable from "servisofts-table";
 import { Dimensions } from "react-native";
 import DataBaseContainer from "../../DataBase/DataBaseContainer";
+import { Data } from "servisofts-background-location";
 let times: any = {};
 
 const time = (key: any) => {
@@ -97,11 +98,12 @@ export const DBComponent = () => {
 
     return <SView col={"xs-12"} center >
         <BTN ref={syncRef} label={"Sincronizar todos"} onPress={async () => {
-            for (let i = 0; i < inputRefs.current.length; i++) {
-                const re: any = inputRefs.current[i]
-                await re.sync();
-            }
-            DataBase.init();
+            // for (let i = 0; i < inputRefs.current.length; i++) {
+            //     const re: any = inputRefs.current[i]
+            //     await re.sync();
+            // }
+            // DataBase.init();
+            await DataBaseContainer.sync();
             // inputRefs.current.map((ref: any) => ref.sync())
         }} />
         <SHr h={50} />

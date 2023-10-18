@@ -14,14 +14,57 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
     }
     private static INSTANCE: any;
 
-    static sync = () => {
+    static sync = async () => {
+        console.log("Entro al sync")
         if (!DataBaseContainer.INSTANCE) return;
-        DB.tables.map((t) => this.syncTable(t.scheme.name))
+        try {
+            await DataBaseContainer.testConnection();
+        } catch (error) {
+            console.error(error);
+            return;
+        }
+        console.log("Entro al sync paso")
+
+        for (let i = 0; i < DB.tables.length; i++) {
+            const t = DB.tables[i];
+            try {
+                await DataBaseContainer.syncTable(t.scheme.name)
+            } catch (error) {
+                console.error(error);
+            }
+        }
     }
     static syncTable = async (name: string) => {
         if (!DataBaseContainer.INSTANCE) return;
         return await DataBaseContainer.INSTANCE.syncTable(name);
+    }
+    static testConnection = async () => {
+        const notify = await SNotification.send({
+            title: "Base de datos",
+            body: `Verificando conexion a internet`,
+            color: STheme.color.warning,
+            type: "loading"
+        })
+        try {
 
+            const data = await SSocket.sendPromise2({
+                component: "enviroments",
+                type: "getVersion"
+            }, 5000)
+            if (!data) throw "error"
+            console.log(data);
+            notify.close();
+            return data;
+        } catch (e) {
+            notify.close();
+            await SNotification.send({
+                title: "Base de datos",
+                body: `Sin conexion con el servidor. Verifique su internet.`,
+                color: STheme.color.danger,
+                time: 5000
+            })
+            throw "error"
+        }
     }
 
     isRun;
@@ -34,14 +77,15 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
 
     hilo() {
         if (!this.isRun) return;
-        new SThread(10000, "hilo_verificador", false).start(() => {
+        new SThread(10000, "hilo_verificador", false).start(async () => {
             if (!this.isRun) return;
-            SNotification.send({
-                title: "Base de datos",
-                body: `Verificando cambios...`,
-                color: STheme.color.warning,
-                time: 5000
-            })
+
+            // SNotification.send({
+            //     title: "Base de datos",
+            //     body: `Verificando cambios...`,
+            //     color: STheme.color.warning,
+            //     time: 5000
+            // })
             this.hilo();
         })
     }
@@ -69,7 +113,9 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
         </SView>
         return <>
             {this.props.children}
-            <AlertBar ref={ref => DataBaseContainer.INSTANCE = ref} />
+            <AlertBar ref={ref => {
+                DataBaseContainer.INSTANCE = ref;
+            }} />
         </>
     }
 }
@@ -97,7 +143,7 @@ const AlertBar = forwardRef((props, ref) => {
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        DB.tables.map((a) => syncTable(a.scheme.name))
+        // DB.tables.map((a) => syncTable(a.scheme.name))
         // syncTable();
     }, [])
 
@@ -105,37 +151,14 @@ const AlertBar = forwardRef((props, ref) => {
         syncTable: syncTable
     }))
     const syncTable = async (table_name: string) => {
-
-        if (loading) return;
-        setLoading(true);
+        // if (loading) return;
+        // setLoading(true);
         const notification = await SNotification.send({
             title: "Base de datos - " + table_name,
             body: `Sincronizando datos.`,
             color: STheme.color.warning,
             type: "loading",
         })
-
-
-        try {
-            const data = await SSocket.sendPromise2({
-                component: "enviroments",
-                type: "getVersion"
-            }, 5000)
-            if (!data) throw "error"
-        } catch (e) {
-            await SNotification.send({
-                title: "Base de datos",
-                body: `Sin conexion con el servidor. Verifique su internet.`,
-                color: STheme.color.danger,
-                time: 5000
-            })
-            setLoading(false);
-            SNotification.remove(notification.key ?? "")
-            // notification.close();
-            return;
-        }
-
-
 
         let totalChanges = 0;
         let syncChanges = 0;
@@ -168,7 +191,7 @@ const AlertBar = forwardRef((props, ref) => {
                 color: STheme.color.danger,
                 time: 5000
             })
-            setLoading(false);
+            // setLoading(false);
             console.error(t.scheme.name, error)
         }
         // }
@@ -184,7 +207,7 @@ const AlertBar = forwardRef((props, ref) => {
         }
 
         setMessage("");
-        setLoading(false);
+        // setLoading(false);
     }
     if (!message) return null
     return <SView style={{
