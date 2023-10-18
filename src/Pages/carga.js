@@ -26,7 +26,7 @@ export default class index extends Component {
     }
     componentDidMount() {
         this.run = true;
-        
+
         new SThread(2500, "carga_hilo", false).start(() => {
             if (!this.run) return;
             if (Model.usuario.Action.getKey()) {
@@ -44,10 +44,14 @@ export default class index extends Component {
             const versionRequired = e.data
             if (versionToNumber(versionRequired) > versionToNumber(packageInfo.version)) {
                 SNavigation.replace("/version_required")
+                return;
             }
+            DataBaseContainer.sync();
+
         }).catch(e => {
             console.error(e)
         })
+
     }
 
     renderFooter() {

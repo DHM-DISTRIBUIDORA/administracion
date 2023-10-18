@@ -51,7 +51,12 @@ class index extends Component {
         </Container>
     }
     render() {
-        return <SPage navBar={this.navBar()} footer={this.footer()}>
+        return <SPage navBar={this.navBar()} footer={this.footer()}
+            onRefresh={e => {
+                this.componentDidMount();
+                if (e) e()
+            }}
+        >
             {this.renderContainer()}
         </SPage >
     }
