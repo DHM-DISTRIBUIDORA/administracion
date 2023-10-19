@@ -46,7 +46,7 @@ export default class index extends Component {
                 SNavigation.replace("/version_required")
                 return;
             }
-            DataBaseContainer.sync();
+            // DataBaseContainer.sync();
 
         }).catch(e => {
             console.error(e)
