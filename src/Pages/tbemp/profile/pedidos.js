@@ -67,6 +67,8 @@ class pedidos extends Component {
     }
     render() {
         if (!this.state.data) return <SLoad />
+        console.log("DATA:")
+        console.log(this.state.data)
         return (
             <SPage title={'Pedidos'} >
                 <Container >
