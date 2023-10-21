@@ -38,20 +38,24 @@ class pedidos extends Component {
             total += a.vdpre * a.vdcan
             cantidadProductos += a.vdcan;
         })
-        return <SView col={"xs-12"} card padding={8} onPress={() => {
+        return <SView col={"xs-12"} card padding={4} onPress={() => {
             SNavigation.navigate("/dm_cabfac/recibo", { pk: obj.idven })
         }} row>
             <SView col={"xs-12"} row>
-                <SText>{obj.idven}</SText>
+                <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.idven}</SText>
                 <SView flex />
-                <SText color={STheme.color.gray}>{(obj.vfec + "").substring(0, 10)}{(obj.vhora + "").substring(10, 16)}</SText>
+                <SText fontSize={10} color={STheme.color.gray}>{(obj.vfec + "").substring(0, 10)}{(obj.vhora + "").substring(10, 16)}</SText>
             </SView>
-            <SView col={"xs-12"} row>
-                <SView col={"xs-11"} flex row>
-                    <SText>{obj.clicod}  - {obj.nombrecliente}</SText>
-                    <SText>{obj.razonsocial}</SText>
-                    <SText bold># {cantidadProductos}</SText>
-                    <SText bold>Bs. {SMath.formatMoney(total)}</SText>
+            <SHr />
+            <SView col={"xs-12"} center row>
+                <SView flex row>
+                    <SText bold>{obj.clicod}  - {obj.nombrecliente}</SText>
+                    <SText fontSize={12}>{obj.vobs}</SText>
+                </SView>
+                <SView width={80} style={{
+                    alignItems: "flex-end"
+                }}>
+                    <SText bold>Bs.{SMath.formatMoney(total)}</SText>
                 </SView>
 
             </SView>
@@ -75,7 +79,7 @@ class pedidos extends Component {
 
                     <SHr height={20} />
                     <SList
-                        limit={20}
+                        limit={15}
                         data={this.state.data}
                         render={this.component.bind(this)}
                         // order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}

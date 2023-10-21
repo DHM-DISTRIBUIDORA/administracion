@@ -87,6 +87,8 @@ export default class root extends Component {
             clientes_filter = this.state?.datas.map(item => ({
                 "idcli": item.id,
                 "clinom": item.clinom,
+                "clidir": item.clidir,
+                "clicod": item.clicod,
                 "clilat": item.location.latitude,
                 "clilon": item.location.longitude
             }));
@@ -108,10 +110,11 @@ export default class root extends Component {
                         const curvisita = visitas.find(a => a.idcli == vd.idcli);
                         return <>
                             <SView col={"xs-12"} row center
+                                card
                                 style={{
-                                    padding: 12,
-                                    borderWidth: 1,
-                                    borderColor: STheme.color.gray,
+                                    padding: 8,
+                                    // borderWidth: 1,
+                                    // borderColor: STheme.color.gray,
                                     borderRadius: 4
                                 }}
                                 onPress={() => {
@@ -127,7 +130,8 @@ export default class root extends Component {
                                 }}
                             >
                                 <SView col={"xs-9"} >
-                                    <SText fontSize={12}>{vd?.clinom}</SText>
+                                    <SText fontSize={14} bold>{vd?.clicod} - {vd?.clinom}</SText>
+                                    <SText fontSize={12}>{vd?.clidir}</SText>
                                 </SView>
                                 <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>
                                     {curvisita ?
@@ -148,7 +152,6 @@ export default class root extends Component {
                         </>
                     }}
                 />
-                <SHr height={30} />
             </Container>
             <SLoad type='window' hidden={!this.state.loading} />
         </SPage>
