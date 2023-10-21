@@ -201,8 +201,19 @@ class index extends DPA.profile {
                 // monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
                 monto: "",
                 onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                // onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Ipedidos',
                 color: '#FF5A5F',
+            })}
+            {this.ItemCard({
+                label: "Pedidos",
+                cant: "Categorías",
+                // monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                monto: "",
+                // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                icon: 'Icategoria',
+                color: '#61AD02',
             })}
             {this.ItemCard({
                 label: "Ventas",

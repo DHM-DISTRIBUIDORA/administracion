@@ -73,7 +73,7 @@ class index extends Component {
             const productos = Model.carrito.Action.getState().productos;
             let dataProducto = []
 
-            const idven = SUuid();
+            const idven = new Date().getTime() + "";
             Object.keys(productos).map((key, index) => {
                 const prd = productos[key].data;
                 dataProducto.push({
@@ -91,7 +91,7 @@ class index extends Component {
                 "tipocliente": tbcat.catnom,
                 "vtipa": 0,
                 "clicod": tbcli.clicod,
-                "vobs": "VENTA DESDE APP SERVISOFTS - " + this.state.detalle,
+                "vobs": "SAPP - " + this.state.detalle,
                 "vpla": 0,
                 "vdes": "0",
                 "codvendedor": tbemp.empcod,

@@ -77,6 +77,9 @@ import IconTerminos, { ReactComponent as IconTerminosW } from './iconTerminos.sv
 import IconLocation, { ReactComponent as IconLocationW } from './iconLocation.svg';
 import InputDireccion, { ReactComponent as InputDireccionW } from './inputDireccion.svg';
 import Icarnet, { ReactComponent as IcarnetW } from './icarnet.svg';
+import Icategoria, { ReactComponent as IcategoriaW } from './icategoria.svg';
+import Ireload, { ReactComponent as IreloadW } from './ireload.svg';
+import Istorage, { ReactComponent as IstorageW } from './istorage.svg';
 
 
 const Assets = {
@@ -159,6 +162,9 @@ const Assets = {
 	"IProductos": { Native: IProductos, Web: IProductosW },
 	"InputDireccion": { Native: InputDireccion, Web: InputDireccionW },
 	"Icarnet": { Native: Icarnet, Web: IcarnetW },
+	"Icategoria": { Native: Icategoria, Web: IcategoriaW },
+	"Ireload": { Native: Ireload, Web: IreloadW },
+	"Istorage": { Native: Istorage, Web: IstorageW },
 	
 
 }
