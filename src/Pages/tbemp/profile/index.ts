@@ -7,6 +7,7 @@ import tbclimapa from "./tbclimapa";
 import tbven from "./tbven";
 import tbtg from "./tbtg";
 import pedidos from "./pedidos";
+import pedidosEmpresa from "./pedidosEmpresa";
 export default SPage.combinePages("profile", {
     "": root,
     tbzon,
@@ -14,6 +15,7 @@ export default SPage.combinePages("profile", {
     tbclimapa,
     tbven,
     tbtg,
-    pedidos
+    pedidos,
+    pedidosEmpresa
 
 })

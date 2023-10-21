@@ -60,7 +60,7 @@ class index extends Component {
                     <SView col={"xs-10"} border={'transparent'} center>
                         <SHr height={20} />
                         <PButtom fontSize={20} width={"100%"} height={50} bold withe center onPress={() => {
-                            SNavigation.navigate("/explorar")
+                            SNavigation.navigate("/public/explorar")
                         }} >BUSCAR OTROS</PButtom>
                     </SView>
                     <SHr height={30} />
