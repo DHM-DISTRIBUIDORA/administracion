@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, SView } from 'servisofts-component';
+import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { Container } from '../../../Components';
 import Model from '../../../Model';
@@ -18,95 +18,45 @@ class pedidosEmpresa extends Component {
 
     componentDidMount() {
         let producto;
+        let categoria;
 
         DataBase.dm_cabfac.all().then(dt => {
             let data = dt.map((a) => {
-                // a.filter((a) => new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") <= this.fecha_fin)
-                // a.detalle = JSON.parse(a.detalle);
                 return a
             }).filter((a) => new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") <= this.fecha_fin)
-
-
-            console.log("DATA:")
-            console.log(data)
-
-            // let tbprd = DataBase.tbprd.filtered();
-            let tbprd;
-            // console.log(tbprd)
-
-            // let tbprdlin = DataBase.tbprdlin.all();
-         
 
             data.map((a) => {
                 a.detalle.map((b) => {
                     console.log(b)
-                    // const elemento =  tbprd.filter((c) => c.prdcod === b.prdcod);
-                    // let tbprd = DataBase.tbprd.filtered(`prdcod == ${b.prdcod}`);
-                    producto = DataBase.tbprd.filtered(`prdcod == ${(b.prdcod+"")}`).then((e) => {
-                        console.log(tbprd)
-                        this.setState({ dataProducto: e })
+                    producto = DataBase.tbprd.filtered(`prdcod == ${(b.prdcod + "")}`).then((e) => {
+                        this.setState({ dataProducto: e[0] })
+
+                        categoria = DataBase.tbprdlin.filtered(`idlinea == ${(e[0].idlinea)}`).then((c) => {
+                            this.setState({ dataCategoria: c[0] })
+                            b.nombreCategoria = c[0].linnom;
+                        })
                     })
                     return b;
                 })
             })
-            // const resultado = data.map((a) => {
-            //     a.detalle = a.detalle.filter((b) => {
-            //         //   const elemento = tbprd.find((c) => c.prdcod === b.prdcod);
-            //         let tbprd = DataBase.tbprd.filtered(b.prdcod);
-            //         console.log(tbprd)
-            //         return elemento !== undefined;
-            //     });
-            //     return a;
-            // });
-
-            console.log("PRODUCTO:")
-
-            console.log(this.state.dataProducto)
+          
             this.setState({ data: data })
 
-            // function obtenerLinnom(idlinea) {
-            //     const elemento = tbprdlin.find(item => item.idlinea === idlinea);
-            //     return elemento ? elemento.linnom : null;
-            //   }
-
-            //   // Filtrar dm_cabfac por idprd = 26
-            //   const filtroDmCabfac = dm_cabfac.filter(item => item.idprd === 26);
-
-            //   // Obtener idlinea de tbprd
-            //   const idlineaTbprd = tbprd.find(item => item.idprd === 26)?.idlinea;
-
-            //   // Obtener linnom de tbprdlin basado en idlinea
-            //   const linnom = obtenerLinnom(idlineaTbprd);
-
-            //   // Combinar los datos en dm_cabfac
-            //   if (filtroDmCabfac.length > 0 && idlineaTbprd !== undefined && linnom !== null) {
-            //     filtroDmCabfac[0].linnom = linnom;
-            //   }
         })
 
-
-
-
-        // SSocket.sendPromise({
-        //     component: "dm_cabfac",
-        //     type: "getPedidos",
-        //     idemp: this.idemp
-        // }).then((a) => {
-        //     this.setState({ data: a.data })
-        // })
     }
 
     header = (obj) => {
 
-        return <SView col={"xs-12"} card padding={8} row>
+        return <SView col={"xs-12"}  padding={8} row backgroundColor={STheme.color.primary} style={{borderRadius:4}}>
 
             <SView col={"xs-6"} row>
-                <SText>Nombre de empresa</SText>
+                <SText color={STheme.color.white} bold fontSize={16} center>Nombre de empresa</SText>
                 {/* <SView flex />
                 <SText>{(obj.vfec + "").substring(0, 10)}</SText> */}
             </SView>
-            <SView col={"xs-6"} row>
-                <SText>Monto en Bs.</SText>
+            <SView col={"xs-6"} flex style={{alignItems:"flex-end"}}>
+                <SText color={STheme.color.white} bold fontSize={16} >Monto en Bs.</SText>
             </SView>
 
 
@@ -117,9 +67,11 @@ class pedidosEmpresa extends Component {
         const detalle = obj.detalle ?? []
         let total = 0;
         let cantidadProductos = 0;
+        let nombreLinea = "";
         detalle.map(a => {
             total += a.vdpre * a.vdcan
             cantidadProductos += a.vdcan;
+            nombreLinea = nombreLinea + a.nombreCategoria + " - ";
         })
         return <SView col={"xs-12"} card padding={8} onPress={() => {
             SNavigation.navigate("/dm_cabfac/recibo", { pk: obj.idven })
@@ -128,7 +80,7 @@ class pedidosEmpresa extends Component {
                 <SText>{(obj.vfec + "").substring(0, 10)}</SText>
             </SView>
             <SView col={"xs-6"} row>
-                <SText>Nombre de empresa</SText>
+                <SText>{nombreLinea}</SText>
                 {/* <SView flex />
                 <SText>{(obj.vfec + "").substring(0, 10)}</SText> */}
             </SView>
@@ -142,16 +94,13 @@ class pedidosEmpresa extends Component {
                     <SText bold># {cantidadProductos}</SText>
                     <SText bold>Bs. {SMath.formatMoney(total)}</SText>
                 </SView>
-
             </SView>
-
-
         </SView>
     }
     render() {
-        if (!this.state.data) return <SLoad />
-        // console.log("DATA:")
-        // console.log(this.state.data)
+        // if (!this.state.data) return <SLoad />
+        // if (!this.state.dataProducto) return <SLoad />
+
         return (
             <SPage title={'Pedidos por Empresa'} >
                 <Container >
