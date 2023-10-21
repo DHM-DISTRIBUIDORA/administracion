@@ -325,7 +325,7 @@ class index extends DPA.profile {
         if (!obj) return <SLoad />
         return <SView col={"xs-12"} center>
             <SHr />
-            <SView col={"xs-12"} height={200} center>
+            <SView col={"xs-12"} height={220} center>
                 <SView width={100} height={100} card style={{
                     borderRadius: 28,
                     overflow: "hidden",
@@ -364,6 +364,8 @@ class index extends DPA.profile {
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.clinom}`}</SText>
                 <SText>{`${obj.idcli} | ${obj.clicod}`}</SText>
+                <SHr/>
+                <SText fontSize={12}>{`${obj.clidir}`}</SText>
             </SView>
 
             <Btn col={"xs-11"} onPress={() => {

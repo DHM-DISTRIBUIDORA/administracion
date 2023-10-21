@@ -14,6 +14,7 @@ export default new class tbcli extends TableAbstract {
             sync_type: "string?",
             "idcli": "int",
             "clicod": "string?",
+            "clidir": "string?",
             "clicuo": "int?",
             "clidesfin": "int?",
             "clidocid": "int?",
