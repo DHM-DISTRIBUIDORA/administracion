@@ -31,7 +31,7 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
-            data.push({ id: o.idcli, clinom: o.clinom, visita: o.visita, location: { latitude: o.clilat, longitude: o.clilon } });
+            data.push({ id: o.idcli, clinom: o.clinom, clidir: o.clidir, clicod: o.clicod, visita: o.visita, location: { latitude: o.clilat, longitude: o.clilon } });
             dataLatLng.push({ latitude: o.clilat, longitude: o.clilon });
         });
 
@@ -76,6 +76,7 @@ export default class MapaComponent extends Component {
                 onClusterPress={(data, markers) => {
                     console.log(data, markers);
                     console.log(state.idemp)
+                    console.log(markers)
                     SNavigation.navigate("/vendedor/list", { pk: state.idemp, datas: markers })
                 }}
                 showsUserLocation={true}
