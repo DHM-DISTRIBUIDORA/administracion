@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, SView } from 'servisofts-component';
+import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { Container } from '../../../Components';
 import Model from '../../../Model';
@@ -17,12 +17,9 @@ class pedidos extends Component {
 
     componentDidMount() {
 
-        DataBase.dm_cabfac.all().then(dt => {
-            let data = dt.map((a) => {
-                // a.detalle = JSON.parse(a.detalle);
-                return a;
-            })
-            this.setState({ data: data })
+        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0").then(dt => {
+            dt = dt.sort((a, b) => a.vhora > b.vhora ? -1 : 1)
+            this.setState({ data: dt })
         })
         // SSocket.sendPromise({
         //     component: "dm_cabfac",
@@ -47,13 +44,10 @@ class pedidos extends Component {
             <SView col={"xs-12"} row>
                 <SText>{obj.idven}</SText>
                 <SView flex />
-                <SText>{(obj.vfec + "").substring(0, 10)}</SText>
+                <SText color={STheme.color.gray}>{(obj.vfec + "").substring(0, 10)}{(obj.vhora + "").substring(10, 16)}</SText>
             </SView>
             <SView col={"xs-12"} row>
-                <SView col={"xs-3"} row>
-
-                </SView>
-                <SView col={"xs-9"} flex row>
+                <SView col={"xs-11"} flex row>
                     <SText>{obj.clicod}  - {obj.nombrecliente}</SText>
                     <SText>{obj.razonsocial}</SText>
                     <SText bold># {cantidadProductos}</SText>
@@ -84,11 +78,8 @@ class pedidos extends Component {
                         limit={20}
                         data={this.state.data}
                         render={this.component.bind(this)}
-                        order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
-                        {...this.fecha_inicio ?
-                            {
-                                filter: (a) => new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec, "yyyy-MM-dd").toString("yyyy-MM-dd") <= this.fecha_fin
-                            } : null}
+                        // order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
+
                         // filter={(a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin} : null}
 
                         buscador={true}
