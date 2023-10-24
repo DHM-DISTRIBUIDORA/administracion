@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
-import { Btn, Container, PButtom } from '../../Components';
+import { Btn, Container, PButtom, PButtom3 } from '../../Components';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
 class recibo extends Component {
@@ -17,6 +17,7 @@ class recibo extends Component {
 
 
     componentDidMount() {
+        //TODO: NO RECARGA EL DETALLE AL EDITAR
 
         DataBase.dm_cabfac.objectForPrimaryKey(this.idven).then((e) => {
             // e.detalle = JSON.parse(e.detalle);
@@ -160,11 +161,30 @@ class recibo extends Component {
                 {this.cabeceraVenta()}
                 {this.detalle()}
                 <SHr height={20} />
-                <Btn onPress={() => {
+                {/* <Btn onPress={() => {
                     SNavigation.navigate("/dm_cabfac/edit", { pk: this.state.data.idven })
-                }}>{"Editar"}</Btn>
+                }}>{"Editar"}</Btn> */}
+                <PButtom3
+                    colorBg={"#F9A435"}
+                    loading={this.state.loading}
+                    onPress={() => {
+                        SNavigation.navigate("/dm_cabfac/edit", { pk: this.state.data.idven })
+                    }} >EDITAR</PButtom3>
                 <SHr height={20} />
-                <Btn onPress={() => {
+                <PButtom3
+                    colorBg={STheme.color.danger}
+                    loading={this.state.loading}
+                    onPress={() => {
+                        DataBase.dm_cabfac.update({
+                            ...this.state.data,
+                            sync_type: "delete"
+                        }).then(e => {
+                            console.log("Exito al eliminar")
+                        }).catch(e => {
+                            console.error(e)
+                        })
+                    }} >ELIMINAR</PButtom3>
+                {/* <Btn onPress={() => {
                     DataBase.dm_cabfac.update({
                         ...this.state.data,
                         sync_type: "delete"
@@ -175,7 +195,7 @@ class recibo extends Component {
                     })
                     // console.log(Model.carrito.Action.getState().productos)
                     // console.log(this.state.data)
-                }}>{"Eliminar"}</Btn>
+                }}>{"Eliminar"}</Btn> */}
                 <SHr height={20} />
                 {!this.onBack ? null :
                     <PButtom primary
