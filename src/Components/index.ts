@@ -4,6 +4,7 @@ import BottomNavigator from "./BottomNavigator"
 import Container from "./Container"
 import PButtom from "./PButtom"
 import PButtom2 from "./PButtom2"
+import PButtom3 from "./PButtom3"
 import AccentBar from "./AccentBar"
 import FloatButtomTap from "./FloatButtomTap"
 import Contador from "./Contador"
@@ -27,6 +28,7 @@ export {
     Container,
     PButtom,
     PButtom2,
+    PButtom3,
     AccentBar,
     FloatButtomTap,
     Contador,
