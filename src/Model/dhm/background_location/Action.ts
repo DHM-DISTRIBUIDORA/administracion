@@ -1,4 +1,4 @@
-import { SStorage, SUuid } from "servisofts-component";
+import { SDate, SStorage, SUuid } from "servisofts-component";
 import { SAction } from "servisofts-model";
 import SSocket from 'servisofts-socket';
 import Model from "../..";
@@ -20,7 +20,9 @@ export default class Action extends SAction {
         // console.log(obj);
         if (data) {
             data.key = SUuid();
+            data.tipo = type;
             data.sync_type = "insert";
+            data.fecha_on = new SDate().toString();
             DataBase.background_location.insert(data)
         }
         // SSocket.sendHttpAsync(SSocket.api.root + "api", obj)

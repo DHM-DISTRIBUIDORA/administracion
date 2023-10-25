@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
-import { SHr, SLoad } from 'servisofts-component';
+import { SHr, SLoad, SThread } from 'servisofts-component';
 import { SButtom, SDate, SForm, SNavigation, SPage, SPopup, SText, STheme, SView, SIcon } from 'servisofts-component';
-import { PButtom } from '../../Components';
+import { Container, PButtom } from '../../Components';
 import Model from '../../Model';
 
 class recuperar extends Component {
@@ -16,6 +16,11 @@ class recuperar extends Component {
         if (!this.key_rol) {
             this.key_rol = "d16d800e-5b8d-48ae-8fcb-99392abdf61f";
         }
+    }
+    componentDidMount() {
+        new SThread(100, "render_window").start(() => {
+            this.setState({ ready: true })
+        })
     }
     getForm() {
         return <SForm
@@ -52,7 +57,7 @@ class recuperar extends Component {
         return (
             <SPage title={"Recuperar Contraseña"}>
                 <SView center>
-                    <SView col={"xs-11 md-6 xl-4"} center>
+                    <Container loading={!this.state.ready}>
                         <SView height={40} />
                         <SText fontSize={16} color={STheme.color.text} center >Le enviaremos un mensaje para configurar o restablecer su nueva contraseña. </SText>
                         <SView height={40} />
@@ -74,7 +79,7 @@ class recuperar extends Component {
                             }}>¡Ya tengo un código!</SText>
                         </SView>
                         <SView height={36} />
-                    </SView>
+                    </Container>
                 </SView>
             </SPage>
         );

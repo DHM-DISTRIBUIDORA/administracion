@@ -61,6 +61,7 @@ export default new class tbcli extends TableAbstract {
             let usrLog = Model.usuario.Action.getUsuarioLog();
             if (!usrLog) return reject({
                 estado: "error",
+                code: 200,
                 error: "user not found"
             })
 
@@ -84,16 +85,23 @@ export default new class tbcli extends TableAbstract {
                 "component": "tbcli",
                 "type": "getAll",
                 "estado": "cargando",
-                "fecmod": sync_data.fecmod
+
             }
             if (usrLog.idvendedor) {
                 request["cliidemp"] = usrLog.idvendedor
+            } else {
+                request["fecmod"] = sync_data.fecmod
             }
-            SSocket.sendPromise2(request, 60 * 1000 * 5).then((e: any) => {
-                // SDB.deleteAll(this.scheme.name).then((ex: any) => {
+            SSocket.sendPromise2(request, 60 * 1000 * 5).then(async (e: any) => {
+                if (!request.fecmod) {
+                    await SDB.deleteAll(this.scheme.name);
+                }
+
                 SDB.insertArray(this.scheme.name, e.data).then((a: any) => {
-                    sync_data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0") + "";
-                    SDB.update("sync_data", sync_data)
+                    if (request.fecmod) {
+                        sync_data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0") + "";
+                        SDB.update("sync_data", sync_data)
+                    }
                     resolve(e);
                 })
                 // })

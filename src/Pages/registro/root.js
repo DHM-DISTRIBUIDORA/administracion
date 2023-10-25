@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SForm, SHr, SNavigation, SPage, SPopup, SText, SView, STheme, SIcon } from 'servisofts-component';
+import { SForm, SHr, SNavigation, SPage, SPopup, SText, SView, STheme, SIcon, SLoad, SThread } from 'servisofts-component';
 import { AccentBar } from '../../Components';
 import Container from '../../Components/Container';
 import CryptoJS from 'crypto-js';
@@ -17,15 +17,20 @@ class root extends Component {
         };
         this.params = SNavigation.getAllParams();
     }
-
+    componentDidMount() {
+        new SThread(100, "render_window").start(() => {
+            this.setState({ ready: true })
+        })
+    }
     render() {
+        // if (!this.state.ready) return <SLoad />
         var defaultData = {
             ...this.params,
         };
         return (
             <SPage  >
                 <Header />
-                <Container>
+                <Container loading={!this.state.ready}>
                     <SView col={"xs-12"} center>
                         <SHr height={20} />
                         <SText fontSize={26} color={STheme.color.text}>Regístrate</SText>
@@ -44,7 +49,7 @@ class root extends Component {
                             Nombres: { placeholder: "Nombre", isRequired: true, defaultValue: defaultData.Nombres },
                             Apellidos: { placeholder: "Apellidos", isRequired: true, defaultValue: defaultData.Apellidos },
                             Correo: { placeholder: "Correo", type: "email", isRequired: true, defaultValue: defaultData.Correo },
-                            FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: false, type: "date"},
+                            FechaNacimiento: { placeholder: "Fecha de Nacimiento", isRequired: false, type: "date" },
                             //telefono: { placeholder: "Celular", isRequired: true, type: "telefono", isRequired:true},
                             Telefono: { placeholder: "Celular", isRequired: false, isRequired: true },
                             CI: { placeholder: "Carnet de Identidad", isRequired: false },

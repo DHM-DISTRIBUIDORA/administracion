@@ -4,10 +4,10 @@ import Model from '../../Model';
 import { SDate } from 'servisofts-component';
 
 
-export default new class visita_vendedor extends TableAbstract {
+export default new class visita_transportista extends TableAbstract {
 
     scheme: Scheme = {
-        name: "visita_vendedor",
+        name: "visita_transportista",
         primaryKey: "key",
         properties: {
             sync_type: "string?",
@@ -35,13 +35,15 @@ export default new class visita_vendedor extends TableAbstract {
                 error: "user not found"
             })
             let request: any = {
-                "component": "visita_vendedor",
+                "component": "visita_transportista",
                 "type": "getAll",
                 "estado": "cargando",
-                "fecha":new SDate().toString("yyyy-MM-dd")
+                "fecha": new SDate().toString("yyyy-MM-dd")
             }
-            if (usrLog?.idvendedor) {
-                request["idemp"] = usrLog.idvendedor
+            if (usrLog?.idtransportista) {
+                request["idemp"] = usrLog.idtransportista
+            } else {
+                resolve("");
             }
             SSocket.sendPromise2(request).then((e: any) => {
                 const arr = Object.values(e.data).map((a: any) => {
@@ -59,7 +61,7 @@ export default new class visita_vendedor extends TableAbstract {
         })
     }
 
-    
+
 
     loadToReducer = async () => {
         // const e = await this.all()

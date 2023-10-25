@@ -11,11 +11,12 @@ import tbcat from "./tables/tbcat";
 import background_location from './tables/background_location'
 import sync_data from './tables/sync_data'
 import visita_vendedor from './tables/visita_vendedor'
+import visita_transportista from './tables/visita_transportista'
 import { SThread } from 'servisofts-component'
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 7,
-    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor]
+    version: 11,
+    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista]
 }
 
 export default {
@@ -47,7 +48,8 @@ export default {
     tbcli,
     tbcat,
     background_location,
-    visita_vendedor
+    visita_vendedor,
+    visita_transportista
 }
 
 

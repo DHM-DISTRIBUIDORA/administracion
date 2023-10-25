@@ -21,7 +21,7 @@ export default class MapaComponent extends Component {
             idemp: this.props?.state?.idemp,
             visitaType: "transporte",
             visita: visita,
-            tbvd:tbvd
+            tbvd: tbvd
         })
     }
     render() {
@@ -39,7 +39,15 @@ export default class MapaComponent extends Component {
 
         const renderCluster = (data, onPressCluster, keys) => {
             let onPress = onPressCluster;
-            const visita = this.props.state?.visitas[data.id];
+            // const visita = null;
+            console.log(data)
+
+            let visita;
+            if (this.props.state?.visitas) {
+                visita = this.props.state?.visitas.find(a => a.idcli == data.id);
+
+
+            }
             if (data.count == 1) {
                 onPress = this.handlePressClient.bind(this, data, visita, data.tbvd)
             }
@@ -74,7 +82,7 @@ export default class MapaComponent extends Component {
                 onClusterPress={(data, markers) => {
                     console.log(data, markers);
                     console.log(state.idemp)
-                    SNavigation.navigate("/vendedor/list", { pk: state.idemp, datas: markers })
+                    SNavigation.navigate("/transporte/list", { pk: state.idemp, datas: markers })
                 }}
                 renderMarker={renderCluster}
                 renderCluster={renderCluster}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SLoad, SNavigation, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component';
 import { AccentBar, BottomNavigator, Container } from '../../Components';
 // import SectionApis from './components/SectionApis';
 import SectionFooter from './components/SectionFooter';
@@ -13,9 +13,14 @@ class login extends Component {
         this.state = {
         };
     }
+    componentDidMount() {
+        new SThread(100, "render_window").start(() => {
+            this.setState({ ready: true })
+        })
+    }
 
     render() {
-
+        // if (!this.state.ready) return <SLoad />
         return (
             <SPage hidden footer={<BottomNavigator url={"/login"} />}>
                 <SView col={"xs-12"} center>
@@ -26,7 +31,7 @@ class login extends Component {
                             <SHr height={16} />
                         </Container>
                     </SView>
-                    <Container>
+                    <Container loading={!this.state.ready}>
                         <SHr height={16} />
                         <SectionForm ref={ref => this._sectionForm = ref} />
                         <SHr height={25} />

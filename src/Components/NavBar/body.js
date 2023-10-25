@@ -221,6 +221,7 @@ export default class body extends React.Component {
                             // Model._events.CLEAR();
                             Model.tbcli.Action.setCliente(null);
                             Model.usuario.Action.unlogin();
+                            Model.carrito.Action.removeAll()
                             DataBase.clear();
                             SNavigation.reset("/");
                             NavBar.close();

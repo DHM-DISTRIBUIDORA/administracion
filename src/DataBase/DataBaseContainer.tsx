@@ -4,6 +4,8 @@ import DataBase, { DB } from '.';
 import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread } from 'servisofts-component';
 import SDB, { TableAbstract } from 'servisofts-db';
 import SSocket from 'servisofts-socket';
+import SaveTop from '../Components/SaveTop';
+import Model from '../Model';
 
 type DataBaseContainerPropsType = {
     children?: any
@@ -55,7 +57,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
             console.log(data);
             notify.close();
             return data;
-        } catch (e) {
+        } catch (e: any) {
             notify.close();
             await SNotification.send({
                 title: "Base de datos",
@@ -80,16 +82,46 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
         new SThread(10000, "hilo_verificador", false).start(async () => {
             if (!this.isRun) return;
 
-            // SNotification.send({
-            //     title: "Base de datos",
-            //     body: `Verificando cambios...`,
-            //     color: STheme.color.warning,
-            //     time: 5000
-            // })
+            await this.verifyChanges();
+
             this.hilo();
         })
     }
 
+
+    verifyChanges = async () => {
+        const notify = await SNotification.send({
+            title: "Base de datos",
+            body: `Verificando cambios...`,
+            color: STheme.color.warning,
+            type: "loading"
+        })
+        for (let i = 0; i < DB.tables.length; i++) {
+            const table = DB.tables[i];
+            try {
+                const changes = await table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'");
+                if (changes.length > 0) {
+                    await subirCambios(table);
+                    changes.map(tr => {
+                        tr.sync_type = "";
+                        table.update(tr)
+                    })
+                    await table.sync();
+                }
+
+            } catch (error) {
+                SNotification.send({
+                    title: table.scheme.name,
+                    body: JSON.stringify(error),
+                    color: STheme.color.danger,
+                    time: 5000
+                })
+                console.error(error)
+            }
+        }
+        notify.close()
+
+    }
     componentDidMount(): void {
         DataBase.init().then(() => {
             console.log("listo");
@@ -116,6 +148,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
             <AlertBar ref={ref => {
                 DataBaseContainer.INSTANCE = ref;
             }} />
+            <SaveTop />
         </>
     }
 }
@@ -129,6 +162,7 @@ const subirCambios = async (table: TableAbstract) => {
     const respuesta: any = await SSocket.sendPromise2({
         component: table.scheme.name,
         type: "uploadChanges",
+        key_usuario: Model.usuario.Action.getKey(),
         insert: _insert,
         update: _update,
         delete: _delete,
@@ -185,12 +219,15 @@ const AlertBar = forwardRef((props, ref) => {
             await t.loadToReducer();
         } catch (error: any) {
             // setMessage(error);
-            SNotification.send({
-                title: t.scheme.name,
-                body: error?.error ?? JSON.stringify(error),
-                color: STheme.color.danger,
-                time: 5000
-            })
+            if (error?.code != 200) {
+                SNotification.send({
+                    title: t.scheme.name,
+                    body: error?.error ?? JSON.stringify(error),
+                    color: STheme.color.danger,
+                    time: 5000
+                })
+            }
+
             // setLoading(false);
             console.error(t.scheme.name, error)
         }

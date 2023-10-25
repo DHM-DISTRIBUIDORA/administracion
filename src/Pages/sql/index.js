@@ -1,9 +1,10 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SView, STable3 } from 'servisofts-component'
+import { SView, STable3, SNavigation } from 'servisofts-component'
 import MenuBar from './MenuBar'
 import TabSelection from './TabSelection'
 import TreeView from './TreeView/index'
+import Model from '../../Model'
 
 
 type ThemeProps = {
@@ -24,12 +25,17 @@ export default class index extends Component<PropsType> {
             text: "#ffffff"
         }
     }
+    componentDidMount() {
+        if (!Model.usuario.Action.getKey()) {
+            SNavigation.reset("/");
+        }
+    }
     render() {
         // return <STable3/>
         return <SView col={"xs-12"} flex backgroundColor={this.props.backgrounColor}>
-            <MenuBar />
+            {/* <MenuBar /> */}
             <SView col={"xs-12"} row flex>
-                <TreeView  />
+                <TreeView />
                 <TabSelection />
             </SView>
         </SView>

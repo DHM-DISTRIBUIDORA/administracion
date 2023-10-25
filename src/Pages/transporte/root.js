@@ -6,6 +6,7 @@ import SSocket from 'servisofts-socket'
 import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
+import DataBase from '../../DataBase'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -13,25 +14,23 @@ export default class root extends Component {
             // curdate: new SDate("2023-08-28", "yyyy-MM-dd"),
             curdate: new SDate(),
             idemp: SNavigation.getParam("idemp"),
-            fecha_inicio: SNavigation.getParam("fecha_inicio"),
-            fecha_fin: SNavigation.getParam("fecha_fin"),
+            fecha: SNavigation.getParam("fecha"),
         }
     }
     componentDidMount() {
         this.setState({ loading: true })
         SSocket.sendPromise({
-            component: "tbtg",
-            // type: "getAll",
-            // fecha: this.state.curdate.toString("yyyy-MM-dd"),
-            fecha_inicio:this.state.fecha_inicio,
-            fecha_fin:this.state.fecha_fin,
-            type: "getPedidosDespachados",
-            idemp: this.state.idemp
-        }).then((e) => {
+            component: "tbemp",
+            type: "getVentasFactura",
+            idemp: this.state.idemp,
+            fecha: this.state.fecha
+        }).then(async (e) => {
+            const visitas = await DataBase.visita_transportista.all();
+            // console.log("zonas", zonas);
             this.setState({
                 loading: false,
                 data: Object.values(e.data),
-                visitas: e.visitas
+                visitas: visitas
             })
         }).catch(e => {
             this.setState({ loading: false })
