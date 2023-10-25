@@ -73,6 +73,7 @@ export default class root extends Component {
                 <SView flex center>
                     <SBuscador onChange={(e) => {
                         this.setState({ busqueda: e })
+                        console.log(e)
                     }} />
                     {/* <SInput placeholder={"Buscar al cliente"} /> */}
                     {/* <SText col={"xs-11"} fontSize={12}>Activate para visitar a tus clientes.</SText> */}

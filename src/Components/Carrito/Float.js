@@ -4,6 +4,7 @@ import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SS
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
+import DataBase from '../../DataBase';
 export type FloatPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -13,10 +14,13 @@ class index extends Component<FloatPropsType> {
         super(props);
         this.state = {
         };
+        this.idven = SNavigation.getParam("idven");
     }
 
     componentDidMount() {
+
         const cliente = Model.tbcli.Action.getCliente();
+
         if (cliente) {
             this.setState({
                 client: cliente
@@ -34,13 +38,34 @@ class index extends Component<FloatPropsType> {
                 console.error(e);
             }
         })
+
+        if (this.idven) {
+            DataBase.dm_cabfac.objectForPrimaryKey(this.idven).then((e) => {
+                this.setState({ dataPedido: e })
+
+            })
+        }
+
     }
     render() {
-        const productos = Model.carrito.Action.getState().productos;
+        console.log(this.idven + " kkkk")
         let total = 0;
-        Object.keys(productos).map((key, index) => {
-            total += productos[key].data.prdpoficial * productos[key].cantidad;
-        });
+        // let productos = {} ;
+        // var productos = {};
+        var productos;
+        if (this.state?.dataPedido) {
+            productos = this.state?.dataPedido?.detalle ?? [];
+            console.log(productos)
+            Object.keys(productos).map((key, index) => {
+                total += productos[key].vdpre * productos[key].vdcan;
+            });
+        } else {
+            productos = Model.carrito.Action.getState().productos;
+            console.log(productos)
+            Object.keys(productos).map((key, index) => {
+                total += productos[key].data.prdpoficial * productos[key].cantidad;
+            });
+        }
         var distancia = 40
         if (this.props.bottom) distancia = this.props.bottom
         return (
@@ -59,7 +84,12 @@ class index extends Component<FloatPropsType> {
                 }}
                     onPress={() => {
                         // this.props.navigation.navigate('farmacia/carrito');
-                        SNavigation.navigate("/carrito/pedido")
+                        if (this.state?.dataPedido) {
+                            SNavigation.navigate("/dm_cabfac/edit", { pk: this.state.dataPedido.idven })
+                        } else {
+                            SNavigation.navigate("/carrito/pedido")
+
+                        }
                     }}
 
                 >

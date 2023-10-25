@@ -31,6 +31,14 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
+            console.log("aquiio ")
+            if (state?.busqueda) {
+                console.log(state.busqueda)
+                console.log(o.clinom)
+                //TODO: LICETH
+                // if (person.name.toLowerCase().includes(searchTerm)) return
+                // if (state.busqueda == o.clinom) return;
+            }
             data.push({ id: o.idcli, clinom: o.clinom, clidir: o.clidir, clicod: o.clicod, visita: o.visita, location: { latitude: o.clilat, longitude: o.clilon } });
             dataLatLng.push({ latitude: o.clilat, longitude: o.clilon });
         });

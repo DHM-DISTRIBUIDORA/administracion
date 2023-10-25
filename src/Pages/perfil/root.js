@@ -291,6 +291,7 @@ class index extends Component {
                     <Btn col={"xs-11"} type='danger' onPress={() => {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
+                        Model.carrito.Action.removeAll()
                         DataBase.clear();
                         // DataBaseContainer.sync();
                         SNavigation.reset("/");

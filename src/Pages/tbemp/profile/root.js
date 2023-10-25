@@ -127,8 +127,8 @@ class index extends DPA.profile {
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
         var montoOk = "";
-        if (monto != "") montoOk = "Bs. " + monto;
-        return <SView col={"xs-6"} height={100} padding={6} onPress={onPress} >
+        if (monto != "") montoOk = "Bs. " + monto; 
+        return <SView col={"xxs-12 xs-6 sm-6 md-6 lg-6 xl-6 xxl-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
                 borderBottomWidth: 4,
@@ -154,11 +154,11 @@ class index extends DPA.profile {
                 }}>
                     {(montoOk == "")
                         ?
-                        <SText bold fontSize={14}>{cant}</SText>
+                        <SText bold fontSize={14} style={{lineHeight: 20}}>{cant}</SText>
                         :
-                        <SText bold fontSize={14}>({cant})</SText>}
-                    <SText fontSize={14}>{montoOk}</SText>
-                    <SText fontSize={12} color={STheme.color.gray}>{label}</SText>
+                        <SText bold fontSize={14} style={{lineHeight: 20}}>({cant})</SText>}
+                    <SText fontSize={14} style={{lineHeight: 20}}>{montoOk}</SText>
+                    <SText fontSize={12} color={STheme.color.gray} style={{lineHeight: 15}}>{label}</SText>
                 </SView>
             </SView>
         </SView>
