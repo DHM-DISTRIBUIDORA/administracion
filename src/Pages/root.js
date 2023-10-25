@@ -109,7 +109,8 @@ class index extends Component {
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
                     }} icon={<SIcon name={"Icon2"} />} /> */}
-                    <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} onPress={() => {
+                    <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} url={"/transporte/picklist"} />
+                    {/* <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} onPress={() => {
 
                         SSocket.sendPromise2({
                             component: "tbemp",
@@ -121,11 +122,11 @@ class index extends Component {
                         }).catch(e => {
                             console.error(e)
                         })
-                    }} />
+                    }} /> */}
                     <MenuButtom label={"La entrega"} icon={<SIcon name={"Reload"} />} onPress={() => {
                         SSocket.sendPromise2({
                             component: "tbemp",
-                            type: "picklist",
+                            type: "getVentasFactura",
                             idemp: user.idtransportista,
                             fecha: "2023-10-24"
                         }).then(e => {

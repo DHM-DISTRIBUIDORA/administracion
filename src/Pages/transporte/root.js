@@ -20,13 +20,10 @@ export default class root extends Component {
     componentDidMount() {
         this.setState({ loading: true })
         SSocket.sendPromise({
-            component: "tbtg",
-            // type: "getAll",
-            // fecha: this.state.curdate.toString("yyyy-MM-dd"),
-            fecha_inicio:this.state.fecha_inicio,
-            fecha_fin:this.state.fecha_fin,
-            type: "getPedidosDespachados",
-            idemp: this.state.idemp
+            component: "tbemp",
+            type: "getVentasFactura",
+            idemp: this.state.idemp,
+            fecha: this.state.fecha_inicio
         }).then((e) => {
             this.setState({
                 loading: false,
