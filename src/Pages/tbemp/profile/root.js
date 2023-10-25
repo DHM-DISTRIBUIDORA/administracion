@@ -157,7 +157,7 @@ class index extends DPA.profile {
                         <SText bold fontSize={14} style={{lineHeight: 20}}>{cant}</SText>
                         :
                         <SText bold fontSize={14} style={{lineHeight: 20}}>({cant})</SText>}
-                    <SText fontSize={14} style={{lineHeight: 15}}>{montoOk}</SText>
+                    <SText fontSize={14} style={{lineHeight: 20}}>{montoOk}</SText>
                     <SText fontSize={12} color={STheme.color.gray} style={{lineHeight: 15}}>{label}</SText>
                 </SView>
             </SView>
