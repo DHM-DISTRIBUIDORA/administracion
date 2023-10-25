@@ -39,6 +39,7 @@ export default new class dm_cabfac extends TableAbstract {
             let usrLog = Model.usuario.Action.getUsuarioLog();
             if (!usrLog) return reject({
                 estado: "error",
+                code: 200,
                 error: "user not found"
             })
             let request: any = {

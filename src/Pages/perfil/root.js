@@ -292,7 +292,7 @@ class index extends Component {
                         Model.tbcli.Action.setCliente(null);
                         Model.usuario.Action.unlogin();
                         DataBase.clear();
-                        DataBaseContainer.sync();
+                        // DataBaseContainer.sync();
                         SNavigation.reset("/");
                         // NavBar.close();
 

@@ -109,7 +109,31 @@ class index extends Component {
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
                     }} icon={<SIcon name={"Icon2"} />} /> */}
-                    {/* <MenuButtom label={"Mapa"} url={"/tbcli/mapa"} icon={<SIcon name={"Map"} />} /> */}
+                    <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} onPress={() => {
+
+                        SSocket.sendPromise2({
+                            component: "tbemp",
+                            type: "picklist",
+                            idemp: user.idtransportista,
+                            fecha: "2023-10-24"
+                        }).then(e => {
+                            console.log(e);
+                        }).catch(e => {
+                            console.error(e)
+                        })
+                    }} />
+                    <MenuButtom label={"La entrega"} icon={<SIcon name={"Reload"} />} onPress={() => {
+                        SSocket.sendPromise2({
+                            component: "tbemp",
+                            type: "picklist",
+                            idemp: user.idtransportista,
+                            fecha: "2023-10-24"
+                        }).then(e => {
+                            console.log(e);
+                        }).catch(e => {
+                            console.error(e)
+                        })
+                    }} />
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />

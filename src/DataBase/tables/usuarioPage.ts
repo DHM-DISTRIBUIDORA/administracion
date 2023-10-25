@@ -26,6 +26,7 @@ export default new class usuarioPage extends TableAbstract {
             let usrLog = Model.usuario.Action.getUsuarioLog();
             if(!usrLog?.key) return reject({
                 estado: "error",
+                code: 200,
                 error: "user not found"
             })
             SSocket.sendPromise2({

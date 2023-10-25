@@ -73,7 +73,6 @@ export default class SectionForm extends Component {
                                     SNavigation.navigate("/login");
                                     this.fadeOut();
                                 } else {
-                                    DataBaseContainer.sync();
                                     SNavigation.replace("/");
                                 }
 

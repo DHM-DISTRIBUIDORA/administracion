@@ -17,7 +17,7 @@ import Socket from './Socket';
 import DataBaseContainer from './DataBase/DataBaseContainer';
 
 try{
-    Firebase.init();
+    // Firebase.init();
 }catch(e){
     console.log(e);
 }

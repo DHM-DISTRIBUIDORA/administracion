@@ -55,7 +55,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
             console.log(data);
             notify.close();
             return data;
-        } catch (e) {
+        } catch (e: any) {
             notify.close();
             await SNotification.send({
                 title: "Base de datos",
@@ -185,12 +185,15 @@ const AlertBar = forwardRef((props, ref) => {
             await t.loadToReducer();
         } catch (error: any) {
             // setMessage(error);
-            SNotification.send({
-                title: t.scheme.name,
-                body: error?.error ?? JSON.stringify(error),
-                color: STheme.color.danger,
-                time: 5000
-            })
+            if (error?.code != 200) {
+                SNotification.send({
+                    title: t.scheme.name,
+                    body: error?.error ?? JSON.stringify(error),
+                    color: STheme.color.danger,
+                    time: 5000
+                })
+            }
+
             // setLoading(false);
             console.error(t.scheme.name, error)
         }

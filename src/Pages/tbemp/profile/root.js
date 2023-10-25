@@ -287,8 +287,8 @@ class index extends DPA.profile {
             <SHr h={30} />
             {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
-            {/* {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
-            {obj.idemt == 4 ? this.getCardsTransportista(obj) : null} */}
+            {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
+            {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
             <SHr />
         </SView>
     }
