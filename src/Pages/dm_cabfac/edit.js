@@ -184,7 +184,7 @@ export default class editar extends Component {
             {this.detalle()}
             <SHr height={20} />
             <PButtom3 colorBg={"#F9A435"} onPress={() => {
-                SNavigation.navigate("/public", { pk: this.state.data.idven })   
+                SNavigation.navigate("/public", { idven: this.state.data.idven })   
             }}>{"AÑADIR PRODUCTO"}</PButtom3>
             <SHr height={10} />
             <PButtom onPress={() => this.form.submit()}>{"EDITAR"}</PButtom>
