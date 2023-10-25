@@ -18,6 +18,14 @@
       "sha1": "cbef70cb0c0e621df3b4354ff7e46defbb0ac3c5"
     },
     {
+      "path": "node_modules/servisofts-component/font/Calibri.ttf",
+      "sha1": "18bdacade53d1ca0d7f57e4e4be5c965709fc9b0"
+    },
+    {
+      "path": "node_modules/servisofts-component/font/Cascadia.ttf",
+      "sha1": "ed79fb8cfb1fcdfea1eab860fc973a0e2f2a7a99"
+    },
+    {
       "path": "node_modules/servisofts-component/font/LondonBetween.ttf",
       "sha1": "3675bceeb3d8c7b3f2d8a4c26a651ce265fa8d60"
     },
@@ -155,11 +163,11 @@
     },
     {
       "path": "node_modules/servisofts-component/font/index.css",
-      "sha1": "9d156d598578346239b3fc54d43575ec1fd41036"
+      "sha1": "62a1f6385335699abaab0408268b8a1f426a1a87"
     },
     {
       "path": "node_modules/servisofts-component/font/index.d.ts",
-      "sha1": "93ed69c00b712e4ba76febeca159294428880ba6"
+      "sha1": "0d4e91b8a35f0719113d60e54b783f5a8709410e"
     },
     {
       "path": "node_modules/servisofts-component/font/index.js",
@@ -179,7 +187,7 @@
     },
     {
       "path": "node_modules/servisofts-component/font/index.tsx",
-      "sha1": "d47a4040664ffe3837b54236729da8588151e0fe"
+      "sha1": "e7f0d49bce6e6e2151342273b849febf2b7c4502"
     }
   ]
 }

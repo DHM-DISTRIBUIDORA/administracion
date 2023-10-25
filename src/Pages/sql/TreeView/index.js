@@ -1,6 +1,6 @@
 import { Text, View, ScrollView } from 'react-native'
 import React, { Component } from 'react'
-import { SList, SScrollView2, SText, SView } from 'servisofts-component'
+import { SList, SScrollView2, SText, STheme, SView } from 'servisofts-component'
 import ResizableBox from '../ResizableBox'
 import Tables from "./elements/tables"
 export default class TreeView extends Component {
@@ -13,7 +13,7 @@ export default class TreeView extends Component {
     render() {
         return <SView height>
             <SView col={"xs-12"} flex style={{
-                borderRightColor: "#eee",
+                borderRightColor: STheme.color.card,
                 borderRightWidth: 2
             }}>
                 <ResizableBox width={200}>

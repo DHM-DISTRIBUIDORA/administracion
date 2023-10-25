@@ -5,6 +5,7 @@ import { Banner, BottomNavigator, Container, Producto, TopBar, } from '../../Com
 import Model from '../../Model';
 import { FlatList } from 'react-native';
 import DataBase from '../../DataBase';
+import { Trigger } from 'servisofts-db';
 class index extends Component {
 
     state = {
@@ -12,13 +13,24 @@ class index extends Component {
     }
 
     componentDidMount() {
-        new SThread(10, "load").start(() => {
-            this.setState({ load: true })
-        })
-        DataBase.tbprd.all().then((e) => {
-            this.setState({ data: e })
-        })
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbprd"]
+        }, (evt) => {
+            this.loadDataAsync();
+        });
     }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
+    async loadDataAsync() {
+        const tbprd = await DataBase.tbprd.all();
+        this.setState({ data: tbprd, load: true })
+    }
+
+
     recibirItems = ({ tbprd }) => {
         let productos = Model.carrito.Action.getState().productos;
         Object.assign(productos, tbprd);

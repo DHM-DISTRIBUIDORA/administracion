@@ -62,25 +62,40 @@ class index extends DPA.profile {
 
     visitaRegistro({ descripcion, tipo, monto }) {
         this.setState({ loading: true })
-        const data = {
+        let data = {
             sync_type: "insert",
             key: SUuid(),
             key_usuario: Model.usuario.Action.getKey(),
-            idemp: Model.usuario.Action.getUsuarioLog()?.idvendedor,
+
             idcli: this.pk,
             descripcion: descripcion,
             tipo: tipo,
             monto: monto,
             fecha: new SDate().toString("yyyy-MM-dd"),
         }
-        DataBase.visita_vendedor.insert(data).then(e => {
-            this.setState({ loading: false })
-            SNavigation.goBack();
 
-        }).catch(e => {
-            console.error(e)
-            this.setState({ loading: false })
-        })
+        if (this.visitaType == "transporte") {
+            data.idemp = Model.usuario.Action.getUsuarioLog()?.idtransportista;
+            DataBase.visita_transportista.insert(data).then(e => {
+                this.setState({ loading: false })
+                SNavigation.goBack();
+
+            }).catch(e => {
+                console.error(e)
+                this.setState({ loading: false })
+            })
+        } else {
+            data.idemp = Model.usuario.Action.getUsuarioLog()?.idvendedor;
+            DataBase.visita_vendedor.insert(data).then(e => {
+                this.setState({ loading: false })
+                SNavigation.goBack();
+
+            }).catch(e => {
+                console.error(e)
+                this.setState({ loading: false })
+            })
+        }
+
         return;
         SSocket.sendPromise({
             component: this.visitaType == "transporte" ? "visita_transportista" : "visita_vendedor",
@@ -364,7 +379,7 @@ class index extends DPA.profile {
                 <SHr />
                 <SText bold fontSize={16}>{`${obj.clinom}`}</SText>
                 <SText>{`${obj.idcli} | ${obj.clicod}`}</SText>
-                <SHr/>
+                <SHr />
                 <SText fontSize={12}>{`${obj.clidir}`}</SText>
             </SView>
 

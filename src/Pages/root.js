@@ -109,7 +109,7 @@ class index extends Component {
                     {/* <MenuButtom label={"RECIBO"} url={"/dm_cabfac/recibo"} params={{
                         pk: 927100083
                     }} icon={<SIcon name={"Icon2"} />} /> */}
-                    <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} url={"/transporte/picklist"} />
+                    {/* <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} url={"/transporte/picklist"} /> */}
                     {/* <MenuButtom label={"Pick List"} icon={<SIcon name={"Reload"} />} onPress={() => {
 
                         SSocket.sendPromise2({
@@ -123,16 +123,16 @@ class index extends Component {
                             console.error(e)
                         })
                     }} /> */}
-                    <MenuButtom label={"La entrega"} icon={<SIcon name={"Reload"} />} onPress={() => {
-                        SSocket.sendPromise2({
-                            component: "tbemp",
-                            type: "getVentasFactura",
-                            idemp: user.idtransportista,
-                            fecha: "2023-10-24"
+                    <MenuButtom label={"GPX"} icon={<SIcon name={"Reload"} />} onPress={() => {
+                        //    https://dhm.servisofts.com/repo/dhm/gpx/7929777a-8cea-4c34-aec8-a22bb7439fac/2023/8/29/22.gpx
+                        fetch("https://dhm.servisofts.com/repo/dhm/gpx/7929777a-8cea-4c34-aec8-a22bb7439fac/2023/8/29/22.gpx", {
+                            mode: "no-cors"
+                        }).then(e => {
+                            return e.text()
                         }).then(e => {
                             console.log(e);
                         }).catch(e => {
-                            console.error(e)
+                            console.error(e);
                         })
                     }} />
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}

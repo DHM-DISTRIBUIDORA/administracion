@@ -31,7 +31,6 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
-            console.log("aquiio ")
             if (state?.busqueda) {
                 console.log(state.busqueda)
                 console.log(o.clinom)

@@ -37,7 +37,7 @@ const BTN = forwardRef(({ onPress, label }: any, ref) => {
         borderColor: state.color,
         borderWidth: 1,
     }} center height={40} card onPress={handleOnPress}>
-        {!state.loading ? <SText center color={state.color} >{label}</SText> : <SLoad />}
+        {!state.loading ? <SText center font="Roboto" color={state.color} >{label}</SText> : <SLoad />}
     </SView>
 });
 
@@ -97,15 +97,15 @@ export const DBComponent = () => {
     }, [])
 
     return <SView col={"xs-12"} center >
-        <BTN ref={syncRef} label={"Sincronizar todos"} onPress={async () => {
-            // for (let i = 0; i < inputRefs.current.length; i++) {
-            //     const re: any = inputRefs.current[i]
-            //     await re.sync();
-            // }
-            // DataBase.init();
-            await DataBaseContainer.sync();
-            // inputRefs.current.map((ref: any) => ref.sync())
-        }} />
+        <SView row>
+            <BTN ref={syncRef} label={"Sincronizar todos"} onPress={async () => {
+                await DataBaseContainer.sync();
+            }} />
+            <SView width={8} />
+            <BTN ref={syncRef} label={"Clear"} onPress={async () => {
+                DataBase.clear();
+            }} />
+        </SView>
         <SHr h={50} />
         {tables.map((table, i) => <TableItem ref={(el: never) => inputRefs.current[i] = el} table={table} />)}
     </SView>

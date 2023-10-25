@@ -7,12 +7,11 @@ type PropsType = {
     direcction?: "top" | "bottom" | "left" | "right",
     size: any,
 }
-class ResizableBox extends Component<PropsType> {
+class ResizableBoxVertical extends Component<PropsType> {
     constructor(props) {
         super(props);
-        console.log("entro acas ajc ajc ajc aj caj csj ")
         this.state = {
-            width: this.props.width ?? 100,
+            height: this.props.height ?? 100,
         };
 
         this.panResponder = PanResponder.create({
@@ -20,11 +19,11 @@ class ResizableBox extends Component<PropsType> {
             onPanResponderGrant: (evt, gestureState) => {
                 // this.setEnabled(false);
                 Selection.preventSelection();
-                this.startWidth = this.state.width
+                this.start = this.state.height
             },
             onPanResponderMove: (evt, gestureState) => {
-                
-                this.setState({ width: this.startWidth + gestureState.dx, });
+
+                this.setState({ height: this.start - gestureState.dy, });
             },
             onPanResponderRelease: (evt, gestureState) => {
                 Selection.allowSelection();
@@ -40,17 +39,17 @@ class ResizableBox extends Component<PropsType> {
     render() {
         return (
             <View style={{
-                height: "100%",
-                width: this.state.width,
+                width: "100%",
+                height: this.state.height,
             }}>
                 {this.props.children}
                 <View style={{
-                    height: "100%",
-                    width: 8,
+                    height: 8,
+                    width: "100%",
                     position: "absolute",
-                    right: 0,
+                    left: 0,
                     top: 0,
-                    cursor: "e-resize"
+                    cursor: "n-resize"
                 }}
                     {...this.panResponder.panHandlers}
                 >
@@ -60,4 +59,4 @@ class ResizableBox extends Component<PropsType> {
     }
 }
 
-export default ResizableBox;
+export default ResizableBoxVertical;

@@ -16,9 +16,9 @@ import Socket from './Socket';
 
 import DataBaseContainer from './DataBase/DataBaseContainer';
 
-try{
+try {
     // Firebase.init();
-}catch(e){
+} catch (e) {
     console.log(e);
 }
 BackgroundLocation();
@@ -44,7 +44,7 @@ function App(): JSX.Element {
                 props={{ navBar: TopBar, title: 'DHM', pages: Pages }}
             />
             <NavBar />
-            <SText style={{ position: "absolute", bottom: 2, right: 2, }} fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
+            <SText style={{ position: "absolute", bottom: 2, right: 2, zIndex: 0, }} disabled fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
         </DataBaseContainer>
         <Socket store={store} />
     </SComponentContainer>

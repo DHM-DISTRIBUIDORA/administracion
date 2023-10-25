@@ -1,14 +1,8 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SBuscador, SButtom, SDate, SHr, SIcon, SInput, SList, SLoad, SMapView, SNavigation, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component'
-import Model from '../../Model'
-import SSocket from 'servisofts-socket'
-import MapaComponent from './MapaComponent';
-import DetalleMapaComponent from './DetalleMapaComponent';
-import SwitchRastreo from '../../Components/SwitchRastreo'
+import { SBuscador, SButtom, SDate, SHr, SIcon, SInput, SList, SLoad, SMapView, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component'
 import { Container, Popups } from '../../Components'
 import DataBase from '../../DataBase'
-import { Trigger } from 'servisofts-db'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -21,25 +15,13 @@ export default class root extends Component {
         }
     }
 
-
     componentDidMount() {
-        this.loadDataAsync();
-        this.t1 = Trigger.addEventListener({
-            on: ["insert", "update", "delete"],
-            tables: ["visita_vendedor"]
-        }, (evt) => {
-            // new SThread(2000, "ASdasd", true).start(() => {
-            console.log("ENTRO EN EL TRIGGERRRRRR LIST", evt)
-            this.loadDataAsync();
-            // })
-        });
-    }
-    componentWillUnmount() {
-        Trigger.removeEventListener(this.t1);
+        this.loadDataAsync()
     }
 
 
     async loadDataAsync() {
+        this.setState({ loading: true })
         try {
             const zonas = await DataBase.tbzon.filtered("zdia == $0", new Date().getUTCDay());
             let query = "";
@@ -53,11 +35,11 @@ export default class root extends Component {
             if (query) {
                 clientes = await DataBase.tbcli.filtered(query);
             }
-            const visitas = await DataBase.visita_vendedor.all();
+            const visitas = await DataBase.visita_transportista.all();
             this.setState({
                 loading: false,
                 data: clientes,
-                visitas: [...visitas]
+                visitas: visitas
             })
 
         } catch (error) {
@@ -87,7 +69,7 @@ export default class root extends Component {
         if (!this.state?.data) return <SLoad />;
         var clientes_data = this.state?.data
         var clientes_filter = [];
-
+        var visitas = this.state.visitas ?? [];
 
         clientes_filter = clientes_data;
         if (this.state?.ubicacion) {
@@ -106,6 +88,7 @@ export default class root extends Component {
                 "clilon": item.location.longitude
             }));
         }
+
         return <SPage
             title={(this.state?.ubicacion) ? ((this.state?.ubicacion == "true") ? "CLIENTES CON UBICACIÓN" : "CLIENTES SIN UBICACIÓN") : "MIS CLIENTES"}
             disableScroll
@@ -115,13 +98,13 @@ export default class root extends Component {
                     initSpace={8}
                     space={5}
                     buscador
-                    limit={20}
+                    // limit={20}
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
-                        const curvisita = (this.state.visitas ?? []).find(a => a.idcli == vd.idcli);
+                        const curvisita = visitas.find(a => a.idcli == vd.idcli);
                         return <>
-                            <SView key={vd.idcli} col={"xs-12"} row center
+                            <SView col={"xs-12"} row center
                                 card
                                 style={{
                                     padding: 8,
@@ -136,7 +119,7 @@ export default class root extends Component {
                                     SNavigation.navigate("/tbcli/profile", {
                                         pk: vd.idcli + "",
                                         idemp: this.props?.state?.idemp,
-                                        visitaType: "venta",
+                                        visitaType: "transporte",
                                         visita: curvisita,
                                     })
                                 }}

@@ -11,6 +11,7 @@ export default new class background_location extends TableAbstract {
         properties: {
             sync_type: "string?",
             "key": "string?",
+            "tipo": "string?",
             "accuracy": "double?",
             "altitude": "double?",
             "distanceMoved": "double?",
@@ -19,7 +20,8 @@ export default new class background_location extends TableAbstract {
             "longitude": "double?",
             "rotation": "double?",
             "speed": "double?",
-            "time": "float?"
+            "time": "float?",
+            "fecha_on":"string?",
         }
     }
 

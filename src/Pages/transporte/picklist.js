@@ -1,13 +1,13 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SLoad, SPage, STable2, SText } from 'servisofts-component'
+import { SLoad, SNavigation, SPage, STable2, SText } from 'servisofts-component'
 import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 
 export default class picklist extends Component {
     state = {
         data: null,
-        fecha:"2023-10-24"
+        fecha: SNavigation.getParam("fecha")
     }
     componentDidMount() {
         this.loadData()
@@ -21,7 +21,7 @@ export default class picklist extends Component {
             idemp: user.idtransportista,
             fecha: this.state.fecha
         })
-        this.setState({ data: picklist.data })
+        this.setState({ data: picklist.data ?? [] })
     }
 
     renderTable() {

@@ -236,7 +236,7 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Ilist',
                 color: '#1DA1F2',
-                onPress: () => SNavigation.navigate("/tbemp/profile/pickList", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => SNavigation.navigate("/transporte/picklist", { pk: this.pk, fecha: this.state?.fecha_inicio }),
                 // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
             })}
             {/* {this.ItemCard({
@@ -300,16 +300,16 @@ class index extends DPA.profile {
 
             <SView col={"xs-12"} >
                 <SText >Usuario:</SText>
-                <SView col={"xs-12"} card center  row
+                <SView col={"xs-12"} card center row
                     onPress={() => {
                         SNavigation.navigate("/tbemp/profile/usuario", { pk: this.pk })
                     }}
                 >
-                    <SHr height={15}/>
+                    <SHr height={15} />
                     <SIcon name={"Iuser"} height={20} width={22} />
                     <SView width={5} />
                     <SText>Ver Usuario</SText>
-                    <SHr height={15}/>
+                    <SHr height={15} />
 
                 </SView>
             </SView>

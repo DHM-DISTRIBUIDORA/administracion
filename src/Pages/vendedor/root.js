@@ -8,6 +8,7 @@ import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
 import DataBase from '../../DataBase'
+import { Trigger } from 'servisofts-db'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -17,19 +18,20 @@ export default class root extends Component {
             idemp: SNavigation.getParam("idemp"),
         }
     }
+
+
     componentDidMount() {
         this.loadDataAsync();
-        // this.setState({ loading: true })
-
-        // Model.tbcli.Action.getClientesDia({ idemp: this.state.idemp, sdate: this.state.curdate }).then((e) => {
-        //     this.setState({
-        //         loading: false,
-        //         data: e.data, visitas: e.visitas
-        //     })
-        // }).catch(e => {
-        //     this.setState({ loading: false })
-        //     console.error(e);
-        // })
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["visita_vendedor"]
+        }, (evt) => {
+            console.log("ENTRO EN EL TRIGGERRRRRR", evt)
+            this.loadDataAsync();
+        });
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
     }
 
     async loadDataAsync() {
@@ -50,8 +52,8 @@ export default class root extends Component {
             }
 
             const visitas = await DataBase.visita_vendedor.all();
+            console.log(visitas.length)
             // console.log("zonas", zonas);
-            console.log("cliente", clientes);
             this.setState({
                 loading: false,
                 data: clientes,

@@ -16,7 +16,7 @@ export default class IniciarTransporte extends Component {
                     <SwitchRastreo />
                 </SView> */}
                 <Btn col={"xs-11"} type='default' onPress={() => {
-                    SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha_inicio: this.props.fecha_inicio, fecha_fin: this.props.fecha_fin })
+                    SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.props.fecha_inicio })
                 }}>INICIAR TRANSPORTE</Btn>
                 <SHr />
                 <SText fontSize={12} center color={STheme.color.lightGray} >{"Al activarse se utilizará su ubicación para guiarlo a realizar sus visitas."}</SText>

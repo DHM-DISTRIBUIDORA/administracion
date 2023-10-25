@@ -1,4 +1,4 @@
-import { Text, View, TextInput, ScrollView, KeyboardAvoidingView, Platform } from 'react-native'
+import { Text, View, TextInput, ScrollView, KeyboardAvoidingView, Platform, TextStyle } from 'react-native'
 import React, { Component } from 'react'
 import { SList, SStorage, SText, STheme, SThread, SView } from 'servisofts-component'
 import * as ReservedWords from './ReservedWords';
@@ -17,10 +17,27 @@ export default class TextArea extends Component {
     }
 
 
+
+
+    handleKey = (e) => {
+        if (this.props.onKeyPress) {
+            this.props.onKeyPress(e);
+        }
+
+
+    }
     componentDidMount() {
-        SStorage.getItem("value_text", (val) => {
+        SStorage.getItem("sql_tap_" + this.props.pk, (val) => {
             this.setState({ value: val ?? "" })
         })
+        if (Platform.OS == "web") {
+            window.addEventListener('keydown', this.handleKey);
+        }
+    }
+    componentWillUnmount() {
+        if (Platform.OS == "web") {
+            window.removeEventListener('keydown', this.handleKey);
+        }
     }
     getValue() {
         return this.state.value;
@@ -93,6 +110,7 @@ export default class TextArea extends Component {
     }
     handleOnKeyPress = (e) => {
         let key = e.nativeEvent.key;
+        this.handleKey(e);
         switch (key) {
             case "Tab":
                 this.handleOnKeyPress_Tab(e);
@@ -108,7 +126,7 @@ export default class TextArea extends Component {
         this.setState({ value: this.state.value })
         new SThread(500, "sad", true).start(() => {
             console.log("fuardo el elmento")
-            SStorage.setItem("value_text", this.state.value)
+            SStorage.setItem("sql_tap_" + this.props.pk, this.state.value)
         })
 
 
@@ -162,15 +180,18 @@ export default class TextArea extends Component {
         return <Text style={[style]}>{ARRAY}</Text>
     }
     render() {
-        let textStyle = {
+        let textStyle: TextStyle = {
             fontSize: 14,
             lineHeight: 18,
-            fontFamily: "Roboto",
-            font: "Roboto",
+            fontFamily: "Cascadia",
+            font: "Cascadia",
             caretColor: STheme.color.text,
             color: STheme.color.text,
+            // fontWeight: 700,
+            // caretColor: "#99D6F8",
+            // color: "#99D6F8",
             padding: 0,
-            margin: 0
+            margin: 0,
 
         }
         let style = {
@@ -214,7 +235,7 @@ export default class TextArea extends Component {
                             </SView>
                             <SView width={20} style={{
                                 borderRightWidth: 1,
-                                borderColor: "#eee"
+                                borderColor: STheme.color.card
                             }} ></SView>
                             <SView flex height={"100%"} >
                                 <ScrollView horizontal
@@ -239,7 +260,6 @@ export default class TextArea extends Component {
                                                 scrollEnabled={false}
                                                 style={{
                                                     ...style,
-
                                                     paddingTop: 0,//No quitar son para IOS
                                                     marginTop: 0,//No quitar son para IOS
                                                     padding: 0,

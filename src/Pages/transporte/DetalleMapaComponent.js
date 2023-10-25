@@ -11,7 +11,7 @@ const Card = ({ label, value, backgroundColor, onPress }) => {
                 <SText fontSize={18}>{value}</SText>
             </SView>
             <SText center fontSize={10} color={STheme.color.black}>{label}</SText>
-        <SHr height={10} />
+            <SHr height={10} />
 
         </SView>
     </SView>
@@ -22,7 +22,7 @@ export default ({ state }) => {
     const visitas = state.visitas ?? {};
     const clientes_con_ubicacion = clientes.filter(a => !!a.clilat && !!a.clilon)
     const clientes_sin_ubicacion = clientes.filter(a => !a.clilat || !a.clilon)
-    const clientes_visitados = clientes.filter(a => !!visitas[a.idcli])
+    const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idcli == a.idcli))
 
 
     return <SView col={"xs-12"}
@@ -34,12 +34,15 @@ export default ({ state }) => {
     >
         <SView row col={"xs-12"}>
             <Card label={"Clientes con ubicación"} value={clientes_con_ubicacion.length} backgroundColor={STheme.color.success + "99"} onPress={() => {
-                SNavigation.navigate("/tbemp/profile/tbcli", { pk: state.idemp })
+                SNavigation.navigate("/transporte/list", { pk: state.idemp, ubicacion: "true" })
             }} />
             <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "99"} onPress={() => {
-                SNavigation.navigate("/tbemp/profile/tbcli", { pk: state.idemp })
+                SNavigation.navigate("/transporte/list", { pk: state.idemp, ubicacion: false })
             }} />
-            <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`} />
+            <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`}
+                onPress={() => {
+                    SNavigation.navigate("/transporte/list", { pk: state.idemp })
+                }} />
         </SView>
     </SView>
 }
