@@ -38,7 +38,7 @@ class index extends DPA.profile {
     // componentDidMount() {
     //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
     //         // Tu código aquí será ejecutado cada vez que la pantalla esté enfocada
-            
+
     //         // ...
     //     });
     // }
@@ -127,7 +127,7 @@ class index extends DPA.profile {
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
         var montoOk = "";
-        if (monto != "") montoOk = "Bs. " + monto; 
+        if (monto != "") montoOk = "Bs. " + monto;
         return <SView col={"xxs-12 xs-6 sm-6 md-6 lg-6 xl-6 xxl-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,
@@ -154,11 +154,11 @@ class index extends DPA.profile {
                 }}>
                     {(montoOk == "")
                         ?
-                        <SText bold fontSize={14} style={{lineHeight: 20}}>{cant}</SText>
+                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>{cant}</SText>
                         :
-                        <SText bold fontSize={14} style={{lineHeight: 20}}>({cant})</SText>}
-                    <SText fontSize={14} style={{lineHeight: 20}}>{montoOk}</SText>
-                    <SText fontSize={12} color={STheme.color.gray} style={{lineHeight: 15}}>{label}</SText>
+                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>({cant})</SText>}
+                    <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText>
+                    <SText fontSize={12} color={STheme.color.gray} style={{ lineHeight: 15 }}>{label}</SText>
                 </SView>
             </SView>
         </SView>
@@ -231,11 +231,12 @@ class index extends DPA.profile {
             justifyContent: "space-between"
         }}>
             {this.ItemCard({
-                label: "Clientes con pedidos",
-                cant: this.state.cantidad_clientes_con_pedido ?? 0,
+                label: "",
+                cant: "Pick List",
                 monto: "",
-                icon: 'Iclients',
+                icon: 'Ilist',
                 color: '#1DA1F2',
+                onPress: () => SNavigation.navigate("/tbemp/profile/pickList", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
             })}
             {/* {this.ItemCard({
@@ -246,11 +247,12 @@ class index extends DPA.profile {
                 color: '#833AB4',
             })} */}
             {this.ItemCard({
-                label: "Productos",
-                cant: this.state.cantidad_total_items ?? 0,
-                monto: SMath.formatMoney(this.state.monto_total_items ?? 0),
-                icon: 'Ipedidos',
+                label: "",
+                cant: "Entregas",
+                monto: "",
+                icon: 'Ientregas',
                 color: '#FF5A5F',
+                onPress: () => SNavigation.navigate("/tbemp/profile/entregas", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
             })}
         </SView>
     }
@@ -294,37 +296,26 @@ class index extends DPA.profile {
     }
 
     getUser() {
+        return <>
 
-        if (!this.data) return <SLoad />
-        const idemt = this.data.idemt;
+            <SView col={"xs-12"} >
+                <SText >Usuario:</SText>
+                <SView col={"xs-12"} card center  row
+                    onPress={() => {
+                        SNavigation.navigate("/tbemp/profile/usuario", { pk: this.pk })
+                    }}
+                >
+                    <SHr height={15}/>
+                    <SIcon name={"Iuser"} height={20} width={22} />
+                    <SView width={5} />
+                    <SText>Ver Usuario</SText>
+                    <SHr height={15}/>
 
-        let key = "";
-        if (idemt == 1) {
-            key = "idvendedor"
-        } else if (idemt == 4) {
-            key = "idtransportista"
-        }
-        if (!key) return <SText>Usuario no configurado.</SText>
-        let users = Model.usuario.Action.getAll();
-        if (!users) return <SLoad />
-        // console.log(users)
-        let user = Object.values(users).find(o => o[key] == this.pk)
-        return <SView col={"xs-12"}>
-            <SText >Usuario:</SText>
-            <Usuario.Select
-                defaultValue={user}
-                onChange={(usr) => {
-                    if (user) {
-                        Model.usuario.Action.editar({
-                            data: { ...user, [key]: "" }, key_usuario: Model.usuario.Action.getKey()
-                        })
-                    }
-                    Model.usuario.Action.editar({
-                        data: { ...usr, [key]: this.pk }, key_usuario: Model.usuario.Action.getKey()
-                    })
-                }} />
-        </SView>
+                </SView>
+            </SView>
+        </>
     }
+
     $footer() {
         return <SView col={"xs-12"} center>
             <SHr />

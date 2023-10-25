@@ -4,6 +4,7 @@ import DataBase, { DB } from '.';
 import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread } from 'servisofts-component';
 import SDB, { TableAbstract } from 'servisofts-db';
 import SSocket from 'servisofts-socket';
+import SaveTop from '../Components/SaveTop';
 
 type DataBaseContainerPropsType = {
     children?: any
@@ -116,6 +117,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
             <AlertBar ref={ref => {
                 DataBaseContainer.INSTANCE = ref;
             }} />
+             <SaveTop />
         </>
     }
 }

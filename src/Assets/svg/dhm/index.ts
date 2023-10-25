@@ -80,6 +80,10 @@ import Icarnet, { ReactComponent as IcarnetW } from './icarnet.svg';
 import Icategoria, { ReactComponent as IcategoriaW } from './icategoria.svg';
 import Ireload, { ReactComponent as IreloadW } from './ireload.svg';
 import Istorage, { ReactComponent as IstorageW } from './istorage.svg';
+import Ientregas, { ReactComponent as IentregasW } from './ientregas.svg';
+import Ilist, { ReactComponent as IlistW } from './ilist.svg';
+import Iuser, { ReactComponent as IuserW } from './iuser.svg';
+import Isave, { ReactComponent as IsaveW } from './isave.svg';
 
 
 const Assets = {
@@ -165,7 +169,17 @@ const Assets = {
 	"Icategoria": { Native: Icategoria, Web: IcategoriaW },
 	"Ireload": { Native: Ireload, Web: IreloadW },
 	"Istorage": { Native: Istorage, Web: IstorageW },
+	"Ientregas": { Native: Ientregas, Web: IentregasW },
+	"Ilist": { Native: Ilist, Web: IlistW },
+	"Iuser": { Native: Iuser, Web: IuserW },
+	"Isave": { Native: Isave, Web: IsaveW },
+
 	
+	
+
+
+
+
 
 }
 
