@@ -108,8 +108,12 @@ export default new class tbcli extends TableAbstract {
                 "estado": "cargando",
 
             }
+
             if (usrLog.idvendedor) {
                 request["cliidemp"] = usrLog.idvendedor
+            }else if (usrLog.idtransportista) {
+                // request["cliidemp"] = usrLog.idvendedor
+                return resolve("");
             } else {
                 request["fecmod"] = sync_data.fecmod
             }
