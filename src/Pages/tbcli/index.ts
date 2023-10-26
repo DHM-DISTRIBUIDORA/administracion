@@ -10,6 +10,7 @@ import _new from "./new"
 import find from './find';
 import profile from './profile/index';
 import mapa from './mapa';
+import listCliCat from './listCliCat';
 
 
 export const Parent = {
@@ -28,5 +29,6 @@ export default SPage.combinePages(Parent.name, {
     edit,
     find,
     "mapa": mapa,
-    ...profile
+    ...profile,
+    listCliCat
 })
