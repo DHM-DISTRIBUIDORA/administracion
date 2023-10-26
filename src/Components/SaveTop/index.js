@@ -28,7 +28,8 @@ class index extends React.Component {
 				}}
 					activeOpacity={1}
 					onPress={() => {
-						DataBaseContainer.sync();
+						DataBaseContainer.saveChanges();
+						// DataBaseContainer.sync();
 					}} center>
 						<SIcon name={"Isave"} fill={STheme.color.primary} height={17} width={17} />
 				</SView>

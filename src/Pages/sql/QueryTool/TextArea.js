@@ -23,8 +23,37 @@ export default class TextArea extends Component {
         if (this.props.onKeyPress) {
             this.props.onKeyPress(e);
         }
+        this.handleKey_comment(e);
 
 
+    }
+    handleKey_comment(e) {
+        if ((e.which || e.keyCode) === 191) {
+            if (e.metaKey) {
+                e.preventDefault();
+                const li = this.state.value.lastIndexOf("\n", this.state.selection.start - 1)
+                const comentp = this.state.value.indexOf("--", li);
+                if (comentp >= 0) {
+                    const newWord = this.state.value.substring(0, comentp) + this.state.value.substring(comentp + 2, this.state.value.length)
+                    this.state.event = "comment";
+                    this.state.selection.start = this.state.selection.start - 2;
+                    this.state.selection.end = this.state.selection.end - 2;
+                    this.handleOnChangeText(newWord)
+                } else {
+                    const newWord = this.state.value.substring(0, li + 1) + "--" + this.state.value.substring(li + 1, this.state.value.length)
+                    this.state.event = "comment";
+                    this.state.selection.start = this.state.selection.start + 2;
+                    this.state.selection.end = this.state.selection.end + 2;
+                    this.handleOnChangeText(newWord)
+                }
+                new SThread(2, "sad", true).start(() => {
+                    this.inp.selectionStart = this.state.selection.start;
+                    this.inp.selectionEnd = this.state.selection.end;
+                })
+
+            }
+            // this.execute();
+        }
     }
     componentDidMount() {
         SStorage.getItem("sql_tap_" + this.props.pk, (val) => {
@@ -41,6 +70,12 @@ export default class TextArea extends Component {
     }
     getValue() {
         return this.state.value;
+    }
+    getValueSelect() {
+        console.log(this.state.selection)
+        if (!this.state?.selection?.start && !this.state?.selection?.end) return this.state.value;
+        if (this.state?.selection?.start == this.state?.selection?.end) return this.state.value;
+        return this.state.value.substring(this.state.selection.start, this.state.selection.end);
     }
     preventDefault(e) {
         e.preventDefault();
@@ -99,7 +134,7 @@ export default class TextArea extends Component {
             saveSelect.start += row.length
             saveSelect.end += row.length
             this.handleOnChangeText(value)
-            new SThread(10, "sadas", true).start(() => {
+            new SThread(2, "sadas", true).start(() => {
                 this.state.selection = saveSelect
                 this.inp.selectionStart = this.state.selection.start;
                 this.inp.selectionEnd = this.state.selection.end;
@@ -289,7 +324,7 @@ export default class TextArea extends Component {
                                                     }
                                                 }}
                                                 onSelectionChange={(e) => {
-                                                    if (this.state.event == "tab") {
+                                                    if (this.state.event == "tab" || this.state.event == "comment") {
                                                         this.state.event = "onSelectionChange";
                                                         // this.setState({ ...this.state })
                                                         return;

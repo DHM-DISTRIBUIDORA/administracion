@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import React, { Component, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import DataBase, { DB } from '.';
-import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread } from 'servisofts-component';
+import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread, SPopup, SDate } from 'servisofts-component';
 import SDB, { TableAbstract } from 'servisofts-db';
 import SSocket from 'servisofts-socket';
 import SaveTop from '../Components/SaveTop';
@@ -15,7 +15,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
         ready: false
     }
     private static INSTANCE: any;
-
+    static __runsync = false;
     static sync = async () => {
         console.log("Entro al sync")
         if (!DataBaseContainer.INSTANCE) return;
@@ -25,7 +25,16 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
             console.error(error);
             return;
         }
-        console.log("Entro al sync paso")
+        if (this.__runsync) {
+            SNotification.send({
+                title: "Error",
+                body: "Hay otra sincornizacion en curso",
+                color: STheme.color.danger,
+                time: 5000,
+            })
+            return;
+        }
+        this.__runsync = true;
 
         for (let i = 0; i < DB.tables.length; i++) {
             const t = DB.tables[i];
@@ -35,12 +44,20 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
                 console.error(error);
             }
         }
+        DataBase.sync_data.insert({ tbname: "all", fecha_sync: new SDate().toString(), sync_type: "all" })
+        SNotification.send({
+            title: "Sync",
+            body: "Se sincronizaron los datos con exito.",
+            color: STheme.color.success,
+            time: 5000,
+        })
+        this.__runsync = false;
     }
     static syncTable = async (name: string) => {
         if (!DataBaseContainer.INSTANCE) return;
         return await DataBaseContainer.INSTANCE.syncTable(name);
     }
-    static testConnection = async () => {
+    static testConnection = async (hidden = false) => {
         const notify = await SNotification.send({
             title: "Base de datos",
             body: `Verificando conexion a internet`,
@@ -65,7 +82,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
                 color: STheme.color.danger,
                 time: 5000
             })
-            throw "error"
+            throw "no server"
         }
     }
 
@@ -79,26 +96,61 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
 
     hilo() {
         if (!this.isRun) return;
-        new SThread(10000, "hilo_verificador", false).start(async () => {
+        new SThread(1000 * 60 * 1, "hilo_verificador", true).start(async () => {
             if (!this.isRun) return;
 
-            await this.verifyChanges();
+            await DataBaseContainer.saveChanges();
 
             this.hilo();
         })
     }
 
+    static __runsave = false;
+    static saveChanges = async () => {
 
-    verifyChanges = async () => {
+        if (this.__runsave) {
+            SNotification.send({
+                title: "Error",
+                body: "Hay otra sincornizacion en curso",
+                color: STheme.color.danger,
+                time: 5000,
+            })
+            return;
+        }
+        this.__runsave = true;
+
         const notify = await SNotification.send({
             title: "Base de datos",
-            body: `Verificando cambios...`,
+            body: `Guardando cambios...`,
             color: STheme.color.warning,
             type: "loading"
         })
+
+        let isConnect: any = false;
+        if (!isConnect) {
+            try {
+                isConnect = await SSocket.sendPromise2({
+                    component: "enviroments",
+                    type: "getVersion"
+                }, 5000)
+            } catch (error) {
+                this.__runsave = false;
+                notify.close();
+                SNotification.send({
+                    title: "Error de conexion",
+                    body: "Verifique su conexion a internet.",
+                    color: STheme.color.danger,
+                    time: 5000
+                })
+                return;
+                // throw "Sin conexion a internet"
+            }
+
+        }
         for (let i = 0; i < DB.tables.length; i++) {
             const table = DB.tables[i];
             try {
+
                 const changes = await table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'");
                 if (changes.length > 0) {
                     await subirCambios(table);
@@ -119,6 +171,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
                 console.error(error)
             }
         }
+        this.__runsave = false;
         notify.close()
 
     }
@@ -159,6 +212,9 @@ const subirCambios = async (table: TableAbstract) => {
     const _update = await table.filtered("sync_type == 'update'");
     const _delete = await table.filtered("sync_type == 'delete'");
 
+    let cantidad = _insert.length + _update.length + _delete.length
+    if (cantidad <= 0) throw "No hay cambios";
+    console.log(cantidad)
     const respuesta: any = await SSocket.sendPromise2({
         component: table.scheme.name,
         type: "uploadChanges",
@@ -166,10 +222,11 @@ const subirCambios = async (table: TableAbstract) => {
         insert: _insert,
         update: _update,
         delete: _delete,
-    }, 1000 * 60 * 5)
+    }, 1000 * cantidad * 5)
+    // }, 1000 * 40)
 
     if (respuesta?.estado != "exito") throw "No respondio exito";
-    return true;
+    return respuesta;
 }
 
 const AlertBar = forwardRef((props, ref) => {

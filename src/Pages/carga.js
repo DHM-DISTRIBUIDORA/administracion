@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SNavigation, SPage, STheme, SThread, SView } from 'servisofts-component';
+import { SHr, SIcon, SNavigation, SPage, SPopup, STheme, SThread, SView } from 'servisofts-component';
 import Model from '../Model';
 import SSocket from 'servisofts-socket'
 import packageInfo from "../../package.json";
@@ -46,7 +46,19 @@ export default class index extends Component {
                 SNavigation.replace("/version_required")
                 return;
             }
-            DataBaseContainer.sync();
+
+            DataBase.sync_data.objectForPrimaryKey("all").then(e => {
+                SPopup.confirm({
+                    title: "Recargar los datos?",
+                    message:"Presiona en confirmar para volver a descargar los datos o cancelar para continuar con los datos que tienes.",
+                    onPress: () => {
+                        DataBaseContainer.sync();
+                    }
+                })
+            }).catch(e => {
+                DataBaseContainer.sync();
+            })
+
 
         }).catch(e => {
             console.error(e)

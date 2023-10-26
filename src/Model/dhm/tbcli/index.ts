@@ -9,10 +9,12 @@ export default new SModel<Action, Reducer>({
     Columns: {
         "idcli": { type: "text", pk: true },
         "clicod": { type: "text", editable: true },
+        "idcat": { type: "text", editable: true },
         "clinom": { type: "text", editable: true, notNull: true },
+        "clirazon": { type: "text", editable: true },
         "cliape": { type: "text", editable: true },
         "clinit": { type: "text", editable: true, notNull: true },
-        "clidir": { type: "text", editable: true },
+
         "cliloc": { type: "text", editable: true },
         "clizona": { type: "text", editable: true },
         "clidep": { type: "text", editable: true },
@@ -38,7 +40,7 @@ export default new SModel<Action, Reducer>({
         "clifing": { type: "text", editable: true },
         "idds": { type: "text", editable: true },
         "climon": { type: "text", editable: true },
-        "idcat": { type: "text", editable: true },
+
         "cliadic": { type: "text", editable: true },
         "iddepcli": { type: "text", editable: true },
         "clidesfin": { type: "text", editable: true },
@@ -47,7 +49,6 @@ export default new SModel<Action, Reducer>({
         "cliinter": { type: "text", editable: true },
         "idciu": { type: "text", editable: true },
         "idloc": { type: "text", editable: true },
-        "clirazon": { type: "text", editable: true },
         "idcanal": { type: "text", editable: true },
         "dmsest": { type: "text", editable: true },
         "usumod": { type: "text", editable: true },
@@ -55,8 +56,7 @@ export default new SModel<Action, Reducer>({
         "clicel": { type: "text", editable: true },
         "cliote": { type: "text", editable: true },
         "cliico": { type: "text", editable: true },
-        "clilat": { type: "text", editable: true },
-        "clilon": { type: "text", editable: true },
+
         "cliidcta": { type: "text", editable: true },
         "idrg": { type: "text", editable: true },
         "cliidtipo": { type: "text", editable: true },
@@ -67,6 +67,9 @@ export default new SModel<Action, Reducer>({
         "climpid": { type: "text", editable: true },
         "climpdoc": { type: "text", editable: true },
         "sucreg": { type: "text", editable: true },
+        "clidir": { type: "text", editable: true },
+        "clilat": { type: "text", editable: true },
+        "clilon": { type: "text", editable: true },
     },
     image: {
         api: "root",

@@ -15,7 +15,7 @@ import visita_transportista from './tables/visita_transportista'
 import { SThread } from 'servisofts-component'
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 11,
+    version: 12,
     tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista]
 }
 
