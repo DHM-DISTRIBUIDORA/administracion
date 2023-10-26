@@ -48,9 +48,10 @@ class pedidos extends Component {
             </SView>
             <SHr />
             <SView col={"xs-12"} center row>
-                <SView flex row>
+                <SView flex>
                     <SText bold>{obj.clicod}  - {obj.nombrecliente}</SText>
-                    <SText fontSize={12}>{obj.vobs}</SText>
+                    <SText fontSize={12} color={STheme.color.gray}>{obj.vobs}</SText>
+
                 </SView>
                 <SView width={80} style={{
                     alignItems: "flex-end"

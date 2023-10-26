@@ -7,6 +7,7 @@ import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import SwitchRastreo from '../../Components/SwitchRastreo'
 import DataBase from '../../DataBase'
+import { Trigger } from 'servisofts-db'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -18,26 +19,34 @@ export default class root extends Component {
         }
     }
     componentDidMount() {
-        this.setState({ loading: true })
-        SSocket.sendPromise({
-            component: "tbemp",
-            type: "getVentasFactura",
-            idemp: this.state.idemp,
-            fecha: this.state.fecha
-        }).then(async (e) => {
-            const visitas = await DataBase.visita_transportista.all();
-            // console.log("zonas", zonas);
-            this.setState({
-                loading: false,
-                data: Object.values(e.data),
-                visitas: visitas
-            })
-        }).catch(e => {
-            this.setState({ loading: false })
-            console.error(e);
-        })
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["visita_transportista"]
+        }, (evt) => {
+            this.loadDataAsync();
+        });
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
     }
 
+    async loadDataAsync() {
+        this.setState({ loading: true })
+        try {
+            const ventas = await DataBase.ventas_factura.all()
+            const visitas = await DataBase.visita_transportista.all();
+            this.setState({
+                loading: false,
+                data: ventas,
+                visitas: visitas
+            })
+
+        } catch (error) {
+            this.setState({ loading: false })
+            console.error(error);
+        }
+    }
     render() {
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
             <SView col={"xs-12"} center row padding={4} height={50}>
@@ -55,7 +64,7 @@ export default class root extends Component {
                 <MapaComponent state={this.state} setState={this.setState.bind(this)} />
                 <DetalleMapaComponent state={this.state} setState={this.setState.bind(this)} />
             </SView>
-            <SLoad type='window' hidden={!this.state.loading} />
+            {/* <SLoad type='window' hidden={!this.state.loading} /> */}
         </SPage>
     }
 }

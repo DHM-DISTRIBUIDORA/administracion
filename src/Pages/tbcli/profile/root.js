@@ -46,18 +46,18 @@ class index extends DPA.profile {
     }
 
     loadData({ fecha_inicio, fecha_fin }) {
-        SSocket.sendPromise({
-            component: "tbcli",
-            type: "getPerfil",
-            idcli: this.pk + "",
-            fecha_inicio,
-            fecha_fin
-        }).then((e) => {
-            const obj = e.data[0]
-            console.log("tbcli getPerfil", obj)
-            this.setState({ ...obj })
-        }).catch(e => console.error(e))
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
+        // SSocket.sendPromise({
+        //     component: "tbcli",
+        //     type: "getPerfil",
+        //     idcli: this.pk + "",
+        //     fecha_inicio,
+        //     fecha_fin
+        // }).then((e) => {
+        //     const obj = e.data[0]
+        //     console.log("tbcli getPerfil", obj)
+        //     this.setState({ ...obj })
+        // }).catch(e => console.error(e))
+        // this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
     }
 
     visitaRegistro({ descripcion, tipo, monto }) {

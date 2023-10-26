@@ -28,7 +28,8 @@ export default class Action extends SAction {
             extra.data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0")
             const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
 
-            extra.data.idcli = (cantidad.length + 1) * -1;
+            extra.data.idcli = new Date().getTime()
+            extra.data.clicod = "Pendiente"
             const data = await DataBase.tbcli.insert(extra?.data)
             this._dispatch({
                 ...this.model.info,

@@ -23,6 +23,7 @@ class index extends Component {
             this.state.lat = -17.783799
             this.state.lon = -63.180
         }
+
         // this.pk = SNavigation.getParam("pk");
 
         this.callback = SNavigation.getParam("callback");

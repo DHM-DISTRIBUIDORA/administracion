@@ -15,9 +15,10 @@ import BackgroundLocation from './BackgroundLocation';
 import Socket from './Socket';
 
 import DataBaseContainer from './DataBase/DataBaseContainer';
+// import { Example } from 'servisofts-charts';
 
 try {
-    // Firebase.init();
+    Firebase.init();
 } catch (e) {
     console.log(e);
 }
@@ -51,4 +52,10 @@ function App(): JSX.Element {
     </Redux>
 }
 
+
+// function AppTest(): JSX.Element {
+//     return <Example />
+// }
+
+// export default AppTest;
 export default App;

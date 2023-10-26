@@ -46,7 +46,9 @@ export default class QueryTool extends Component<{ pk: string }> {
     }
 
     execute() {
-        let value = this.inp.getValue();
+        // let value = this.inp.getValue();
+        let value = this.inp.getValueSelect();
+        console.log(value)
         if (!value) return;
         this.setState({ loading: true, data: null, error: null })
         SSocket.sendPromise({

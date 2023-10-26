@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { SBuscador, SButtom, SDate, SHr, SIcon, SInput, SList, SLoad, SMapView, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component'
 import { Container, Popups } from '../../Components'
 import DataBase from '../../DataBase'
+import { Trigger } from 'servisofts-db'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -15,30 +16,28 @@ export default class root extends Component {
         }
     }
 
-    componentDidMount() {
-        this.loadDataAsync()
-    }
 
+    componentDidMount() {
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["visita_transportista"]
+        }, (evt) => {
+            this.loadDataAsync();
+        });
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
 
     async loadDataAsync() {
         this.setState({ loading: true })
         try {
-            const zonas = await DataBase.tbzon.filtered("zdia == $0", new Date().getUTCDay());
-            let query = "";
-            zonas.map((zon, i) => {
-                if (i > 0) {
-                    query += " || "
-                }
-                query += ` idz == ${zon.idz} `
-            })
-            let clientes = []
-            if (query) {
-                clientes = await DataBase.tbcli.filtered(query);
-            }
+            const ventas = await DataBase.ventas_factura.all()
             const visitas = await DataBase.visita_transportista.all();
             this.setState({
                 loading: false,
-                data: clientes,
+                data: ventas,
                 visitas: visitas
             })
 
@@ -102,7 +101,7 @@ export default class root extends Component {
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
-                        const curvisita = visitas.find(a => a.idcli == vd.idcli);
+                        const curvisita = (this.state.visitas ?? []).find(a => a.idcli == vd.idcli);
                         return <>
                             <SView col={"xs-12"} row center
                                 card
@@ -125,7 +124,7 @@ export default class root extends Component {
                                 }}
                             >
                                 <SView col={"xs-9"} >
-                                    <SText fontSize={14} bold>{vd?.clicod} - {vd?.clinom}</SText>
+                                    <SText fontSize={14} bold>{vd?.codigo} - {vd?.clinom}</SText>
                                     <SText fontSize={12}>{vd?.clidir}</SText>
                                 </SView>
                                 <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>

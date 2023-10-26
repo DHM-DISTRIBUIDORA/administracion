@@ -12,11 +12,12 @@ import background_location from './tables/background_location'
 import sync_data from './tables/sync_data'
 import visita_vendedor from './tables/visita_vendedor'
 import visita_transportista from './tables/visita_transportista'
+import ventas_factura from './tables/ventas_factura'
 import { SThread } from 'servisofts-component'
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 11,
-    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista]
+    version: 14,
+    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista, ventas_factura]
 }
 
 export default {
@@ -49,7 +50,8 @@ export default {
     tbcat,
     background_location,
     visita_vendedor,
-    visita_transportista
+    visita_transportista,
+    ventas_factura
 }
 
 

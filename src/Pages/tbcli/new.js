@@ -11,11 +11,15 @@ class index extends DPA.new {
             Parent: Parent,
             excludes: ["idcli", "clicod", "cliape", "clizona", "climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
                 "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
-                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo", "climz", "clifing", "idconf", "cliuv", "idds", "climon", "idcat", "idcanal", "clicel"],
+                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo", "climz", "clifing", "idconf", "cliuv", "idds", "climon", "idcanal", "clicel", "clitipdoc",
+                "cliforpag", "clitipgar", "cliidtipo", "idclit",
+                // "clilat", "clilon",
+            ],
             title: "Nuevo " + Parent.title,
         });
         this.state = {
-            ubicacion: null
+            ubicacion: null,
+            clirazon: "",
         };
         this.pk = SNavigation.getParam("pk");
         console.log("pk - ", this.pk);
@@ -26,33 +30,78 @@ class index extends DPA.new {
     }
     $inputs() {
         var inp = super.$inputs();
-        inp["clilat"].onPress = (evt) => {
+        inp["clidir"].label = "Dirección"
+
+        inp["clidir"].onPress = (evt) => {
+            const values = this.form.getValues();
             SNavigation.navigate("/tbcli/mapa", {
                 callback: (resp) => {
+                    this.form.setValues({
+                        clidir: resp.clidir,
+                        clilat: resp.clilat,
+                        clilon: resp.clilon,
+                    })
+                    console.log(resp);
                     this.setState({ ubicacion: resp })
                 },
-                lat: 0,
-                lon: 0,
+                obj: {
+                    clidir: values?.clidir,
+                },
+                lat: values?.clilat,
+                lon: values?.clilon,
             });
         }
-        if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
-        if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
+        // if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
+        // if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
 
         // inp["clicod"].label = "Código de cliente"
         inp["clinom"].label = "Nombre completo"
+        inp["clinom"].onChangeText = (e) => {
+            if (!this.state?.clirazon) {
+                this.editRazon = true;
+                this.form.setValues({
+                    clirazon: e
+                })
+            }
+        }
+        inp["clirazon"].label = "Razón social"
+        inp["clirazon"].onChangeText = (e) => {
+            if (this.editRazon) {
+                this.editRazon = false;
+                return;
+            }
+            this.state.clirazon = e;
+        }
         inp["clinit"].label = "NIT"
-        inp["clidir"].label = "Dirección"
         inp["clitel"].label = "Teléfono"
+        inp["clitel"].type = "phone"
         inp["cliemail"].label = "Correo electrónico"
-        inp["clitipgar"].label = "Tipo de Garantía"
-        inp["cliforpag"].label = "Forma de pago"
-        inp["clitipdoc"].label = "Tipo de documento"
-        inp["clirazon"].label = "Razón"
+        inp["cliemail"].type = "email"
+        inp["cliemail"].required = true
+        inp["idcat"].label = "Tipo de cliente o Categoria"
+        inp["idcat"].editable = false;
+        inp["idcat"].value = this.state.idcat;
+        inp["idcat"].onPress = () => {
+            SNavigation.navigate("/tbcli/listCliCat", {
+                onSelect: (cat) => {
+                    console.log(cat);
+                    this.setState({ idcat: cat.idcat })
+                }
+            })
+        }
+        // inp["clinom"].on
+        // inp["clitipgar"].label = "Tipo de Garantía"
+        // inp["cliforpag"].label = "Forma de pago"
+        // inp["clitipdoc"].label = "Tipo de documento"
         inp["clilat"].label = "Latitud"
+        inp["clilat"].col = "xs-5.5"
+        inp["clilat"].editable = false
         inp["clilon"].label = "Longitud"
-        inp["cliidtipo"].label = "Id Tipo"
+        inp["clilon"].col = "xs-5.5"
+        inp["clilon"].editable = false
+        // inp["cliidtipo"].label = "Id Tipo"
 
-        inp["idz"].label = "Id zona"
+        inp["idz"].label = "Zona del cliente"
         inp["idz"].editable = false;
         inp["idz"].value = this.state.idz;
         inp["idz"].onPress = () => {
@@ -63,7 +112,7 @@ class index extends DPA.new {
                 }
             })
         }
-
+ 
         return inp;
     }
     $onSubmit(data) {
@@ -76,7 +125,7 @@ class index extends DPA.new {
         }
 
         if (this.pk) data.cliidemp = this.pk;
-        
+
         data.cliest = 0;
 
         // console.log("bbbbbb");
