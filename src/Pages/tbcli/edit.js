@@ -12,7 +12,7 @@ class index extends DPA.edit {
             Parent: Parent,
             excludes: ["cliape","clizona","climpid", "clidocid", "clicicompl", "clireprsci", "clireprs", "idrg", "cliidcta", "sucreg", "climpdoc", "cliico", "cliote", "fecmod", "usumod", "dmsest",
                 "clifax", "clicom", "clidep", "idclir", "clisic", "idloc", "cliloc", "idciu", "cliinter", "cliidemp", "clidirnro", "clidesfin", "iddepcli", "cliadic",
-                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcat","idcanal","clicel"],
+                "clitlimcre", "clilimau", "cliplazo", "cliest", "clicuo","climz", "clifing","idconf","cliuv","idds","climon","idcanal","clicel","clitipgar","cliforpag","clitipdoc" ,"idclit","cliidtipo"],
             title: "Editar " + Parent.title,
         });
         this.state = {
@@ -29,48 +29,88 @@ class index extends DPA.edit {
 
     $inputs() {
         var inp = super.$inputs();
-        console.log(this.state?.ubicacion?.clilat + " / " + this.state?.ubicacion?.clilon)
-        if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
-        if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
-        inp["clilat"].onPress = (evt) => {
-            let newLat;
-            let newLon;
-            if (inp["clilat"].value == "") {
-                newLat = 0;
-                newLon = 0;
-            } else if (this.state?.ubicacion?.clilat) {
-                newLat = this.state?.ubicacion?.clilat;
-                newLon = this.state?.ubicacion?.clilon;
-            } else {
-                newLat = this.data?.clilat;
-                newLon = this.data?.clilon;
-            }
-            SNavigation.navigate("/tbcli/mapa",
-                {
-                    callback: (resp) => {
-                        this.setState({ ubicacion: resp })
-                    },
-                    lat: newLat,
-                    lon: newLon,
-                    pk: this.pk
+        inp["clidir"].label = "Dirección"
+
+        inp["clidir"].onPress = (evt) => {
+            const values = this.form.getValues();
+            SNavigation.navigate("/tbcli/mapa", {
+                callback: (resp) => {
+                    this.form.setValues({
+                        clidir: resp.clidir,
+                        clilat: resp.clilat,
+                        clilon: resp.clilon,
+                    })
+                    console.log(resp);
+                    this.setState({ ubicacion: resp })
                 },
-            )
+                obj: {
+                    clidir: values?.clidir,
+                },
+                lat: values?.clilat,
+                lon: values?.clilon,
+            });
         }
+        // console.log(this.state?.ubicacion?.clilat + " / " + this.state?.ubicacion?.clilon)
+        // if (this.state?.ubicacion?.clilat) inp["clilat"].value = this.state?.ubicacion?.clilat;
+        // if (this.state?.ubicacion?.clilon) inp["clilon"].value = this.state?.ubicacion?.clilon;
+        // inp["clilat"].onPress = (evt) => {
+        //     let newLat;
+        //     let newLon;
+        //     if (inp["clilat"].value == "") {
+        //         newLat = 0;
+        //         newLon = 0;
+        //     } else if (this.state?.ubicacion?.clilat) {
+        //         newLat = this.state?.ubicacion?.clilat;
+        //         newLon = this.state?.ubicacion?.clilon;
+        //     } else {
+        //         newLat = this.data?.clilat;
+        //         newLon = this.data?.clilon;
+        //     }
+        //     SNavigation.navigate("/tbcli/mapa",
+        //         {
+        //             callback: (resp) => {
+        //                 this.setState({ ubicacion: resp })
+        //             },
+        //             lat: newLat,
+        //             lon: newLon,
+        //             pk: this.pk
+        //         },
+        //     )
+        // }
         inp["clicod"].label = "Código de cliente"
         inp["clinom"].label = "Nombre completo"
         inp["clinit"].label = "NIT"
         inp["clidir"].label = "Dirección"
         inp["clitel"].label = "Teléfono"
+        inp["clitel"].type = "phone"
         inp["cliemail"].label = "Correo electrónico"
-        inp["clitipgar"].label = "Tipo de Garantía"
-        inp["cliforpag"].label = "Forma de pago"
-        inp["clitipdoc"].label = "Tipo de documento"
+        inp["idcat"].label = "Tipo de cliente o Categoria"
+        inp["idcat"].editable = false;
+        inp["idcat"].value = this.state.idcat;
+        inp["idcat"].onPress = () => {
+            SNavigation.navigate("/tbcli/listCliCat", {
+                onSelect: (cat) => {
+                    console.log(cat);
+                    this.setState({ idcat: cat.idcat })
+                }
+            })
+        }
+        // inp["clitipgar"].label = "Tipo de Garantía"
+        // inp["cliforpag"].label = "Forma de pago"
+        // inp["clitipdoc"].label = "Tipo de documento"
         inp["clirazon"].label = "Razón"
         inp["clilat"].label = "Latitud"
         inp["clilon"].label = "Longitud"
-        inp["cliidtipo"].label = "Id Tipo"
+        // inp["cliidtipo"].label = "Id Tipo"
 
-        inp["idz"].label = "Id zona"
+        inp["clilat"].label = "Latitud"
+        inp["clilat"].col = "xs-5.5"
+        inp["clilat"].editable = false
+        inp["clilon"].label = "Longitud"
+        inp["clilon"].col = "xs-5.5"
+        inp["clilon"].editable = false
+
+        inp["idz"].label = "Zona de cliente"
         inp["idz"].editable = false;
         inp["idz"].value = this.state.idz;
         inp["idz"].onPress = () => {

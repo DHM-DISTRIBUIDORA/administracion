@@ -79,6 +79,16 @@ class index extends DPA.new {
         inp["cliemail"].type = "email"
         inp["cliemail"].required = true
         inp["idcat"].label = "Tipo de cliente o Categoria"
+        inp["idcat"].editable = false;
+        inp["idcat"].value = this.state.idcat;
+        inp["idcat"].onPress = () => {
+            SNavigation.navigate("/tbcli/listCliCat", {
+                onSelect: (cat) => {
+                    console.log(cat);
+                    this.setState({ idcat: cat.idcat })
+                }
+            })
+        }
         // inp["clinom"].on
         // inp["clitipgar"].label = "Tipo de Garantía"
         // inp["cliforpag"].label = "Forma de pago"
@@ -102,7 +112,7 @@ class index extends DPA.new {
                 }
             })
         }
-
+ 
         return inp;
     }
     $onSubmit(data) {

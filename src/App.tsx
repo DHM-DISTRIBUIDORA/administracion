@@ -15,7 +15,7 @@ import BackgroundLocation from './BackgroundLocation';
 import Socket from './Socket';
 
 import DataBaseContainer from './DataBase/DataBaseContainer';
-import { Example } from 'servisofts-charts';
+// import { Example } from 'servisofts-charts';
 
 try {
     // Firebase.init();
@@ -53,9 +53,9 @@ function App(): JSX.Element {
 }
 
 
-function AppTest(): JSX.Element {
-    return <Example />
-}
+// function AppTest(): JSX.Element {
+//     return <Example />
+// }
 
 // export default AppTest;
 export default App;
