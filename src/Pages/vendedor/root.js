@@ -38,7 +38,8 @@ export default class root extends Component {
         this.setState({ loading: true })
         try {
 
-            const zonas = await DataBase.tbzon.filtered("zdia == $0", new Date().getUTCDay());
+            console.log()
+            const zonas = await DataBase.tbzon.filtered("zdia == $0",new SDate().date.getDay());
             let query = "";
             zonas.map((zon, i) => {
                 if (i > 0) {

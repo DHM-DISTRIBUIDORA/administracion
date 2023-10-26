@@ -49,6 +49,7 @@ class index extends Component {
         if (this.state.loading) return;
         // console.error(client)
         try {
+            this.state.loading = true;
             this.setState({ loading: true, error: "" })
             console.log("tbcli", tbcli)
 
@@ -111,8 +112,8 @@ class index extends Component {
 
             await DataBase.dm_cabfac.insert(dm_cabfac);
             Model.carrito.Action.removeAll()
-            this.setState({ loading: false, error: "" })
 
+            this.setState({ loading: false, error: "" })
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: idven,
                 onBack: () => {
