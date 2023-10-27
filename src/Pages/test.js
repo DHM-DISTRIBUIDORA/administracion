@@ -31,7 +31,7 @@ export default class test extends Component {
 
         return (
             <View>
-                <Text>{this.state?"si":"no"}</Text>
+                <Text>{JSON.stringify(this.state)}</Text>
             </View>
         )
     
