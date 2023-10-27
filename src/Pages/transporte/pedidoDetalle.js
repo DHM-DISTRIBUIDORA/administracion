@@ -20,6 +20,7 @@ class pedidoDetalle extends Component {
         this.visitaType = SNavigation.getParam("visitaType", false);
         this.idemp = SNavigation.getParam("idemp", 0);
         this.tbvd = SNavigation.getParam("tbvd", 0);
+        this.pk = SNavigation.getParam("pk", 0);
     }
     componentDidMount() {
         //TODO: NO RECARGA EL DETALLE AL EDITAR
