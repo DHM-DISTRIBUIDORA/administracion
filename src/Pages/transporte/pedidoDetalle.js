@@ -11,7 +11,6 @@ class pedidoDetalle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            // curdate: new SDate("2023-08-28", "yyyy-MM-dd"),
             curdate: new SDate(),
             idemp: SNavigation.getParam("idemp"),
             fecha: SNavigation.getParam("fecha"),
@@ -27,9 +26,8 @@ class pedidoDetalle extends Component {
         // DataBase.ventas_factura.all
         // DataBase.dm_cabfac.
         DataBase.ventas_factura.objectForPrimaryKey(parseInt(this.idven)).then((e) => {
-            // e.detalle = JSON.parse(e.detalle);
             this.setState({ data: e })
-            console.log(e)
+            // console.log(e)
         })
     }
     item() {
@@ -233,27 +231,14 @@ class pedidoDetalle extends Component {
                                         <SHr />
                                         <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
                                         <SHr />
-                                        {/* <SInput ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
-                                        <SHr /> */}
                                         <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Razón o motivo"} />
-
                                         <SHr />
                                         <Btn padding={8} onPress={() => {
-                                            // let monto = 0;
-                                            // if (this.visitaType == "venta") {
-                                            //     monto = 0;
-                                            // } else if (this.visitaType == "transporte") {
-                                            //     monto = this.total_pagado.getValue();
-                                            // }
                                             this.visitaRegistro({
                                                 descripcion: (this.visita_descripcion?.getValue()) ? this.visita_descripcion?.getValue() : "",
                                                 tipo: this.visita_tipo.getValue(),
                                                 // monto: monto
                                             })
-                                            // this.onVisitaSuccess({
-                                            //     descripcion: this.visita_descripcion.getValue(),
-                                            //     tipo: this.visita_tipo.getValue()
-                                            // });
                                             SPopup.close("popup_concretar_visita_no");
                                         }}>CONFIRMAR</Btn>
                                         <SHr />
@@ -266,15 +251,10 @@ class pedidoDetalle extends Component {
                     </SView>
                     <SView col={"xs-1"} />
                     <SView col={"xs-5.5"} center>
-                        {/* <PButtom3 colorBg={STheme.color.success} onPress={() => {
-                            SNavigation.navigate("/transporte/pedidoSiEntregado", { idven: this.state.data.idven })
-                        }}>{"SÍ, ENTREGADO"}</PButtom3>
-                        <SHr height={20} /> */}
                         <PButtom3 colorBg={STheme.color.success} onPress={() => {
                             SPopup.openContainer({
                                 key: "popup_concretar_visita_si",
                                 render: (e) => {
-
                                     let opts = []
                                     if (this.visitaType == "transporte") {
                                         opts = ["ENTREGADO", "ENTREGADO PARCIALMENTE"]
@@ -289,7 +269,6 @@ class pedidoDetalle extends Component {
                                         <SInput ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
                                         {/* <SHr />
                                         <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} /> */}
-
                                         <SHr />
                                         <Btn padding={8} onPress={() => {
                                             let monto = 0;
@@ -303,10 +282,6 @@ class pedidoDetalle extends Component {
                                                 tipo: this.visita_tipo.getValue(),
                                                 monto: monto
                                             })
-                                            // this.onVisitaSuccess({
-                                            //     descripcion: this.visita_descripcion.getValue(),
-                                            //     tipo: this.visita_tipo.getValue()
-                                            // });
                                             SPopup.close("popup_concretar_visita_si");
                                         }}>CONFIRMAR</Btn>
                                         <SHr />
