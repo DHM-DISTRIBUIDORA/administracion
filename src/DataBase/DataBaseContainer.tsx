@@ -161,12 +161,16 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
                     await table.sync();
                 }
 
-            } catch (error) {
+            } catch (error: any) {
+                let e = error;
+                if (typeof error == "object") {
+                    e = error?.error;
+                }
                 SNotification.send({
                     title: table.scheme.name,
-                    body: JSON.stringify(error),
+                    body: e,
                     color: STheme.color.danger,
-                    time: 5000
+                    // time: 5000
                 })
                 console.error(error)
             }
@@ -281,7 +285,7 @@ const AlertBar = forwardRef((props, ref) => {
                     title: t.scheme.name,
                     body: error?.error ?? JSON.stringify(error),
                     color: STheme.color.danger,
-                    time: 5000
+                    // time: 5000
                 })
             }
 

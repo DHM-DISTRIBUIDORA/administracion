@@ -60,7 +60,7 @@ export default class index extends Component {
                         limit={50}
                         rowHeight={30}
                         data={this.state?.data ?? {}} />
-                    <SLoad type='window' hidden={!this.state?.loading} />
+                    {/* <SLoad type='window' hidden={!this.state?.loading} /> */}
                 </SView>
             </SPage>
         )

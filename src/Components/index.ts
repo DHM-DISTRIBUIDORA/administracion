@@ -20,8 +20,9 @@ import Header from "./Header"
 import Btn from "./Btn"
 import Usuario from "./Usuario"
 import Visitas from "./Visitas"
-
+import Loader from "./Loader"
 export {
+    Loader,
     TopBar,
     NavBar,
     BottomNavigator,
@@ -44,5 +45,5 @@ export {
     Header,
     Btn,
     Visitas,
-    
+
 }

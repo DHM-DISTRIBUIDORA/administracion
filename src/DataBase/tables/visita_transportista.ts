@@ -15,6 +15,7 @@ export default new class visita_transportista extends TableAbstract {
             "fecha_on": "string?",
             "estado": "int?",
             "idcli": "string?",
+            "idven": "string?",
             "idemp": "string?",
             "tipo": "string?",
             "descripcion": "string?",

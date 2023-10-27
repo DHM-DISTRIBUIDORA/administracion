@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { Btn, Container, PButtom, PButtom3 } from '../../Components';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
+import { Trigger } from 'servisofts-db';
 class recibo extends Component {
     constructor(props) {
         super(props);
@@ -15,28 +16,25 @@ class recibo extends Component {
         this.onBack = SNavigation.getParam("onBack");
     }
 
-
     componentDidMount() {
-        //TODO: NO RECARGA EL DETALLE AL EDITAR
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["dm_cabfac"]
+        }, (evt) => {
+            this.loadDataAsync();
+        });
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
 
+    async loadDataAsync() {
         DataBase.dm_cabfac.objectForPrimaryKey(this.idven).then((e) => {
             // e.detalle = JSON.parse(e.detalle);
             this.setState({ data: e })
         })
-        // SSocket.sendPromise({
-        //     component: "dm_cabfac",
-        //     type: "getPedido",
-        //     idven: this.idven,
-
-
-        // }).then(e => {
-        //     console.log(e);
-        //     this.setState({ data: e.data[0] })
-        // }).catch(e => {
-        //     console.error(e);
-        // })
     }
-
     item() {
         if (!this.state?.data) return <SLoad />
         return <>
@@ -113,7 +111,7 @@ class recibo extends Component {
         if (!detalle) return <SLoad />
         if (!productos) return <SLoad />
         Object.keys(detalle).map((key, index) => {
-            total += detalle[key].vdpre * detalle[key].vdcan;
+            total += detalle[key]?.vdpre * detalle[key]?.vdcan;
         });
         return <>
             <SList
@@ -122,7 +120,7 @@ class recibo extends Component {
                 data={detalle}
                 order={[{ key: "prdnom", order: "asc" }]}
                 render={(vd) => {
-                    const producto = Object.values(productos).find(a => a.prdcod == vd.prdcod)
+                    const producto = Object.values(productos).find(a => a?.prdcod == vd?.prdcod)
                     return <>
                         <SView col={"xs-12"} row>
                             <SView col={"xs-1.5"} center>
@@ -175,14 +173,21 @@ class recibo extends Component {
                     colorBg={STheme.color.danger}
                     loading={this.state.loading}
                     onPress={() => {
-                        DataBase.dm_cabfac.update({
-                            ...this.state.data,
-                            sync_type: "delete"
-                        }).then(e => {
-                            console.log("Exito al eliminar")
-                        }).catch(e => {
-                            console.error(e)
+                        SPopup.confirm({
+                            title: "Seguro que desea eliminar?",
+                            onPress: () => {
+                                DataBase.dm_cabfac.update({
+                                    ...this.state.data,
+                                    sync_type: "delete"
+                                }).then(e => {
+                                    SNavigation.goBack();
+                                    console.log("Exito al eliminar")
+                                }).catch(e => {
+                                    console.error(e)
+                                })
+                            }
                         })
+
                     }} >ELIMINAR</PButtom3>
                 {/* <Btn onPress={() => {
                     DataBase.dm_cabfac.update({

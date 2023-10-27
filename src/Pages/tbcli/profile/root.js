@@ -418,7 +418,7 @@ class index extends DPA.profile {
 
                         let opts = []
                         if (this.visitaType == "venta") {
-                            opts = ["REALIZÓ PEDIDO", "TIENDA CERRADA", "NO ESTÁN LOS ENCARGADOS", "CUENTA CON STOCK"]
+                            opts = ["TIENDA CERRADA", "NO ESTÁN LOS ENCARGADOS", "CUENTA CON STOCK", "NO CUENTA CON DINERO"]
                         } else if (this.visitaType == "transporte") {
                             opts = ["RECIBIO CONFORME", "NO PAGO", "SE ENCONTRABA CERRADO"]
                         }

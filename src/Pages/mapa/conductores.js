@@ -51,12 +51,12 @@ class Mapa extends Component {
                     }}>
                         {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
                             return <SMapView.SMarker latitude={obj.latitude} longitude={obj.longitude} >
-                                <SView width={50} height={50} center onPress={() => {
+                                <SView width={80} height={80} center onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
                                 }}>
-                                    <SIcon name={"Marker"} fill={obj.tipo == "start" ? STheme.color.success : STheme.color.danger} />
+                                    <SIcon name={"Marker"} width={30} fill={obj.tipo == "start" ? STheme.color.success : STheme.color.danger} />
                                     <SText fontSize={10}>{usuarios[obj.key_usuario]?.Correo}</SText>
-                                    <SText fontSize={12}>{new SDate(obj.fecha_last).toString("hh:mm")}</SText>
+                                    <SText fontSize={12}>{new SDate(obj.fecha_last).toString("hh:mm:ss")}</SText>
                                 </SView>
                             </SMapView.SMarker>
                         })}

@@ -88,7 +88,7 @@ const Parent2 = {
     path: `/tbcli`,
     model: Model.tbcli
 }
-class Lista extends DPA.list {
+class Lista extends DPA.list2 {
     constructor(props) {
         // Model.tbcli.Action.CLEAR();
         super(props, {
@@ -111,9 +111,9 @@ class Lista extends DPA.list {
             this.setState({ data: e })
         })
     }
-    $filter(data) {
-        return data.cliest == "0"
-    }
+    // $filter(data) {
+    //     return data.cliest == "0"
+    // }
 
     // $onSelect(data) {
     //     SStorage.setItem("tbcli_a_comprar", JSON.stringify(data))

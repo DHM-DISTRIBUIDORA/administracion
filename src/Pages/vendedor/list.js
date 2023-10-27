@@ -5,7 +5,6 @@ import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 import MapaComponent from './MapaComponent';
 import DetalleMapaComponent from './DetalleMapaComponent';
-import SwitchRastreo from '../../Components/SwitchRastreo'
 import { Container, Popups } from '../../Components'
 import DataBase from '../../DataBase'
 import { Trigger } from 'servisofts-db'
