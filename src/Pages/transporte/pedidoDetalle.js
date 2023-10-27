@@ -131,6 +131,7 @@ class pedidoDetalle extends Component {
         Object.keys(detalle).map((key, index) => {
             total += detalle[key].vdpre * detalle[key].vdcan;
         });
+        this.total = total;
         return <>
             <SList2
                 initSpace={8}
@@ -248,7 +249,7 @@ class pedidoDetalle extends Component {
                                 <SHr />
                                 <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
                                 <SHr />
-                                <SInput ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
+                                <SInput defaultValue={this.total} ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
                                 {/* <SHr />
                             <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} /> */}
                                 <SHr />

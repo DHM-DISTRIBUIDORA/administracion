@@ -47,7 +47,7 @@ export default new class ventas_factura extends TableAbstract {
                 "component": "tbemp",
                 "type": "getVentasFactura",
                 "estado": "cargando",
-                "fecha": new SDate().toString("yyyy-MM-dd"),
+                "fecha": new SDate().addDay(-1).toString("yyyy-MM-dd"),
             }
             if (usrLog?.idtransportista) {
                 request["idemp"] = usrLog.idtransportista

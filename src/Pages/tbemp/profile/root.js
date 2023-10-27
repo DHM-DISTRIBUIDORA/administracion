@@ -91,6 +91,7 @@ class index extends DPA.profile {
     }
 
     getDataTransportista({ fecha_inicio, fecha_fin }) {
+        this.setState({load_cant: true});
         const request = {
             component: "dhm",
             type: "perfilTransportista",

@@ -5,7 +5,7 @@ import { Btn } from '../../../../Components'
 
 export default class IniciarTransporte extends Component {
     render() {
-        const curDate = new SDate().toString("DAY, dd de MONTH.")
+        const curDate = new SDate().addDay(-1).toString("DAY, dd de MONTH.")
         return (
             <SView col={"xs-12"} center card>
                 <SHr />
