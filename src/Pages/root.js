@@ -6,6 +6,7 @@ import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, 
 import { connect } from 'react-redux';
 import DataBaseContainer from '../DataBase/DataBaseContainer';
 import DataBase from '../DataBase';
+import SwitchRastreo from '../Components/SwitchRastreo';
 // import { SNotification } from '../Components';
 
 class index extends Component {
@@ -77,6 +78,7 @@ class index extends Component {
             if (resolve) resolve();
         }}  >
             <SHr height={10} />
+            <SwitchRastreo height={18} width={80} />
             {/* {this.datosUser()} */}
             <SHr height={8} />
             <SView col={"xs-12"} center>
@@ -138,6 +140,7 @@ class index extends Component {
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                    <MenuButtom label={"Test"} url={"/test"} icon={this.getIconProfile()} />
                 </MenuPages>
             </SView>
             {/* <SHr height={100} /> */}

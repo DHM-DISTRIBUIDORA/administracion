@@ -27,21 +27,7 @@ module.exports = (async () => {
       }),
     },
     watchFolders: [
-        // path.resolve(__dirname, '../../servisofts-component/dist'),
-        // path.resolve(__dirname, '../../servisofts-socket/dist'),
-        // path.resolve(__dirname, '../../react-native-maps-super-cluster'),
-        // path.resolve(__dirname, '../../servisofts-charts/dist'),
-        // path.resolve(__dirname, '../../servisofts-db/dist'),
-        // path.resolve(__dirname, '../../servisofts-table/dist'),
-      // path.resolve(__dirname, '../../chat/library/dist'),
-
-      // path.resolve(__dirname, '../../servisofts-component/dist'),
-      // path.resolve(__dirname, '../../servisofts-model/dist'),
-      // path.resolve(__dirname, '../../servisofts-page/dist'),
-      // path.resolve(__dirname, '../../roles_permisos/library/dist'),
-      // path.resolve(__dirname, '../../usuario/library/dist'),
-      // path.resolve(__dirname, '../../chat/library/dist'),
-      // path.resolve(__dirname, '../../geolocation/library/dist'),
+    
     ],
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),
