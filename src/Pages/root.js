@@ -6,6 +6,7 @@ import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, 
 import { connect } from 'react-redux';
 import DataBaseContainer from '../DataBase/DataBaseContainer';
 import DataBase from '../DataBase';
+import SwitchRastreo from '../Components/SwitchRastreo';
 // import { SNotification } from '../Components';
 
 class index extends Component {
@@ -77,6 +78,7 @@ class index extends Component {
             if (resolve) resolve();
         }}  >
             <SHr height={10} />
+
             {/* {this.datosUser()} */}
             <SHr height={8} />
             <SView col={"xs-12"} center>
@@ -89,6 +91,11 @@ class index extends Component {
                 <SView width={200} flex>
                     <SIcon name={"LogoClear"} fill={STheme.color.text} stroke={STheme.color.text} />
                 </SView>
+            </SView>
+            <SHr height={32} />
+            <SView col={"xs-12"} center>
+                <SwitchRastreo height={40} width={90} />
+                <SText fontSize={12} color={STheme.color.lightGray}>{"Activate para ser rastreado."}</SText>
             </SView>
             <SHr height={32} />
             <SView col={"xs-12"} flex >
@@ -138,6 +145,7 @@ class index extends Component {
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                    {/* <MenuButtom label={"Test"} url={"/test"} icon={this.getIconProfile()} /> */}
                 </MenuPages>
             </SView>
             {/* <SHr height={100} /> */}

@@ -41,7 +41,7 @@ import version_required from './version_required';
 import notification_manager from './notification_manager';
 import notification from './notification';
 // import test2 from "./test2"
-// import test from "./test"
+import test from "./test"
 
 import storage from "./storage"
 // import { Example } from "servisofts-charts"
@@ -94,6 +94,6 @@ export default SPage.combinePages("/", {
   ...storage,
   // test2,
   notification_manager,
-  // test,
+  test,
   // "chart": Example
 });

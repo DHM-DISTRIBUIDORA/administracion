@@ -6,7 +6,6 @@ import SSocket from 'servisofts-socket'
 // import MapaComponent from './MapaComponent';
 import MapaComponent from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
-import SwitchRastreo from '../../Components/SwitchRastreo'
 import DataBase from '../../DataBase'
 import { Trigger } from 'servisofts-db'
 export default class root extends Component {
@@ -71,8 +70,6 @@ export default class root extends Component {
         console.log("asldalsda")
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
             <SView col={"xs-12"} center row padding={4} height={50}>
-                <SwitchRastreo height={18} width={80} />
-                <SView width={4} />
                 <SView flex center>
                     <SBuscador onChange={(e) => {
                         this.setState({ busqueda: e })

@@ -40,7 +40,7 @@ class index extends DPA.profile {
 
     optionItem({ key, label, color, icon, root }) {
         // var select = !!this.state.select[key]
-        return <SView height={35} center style={{
+        return <SView height={35} width={100} center style={{
             paddingLeft: 8,
             paddingRight: 8,
             opacity: 1,

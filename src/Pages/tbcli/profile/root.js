@@ -5,7 +5,7 @@ import Model from '../../../Model';
 import item from '../item';
 import { SHr, SImage, SInput, SList, SLoad, SNavigation, SStorage, SText, STheme, SView, SIcon, SDate, SMath, SMarker, SPopup, SUuid } from 'servisofts-component';
 import SSocket from "servisofts-socket"
-import { Btn, Header, PButtom, Visitas } from '../../../Components';
+import { Btn, BtnNavegar, Header, PButtom, Visitas } from '../../../Components';
 import SCharts from 'servisofts-charts';
 import SMapView from "servisofts-component/Component/SMapView";
 import { SelectEntreFechas } from '../../../Components/Fechas';
@@ -252,25 +252,46 @@ class index extends DPA.profile {
                 }
 
                 <SHr height={10} />
-                <SView style={{ alignItems: "flex-end" }} height={50}>
-                    <SView center width={170} height={35} backgroundColor={STheme.color.primary}
-                        style={{ borderRadius: 8 }}
-                        onPress={() => {
-                            SNavigation.navigate("/tbcli/mapa",
-                                {
-                                    callback2: (resp) => {
-                                        this.setState({ ubicacion: resp })
-                                    },
-                                    lat: objeto?.clilat,
-                                    lon: objeto?.clilon,
-                                    pk: this.pk,
-                                    obj: objeto
-                                },
-                            )
-                        }}>
-                        <SText color={STheme.color.white}>{((objeto?.clilan == "") || (objeto?.clilon == "")) ? "AGREGAR UBICACIÓN" : "EDITAR UBICACIÓN"}</SText>
+                <SView col={"xs-12"} row center>
+
+                    <SView col={"xs-11.5 sm-5.5"} center>
+                        {objeto?.clilat == "" ? null : <BtnNavegar latLng={{ latitude: objeto?.clilat, longitude: objeto?.clilon }}
+                            backgroundColor={STheme.color.darkGray}
+                            width={190}
+                            height={50}
+                            style={{ borderRadius: 8 }}
+                            center
+                        >
+                            <SText color={STheme.color.white} center fontSize={15} >IR A GOOGLE MAPS</SText>
+                        </BtnNavegar>}
+
                     </SView>
+                    <SView col={"xs-1"} height={10} />
+                    <SView col={"xs-11.5 sm-5.5"} center>
+                        <SView height={50}>
+                            <SView center width={190} height={50} backgroundColor={STheme.color.primary}
+                                style={{ borderRadius: 8 }}
+                                onPress={() => {
+                                    SNavigation.navigate("/tbcli/mapa",
+                                        {
+                                            callback2: (resp) => {
+                                                this.setState({ ubicacion: resp })
+                                            },
+                                            lat: objeto?.clilat,
+                                            lon: objeto?.clilon,
+                                            pk: this.pk,
+                                            obj: objeto
+                                        },
+                                    )
+                                }}>
+                                <SText fontSize={15} color={STheme.color.white}>{((objeto?.clilan == "") || (objeto?.clilon == "")) ? "AGREGAR UBICACIÓN" : "EDITAR UBICACIÓN"}</SText>
+                            </SView>
+                        </SView>
+                    </SView>
+
+
                 </SView>
+                <SHr height={15} />
             </SView>
         </>
 
@@ -360,7 +381,8 @@ class index extends DPA.profile {
                 </SView>
                 <SView style={{
                     position: "absolute",
-                    right: "35%"
+                    right: "36.5%",
+                    top: 70
                 }}
                     onPress={() => {
                         SNavigation.navigate("/tbcli/edit", { pk: this.pk })
@@ -396,7 +418,7 @@ class index extends DPA.profile {
 
                         let opts = []
                         if (this.visitaType == "venta") {
-                            opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
+                            opts = ["TIENDA CERRADA", "NO ESTÁN LOS ENCARGADOS", "CUENTA CON STOCK", "NO CUENTA CON DINERO"]
                         } else if (this.visitaType == "transporte") {
                             opts = ["RECIBIO CONFORME", "NO PAGO", "SE ENCONTRABA CERRADO"]
                         }
@@ -413,16 +435,16 @@ class index extends DPA.profile {
 
                             <SHr />
                             <Btn padding={8} onPress={() => {
-                                let monto = 0;
-                                if (this.visitaType == "venta") {
-                                    monto = 0;
-                                } else if (this.visitaType == "transporte") {
-                                    monto = this.total_pagado.getValue();
-                                }
+                                // let monto = 0;
+                                // if (this.visitaType == "venta") {
+                                //     monto = 0;
+                                // } else if (this.visitaType == "transporte") {
+                                //     monto = this.total_pagado.getValue();
+                                // }
                                 this.visitaRegistro({
                                     descripcion: this.visita_descripcion.getValue(),
                                     tipo: this.visita_tipo.getValue(),
-                                    monto: monto
+                                    // monto: monto
                                 })
                                 // this.onVisitaSuccess({
                                 //     descripcion: this.visita_descripcion.getValue(),

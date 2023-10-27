@@ -1,7 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { SDate, SHr, SNavigation, SText, STheme, SView } from 'servisofts-component'
-import SwitchRastreo from '../../../../Components/SwitchRastreo'
 import { Btn } from '../../../../Components'
 
 export default class IniciarTransporte extends Component {
@@ -13,7 +12,6 @@ export default class IniciarTransporte extends Component {
                 <SText bold fontSize={20}>{curDate}</SText>
                 <SHr />
                 {/* <SView col={"xs-12"} center card padding={8}>
-                    <SwitchRastreo />
                 </SView> */}
                 <Btn col={"xs-11"} type='default' onPress={() => {
                     SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.props.fecha_inicio })

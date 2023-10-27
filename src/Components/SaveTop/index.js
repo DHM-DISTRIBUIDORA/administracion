@@ -20,11 +20,14 @@ class index extends React.Component {
 	
 		return (
 			<>
-				<SView card style={{
+				<SView  style={{
 					position: "absolute",
 					width: 25,
 					height: 25,
 					right: 70,
+					backgroundColor: STheme.color.card,
+					borderBottomLeftRadius: 5,
+					borderBottomRightRadius: 5,
 				}}
 					activeOpacity={1}
 					onPress={() => {

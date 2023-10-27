@@ -101,7 +101,8 @@ export default class root extends Component {
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
-                        const curvisita = (this.state.visitas ?? []).find(a => a.idcli == vd.idcli);
+                        console.log(vd)
+                        const curvisita = (this.state.visitas ?? []).find(a => a.idven == vd.idven);
                         return <>
                             <SView col={"xs-12"} row center
                                 card
@@ -112,11 +113,11 @@ export default class root extends Component {
                                     borderRadius: 4
                                 }}
                                 onPress={() => {
-                                    if (!vd.clilat || !vd.clilon) {
-                                        SPopup.open({ content: <Popups.AgregarUbicacion /> });
-                                    }
-                                    SNavigation.navigate("/tbcli/profile", {
-                                        pk: vd.idcli + "",
+                                    // if (!vd.clilat || !vd.clilon) {
+                                    //     SPopup.open({ content: <Popups.AgregarUbicacion /> });
+                                    // }
+                                    SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                        idven: vd.idven + "",
                                         idemp: this.props?.state?.idemp,
                                         visitaType: "transporte",
                                         visita: curvisita,
