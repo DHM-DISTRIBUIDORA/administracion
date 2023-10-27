@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import PButtomSmall from '../PButtomSmall';
 import Background from 'servisofts-component/img/Background';
@@ -68,7 +68,9 @@ export default class index extends Component<ProductoCardPropsType> {
         var { prdpoficial, stock, prdunid, catcod, idalm, prdnom, prdcod, prdcxu, idprd } = this.props.data;
         // const productos = Model.carrito.Action.getState().productos ?? {};
         // let incar = productos[idprd];
-        return <SView col={"xs-12"} card center padding={8} height={150}>
+        return <SView col={"xs-12"} card center padding={8} height={150} onPress={!this.props.onSelect?null:()=>{
+            this.props.onSelect(this.props.data)
+        }}>
 
             <SView flex row col={"xs-12"} height={80}>
                 <SView flex >
@@ -100,9 +102,10 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView flex height style={{ justifyContent: "flex-end" }}>
                     <SText fontSize={16}>Bs.{SMath.formatMoney(prdpoficial, 2)}</SText>
                 </SView>
-                <Cantidad
+                {this.props.onSelect ? null : <Cantidad
                     key={this.props.data.idprd}
                     data={this.props.data}
+
                     // defaultValue={0}
                     limit={this.props?.data?.stock ?? 0}
                 // onChange={(cant) => {
@@ -115,8 +118,7 @@ export default class index extends Component<ProductoCardPropsType> {
                 //     // }
                 //     // Model.carrito.Action.setState({ productos });
                 // }}
-                />
-
+                />}
             </SView>
 
 

@@ -56,7 +56,7 @@ class index extends DPA.profile {
         //     idemp: this.idemp
         //     // idemp: this.pk + ""
         // }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin, loading: true })
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
         // SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
         //     const obj = e.data[0]
         //     console.log(obj)
@@ -64,19 +64,20 @@ class index extends DPA.profile {
         // }).catch(e => {
         //     console.error(e)
         // })
-        console.log(fecha_inicio, fecha_fin)
-        DataBase.dm_cabfac.all().then(e => {
-            console.log(e.length);
-        });
-        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0").then((e) => {
-            this.setState({ cantidad_pedidos: e.length })
+        const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
+
+        let monto = 0;
+        cantidad_pedidos.map(a => {
+            a.detalle.map((d) => {
+                monto += d.vdcan * d.vdpre
+            })
         })
-        DataBase.tbzon.filtered(`idemp == ${this.idemp}`).then((e) => {
-            this.setState({ cantidad_zonas: e.length })
-        })
-        DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`).then((e) => {
-            this.setState({ cantidad_clientes: e.length })
-        })
+        // this.setState({ cantidad_pedidos: cantidad_pedidos.length })
+        const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+        // this.setState({ cantidad_zonas: cantidad_zonas.length })
+        const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
+        // this.setState({ cantidad_clientes: cantidad_clientes.length })
+        this.setState({ cantidad_clientes: cantidad_clientes.length, cantidad_zonas: cantidad_zonas.length, cantidad_pedidos: cantidad_pedidos.length, monto_pedidos: monto, load_cant: true })
 
         // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
         // let query = "";
@@ -152,11 +153,11 @@ class index extends DPA.profile {
                 <SView flex height style={{
                     justifyContent: "center"
                 }}>
-                    {(montoOk == "")
+                    {!this.state.load_cant ? <SLoad /> : ((montoOk == "")
                         ?
                         <SText bold fontSize={14} style={{ lineHeight: 20 }}>{cant}</SText>
                         :
-                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>({cant})</SText>}
+                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>( {cant} )</SText>)}
                     <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText>
                     <SText fontSize={12} color={STheme.color.gray} style={{ lineHeight: 15 }}>{label}</SText>
                 </SView>
@@ -198,8 +199,8 @@ class index extends DPA.profile {
             {this.ItemCard({
                 label: "Pedidos",
                 cant: this.state.cantidad_pedidos,
-                // monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
-                monto: "",
+                monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                // monto: "",
                 onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Ipedidos',
@@ -208,21 +209,20 @@ class index extends DPA.profile {
             {this.ItemCard({
                 label: "Pedidos",
                 cant: "Categorías",
-                // monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
                 monto: "",
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Icategoria',
                 color: '#61AD02',
             })}
-            {this.ItemCard({
+            {/* {this.ItemCard({
                 label: "Ventas",
                 cant: this.state.cantidad_ventas,
                 monto: SMath.formatMoney(this.state.monto_total_ventas ?? 0),
                 onPress: () => SNavigation.navigate("/tbemp/profile/tbven", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Iventas',
                 color: '#DE6D3B',
-            })}
+            })} */}
 
         </SView>
     }
@@ -254,7 +254,7 @@ class index extends DPA.profile {
                 color: '#FF5A5F',
                 onPress: () => SNavigation.navigate("/tbemp/profile/entregas", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
             })}
-            <SHr height={15} />
+            {/* <SHr height={15} />
             {this.ItemCard({
                 label: "",
                 cant: "Detalle Pedido",
@@ -262,7 +262,7 @@ class index extends DPA.profile {
                 icon: 'Ientregas',
                 color: '#FF5A5F',
                 onPress: () => SNavigation.navigate("/transporte/pedidoDetalle"),
-            })}
+            })} */}
         </SView>
     }
     $item(obj) {
@@ -330,14 +330,10 @@ class index extends DPA.profile {
             <SHr />
             {this.getUser()}
             <SHr />
-            <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
+            {/* <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
                 pk: this.pk
             }} >
-                {/* <MenuButtom url={Parent.path + "/profile/tbzon"} params={{ pk: this.pk }}
-                    icon={<SIcon name={"Zonas"} />} label={"Zonas"} />
-                <MenuButtom url={Parent.path + "/profile/tbcli"} params={{ pk: this.pk }}
-                    icon={<SIcon name={"Clientes"} />} label={"Clientes"} /> */}
-            </MenuPages>
+            </MenuPages> */}
         </SView>
     }
 

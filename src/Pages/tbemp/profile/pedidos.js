@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
-import { Container } from '../../../Components';
+import { Container, Loader } from '../../../Components';
 import Model from '../../../Model';
 import DataBase from '../../../DataBase';
+import { Trigger } from 'servisofts-db';
 class pedidos extends Component {
     constructor(props) {
         super(props);
@@ -16,7 +17,19 @@ class pedidos extends Component {
     }
 
     componentDidMount() {
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["dm_cabfac"]
+        }, (evt) => {
+            this.loadDataAsync();
+        });
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
 
+    async loadDataAsync() {
         DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0").then(dt => {
             dt = dt.sort((a, b) => a.vhora > b.vhora ? -1 : 1)
             this.setState({ data: dt })
@@ -35,12 +48,15 @@ class pedidos extends Component {
         let total = 0;
         let cantidadProductos = 0;
         detalle.map(a => {
-            total += a.vdpre * a.vdcan
-            cantidadProductos += a.vdcan;
+
+            total += a?.vdpre * a?.vdcan
+            cantidadProductos += a?.vdcan;
         })
+
         return <SView col={"xs-12"} card padding={4} onPress={() => {
             SNavigation.navigate("/dm_cabfac/recibo", { pk: obj.idven })
         }} row>
+            {/* <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.sync_type}</SText> */}
             <SView col={"xs-12"} row>
                 <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.idven}</SText>
                 <SView flex />
@@ -65,13 +81,9 @@ class pedidos extends Component {
         </SView>
     }
     render() {
-        if (!this.state.data) return <SLoad />
-        console.log("DATA:")
-        console.log(this.state.data)
         return (
             <SPage title={'Pedidos'} >
                 <Container >
-
                     {(this.fecha_inicio) ?
                         <SView col={"xs-12"} center>
                             <SText fontSize={20} bold >Pedidos entre: </SText>
@@ -79,16 +91,17 @@ class pedidos extends Component {
                         </SView> : null}
 
                     <SHr height={20} />
-                    <SList
-                        limit={15}
-                        data={this.state.data}
-                        render={this.component.bind(this)}
-                        // order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
+                    <Loader loading={!this.state.data}>
+                        <SList
+                            limit={10}
+                            data={this.state.data}
+                            render={this.component.bind(this)}
+                            // order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
+                            filter={(a) => a.sync_type != "delete"}
 
-                        // filter={(a) => new SDate(a.vfec).toString("yyyy-MM-dd") >= this.fecha_inicio && new SDate(a.vfec).toString("yyyy-MM-dd") <= this.fecha_fin} : null}
-
-                        buscador={true}
-                    />
+                            buscador={true}
+                        />
+                    </Loader>
                 </Container>
                 <SHr height={30} />
             </SPage>

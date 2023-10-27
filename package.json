@@ -1,6 +1,6 @@
 {
   "name": "distribuidora_dhm_app",
-  "version": "1.0.25",
+  "version": "1.0.27",
   "description": "distribuidora_dhm_app",
   "scripts": {
     "start": "react-native start",
@@ -59,10 +59,10 @@
     "redux-thunk": "^2.3.0",
     "servisofts-background-location": "2.0.1",
     "servisofts-charts": "1.0.1",
-    "servisofts-component": "^3.0.11",
+    "servisofts-component": "^3.0.12",
     "servisofts-db": "^1.0.5",
     "servisofts-model": "1.0.5",
-    "servisofts-page": "1.0.11",
+    "servisofts-page": "^1.0.12",
     "servisofts-rn-chat": "1.0.7",
     "servisofts-rn-geolocation": "^1.0.4",
     "servisofts-rn-roles_permisos": "1.0.4",

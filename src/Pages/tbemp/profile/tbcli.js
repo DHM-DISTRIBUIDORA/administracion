@@ -88,7 +88,7 @@ const Parent2 = {
     path: `/tbcli`,
     model: Model.tbcli
 }
-class Lista extends DPA.list {
+class Lista extends DPA.list2 {
     constructor(props) {
         // Model.tbcli.Action.CLEAR();
         super(props, {

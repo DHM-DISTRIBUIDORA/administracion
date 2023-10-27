@@ -106,7 +106,7 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
                 }]
                 // right: ,
             }}
-            ><SText col={"xs-12"} center color={"#fff"} bold fontSize={12}>{this.state.active ? "On" : "Offline"}</SText></SView>
+            ><SText col={"xs-12"} center color={"#fff"} bold fontSize={12}>{this.state.active ? "On" : "Off"}</SText></SView>
             <SView animated style={{
                 width: 33,
                 height: 33,

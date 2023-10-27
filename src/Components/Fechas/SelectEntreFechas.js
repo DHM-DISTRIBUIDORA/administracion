@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SInput, SNavigation, SText, SView } from 'servisofts-component'
+import { SDate, SInput, SNavigation, SText, SThread, SView } from 'servisofts-component'
 
 type DataType = {
     fecha_inicio: String,
@@ -18,13 +18,15 @@ export default class SelectEntreFechas extends Component<SelectEntreFechasProps>
             fecha_fin: this.props.fecha_fin ?? new SDate().toString("yyyy-MM-dd"),
         }
 
-       
+
         // this.state.fecha_inicio = SNavigation.getParam("fecha_inicio", SelectEntreFechas.defaultProps.fecha_inicio)
         // this.state.fecha_fin = SNavigation.getParam("fecha_inicio", SelectEntreFechas.defaultProps.fecha_fin)
     }
 
     componentDidMount() {
-        this.props.onChange(this.state)
+        new SThread(100, "kekeke").start(() => {
+            this.props.onChange(this.state)
+        })
     }
 
     handleChange(key, e) {

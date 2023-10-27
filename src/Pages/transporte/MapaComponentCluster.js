@@ -33,7 +33,7 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
-            data.push({ id: o.idcli, clinom: o.clinom, tbvd: o.tbvd, location: { latitude: o.clilat, longitude: o.clilon } });
+            data.push({ id: o.idven, clinom: o.clinom, tbvd: o.tbvd, location: { latitude: o.clilat, longitude: o.clilon } });
             dataLatLng.push({ latitude: o.clilat, longitude: o.clilon });
         });
 
@@ -44,7 +44,7 @@ export default class MapaComponent extends Component {
 
             let visita;
             if (this.props.state?.visitas) {
-                visita = this.props.state?.visitas.find(a => a.idcli == data.id);
+                visita = this.props.state?.visitas.find(a => a.idven == data.id);
 
 
             }

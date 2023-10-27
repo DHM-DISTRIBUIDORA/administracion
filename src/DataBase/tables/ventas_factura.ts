@@ -27,6 +27,7 @@ export default new class ventas_factura extends TableAbstract {
             "tipo": "string?",
             "vtipp": "int?",
             "zona": "string?",
+            detalle: "json?",
         }
     }
 
@@ -54,12 +55,14 @@ export default new class ventas_factura extends TableAbstract {
                 resolve("");
             }
             SSocket.sendPromise2(request).then((e: any) => {
-                if(!e.data) return resolve("");
-                // const arr = Object.values(e.data).map((a: any) => {
-                //     return a;
-                // })
+                console.log(e);
+                if (!e.data) return resolve("");
+                const arr = e.data.map((a: any) => {
+                    a.detalle = e.detalle.filter((det: any) => det.idven == a.idven);
+                    return a;
+                })
                 SDB.deleteAll(this.scheme.name).then((ex: any) => {
-                    SDB.insertArray(this.scheme.name, e.data).then(a => {
+                    SDB.insertArray(this.scheme.name, arr).then(a => {
                         resolve(e);
                     })
                 })

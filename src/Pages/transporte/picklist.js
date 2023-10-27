@@ -48,7 +48,7 @@ export default class picklist extends Component {
     }
     render() {
         return (
-            <SPage title={"Pick List " + this.state.fecha}>
+            <SPage title={"Pick List " + this.state.fecha} disableScroll>
                 {this.renderTable()}
             </SPage>
         )
