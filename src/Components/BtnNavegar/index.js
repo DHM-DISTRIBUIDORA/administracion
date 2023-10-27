@@ -16,20 +16,11 @@ export default class index extends Component<BtnNavegarPropsType> {
         };
     }
 
-    async _handle_ios() {
-        let urlScheme;
-        urlScheme = `comgooglemaps://?q=${this.props.latLng.latitude},${this.props.latLng.longitude}`;
-        const isAvailable = await Linking.canOpenURL(urlScheme);
-        if (!isAvailable) {
-            // Linking.openURL(urlScheme);
-            // urlScheme = `http://maps.apple.com/?q=${this.props.latLng.latitude},${this.props.latLng.longitude}`;
-            urlScheme = `maps:0,0?q=${this.props.latLng.latitude},${this.props.latLng.longitude}`;
-        }
-
-        Linking.openURL(urlScheme);
+    _handle_ios() {
+        Linking.openURL('http://maps.apple.com/maps?daddr=');
     }
     _handle_android() {
-        Linking.openURL(`geo:0,0?q=${this.props.latLng.latitude},${this.props.latLng.longitude}`);
+        Linking.openURL(`http://maps.google.com/maps?q=${this.props.latLng.latitude},${this.props.latLng.longitude}`);
     }
     _handle_web() {
         Linking.openURL(`http://maps.google.com/maps?q=${this.props.latLng.latitude}+${this.props.latLng.longitude}`);
@@ -43,7 +34,7 @@ export default class index extends Component<BtnNavegarPropsType> {
     }
     render() {
         return (
-            <SView onPress={this._handlePress.bind(this)}>
+            <SView onPress={this._handlePress.bind(this)} {...this.props}>
                 {this.props.children ?? <SText>Navegar</SText>}
             </SView>
         );

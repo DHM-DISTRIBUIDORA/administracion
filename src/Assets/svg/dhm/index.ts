@@ -84,6 +84,7 @@ import Ientregas, { ReactComponent as IentregasW } from './ientregas.svg';
 import Ilist, { ReactComponent as IlistW } from './ilist.svg';
 import Iuser, { ReactComponent as IuserW } from './iuser.svg';
 import Isave, { ReactComponent as IsaveW } from './isave.svg';
+import Scroll, { ReactComponent as ScrollW } from './scroll.svg';
 
 
 const Assets = {
@@ -173,6 +174,8 @@ const Assets = {
 	"Ilist": { Native: Ilist, Web: IlistW },
 	"Iuser": { Native: Iuser, Web: IuserW },
 	"Isave": { Native: Isave, Web: IsaveW },
+	"Scroll": { Native: Scroll, Web: ScrollW },
+	
 
 	
 	
