@@ -418,7 +418,7 @@ class index extends DPA.profile {
 
                         let opts = []
                         if (this.visitaType == "venta") {
-                            opts = ["REALIZO PEDIDO", "NO PIDIO", "SE ENCOTRABA CERRADO"]
+                            opts = ["REALIZÓ PEDIDO", "TIENDA CERRADA", "NO ESTÁN LOS ENCARGADOS", "CUENTA CON STOCK"]
                         } else if (this.visitaType == "transporte") {
                             opts = ["RECIBIO CONFORME", "NO PAGO", "SE ENCONTRABA CERRADO"]
                         }
@@ -435,16 +435,16 @@ class index extends DPA.profile {
 
                             <SHr />
                             <Btn padding={8} onPress={() => {
-                                let monto = 0;
-                                if (this.visitaType == "venta") {
-                                    monto = 0;
-                                } else if (this.visitaType == "transporte") {
-                                    monto = this.total_pagado.getValue();
-                                }
+                                // let monto = 0;
+                                // if (this.visitaType == "venta") {
+                                //     monto = 0;
+                                // } else if (this.visitaType == "transporte") {
+                                //     monto = this.total_pagado.getValue();
+                                // }
                                 this.visitaRegistro({
                                     descripcion: this.visita_descripcion.getValue(),
                                     tipo: this.visita_tipo.getValue(),
-                                    monto: monto
+                                    // monto: monto
                                 })
                                 // this.onVisitaSuccess({
                                 //     descripcion: this.visita_descripcion.getValue(),
