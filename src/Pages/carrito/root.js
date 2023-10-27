@@ -117,8 +117,8 @@ class index extends Component {
                 key: SUuid(),
                 fecha_on: new SDate().toString(),
                 key_usuario: Model.usuario.Action.getKey(),
-                idcli: tbcli.idcli,
-                idemp: tbemp.idemp,
+                idcli: tbcli.idcli + "",
+                idemp: tbemp.idemp + "",
                 descripcion: dm_cabfac.vobs,
                 tipo: "REALIZO PEDIDO",
                 fecha: new SDate().toString("yyyy-MM-dd"),
@@ -127,6 +127,8 @@ class index extends Component {
             Model.carrito.Action.removeAll()
 
             this.setState({ loading: false, error: "" })
+            // console.log("SI REGISTRO EN LA DB")
+            // return;
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: idven,
                 onBack: () => {
