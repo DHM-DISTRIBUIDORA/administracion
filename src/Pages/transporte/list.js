@@ -101,6 +101,7 @@ export default class root extends Component {
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
+                        console.log(vd)
                         const curvisita = (this.state.visitas ?? []).find(a => a.idcli == vd.idcli);
                         return <>
                             <SView col={"xs-12"} row center
@@ -115,8 +116,8 @@ export default class root extends Component {
                                     if (!vd.clilat || !vd.clilon) {
                                         SPopup.open({ content: <Popups.AgregarUbicacion /> });
                                     }
-                                    SNavigation.navigate("/tbcli/profile", {
-                                        pk: vd.idcli + "",
+                                    SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                        idven: vd.idven + "",
                                         idemp: this.props?.state?.idemp,
                                         visitaType: "transporte",
                                         visita: curvisita,
