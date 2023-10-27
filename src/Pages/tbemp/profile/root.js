@@ -254,6 +254,15 @@ class index extends DPA.profile {
                 color: '#FF5A5F',
                 onPress: () => SNavigation.navigate("/tbemp/profile/entregas", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
             })}
+            <SHr height={15} />
+            {this.ItemCard({
+                label: "",
+                cant: "Detalle Pedido",
+                monto: "",
+                icon: 'Ientregas',
+                color: '#FF5A5F',
+                onPress: () => SNavigation.navigate("/transporte/pedidoDetalle"),
+            })}
         </SView>
     }
     $item(obj) {

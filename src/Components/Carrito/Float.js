@@ -133,9 +133,9 @@ class index extends Component<FloatPropsType> {
                         <SView width={16}
                             height
                             {...this.panResponder.panHandlers}
-                            backgroundColor={STheme.color.warning}
+                            backgroundColor={STheme.color.gray}
                         >
-
+                            <SIcon name={'Scroll'} height={52} width={16} fill={STheme.color.white} />
                         </SView>
                     </SView>
 
