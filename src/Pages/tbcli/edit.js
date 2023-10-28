@@ -114,11 +114,14 @@ class index extends DPA.edit {
         inp["idz"].editable = false;
         inp["idz"].value = this.state.idz;
         inp["idz"].onPress = () => {
+            let idemp =""
+            if(Model.usuario.Action.getUsuarioLog().idvendedor) idemp = Model.usuario.Action.getUsuarioLog().idvendedor
             SNavigation.navigate("/tbzon", {
                 onSelect: (zona) => {
                     console.log(zona);
                     this.setState({ idz: zona.idz })
-                }
+                },
+                idemp: idemp
             })
         }
 

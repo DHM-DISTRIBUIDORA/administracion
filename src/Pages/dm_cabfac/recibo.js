@@ -60,16 +60,26 @@ class recibo extends Component {
             </SView>
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
+                    <SView width={85} style={{ alignItems: "flex-start" }} row>
+                        <SText fontSize={14} bold >TELÉFONO: </SText>
+                    </SView>
+                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
+                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.telefonos}</SText>
+                    </SView>
+                </SView>
+                <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
+                    <SText fontSize={14} bold  >ID VENTA: </SText>
+                    <SText color={STheme.color.gray} font={'AcherusGrotesque-Regular'} >{this.state?.data?.idven}</SText>
+                </SView>
+            </SView>
+            <SView col={"xs-12"} row>
+                <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SView width={70} style={{ alignItems: "flex-start" }} row>
                         <SText fontSize={14} bold >DETALLE: </SText>
                     </SView>
                     <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
                         <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.vobs}</SText>
                     </SView>
-                </SView>
-                <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
-                    <SText fontSize={14}   >ID VENTA: </SText>
-                    <SText color={STheme.color.gray} font={'AcherusGrotesque-Regular'} >{this.state?.data?.idven}</SText>
                 </SView>
             </SView>
         </>
