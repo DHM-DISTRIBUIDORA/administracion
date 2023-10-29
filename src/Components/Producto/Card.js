@@ -6,6 +6,7 @@ import PButtomSmall from '../PButtomSmall';
 import Background from 'servisofts-component/img/Background';
 import Model from '../../Model';
 import Cantidad from './Cantidad';
+import Btn from '../Btn';
 export type ProductoCardPropsType = {
     data: any,
     onPress?: (obj) => {},
@@ -102,7 +103,9 @@ export default class index extends Component<ProductoCardPropsType> {
                 <SView flex height style={{ justifyContent: "flex-end" }}>
                     <SText fontSize={16}>Bs.{SMath.formatMoney(prdpoficial, 2)}</SText>
                 </SView>
-                {this.props.onSelect ? null : <Cantidad
+                {this.props.onSelect ? <PButtomSmall onPress={!this.props.onSelect?null:()=>{
+            this.props.onSelect(this.props.data)
+        }} padding={4} >Añadir</PButtomSmall> : <Cantidad
                     key={this.props.data.idprd}
                     data={this.props.data}
 

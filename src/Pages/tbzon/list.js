@@ -17,6 +17,7 @@ class index extends DPA.list {
                 resolve();
             }
         });
+        this.idvendedor = Model.usuario.Action.getUsuarioLog()?.idvendedor;
     }
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
@@ -29,7 +30,8 @@ class index extends DPA.list {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $filter(data) {
-        return data.zest != 1
+        return (data.zest != 1) && (data?.idemp == this.idvendedor)
+        // return (data.zest != 1) 
     }
     $order() {
         // return [{ key: "pedidos", order: "desc" }]

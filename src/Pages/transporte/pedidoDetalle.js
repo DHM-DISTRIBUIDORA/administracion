@@ -1,11 +1,11 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { SBuscador, SDate, SHr, SInput, SList, SList2, SLoad, SMapView, SMath, SNavigation, SPage, SPopup, SText, STheme, SView, SUuid } from 'servisofts-component'
+import { SBuscador, SDate, SHr, SInput, SList, SList2, SLoad, SMapView, SMath, SNavigation, SPage, SPopup, SText, STheme, SView, SUuid, SMarker, SIcon } from 'servisofts-component'
 import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 import DataBase from '../../DataBase'
-import { Btn, Container, PButtom3 } from '../../Components';
+import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -35,7 +35,7 @@ class pedidoDetalle extends Component {
             // console.log(e)
         })
         DataBase.visita_transportista.filtered("idven == '" + this.idven + "'").then((e) => {
-            console.log(e);
+            // console.log(e);
             this.setState({ visita: e[0] })
         })
         DataBase.tbprd.all().then(e => {
@@ -68,10 +68,10 @@ class pedidoDetalle extends Component {
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SView width={70} style={{ alignItems: "flex-start" }} row>
-                        <SText fontSize={14} bold >DETALLE: </SText>
+                        <SText fontSize={14} bold >TELEFONO: </SText>
                     </SView>
                     <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
-                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.razon_social}</SText>
+                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.telefonos}</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
@@ -79,8 +79,17 @@ class pedidoDetalle extends Component {
                     <SText color={STheme.color.gray} font={'AcherusGrotesque-Regular'} >{this.state?.data?.idven}</SText>
                 </SView>
             </SView>
+
             <SView col={"xs-12"} row>
-                <SView col={"xs-12"} style={{ alignItems: "flex-start" }} row>
+                <SView col={"xs-12 sm-6"} style={{ alignItems: "flex-start" }} row>
+                    <SView width={70} style={{ alignItems: "flex-start" }} row>
+                        <SText fontSize={14} bold >DETALLE: </SText>
+                    </SView>
+                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
+                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.razon_social}</SText>
+                    </SView>
+                </SView>
+                <SView col={"xs-12 sm-6"} style={{ alignItems: "flex-start" }} row>
                     <SView width={90} style={{ alignItems: "flex-start" }} >
                         <SText fontSize={14} bold >DIRECCION: </SText>
                     </SView>
@@ -249,7 +258,7 @@ class pedidoDetalle extends Component {
                                 <SHr />
                                 <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
                                 <SHr />
-                                <SInput defaultValue={this.total} ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
+                                <SInput defaultValue={(parseFloat(this.total).toFixed(2))} ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
                                 {/* <SHr />
                             <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} /> */}
                                 <SHr />
@@ -276,6 +285,78 @@ class pedidoDetalle extends Component {
             </SView>
         </SView>
     }
+
+    getUbicacion() {
+        if (!this.state?.data) return <SLoad />
+        const objeto = this.state?.data;
+        // objeto.clilat = -17.750285549975814;
+        // objeto.clilon = -63.17470188985609;
+        if (!objeto.clilat) return <SView><SText bold>CLIENTE NO TIENE UBICACIÓN REGISTRADA</SText></SView>;
+  
+        return <>
+            <SView col={"xs-12"} >
+
+                {((objeto?.clilan == "") || (objeto?.clilon == "")) ? null :
+                    <SView col={"xs-12 md-12"} height={300} padding={6}  >
+                        <SView card flex col={"xs-12"} style={{
+                            borderRadius: 14,
+                            borderBottomWidth: 4,
+                            borderLeftWidth: 3,
+                            borderRightWidth: 1,
+                            borderColor: STheme.color.card,
+                            padding: 15
+                        }} row center>
+                            <SMapView
+                                initialRegion={{
+                                    latitude: objeto?.clilat,
+                                    longitude: objeto?.clilon,
+                                    latitudeDelta: 0.0222,
+                                    longitudeDelta: 0.0221,
+                                }} preventCenter
+                                options={{
+                                    zoomControl: false,
+                                    fullscreenControl: false,
+                                    mapTypeControl: false,
+                                    rotateControl: false,
+                                    streetViewControl: false,
+                                }}
+                            >
+                                <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
+                                    <SIcon name="MarcadorMapa" width={35} height={55} />
+                                </SMarker>
+                            </SMapView>
+                            <SView col={"xs-12"} height style={{
+                                position: "absolute"
+                            }} withoutFeedback>
+
+                            </SView>
+                        </SView>
+                    </SView>
+
+                }
+
+                <SHr height={10} />
+                <SView col={"xs-12"} row center>
+                    <SView col={"xs-11.5 sm-11.5"} center>
+                        {objeto?.clilat == "" ? null : <BtnNavegar latLng={{ latitude: objeto?.clilat, longitude: objeto?.clilon }}
+                            backgroundColor={STheme.color.darkGray}
+                            width={190}
+                            height={50}
+                            style={{ borderRadius: 8 }}
+                            center
+                        >
+                            <SText color={STheme.color.white} center fontSize={15} >IR A GOOGLE MAPS</SText>
+                        </BtnNavegar>}
+
+                    </SView>
+                    <SView col={"xs-1"} height={10} />
+                </SView>
+                <SHr height={15} />
+            </SView>
+        </>
+
+    }
+
     render() {
         return <SPage title={"Detalle Pedido"}>
             <Container>
@@ -287,6 +368,13 @@ class pedidoDetalle extends Component {
                 </SView>
                 <SHr height={20} />
                 {this.renderButtoms()}
+                <SHr height={20} />
+                <SView col={"xs-12"} row >
+                    <SHr height={20} />
+                    <SText bold fontSize={16}>UBICACIÓN TIENDA</SText>
+                    <SHr />
+                </SView>
+                {this.getUbicacion()}
             </Container>
         </SPage>
     }
