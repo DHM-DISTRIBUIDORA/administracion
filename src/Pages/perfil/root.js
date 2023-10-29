@@ -101,7 +101,7 @@ class index extends Component {
                             top: 0,
                             // width: 50
                         }} />
-                        <SImage src={SSocket.api.root + (usuario?.Apellidos != "" ? "usuario/" : "tbcli/") + usuario?.key + "?date=" + new Date().getTime()}
+                        <SImage enablePreview src={SSocket.api.root + (usuario?.Apellidos != "" ? "usuario/" : "tbcli/") + usuario?.key + "?date=" + new Date().getTime()}
                             style={{ resizeMode: 'cover', zIndex: 99, }} />
                     </SView>
                 </SView>
