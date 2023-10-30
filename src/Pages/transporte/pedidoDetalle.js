@@ -67,11 +67,11 @@ class pedidoDetalle extends Component {
             </SView>
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
-                    <SView width={70} style={{ alignItems: "flex-start" }} row>
+                    <SView style={{ alignItems: "flex-start" }} >
                         <SText fontSize={14} bold >TELEFONO: </SText>
                     </SView>
-                    <SView col={"xs-9"} style={{ alignItems: "baseline" }} >
-                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.telefonos}</SText>
+                    <SView>
+                        <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.clitel}</SText>
                     </SView>
                 </SView>
                 <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
@@ -201,10 +201,15 @@ class pedidoDetalle extends Component {
     }
 
     renderButtoms() {
-        if (this.state?.visita) return <SView>
-            <SText>Ya fue visitado</SText>
-            <SText>{JSON.stringify(this.state?.visita)}</SText>
-        </SView>;
+        if (this.state?.visita) {
+            const { descripcion, fecha, fecha_on, tipo, monto } = this.state.visita
+            return <SView>
+                <SText bold color={STheme.color.success} >Visitado el {new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("DAY dd de MONTH del yyyy a las hh:mm")}. </SText>
+                <SText>{tipo}</SText>
+                <SText>Bs. {SMath.formatMoney(monto)}</SText>
+                <SText>{descripcion}</SText>
+            </SView>
+        }
         return <SView col={"xs-12"} center row>
             <SView col={"xs-5.5"} center>
                 <PButtom3 colorBg={STheme.color.danger} onPress={() => {
@@ -292,7 +297,7 @@ class pedidoDetalle extends Component {
         // objeto.clilat = -17.750285549975814;
         // objeto.clilon = -63.17470188985609;
         if (!objeto.clilat) return <SView><SText bold>CLIENTE NO TIENE UBICACIÓN REGISTRADA</SText></SView>;
-  
+
         return <>
             <SView col={"xs-12"} >
 
@@ -305,7 +310,7 @@ class pedidoDetalle extends Component {
                             borderRightWidth: 1,
                             borderColor: STheme.color.card,
                             padding: 15
-                        }} row center>
+                        }}  center>
                             <SMapView
                                 initialRegion={{
                                     latitude: objeto?.clilat,
@@ -321,9 +326,9 @@ class pedidoDetalle extends Component {
                                     streetViewControl: false,
                                 }}
                             >
-                                <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
+                                <SMapView.SMarker latitude={objeto?.clilat} longitude={objeto?.clilon}  >
                                     <SIcon name="MarcadorMapa" width={35} height={55} />
-                                </SMarker>
+                                </SMapView.SMarker>
                             </SMapView>
                             <SView col={"xs-12"} height style={{
                                 position: "absolute"

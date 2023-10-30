@@ -191,10 +191,15 @@ export default class editar extends Component {
                 }}
             />
             <SHr />
-            <PButtom3 colorBg={"#F9A435"}  outline onPress={() => {
+            <PButtom3 colorBg={"#F9A435"} outline onPress={() => {
                 SNavigation.navigate("/public/buscar", {
                     idven: this.state.data.idven, onSelect: (itm) => {
                         if (this.loading) return;
+                        const prev = this.state.data.detalle.find(a => a.prdcod == itm.prdcod);
+                        if(prev){
+                            SPopup.alert("Ya tienes este producto agregado.")
+                            return false;
+                        }
                         this.loading = true;
 
                         SNavigation.goBack();
@@ -203,7 +208,7 @@ export default class editar extends Component {
                             prdcod: itm.prdcod,
                             vdcan: 1,
                             vddesc: 0,
-                            vdpre: itm.prdcxu,
+                            vdpre: itm.prdpoficial,
                         })
                         this.setState({ ...this.state })
                         this.loading = false;

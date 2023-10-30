@@ -12,7 +12,7 @@ export default class root extends Component {
         super(props);
         this.state = {
             // curdate: new SDate("2023-08-28", "yyyy-MM-dd"),
-            curdate: new SDate(),
+            curdate: new SDate(SNavigation.getParam("fecha"), "yyyy-MM-dd"),
             idemp: SNavigation.getParam("idemp"),
             fecha: SNavigation.getParam("fecha"),
         }

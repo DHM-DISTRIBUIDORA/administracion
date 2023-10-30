@@ -19,6 +19,7 @@ export default new class visita_vendedor extends TableAbstract {
             "tipo": "string?",
             "descripcion": "string?",
             "fecha": "string?",
+            "key_usuario": "string?",
         }
     }
 

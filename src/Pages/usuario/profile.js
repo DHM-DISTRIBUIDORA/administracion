@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
-import { SForm, SHr, SInput, SList, SText, SView } from 'servisofts-component';
+import { SForm, SHr, SInput, SList, SNavigation, SText, SView } from 'servisofts-component';
 import Model from '../../Model';
 import { EditarUsuarioRol } from 'servisofts-rn-roles_permisos';
 
@@ -36,6 +36,10 @@ class index extends DPA.profile {
     $footer() {
 
         return <SView col={"xs-12"}>
+            <SHr height={16} />
+            <SText onPress={() => {
+                SNavigation.navigate("/gpx", { key_usuario: this.pk })
+            }}>VER RUTAS</SText>
             <SHr height={16} />
             <EditarUsuarioRol key_usuario={this.pk} url={"/usuario"} permiso={"edit_rol"} />
         </SView>

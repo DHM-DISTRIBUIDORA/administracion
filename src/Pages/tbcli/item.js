@@ -16,7 +16,8 @@ class index extends DPA.item {
         return <SView col={"xs-12"} row>
             {this.buildLabel({ label: "Codigo", value: this.data?.clicod })}
             {this.buildLabel({ label: "Nombre", value: this.data?.clinom })}
-            {this.buildLabel({ label: "Direccion", value: this.data?.clidir })}
+            {this.buildLabel({ label: "Tel.", value: this.data?.clitel })}
+            {this.buildLabel({ label: "Dir.", value: this.data?.clidir })}
             {/* {this.buildLabel({ label: "Pedidos", value: this.data?.pedidos })} */}
             {/* {this.buildLabel({ label: "Ventas", value: this.data?.ventas })} */}
         </SView>
