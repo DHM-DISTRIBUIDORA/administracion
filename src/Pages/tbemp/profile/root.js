@@ -9,7 +9,7 @@ import SChart from "servisofts-charts"
 import { Header, Usuario } from '../../../Components';
 import ZonasDelDia from './components/ZonasDelDia';
 import IniciarTransporte from './components/IniciarTransporte';
-import { SelectEntreFechas } from '../../../Components/Fechas';
+import { SelectEntreFechas, SelectFecha } from '../../../Components/Fechas';
 import DataBase from '../../../DataBase';
 class index extends DPA.profile {
     state = {
@@ -19,7 +19,8 @@ class index extends DPA.profile {
         cantidad_ventas: 0,
         cantidad_pedidos: 0,
         monto_total_pedidos: 0,
-        monto_total_ventas: 0
+        monto_total_ventas: 0,
+        fecha: DataBase.ventas_factura.fecha
     }
     constructor(props) {
         super(props, {
@@ -90,12 +91,16 @@ class index extends DPA.profile {
         // })
     }
 
-    getDataTransportista({ fecha_inicio, fecha_fin }) {
+    getDataTransportista({ fecha }) {
+        // DataBase.ventas_factura.fecha = fecha;
+        DataBase.ventas_factura.setFecha(fecha);
+        this.setState({ load_cant: true, fecha: fecha });
+        return null;
         const request = {
             component: "dhm",
             type: "perfilTransportista",
-            fecha_inicio: fecha_inicio,
-            fecha_fin: fecha_fin,
+            fecha_inicio: fecha,
+            fecha_fin: fecha,
             idemp: this.idemp
             // idemp: this.pk + ""
         }
@@ -236,7 +241,7 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Ilist',
                 color: '#1DA1F2',
-                onPress: () => SNavigation.navigate("/transporte/picklist", { pk: this.pk, fecha: this.state?.fecha_inicio }),
+                onPress: () => SNavigation.navigate("/transporte/picklist", { pk: this.pk, fecha: this.state?.fecha }),
                 // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
             })}
             {/* {this.ItemCard({
@@ -252,7 +257,7 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Ientregas',
                 color: '#FF5A5F',
-                onPress: () => SNavigation.navigate("/tbemp/profile/entregas", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => SNavigation.navigate("/transporte/list", { pk: this.pk }),
             })}
             {/* <SHr height={15} />
             {this.ItemCard({
@@ -267,6 +272,7 @@ class index extends DPA.profile {
     }
     $item(obj) {
         // console.log(this.state?.fecha_inicio + " AQUII")
+        console.log(this.state)
         return <SView col={"xs-12"} center>
             <SHr h={30} />
             <SView col={"xs-12"} center>
@@ -294,11 +300,11 @@ class index extends DPA.profile {
             </SView>
             <SHr h={30} />
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
-            {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha_inicio={this.state?.fecha_inicio} fecha_fin={this.state?.fecha_fin} /> : null}
+            {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha={this.state?.fecha} /> : null}
             <SHr h={30} />
             {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
-            {obj.idemt == 4 ? <SelectEntreFechas onChange={e => this.getDataTransportista(e)} /> : null}
+            {obj.idemt == 4 ? <SelectFecha fecha={this.state.fecha} onChange={e => this.getDataTransportista(e)} /> : null}
             {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
             <SHr />
         </SView>

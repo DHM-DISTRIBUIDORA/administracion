@@ -48,6 +48,15 @@ class index extends Component {
     handlePressPedido = async (tbcli) => {
         if (this.state.loading) return;
         // console.error(client)
+        if (!tbcli) {
+            if (Model.usuario.Action.getKey()) {
+                SPopup.alert("Primero debe seleccionar el cliente.")
+                return;
+            }
+            SPopup.alert("Para realizar el pedido, inicie sesión.")
+            SNavigation.navigate("/login")
+            return;
+        }
         try {
             this.state.loading = true;
             this.setState({ loading: true, error: "" })
@@ -56,6 +65,10 @@ class index extends Component {
             const tbzon = await DataBase.tbzon.objectForPrimaryKey(tbcli.idz)
             console.log("tbzon", tbzon)
 
+            if (!tbzon.idemp) {
+                this.setState({ loading: false, error: "Su zona no cuenta con un vendedor asignado." })
+                return;
+            }
             let tbcat;
             try {
                 tbcat = await DataBase.tbcat.objectForPrimaryKey(tbcli.idcat)

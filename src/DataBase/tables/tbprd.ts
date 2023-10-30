@@ -15,11 +15,11 @@ export default new class tbprd extends TableAbstract {
             "prdcod": "string?",
             "prduxcdes": "string?",
             "idlinea": "int?",
-            "prdcxu": "int?",
-            "prduxd": "int?",
+            "prdcxu": "double?",
+            "prduxd": "double?",
             "prdunid": "string?",
-            "prdpoficial": "int?",
-            "stock": "int?",
+            "prdpoficial": "double?",
+            "stock": "double?",
             "prdnom": "string?",
         }
     }

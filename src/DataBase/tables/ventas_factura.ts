@@ -1,10 +1,31 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
-import { SDate } from 'servisofts-component';
+import { SDate, SStorage } from 'servisofts-component';
 
 
 export default new class ventas_factura extends TableAbstract {
+    fecha: any = "";
+    constructor() {
+        super();
+        SStorage.getItem("ventas_factura_fecha", (e: any) => {
+            if (e) {
+                this.fecha = e;
+            } else {
+                let date = new SDate().addDay(-1);
+                if (date.getDayOfWeek() == 6) {
+                    date.addDay(-1);
+                }
+                this.fecha = date.toString("yyyy-MM-dd");
+            }
+
+        })
+    }
+    setFecha(fecha: any) {
+        if(this.fecha == fecha) return;
+        SStorage.setItem("ventas_factura_fecha", fecha);
+        this.sync();
+    }
 
     scheme: Scheme = {
         name: "ventas_factura",
@@ -14,6 +35,7 @@ export default new class ventas_factura extends TableAbstract {
             "clilat": "double?",
             "clilon": "double?",
             "clinom": "string?",
+            "clitel": "string?",
             "codigo": "string?",
             "contado": "double?",
             "credito": "double?",
@@ -47,7 +69,7 @@ export default new class ventas_factura extends TableAbstract {
                 "component": "tbemp",
                 "type": "getVentasFactura",
                 "estado": "cargando",
-                "fecha": new SDate().toString("yyyy-MM-dd"),
+                "fecha": this.fecha,
             }
             if (usrLog?.idtransportista) {
                 request["idemp"] = usrLog.idtransportista
@@ -56,7 +78,12 @@ export default new class ventas_factura extends TableAbstract {
             }
             SSocket.sendPromise2(request).then((e: any) => {
                 console.log(e);
-                if (!e.data) return resolve("");
+                if (!e.data) {
+                    SDB.deleteAll(this.scheme.name).then((ex: any) => {
+
+                    })
+                    return resolve("");
+                }
                 const arr = e.data.map((a: any) => {
                     a.detalle = e.detalle.filter((det: any) => det.idven == a.idven);
                     return a;

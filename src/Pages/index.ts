@@ -42,7 +42,7 @@ import notification_manager from './notification_manager';
 import notification from './notification';
 // import test2 from "./test2"
 import test from "./test"
-
+import gpx from './gpx';
 import storage from "./storage"
 // import { Example } from "servisofts-charts"
 
@@ -64,6 +64,7 @@ export default SPage.combinePages("/", {
   "privacidad": privacidad,
   "privacy": privacidad,
   ...producto,
+  ...gpx,
   ...dm_cabfac,
   ...clientes,
   ...usuario,

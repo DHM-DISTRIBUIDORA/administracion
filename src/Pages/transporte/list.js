@@ -121,6 +121,7 @@ export default class root extends Component {
                                         idemp: this.props?.state?.idemp,
                                         visitaType: "transporte",
                                         visita: curvisita,
+                                        pk: vd.idcli + "",
                                     })
                                 }}
                             >

@@ -20,6 +20,7 @@ export default new class visita_transportista extends TableAbstract {
             "tipo": "string?",
             "descripcion": "string?",
             "fecha": "string?",
+            "key_usuario": "string?",
         }
     }
 

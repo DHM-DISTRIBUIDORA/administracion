@@ -7,11 +7,11 @@ export default class index extends Component {
 
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
-            component: "visita_vendedor",
+            component: "visita_transportista",
             type: "getReporteVisitas",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("idemp")
+            // idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
@@ -41,19 +41,20 @@ export default class index extends Component {
     render() {
 
         return (
-            <SPage title="Visitas de vendedores" disableScroll>
+            <SPage title="Visitas de transportistas" disableScroll>
                 <SelectEntreFechas onChange={e => this.getData(e)} />
                 <SView flex>
                     <STable2
                         header={[
                             { key: "index" },
                             { key: "idemp", width: 70 },
-                            // { key: "idcli", width: 70 },
+                            { key: "idven", width: 70 },
                             { key: "tbcli/0/clicod", label: "Código de cliente", width: 200 },
                             { key: "tbcli/0/clinom", label: "Nombre de cliente", width: 200 },
                             { key: "fecha", width: 80, render: a => new SDate(a).toString("yyyy-MM-dd") },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm") },
                             { key: "tipo", width: 150 },
+                            { key: "monto", width: 150 },
                             { key: "descripcion", width: 300 },
                             { key: "key_usuario", width: 150 },
 
