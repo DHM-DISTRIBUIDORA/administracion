@@ -6,6 +6,7 @@ export default () => {
     // SBLocation.stop();
     if (Platform.OS == "web") return;
     SBLocation.initEmitter((data) => {
-        return Model.background_location.Action.onChange(data.data, data.type);
+        Model.background_location.Action.onChange(data.data, data.type);
+        return true;
     })
 }

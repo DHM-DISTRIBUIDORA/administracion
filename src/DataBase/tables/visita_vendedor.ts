@@ -39,10 +39,12 @@ export default new class visita_vendedor extends TableAbstract {
                 "component": "visita_vendedor",
                 "type": "getAll",
                 "estado": "cargando",
-                "fecha":new SDate().toString("yyyy-MM-dd")
+                "fecha": new SDate().toString("yyyy-MM-dd")
             }
             if (usrLog?.idvendedor) {
                 request["idemp"] = usrLog.idvendedor
+            } else {
+                return reject({ error: "idvendedor not found" })
             }
             SSocket.sendPromise2(request).then((e: any) => {
                 const arr = Object.values(e.data).map((a: any) => {
@@ -50,6 +52,10 @@ export default new class visita_vendedor extends TableAbstract {
                 })
                 SDB.deleteAll(this.scheme.name).then((ex: any) => {
                     SDB.insertArray(this.scheme.name, arr).then(a => {
+                        SDB.insert("sync_data", {
+                            tbname: this.scheme.name,
+                            fecha_sync: new SDate().toString(),
+                        })
                         resolve(e);
                     })
                 })
@@ -60,7 +66,7 @@ export default new class visita_vendedor extends TableAbstract {
         })
     }
 
-    
+
 
     loadToReducer = async () => {
         // const e = await this.all()
@@ -73,6 +79,11 @@ export default new class visita_vendedor extends TableAbstract {
         //     estado: "exito",
         //     data: e,
         // })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();
 

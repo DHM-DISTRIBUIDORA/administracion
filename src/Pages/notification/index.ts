@@ -3,8 +3,8 @@ import { SPage } from 'servisofts-component';
 import root from './root';
 import send from "./send"
 export const Parent = {
-    name: "pedidos",
-    path: "/pedidos"
+    name: "notification",
+    path: "/notification"
 }
 export default SPage.combinePages(Parent.name, {
     "": root,

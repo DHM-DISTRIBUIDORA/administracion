@@ -31,7 +31,7 @@ class index extends DPA.profile {
             excludes: [],
             title: "Perfil de " + Parent.title,
         });
-        this.pk = SNavigation.getParam("pk");
+        this.pk = parseInt(SNavigation.getParam("pk"));
         this.visita = SNavigation.getParam("visita", false);
         this.visitaType = SNavigation.getParam("visitaType", false);
         this.idemp = SNavigation.getParam("idemp", 0);
@@ -42,7 +42,11 @@ class index extends DPA.profile {
     }
 
     componentDidMount() {
-
+        DataBase.tbcli.objectForPrimaryKey(this.pk).then(e => {
+            this.setState({ data: e })
+        }).catch(e => {
+            console.error(e)
+        })
     }
 
     loadData({ fecha_inicio, fecha_fin }) {
@@ -121,22 +125,22 @@ class index extends DPA.profile {
         })
     }
     $allowNew() {
-        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
     $allowEdit() {
-        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
     $allowDelete() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
     }
     $allowAccess() {
-        // if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
+        if (!!Model.usuario.Action.getUsuarioLog()?.idvendedor) return true;
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
-        return Parent.model.Action.getByKey(this.pk);
+        return this.state?.data;
     }
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {

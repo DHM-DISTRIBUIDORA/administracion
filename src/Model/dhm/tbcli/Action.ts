@@ -26,7 +26,7 @@ export default class Action extends SAction {
             if (!extra) return;
             extra.data.sync_type = "insert";
             extra.data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0")
-            const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
+            // const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
 
             extra.data.idcli = new Date().getTime()
             extra.data.clicod = "Pendiente"

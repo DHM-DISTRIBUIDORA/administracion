@@ -1,4 +1,4 @@
-import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
+import SDB, { DBProps, Scheme, TableAbstract, Trigger } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 
@@ -13,9 +13,12 @@ export default new class sync_data extends TableAbstract {
             fecha_sync: "string?",
             sync_type: "string?",
 
-            
+
         }
     }
+    // constructor() {
+    //     super();
+    // }
 
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {

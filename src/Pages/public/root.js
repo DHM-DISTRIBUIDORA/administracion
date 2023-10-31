@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage, SThread } from 'servisofts-component';
+import { SHr, SPage, SText, SView, SLoad, STheme, SImage, SIcon, SNavigation, SList, SMath, SStorage, SThread, SDate } from 'servisofts-component';
 import { Banner, BottomNavigator, Container, Producto, TopBar, } from '../../Components';
 import Model from '../../Model';
 import { FlatList } from 'react-native';
@@ -26,6 +26,17 @@ class index extends Component {
     }
 
     async loadDataAsync() {
+        try {
+            var lastsync = await DataBase.sync_data.objectForPrimaryKey("tbprd")
+        } catch (error) {
+            // Aca nunca sincronice
+            await DataBase.tbprd.sync();
+            await DataBase.tbprdlin.sync();
+            await DataBase.sync_data.insert({
+                tbname: "tbprd",
+                fecha_sync: new SDate().toString(),
+            })
+        }
         const tbprd = await DataBase.tbprd.all();
         this.setState({ data: tbprd, load: true })
     }

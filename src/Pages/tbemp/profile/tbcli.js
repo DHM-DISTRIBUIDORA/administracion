@@ -27,6 +27,14 @@ class index extends DPA.profile {
             // ...this.state,
         }
     }
+
+    componentDidMount() {
+        DataBase.tbemp.objectForPrimaryKey(parseInt(this.pk)).then(e => {
+            this.setState({ data: e })
+        }).catch(e => {
+            console.error(e)
+        })
+    }
     $allowBack() {
         return true;
     }
@@ -42,7 +50,7 @@ class index extends DPA.profile {
     }
 
     $getData() {
-        return Parent.model.Action.getByKey(this.pk);
+        return this.state?.data
     }
     $footer() {
         return (<SView col={"xs-12"}>
@@ -50,6 +58,8 @@ class index extends DPA.profile {
         </SView>
         )
     }
+
+
     optionItem({ key, label, color, icon, root }) {
         var select = !!this.state.select[key]
         return <TouchableOpacity style={{
@@ -106,11 +116,22 @@ class Lista extends DPA.list2 {
     //     return Parent2.model.Action.getPermiso({ url: Parent.path, permiso: "new" });
     // }
     componentDidMount() {
-        console.log(`cliidemp == ${this.props?.pi?.pk}`)
-        DataBase.tbcli.filtered(`cliidemp == ${this.props?.pi?.pk}`).then((e) => {
-            this.setState({ data: e })
-        })
+        // console.log(`cliidemp == ${this.props?.pi?.pk}`)
+        this.loadData();
     }
+
+    async loadData() {
+        const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
+        let query = "";
+        cantidad_zonas.map((z, i) => {
+            if (i > 0) query += " || "
+            query += `idz == ${z.idz}`
+        })
+        const cantidad_clientes = await DataBase.tbcli.filtered(query)
+        this.setState({ data: cantidad_clientes })
+    }
+
+
     // $filter(data) {
     //     return data.cliest == "0"
     // }

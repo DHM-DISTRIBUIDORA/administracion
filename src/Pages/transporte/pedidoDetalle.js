@@ -185,9 +185,8 @@ class pedidoDetalle extends Component {
             descripcion: descripcion,
             tipo: tipo,
             monto: monto,
-            fecha: new SDate().toString("yyyy-MM-dd"),
+            fecha: new SDate(this?.state?.data?.fecha, "yyyy-MM-dd hh:mm:ss").toString("yyyy-MM-ddThh:mm:ss"),
         }
-
         data.idemp = Model.usuario.Action.getUsuarioLog()?.idtransportista;
         DataBase.visita_transportista.insert(data).then(e => {
             this.setState({ loading: false })
@@ -310,7 +309,7 @@ class pedidoDetalle extends Component {
                             borderRightWidth: 1,
                             borderColor: STheme.color.card,
                             padding: 15
-                        }}  center>
+                        }} center>
                             <SMapView
                                 initialRegion={{
                                     latitude: objeto?.clilat,

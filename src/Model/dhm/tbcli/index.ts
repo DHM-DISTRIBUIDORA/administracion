@@ -10,6 +10,7 @@ export default new SModel<Action, Reducer>({
         "idcli": { type: "text", pk: true },
         "clicod": { type: "text", editable: true },
         "idcat": { type: "text", editable: true },
+        "idz": { type: "text", editable: true },
         "clinom": { type: "text", editable: true, notNull: true },
         "clirazon": { type: "text", editable: true },
         "cliape": { type: "text", editable: true },
@@ -33,7 +34,7 @@ export default new SModel<Action, Reducer>({
         "cliplazo": { type: "text", editable: true },
         "idconf": { type: "text", editable: true },
         "cliest": { type: "text", editable: true },
-        "idz": { type: "text", editable: true },
+       
         "clicuo": { type: "text", editable: true },
         "cliuv": { type: "text", editable: true },
         "climz": { type: "text", editable: true },

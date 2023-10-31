@@ -11,7 +11,7 @@ export default class index extends Component {
             type: "getReporteVisitas",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("idemp")
+            // idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {

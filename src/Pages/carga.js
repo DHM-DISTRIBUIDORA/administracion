@@ -47,17 +47,17 @@ export default class index extends Component {
                 return;
             }
 
-            DataBase.sync_data.objectForPrimaryKey("all").then(e => {
-                SPopup.confirm({
-                    title: "¿Recargar los datos?",
-                    message:"Presiona en CONFIRMAR para volver a descargar los datos o CANCELAR para continuar con los datos que tienes.",
-                    onPress: () => {
-                        DataBaseContainer.sync();
-                    }
-                })
-            }).catch(e => {
-                DataBaseContainer.sync();
-            })
+            // DataBase.sync_data.objectForPrimaryKey("all").then(e => {
+            //     SPopup.confirm({
+            //         title: "¿Recargar los datos?",
+            //         message:"Presiona en CONFIRMAR para volver a descargar los datos o CANCELAR para continuar con los datos que tienes.",
+            //         onPress: () => {
+            //             DataBaseContainer.sync();
+            //         }
+            //     })
+            // }).catch(e => {
+            //     DataBaseContainer.sync();
+            // })
 
 
         }).catch(e => {

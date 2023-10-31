@@ -30,7 +30,7 @@ export default new class usuario extends TableAbstract {
         return new Promise(async (resolve, reject) => {
             let sync_data = {
                 tbname: this.scheme.name,
-                fecmod: '1950-01-01T00:00:00.0'
+                fecha_sync: '1950-01-01T00:00:00.0'
             }
             try {
                 sync_data = await SDB.objectForPrimaryKey("sync_data", this.scheme.name);
@@ -44,14 +44,14 @@ export default new class usuario extends TableAbstract {
                 "component": "usuario",
                 "type": "getAll",
                 "cabecera": "usuario_app",
-                "fecha_edit": sync_data.fecmod,
+                "fecha_edit": sync_data.fecha_sync,
                 // "fecha_edit": "2023-09-10T17:00:50",
             }).then(async (e: any) => {
 
 
                 // SDB.dele teAll(this.scheme.name).then(ex => {
                 SDB.insertArray(this.scheme.name, Object.values(e.data)).then(a => {
-                    sync_data.fecmod = new SDate().toString("yyyy-MM-ddThh:mm:ss.0") + "";
+                    sync_data.fecha_sync = new SDate().toString("yyyy-MM-ddThh:mm:ss.0") + "";
                     SDB.update("sync_data", sync_data)
                     resolve(e);
                 })
@@ -79,5 +79,10 @@ export default new class usuario extends TableAbstract {
             estado: "exito",
             data: data,
         })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();
