@@ -40,24 +40,17 @@ export default class root extends Component {
       // }}>
       // </SMapView.SMarker>)
     })
-    return <SMapView.SPolyline
+    return <SMapView.SPolyline key={this.state.index}
       coordinates={ITEMS}
       strokeColor={STheme.color.primary}
       strokeWidth={5}
     ></SMapView.SPolyline>
   }
   getMarkers = () => {
-    if (!this.state?.data) return null;
-    // console.log(this.state?.data)
-    let ITEMS = [];
+    if (!this.state?.data) return <></>;
+    if (this.state?.data.length==0) return <></>;
 
-
-    ITEMS.push({
-
-    })
-
-
-    return <SMapView.SMarker
+    return <SMapView.SMarker key={this.state.index}
       ref={ref => this.marker = ref}
       latitude={parseFloat(this.state.data[this.state.index].lat)}
       longitude={parseFloat(this.state.data[this.state.index].lon)}
@@ -78,8 +71,8 @@ export default class root extends Component {
               latitude: parseFloat(this.state.data[this.state.index].lat),
               longitude: parseFloat(this.state.data[this.state.index].lon)
             })
+            //this.setState({ index: parseInt(e) })
           }
-          // this.setState({ index: parseInt(e) })
         }} />
       {/* <SText>{new SDate(this.state.data[this.state.index].fecha_on, "yyyy-MM-ddThh:mm:ss.SSSZ").toString("yyyy-MM-dd hh:mm:ss")}</SText> */}
     </>

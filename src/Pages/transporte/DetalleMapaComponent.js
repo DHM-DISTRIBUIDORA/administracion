@@ -22,7 +22,7 @@ export default ({ state }) => {
     const visitas = state.visitas ?? {};
     const clientes_con_ubicacion = clientes.filter(a => !!a.clilat && !!a.clilon)
     const clientes_sin_ubicacion = clientes.filter(a => !a.clilat || !a.clilon)
-    const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idcli == a.idcli))
+    const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idven == a.idven))
 
 
     return <SView col={"xs-12"}

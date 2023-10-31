@@ -6,6 +6,7 @@ import { BottomNavigator, Container, TopBar } from '../../Components';
 import SSocket, { setProps } from 'servisofts-socket';
 import Pedido from '../../Components/Pedido';
 import Model from '../../Model';
+import DataBase from '../../DataBase';
 class index extends Component {
 
     constructor(props) {
@@ -14,19 +15,22 @@ class index extends Component {
     }
 
     componentDidMount() {
-
-        SSocket.sendPromise({
-            component: "dm_cabfac",
-            type: "getPedidos",
-            idcli: this.idcli,
-
-
-        }).then(e => {
-            console.log(e);
-            this.setState({ data: e.data ?? [] })
-        }).catch(e => {
-            console.error(e);
+        DataBase.dm_cabfac.all().then(e => {
+            this.setState({ data: e })
         })
+
+        // SSocket.sendPromise({
+        //     component: "dm_cabfac",
+        //     type: "getPedidos",
+        //     idcli: this.idcli,
+
+
+        // }).then(e => {
+        //     console.log(e);
+        //     this.setState({ data: e.data ?? [] })
+        // }).catch(e => {
+        //     console.error(e);
+        // })
     }
 
     getLista() {

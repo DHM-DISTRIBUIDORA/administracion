@@ -1,31 +1,29 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
-import { SDate, SStorage } from 'servisofts-component';
+import { SDate, SPopup, SStorage } from 'servisofts-component';
 
 
 export default new class ventas_factura extends TableAbstract {
-    fecha: any = "";
     constructor() {
         super();
-        SStorage.getItem("ventas_factura_fecha", (e: any) => {
-            if (e) {
-                this.fecha = e;
-            } else {
-                let date = new SDate().addDay(-1);
-                if (date.getDayOfWeek() == 6) {
-                    date.addDay(-1);
-                }
-                this.fecha = date.toString("yyyy-MM-dd");
-            }
-
-        })
+        // SStorage.getItem("ventas_factura_fecha", (e: any) => {
+        //     if (e) {
+        //         this.fecha = e;
+        //     } else {
+        //         let date = new SDate().addDay(-1);
+        //         if (date.getDayOfWeek() == 6) {
+        //             date.addDay(-1);
+        //         }
+        //         this.fecha = date.toString("yyyy-MM-dd");
+        //     }
+        // })
     }
-    setFecha(fecha: any) {
-        if(this.fecha == fecha) return;
-        SStorage.setItem("ventas_factura_fecha", fecha);
-        this.sync();
-    }
+    // setFecha(fecha: any) {
+    //     if (this.fecha == fecha) return;
+    //     SStorage.setItem("ventas_factura_fecha", fecha);
+    //     this.sync();
+    // }
 
     scheme: Scheme = {
         name: "ventas_factura",
@@ -53,12 +51,16 @@ export default new class ventas_factura extends TableAbstract {
         }
     }
 
+    fecha: any = "";
+
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {
-            // return reject({
-            //     estado: "error",
-            //     error: "Method no implement"
-            // })
+
+            // SPopup.date("selecciona", (data: any) => {
+
+            const fecha = this.fecha
+            // this.fecha = ;
+            // const fecha =  this.fecha
             let usrLog = Model.usuario.Action.getUsuarioLog();
             if (!usrLog) return reject({
                 estado: "error",
@@ -69,18 +71,21 @@ export default new class ventas_factura extends TableAbstract {
                 "component": "tbemp",
                 "type": "getVentasFactura",
                 "estado": "cargando",
-                "fecha": this.fecha,
+                "fecha": fecha,
             }
             if (usrLog?.idtransportista) {
                 request["idemp"] = usrLog.idtransportista
             } else {
-                resolve("");
+                return resolve("");
             }
             SSocket.sendPromise2(request).then((e: any) => {
                 console.log(e);
                 if (!e.data) {
                     SDB.deleteAll(this.scheme.name).then((ex: any) => {
-
+                        SDB.insert("sync_data", {
+                            tbname: this.scheme.name,
+                            fecha_sync: new SDate().toString(),
+                        })
                     })
                     return resolve("");
                 }
@@ -90,6 +95,10 @@ export default new class ventas_factura extends TableAbstract {
                 })
                 SDB.deleteAll(this.scheme.name).then((ex: any) => {
                     SDB.insertArray(this.scheme.name, arr).then(a => {
+                        SDB.insert("sync_data", {
+                            tbname: this.scheme.name,
+                            fecha_sync: new SDate().toString(),
+                        })
                         resolve(e);
                     })
                 })
@@ -98,6 +107,7 @@ export default new class ventas_factura extends TableAbstract {
                 reject(e);
             })
         })
+        // })
     }
 
 
@@ -113,6 +123,11 @@ export default new class ventas_factura extends TableAbstract {
         //     estado: "exito",
         //     data: e,
         // })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();
 

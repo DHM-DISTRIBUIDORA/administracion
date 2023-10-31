@@ -34,7 +34,17 @@ class index extends DPA.profile {
     }
 
     componentDidMount() {
-        console.log("nSASA DAKJS DASD JASD");
+        console.log("nSASA DAKJS DASD JASD", this.idemp);
+        DataBase.tbemp.objectForPrimaryKey(parseInt(this.idemp)).then(e => {
+            console.log("Aqui los empleados", e)
+            this.setState({ data: e })
+            if (e.idemt == 4) {
+                this.getDataTransportista()
+
+            }
+        }).catch(e => {
+            console.error(e)
+        })
     }
     // componentDidMount() {
     //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
@@ -76,25 +86,35 @@ class index extends DPA.profile {
         // this.setState({ cantidad_pedidos: cantidad_pedidos.length })
         const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
         // this.setState({ cantidad_zonas: cantidad_zonas.length })
-        const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
+        let query = "";
+        cantidad_zonas.map((z, i) => {
+            if (i > 0) query += " || "
+            query += `idz == ${z.idz}`
+        })
+        let cantidad_clientes = []
+        if (cantidad_zonas.length > 0) {
+            cantidad_clientes = await DataBase.tbcli.filtered(query)
+
+        }
+
+
+        // const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
         // this.setState({ cantidad_clientes: cantidad_clientes.length })
         this.setState({ cantidad_clientes: cantidad_clientes.length, cantidad_zonas: cantidad_zonas.length, cantidad_pedidos: cantidad_pedidos.length, monto_pedidos: monto, load_cant: true })
 
         // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
         // let query = "";
-        // zonas.map((z, i) => {
-        //     if (i > 0) query += " || "
-        //     query += `idz == ${z.idz}`
-        // })
-        // DataBase.tbcli.filtered(query).then((e) => {
-        //     this.setState({ cantidad_clientes: e.length })
-        // })
+
     }
 
-    getDataTransportista({ fecha }) {
+    getDataTransportista() {
         // DataBase.ventas_factura.fecha = fecha;
-        DataBase.ventas_factura.setFecha(fecha);
-        this.setState({ load_cant: true, fecha: fecha });
+        // DataBase.ventas_factura.setFecha(fecha);
+        DataBase.enviroments.objectForPrimaryKey("fecha").then(e => {
+            this.setState({ load_cant: true, fecha: e.value });
+        }).catch(e => {
+            this.setState({ load_cant: true });
+        })
         return null;
         const request = {
             component: "dhm",
@@ -127,7 +147,7 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
-        return Parent.model.Action.getByKey(this.pk);
+        return this.state.data;
     }
 
 
@@ -304,7 +324,7 @@ class index extends DPA.profile {
             <SHr h={30} />
             {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
-            {obj.idemt == 4 ? <SelectFecha fecha={this.state.fecha} onChange={e => this.getDataTransportista(e)} /> : null}
+            {/* {obj.idemt == 4 ? <SelectFecha fecha={this.state.fecha} onChange={e => this.getDataTransportista(e)} /> : null} */}
             {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
             <SHr />
         </SView>

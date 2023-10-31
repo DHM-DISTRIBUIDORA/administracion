@@ -10,7 +10,7 @@ export default class Action extends SAction {
     getCurrentLocation() {
         return this._getReducer().location
     }
-    onChange(data: any, type: any) {
+    async onChange(data: any, type: any) {
         // var obj = {
         //     component: "background_location",
         //     type: "onChange",
@@ -26,8 +26,7 @@ export default class Action extends SAction {
         data.fecha_on = new SDate().toString("yyyy-MM-ddThh:mm:ss.000Z");
         data.tipo = type;
         data.sync_type = "insert";
-        DataBase.background_location.insert(data)
-        console.log(data)
+        await DataBase.background_location.insert(data)
         this.subirCambios(DataBase.background_location)
         // SSocket.sendHttpAsync(SSocket.api.root + "api", obj)
         // this._dispatch(obj);

@@ -102,9 +102,9 @@ class index extends Component {
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
                     <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Istorage"} />} />
-                    <MenuButtom label={"Sincronizar"} onPress={() => {
+                    {/* <MenuButtom label={"Sincronizar"} onPress={() => {
                         DataBaseContainer.sync();
-                    }} icon={<SIcon name={"Ireload"} fill={STheme.color.text} />} />
+                    }} icon={<SIcon name={"Ireload"} fill={STheme.color.text} />} /> */}
                     {/* <MenuButtom label={"Notificate"} onPress={() => {
                         SNotification.send({
                             title: "Notificacion de prueba",

@@ -18,6 +18,9 @@ class recibo extends Component {
 
     componentDidMount() {
         this.loadDataAsync();
+        DataBase.tbprd.all().then(e => {
+            this.setState({ productos: e })
+        })
         this.t1 = Trigger.addEventListener({
             on: ["insert", "update", "delete"],
             tables: ["dm_cabfac"]
@@ -34,6 +37,7 @@ class recibo extends Component {
             // e.detalle = JSON.parse(e.detalle);
             this.setState({ data: e })
         })
+
     }
     item() {
         if (!this.state?.data) return <SLoad />
@@ -116,7 +120,8 @@ class recibo extends Component {
     detalle() {
         if (!this.state?.data) return <SLoad />
         const { detalle } = this.state.data;
-        const productos = Model.tbprd.Action.getAll();
+        const productos = this.state.productos
+        if (!productos) return <SLoad />
         let total = 0;
         if (!detalle) return <SLoad />
         if (!productos) return <SLoad />

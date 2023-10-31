@@ -1,6 +1,7 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import { SDate } from 'servisofts-component';
 
 
 export default new class background_location extends TableAbstract {
@@ -21,13 +22,18 @@ export default new class background_location extends TableAbstract {
             "rotation": "double?",
             "speed": "double?",
             "time": "float?",
-            "fecha_on":"string?",
+            "fecha_on": "string?",
         }
     }
 
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {
             resolve("exito")
+
+            SDB.insert("sync_data", {
+                tbname: this.scheme.name,
+                fecha_sync: new SDate().toString(),
+            })
             // SSocket.sendPromise2({
             //     "version": "1.0",
             //     "component": "tbprd",
@@ -63,6 +69,11 @@ export default new class background_location extends TableAbstract {
         //     estado: "exito",
         //     data: e,
         // })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();
 

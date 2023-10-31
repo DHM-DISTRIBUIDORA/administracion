@@ -1,6 +1,7 @@
 import SDB, { DBProps, Scheme, TableAbstract } from 'servisofts-db'
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import { SDate } from 'servisofts-component';
 
 
 export default new class usuarioPage extends TableAbstract {
@@ -24,7 +25,7 @@ export default new class usuarioPage extends TableAbstract {
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {
             let usrLog = Model.usuario.Action.getUsuarioLog();
-            if(!usrLog?.key) return reject({
+            if (!usrLog?.key) return reject({
                 estado: "error",
                 code: 200,
                 error: "user not found"
@@ -40,6 +41,11 @@ export default new class usuarioPage extends TableAbstract {
                 try {
                     await SDB.deleteAll("usuarioPage")
                     const a = await SDB.insertArray("usuarioPage", Object.values(e.data))
+                    SDB.insert("sync_data", {
+                        tbname: this.scheme.name,
+                        fecha_sync: new SDate().toString(),
+                    })
+                    this.loadToReducer();
                     resolve(e);
                 } catch (error) {
                     reject(error)
@@ -66,5 +72,10 @@ export default new class usuarioPage extends TableAbstract {
             estado: "exito",
             data: data,
         })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();

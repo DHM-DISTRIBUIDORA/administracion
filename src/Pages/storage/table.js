@@ -6,6 +6,7 @@ import STable from 'servisofts-table';
 export default class index extends Component {
 
     table = SNavigation.getParam("table")
+    changes = SNavigation.getParam("changes")
 
     render() {
         return <SPage disableScroll hidden>

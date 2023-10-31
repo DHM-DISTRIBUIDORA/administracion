@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { SForm, SHr, SIcon, SNavigation, SPopup, SText, SView } from 'servisofts-component';
 import Model from '../../../Model';
 import CryptoJS from 'crypto-js';
-import DataBaseContainer from '../../../DataBase/DataBaseContainer';
 
 export default class SectionForm extends Component {
     constructor(props) {

@@ -19,6 +19,9 @@ export default class editar extends Component {
         }).catch(e => {
             console.error(e);
         })
+        DataBase.tbprd.all().then(e => {
+            this.setState({ productos: e })
+        })
 
     }
     // detalle(){
@@ -82,7 +85,7 @@ export default class editar extends Component {
     detalle() {
         if (!this.state?.data) return <SLoad />
         const { detalle } = this.state.data;
-        const productos = Model.tbprd.Action.getAll();
+        const productos = this.state?.productos
         let total = 0;
         if (!detalle) return <SLoad />
         if (!productos) return <SLoad />
@@ -196,7 +199,7 @@ export default class editar extends Component {
                     idven: this.state.data.idven, onSelect: (itm) => {
                         if (this.loading) return;
                         const prev = this.state.data.detalle.find(a => a.prdcod == itm.prdcod);
-                        if(prev){
+                        if (prev) {
                             SPopup.alert("Ya tienes este producto agregado.")
                             return false;
                         }

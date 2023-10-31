@@ -19,7 +19,6 @@ export default new class tbcli extends TableAbstract {
             "clirazon": "string?",
             "clidir": "string?",
             "clitel": "string?",
-            "cliidemp": "int?",
             "clilat": "double?",
             "clilon": "double?",
             "cliemail": "string?",
@@ -125,7 +124,7 @@ export default new class tbcli extends TableAbstract {
                 request["cliidemp"] = usrLog.idvendedor
             } else if (usrLog.idtransportista) {
                 // request["cliidemp"] = usrLog.idvendedor
-                return resolve("");
+                return reject({ error: "idvendedor not found" })
             } else {
                 request["fecmod"] = sync_data.fecmod
             }
@@ -135,10 +134,14 @@ export default new class tbcli extends TableAbstract {
                 }
 
                 SDB.insertArray(this.scheme.name, e.data).then((a: any) => {
-                    if (request.fecmod) {
-                        sync_data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0") + "";
-                        SDB.update("sync_data", sync_data)
-                    }
+                    // if (request.fecmod) {
+                    //     sync_data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0") + "";
+                    //     SDB.update("sync_data", sync_data)
+                    // }
+                    SDB.insert("sync_data", {
+                        tbname: this.scheme.name,
+                        fecha_sync: new SDate().toString(),
+                    })
                     resolve(e);
                 })
                 // })
@@ -158,6 +161,11 @@ export default new class tbcli extends TableAbstract {
             estado: "exito",
             data: e,
         })
+    }
+    async deleteAll(): Promise<any> {
+        await super.deleteAll();
+        SDB.delete("sync_data", this.scheme.name)
+        return true;
     }
 }();
 
