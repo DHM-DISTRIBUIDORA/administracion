@@ -12,8 +12,10 @@ export default class index extends Component {
     getData({ fecha_inicio, fecha_fin }) {
 
         const request = {
-            component: "tbcli",
-            type: "clientes_con_pedidos",
+            // component: "tbcli",
+            // type: "clientes_con_pedidos",
+            component: "reporte",
+            type: "getClienteConPedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
             // idemp: SNavigation.getParam("idemp")
