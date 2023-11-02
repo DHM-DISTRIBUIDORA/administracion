@@ -4,19 +4,19 @@ import { SLoad, SMath, SNavigation, SPage, SPopup, STable2, SView } from 'servis
 import { SelectEntreFechas } from '../../Components/Fechas'
 export default class index extends Component {
     componentDidMount() {
-        if (!SNavigation.getParam("idemp")) {
-            SNavigation.goBack();
-            SPopup.alert("Usted no tiene un idemp")
-        }
+        // if (!SNavigation.getParam("idemp")) {
+        //     SNavigation.goBack();
+        //     SPopup.alert("Usted no tiene un idemp")
+        // }
     }
     getData({ fecha_inicio, fecha_fin }) {
 
         const request = {
             component: "tbcli",
-            type: "getAllPedidos",
+            type: "clientes_con_pedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("idemp")
+            // idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
