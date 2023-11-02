@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
 import { SDate, SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
+import DataBase from '../../DataBase'
 export default class index extends Component {
 
+    componentDidMount() {
+        DataBase.usuario.all().then(e => {
+            this.setState({ dataUser: e })
+        }).catch(e => {
+            console.error(e)
+        })
+    }
 
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
@@ -13,10 +21,19 @@ export default class index extends Component {
             fecha_fin: fecha_fin,
         }
         this.setState({ loading: true })
+
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-            console.log(e);
+            var itemNew = {};
             let data = e.data;
-            this.setState({ data, loading: false })
+
+            var newDataUser = this.state.dataUser
+
+            Object.keys(data).map((item) => {
+                itemNew = newDataUser.find(dataItem => dataItem.key === data[item].key_usuario);
+                data[item].Nombres = itemNew ? itemNew.Nombres : null
+            });
+            this.setState({ data: data, loading: false })
+
         }).catch(e => {
             this.setState({ loading: false, error: e?.error })
             console.error(e);
@@ -34,6 +51,7 @@ export default class index extends Component {
                         header={[
                             { key: "index" },
                             { key: "key_usuario", width: 300 },
+                            { key: "Nombres", width: 300 },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm:ss") },
                             { key: "tipo", width: 150 },
                             { key: "latitude", width: 150 },
