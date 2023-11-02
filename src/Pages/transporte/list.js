@@ -1,7 +1,7 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { SBuscador, SButtom, SDate, SHr, SIcon, SInput, SList, SLoad, SMapView, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component'
-import { Container, Popups } from '../../Components'
+import { Btn, Container, Popups } from '../../Components'
 import DataBase from '../../DataBase'
 import { Trigger } from 'servisofts-db'
 export default class root extends Component {
@@ -13,6 +13,7 @@ export default class root extends Component {
             idemp: SNavigation.getParam("pk"),
             ubicacion: SNavigation.getParam("ubicacion"),
             datas: SNavigation.getParam("datas"),
+            fecha: SNavigation.getParam("fecha"),
         }
     }
 
@@ -93,6 +94,12 @@ export default class root extends Component {
             disableScroll
         >
             <Container flex>
+                <SView col={"xs-12"}>
+                    <Btn padding={4} onPress={() => {
+                          SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.state.fecha })
+                    }}>Ver en mapa</Btn>
+                </SView>
+                <SHr />
                 <SList
                     initSpace={8}
                     space={5}
@@ -116,7 +123,7 @@ export default class root extends Component {
                                     // if (!vd.clilat || !vd.clilon) {
                                     //     SPopup.open({ content: <Popups.AgregarUbicacion /> });
                                     // }
-                                    SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                    SNavigation.navigate("/transporte/pedidoDetalle", {
                                         idven: vd.idven + "",
                                         idemp: this.props?.state?.idemp,
                                         visitaType: "transporte",

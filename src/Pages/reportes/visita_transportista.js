@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
 import { SDate, SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
+import DataBase from '../../DataBase'
 export default class index extends Component {
 
+    componentDidMount() {
+        DataBase.tbemp.all().then(e => {
+            this.setState({ dataEmp: e })
+        }).catch(e => {
+            console.error(e)
+        })
+    }
 
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
@@ -25,8 +33,10 @@ export default class index extends Component {
                 keys: arr
             }).then(e => {
                 const clientes = e.data;
+                const empleados = this.state.dataEmp;
                 data.map(obj => {
                     obj.tbcli = clientes.filter(a => a.idcli == obj.idcli)
+                    obj.tbemp = empleados.find(a => a.idemp == obj.idemp)
                 })
                 this.setState({ data, loading: false })
 
@@ -47,7 +57,8 @@ export default class index extends Component {
                     <STable2
                         header={[
                             { key: "index" },
-                            { key: "idemp", width: 70 },
+                            { key: "idemp", width: 70,  },
+                            { key: "tbemp/empnom", width: 150 ,label:"Nombre empleado"},
                             { key: "idven", width: 70 },
                             { key: "tbcli/0/clicod", label: "Código de cliente", width: 200 },
                             { key: "tbcli/0/clinom", label: "Nombre de cliente", width: 200 },
@@ -55,7 +66,7 @@ export default class index extends Component {
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm") },
                             { key: "tipo", width: 150 },
                             { key: "monto", width: 150 },
-                            { key: "descripcion", width: 300 },
+                            { key: "descripcion", width: 300 , label:"Descripción"},
                             { key: "key_usuario", width: 150 },
 
                         ]}

@@ -104,6 +104,3 @@ export default new class dm_cabfac extends TableAbstract {
         return true;
     }
 }();
-
-
-
