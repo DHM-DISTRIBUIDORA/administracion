@@ -2,8 +2,16 @@ import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
 import { SDate, SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
+import DataBase from '../../DataBase'
 export default class index extends Component {
 
+    componentDidMount() {
+        DataBase.tbemp.all().then(e => {
+            this.setState({ dataEmp: e })
+        }).catch(e => {
+            console.error(e)
+        })
+    }
 
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
@@ -14,8 +22,10 @@ export default class index extends Component {
             // idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
+        var itemNew = {};
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             console.log(e);
+            
             let data = e.data;
             let arr = data.map(val => val.idcli);
             const uniqueArr = [...new Set(arr)];
@@ -25,10 +35,14 @@ export default class index extends Component {
                 keys: arr
             }).then(e => {
                 const clientes = e.data;
+                const empleados = this.state.dataEmp;
                 data.map(obj => {
                     obj.tbcli = clientes.filter(a => a.idcli == obj.idcli)
+                    obj.tbemp = empleados.find(a => a.idemp == obj.idemp)
                 })
+
                 this.setState({ data, loading: false })
+                console.log(data);
 
             })
         }).catch(e => {
@@ -48,14 +62,16 @@ export default class index extends Component {
                         header={[
                             { key: "index" },
                             { key: "idemp", width: 70 },
+                            { key: "tbemp/empnom", width: 150, label:"Nombre empleado" },
                             // { key: "idcli", width: 70 },
                             { key: "tbcli/0/clicod", label: "Código de cliente", width: 200 },
                             { key: "tbcli/0/clinom", label: "Nombre de cliente", width: 200 },
                             { key: "fecha", width: 80, render: a => new SDate(a).toString("yyyy-MM-dd") },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm") },
                             { key: "tipo", width: 150 },
-                            { key: "descripcion", width: 300 },
-                            { key: "key_usuario", width: 150 },
+                            { key: "descripcion", width: 300 , label:"Descripción"},
+                            // { key: "idemp", width: 200 },
+                            // { key: "idemp", width: 150 },
 
                         ]}
                         limit={50}
