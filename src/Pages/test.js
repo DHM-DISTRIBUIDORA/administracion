@@ -1,18 +1,22 @@
 import { Text, View } from 'react-native'
 import React, { Component, useState } from 'react'
-import { SHr, SImage, SInput, SMapView, SPage, SText, SView } from 'servisofts-component';
+import { SMapView, SPage, SText } from 'servisofts-component';
+
+// import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 export default class test extends Component {
     state = {
-        assets: []
     };
 
-
+    // componentDidMount() {
+    //     request(PERMISSIONS.ANDROID.CAMERA).then((result) => {
+    //         // …
+    //     });
+    // }
     render() {
 
         return (
             <SPage title={"Test"}>
-     
             </SPage>
         )
 

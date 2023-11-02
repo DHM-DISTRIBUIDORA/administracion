@@ -10,6 +10,16 @@ import visita_vendedor from "./visita_vendedor"
 import visita_transportista from "./visita_transportista"
 import clientes_con_sin_pedidos_mapa from "./clientes_con_sin_pedidos_mapa"
 import activaciones from "./activaciones"
+import profile from './profile/index';
+import Model from '../../Model';
+
+
+export const Parent = {
+    name: "tbemp",
+    path: `/tbemp`,
+    model: Model.tbemp,
+    title:"empleado"
+}
 
 export default SPage.combinePages("reportes", {
     "": root,
@@ -22,5 +32,6 @@ export default SPage.combinePages("reportes", {
     clientes_sin_pedidos_mapa,
     visita_vendedor,
     visita_transportista,
-    clientes_con_sin_pedidos_mapa
+    clientes_con_sin_pedidos_mapa,
+    ...profile
 });

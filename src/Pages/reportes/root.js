@@ -29,8 +29,33 @@ export default class root extends Component {
                     })
                 }} />
                 <MenuButtom label={"Visitas del vendedor"} url={"/reportes/visita_vendedor"} params={{ idemp: idemp }} icon={<SIcon name={"MVisit"} fill={STheme.color.text} />} />
+                <MenuButtom label={"Visitas del vendedor Mapa"} icon={<SIcon name={"MConPedidosMap"} fill={STheme.color.text} />}
+                    onPress={() => {
+                        SNavigation.navigate("/reportes/profile/tbemp", { tipo : "V",
+                            onSelect: (emp) => {
+                                new SThread(100, "asdasd").start(() => {
+                                    SNavigation.navigate("/reportes/clientes_sin_pedidos_mapa", { idemp: emp.idemp })
+                                })
+                            }
+                        })
+                        // SNavigation.navigate("/reportes/profile/tbemp")
+                    }}
+                />
+
                 <MenuButtom label={"Visitas del transportista"} url={"/reportes/visita_transportista"} params={{ idemp: idemp }} icon={<SIcon name={"MVisit"} fill={STheme.color.text} />} />
-                <MenuButtom label={"Clientes con y sin pedidos"} url={"/reportes/clientes_con_sin_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} />
+                <MenuButtom label={"Visitas del transportista Mapa"} icon={<SIcon name={"MConPedidosMap"} fill={STheme.color.text} />}
+                    onPress={() => {
+                        SNavigation.navigate("/reportes/profile/tbemp", { tipo : "T",
+                            onSelect: (emp) => {
+                                new SThread(100, "asdasd").start(() => {
+                                    SNavigation.navigate("/reportes/clientes_sin_pedidos_mapa", { idemp: emp.idemp })
+                                })
+                            }
+                        })
+                        // SNavigation.navigate("/reportes/profile/tbemp")
+                    }}
+                />
+                {/* <MenuButtom label={"Clientes con y sin pedidos"} url={"/reportes/clientes_con_sin_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} /> */}
                 <MenuButtom label={"Activaciones"} url={"/reportes/activaciones"} icon={<SIcon name={"MConPedidosMap"} />} />
 
             </MenuPages>
