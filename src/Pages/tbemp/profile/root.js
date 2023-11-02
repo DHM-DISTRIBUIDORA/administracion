@@ -20,6 +20,7 @@ class index extends DPA.profile {
         cantidad_pedidos: 0,
         monto_total_pedidos: 0,
         monto_total_ventas: 0,
+        cantidad_visitas: 0,
         fecha: DataBase.ventas_factura.fecha
     }
     constructor(props) {
@@ -27,6 +28,12 @@ class index extends DPA.profile {
             Parent: Parent,
             excludes: [],
             title: "Perfil de " + Parent.title,
+            onRefresh: (r) => {
+                
+                if (r) r();
+                this.componentDidMount();
+                this.setState({ load_cant: false })
+            }
         });
         this.idemp = SNavigation.getParam("pk")
 
@@ -97,7 +104,7 @@ class index extends DPA.profile {
 
         }
 
-
+        
         // const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
         // this.setState({ cantidad_clientes: cantidad_clientes.length })
         this.setState({ cantidad_clientes: cantidad_clientes.length, cantidad_zonas: cantidad_zonas.length, cantidad_pedidos: cantidad_pedidos.length, monto_pedidos: monto, load_cant: true })
@@ -107,14 +114,22 @@ class index extends DPA.profile {
 
     }
 
-    getDataTransportista() {
+    async getDataTransportista() {
         // DataBase.ventas_factura.fecha = fecha;
         // DataBase.ventas_factura.setFecha(fecha);
-        DataBase.enviroments.objectForPrimaryKey("fecha").then(e => {
-            this.setState({ load_cant: true, fecha: e.value });
-        }).catch(e => {
-            this.setState({ load_cant: true });
+        const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha");
+        const pedidos = await DataBase.ventas_factura.all()
+        const visitas = await DataBase.visita_transportista.all()
+        let monto = 0;
+        visitas.map(a => {
+            monto += a.monto
         })
+        const clientes_visitados = pedidos.filter(a => !!visitas.find(v => v.idven == a.idven))
+
+        // })
+        this.setState({ load_cant: true, fecha: fechaEnv.value, cantidad_pedidos: pedidos.length, cantidad_visitas: clientes_visitados.length, monto_visitas: parseFloat(monto ?? 0).toFixed(2) });
+
+
         return null;
         const request = {
             component: "dhm",
@@ -272,12 +287,12 @@ class index extends DPA.profile {
                 color: '#833AB4',
             })} */}
             {this.ItemCard({
-                label: "",
-                cant: "Entregas",
-                monto: "",
+                cant: `${this.state?.cantidad_visitas} / ${this.state.cantidad_pedidos}`,
+                label: "Entregas",
+                monto: this.state.monto_visitas,
                 icon: 'Ientregas',
                 color: '#FF5A5F',
-                onPress: () => SNavigation.navigate("/transporte/list", { pk: this.pk }),
+                onPress: () => SNavigation.navigate("/transporte/list", { pk: this.pk, fecha: this.state?.fecha }),
             })}
             {/* <SHr height={15} />
             {this.ItemCard({

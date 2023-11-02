@@ -3,7 +3,6 @@ import React, { Component } from 'react'
 import { SLoad, SMath, SNavigation, SPage, STable2, SText } from 'servisofts-component'
 import Model from '../../Model'
 import SSocket from 'servisofts-socket'
-import DataBase from '../../DataBase'
 
 export default class picklist extends Component {
     state = {
@@ -17,38 +16,13 @@ export default class picklist extends Component {
 
     async loadData() {
         const user = Model.usuario.Action.getUsuarioLog();
-        const ventas = await DataBase.ventas_factura.all();
-        const tbprd = await DataBase.tbprd.all();
-        let productos = {};
-
-        for (let i = 0; i < ventas.length; i++) {
-            let venta = ventas[i];
-            let detalle = venta.detalle;
-            for (let j = 0; j < detalle.length; j++) {
-                let det = detalle[j];
-                let producto = productos[det.idprd] ?? {};
-                producto.idprd = det.idprd;
-                producto.cantidad_vendido = (producto.cantidad_vendido ?? 0) + det.vdcan;
-                producto.total_vendido = (producto.total_vendido ?? 0) + (det.vdpre * det.vdcan);
-                productos[det.idprd] = producto;
-            }
-        }
-        let arr = Object.values(productos).map((producto, index) => {
-            let prd = tbprd.find(a => a.idprd == producto.idprd)
-            producto.prdnom = prd?.prdnom
-            producto.prdcod = prd?.prdcod
-            return producto;
+        const picklist = await SSocket.sendPromise2({
+            component: "tbemp",
+            type: "picklist2",
+            idemp: this.state.idemp ?? user.idtransportista,
+            fecha: this.state.fecha
         })
-        arr.sort((a, b) => a.prdcod.localeCompare(b.prdcod))
-        this.setState({ data: arr })
-
-        // const picklist = await SSocket.sendPromise2({
-        //     component: "tbemp",
-        //     type: "picklist2",
-        //     idemp: this.state.idemp ?? user.idtransportista,
-        //     fecha: this.state.fecha
-        // })
-        // this.setState({ data: picklist.data ?? [] })
+        this.setState({ data: picklist.data ?? [] })
     }
 
     renderTable() {

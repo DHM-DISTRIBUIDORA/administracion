@@ -10,8 +10,11 @@ class index extends DPA.list {
             Parent: Parent,
             excludes: ["key", "fecha_on", "key_usuario", "Password", "Telefono", "Correo", "CI"],
             onRefresh: (resolve) => {
-                Parent.model.Action.CLEAR();
-                resolve();
+                // Parent.model.Action.CLEAR();
+                Parent.model.Action._getReducer().data = null;
+                Parent.model.Action.getAll();
+                if (resolve) resolve()
+
             }
         });
     }
@@ -34,20 +37,20 @@ class index extends DPA.list {
                     SNavigation.navigate(Parent.path + "/eliminados")
                 }
             })
-            menu.push({
-                children: <SExcel
-                    name={"Plan de cuentas calistenia"}
-                    data={this.data}
-                    styleHeader={{ width: 400, }}
-                    header={[
-                        { key: "codigo", label: "Codigo", type: "s", style: { width: 100 } },
-                        { key: "descripcion", label: "Descripcion", type: "s", style: {} },
-                        { key: "fecha_on", label: "Fecha creacion", type: "d", style: { width: 170 }, styleData: { alignment: { horizontal: "center" } } },
-                        { key: "estado", label: "Estado", type: "n", style: { width: 100 }, styleData: { alignment: { horizontal: "center" } } },
-                        { key: "key", label: "key", style: { width: 130 }, type: "s", styleData: { alignment: { horizontal: "center" }, font: { sz: 6 }, } },
+            // menu.push({
+            //     children: <SExcel
+            //         name={"Plan de cuentas calistenia"}
+            //         data={this.data}
+            //         styleHeader={{ width: 400, }}
+            //         header={[
+            //             { key: "codigo", label: "Codigo", type: "s", style: { width: 100 } },
+            //             { key: "descripcion", label: "Descripcion", type: "s", style: {} },
+            //             { key: "fecha_on", label: "Fecha creacion", type: "d", style: { width: 170 }, styleData: { alignment: { horizontal: "center" } } },
+            //             { key: "estado", label: "Estado", type: "n", style: { width: 100 }, styleData: { alignment: { horizontal: "center" } } },
+            //             { key: "key", label: "key", style: { width: 130 }, type: "s", styleData: { alignment: { horizontal: "center" }, font: { sz: 6 }, } },
 
-                    ]} />
-            })
+            //         ]} />
+            // })
         }
 
         return menu;
