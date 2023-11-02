@@ -15,10 +15,10 @@ export default class index extends Component {
         }
     }
     componentDidMount() {
-        if (!SNavigation.getParam("idemp")) {
-            SNavigation.goBack();
-            SPopup.alert("Usted no tiene un idemp")
-        }
+        // if (!SNavigation.getParam("idemp")) {
+        //     SNavigation.goBack();
+        //     SPopup.alert("Usted no tiene un idemp")
+        // }
     }
     getData({ fecha_inicio, fecha_fin }) {
 
@@ -28,7 +28,7 @@ export default class index extends Component {
             type: "getAllPedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("idemp")
+            //idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
@@ -45,7 +45,7 @@ export default class index extends Component {
             type: "getSinPedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            idemp: SNavigation.getParam("idemp")
+            // idemp: SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request2).then(e => {

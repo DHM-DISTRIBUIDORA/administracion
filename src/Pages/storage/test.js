@@ -41,6 +41,7 @@ export default class test extends Component {
                     <SText col={"xs-2.5"} bold center>Ultima descarga</SText>
                 </SView>
 
+                <Table table={DataBase.tbcli} label="Clientes." save />
                 <BtnEliminarYDescargar label={"Productos"} onPress={() => {
                     DataBase.Funciones.sincronizar_productos()
                 }} />
