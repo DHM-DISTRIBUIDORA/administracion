@@ -201,7 +201,9 @@ class pedidoDetalle extends Component {
 
     renderButtoms() {
         if (this.state?.visita) {
-            const { descripcion, fecha, fecha_on, tipo, monto } = this.state.visita
+            let { descripcion, fecha, fecha_on, tipo, monto } = this.state.visita
+             if(monto == null) monto = 0;
+            console.log(monto);
             return <SView>
                 <SText bold color={STheme.color.success} >Visitado el {new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("DAY dd de MONTH del yyyy a las hh:mm")}. </SText>
                 <SText>{tipo}</SText>
