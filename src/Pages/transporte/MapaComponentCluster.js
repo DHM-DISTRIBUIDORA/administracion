@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SMapView, SView, SLoad, SNavigation, SThread, SText } from 'servisofts-component'
+import { SMapView, SView, SLoad, SNavigation, SThread, SText, STheme } from 'servisofts-component'
 
 // import ClusteredMapView from "react-native-maps-super-cluster"
 import { Text, View } from 'react-native';
@@ -52,7 +52,7 @@ export default class MapaComponent extends Component {
                 onPress = this.handlePressClient.bind(this, data, visita, data.tbvd)
             }
             return MarkerCircle({
-                borderColor: !visita ? "" : "#0f0",
+                borderColor: !visita ? STheme.color.primary : "#0f0",
                 latitude: data.location.latitude, longitude: data.location.longitude,
                 onPress: onPress,
                 key: data.id,
