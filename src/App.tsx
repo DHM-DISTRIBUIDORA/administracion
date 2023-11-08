@@ -18,7 +18,7 @@ import DataBaseContainer from './DataBase/DataBaseContainer';
 // import { Example } from 'servisofts-charts';
 
 try {
-    // Firebase.init();
+    Firebase.init();
 } catch (e) {
     console.log(e);
 }
