@@ -150,7 +150,7 @@ class index extends Component {
                         longitudeDelta: 0.005
                     }}
                     ref={(map) => this.map = map}
-                    icon={<SIcon name="MarcadorMapa" width={25} height={40} />}
+                    icon={<SIcon name="MarcadorMapa" width={25} height={40} fill={STheme.color.primary} />}
                     onChange={(evt) => {
                         this.setState({ lat: evt.latitude, lon: evt.longitude })
                     }} />
