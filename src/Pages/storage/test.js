@@ -17,11 +17,11 @@ const BtnEliminarYDescargar = ({ label, onPress }) => {
             }}
             onPress={() => {
                 SPopup.confirm({
-                    title: "Esta seguro de volver a descargar los datos?",
+                    title: "¿Está seguro de volver a descargar los datos?",
                     onPress: onPress,
-                    message:"Los datos no guardados se perderan, y se volvera a descargar los datos del servidor."
+                    message:"Los datos no guardados se perderán y se volverá a descargar los datos del servidor."
                 })
-            }}  >Eliminar y descargar nuevos.</SText>
+            }}  >Eliminar y descargar nuevos</SText>
     </SView>
 }
 export default class test extends Component {
@@ -36,9 +36,9 @@ export default class test extends Component {
                 <SView row col={"xs-12"} padding={4} >
                     <SText col={"xs-4"} bold>Nombre</SText>
                     <SText col={"xs-1"} bold >#</SText>
-                    <SText col={"xs-1"} bold>Canbios</SText>
+                    <SText col={"xs-1"} bold>Cambios</SText>
                     <SText col={"xs-2.5"} bold center>Acciones</SText>
-                    <SText col={"xs-2.5"} bold center>Ultima descarga</SText>
+                    <SText col={"xs-2.5"} bold center>Última descarga</SText>
                 </SView>
 
                 <Table table={DataBase.tbcli} label="Clientes." save />

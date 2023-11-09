@@ -9,6 +9,8 @@ import item2 from '../../tbcli/item';
 import { Text, TouchableOpacity, View } from 'react-native';
 import StoreTemp from '../../../StoreTemp';
 import DataBase from '../../../DataBase';
+import { Trigger } from 'servisofts-db';
+
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
@@ -34,7 +36,9 @@ class index extends DPA.profile {
         }).catch(e => {
             console.error(e)
         })
+       
     }
+
     $allowBack() {
         return true;
     }
@@ -111,16 +115,30 @@ class Lista extends DPA.list2 {
         this.state = {}
     }
 
+    componentDidMount() {
+
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (evt) => {
+            console.log("ENTRO EN EL TRIGGERRRRRR", evt)
+            this.loadData();
+        });
+
+        this.loadData();
+    }
+
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
     // $allowNew() {
     //     return true
     //     return Parent2.model.Action.getPermiso({ url: Parent.path, permiso: "new" });
     // }
-    componentDidMount() {
-        // console.log(`cliidemp == ${this.props?.pi?.pk}`)
-        this.loadData();
-    }
 
-    async loadData() {
+
+    async loadData() { 
         const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
         let query = "";
         cantidad_zonas.map((z, i) => {
@@ -148,7 +166,7 @@ class Lista extends DPA.list2 {
         SNavigation.navigate("/tbcli/profile", { pk: data.idcli })
     }
     $getData() {
-        if (!this.state.data) this.componentDidMount();
+        if (!this.state.data) null;
         // DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`).then((e) => {
         //     this.setState({ cantidad_clientes: e.length })
         // })

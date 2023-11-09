@@ -45,13 +45,15 @@ export default ({ latitude, longitude, key, cantidad, src, label, onPress, size 
                     height: "100%",
                     borderRadius: 100,
                 }} center>
-                    {!content ? null : <SText fontSize={8} bold color={STheme.color.black} center style={{lineHeight: 8}}>{content}</SText>}
+                    {!content ? null : <SText fontSize={8} bold color={STheme.color.black} center style={{ lineHeight: 8 }}>{content}</SText>}
+                    {!label ? null : <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{label}</SText>}
+
                 </SView>
             </SView>
             <Cantidad cantidad={cantidad} />
         </SView>
-        {!label ? null : <SText fontSize={8} center >{label}</SText>}
-        <SIcon name={"MarcadorMapa"} width={35} height={55} fill={"#028EAF"}/>
+        {/* {!label ? null : <SText fontSize={8} color={STheme.color.black} style={{lineHeight: 8}}  center >{label}</SText>}  */}
+        <SIcon name={"MarcadorMapa"} width={35} height={43} fill={"#028EAF"} />
     </SMapView.SMarker>
 }
 // export default ({ latitude, longitude, cantidad, src, label, onPress }) => {
