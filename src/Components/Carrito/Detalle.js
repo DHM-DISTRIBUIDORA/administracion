@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SList } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
-import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
 export type DetallePropsType = {
     data: any,

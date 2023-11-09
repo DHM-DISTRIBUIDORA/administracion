@@ -51,10 +51,7 @@ export default class PButtomSmall extends Component<PButtomSmall_props> {
                     this.props.onPress();
                 }
             }} >
-            {this.props.loading ? <SLoad /> : <SText {...this.props} color={STheme.color.white} >
-                {/* {this.props.children} */}
-                
-                </SText>}
+            {this.props.loading ? <SLoad /> : <SText {...this.props} color={STheme.color.white} ></SText>}
         </SView>);
     }
 }
