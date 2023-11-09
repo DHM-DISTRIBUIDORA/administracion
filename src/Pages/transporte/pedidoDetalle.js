@@ -181,7 +181,7 @@ class pedidoDetalle extends Component {
             key: SUuid(),
             key_usuario: Model.usuario.Action.getKey(),
             idven: this.idven,
-            idcli: this.state?.data?.idcli,
+            idcli: this.state?.data?.idcli + "",
             descripcion: descripcion,
             tipo: tipo,
             monto: monto,
@@ -202,7 +202,7 @@ class pedidoDetalle extends Component {
     renderButtoms() {
         if (this.state?.visita) {
             let { descripcion, fecha, fecha_on, tipo, monto } = this.state.visita
-             if(monto == null) monto = 0;
+            if (monto == null) monto = 0;
             console.log(monto);
             return <SView>
                 <SText bold color={STheme.color.success} >Visitado el {new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("DAY dd de MONTH del yyyy a las hh:mm")}. </SText>
@@ -328,7 +328,7 @@ class pedidoDetalle extends Component {
                                 }}
                             >
                                 <SMapView.SMarker latitude={objeto?.clilat} longitude={objeto?.clilon}  >
-                                    <SIcon name="MarcadorMapa" width={35} height={55}  fill={STheme.color.primary}/>
+                                    <SIcon name="MarcadorMapa" width={35} height={55} fill={STheme.color.primary} />
                                 </SMapView.SMarker>
                             </SMapView>
                             <SView col={"xs-12"} height style={{

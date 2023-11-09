@@ -31,7 +31,8 @@ export default new class tbprd extends TableAbstract {
                 "version": "1.0",
                 "component": "tbprd",
                 "type": "getAllSimple",
-                "estado": "cargando"
+                "estado": "cargando",
+                idalm:"1",
             }).then((e: any) => {
                 SDB.deleteAll(this.scheme.name).then((ex) => {
                     SDB.insertArray(this.scheme.name, e.data).then(a => {

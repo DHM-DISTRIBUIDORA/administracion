@@ -129,7 +129,13 @@ class index extends DPA.profile {
     async getDataTransportista() {
         // DataBase.ventas_factura.fecha = fecha;
         // DataBase.ventas_factura.setFecha(fecha);
-        const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha");
+        try {
+            const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha");
+            this.setState({ fecha: fechaEnv.value, })
+        } catch (e) {
+            console.error(e)
+        }
+
         const pedidos = await DataBase.ventas_factura.all()
         const visitas = await DataBase.visita_transportista.all()
         let monto = 0;
@@ -139,7 +145,7 @@ class index extends DPA.profile {
         const clientes_visitados = pedidos.filter(a => !!visitas.find(v => v.idven == a.idven))
 
         // })
-        this.setState({ load_cant: true, fecha: fechaEnv.value, cantidad_pedidos: pedidos.length, cantidad_visitas: clientes_visitados.length, monto_visitas: parseFloat(monto ?? 0).toFixed(2) });
+        this.setState({ load_cant: true, cantidad_pedidos: pedidos.length, cantidad_visitas: clientes_visitados.length, monto_visitas: parseFloat(monto ?? 0).toFixed(2) });
 
 
         return null;

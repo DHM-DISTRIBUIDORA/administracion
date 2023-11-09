@@ -19,7 +19,7 @@ const BtnEliminarYDescargar = ({ label, onPress }) => {
                 SPopup.confirm({
                     title: "¿Está seguro de volver a descargar los datos?",
                     onPress: onPress,
-                    message:"Los datos no guardados se perderán y se volverá a descargar los datos del servidor."
+                    message: "Los datos no guardados se perderán y se volverá a descargar los datos del servidor."
                 })
             }}  >Eliminar y descargar nuevos</SText>
     </SView>
@@ -40,12 +40,7 @@ export default class test extends Component {
                     <SText col={"xs-2.5"} bold center>Acciones</SText>
                     <SText col={"xs-2.5"} bold center>Última descarga</SText>
                 </SView>
-                <BtnEliminarYDescargar label={"ADMIN"} onPress={() => {
-                    DataBase.Funciones.sincronizar_admin()
-                }} />
-                <Table table={DataBase.tbcli} label="Clientes." save />
-                <Table table={DataBase.tbzon} label="Zonas." />
-                <SHr h={50} />
+
                 <BtnEliminarYDescargar label={"Productos"} onPress={() => {
                     DataBase.Funciones.sincronizar_productos()
                 }} />
@@ -86,6 +81,14 @@ export default class test extends Component {
                         <Table table={DataBase.ventas_factura} label="Ventas por entregar." />
                     </>
                 }
+
+                <SHr h={300} />
+                <BtnEliminarYDescargar label={"SOLO PARA ADMIN"} onPress={() => {
+                    DataBase.Funciones.sincronizar_admin()
+                }} />
+                <Table table={DataBase.tbcli} label="Clientes." save />
+                <Table table={DataBase.tbzon} label="Zonas." />
+                <SHr h={50} />
             </SScrollView2>
             {/* </SScrollView2> */}
         </SPage>

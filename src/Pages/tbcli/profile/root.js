@@ -10,6 +10,7 @@ import SCharts from 'servisofts-charts';
 import SMapView from "servisofts-component/Component/SMapView";
 import { SelectEntreFechas } from '../../../Components/Fechas';
 import DataBase from '../../../DataBase';
+import { Trigger } from 'servisofts-db';
 
 
 class index extends DPA.profile {
@@ -42,6 +43,19 @@ class index extends DPA.profile {
     }
 
     componentDidMount() {
+        this.load()
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (e) => {
+            this.load()
+        })
+
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1)
+    }
+    load() {
         DataBase.tbcli.objectForPrimaryKey(this.pk).then(e => {
             this.setState({ data: e })
         }).catch(e => {
@@ -70,8 +84,7 @@ class index extends DPA.profile {
             sync_type: "insert",
             key: SUuid(),
             key_usuario: Model.usuario.Action.getKey(),
-
-            idcli: this.pk,
+            idcli: this.pk+" ",
             descripcion: descripcion,
             tipo: tipo,
             monto: monto,

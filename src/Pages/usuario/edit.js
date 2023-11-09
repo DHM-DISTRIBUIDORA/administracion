@@ -9,7 +9,7 @@ class index extends DPA.edit {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            excludes: []
+            excludes: ["Password"]
         });
     }
     $allowAccess() {
@@ -20,14 +20,14 @@ class index extends DPA.edit {
     }
     $inputs() {
         var inputs = super.$inputs();
-        inputs["Password"].type = "password"
+        // inputs["Password"].type = "password"
         inputs["Correo"].type = "email"
         // inputs["Telefono"].type = "phone"
         return inputs;
     }
     $onSubmit(data) {
 
-        data["Password"] = CryptoJS.MD5(data["Password"]).toString();
+        // data["Password"] = CryptoJS.MD5(data["Password"]).toString();
         Parent.model.Action.editar({
             data: {
                 ...this.data,
