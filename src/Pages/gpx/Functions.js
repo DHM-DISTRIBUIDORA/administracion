@@ -29,7 +29,9 @@ const getLista = (key_usuario, fecha) => {
     const INSTANCE = this
     return new Promise((resolve, reject) => {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', state.url + "/" + key_usuario + "/" + sfecha[0] + "/" + sfecha[1] + "/" + sfecha[2] + "/", true);
+        let dia = sfecha[2];
+        if (dia.startsWith("0")) dia = dia.substring(1);
+        xhr.open('GET', state.url + "/" + key_usuario + "/" + sfecha[0] + "/" + sfecha[1] + "/" + dia + "/", true);
         xhr.onerror = function () {
             reject()
         }
@@ -37,7 +39,7 @@ const getLista = (key_usuario, fecha) => {
             // Si la solicitud se completó con éxito
             if (xhr.readyState == 4 && xhr.status == 200) {
                 // var parser = new DOMParser();
-                
+
                 // var doc = parser.parseFromString(xhr.responseText, 'text/html');
                 var doc = new DomSelector(xhr.responseText);
                 var links = doc.getElementsByTagName('a');
@@ -66,7 +68,9 @@ const getGpx = (key_usuario, fecha, file) => {
     const INSTANCE = this
     return new Promise(resolve => {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', state.url + "/" + key_usuario + "/" + sfecha[0] + "/" + sfecha[1] + "/" + sfecha[2] + "/" + file, true);
+        let dia = sfecha[2];
+        if (dia.startsWith("0")) dia = dia.substring(1);
+        xhr.open('GET', state.url + "/" + key_usuario + "/" + sfecha[0] + "/" + sfecha[1] + "/" + dia + "/" + file, true);
         xhr.onreadystatechange = function () {
             // Si la solicitud se completó con éxito
             if (xhr.readyState == 4 && xhr.status == 200) {

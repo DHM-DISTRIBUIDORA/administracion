@@ -3,7 +3,7 @@ import { SHr, SLoad, SMapView, SNavigation, SText, STheme, SView } from 'serviso
 
 
 const Card = ({ label, value, backgroundColor, onPress }) => {
-    return <SView width={100} height={100} center padding={8}>
+    return <SView width={95} height={100} center padding={8}>
         <SView col={"xs-12"} flex card center style={{
             backgroundColor: backgroundColor ?? STheme.color.card
         }} onPress={onPress}>
@@ -42,6 +42,10 @@ export default ({ state }) => {
             <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`}
                 onPress={() => {
                     SNavigation.navigate("/transporte/list", { pk: state.idemp })
+                }} />
+            <Card  label={(state.mapa == 1) ? "Agrupar Mapa" : "Desagrupar Mapa"} value={""} backgroundColor={STheme.color.lightGray + "99"}
+                onPress={() => {
+                    (state.mapa == 1) ? SNavigation.navigate("/transporte", { pk: state.idemp, mapa: 0 }) : SNavigation.navigate("/transporte/desgrup", { pk: state.idemp, mapa: 1 })
                 }} />
         </SView>
     </SView>

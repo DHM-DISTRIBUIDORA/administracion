@@ -9,7 +9,7 @@ export default class root extends Component {
     super(props);
     this.state = {
       key_usuario: SNavigation.getParam("key_usuario"),
-      fecha: "2023-10-27",
+      fecha: new SDate().toString("yyyy-MM-dd"),
       index: 0,
     }
   }
@@ -48,7 +48,7 @@ export default class root extends Component {
   }
   getMarkers = () => {
     if (!this.state?.data) return <></>;
-    if (this.state?.data.length==0) return <></>;
+    if (this.state?.data.length == 0) return <></>;
 
     return <SMapView.SMarker key={this.state.index}
       ref={ref => this.marker = ref}
@@ -67,13 +67,18 @@ export default class root extends Component {
         onChange={(e) => {
           this.state.index = parseInt(e);
           if (this.marker) {
+            // console.log(this.state.data[this.state.index]);
             this.marker.setCoordinate({
               latitude: parseFloat(this.state.data[this.state.index].lat),
               longitude: parseFloat(this.state.data[this.state.index].lon)
             })
             //this.setState({ index: parseInt(e) })
           }
+          if (this.mensaje) {
+            this.mensaje.setLabel(this.state.data[this.state.index]?.fecha_on)
+          }
         }} />
+      <Mensajes ref={ref => this.mensaje = ref} />
       {/* <SText>{new SDate(this.state.data[this.state.index].fecha_on, "yyyy-MM-ddThh:mm:ss.SSSZ").toString("yyyy-MM-dd hh:mm:ss")}</SText> */}
     </>
   }
@@ -102,4 +107,16 @@ export default class root extends Component {
     )
   }
 
+}
+
+class Mensajes extends Component {
+  state = {
+    label: "FECHA"
+  }
+  setLabel(label) {
+    this.setState({ label: label })
+  }
+  render() {
+    return <SText>{this.state.label}</SText>
+  }
 }

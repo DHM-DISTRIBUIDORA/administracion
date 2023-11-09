@@ -59,7 +59,7 @@ export default class SectionForm extends Component {
                     error={this.state.error}
                     onSubmit={(data) => {
                         if (data) {
-                            data["password"] = CryptoJS.MD5(data["password"]).toString();
+                             data["password"] = CryptoJS.MD5(data["password"]).toString();
                             data["usuario"] = data["usuario"].toLowerCase();
                             // Parent.Actions.login(data, this.props);
                             Model.usuario.Action.loginByKey(data).then((resp) => {

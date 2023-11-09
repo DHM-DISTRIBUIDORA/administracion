@@ -105,7 +105,7 @@ export default class index extends Component<ProductoCardPropsType> {
                 </SView>
                 {this.props.onSelect ? <PButtomSmall onPress={!this.props.onSelect?null:()=>{
             this.props.onSelect(this.props.data)
-        }} padding={4} >Añadir</PButtomSmall> : <Cantidad
+        }} >Añadir</PButtomSmall> : <Cantidad
                     key={this.props.data.idprd}
                     data={this.props.data}
 

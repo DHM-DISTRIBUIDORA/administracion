@@ -41,7 +41,6 @@ export default class Action extends SAction {
 
         let cantidad = _insert.length + _update.length + _delete.length
         if (cantidad <= 0) throw "No hay cambios";
-        // SSocket.sendHttpAsync(SSocket.api.root + "api", obj)
         const respuesta: any = await SSocket.sendHttpAsync(SSocket.api.root + "api", {
             component: table.scheme.name,
             type: "uploadChanges",

@@ -4,12 +4,14 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
 import item from './item';
+import { Data } from 'servisofts-background-location';
+import DataBase from '../../DataBase';
 
 class index extends DPA.list {
     constructor(props) {
         super(props, {
             Parent: Parent,
-            title: "Lista de " + Parent.title+ "s",
+            title: "Lista de " + Parent.title + "s",
             item: item,
             params: ["idemp?"],
             excludes: [],
@@ -18,6 +20,18 @@ class index extends DPA.list {
                 if (resolve) resolve();
             }
         });
+    }
+    componentDidMount() {
+        if (this?.$params?.idemp) {
+            DataBase.tbcli.filtered("idemp = ?", [this.$params.idemp]).then((res) => {
+                this.setState({ data: res })
+            })
+        } else {
+            DataBase.tbcli.all().then((res) => {
+                this.setState({ data: res })
+            })
+        }
+
     }
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
@@ -32,7 +46,8 @@ class index extends DPA.list {
         return data.estado != 0
     }
     $getData() {
-        return Parent.model.Action.getAll({ ...this.$params });
+        return this.state.data;
+        // return Parent.model.Action.getAll({ ...this.$params });
     }
 }
 export default connect(index);

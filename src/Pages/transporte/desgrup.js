@@ -4,7 +4,6 @@ import { SBuscador, SDate, SHr, SInput, SLoad, SMapView, SNavigation, SPage, STe
 import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 import MapaComponent from './MapaComponent';
-import MapaComponentCluster from './MapaComponentCluster';
 import DetalleMapaComponent from './DetalleMapaComponent';
 import DataBase from '../../DataBase'
 import { Trigger } from 'servisofts-db'
@@ -16,7 +15,6 @@ export default class root extends Component {
             curdate: new SDate(SNavigation.getParam("fecha"), "yyyy-MM-dd"),
             idemp: SNavigation.getParam("idemp"),
             fecha: SNavigation.getParam("fecha"),
-            mapa: SNavigation.getParam("mapa"),
         }
     }
     componentDidMount() {
@@ -27,7 +25,6 @@ export default class root extends Component {
         }, (evt) => {
             this.loadDataAsync();
         });
-
         this.state.mapa = SNavigation.getParam("mapa");
     }
     componentWillUnmount() {
@@ -62,12 +59,7 @@ export default class root extends Component {
                 </SView>
             </SView>
             <SView col={"xs-12"} flex>
-                {/* {(this.state.mapa == 1) ?
-                    <MapaComponent state={this.state} setState={this.setState.bind(this)} /> :
-                    <MapaComponentCluster state={this.state} setState={this.setState.bind(this)} />
-                } */}
-                 <MapaComponentCluster state={this.state} setState={this.setState.bind(this)} />
-
+                <MapaComponent state={this.state} setState={this.setState.bind(this)} />
                 <DetalleMapaComponent state={this.state} setState={this.setState.bind(this)} />
             </SView>
             {/* <SLoad type='window' hidden={!this.state.loading} /> */}

@@ -3,7 +3,6 @@ import { PanResponder } from 'react-native'
 import { connect } from 'react-redux';
 import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SStorage } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
-import PButtomSmall from '../PButtomSmall';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
 export type FloatPropsType = {

@@ -47,7 +47,7 @@ class index extends Component {
                 longitude: obj?.location.longitude,
                 src: SSocket.api.root + "tbcli/" + obj?.id,
                 label: obj.clinom,
-                size: 40,
+                size: 80,
                 cantidad: obj.count > 1 ? obj.count : 0,
                 onPress: obj.count <= 1 ? HanndleOnPress.bind(this, obj) : onPress,
                 // cantidad: obj?.cantidad

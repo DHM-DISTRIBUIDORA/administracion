@@ -18,7 +18,7 @@ import DataBaseContainer from './DataBase/DataBaseContainer';
 // import { Example } from 'servisofts-charts';
 
 try {
-    // Firebase.init();
+    Firebase.init();
 } catch (e) {
     console.log(e);
 }
@@ -27,28 +27,28 @@ BackgroundLocation();
 function App(): JSX.Element {
     // @ts-ignore
     return <Redux><SComponentContainer
-        debug
-        socket={SSocket}
-        background={<BackgroundImage />}
-        assets={Assets}
-        inputs={Config.inputs}
-        theme={{ themes: Config.theme, initialTheme: "default" }}
-    >
-        <DataBaseContainer>
-            <SNavigation
-                linking={{
-                    prefixes: ["https://dhm.servisofts.com/app/", "http://dhm.servisofts.com/app/", 'dhm://app/'],
-                    getInitialURL: () => {
-                        Firebase.getInitialURL();
-                    }
-                }}
-                props={{ navBar: TopBar, title: 'DHM', pages: Pages }}
-            />
-            <NavBar />
-            <SText style={{ position: "absolute", bottom: 2, right: 2, zIndex: 0, }} disabled fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
-        </DataBaseContainer>
-        <Socket store={store} />
-    </SComponentContainer>
+            debug
+            socket={SSocket}
+            background={<BackgroundImage />}
+            assets={Assets}
+            inputs={Config.inputs}
+            theme={{ themes: Config.theme, initialTheme: "default" }}
+        >
+            <DataBaseContainer>
+                <SNavigation
+                    linking={{
+                        prefixes: ["https://dhm.servisofts.com/app/", "http://dhm.servisofts.com/app/", 'dhm://app/'],
+                        getInitialURL: () => {
+                            Firebase.getInitialURL();
+                        }
+                    }}
+                    props={{ navBar: TopBar, title: 'DHM', pages: Pages }}
+                />
+                <NavBar />
+                <SText style={{ position: "absolute", bottom: 2, right: 2, zIndex: 0, }} disabled fontSize={10} color={STheme.color.lightGray}>v{packageInfo.version}</SText>
+            </DataBaseContainer>
+            <Socket store={store} />
+        </SComponentContainer>
     </Redux>
 }
 

@@ -64,6 +64,8 @@ class index extends Component {
             SNavigation.goBack();
             return <SLoad />
         }
+        // console.log(SSocket.api.root + "api")
+
         const user = Model.usuario.Action.getUsuarioLog();
         return <SPage preventBack hidden onRefresh={async (resolve) => {
             Model.usuario.Action.syncUserLog();

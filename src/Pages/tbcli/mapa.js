@@ -87,7 +87,7 @@ class index extends Component {
                         }}
                         type='textArea'
                         // editable={false}
-                        placeholder={"Escribe la direccion"}
+                        placeholder={"Escribe la dirección"}
                         // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 50)}${this.state?.data?.direccion.length > 50 ? "..." : ""}` : ""}
                         defaultValue={this?.obj?.clidir}
                     // iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
@@ -102,7 +102,7 @@ class index extends Component {
 
                     const valDir = this.input.getValue();
                     if (!valDir) {
-                        SPopup.alert("Se requiere direccion ");
+                        SPopup.alert("Se requiere alguna descripción para la dirección");
                         return;
                     }
 
@@ -150,7 +150,7 @@ class index extends Component {
                         longitudeDelta: 0.005
                     }}
                     ref={(map) => this.map = map}
-                    icon={<SIcon name="MarcadorMapa" width={25} height={40} />}
+                    icon={<SIcon name="MarcadorMapa" width={25} height={40} fill={STheme.color.primary} />}
                     onChange={(evt) => {
                         this.setState({ lat: evt.latitude, lon: evt.longitude })
                     }} />
