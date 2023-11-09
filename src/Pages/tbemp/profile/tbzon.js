@@ -6,14 +6,23 @@ import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
 import item2 from '../../tbzon/item';
+import DataBase from '../../../DataBase';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
             Parent: Parent,
             params: ["onSelect?"],
-            item:item,
+            item: item,
             excludes: []
         });
+    }
+
+    componentDidMount() {
+        DataBase.tbemp.objectForPrimaryKey(parseInt(this.pk)).then(e => {
+            this.setState({ data: e })
+        }).catch(e => {
+            console.error(e)
+        })
     }
     $allowBack() {
         return true;
@@ -29,7 +38,8 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
-        return Parent.model.Action.getByKey(this.pk);
+        return this.state.data;
+        // return Parent.model.Action.getByKey(this.pk);
     }
     $footer() {
         return (<SView col={"xs-12"}>
@@ -59,10 +69,15 @@ class Lista extends DPA.list {
         });
     }
 
+    componentDidMount() {
+        DataBase.tbzon.filtered(`idemp == ${this.props.pi.pk}`).then((data) => {
+            this.setState({ data: data })
+        })
+    }
     $filter(data) {
         return data.zest == "0"
     }
     $getData() {
-        return Parent2.model.Action.getAllBy({ idemp: this.props.pi.pk })
+        return this.state.data;
     }
 }

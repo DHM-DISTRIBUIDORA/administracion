@@ -36,6 +36,13 @@ export const sincronizar_transportista = async () => {
 
 }
 
+export const sincronizar_admin = async () => {
+    const tables = [DataBase.tbcli, DataBase.tbzon]
+    tables.map((t) => {
+        syncWithNotify(t);
+    })
+}
+
 const syncWithNotify = async (t: any) => {
     const notify = await SNotification.send({
         title: t.scheme.name,
@@ -81,13 +88,14 @@ export const SaveChanges = async (table: TableAbstract) => {
                     data: obj
                 })
                 if (resp.estado != "exito") throw resp;
+                resp.data.sync_type = "";
                 await table.delete(obj[table.scheme.primaryKey]);
                 if (obj.sync_type != "delete") {
                     await table.insert(resp.data)
                 }
             } catch (error: any) {
                 SNotification.send({
-                    title: "Error al guardas",
+                    title: "Error al guardar cambios",
                     body: error?.error ?? error,
                     color: STheme.color.danger
                 })

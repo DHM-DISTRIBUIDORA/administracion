@@ -3,6 +3,7 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
 import item from './item';
+import DataBase from '../../DataBase';
 // import item from './item';
 
 class index extends DPA.list {
@@ -18,6 +19,12 @@ class index extends DPA.list {
             }
         });
     }
+
+    componentDidMount() {
+        DataBase.tbemp.all().then((res) => {
+            this.setState({ data: res })
+        })
+    }
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
@@ -31,8 +38,8 @@ class index extends DPA.list {
     //     return data.empest != "1"
     // }
     $getData() {
-        console.log(Parent.model.Action.getAll())
-        return Parent.model.Action.getAll();
+        // console.log(Parent.model.Action.getAll())
+        return this.state.data;
     }
 
 }

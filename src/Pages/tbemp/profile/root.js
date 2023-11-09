@@ -29,10 +29,10 @@ class index extends DPA.profile {
             excludes: [],
             title: "Perfil de " + Parent.title,
             onRefresh: (r) => {
-                
+
                 if (r) r();
-                this.componentDidMount();
                 this.setState({ load_cant: false })
+                this.componentDidMount();
             }
         });
         this.idemp = SNavigation.getParam("pk")
@@ -48,6 +48,10 @@ class index extends DPA.profile {
             if (e.idemt == 4) {
                 this.getDataTransportista()
 
+            } else {
+                if (this.state?.fecha_inicio && this.state?.fecha_fin) {
+                    this.getDataVendedor({ fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin })
+                }
             }
         }).catch(e => {
             console.error(e)
@@ -82,32 +86,40 @@ class index extends DPA.profile {
         // }).catch(e => {
         //     console.error(e)
         // })
-        const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
-
-        let monto = 0;
-        cantidad_pedidos.map(a => {
-            a.detalle.map((d) => {
-                monto += d.vdcan * d.vdpre
+        try {
+            const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
+            let monto = 0;
+            cantidad_pedidos.map(a => {
+                a.detalle.map((d) => {
+                    monto += d.vdcan * d.vdpre
+                })
             })
-        })
-        // this.setState({ cantidad_pedidos: cantidad_pedidos.length })
-        const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
-        // this.setState({ cantidad_zonas: cantidad_zonas.length })
+            this.setState({ cantidad_pedidos: cantidad_pedidos.length, monto_pedidos: monto })
+        } catch (error) {
+            console.error("No pudimos cargar los pedidos");
+        }
         let query = "";
-        cantidad_zonas.map((z, i) => {
-            if (i > 0) query += " || "
-            query += `idz == ${z.idz}`
-        })
-        let cantidad_clientes = []
-        if (cantidad_zonas.length > 0) {
-            cantidad_clientes = await DataBase.tbcli.filtered(query)
 
+        try {
+            const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+            this.setState({ cantidad_zonas: cantidad_zonas.length })
+            cantidad_zonas.map((z, i) => {
+                if (i > 0) query += " || "
+                query += `idz == ${z.idz}`
+            })
+        } catch (error) {
+            console.error("No pudimos cargar las zonas");
         }
 
-        
+        let cantidad_clientes = []
+        if (query) {
+            cantidad_clientes = await DataBase.tbcli.filtered(query)
+        }
+
+
         // const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
         // this.setState({ cantidad_clientes: cantidad_clientes.length })
-        this.setState({ cantidad_clientes: cantidad_clientes.length, cantidad_zonas: cantidad_zonas.length, cantidad_pedidos: cantidad_pedidos.length, monto_pedidos: monto, load_cant: true })
+        this.setState({ cantidad_clientes: cantidad_clientes.length, load_cant: true })
 
         // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
         // let query = "";
