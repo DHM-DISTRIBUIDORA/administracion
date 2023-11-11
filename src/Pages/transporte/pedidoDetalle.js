@@ -184,7 +184,7 @@ class pedidoDetalle extends Component {
             idcli: this.state?.data?.idcli + "",
             descripcion: descripcion,
             tipo: tipo,
-            monto: monto,
+            monto: parseFloat(monto??0),
             fecha: new SDate(this?.state?.data?.fecha, "yyyy-MM-dd hh:mm:ss").toString("yyyy-MM-ddThh:mm:ss"),
         }
         data.idemp = Model.usuario.Action.getUsuarioLog()?.idtransportista;
