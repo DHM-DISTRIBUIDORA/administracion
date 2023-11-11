@@ -14,6 +14,8 @@ class password extends Component {
         this.state = {
         };
         this.params = SNavigation.getAllParams();
+
+        console.log(this.params.pk + "  pk");
     }
 
     alertErrorPassword() {
@@ -34,7 +36,7 @@ class password extends Component {
         return <SView col={"xs-11 md-8 xl-6"} row center style={{ height: 250, borderRadius: 8, }} backgroundColor={STheme.color.background} >
             <SView col={"xs-11"} height={40} />
             <SView col={"xs-11"}  >
-                <SIcon name={"InputPassword"} height={100} fill={STheme.color.primary}  />
+                <SIcon name={"InputPassword"} height={100} fill={STheme.color.primary} />
             </SView>
             <SView col={"xs-11"} height={15} />
             <SView col={"xs-12"} center  >
@@ -54,8 +56,19 @@ class password extends Component {
             return null;
         }
         var password = CryptoJS.MD5(values["Password"]).toString();
-        let usuario = Model.usuario.Action.getUsuarioLog();
+        let usuario;
+        if (this.params.pk) {
+            usuario = Model.usuario.Action.getByKey(this.params.pk);
+        } else {
+            usuario = Model.usuario.Action.getUsuarioLog();
+        }
+
+        console.log("usuario")
+        console.log(usuario)
         this.setState({ loading: true, error: "" })
+
+      
+
         Model.usuario.Action.editar({
             data: {
                 ...usuario,
@@ -69,6 +82,8 @@ class password extends Component {
             this.setState({ loading: false, error: e.error })
             SPopup.alert("Error en los datos");
         })
+
+
         // delete values["RepPassword"];
     }
 

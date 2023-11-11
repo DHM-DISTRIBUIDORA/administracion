@@ -1,5 +1,5 @@
 import React from 'react';
-import { SExcel, SNavigation } from 'servisofts-component';
+import { SExcel, SLoad, SNavigation } from 'servisofts-component';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
@@ -56,13 +56,17 @@ class index extends DPA.list {
         return menu;
     }
     $order() {
-        return [{ key: "Nombres", order: "asc", peso: 2 }, { key: "Apellidos", order: "asc", peso: 1 }]
+        // return [{ key: "Nombres", order: "asc", peso: 2 }, { key: "Apellidos", order: "asc", peso: 1 }]
+        return [{ key: "Nombres", order: "asc"}, { key: "Apellidos", order: "asc"}]
     }
     $filter(data) {
         // return true;
-        return data.estado != "0"
+        return data?.estado != "0"
     }
     $getData() {
+        console.log(Parent.model.Action.getAll())
+        console.log("GGG")
+        // if (Object.keys(Parent.model.Action.getAll()).length === 0) return ;
         return Parent.model.Action.getAll();
     }
 }

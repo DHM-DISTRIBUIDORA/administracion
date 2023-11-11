@@ -21,13 +21,10 @@ const versionToNumber = (v) => {
 export default class index extends Component {
     state = {}
 
-    componentWillUnmount() {
-        this.run = false;
-    }
+
     componentDidMount() {
         this.run = true;
-
-        new SThread(2500, "carga_hilo", false).start(() => {
+        new SThread(2500, "carga_hilo", true).start(() => {
             if (!this.run) return;
             if (Model.usuario.Action.getKey()) {
                 SNavigation.replace("/root")
@@ -64,6 +61,10 @@ export default class index extends Component {
             console.error(e)
         })
 
+    }
+
+    componentWillUnmount() {
+        this.run = false;
     }
 
     renderFooter() {

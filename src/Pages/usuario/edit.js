@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from '.';
-import { SNavigation, SPopup } from 'servisofts-component';
+import { SHr, SNavigation, SPopup, SView } from 'servisofts-component';
 import Model from '../../Model';
 import CryptoJS from 'crypto-js';
+import { PButtom } from '../../Components';
 
 class index extends DPA.edit {
     constructor(props) {
@@ -40,6 +41,25 @@ class index extends DPA.edit {
         }).catch(e => {
             console.error(e);
         })
+    }
+
+    getCambiarPass() {
+        return <>
+
+            <SView col={"xs-12"} center>
+                <PButtom fontSize={20} onPress={() => {
+                    SNavigation.navigate("/perfil/changepass" , { pk: this.pk })
+                }}>CAMBIAR CONTRASEÑA</PButtom>
+            </SView>
+        </>
+    }
+
+    $footer() {
+        return <SView col={"xs-12"} center>
+            <SHr height={30}/>
+            {this.getCambiarPass()}
+            <SHr />
+        </SView>
     }
 }
 
