@@ -228,13 +228,14 @@ class index extends Component {
         })
     }
     render() {
-        console.log(this.state?.client)
-        console.log(this.state?.detalle + " detalle")
+        // console.log(this.state?.client)
+        // console.log(this.state?.detalle + " detalle")
         return <SPage footer={this.footer()}>
             <Container>
                 <SText>Carrito</SText>
                 <SHr />
-                <SText>Detalle</SText>
+                <Carrito.Cliente data={this.state.client} />
+                {/* <SText>{JSON.stringify(this.state.client)}</SText> */}
                 <SHr />
                 <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText>
                 <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
