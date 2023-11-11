@@ -27,7 +27,7 @@ class index extends DPA.new {
  
     $onSubmit(data) {
         if (data["Password"] != data["rep_pass"]) {
-            SPopup.alert("Las contraceñas no coinciden.")
+            SPopup.alert("Las contraseñas no coinciden.")
             return;
         }
         data["Password"] = CryptoJS.MD5(data["Password"]).toString();
