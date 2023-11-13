@@ -78,7 +78,7 @@ export default class index extends Component {
 					</SView>
 					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{ zIndex: 99 }} />
 				</SView >
-				{(this.props.carrito != "no") ? <Carrito.Float bottom={68} /> : null}
+				{(this.props.carrito != "no") ? <Carrito.Float bottom={209} /> : null}
 			</>
 			// </SView>
 		);

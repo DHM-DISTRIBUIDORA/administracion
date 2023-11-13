@@ -10,6 +10,7 @@ class pedidos extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            // cont: 0
         };
         this.idemp = SNavigation.getParam("pk")
         this.fecha_inicio = SNavigation.getParam("fecha_inicio");
@@ -31,7 +32,10 @@ class pedidos extends Component {
 
     async loadDataAsync() {
         DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0").then(dt => {
-            dt = dt.sort((a, b) => a.vhora > b.vhora ? -1 : 1)
+            dt = dt.sort((a, b) => a.vhora < b.vhora ? -1 : 1)
+
+            dt.map((a, i) => a.index = i + 1)
+
             this.setState({ data: dt })
         })
         // SSocket.sendPromise({
@@ -53,34 +57,47 @@ class pedidos extends Component {
             cantidadProductos += a?.vdcan;
         })
 
-        return <SView col={"xs-12"} card padding={4} onPress={() => {
+        return <SView col={"xs-12"} onPress={() => {
             SNavigation.navigate("/dm_cabfac/recibo", { pk: obj.idven })
         }} row>
             {/* <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.sync_type}</SText> */}
-            <SView col={"xs-12"} row>
-                <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.idven}</SText>
-                <SView flex />
-                <SText fontSize={10} color={STheme.color.gray}>{(obj.vfec + "").substring(0, 10)}{(obj.vhora + "").substring(10, 16)}</SText>
+            <SView col={"xs-4"} row height={25}
+                backgroundColor={STheme.color.primary}
+                style={{
+                    borderTopRightRadius: 8,
+                    // position: "absolute",
+                    // borderBottomLeftRadius: 8,
+                }}
+            >
+                <SView width={5} />
+                <SText bold color={STheme.color.white} center>PEDIDO # {obj.index}</SText>
             </SView>
-            <SHr />
-            <SView col={"xs-12"} center row>
-                <SView flex>
-                    <SText bold>{obj.clicod}  - {obj.nombrecliente}</SText>
-                    <SText fontSize={12} color={STheme.color.gray}>{obj.vobs}</SText>
+            <SView col={"xs-12"} row padding={4} card>
+                <SView col={"xs-12"} row>
+                    <SText fontSize={10} color={obj.sync_type ? STheme.color.warning : null}>{obj.idven}</SText>
+                    <SView flex />
+                    <SText fontSize={10} color={STheme.color.gray}>{(obj.vfec + "").substring(0, 10)}{(obj.vhora + "").substring(10, 16)}</SText>
+                </SView>
+                <SHr />
+                <SView col={"xs-12"} center row>
+                    <SView flex>
+                        <SText bold>{obj.clicod}  - {obj.nombrecliente}</SText>
+                        <SText fontSize={12} color={STheme.color.gray}>{obj.vobs}</SText>
+
+                    </SView>
+                    <SView width={80} style={{
+                        alignItems: "flex-end"
+                    }}>
+                        <SText bold>Bs.{SMath.formatMoney(total)}</SText>
+                    </SView>
 
                 </SView>
-                <SView width={80} style={{
-                    alignItems: "flex-end"
-                }}>
-                    <SText bold>Bs.{SMath.formatMoney(total)}</SText>
-                </SView>
-
             </SView>
-
 
         </SView>
     }
     render() {
+        var cont = 0;
         return (
             <SPage title={'Pedidos'} >
                 <Container >
@@ -95,10 +112,12 @@ class pedidos extends Component {
                         <SList
                             limit={10}
                             data={this.state.data}
-                            render={this.component.bind(this)}
-                            // order={[{ key: "idven", order: "desc" }, { key: "vfec", order: "desc", peso: 2 }]}
                             filter={(a) => a.sync_type != "delete"}
-
+                            //order={[{ key: "vfec", order: "asc" }, { key: "vhora", order: "asc" }]}
+                            // render={this.component.bind(this)}
+                            render={(datas) => {
+                                return this.component(datas)
+                            }}
                             buscador={true}
                         />
                     </Loader>
