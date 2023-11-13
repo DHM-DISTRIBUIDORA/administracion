@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native'
-import React, { Component, forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
+import React, { Component  } from 'react'
 import DataBase, { DB } from '.';
 import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread, SPopup, SDate } from 'servisofts-component';
 import SDB, { TableAbstract } from 'servisofts-db';
