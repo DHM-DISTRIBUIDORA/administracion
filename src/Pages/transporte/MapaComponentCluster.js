@@ -14,15 +14,22 @@ export default class MapaComponent extends Component {
     }
 
     handlePressClient = (data, visita, tbvd) => {
-        console.log(tbvd);
-        SNavigation.navigate("/tbcli/profile", {
-            // SNavigation.navigate("/vendedor/cliente", {
-            pk: data.id + "",
+        // console.log(tbvd);
+        SNavigation.navigate("/transporte/pedidoDetalle", {
+            idven: data.id + "",
             idemp: this.props?.state?.idemp,
             visitaType: "transporte",
             visita: visita,
-            tbvd: tbvd
+            // pk: vd.idcli + "",
         })
+        // SNavigation.navigate("/tbcli/profile", {
+        //     // SNavigation.navigate("/vendedor/cliente", {
+        //     pk: data.id + "",
+        //     idemp: this.props?.state?.idemp,
+        //     visitaType: "transporte",
+        //     visita: visita,
+        //     tbvd: tbvd
+        // })
     }
     render() {
         const { state, setState } = this.props;

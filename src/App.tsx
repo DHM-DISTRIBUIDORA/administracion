@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useEffect } from 'react';
 import { Platform, Text } from 'react-native';
 import { SComponentContainer, SNavigation, SText, STheme } from 'servisofts-component';
@@ -25,8 +26,8 @@ try {
 BackgroundLocation();
 
 function App(): JSX.Element {
-    // @ts-ignore
-    return <Redux><SComponentContainer
+    return <Redux>
+        <SComponentContainer
             debug
             socket={SSocket}
             background={<BackgroundImage />}

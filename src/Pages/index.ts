@@ -44,6 +44,7 @@ import notification from './notification';
 import test from "./test"
 import gpx from './gpx';
 import storage from "./storage"
+import videos from './videos';
 // import { Example } from "servisofts-charts"
 
 // export default SPage.combinePages("/", {
@@ -90,6 +91,7 @@ export default SPage.combinePages("/", {
   ...transporte,
   ...info,
   ...notification,
+  ...videos,
   version_required,
   buscar_cliente_codigo,
   ...storage,

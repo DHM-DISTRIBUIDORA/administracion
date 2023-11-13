@@ -140,7 +140,7 @@ class index extends DPA.profile {
         const visitas = await DataBase.visita_transportista.all()
         let monto = 0;
         visitas.map(a => {
-            monto += a.monto
+            monto += a.monto ?? 0
         })
         const clientes_visitados = pedidos.filter(a => !!visitas.find(v => v.idven == a.idven))
 

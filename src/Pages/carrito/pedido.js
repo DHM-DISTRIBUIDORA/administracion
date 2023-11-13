@@ -97,7 +97,7 @@ class index extends Component {
                         Model.carrito.Action.removeAll()
                         SNavigation.replace('/public')
                     }} >ELIMINAR PEDIDOS</PButtom>
-                <SHr height={30} />
+                <SHr height={20} />
 
             </SView>
         )

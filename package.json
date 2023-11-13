@@ -1,6 +1,6 @@
 {
   "name": "distribuidora_dhm_app",
-  "version": "1.0.32",
+  "version": "1.0.33",
   "description": "distribuidora_dhm_app",
   "scripts": {
     "start": "react-native start",
@@ -60,7 +60,7 @@
     "redux-thunk": "^2.3.0",
     "servisofts-background-location": "2.0.1",
     "servisofts-charts": "1.0.1",
-    "servisofts-component": "^3.0.15",
+    "servisofts-component": "3.0.15",
     "servisofts-db": "^1.0.6",
     "servisofts-model": "1.0.5",
     "servisofts-page": "^1.0.12",
@@ -82,7 +82,7 @@
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@tsconfig/react-native": "^2.0.2",
-    "@types/react": "^18.0.24",
+    "@types/react": "18.2.0",
     "@types/react-native": "^0.61.17",
     "metro-react-native-babel-preset": "0.73.8",
     "react-scripts": "^5.0.1",

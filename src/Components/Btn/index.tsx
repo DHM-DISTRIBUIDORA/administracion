@@ -1,9 +1,8 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SText, STextProps, SView, SViewProps } from 'servisofts-component'
+import { SText, STextProps, SView, SViewProps, SLoad } from 'servisofts-component'
 import _default from "./type/default"
 import danger from "./type/danger"
-import { SLoad } from 'servisofts-component'
 
 const types = {
     default: _default,

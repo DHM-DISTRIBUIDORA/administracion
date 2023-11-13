@@ -189,7 +189,7 @@ class recibo extends Component {
                     loading={this.state.loading}
                     onPress={() => {
                         SPopup.confirm({
-                            title: "Seguro que desea eliminar?",
+                            title: "¿Está seguro que desea eliminar?",
                             onPress: () => {
                                 DataBase.dm_cabfac.update({
                                     ...this.state.data,
