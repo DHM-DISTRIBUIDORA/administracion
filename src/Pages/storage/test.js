@@ -81,13 +81,17 @@ export default class test extends Component {
                         <Table table={DataBase.ventas_factura} label="Ventas por entregar." />
                     </>
                 }
-
-                <SHr h={300} />
-                <BtnEliminarYDescargar label={"SOLO PARA ADMIN"} onPress={() => {
-                    DataBase.Funciones.sincronizar_admin()
-                }} />
-                <Table table={DataBase.tbcli} label="Clientes." save />
-                <Table table={DataBase.tbzon} label="Zonas." />
+                {!urser?.idtransportista && !urser?.idvendedor ?
+                    <>
+                        <SHr />
+                        <BtnEliminarYDescargar label={"SOLO PARA ADMIN"} onPress={() => {
+                            DataBase.Funciones.sincronizar_admin()
+                        }} />
+                        <Table table={DataBase.tbcli} label="Clientes." save />
+                        <Table table={DataBase.tbzon} label="Zonas." />
+                    </>
+                    : null
+                }
                 <SHr h={50} />
             </SScrollView2>
             {/* </SScrollView2> */}
