@@ -11,10 +11,10 @@ export default class MapaComponent extends Component {
         if (!this.map) return;
         if (!arrLatLng2.length) return;
         this.map.fitToCoordinates(arrLatLng2, {})
-    }
+    } 
 
     handlePressClient = (data, visita, tbvd) => {
-        // console.log(tbvd);
+       
         SNavigation.navigate("/transporte/pedidoDetalle", {
             idven: data.id + "",
             idemp: this.props?.state?.idemp,
@@ -45,9 +45,13 @@ export default class MapaComponent extends Component {
         });
 
         const renderCluster = (data, onPressCluster, keys) => {
+            console.log("dataaaaaaaaaaaa");
+            console.log(data);
+            console.log("this.props.stateeeeee");
+
+            console.log(this.props.state);
             let onPress = onPressCluster;
             // const visita = null;
-            console.log(data)
 
             let visita;
             if (this.props.state?.visitas) {

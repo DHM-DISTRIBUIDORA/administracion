@@ -374,7 +374,7 @@ class index extends DPA.profile {
                     }}
                 >
                     <SHr height={15} />
-                    <SIcon name={"Iuser"} height={20} width={22} />
+                    <SIcon name={"Iuser"} height={20} width={22} fill={STheme.color.text} />
                     <SView width={5} />
                     <SText>Ver Usuario</SText>
                     <SHr height={15} />

@@ -97,7 +97,7 @@ class index extends Component {
             <SHr height={32} />
             <SView col={"xs-12"} center>
                 <SwitchRastreo height={40} width={90} />
-                <SText fontSize={12} color={STheme.color.lightGray}>{"Activate para ser rastreado."}</SText>
+                <SText fontSize={12} color={STheme.color.lightGray}>{"Actívate para ser rastreado."}</SText>
             </SView>
             <SHr height={32} />
             <SView col={"xs-12"} flex >

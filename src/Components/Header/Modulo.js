@@ -32,7 +32,7 @@ export default class index extends Component<Modulo_props> {
                     }}>
                     <SIcon name={this.props?.icon} height={30} width={30} />
                     <SView width={7} />
-                    <SText fontSize={12}>{this.props?.titulo}</SText>
+                    <SText fontSize={11}>{this.props?.titulo}</SText>
                 </SView>
             </SView >
         );

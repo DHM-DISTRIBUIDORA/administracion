@@ -15,6 +15,8 @@ export default class root extends Component {
             curdate: new SDate(SNavigation.getParam("fecha"), "yyyy-MM-dd"),
             idemp: SNavigation.getParam("idemp"),
             fecha: SNavigation.getParam("fecha"),
+            mapa: SNavigation.getParam("mapa"),
+
         }
     }
     componentDidMount() {
@@ -26,6 +28,7 @@ export default class root extends Component {
             this.loadDataAsync();
         });
         this.state.mapa = SNavigation.getParam("mapa");
+        console.log("ENTRÓ DIDMOUNT")
     }
     componentWillUnmount() {
         Trigger.removeEventListener(this.t1);
@@ -41,6 +44,7 @@ export default class root extends Component {
                 data: ventas,
                 visitas: visitas
             })
+            console.log("entro loadDataAsync")
 
         } catch (error) {
             this.setState({ loading: false })
@@ -48,6 +52,7 @@ export default class root extends Component {
         }
     }
     render() {
+        console.log(this.state)
         return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
             <SView col={"xs-12"} center row padding={4} height={50}>
                 <SView flex center>
