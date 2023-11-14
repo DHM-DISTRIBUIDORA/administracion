@@ -43,7 +43,7 @@ class index extends Component {
     }
     render() {
         return <SPage
-            title={"Historico de pedidos"}
+            title={"Histórico de pedidos"}
             // hidden
             footer={this.footer()}
             header={<Pedido.BotonesPedidos url={"/pedidos/historico"}  />}

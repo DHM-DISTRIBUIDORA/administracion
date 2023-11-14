@@ -58,7 +58,7 @@ class index extends Component<BotonesPedidosPropsType> {
                     <SHr height={5} />
                     {this.getButtom({ label: "PENDIENTES", url: "/pedidos", corner: "left" })}
                     {this.getButtom({ label: "EN DELIVERY", url: "/pedidos/delivery", corner: "center" })}
-                    {this.getButtom({ label: "HISTORICO", url: "/pedidos/historico", corner: "right" })}
+                    {this.getButtom({ label: "HISTÓRICO", url: "/pedidos/historico", corner: "right" })}
                     <SHr height={5} />
                 </SView>
             </Container >

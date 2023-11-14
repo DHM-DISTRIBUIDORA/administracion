@@ -255,7 +255,7 @@ class index extends DPA.profile {
                                 }}
                             >
                                 <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
-                                    <SIcon name="MarcadorMapa" width={35} height={55} fill={STheme.color.primary} />
+                                    <SIcon name="MarcadorMapa" width={50} height={55} fill={STheme.color.primary} />
                                 </SMarker>
                             </SMapView>
                             <SView col={"xs-12"} height style={{

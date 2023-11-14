@@ -23,6 +23,7 @@ export default ({ state }) => {
     const clientes_con_ubicacion = clientes.filter(a => !!a.clilat && !!a.clilon)
     const clientes_sin_ubicacion = clientes.filter(a => !a.clilat || !a.clilon)
     const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idven == a.idven))
+    const fecha = SNavigation.getParam("fecha")
 
 
     return <SView col={"xs-12"}
@@ -43,10 +44,13 @@ export default ({ state }) => {
                 onPress={() => {
                     SNavigation.navigate("/transporte/list", { pk: state.idemp })
                 }} />
-            <Card  label={(state.mapa == 1) ? "Agrupar Mapa" : "Desagrupar Mapa"} value={""} backgroundColor={STheme.color.lightGray + "99"}
-                onPress={() => {
-                    (state.mapa == 1) ? SNavigation.navigate("/transporte", { pk: state.idemp, mapa: 0 }) : SNavigation.navigate("/transporte/desgrup", { pk: state.idemp, mapa: 1 })
-                }} />
+            {clientes.length > 0 ?
+                <Card label={(state.mapa == 1) ? "Agrupar Mapa" : "Desagrupar Mapa"} value={""} backgroundColor={STheme.color.lightGray + "99"}
+                    onPress={() => {
+                        (state.mapa == 1) ? SNavigation.navigate("/transporte", { idemp: state.idemp, fecha: fecha, mapa: 0 }) : SNavigation.navigate("/transporte/desgrup", { idemp: state.idemp, fecha: fecha, mapa: 1 })
+                    }} />
+                : null
+            }
         </SView>
     </SView>
 }

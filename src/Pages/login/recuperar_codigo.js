@@ -25,12 +25,18 @@ class recuperar_codigo extends Component {
             inputs={{
                 Codigo: { placeholder: "Ingrese el código recibido", type: "text", isRequired: true },
             }}
+            error={this.state.error}
             onSubmit={(values) => {
                 Model.usuario.Action.verificarCodigoPass({ codigo: values.Codigo }).then(resp => {
                     var usr_rec = resp.data;
                     SNavigation.navigate("/login/recuperar_pass", usr_rec);
                 }).catch(e => {
                     console.error(e);
+                    if (e?.error == "error_datos") {
+                        this.setState({ loading: false, error: "Código erróneo, verifique nuevamente." })
+                    } else {
+                        this.setState({ loading: false, error: "Ha ocurrido un error al introducir el código." })
+                    }
                 })
             }}
         />
