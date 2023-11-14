@@ -10,11 +10,28 @@ import Model from '../../Model';
 export default class MapaComponent extends Component {
     render() {
         const { state, setState } = this.props;
+
         const clientes = state.data ?? []
-        const visitas = state.visitas ?? {};
+        let visitas_ok= {}
         let arrLatLng = [];
         let arrLatLng2 = [];
+       
         clientes.map(o => {
+            console.log("00000000")
+            console.log(o)
+
+            console.log("state.visitas")
+            console.log(state?.visitas[0])
+
+            if (state?.visitas[0]) {
+                visitas_ok = state?.visitas.find(a => a.idven == o.idven);
+            }
+            console.log("visitaaaaaaaaaaaaaaas")
+            console.log(visitas_ok)
+
+
+
+
             // if (state.busqueda) {
 
             //     if (JSON.stringify(o).indexOf(state.busqueda) <= -1) return;
@@ -28,14 +45,19 @@ export default class MapaComponent extends Component {
                 latitude: o.clilat,
                 longitude: o.clilon,
                 src: SRC.tbcli(o.idcli),
-                borderColor: !visitas[o.idcli] ? STheme.color.danger : STheme.color.success,
+                borderColor: visitas_ok ? "#0f0" : STheme.color.primary,
                 content: o.clinom,
                 onPress: () => {
+
                     // this.realizarVisita(o);
-                    if (!visitas[o.idcli]) {
-                        SNavigation.navigate("/tbcli/profile", {
+                    if (!visitas_ok) {
+                        SNavigation.navigate("/transporte/pedidoDetalle", {
                             // SNavigation.navigate("/vendedor/cliente", {
-                            pk: o.idcli + "",
+                            // pk: o.idcli + "",
+                            idven: o.idven + "",
+                            idemp: this.props?.state?.idemp,
+                            visitaType: "transporte",
+                            visita: visitas_ok[0],
 
                             onVisitaSuccess: ({ descripcion, tipo }) => {
                                 // if (this.state.loading) return null;
@@ -54,7 +76,7 @@ export default class MapaComponent extends Component {
                                         fecha: state.curdate.toString("yyyy-MM-dd")
                                     }
                                 }).then(e => {
-                                    state.visitas[o.idcli] = e.data;
+                                    state.visitas[0] = e.data;
                                     setState({ loading: false })
                                     SNavigation.goBack();
 
@@ -65,9 +87,13 @@ export default class MapaComponent extends Component {
                             }
                         })
                     } else {
-                        SNavigation.navigate("/tbcli/profile", {
-                            pk: o.idcli + "",
-                            visita: visitas[o.idcli],
+                        SNavigation.navigate("/transporte/pedidoDetalle", {
+                            // pk: o.idcli + "",
+                            // visita: visitas[o.idcli],
+                            idven: o.idven + "",
+                            idemp: this.props?.state?.idemp,
+                            visitaType: "transporte",
+                            visita: visitas[0],
                         })
                     }
 
@@ -80,8 +106,16 @@ export default class MapaComponent extends Component {
                 if (map) {
                     if (!arrLatLng.length) return;
                     map.fitToCoordinates(arrLatLng2, {
-
+                        edgePadding: {
+                            top: 100,
+                            right: 100,
+                            bottom: 100,
+                            left: 100
+                        },
+                        animated: true,
+                    
                     })
+                    console.log("RTRTRTRT")
                 }
 
             }}>
