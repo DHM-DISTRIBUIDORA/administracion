@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 // import {  } from 'react-native-svg'
-import { SHr, SText, SView } from 'servisofts-component'
+import { SHr, SNavigation, SText, SView } from 'servisofts-component'
 import ReportButtom from './ReportButtom'
 
 export default class ErrorWindow extends Component {
@@ -57,7 +57,7 @@ export default class ErrorWindow extends Component {
                                 justifyContent: 'center',
                             }}
                             onPress={() => {
-                                navigation.navigate('public')
+                                SNavigation.reset("/");
                             }
                             }
                         >

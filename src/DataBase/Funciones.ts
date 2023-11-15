@@ -96,8 +96,9 @@ export const SaveChanges = async (table: TableAbstract) => {
             } catch (error: any) {
                 SNotification.send({
                     title: "Error al guardar cambios",
-                    body: error?.error ?? error,
-                    color: STheme.color.danger
+                    body: JSON.stringify(error?.error) ?? JSON.stringify(error),
+                    color: STheme.color.danger,
+                    time: 10000,
                 })
                 console.error(error)
             }
@@ -109,6 +110,20 @@ export const SaveChanges = async (table: TableAbstract) => {
 
 export const TimeHilo = 1000 * 30;
 export const saveAllChanges = async () => {
+
+    try {
+        const version = await SSocket.sendHttpAsync(SSocket.api.root + "api", {
+            component: "enviroments",
+            type: "getVersion",
+        })
+    } catch (error) {
+        SNotification.send({
+            title: "Error al guardar cambios",
+            body: "Verifique la conexion a internet.",
+            color: STheme.color.danger,
+            time: 10000,
+        })
+    }
 
     const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista]
     // SNotification.send({
