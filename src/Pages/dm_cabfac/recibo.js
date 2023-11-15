@@ -25,7 +25,7 @@ class recibo extends Component {
             on: ["insert", "update", "delete"],
             tables: ["dm_cabfac"]
         }, (evt) => {
-            this.loadDataAsync();
+            this.loadDataAsync(); 
         });
     }
     componentWillUnmount() {
