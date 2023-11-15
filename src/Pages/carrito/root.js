@@ -5,6 +5,7 @@ import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
+import { Trigger } from 'servisofts-db';
 
 
 class index extends Component {
@@ -16,7 +17,7 @@ class index extends Component {
         this.state = {
             detalle: "",
         }
-
+        this.idcli = SNavigation.getParam("pk");
     }
 
     componentDidMount() {
@@ -39,8 +40,25 @@ class index extends Component {
                 console.error(e);
             }
         })
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (evt) => {
+            this.loadDataAsync(); 
+        });
     }
 
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
+    async loadDataAsync() {
+        DataBase.tbcli.objectForPrimaryKey(this.idcli).then((e) => {
+            // e.detalle = JSON.parse(e.detalle);
+            this.setState({ data: e })
+        })
+
+    }
 
     loadData() {
 

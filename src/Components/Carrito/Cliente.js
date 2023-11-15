@@ -64,7 +64,7 @@ export default class Cliente extends Component {
                      //       // this.setState({ idz: cliente.idcli + "" })
                      //    }
                      // },
-                     { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
+                     { pk: parseInt(Model.usuario.Action.getUsuarioLog()?.idvendedor), ubicacion: "true" })
                }} />
                <Card label={"Editar"} backgroundColor={"#F5AD76" + "AA"} onPress={() => {
                   SNavigation.navigate("/tbcli/edit", { pk: this.props.data?.idcli, ubicacion: "true" })
