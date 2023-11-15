@@ -235,10 +235,11 @@ class index extends Component {
             <Container>
                 <SText>Carrito</SText>
                 <SHr />
+                <SText col={"xs-12"} bold fontSize={16}>Cliente</SText>
                 <Carrito.Cliente data={this.state.client} />
                 {/* <SText>{JSON.stringify(this.state.client)}</SText> */}
                 <SHr />
-                <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText>
+                {/* <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText> */}
                 <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
                     this.state.client.clinit = val;
                 }} />
