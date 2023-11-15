@@ -148,6 +148,7 @@ class index extends Component {
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
                     <MenuButtom label={"Pantalla blanco"} url={"/blanco"} icon={this.getIconProfile()} />
+                    <MenuButtom label={"Pantalla blanco 2"} url={"/blanco/blanco2"} icon={this.getIconProfile()} />
                     {/* <MenuButtom label={"Test"} url={"/test"} icon={this.getIconProfile()} /> */}
                 </MenuPages>
             </SView>
