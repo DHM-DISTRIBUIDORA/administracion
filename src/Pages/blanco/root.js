@@ -14,23 +14,12 @@ class index extends Component {
         };
     }
 
-    renderData() {
-        const clientes = Model.dm_clientes.Action.getAll();
-        if (!clientes) return <SLoad />
-        return <SList
-            buscador
-            data={clientes}
-            limit={20}
-        />
-    }
     render() {
         return (
             <SPage title={'Clientes'}>
                 <Container>
-                    {/* {this.renderData()} */}
-                    <SText>holaaqaaaaaa</SText>
+                    <SText>Preciona sobre el numero para lanzar la exeption.</SText>
                     <ErrorBoundary>
-                        <BuggyCounter />
                         <BuggyCounter />
                     </ErrorBoundary>
                 </Container>
@@ -38,7 +27,4 @@ class index extends Component {
         );
     }
 }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(index);
+export default (index);
