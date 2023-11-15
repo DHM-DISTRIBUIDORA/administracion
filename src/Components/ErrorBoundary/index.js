@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ErrorWindow from './ErrorWindow';
+import ReportButtom from './ReportButtom';
+import { SView } from 'servisofts-component';
+import { View } from 'react-native';
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -16,7 +19,14 @@ class ErrorBoundary extends React.Component {
 
   render() {
     if (this.state.errorInfo) {
-      return <ErrorWindow {...this.state} />
+      return <View style={{
+        flex: 1,
+        height:"100%"
+
+      }}>
+        <ReportButtom {...this.state} />
+        <ErrorWindow {...this.state} />
+      </View>
     }
     return this.props.children;
   }
