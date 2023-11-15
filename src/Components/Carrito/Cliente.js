@@ -45,13 +45,14 @@ export default class Cliente extends Component {
    }
 
    render() {
-      if (!this.props.data) return this.botones();
+      // if (!this.props.data) return this.botones();
+      if (!this.props.data) return <SText>No hay cliente seleccionado.</SText>
       return (
          <SView col={"xs-12"} >
             {/* <SText>TODO: Colocar boton para seleccinar el cliente.</SText> */}
             {/* <Text>{JSON.stringify(this.props)} </Text> */}
             <SHr height={10} />
-            <SView col={"xs-12"} row style={{
+            {/* <SView col={"xs-12"} row style={{
                borderTopLeftRadius: 8,
                overflow: "hidden"
             }}>
@@ -80,7 +81,7 @@ export default class Cliente extends Component {
                      // },
                      { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
                }} />
-            </SView>
+            </SView> */}
             <SView col={"xs-12"} card row style={{
             }}>
                <SView col={"xs-3.5"} center style={{ padding: 8 }}>

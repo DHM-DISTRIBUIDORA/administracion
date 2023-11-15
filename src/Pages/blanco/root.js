@@ -18,10 +18,8 @@ class index extends Component {
         return (
             <SPage title={'Clientes'}>
                 <Container>
-                    <SText>Preciona sobre el numero para lanzar la exeption.</SText>
-                    <ErrorBoundary>
-                        <BuggyCounter />
-                    </ErrorBoundary>
+                    <SText>Preciona sobre el numero para lanzar la exeption. {a}</SText>
+                   
                 </Container>
             </SPage>
         );

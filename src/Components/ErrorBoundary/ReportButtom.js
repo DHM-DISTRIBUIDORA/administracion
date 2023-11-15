@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SNavigation, SText, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 import Model from '../../Model'
-import { Platform, Text, TouchableOpacity } from 'react-native'
+import { Platform, Text, TouchableOpacity, BackHandler } from 'react-native'
 
 export default class ReportButtom extends Component {
 
@@ -16,13 +16,6 @@ export default class ReportButtom extends Component {
             },
 
         }
-        const nav = SNavigation.lastRoute;
-        if (nav?.route) {
-            data.data.route = {
-                name: nav?.route.name,
-                params: nav?.route.params
-            }
-        }
 
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", {
@@ -31,20 +24,12 @@ export default class ReportButtom extends Component {
             key_usuario: Model.usuario.Action.getKey(),
             data: data
         }).then(e => {
-            Platform.select({
-                android: () => {
-                    // SPopup.success({ title: "Gracias por reportar", body: "En breve nos pondremos en contacto contigo" })
-                },
-                ios: () => {
-                    // SPopup.success({ title: "Gracias por reportar", body: "En breve nos pondremos en contacto contigo" })
-                },
-                web: () => {
-                    window.location.href = "/"
-                }
-            }).apply()
+            if (this.props.closeApp) {
+                this.props.closeApp()
+            }
             this.setState({ loading: false, success: true })
         }).catch(e => {
-            
+
             this.setState({ loading: false, success: false })
         })
     }

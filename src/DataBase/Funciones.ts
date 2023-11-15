@@ -108,7 +108,7 @@ export const SaveChanges = async (table: TableAbstract) => {
     tablesLoading[table.scheme.name] = false;
 }
 
-export const TimeHilo = 1000 * 30;
+export const TimeHilo = 1000 * 45;
 export const saveAllChanges = async () => {
 
     try {
@@ -121,8 +121,9 @@ export const saveAllChanges = async () => {
             title: "Error al guardar cambios",
             body: "Verifique la conexion a internet.",
             color: STheme.color.danger,
-            time: 10000,
+            time: 6000,
         })
+        return;
     }
 
     const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista]

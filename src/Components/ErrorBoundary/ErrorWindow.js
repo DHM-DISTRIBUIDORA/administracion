@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, Platform, BackHandler } from 'react-native'
 // import {  } from 'react-native-svg'
-import { SHr, SNavigation, SText, SView } from 'servisofts-component'
+import { SDate, SHr, SNavigation, SText, SView } from 'servisofts-component'
 import ReportButtom from './ReportButtom'
 
 export default class ErrorWindow extends Component {
+
+    closeApp() {
+        Platform.select({
+            android: () => {
+                BackHandler.exitApp();
+                // SPopup.success({ title: "Gracias por reportar", body: "En breve nos pondremos en contacto contigo" })
+            },
+            ios: () => {
+                BackHandler.exitApp();
+                // SPopup.success({ title: "Gracias por reportar", body: "En breve nos pondremos en contacto contigo" })
+            },
+            web: () => {
+                window.location.href = "/"
+            }
+        }).apply()
+    }
     render() {
         return (
             <View style={{
@@ -29,16 +45,23 @@ export default class ErrorWindow extends Component {
                         color: '#FFFFFF',
                     }}>¡ALGO MALO PASA!</Text>
                     <View style={{ height: 20 }} />
-                    <Image
-                        source={require('../../Assets/img/bug.png')}
-                        style={{ width: 230, height: 276 }}
-                    />
+                    <SView height={276}>
+                        <Image
+                            source={require('../../Assets/img/bug.png')}
+                            style={{ width: 230, height: 276 }}
+                        />
+                    </SView>
                     <View style={{ height: 20 }} />
+
                     <Text style={{
                         fontSize: 16,
                         color: '#FFFFFF',
                         textAlign: 'center',
-                    }}>{this.props.error.message}</Text>
+                    }}>{this.props?.error?.message}</Text>
+                    <SHr />
+                    <Text style={{ fontSize: 12, color: '#FFFFFF' }}>src: {this.props?.route?.name}</Text>
+                    <Text style={{ fontSize: 12, color: '#FFFFFF' }}>{new SDate().toString("yyyy-MM-dd hh:mm:ss")}</Text>
+                    <SHr />
                     <View style={{ height: 50 }} />
                     <View style={{
                         flexDirection: 'row',
@@ -57,7 +80,7 @@ export default class ErrorWindow extends Component {
                                 justifyContent: 'center',
                             }}
                             onPress={() => {
-                                SNavigation.reset("/");
+                                this.closeApp();
                             }
                             }
                         >
@@ -67,8 +90,9 @@ export default class ErrorWindow extends Component {
                             }}>IGNORAR</Text>
                         </TouchableOpacity>
                         <View style={{ width: 20 }} />
-                        <ReportButtom {...this.props} />
+                        <ReportButtom {...this.props} closeApp={this.closeApp} />
                     </View>
+                    <Text style={{ fontSize: 12, color: '#EEEEEE' }}>{"Reporte el error y vuelva a iniciar la app."}</Text>
                 </View>
                 {/* <Text >
                     {this.props.errorInfo.componentStack}
