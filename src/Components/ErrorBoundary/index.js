@@ -12,7 +12,10 @@ class ErrorBoundary extends React.Component {
 
   componentDidCatch(error, errorInfo) {
     this.setState({
-      error: error,
+      error: {
+        message: error.toString(),
+        stack: error.stack
+      },
       errorInfo: errorInfo
     })
   }
@@ -21,7 +24,7 @@ class ErrorBoundary extends React.Component {
     if (this.state.errorInfo) {
       return <View style={{
         flex: 1,
-        height:"100%"
+        height: "100%"
 
       }}>
         <ReportButtom {...this.state} />

@@ -3,7 +3,6 @@ import { SHr, SText, SView } from 'servisofts-component'
 
 export default class ErrorWindow extends Component {
     render() {
-        console.log(this.props)
         return (
             <SView>
                 <SText>ALGO MALO PASA</SText>
