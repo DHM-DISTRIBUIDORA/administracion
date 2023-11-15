@@ -5,6 +5,7 @@ import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
+import { Trigger } from 'servisofts-db';
 
 
 class index extends Component {
@@ -16,7 +17,7 @@ class index extends Component {
         this.state = {
             detalle: "",
         }
-
+        this.idcli = SNavigation.getParam("pk");
     }
 
     componentDidMount() {
@@ -39,8 +40,25 @@ class index extends Component {
                 console.error(e);
             }
         })
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (evt) => {
+            this.loadDataAsync(); 
+        });
     }
 
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
+    async loadDataAsync() {
+        DataBase.tbcli.objectForPrimaryKey(this.idcli).then((e) => {
+            // e.detalle = JSON.parse(e.detalle);
+            this.setState({ data: e })
+        })
+
+    }
 
     loadData() {
 
@@ -139,7 +157,7 @@ class index extends Component {
 
             Model.carrito.Action.removeAll()
 
-            this.setState({ loading: false, error: "" })
+
             // console.log("SI REGISTRO EN LA DB")
             // return;
             SNavigation.replace("/dm_cabfac/recibo", {
@@ -151,6 +169,7 @@ class index extends Component {
                     })
                 }
             })
+            // this.setState({ loading: false, error: "" })
         } catch (error) {
             console.error(error);
             this.setState({ loading: false, error: error })
@@ -234,10 +253,11 @@ class index extends Component {
             <Container>
                 <SText>Carrito</SText>
                 <SHr />
+                <SText col={"xs-12"} bold fontSize={16}>Cliente</SText>
                 <Carrito.Cliente data={this.state.client} />
                 {/* <SText>{JSON.stringify(this.state.client)}</SText> */}
                 <SHr />
-                <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText>
+                {/* <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText> */}
                 <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
                     this.state.client.clinit = val;
                 }} />

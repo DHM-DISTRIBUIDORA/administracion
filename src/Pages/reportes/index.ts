@@ -11,6 +11,7 @@ import visita_transportista from "./visita_transportista"
 import clientes_con_sin_pedidos_mapa from "./clientes_con_sin_pedidos_mapa"
 import activaciones from "./activaciones"
 import profile from './profile/index';
+import log from "./log"
 import Model from '../../Model';
 
 
@@ -33,5 +34,6 @@ export default SPage.combinePages("reportes", {
     visita_vendedor,
     visita_transportista,
     clientes_con_sin_pedidos_mapa,
+    log,
     ...profile
 });

@@ -1,5 +1,5 @@
 import { Text, View } from 'react-native'
-import React, { Component  } from 'react'
+import React, { Component } from 'react'
 import DataBase, { DB } from '.';
 import { SIcon, SLoad, SText, STheme, SView, SNotification, SThread, SPopup, SDate } from 'servisofts-component';
 import SDB, { TableAbstract } from 'servisofts-db';
@@ -42,8 +42,12 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
         if (!this.run) return;
         new SThread(DataBase.Funciones.TimeHilo, "hilo_del_guardado", true).start(() => {
             if (!this.run) return;
-            DataBase.Funciones.saveAllChanges();
             this.hilo();
+            try {
+                DataBase.Funciones.saveAllChanges();
+            } catch (error) {
+                console.error(error);
+            }
         })
     }
     render() {

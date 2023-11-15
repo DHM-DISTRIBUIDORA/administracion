@@ -3,14 +3,14 @@ import { SHr, SLoad, SMapView, SNavigation, SText, STheme, SView } from 'serviso
 
 
 const Card = ({ label, value, backgroundColor, onPress }) => {
-    return <SView width={95} height={100} center padding={8}>
+    return <SView width={80} height={80} center padding={4}>
         <SView col={"xs-12"} flex card center style={{
             backgroundColor: backgroundColor ?? STheme.color.card
         }} onPress={onPress}>
             <SView flex center>
                 <SText fontSize={18}>{value}</SText>
             </SView>
-            <SText center fontSize={10} color={STheme.color.black}>{label}</SText>
+            <SText center fontSize={8} color={STheme.color.black}>{label}</SText>
             <SHr height={10} />
 
         </SView>
