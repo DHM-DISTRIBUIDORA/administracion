@@ -83,7 +83,7 @@ class root extends Component {
                                         SPopup.alert("Error al iniciar con el nuevo usuario");
                                         SNavigation.reset("/");
                                     })
-                                    SNavigation.replace('/');
+                                    // SNavigation.replace('/');
 
                                 }).catch(e => {
                                     SPopup.alert("Ya existe un usuario con este correo.")

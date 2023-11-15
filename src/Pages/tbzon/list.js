@@ -3,9 +3,11 @@ import DPA, { connect } from 'servisofts-page';
 import { Parent } from "."
 import Model from '../../Model';
 import item from './item';
+import DataBase from '../../DataBase';
 // import item from './item';
 
 class index extends DPA.list {
+    state = {}
     constructor(props) {
         super(props, {
             Parent: Parent,
@@ -18,6 +20,13 @@ class index extends DPA.list {
             }
         });
         this.idvendedor = Model.usuario.Action.getUsuarioLog()?.idvendedor;
+    }
+
+    componentDidMount() {
+        DataBase.tbzon.all().then(e => {
+            console.log(e);
+            this.setState({ data: e })
+        });
     }
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
@@ -41,7 +50,7 @@ class index extends DPA.list {
         return [{ key: "ventas", order: "desc" }]
     }
     $getData() {
-        return Parent.model.Action.getAll();
+        return this.state.data ?? Parent.model.Action.getAll();
     }
 }
 export default connect(index);

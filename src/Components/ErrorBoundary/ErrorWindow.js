@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, Image, TouchableOpacity } from 'react-native'
 // import {  } from 'react-native-svg'
 import { SHr, SText, SView } from 'servisofts-component'
+import ReportButtom from './ReportButtom'
 
 export default class ErrorWindow extends Component {
     render() {
@@ -37,7 +38,7 @@ export default class ErrorWindow extends Component {
                         fontSize: 16,
                         color: '#FFFFFF',
                         textAlign: 'center',
-                    }}>{this.props.error && this.props.error.toString()}</Text>
+                    }}>{this.props.error.message}</Text>
                     <View style={{ height: 50 }} />
                     <View style={{
                         flexDirection: 'row',
@@ -66,27 +67,7 @@ export default class ErrorWindow extends Component {
                             }}>IGNORAR</Text>
                         </TouchableOpacity>
                         <View style={{ width: 20 }} />
-                        <TouchableOpacity
-                            style={{
-                                backgroundColor: '#000000',
-                                padding: 10,
-                                borderRadius: 5,
-                                alignItems: 'center',
-                                width: 100,
-                                flex: 1,
-                                height: 50,
-                                justifyContent: 'center',
-                            }}
-                            onPress={() => {
-                                navigation.navigate('public')
-                            }
-                            }
-                        >
-                            <Text style={{
-                                color: '#FFF',
-                                fontSize: 16,
-                            }}>REPORTAR</Text>
-                        </TouchableOpacity>
+                        <ReportButtom {...this.props} />
                     </View>
                 </View>
                 {/* <Text >

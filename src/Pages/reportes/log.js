@@ -24,12 +24,17 @@ export default class index extends Component {
         return (
             <SPage>
                 <STable2
+                    cellStyle={{
+                        // textAlign: "right",
+                        padding:4,
+                        height: 40
+                    }}
                     header={[
                         { key: "index" },
                         { key: "tipo", width: 80 },
-                        { key: "fecha_on", width: 180 },
-                        { key: "descripcion", width: 200 },
-                        { key: "data/route", width: 100 },
+                        { key: "fecha_on", width: 180, order: "desc" },
+                        { key: "descripcion", width: 400 },
+                        { key: "data/route/name", width: 100 },
                         { key: "data/errorInfo", width: 100 },
                         { key: "data/error", width: 100 },
                         { key: "key_usuario", width: 100 },

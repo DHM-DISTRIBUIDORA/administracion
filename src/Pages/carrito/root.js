@@ -139,7 +139,7 @@ class index extends Component {
 
             Model.carrito.Action.removeAll()
 
-            this.setState({ loading: false, error: "" })
+
             // console.log("SI REGISTRO EN LA DB")
             // return;
             SNavigation.replace("/dm_cabfac/recibo", {
@@ -151,6 +151,7 @@ class index extends Component {
                     })
                 }
             })
+            // this.setState({ loading: false, error: "" })
         } catch (error) {
             console.error(error);
             this.setState({ loading: false, error: error })

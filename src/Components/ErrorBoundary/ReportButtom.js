@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { SNavigation, SText, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 import Model from '../../Model'
-import { Platform } from 'react-native'
+import { Platform, Text, TouchableOpacity } from 'react-native'
 
 export default class ReportButtom extends Component {
 
@@ -25,8 +25,6 @@ export default class ReportButtom extends Component {
         }
 
         this.setState({ loading: true })
-
-        console.log(data);
         SSocket.sendHttpAsync(SSocket.api.root + "api", {
             component: "log",
             type: "registro",
@@ -41,13 +39,12 @@ export default class ReportButtom extends Component {
                     // SPopup.success({ title: "Gracias por reportar", body: "En breve nos pondremos en contacto contigo" })
                 },
                 web: () => {
-                    // window.history.back();
-                    window.location.href = window.location.href;
+                    window.location.href = "/"
                 }
-            })
+            }).apply()
             this.setState({ loading: false, success: true })
         }).catch(e => {
-            console.error(e);
+            
             this.setState({ loading: false, success: false })
         })
     }
@@ -55,10 +52,23 @@ export default class ReportButtom extends Component {
         // if (this.state.success) {
         //     return <SText>GRACIAS!</SText>
         // }
-        return (
-            <SView col={"xs-12"} padding={16} backgroundColor='#666' onPress={this.sendServer.bind(this)}>
-                {this.state.loading ? <SText>Cargando...</SText> : <SText>REPORTAR</SText>}
-            </SView>
-        )
+        return <TouchableOpacity
+            style={{
+                backgroundColor: '#000000',
+                padding: 10,
+                borderRadius: 5,
+                alignItems: 'center',
+                width: 100,
+                flex: 1,
+                height: 50,
+                justifyContent: 'center',
+            }}
+            onPress={this.sendServer.bind(this)}
+        >
+            <Text style={{
+                color: '#FFF',
+                fontSize: 16,
+            }}>REPORTAR</Text>
+        </TouchableOpacity>
     }
 }

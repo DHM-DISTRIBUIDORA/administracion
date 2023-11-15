@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import ErrorWindow from './ErrorWindow';
-import ReportButtom from './ReportButtom';
-import { SView } from 'servisofts-component';
 import { View } from 'react-native';
 
 class ErrorBoundary extends React.Component {
@@ -27,7 +25,6 @@ class ErrorBoundary extends React.Component {
         height: "100%"
 
       }}>
-        <ReportButtom {...this.state} />
         <ErrorWindow {...this.state} />
       </View>
     }

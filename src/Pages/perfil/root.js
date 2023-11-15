@@ -265,7 +265,6 @@ class index extends Component {
                 <SView col={"xs-11 sm-10 md-8 lg-6 xl-4"} center>
                     <SHr height={10} />
                     {this.getPerfil()}
-                    {this.id.akgo}
                     <SView height={10}></SView>
                     {this.getDatos()}
                     <SHr h={30} />
