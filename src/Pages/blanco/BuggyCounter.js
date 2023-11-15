@@ -23,7 +23,7 @@ class BuggyCounter extends React.Component {
         // Simulate a JS error
         throw new Error('ME QUEBRÉ!!!!');
       }
-      return <SText onClick={this.handleClick}>{this.state.counter}</SText>;
+      return <SText onPress={this.handleClick}>{this.state.counter}</SText>;
     }
   }
 const initStates = (state) => {

@@ -38,7 +38,4 @@ class ErrorBoundary extends React.Component {
       return this.props.children;
     }  
   }
-const initStates = (state) => {
-    return { state }
-};
-export default connect(initStates)(ErrorBoundary);
+export default ErrorBoundary;
