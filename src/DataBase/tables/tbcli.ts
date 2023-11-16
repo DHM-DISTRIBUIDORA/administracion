@@ -67,7 +67,8 @@ export default new class tbcli extends TableAbstract {
 
             if (usrLog.idvendedor) {
                 request["cliidemp"] = usrLog.idvendedor
-                request["dia"] = new SDate(this.fecha, "yyyy-MM-dd").getDayOfWeek();
+                request["dia"] = new SDate(this.fecha, "yyyy-MM-dd").date.getDay();
+                console.log("AQUI ESTAN LOS DIAS", request["dia"])
 
             } else if (usrLog.idtransportista) {
                 // request["cliidemp"] = usrLog.idvendedor

@@ -61,6 +61,7 @@ class index extends DPA.profile {
     async getDataVendedor() {
         try {
             const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha_vendedor");
+            this.state.fecha = fechaEnv.value;
             this.setState({ fecha: fechaEnv.value, })
         } catch (e) {
             console.error(e)
@@ -81,7 +82,8 @@ class index extends DPA.profile {
         let query = "";
 
         try {
-            const cantidad_zonas = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp} && dia == 3`)
+
+            const cantidad_zonas = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp} && dia == ${new SDate(this.state.fecha, "yyyy-MM-dd").date.getDay()}`)
             // const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
             this.setState({ cantidad_zonas: cantidad_zonas.length })
             cantidad_zonas.map((z, i) => {
@@ -307,7 +309,7 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
+            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk}  fecha={this.state?.fecha} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha={this.state?.fecha} /> : null}
             <SHr h={30} />
             {/* {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null} */}

@@ -6,7 +6,7 @@ import { Btn } from '../../../../Components'
 
 export default class ZonasDelDia extends Component {
     render() {
-        const curDate = new SDate().toString("DAY, dd de MONTH.")
+        const curDate = new SDate(this.props.fecha,"yyyy-MM-dd").toString("DAY, dd de MONTH.")
         return (
             <SView col={"xs-12"} center card>
                 <SHr />

@@ -90,10 +90,16 @@ class Lista extends DPA.list {
     // $filter(data) {
     //     return data.zest == "0"
     // }
+    componentDidMount() {
+        DataBase.tbcli.filtered(`idz == ${this.props.pi.pk}`).then(a => {
+            this.setState({ data: a })
+        })
+    }
     $order() {
         return [{ key: "pedidos", order: "desc" }]
     }
     $getData() {
+        return this.state.data;
         return Parent2.model.Action.getAll({ idz: this.props.pi.pk })
     }
 }

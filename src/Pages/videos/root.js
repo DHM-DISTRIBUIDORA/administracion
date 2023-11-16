@@ -19,8 +19,8 @@ export default class root extends Component {
         
         var xhr = new XMLHttpRequest();
         xhr.open('GET', this.state.url + "/", true);
-        xhr.onerror = function () {
-            reject()
+        xhr.onerror = function (e) {
+            console.log(e)
         }
         xhr.onreadystatechange = function () {
             // Si la solicitud se completó con éxito

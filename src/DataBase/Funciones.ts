@@ -19,7 +19,7 @@ export const sicronizar_vendedor = async () => {
     const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.zona_empleado]
     let fecha = new SDate().toString("yyyy-MM-dd") + ""
     await DataBase.enviroments.insert({
-        key: "fecha",
+        key: "fecha_vendedor",
         value: fecha
     })
     tables.map((t) => {
