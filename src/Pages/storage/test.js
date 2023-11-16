@@ -82,7 +82,7 @@ export default class test extends Component {
                         <Table table={DataBase.ventas_factura} label="Ventas por entregar." />
                     </>
                 }
-                {/* {!urser?.idtransportista && !urser?.idvendedor ?
+                {!urser?.idtransportista && !urser?.idvendedor ?
                     <>
                         <SHr />
                         <BtnEliminarYDescargar label={"SOLO PARA ADMIN"} onPress={() => {
@@ -92,7 +92,7 @@ export default class test extends Component {
                         <Table table={DataBase.tbzon} label="Zonas." />
                     </>
                     : null
-                } */}
+                }
                 <SHr h={50} />
             </SScrollView2>
             {/* </SScrollView2> */}

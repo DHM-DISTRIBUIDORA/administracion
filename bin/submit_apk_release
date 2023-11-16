@@ -2,6 +2,7 @@
 . ./bin/config.properties
 
 mkdir -p target/android/
-version=$(./bin/get_version_android)
-cp ./android/app/build/outputs/apk/release/app-release.apk ./target/android/app-release-$version.apk
-scp ./target/android/app-release-$version.apk $REPO_SSH:$REPO_RESOURCE$REPO_DIR
+version=$(./bin/version)
+cp ./android/app/build/outputs/apk/release/app-release.apk ./target/android/dhm-$version.apk
+scp ./target/android/dhm-$version.apk $REPO_SSH:$REPO_RESOURCE$REPO_DIR
+ssh $REPO_SSH "cd $REPO_RESOURCE$REPO_DIR && cp dhm-$version.apk dhm.apk"
