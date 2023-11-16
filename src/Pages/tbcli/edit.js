@@ -22,7 +22,7 @@ class index extends DPA.edit {
     }
 
     componentDidMount() {
-        DataBase.tbcli.objectForPrimaryKey(this.pk).then(e => {
+        DataBase.tbcli.objectForPrimaryKey(parseInt(this.pk)).then(e => {
             this.setState({ data: e })
         }).catch(e => {
 

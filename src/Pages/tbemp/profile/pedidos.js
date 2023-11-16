@@ -31,7 +31,8 @@ class pedidos extends Component {
     }
 
     async loadDataAsync() {
-        DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0").then(dt => {
+        // DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0").then(dt => {
+        DataBase.dm_cabfac.filtered("sync_type != 'delete'").then(dt => {
             dt = dt.sort((a, b) => a.vhora < b.vhora ? -1 : 1)
 
             dt.map((a, i) => a.index = i + 1)

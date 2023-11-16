@@ -1,13 +1,17 @@
+
 import React, { Component } from 'react';
 
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SUuid, SView } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
-import item2 from '../../tbcli/item';
+import item2 from '../../tbemp/item';
 import DataBase from '../../../DataBase';
+import SSocket from 'servisofts-socket';
+import { Trigger } from 'servisofts-db';
+import ZonaEmpleadoComponent from './ZonaEmpleadoComponent';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
@@ -17,20 +21,23 @@ class index extends DPA.profile {
             excludes: []
         });
     }
+
     componentDidMount() {
         DataBase.tbzon.objectForPrimaryKey(parseInt(this.pk)).then(data => {
             this.setState({ data: data })
+        }).then(e => {
+            console.error(e);
         })
     }
     $allowBack() {
         return true;
     }
-    $allowEdit() {
-        return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
-    }
-    $allowDelete() {
-        return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
-    }
+    // $allowEdit() {
+    //     return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
+    // }
+    // $allowDelete() {
+    //     return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "delete" })
+    // }
     $allowAccess() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
@@ -40,7 +47,7 @@ class index extends DPA.profile {
     }
     $footer() {
         return (<SView col={"xs-12"}>
-            <Lista pi={this} onSelect={this.$params.onSelect} />
+            <ZonaEmpleadoComponent idz={this.pk} />
         </SView>
         )
     }
@@ -68,38 +75,3 @@ class index extends DPA.profile {
 }
 export default connect(index);
 
-
-
-const Parent2 = {
-    name: "Clientes en la zona",
-    path: `/tbcli`,
-    model: Model.tbcli
-}
-class Lista extends DPA.list {
-    constructor(props) {
-        Model.tbcli.Action.CLEAR();
-        super(props, {
-            type: "componentTitle",
-            Parent: Parent2,
-            title: Parent2.name,
-            item: item2,
-            excludes: []
-        });
-    }
-
-    // $filter(data) {
-    //     return data.zest == "0"
-    // }
-    componentDidMount() {
-        DataBase.tbcli.filtered(`idz == ${this.props.pi.pk}`).then(a => {
-            this.setState({ data: a })
-        })
-    }
-    $order() {
-        return [{ key: "pedidos", order: "desc" }]
-    }
-    $getData() {
-        return this.state.data;
-        return Parent2.model.Action.getAll({ idz: this.props.pi.pk })
-    }
-}

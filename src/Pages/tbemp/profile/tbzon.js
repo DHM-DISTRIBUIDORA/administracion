@@ -70,7 +70,20 @@ class Lista extends DPA.list {
     }
 
     componentDidMount() {
-        DataBase.tbzon.filtered(`idemp == ${this.props.pi.pk}`).then((data) => {
+
+        // DataBase.tbzon.filtered(`idemp == ${this.props.pi.pk}`).then((data) => {
+        //     this.setState({ data: data })
+        // })
+        this.loadData();
+    }
+    async loadData() {
+        const zonas_habilitadas = await DataBase.zona_empleado.filtered(`idemp == ${this.props.pi.pk}`)
+        let query = "";
+        zonas_habilitadas.map((z, i) => {
+            if (i > 0) query += " || "
+            query += `idz == ${z.idz}`
+        })
+        DataBase.tbzon.filtered(query).then((data) => {
             this.setState({ data: data })
         })
     }

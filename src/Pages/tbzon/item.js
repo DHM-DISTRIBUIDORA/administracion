@@ -30,7 +30,7 @@ class index extends DPA.item {
             {/* {this.buildLabel({ label: "Id", value: this.data?.idz })} */}
             {this.buildLabel({ label: "Código", value: this.data?.zcod })}
             {this.buildLabel({ label: "Nombre Zona", value: this.data?.znom })}
-            {this.buildLabel({ label: "Día", value: dia[this.data?.zdia]?.content })}
+            {/* {this.buildLabel({ label: "Día", value: dia[this.data?.zdia]?.content })} */}
             {/* {this.buildLabel({ label: "Emp", value: this.state?.empleado?.empnom })} */}
             {/* {this.buildLabel({ label: "Ventas", value: this.data?.ventas })} */}
             {/* {this.buildLabel({ label: "Tipo Zona", value: this.data?.ztipo })} */}

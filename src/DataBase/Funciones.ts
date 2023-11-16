@@ -1,7 +1,7 @@
 import { TableAbstract } from "servisofts-db"
 import SSocket from "servisofts-socket"
 import DataBase from "."
-import { SNotification, SPopup, STheme } from "servisofts-component"
+import { SDate, SNotification, SPopup, SStorage, STheme } from "servisofts-component"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -16,10 +16,18 @@ export const sicronizar_usuario = async () => {
     })
 }
 export const sicronizar_vendedor = async () => {
-    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.tbcli, DataBase.visita_vendedor]
+    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.zona_empleado]
+    let fecha = new SDate().toString("yyyy-MM-dd") + ""
+    await DataBase.enviroments.insert({
+        key: "fecha_vendedor",
+        value: fecha
+    })
     tables.map((t) => {
         syncWithNotify(t);
     })
+    DataBase.tbcli.fecha = fecha;
+    syncWithNotify(DataBase.tbcli);
+
 }
 export const sincronizar_transportista = async () => {
     SPopup.date("Selecciona la fecha", async (e: any) => {
@@ -37,7 +45,7 @@ export const sincronizar_transportista = async () => {
 }
 
 export const sincronizar_admin = async () => {
-    const tables = [DataBase.tbcli, DataBase.tbzon]
+    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.tbcli]
     tables.map((t) => {
         syncWithNotify(t);
     })
@@ -89,14 +97,27 @@ export const SaveChanges = async (table: TableAbstract) => {
                 })
                 if (resp.estado != "exito") throw resp;
                 resp.data.sync_type = "";
+
+
+
                 await table.delete(obj[table.scheme.primaryKey]);
                 if (obj.sync_type != "delete") {
                     await table.insert(resp.data)
                 }
+                // if (table.scheme.name == "tbcli") {
+                //     SStorage.getItem("cliente_dhm", (cli: string) => {
+                //         if (cli) {
+                //             let client = JSON.parse(cli);
+                //             if (obj[table.scheme.primaryKey] == client.idcli) {
+                //                 SStorage.setItem("", resp.data)
+                //             }
+                //         }
+                //     })
+                // }
             } catch (error: any) {
                 SNotification.send({
-                    title: "Error al guardar cambios",
-                    body: JSON.stringify(error?.error) ?? JSON.stringify(error),
+                    title: table.scheme.name,
+                    body: "Error al guardar cambios " + (JSON.stringify(error?.error) ?? JSON.stringify(error)) ?? "",
                     color: STheme.color.danger,
                     time: 10000,
                 })
@@ -126,7 +147,7 @@ export const saveAllChanges = async () => {
         return;
     }
 
-    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista]
+    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista, DataBase.zona_empleado]
     // SNotification.send({
     //     title: "Virificando cambios",
     //     time: 2000,

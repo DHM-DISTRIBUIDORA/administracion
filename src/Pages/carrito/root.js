@@ -20,15 +20,27 @@ class index extends Component {
         this.idcli = SNavigation.getParam("pk");
     }
 
-    componentDidMount() {
 
-        const cliente = Model.tbcli.Action.getCliente();
-        if (cliente) {
-            this.setState({
-                client: cliente
-            })
-            return;
-        }
+    getClienteData() {
+        SStorage.getItem("tbcli_a_comprar", (resp) => {
+            if (!resp) return;
+            const cliente = JSON.parse(resp);
+            if (cliente) {
+                this.setState({
+                    client: cliente
+                })
+                return;
+            }
+        })
+
+    }
+    setClienteData(cli) {
+        SStorage.setItem("tbcli_a_comprar", JSON.stringify(cli))
+        // Model.tbcli.Action.setCliente(cli);
+        this.getClienteData();
+    }
+    componentDidMount() {
+        this.getClienteData();
         SStorage.getItem("tbcli_a_comprar", resp => {
             if (!resp) return;
             try {
@@ -40,12 +52,12 @@ class index extends Component {
                 console.error(e);
             }
         })
-        this.t1 = Trigger.addEventListener({
-            on: ["insert", "update", "delete"],
-            tables: ["tbcli"]
-        }, (evt) => {
-            this.loadDataAsync(); 
-        });
+        // this.t1 = Trigger.addEventListener({
+        //     on: ["insert", "update", "delete"],
+        //     tables: ["tbcli"]
+        // }, (evt) => {
+        //     this.loadDataAsync();
+        // });
     }
 
     componentWillUnmount() {
@@ -53,10 +65,10 @@ class index extends Component {
     }
 
     async loadDataAsync() {
-        DataBase.tbcli.objectForPrimaryKey(this.idcli).then((e) => {
-            // e.detalle = JSON.parse(e.detalle);
-            this.setState({ data: e })
-        })
+        // DataBase.tbcli.objectForPrimaryKey(this.idcli).then((e) => {
+        //     // e.detalle = JSON.parse(e.detalle);
+        //     this.setState({ data: e })
+        // })
 
     }
 
@@ -176,33 +188,6 @@ class index extends Component {
         }
 
 
-
-        // SSocket.sendPromise({
-        //     component: "dm_cabfac",
-        //     type: "registro",
-        //     estado: "cargando",
-        //     data: {
-        //         idcli: idcli,
-        //         vnit: clinit,
-        //         vdet: "VENTA DESDE APP SERVISOFTS - " + this.state.detalle,
-        //         productos: dataProducto
-        //     },
-        //     usumod: "SERVISOFTS",
-
-        // }, 1000 * 60).then(e => {
-        //     this.setState({ loading: false, error: "" })
-        //     console.log(e);
-        //     Model.carrito.Action.removeAll()
-        //     SNavigation.replace("/dm_cabfac/recibo", {
-        //         pk: e?.data?.idven,
-        //         onBack: () => {
-        //             SNavigation.replace("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor })
-        //         }
-        //     })
-        // }).catch(e => {
-        //     this.setState({ loading: false, error: e.error })
-        //     console.error(e);
-        // })
     }
     handlePress = (client) => {
         // nit: this.state.client.clinit
@@ -254,7 +239,9 @@ class index extends Component {
                 <SText>Carrito</SText>
                 <SHr />
                 <SText col={"xs-12"} bold fontSize={16}>Cliente</SText>
-                <Carrito.Cliente data={this.state.client} />
+                <Carrito.Cliente data={this.state.client} onChange={(cliente) => {
+                    this.setClienteData(cliente)
+                }} />
                 {/* <SText>{JSON.stringify(this.state.client)}</SText> */}
                 <SHr />
                 {/* <SText col={"xs-12"} bold fontSize={16}>{this.state?.client?.clinom}</SText> */}

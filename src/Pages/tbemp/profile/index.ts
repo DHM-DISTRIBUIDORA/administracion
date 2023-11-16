@@ -9,9 +9,11 @@ import tbtg from "./tbtg";
 import pedidos from "./pedidos";
 import pedidosEmpresa from "./pedidosEmpresa";
 import usuario from "./usuario";
+import zonas_asignadas from "./zonas_asignadas";
 export default SPage.combinePages("profile", {
     "": root,
     tbzon,
+    zonas_asignadas,
     tbcli,
     tbclimapa,
     tbven,

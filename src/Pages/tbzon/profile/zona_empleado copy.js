@@ -1,13 +1,16 @@
+
 import React, { Component } from 'react';
 
 import DPA, { connect } from 'servisofts-page';
 import { Parent } from ".."
-import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SView } from 'servisofts-component';
+import { SHr, SIcon, SImage, SInput, SList, SLoad, SNavigation, SText, STheme, SUuid, SView } from 'servisofts-component';
 import Model from '../../../Model';
 // import ListaUsuarios from './Components/ListaUsuarios';
 import item from "../item"
-import item2 from '../../tbcli/item';
+import item2 from '../../tbemp/item';
 import DataBase from '../../../DataBase';
+import SSocket from 'servisofts-socket';
+import { Trigger } from 'servisofts-db';
 class index extends DPA.profile {
     constructor(props) {
         super(props, {
@@ -17,9 +20,12 @@ class index extends DPA.profile {
             excludes: []
         });
     }
+
     componentDidMount() {
-        DataBase.tbzon.objectForPrimaryKey(parseInt(this.pk)).then(data => {
+        DataBase.tbzon.objectForPrimaryKey(this.pk).then(data => {
             this.setState({ data: data })
+        }).then(e=>{
+            console.error(e);
         })
     }
     $allowBack() {
@@ -71,9 +77,9 @@ export default connect(index);
 
 
 const Parent2 = {
-    name: "Clientes en la zona",
-    path: `/tbcli`,
-    model: Model.tbcli
+    name: "Empleados en la zona",
+    path: `/zona_empleado`,
+    model: Model.tbemp
 }
 class Lista extends DPA.list {
     constructor(props) {
@@ -86,20 +92,69 @@ class Lista extends DPA.list {
             excludes: []
         });
     }
+    state = {}
+    componentDidMount() {
+        this.trigger = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["zona_empleado"]
+        }, (e) => {
+            this.loadData();
+        })
+        this.loadData();
+
+
+    }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.trigger)
+    }
+
+    loadData() {
+        DataBase.zona_empleado.filtered("idz == $0", this.props.pi.pk).then(arr_zonas_empleados => {
+            let query = "";
+            arr_zonas_empleados.map((a, i) => {
+                if (i > 0) query += " || "
+                query += `idemp == ${a.idemp}`
+            })
+            if (!query) {
+                this.setState({ data: [] })
+                return
+            }
+            DataBase.tbemp.filtered(query).then((e) => {
+                this.setState({ data: e })
+            })
+        })
+    }
+
+    $allowNew() {
+        return true;
+    }
+    onNew() {
+        SNavigation.navigate("/tbemp", {
+            onSelect: (tbemp) => {
+                DataBase.zona_empleado.insert({
+                    sync_type: "insert",
+                    key: SUuid(),
+                    idemp: tbemp.idemp,
+                    idz: this.props.pi.pk,
+                    estado: 1,
+                    key_usuario: Model.usuario.Action.getKey(),
+                }).then(e => {
+                    console.log("Succes", e)
+                }).catch(e => {
+                    console.error(e);
+                })
+
+            }
+        })
+    }
 
     // $filter(data) {
     //     return data.zest == "0"
     // }
-    componentDidMount() {
-        DataBase.tbcli.filtered(`idz == ${this.props.pi.pk}`).then(a => {
-            this.setState({ data: a })
-        })
-    }
-    $order() {
-        return [{ key: "pedidos", order: "desc" }]
-    }
+    // $order() {
+    //     return [{ key: "pedidos", order: "desc" }]
+    // }
     $getData() {
-        return this.state.data;
-        return Parent2.model.Action.getAll({ idz: this.props.pi.pk })
+        return this.state.data
     }
 }

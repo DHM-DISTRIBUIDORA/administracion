@@ -11,6 +11,7 @@ import ZonasDelDia from './components/ZonasDelDia';
 import IniciarTransporte from './components/IniciarTransporte';
 import { SelectEntreFechas, SelectFecha } from '../../../Components/Fechas';
 import DataBase from '../../../DataBase';
+import ZonaEmpleadoComponent from './components/ZonaEmpleadoComponent';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -49,45 +50,26 @@ class index extends DPA.profile {
                 this.getDataTransportista()
 
             } else {
-                if (this.state?.fecha_inicio && this.state?.fecha_fin) {
-                    this.getDataVendedor({ fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin })
-                }
+                // if (this.state?.fecha_inicio && this.state?.fecha_fin) {
+                this.getDataVendedor()
+                // }
             }
         }).catch(e => {
             console.error(e)
         })
     }
-    // componentDidMount() {
-    //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-    //         // Tu código aquí será ejecutado cada vez que la pantalla esté enfocada
 
-    //         // ...
-    //     });
-    // }
-    // componentWillUnmount() {
-    //     this._unsubscribe();
-    // }
-
-
-    async getDataVendedor({ fecha_inicio, fecha_fin }) {
-        // const request = {
-        //     component: "dhm",
-        //     type: "perfilEmp",
-        //     fecha_inicio: fecha_inicio,
-        //     fecha_fin: fecha_fin,
-        //     idemp: this.idemp
-        //     // idemp: this.pk + ""
-        // }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
-        // SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-        //     const obj = e.data[0]
-        //     console.log(obj)
-        //     this.setState({ ...obj })
-        // }).catch(e => {
-        //     console.error(e)
-        // })
+    async getDataVendedor() {
         try {
-            const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
+            const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha_vendedor");
+            this.state.fecha = fechaEnv.value;
+            this.setState({ fecha: fechaEnv.value, })
+        } catch (e) {
+            console.error(e)
+        }
+
+        try {
+            const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`sync_type != 'delete'`)
             let monto = 0;
             cantidad_pedidos.map(a => {
                 a.detalle.map((d) => {
@@ -101,7 +83,9 @@ class index extends DPA.profile {
         let query = "";
 
         try {
-            const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+
+            const cantidad_zonas = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp} && dia == ${new SDate(this.state.fecha, "yyyy-MM-dd").date.getDay()}`)
+            // const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
             this.setState({ cantidad_zonas: cantidad_zonas.length })
             cantidad_zonas.map((z, i) => {
                 if (i > 0) query += " || "
@@ -115,20 +99,11 @@ class index extends DPA.profile {
         if (query) {
             cantidad_clientes = await DataBase.tbcli.filtered(query)
         }
-
-
-        // const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
-        // this.setState({ cantidad_clientes: cantidad_clientes.length })
         this.setState({ cantidad_clientes: cantidad_clientes.length, load_cant: true })
-
-        // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
-        // let query = "";
 
     }
 
     async getDataTransportista() {
-        // DataBase.ventas_factura.fecha = fecha;
-        // DataBase.ventas_factura.setFecha(fecha);
         try {
             const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha");
             this.setState({ fecha: fechaEnv.value, })
@@ -149,23 +124,6 @@ class index extends DPA.profile {
 
 
         return null;
-        const request = {
-            component: "dhm",
-            type: "perfilTransportista",
-            fecha_inicio: fecha,
-            fecha_fin: fecha,
-            idemp: this.idemp
-            // idemp: this.pk + ""
-        }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
-        this.setState({ loading: true })
-        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-            const obj = e.data[0]
-            console.log(obj)
-            this.setState({ ...obj })
-        }).catch(e => {
-            console.error(e)
-        })
     }
 
     $allowEdit() {
@@ -352,10 +310,10 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
+            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} fecha={this.state?.fecha} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha={this.state?.fecha} /> : null}
             <SHr h={30} />
-            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
+            {/* {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null} */}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
             {/* {obj.idemt == 4 ? <SelectFecha fecha={this.state.fecha} onChange={e => this.getDataTransportista(e)} /> : null} */}
             {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}
@@ -365,7 +323,6 @@ class index extends DPA.profile {
 
     getUser() {
         return <>
-
             <SView col={"xs-12"} >
                 <SText >Usuario:</SText>
                 <SView col={"xs-12"} card center row
@@ -383,12 +340,36 @@ class index extends DPA.profile {
             </SView>
         </>
     }
+    verZonas() {
+     
+        return <>
+            <SView col={"xs-12"} >
+                <SText >Zonas:</SText>
+                <SView col={"xs-12"} card center row
+                    onPress={() => {
+                        SNavigation.navigate("/tbemp/profile/zonas_asignadas", { pk: this.pk })
+                    }}
+                >
+                    <SHr height={15} />
+                    <SIcon name={"Marker"} height={20} width={22} fill={STheme.color.text} />
+                    <SView width={5} />
+                    <SText>Zonas asignadas por día</SText>
+                    <SHr height={15} />
+
+                </SView>
+            </SView>
+        </>
+    }
 
     $footer() {
         return <SView col={"xs-12"} center>
             <SHr />
             {this.getUser()}
             <SHr />
+            {this.verZonas()}
+            <SHr />
+
+            {/* <ZonaEmpleadoComponent idemp={this.pk}/> */}
             {/* <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
                 pk: this.pk
             }} >

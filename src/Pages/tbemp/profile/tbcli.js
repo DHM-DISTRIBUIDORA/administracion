@@ -139,14 +139,19 @@ class Lista extends DPA.list2 {
 
 
     async loadData() { 
-        const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
-        let query = "";
-        cantidad_zonas.map((z, i) => {
-            if (i > 0) query += " || "
-            query += `idz == ${z.idz}`
-        })
-        const cantidad_clientes = await DataBase.tbcli.filtered(query)
-        this.setState({ data: cantidad_clientes })
+    //     const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
+    //     let query = "";
+    //     cantidad_zonas.map((z, i) => {
+    //         if (i > 0) query += " || "
+    //         query += `idz == ${z.idz}`
+    //     })
+    //     const cantidad_clientes = await DataBase.tbcli.filtered(query)
+    //     this.setState({ data: cantidad_clientes })
+    //     console.log("cantidad_clientes")
+    //     console.log(cantidad_clientes)
+
+        const clientes = await DataBase.tbcli.all()
+        this.setState({ data: clientes })
     }
 
 
