@@ -20,7 +20,7 @@ export default class root extends Component {
 
 
     componentDidMount() {
-        this.loadDataAsync();
+        this.loadDataAsync(); 
         this.t1 = Trigger.addEventListener({
             on: ["insert", "update", "delete"],
             tables: ["visita_vendedor"]

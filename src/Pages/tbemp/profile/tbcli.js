@@ -147,6 +147,8 @@ class Lista extends DPA.list2 {
         })
         const cantidad_clientes = await DataBase.tbcli.filtered(query)
         this.setState({ data: cantidad_clientes })
+        console.log("cantidad_clientes")
+        console.log(cantidad_clientes)
     }
 
 
