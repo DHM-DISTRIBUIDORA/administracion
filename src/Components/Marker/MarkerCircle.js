@@ -21,7 +21,7 @@ const Cantidad = ({ cantidad }) => {
 export default ({ latitude, longitude, key, cantidad, src, label, onPress, size = 75, content, borderColor }) => {
     // console.log();
     return <SMapView.SMarker key={key} latitude={latitude} longitude={longitude} width={size} onPress={onPress} >
-        <SView width={size} height={40} padding={4} center>
+        <SView width={size} height={40} padding={4} center >
             <SView flex col={"xs-12"} borderRadius={10} backgroundColor={STheme.color.white} onPress={onPress} style={{
                 borderWidth: 2,
                 borderColor: borderColor ?? STheme.color.text,

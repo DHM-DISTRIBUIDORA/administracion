@@ -92,7 +92,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
       right: -4,
     }} onPress={() => {
       SPopup.confirm({
-        title: "Esta seguro de quitar al empleado?",
+        title: "Esta seguro de quitar la zona?",
         onPress: () => {
           empleado_zona.estado = 0;
           empleado_zona.sync_type = "update";
@@ -112,7 +112,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
 
   renderUserDay(day) {
     const data = this.state.data.filter(a => a.dia == day)
-    if (!data || !data.length) return <SText fontSize={10} font='Roboto' color={STheme.color.warning}>{"Sin usuarios, click en + para agregar usuarios."}</SText>
+    if (!data || !data.length) return <SText fontSize={10} font='Roboto' color={STheme.color.warning}>{"Sin zonas, click en + para agregar zonas."}</SText>
 
     return data.map((itm) => {
       const zon = this.state.tbzon.find(a => a.idz == itm.idz);
