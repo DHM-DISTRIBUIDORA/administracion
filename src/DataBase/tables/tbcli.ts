@@ -7,6 +7,7 @@ import { SDate } from 'servisofts-component';
 
 export default new class tbcli extends TableAbstract {
 
+    fecha = "";
     scheme: Scheme = {
         name: "tbcli",
         primaryKey: "idcli",
@@ -29,62 +30,6 @@ export default new class tbcli extends TableAbstract {
             "usumod": "string?",
             "clicel": "string?",
             "clifax": "string?",
-            // "climon": "int?",
-            // "clicuo": "int?",
-            // "clidesfin": "int?",
-            // "clidocid": "int?",
-            // "cliest": "int?",
-            // "clifing": "string?",
-
-            // "cliforpag": "string?",
-            // "cliidcta": "int?",
-
-            // "cliidtipo": "string?",
-            // "cliloc": "string?",
-            // "cliinter": "int?",
-
-            // "clizona": "string?",
-
-            // "clidep": "string?",
-
-            // "clicom": "string?",
-
-            // "climpid": "int?",
-
-            // "cliplazo": "int?",
-            // "clisic": "int?",
-            // "clitipdoc": "string?",
-            // "clilimau": "string?",
-            // "clitipgar": "string?",
-            // "clitlimcre": "int?",
-
-            // "idcanal": "int?",
-
-            // "idciu": "int?",
-            // "idclir": "int?",
-            // "idclit": "int?",
-            // "idconf": "int?",
-            // "iddepcli": "int?",
-            // "idds": "int?",
-            // "idloc": "int?",
-            // "idrg": "int?",
-
-            // "pedidos": "int?",
-            // "sucreg": "int?",
-
-            // "climz": "string?",
-            // "cliuv": "string?",
-            // "cliadic": "string?",
-            // "clidirnro": "string?",
-
-            // "cliote": "string?",
-            // "cliico": "string?",
-            // "clireprs": "string?",
-            // "clireprsci": "string?",
-            // "clicicompl": "string?",
-            // "climpdoc": "string?",
-            // "ventas": "int?",
-            // "dmsest": "int?",
         }
     }
 
@@ -122,6 +67,8 @@ export default new class tbcli extends TableAbstract {
 
             if (usrLog.idvendedor) {
                 request["cliidemp"] = usrLog.idvendedor
+                request["dia"] = new SDate(this.fecha, "yyyy-MM-dd").getDayOfWeek();
+
             } else if (usrLog.idtransportista) {
                 // request["cliidemp"] = usrLog.idvendedor
                 return reject({ error: "idvendedor not found" })

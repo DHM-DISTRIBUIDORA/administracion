@@ -1,7 +1,7 @@
 import { TableAbstract } from "servisofts-db"
 import SSocket from "servisofts-socket"
 import DataBase from "."
-import { SNotification, SPopup, STheme } from "servisofts-component"
+import { SDate, SNotification, SPopup, STheme } from "servisofts-component"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -16,10 +16,18 @@ export const sicronizar_usuario = async () => {
     })
 }
 export const sicronizar_vendedor = async () => {
-    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.tbcli, DataBase.visita_vendedor, DataBase.zona_empleado]
+    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.zona_empleado]
+    let fecha = new SDate().toString("yyyy-MM-dd") + ""
+    await DataBase.enviroments.insert({
+        key: "fecha",
+        value: fecha
+    })
     tables.map((t) => {
         syncWithNotify(t);
     })
+    DataBase.tbcli.fecha = fecha;
+    syncWithNotify(DataBase.tbcli);
+
 }
 export const sincronizar_transportista = async () => {
     SPopup.date("Selecciona la fecha", async (e: any) => {

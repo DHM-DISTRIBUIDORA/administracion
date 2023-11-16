@@ -49,19 +49,25 @@ class index extends DPA.profile {
                 this.getDataTransportista()
 
             } else {
-                if (this.state?.fecha_inicio && this.state?.fecha_fin) {
-                    this.getDataVendedor({ fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin })
-                }
+                // if (this.state?.fecha_inicio && this.state?.fecha_fin) {
+                this.getDataVendedor()
+                // }
             }
         }).catch(e => {
             console.error(e)
         })
     }
- 
-    async getDataVendedor({ fecha_inicio, fecha_fin }) {
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
+
+    async getDataVendedor() {
         try {
-            const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
+            const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha_vendedor");
+            this.setState({ fecha: fechaEnv.value, })
+        } catch (e) {
+            console.error(e)
+        }
+
+        try {
+            const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`sync_type != 'delete'`)
             let monto = 0;
             cantidad_pedidos.map(a => {
                 a.detalle.map((d) => {
@@ -75,7 +81,8 @@ class index extends DPA.profile {
         let query = "";
 
         try {
-            const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+            const cantidad_zonas = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp} && dia == 3`)
+            // const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
             this.setState({ cantidad_zonas: cantidad_zonas.length })
             cantidad_zonas.map((z, i) => {
                 if (i > 0) query += " || "
@@ -303,7 +310,7 @@ class index extends DPA.profile {
             {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha={this.state?.fecha} /> : null}
             <SHr h={30} />
-            {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null}
+            {/* {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null} */}
             {obj.idemt == 1 ? this.getCardsClient(obj) : null}
             {/* {obj.idemt == 4 ? <SelectFecha fecha={this.state.fecha} onChange={e => this.getDataTransportista(e)} /> : null} */}
             {obj.idemt == 4 ? this.getCardsTransportista(obj) : null}

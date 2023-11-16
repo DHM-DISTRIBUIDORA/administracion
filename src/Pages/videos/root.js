@@ -10,10 +10,10 @@ export default class root extends Component {
     };
 
     componentDidMount(){
-        this.getVideos(this.state);
+        this.getVideos();
     }
 
-    getVideos = (state) => {
+    getVideos = () => {
         
         const INSTANCE = this
         
@@ -35,11 +35,11 @@ export default class root extends Component {
                     if (i > 0) {
                         resp.push(links[i]?.attributes?.href);
                     }
-                
-                    this.setState({...{state}, videos:resp})
-                    console.log(state["videos"]);
-                    return;
                 }
+
+                INSTANCE.state["videos"] = resp;
+                console.log(state["videos"]);
+                return;
             };
             xhr.send();
         }
