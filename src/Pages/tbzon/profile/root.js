@@ -17,7 +17,7 @@ class index extends DPA.profile {
         );
     }
 
-   
+
 
     // $inputs() {
     //     var inp = super.$inputs();
@@ -63,6 +63,9 @@ class index extends DPA.profile {
             <MenuPages path={Parent.path + "/profile/"} permiso={"ver"} params={{
                 pk: this.pk
             }} >
+                <MenuButtom label='EMpleados' url={Parent.path + "/profile/zona_empleado"} params={{
+                    pk: this.pk
+                }}></MenuButtom>
             </MenuPages>
         </SView>
     }
