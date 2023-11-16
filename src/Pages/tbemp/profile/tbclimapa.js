@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad, SNavigation, SInput, SPopup } from 'servisofts-component';
+import { SHr, SIcon, SPage, SText, STheme, SView, SMapView, SLoad, SNavigation, SInput, SPopup, SDate, SBuscador } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import Model from '../../../Model';
 import { Parent } from ".."
@@ -8,6 +8,8 @@ import MarkerCircle from '../../../Components/Marker/MarkerCircle';
 import PopupAutoCompleteCliente from './components/PopupAutoCompleteCliente';
 import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
 import DataBase from '../../../DataBase';
+import MapaComponent from '../../vendedor/MapaComponentCluster';
+import { Trigger } from 'servisofts-db';
 
 
 // const Parent2 = {
@@ -24,128 +26,82 @@ class index extends Component {
         super(props);
         this.state = {
             // ...this.state,
+            curdate: new SDate(),
+            pk: SNavigation.getParam("pk"),
         };
         this.pk = SNavigation.getParam("pk")
     }
 
 
 
+
     componentDidMount() {
-       this.loadData();
-
-    }
-
-    async loadData() { 
-        const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.pk}`)
-        let query = "";
-        cantidad_zonas.map((z, i) => {
-            if (i > 0) query += " || "
-            query += `idz == ${z.idz}`
-        })
-        const cantidad_clientes = await DataBase.tbcli.filtered(query)
-        this.setState({ data: cantidad_clientes })
-    }
-
-    renderMapa(data) {
-        if (!data) return null;
-
-        var latPadre = this.calcularPromedio(data, 'clilat');
-        var longPadre = this.calcularPromedio(data, 'clilon');
-        let arr = [];
-        Object.values(data).map((obj) => {
-            if (!obj.clilat || !obj.clilon) return null;
-            arr.push({ id: obj.idcli, clinom: obj.clinom, location: { latitude: obj.clilat, longitude: obj.clilon } })
+        this.loadDataAsync();
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["visita_vendedor"]
+        }, (evt) => {
+            console.log("ENTRO EN EL TRIGGERRRRRR", evt)
+            this.loadDataAsync();
         });
-        const HanndleOnPress = (obj) => {
-            SNavigation.navigate("/tbcli/profile", { pk: obj.id })
-        }
-        const RenderMarker = (obj, onPress) => {
-            return MarkerCircle({
-                latitude: obj?.location.latitude,
-                longitude: obj?.location.longitude,
-                src: SSocket.api.root + "tbcli/" + obj?.id,
-                label: obj.clinom,
-                size: 80,
-                cantidad: obj.count > 1 ? obj.count : 0,
-                onPress: obj.count <= 1 ? HanndleOnPress.bind(this, obj) : onPress,
-                // cantidad: obj?.cantidad
-            })
-        }
-        return <SMapView.Cluster initialRegion={{
-            latitude: latPadre,
-            longitude: longPadre,
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1
-        }}
-            renderMarker={RenderMarker}
-            renderCluster={RenderMarker}
-            data={arr}
-            ref={(map) => this.map = map}
-        >
-            <></>
-            {/* {this.getMarkers(data)} */}
-        </SMapView.Cluster>
     }
-    calcularPromedio(lista, atributo) {
-        let suma = 0;
-        let contador = 0;
-        if (lista.length === 0) {
-            return 0; // O cualquier valor que desees retornar si la lista está vacía
-        } else {
-            Object.values(lista).map((obj) => {
-                if (!obj.clilat || !obj.clilon) return null;
-                suma = suma + obj[atributo]
-                contador++;
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
+    async loadDataAsync() {
+        this.setState({ loading: true })
+        try {
+
+            console.log()
+            // const zonas = await DataBase.tbzon.filtered("zdia == $0",new SDate().date.getDay());
+            const zonas = await DataBase.tbzon.filtered("idemp == $0", parseInt(this.pk));
+            let query = "";
+            zonas.map((zon, i) => {
+                if (i > 0) {
+                    query += " || "
+                }
+                query += ` idz == ${zon.idz} `
             })
-            if (!suma) return 0;
-            return suma / contador;
+            let clientes = []
+            if (query) {
+                clientes = await DataBase.tbcli.filtered(query);
+            }
+
+            const visitas = await DataBase.visita_vendedor.all();
+            console.log(visitas.length)
+            // console.log("zonas", zonas);
+            this.setState({
+                loading: false,
+                data: clientes,
+                visitas: visitas
+            })
+
+        } catch (error) {
+            this.setState({ loading: false })
+            console.error(error);
         }
     }
 
-    buscador(data) {
-        return <SView col={"xs-12"} height={50} row center>
-            <SInput
-                height={48}
-                style={{
-                    backgroundColor: STheme.color.card + 1,
-                    // height: 55,
-                    // borderRadius: 16,
-                    // color: STheme.color.text,
-                    fontSize: 14
-                }}
-                editable={false}
-                placeholder={"Busca una cliente..."}
-                // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 40)}${this.state?.data?.direccion.length > 40 ? "..." : ""}` : ""}
-                value={data?.clinom}
-                onPress={() => {
-                    SPopup.open({
-                        key: "autocomplete", content:
-                            <PopupAutoCompleteCliente callback={(resp) => {
-                                SPopup.close("autocomplete");
-                                this.state.data = resp;
-                                console.log(resp)
-                                this.map.getMap().animateToRegion({
-                                    ...resp,
-                                    latitudeDelta: 0.01,
-                                    longitudeDelta: 0.01
-                                }, 1000);
-
-                                this.setState({ ...this.state });
-                            }} />
-                    });
-                }}
-                iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
-            />
-        </SView>
-    }
 
     render() {
-        var data = this.state.data;
-        if (!data) return <SLoad />
-
-        return <SPage title={'Mapa de clientes'} disableScroll>
-            {this.buscador(data)}
-            {this.renderMapa(data)}
+        console.log("asldalsda")
+        return <SPage disableScroll title={this.state.curdate.toString("DAY, dd de MONTH.")}>
+            <SView col={"xs-12"} center row padding={4} height={50}>
+                <SView flex center>
+                    <SBuscador onChange={(e) => {
+                        this.setState({ busqueda: e })
+                        console.log(e)
+                    }} />
+                    {/* <SInput placeholder={"Buscar al cliente"} /> */}
+                    {/* <SText col={"xs-11"} fontSize={12}>Activate para visitar a tus clientes.</SText> */}
+                </SView>
+            </SView>
+            <SView col={"xs-12"} flex>
+                <MapaComponent state={this.state} setState={this.setState.bind(this)} />
+                {/* <DetalleMapaComponent state={this.state} setState={this.setState.bind(this)} /> */}
+            </SView>
+            {/* <SLoad type='window' hidden={!this.state.loading} /> */}
         </SPage>
     }
 }

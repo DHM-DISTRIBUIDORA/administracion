@@ -14,7 +14,7 @@ class login extends Component {
         };
     }
     componentDidMount() {
-        new SThread(100, "render_window").start(() => {
+        new SThread(100, "render_window", true).start(() => {
             this.setState({ ready: true })
         })
     }
