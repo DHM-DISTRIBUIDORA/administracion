@@ -13,12 +13,12 @@ export default class root extends Component {
         this.getVideos();
     }
 
-    getVideos = () => {
+    getVideos(){
         
         const INSTANCE = this
         
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', this.state.url + "/", true);
+        xhr.open('GET', this.state.url , true);
         xhr.onerror = function (e) {
             console.log(e)
         }
@@ -37,8 +37,7 @@ export default class root extends Component {
                     }
                 }
 
-                INSTANCE.state["videos"] = resp;
-                console.log(state["videos"]);
+                console.log(resp);
                 return;
             };
             xhr.send();

@@ -103,7 +103,7 @@ class index extends Component {
             <SView col={"xs-12"} flex >
                 <MenuPages path={"/"} permiso={"page"}>
                     <MenuButtom label={"Public"} url={"/public"} icon={<SIcon name={"Home"} />} />
-                    <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Istorage"} />} />
+                    {/* <MenuButtom label={"Storage"} url={"/storage"} icon={<SIcon name={"Istorage"} />} /> */}
                     {/* <MenuButtom label={"Sincronizar"} onPress={() => {
                         DataBaseContainer.sync();
                     }} icon={<SIcon name={"Ireload"} fill={STheme.color.text} />} /> */}

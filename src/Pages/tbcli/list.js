@@ -7,6 +7,7 @@ import item from './item';
 import { Data } from 'servisofts-background-location';
 import DataBase from '../../DataBase';
 import { Trigger } from 'servisofts-db';
+import { SNavigation } from 'servisofts-component';
 
 class index extends DPA.list {
     constructor(props) {
@@ -21,17 +22,9 @@ class index extends DPA.list {
                 if (resolve) resolve();
             }
         });
+
     }
-    componentDidMount() { 
-        if (this?.$params?.idemp) {
-            DataBase.tbcli.filtered("idemp = ?", [this.$params.idemp]).then((res) => {
-                this.setState({ data: res })
-            })
-        } else {
-            DataBase.tbcli.all().then((res) => {
-                this.setState({ data: res })
-            })
-        }
+    componentDidMount() {
 
         this.t1 = Trigger.addEventListener({
             on: ["insert", "update", "delete"],
@@ -47,7 +40,16 @@ class index extends DPA.list {
         Trigger.removeEventListener(this.t1);
     }
 
-    async loadData() { 
+    async loadData() {
+        if (this?.$params?.idemp) {
+            DataBase.tbcli.filtered("idemp = ?", [this.$params.idemp]).then((res) => {
+                this.setState({ data: res })
+            })
+        } else {
+            DataBase.tbcli.all().then((res) => {
+                this.setState({ data: res })
+            })
+        }
         //     const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
         //     let query = "";
         //     cantidad_zonas.map((z, i) => {
@@ -58,11 +60,23 @@ class index extends DPA.list {
         //     this.setState({ data: cantidad_clientes })
         //     console.log("cantidad_clientes")
         //     console.log(cantidad_clientes)
-    
-            const clientes = await DataBase.tbcli.all()
-            this.setState({ data: clientes })
-        }
 
+        // const clientes = await DataBase.tbcli.all()
+        // this.setState({ data: clientes })
+    }
+
+
+    onNew() {
+        if(!this.onSelect){
+            return super.onNew();
+        }
+        SNavigation.navigate("/tbcli/new", { onSelect: (cli)=>{
+            if(this.onSelect){
+                this.onSelect(cli)
+            }
+            SNavigation.goBack();
+        } });
+    }
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
@@ -75,6 +89,8 @@ class index extends DPA.list {
     $filter(data) {
         return data.estado != 0
     }
+
+
     $getData() {
         return this.state.data;
         // return Parent.model.Action.getAll({ ...this.$params });

@@ -11,6 +11,7 @@ import ZonasDelDia from './components/ZonasDelDia';
 import IniciarTransporte from './components/IniciarTransporte';
 import { SelectEntreFechas, SelectFecha } from '../../../Components/Fechas';
 import DataBase from '../../../DataBase';
+import ZonaEmpleadoComponent from './components/ZonaEmpleadoComponent';
 class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
@@ -309,7 +310,7 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk}  fecha={this.state?.fecha} /> : null}
+            {obj.idemt == 1 ? <ZonasDelDia idemp={this.pk} fecha={this.state?.fecha} /> : null}
             {obj.idemt == 4 ? <IniciarTransporte idemp={this.pk} fecha={this.state?.fecha} /> : null}
             <SHr h={30} />
             {/* {obj.idemt == 1 ? <SelectEntreFechas onChange={e => this.getDataVendedor(e)} /> : null} */}
@@ -322,7 +323,6 @@ class index extends DPA.profile {
 
     getUser() {
         return <>
-
             <SView col={"xs-12"} >
                 <SText >Usuario:</SText>
                 <SView col={"xs-12"} card center row
@@ -340,12 +340,36 @@ class index extends DPA.profile {
             </SView>
         </>
     }
+    verZonas() {
+     
+        return <>
+            <SView col={"xs-12"} >
+                <SText >Zonas:</SText>
+                <SView col={"xs-12"} card center row
+                    onPress={() => {
+                        SNavigation.navigate("/tbemp/profile/zonas_asignadas", { pk: this.pk })
+                    }}
+                >
+                    <SHr height={15} />
+                    <SIcon name={"Marker"} height={20} width={22} fill={STheme.color.text} />
+                    <SView width={5} />
+                    <SText>Zonas asignadas por día</SText>
+                    <SHr height={15} />
+
+                </SView>
+            </SView>
+        </>
+    }
 
     $footer() {
         return <SView col={"xs-12"} center>
             <SHr />
             {this.getUser()}
             <SHr />
+            {this.verZonas()}
+            <SHr />
+
+            {/* <ZonaEmpleadoComponent idemp={this.pk}/> */}
             {/* <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
                 pk: this.pk
             }} >

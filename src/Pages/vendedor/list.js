@@ -40,18 +40,19 @@ export default class root extends Component {
 
     async loadDataAsync() {
         try {
-            const zonas = await DataBase.tbzon.filtered("zdia == $0", new SDate().date.getDay());
-            let query = "";
-            zonas.map((zon, i) => {
-                if (i > 0) {
-                    query += " || "
-                }
-                query += ` idz == ${zon.idz} `
-            })
-            let clientes = []
-            if (query) {
-                clientes = await DataBase.tbcli.filtered(query);
-            }
+            // const zonas = await DataBase.tbzon.filtered("zdia == $0", new SDate().date.getDay());
+            // let query = "";
+            // zonas.map((zon, i) => {
+            //     if (i > 0) {
+            //         query += " || "
+            //     }
+            //     query += ` idz == ${zon.idz} `
+            // })
+            // let clientes = []
+            // if (query) {
+            //     clientes = await DataBase.tbcli.filtered(query);
+            // }
+            const clientes = await DataBase.tbcli.all();
             const visitas = await DataBase.visita_vendedor.all();
             this.setState({
                 loading: false,

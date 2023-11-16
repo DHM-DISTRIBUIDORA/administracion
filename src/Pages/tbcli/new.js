@@ -22,6 +22,7 @@ class index extends DPA.new {
             clirazon: "",
         };
         this.pk = SNavigation.getParam("pk");
+        this.onSelect = SNavigation.getParam("onSelect");
         console.log("pk - ", this.pk);
     }
 
@@ -170,6 +171,9 @@ class index extends DPA.new {
         }).then((resp) => {
             console.log("asdasdasdad")
             // this.$submitFile(resp.data.key);
+            if (this.onSelect) {
+                this.onSelect(resp)
+            }
             SNavigation.goBack();
         }).catch(e => {
             console.error(e);

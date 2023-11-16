@@ -1,7 +1,7 @@
 import { TableAbstract } from "servisofts-db"
 import SSocket from "servisofts-socket"
 import DataBase from "."
-import { SDate, SNotification, SPopup, STheme } from "servisofts-component"
+import { SDate, SNotification, SPopup, SStorage, STheme } from "servisofts-component"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -45,7 +45,7 @@ export const sincronizar_transportista = async () => {
 }
 
 export const sincronizar_admin = async () => {
-    const tables = [DataBase.tbcli, DataBase.tbzon]
+    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.tbcli]
     tables.map((t) => {
         syncWithNotify(t);
     })
@@ -97,10 +97,23 @@ export const SaveChanges = async (table: TableAbstract) => {
                 })
                 if (resp.estado != "exito") throw resp;
                 resp.data.sync_type = "";
+
+
+
                 await table.delete(obj[table.scheme.primaryKey]);
                 if (obj.sync_type != "delete") {
                     await table.insert(resp.data)
                 }
+                // if (table.scheme.name == "tbcli") {
+                //     SStorage.getItem("cliente_dhm", (cli: string) => {
+                //         if (cli) {
+                //             let client = JSON.parse(cli);
+                //             if (obj[table.scheme.primaryKey] == client.idcli) {
+                //                 SStorage.setItem("", resp.data)
+                //             }
+                //         }
+                //     })
+                // }
             } catch (error: any) {
                 SNotification.send({
                     title: table.scheme.name,

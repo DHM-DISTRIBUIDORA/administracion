@@ -55,19 +55,20 @@ class index extends Component {
 
             console.log()
             // const zonas = await DataBase.tbzon.filtered("zdia == $0",new SDate().date.getDay());
-            const zonas = await DataBase.tbzon.filtered("idemp == $0", parseInt(this.pk));
-            let query = "";
-            zonas.map((zon, i) => {
-                if (i > 0) {
-                    query += " || "
-                }
-                query += ` idz == ${zon.idz} `
-            })
-            let clientes = []
-            if (query) {
-                clientes = await DataBase.tbcli.filtered(query);
-            }
+            // const zonas = await DataBase.tbzon.filtered("idemp == $0", parseInt(this.pk));
+            // let query = "";
+            // zonas.map((zon, i) => {
+            //     if (i > 0) {
+            //         query += " || "
+            //     }
+            //     query += ` idz == ${zon.idz} `
+            // })
+            // let clientes = []
+            // if (query) {
+            //     clientes = await DataBase.tbcli.filtered(query);
+            // }
 
+            const clientes = await DataBase.tbcli.all();
             const visitas = await DataBase.visita_vendedor.all();
             console.log(visitas.length)
             // console.log("zonas", zonas);

@@ -1,6 +1,6 @@
 {
   "name": "distribuidora_dhm_app",
-  "version": "1.0.35",
+  "version": "1.0.36",
   "description": "distribuidora_dhm_app",
   "scripts": {
     "start": "react-native start",
