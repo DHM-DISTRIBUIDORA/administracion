@@ -6,6 +6,7 @@ import Model from '../../Model';
 import item from './item';
 import { Data } from 'servisofts-background-location';
 import DataBase from '../../DataBase';
+import { Trigger } from 'servisofts-db';
 
 class index extends DPA.list {
     constructor(props) {
@@ -21,7 +22,7 @@ class index extends DPA.list {
             }
         });
     }
-    componentDidMount() {
+    componentDidMount() { 
         if (this?.$params?.idemp) {
             DataBase.tbcli.filtered("idemp = ?", [this.$params.idemp]).then((res) => {
                 this.setState({ data: res })
@@ -32,7 +33,36 @@ class index extends DPA.list {
             })
         }
 
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (evt) => {
+            console.log("ENTRO EN EL TRIGGERRRRRR", evt)
+            this.loadData();
+        });
+        this.loadData();
+
     }
+    componentWillUnmount() {
+        Trigger.removeEventListener(this.t1);
+    }
+
+    async loadData() { 
+        //     const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.props?.pi?.pk}`)
+        //     let query = "";
+        //     cantidad_zonas.map((z, i) => {
+        //         if (i > 0) query += " || "
+        //         query += `idz == ${z.idz}`
+        //     })
+        //     const cantidad_clientes = await DataBase.tbcli.filtered(query)
+        //     this.setState({ data: cantidad_clientes })
+        //     console.log("cantidad_clientes")
+        //     console.log(cantidad_clientes)
+    
+            const clientes = await DataBase.tbcli.all()
+            this.setState({ data: clientes })
+        }
+
     $allowNew() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "new" });
     }
