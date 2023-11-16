@@ -66,6 +66,7 @@ export default class test extends Component {
                             DataBase.Funciones.sicronizar_vendedor()
                         }} />
                         <Table table={DataBase.tbzon} label="Zonas." />
+                        <Table table={DataBase.zona_empleado} label="Zonas por día." save/>
                         <Table table={DataBase.tbcat} label="Categorias de clientes." />
                         <Table table={DataBase.dm_cabfac} label="Pedidos." save />
                         <Table table={DataBase.tbcli} label="Clientes." save />

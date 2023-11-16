@@ -16,7 +16,7 @@ export const sicronizar_usuario = async () => {
     })
 }
 export const sicronizar_vendedor = async () => {
-    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.tbcli, DataBase.visita_vendedor]
+    const tables = [DataBase.tbzon, DataBase.tbcat, DataBase.dm_cabfac, DataBase.tbcli, DataBase.visita_vendedor, DataBase.zona_empleado]
     tables.map((t) => {
         syncWithNotify(t);
     })
@@ -95,8 +95,8 @@ export const SaveChanges = async (table: TableAbstract) => {
                 }
             } catch (error: any) {
                 SNotification.send({
-                    title: "Error al guardar cambios",
-                    body: JSON.stringify(error?.error) ?? JSON.stringify(error),
+                    title: table.scheme.name,
+                    body: "Error al guardar cambios " + (JSON.stringify(error?.error) ?? JSON.stringify(error)) ?? "",
                     color: STheme.color.danger,
                     time: 10000,
                 })
@@ -126,7 +126,7 @@ export const saveAllChanges = async () => {
         return;
     }
 
-    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista]
+    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista, DataBase.zona_empleado]
     // SNotification.send({
     //     title: "Virificando cambios",
     //     time: 2000,

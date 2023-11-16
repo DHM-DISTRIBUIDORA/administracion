@@ -5,6 +5,7 @@ import { Parent } from ".."
 import { SHr, SIcon, SText, SView } from 'servisofts-component';
 import Model from '../../../Model';
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos';
+import DataBase from '../../../DataBase';
 
 class index extends DPA.profile {
     constructor(props) {
@@ -18,7 +19,13 @@ class index extends DPA.profile {
     }
 
 
-
+    componentDidMount() {
+        DataBase.tbzon.objectForPrimaryKey(parseInt(this.pk)).then(data => {
+            this.setState({ data: data })
+        }).then(e => {
+            console.error(e);
+        })
+    }
     // $inputs() {
     //     var inp = super.$inputs();
     //     inp["zcod"].label = "Código zona"
@@ -39,6 +46,7 @@ class index extends DPA.profile {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "ver" })
     }
     $getData() {
+        return this.state?.data;
         return Parent.model.Action.getByKey(this.pk);
     }
     $renderContent() {
@@ -63,7 +71,7 @@ class index extends DPA.profile {
             <MenuPages path={Parent.path + "/profile/"} permiso={"ver"} params={{
                 pk: this.pk
             }} >
-                <MenuButtom label='EMpleados' url={Parent.path + "/profile/zona_empleado"} params={{
+                <MenuButtom label='Empleados' url={Parent.path + "/profile/zona_empleado"} params={{
                     pk: this.pk
                 }}></MenuButtom>
             </MenuPages>

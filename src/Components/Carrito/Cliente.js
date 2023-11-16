@@ -24,6 +24,10 @@ export default class Cliente extends Component {
       this.state = {
       };
    }
+
+   onChange(e) {
+      if (this.props.onChange) this.props.onChange(e);
+   }
    botones() {
       return <SView col={"xs-12"} row>
          <Card label={"Nuevo"} backgroundColor={STheme.color.success + "AA"} onPress={() => {
@@ -38,21 +42,20 @@ export default class Cliente extends Component {
                { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
          }} />
          <Card label={"Seleccionar"} backgroundColor={"#85BFD0" + "AA"} onPress={() => {
-            // SNavigation.navigate("/tbemp/profile/tbcli",
-            //    { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
+            SNavigation.navigate("/tbcli", { onSelect: (e) => { this.onChange(e); } })
          }} />
       </SView>
    }
 
    render() {
-      // if (!this.props.data) return this.botones();
+      if (!this.props.data) return this.botones();
       if (!this.props.data) return <SText>No hay cliente seleccionado.</SText>
       return (
          <SView col={"xs-12"} >
             {/* <SText>TODO: Colocar boton para seleccinar el cliente.</SText> */}
             {/* <Text>{JSON.stringify(this.props)} </Text> */}
             <SHr height={10} />
-            {/* <SView col={"xs-12"} row style={{
+            <SView col={"xs-12"} row style={{
                borderTopLeftRadius: 8,
                overflow: "hidden"
             }}>
@@ -71,17 +74,14 @@ export default class Cliente extends Component {
                   SNavigation.navigate("/tbcli/edit", { pk: this.props.data?.idcli, ubicacion: "true" })
                }} />
                <Card label={"Seleccionar"} backgroundColor={"#85BFD0" + "AA"} onPress={() => {
-                  SNavigation.navigate("/tbemp/profile/tbcli",
-                     // {
-                     //    onSelect: (client) => {
-                     //       console.log("clienteeeeee");
-                     //       console.log(client);
-                     //       // this.setState({ idz: client.idcli + "" })
-                     //    }
-                     // },
-                     { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
+                  SNavigation.navigate("/tbcli",
+                     {
+                        onSelect: (client) => {
+                           this.onChange(client)
+                        }
+                     })
                }} />
-            </SView> */}
+            </SView>
             <SView col={"xs-12"} card row style={{
             }}>
                <SView col={"xs-3.5"} center style={{ padding: 8 }}>

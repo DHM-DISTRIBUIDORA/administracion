@@ -57,35 +57,9 @@ class index extends DPA.profile {
             console.error(e)
         })
     }
-    // componentDidMount() {
-    //     this._unsubscribe = this.props.navigation.addListener('focus', () => {
-    //         // Tu código aquí será ejecutado cada vez que la pantalla esté enfocada
-
-    //         // ...
-    //     });
-    // }
-    // componentWillUnmount() {
-    //     this._unsubscribe();
-    // }
-
-
+ 
     async getDataVendedor({ fecha_inicio, fecha_fin }) {
-        // const request = {
-        //     component: "dhm",
-        //     type: "perfilEmp",
-        //     fecha_inicio: fecha_inicio,
-        //     fecha_fin: fecha_fin,
-        //     idemp: this.idemp
-        //     // idemp: this.pk + ""
-        // }
         this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
-        // SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-        //     const obj = e.data[0]
-        //     console.log(obj)
-        //     this.setState({ ...obj })
-        // }).catch(e => {
-        //     console.error(e)
-        // })
         try {
             const cantidad_pedidos = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1 && sync_type != 'delete'`, fecha_inicio + " 00:00:00.0", fecha_fin + " 00:00:00.0")
             let monto = 0;
@@ -115,20 +89,11 @@ class index extends DPA.profile {
         if (query) {
             cantidad_clientes = await DataBase.tbcli.filtered(query)
         }
-
-
-        // const cantidad_clientes = await DataBase.tbcli.filtered(`cliidemp == ${this.idemp}`)
-        // this.setState({ cantidad_clientes: cantidad_clientes.length })
         this.setState({ cantidad_clientes: cantidad_clientes.length, load_cant: true })
-
-        // const zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
-        // let query = "";
 
     }
 
     async getDataTransportista() {
-        // DataBase.ventas_factura.fecha = fecha;
-        // DataBase.ventas_factura.setFecha(fecha);
         try {
             const fechaEnv = await DataBase.enviroments.objectForPrimaryKey("fecha");
             this.setState({ fecha: fechaEnv.value, })
@@ -149,23 +114,6 @@ class index extends DPA.profile {
 
 
         return null;
-        const request = {
-            component: "dhm",
-            type: "perfilTransportista",
-            fecha_inicio: fecha,
-            fecha_fin: fecha,
-            idemp: this.idemp
-            // idemp: this.pk + ""
-        }
-        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
-        this.setState({ loading: true })
-        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
-            const obj = e.data[0]
-            console.log(obj)
-            this.setState({ ...obj })
-        }).catch(e => {
-            console.error(e)
-        })
     }
 
     $allowEdit() {
