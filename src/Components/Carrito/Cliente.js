@@ -30,7 +30,7 @@ export default class Cliente extends Component {
    }
    botones() {
       return <SView col={"xs-12"} row>
-         <Card label={"Nuevo"} backgroundColor={STheme.color.success + "AA"} onPress={() => {
+         {/* <Card label={"Nuevo"} backgroundColor={STheme.color.success + "AA"} onPress={() => {
             SNavigation.navigate("/tbcli/new",
                // {
                //    onSelect: (cliente) => {
@@ -40,7 +40,7 @@ export default class Cliente extends Component {
                //    }
                // },
                { pk: Model.usuario.Action.getUsuarioLog()?.idvendedor, ubicacion: "true" })
-         }} />
+         }} /> */}
          <Card label={"Seleccionar"} backgroundColor={"#85BFD0" + "AA"} onPress={() => {
             SNavigation.navigate("/tbcli", { onSelect: (e) => { this.onChange(e); } })
          }} />
@@ -59,7 +59,7 @@ export default class Cliente extends Component {
                borderTopLeftRadius: 8,
                overflow: "hidden"
             }}>
-               <Card label={"Nuevo"} backgroundColor={STheme.color.success + "AA"} onPress={() => {
+               {/* <Card label={"Nuevo"} backgroundColor={STheme.color.success + "AA"} onPress={() => {
                   SNavigation.navigate("/tbcli/new",
                      // {
                      //    onSelect: (cliente) => {
@@ -69,7 +69,7 @@ export default class Cliente extends Component {
                      //    }
                      // },
                      { pk: parseInt(Model.usuario.Action.getUsuarioLog()?.idvendedor), ubicacion: "true" })
-               }} />
+               }} /> */}
                <Card label={"Editar"} backgroundColor={"#F5AD76" + "AA"} onPress={() => {
                   SNavigation.navigate("/tbcli/edit", { pk: this.props.data?.idcli, ubicacion: "true" })
                }} />
