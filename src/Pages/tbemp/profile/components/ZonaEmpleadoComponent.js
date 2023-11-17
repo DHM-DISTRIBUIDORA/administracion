@@ -150,7 +150,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
     this.allowEdit = Model.usuarioPage.Action.getPermiso({ url: "/tbemp", permiso: "edit_zona" });
     return <SView col={"xs-12"}>
       <SText bold>Zonas del empleado</SText>
-      <SText font='Roboto' color={STheme.color.gray}>En un empleado se agregan zonas en los diferentes dias de la semana, presione sobre el boton mas al lado de cada dia para agregar zonas en ese día.</SText>
+      <SText font='Roboto' color={STheme.color.gray}>En un empleado se agregan zonas en los diferentes días de la semana, presione sobre el botón más al lado de cada día para agregar zonas en ese día.</SText>
       {[0, 1, 2, 3, 4, 5, 6].map(d => this.renderDay({ day: d, onPress: this.onAdd.bind(this, d) }))}
     </SView>
   }
