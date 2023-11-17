@@ -94,7 +94,7 @@ class index extends Component<FloatPropsType> {
             <>
                 <SView center style={{
                     backgroundColor: STheme.color.primary,
-                    width: 160,
+                    width: 165,
                     height: 54,
                     position: "absolute",
                     bottom: this.state.bottom,

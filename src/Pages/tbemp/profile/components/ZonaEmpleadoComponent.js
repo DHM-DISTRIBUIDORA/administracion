@@ -92,7 +92,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
       right: -4,
     }} onPress={() => {
       SPopup.confirm({
-        title: "Esta seguro de quitar al empleado?",
+        title: "Esta seguro de quitar la zona?",
         onPress: () => {
           empleado_zona.estado = 0;
           empleado_zona.sync_type = "update";
@@ -112,7 +112,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
 
   renderUserDay(day) {
     const data = this.state.data.filter(a => a.dia == day)
-    if (!data || !data.length) return <SText fontSize={10} font='Roboto' color={STheme.color.warning}>{"Sin usuarios, click en + para agregar usuarios."}</SText>
+    if (!data || !data.length) return <SText fontSize={10} font='Roboto' color={STheme.color.warning}>{"Sin zonas, click en + para agregar zonas."}</SText>
 
     return data.map((itm) => {
       const zon = this.state.tbzon.find(a => a.idz == itm.idz);
@@ -150,7 +150,7 @@ export default class ZonaEmpleadoComponent extends Component<{ idemp?: int }> {
     this.allowEdit = Model.usuarioPage.Action.getPermiso({ url: "/tbemp", permiso: "edit_zona" });
     return <SView col={"xs-12"}>
       <SText bold>Zonas del empleado</SText>
-      <SText font='Roboto' color={STheme.color.gray}>En un empleado se agregan zonas en los diferentes dias de la semana, presione sobre el boton mas al lado de cada dia para agregar zonas en ese día.</SText>
+      <SText font='Roboto' color={STheme.color.gray}>En un empleado se agregan zonas en los diferentes días de la semana, presione sobre el botón más al lado de cada día para agregar zonas en ese día.</SText>
       {[0, 1, 2, 3, 4, 5, 6].map(d => this.renderDay({ day: d, onPress: this.onAdd.bind(this, d) }))}
     </SView>
   }

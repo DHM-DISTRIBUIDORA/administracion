@@ -51,7 +51,8 @@ class pedidosEmpresa extends Component {
     async calcularDatos() {
         // const dm_cabfac = await DataBase.dm_cabfac.all();
         console.log(this.fecha_inicio, this.fecha_fin)
-        const dm_cabfac = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0")
+        // const dm_cabfac = await DataBase.dm_cabfac.filtered(`vfec >= $0 && vfec <= $1`, this.fecha_inicio + " 00:00:00.0", this.fecha_fin + " 00:00:00.0")
+        const dm_cabfac = await DataBase.dm_cabfac.all();
         // this.setState({ cantidad_pedidos: e.length })
         let lines = {};
         const productos = await DataBase.tbprd.all();

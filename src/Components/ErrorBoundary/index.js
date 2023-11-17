@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ErrorWindow from './ErrorWindow';
-import { View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { SNavigation } from 'servisofts-component';
-
+import PackageInfo from "../../../package.json"
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +15,11 @@ class ErrorBoundary extends React.Component {
         message: error.toString(),
         stack: error.stack
       },
-      errorInfo: errorInfo
+      errorInfo: errorInfo,
+      app: {
+        version: PackageInfo.version,
+        platform: Platform.OS,
+      }
     }
     const nav = SNavigation.lastRoute;
     if (nav?.route) {

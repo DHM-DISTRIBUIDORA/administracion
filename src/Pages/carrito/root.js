@@ -95,7 +95,8 @@ class index extends Component {
             const tbzon = await DataBase.tbzon.objectForPrimaryKey(tbcli.idz)
             console.log("tbzon", tbzon)
 
-            if (!tbzon.idemp) {
+            const idvendedor = Model.usuario.Action.getUsuarioLog().idvendedor;
+            if (!idvendedor) {
                 this.setState({ loading: false, error: "Su zona no cuenta con un vendedor asignado." })
                 return;
             }
@@ -111,7 +112,7 @@ class index extends Component {
             }
 
             console.log("tbcat", tbcat)
-            const tbemp = await DataBase.tbemp.objectForPrimaryKey(tbzon.idemp)
+            const tbemp = await DataBase.tbemp.objectForPrimaryKey(parseInt(idvendedor))
             console.log("tbemp", tbemp)
 
             const productos = Model.carrito.Action.getState().productos;
@@ -175,6 +176,7 @@ class index extends Component {
             SNavigation.replace("/dm_cabfac/recibo", {
                 pk: idven,
                 onBack: () => {
+                    DataBase.Funciones.saveAllChanges();
                     SNavigation.reset("/root")
                     new SThread(500, "sadad").start(() => {
                         SNavigation.navigate("/tbemp/profile", { pk: Model.usuario.Action.getUsuarioLog().idvendedor, reload: new Date().getTime() })
