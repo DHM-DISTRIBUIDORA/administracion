@@ -50,10 +50,10 @@ export default class index extends Component {
                     <STable2
                         header={[
                             { key: "index" },
-                            { key: "key_usuario", width: 150 },
-                            { key: "Nombres", width: 300 },
+                            // { key: "key_usuario", width: 150 },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm:ss") },
-                            { key: "tipo", width: 150 },
+                            { key: "Nombres", width: 150 },
+                            { key: "tipo", width: 100 },
                             { key: "latitude", width: 150 },
                             { key: "longitude", width: 150 },
 

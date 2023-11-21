@@ -49,7 +49,7 @@ class Mapa extends Component {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1
                     }}>
-                        {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
+                        {Object.values(conductores).map((obj) => {
                             return <SMapView.SMarker latitude={obj.latitude} longitude={obj.longitude} >
                                 <SView width={80} height={80} center onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
