@@ -78,6 +78,8 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
     }
 
     render() {
+        console.log("SBLocation.isStarted()?")
+        console.log(SBLocation.isStarted())
         return <SView animated style={{
             width: this.props.width ?? 115,
             height: this.props.height ?? 40,
