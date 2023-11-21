@@ -147,6 +147,7 @@ class index extends Component {
                     {user.idvendedor ? <MenuButtom label={"Vendedor"} url={"/tbemp/profile"} params={{ pk: user.idvendedor }} icon={<SIcon name={"Vendedor"} />} /> : null}
                     {user.idtransportista ? <MenuButtom label={"Transportista"} url={"/tbemp/profile"} params={{ pk: user.idtransportista }} icon={<SIcon name={"Trasnportista"} />} /> : null}
                     <MenuButtom label={"Mi perfil"} url={"/perfil"} icon={this.getIconProfile()} />
+                    {/* <MenuButtom label={"Dash"} url={"/dashboard"} icon={<SIcon name={"Vendedor"} />}/> */}
                     {/* <MenuButtom label={"Test"} url={"/blanco"} icon={<SIcon name={"Alert"} />} /> */}
                 </MenuPages>
             </SView>

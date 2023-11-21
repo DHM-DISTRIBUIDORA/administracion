@@ -126,6 +126,7 @@ class index extends Component {
                             },
                             key_usuario: Model.usuario.Action.getKey()
                         }).then((resp) => {
+                            this.callback2();
                             SNavigation.goBack();
                         }).catch(e => {
                             console.error(e);

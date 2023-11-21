@@ -87,6 +87,22 @@ class index extends Component {
             SNavigation.navigate("/login")
             return;
         }
+
+        if (!tbcli.clilat || !tbcli.clilon) {
+            SPopup.alert("Para realizar el pedido, debe registrar ubicacion al cliente.")
+            SNavigation.navigate("/tbcli/mapa",
+                {
+                    callback2: (resp) => {
+                        // this.setState({ ubicacion: resp })
+                    },
+                    lat: tbcli?.clilat,
+                    lon: tbcli?.clilon,
+                    pk: tbcli.idcli,
+                    obj: tbcli
+                },
+            )
+            return;
+        }
         try {
             this.state.loading = true;
             this.setState({ loading: true, error: "" })

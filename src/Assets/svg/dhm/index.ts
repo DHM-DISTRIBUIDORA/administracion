@@ -85,6 +85,13 @@ import Ilist, { ReactComponent as IlistW } from './ilist.svg';
 import Iuser, { ReactComponent as IuserW } from './iuser.svg';
 import Isave, { ReactComponent as IsaveW } from './isave.svg';
 import Scroll, { ReactComponent as ScrollW } from './scroll.svg';
+import Ivendedor, { ReactComponent as IvendedorW } from './ivendedor.svg';
+import Iactivo, { ReactComponent as IactivoW } from './iactivo.svg';
+import Id1, { ReactComponent as Id1W } from './id1.svg';
+import Id2, { ReactComponent as Id2W } from './id2.svg';
+import Id3, { ReactComponent as Id3W } from './id3.svg';
+import Id4, { ReactComponent as Id4W } from './id4.svg';
+
 
 
 const Assets = {
@@ -175,10 +182,19 @@ const Assets = {
 	"Iuser": { Native: Iuser, Web: IuserW },
 	"Isave": { Native: Isave, Web: IsaveW },
 	"Scroll": { Native: Scroll, Web: ScrollW },
-	
+	"Ivendedor": { Native: Ivendedor, Web: IvendedorW },
+	"Iactivo": { Native: Iactivo, Web: IactivoW },
+	"Id1": { Native: Id1, Web: Id1W },
+	"Id2": { Native: Id2, Web: Id2W },
+	"Id3": { Native: Id3, Web: Id3W },
+	"Id4": { Native: Id4, Web: Id4W },
 
-	
-	
+
+
+
+
+
+
 
 
 

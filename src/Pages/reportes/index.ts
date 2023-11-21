@@ -9,6 +9,7 @@ import clientes_sin_pedidos_mapa from "./clientes_sin_pedidos_mapa"
 import visita_vendedor from "./visita_vendedor"
 import visita_transportista from "./visita_transportista"
 import clientes_con_sin_pedidos_mapa from "./clientes_con_sin_pedidos_mapa"
+import pedidos_por_vendedor from "./pedidos_por_vendedor"
 import activaciones from "./activaciones"
 import profile from './profile/index';
 import log from "./log"
@@ -34,6 +35,7 @@ export default SPage.combinePages("reportes", {
     visita_vendedor,
     visita_transportista,
     clientes_con_sin_pedidos_mapa,
+    pedidos_por_vendedor,
     log,
     ...profile
 });

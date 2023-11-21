@@ -47,7 +47,7 @@ import storage from "./storage"
 import videos from './videos';
 import blanco from './blanco';
 import contacto from './contacto';
-
+import dashboard from './dashboard';
 
 // import { Example } from "servisofts-charts"
 
@@ -103,6 +103,7 @@ export default SPage.combinePages("/", {
   notification_manager,
   test,
   ...blanco,
-  ...contacto
+  ...contacto,
+  ...dashboard
   // "chart": Example
 });
