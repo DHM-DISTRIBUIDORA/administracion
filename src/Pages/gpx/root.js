@@ -35,11 +35,17 @@ export default class root extends Component {
   }
   loadData(fecha) {
     this.loadActivaciones(fecha)
+    this.setState({ data: null, error: "" })
     getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
       console.log(e);
-      this.setState({ data: e })
+      this.setState({ data: e, error: "" })
     }).catch(e => {
-      this.setState({ data: null })
+      if (!e) {
+        e = {
+          error: "No hay datos en esta fecha."
+        }
+      }
+      this.setState({ data: null, error: e?.message ?? e?.error })
       console.error(e);
     })
   }
@@ -49,7 +55,7 @@ export default class root extends Component {
     console.log(this.state?.activaciones)
     return this.state.activaciones.map((o) => {
       return <SMapView.SMarker latitude={parseFloat(o.latitude)} longitude={parseFloat(o.longitude)} fill={o.tipo == "start" ? STheme.color.success : STheme.color.danger}>
-        
+
       </SMapView.SMarker>
     })
   }
@@ -87,7 +93,7 @@ export default class root extends Component {
     if (this.state?.data.length == 0) return <></>;
 
     return <SMapView.SMarker key={this.state.index}
-    fill='#00f'
+      fill='#00f'
       ref={ref => this.marker = ref}
       latitude={parseFloat(this.state.data[this.state.index].lat)}
       longitude={parseFloat(this.state.data[this.state.index].lon)}
@@ -96,6 +102,7 @@ export default class root extends Component {
   }
 
   renerWithData() {
+    if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
     if (!this.state.data) return <SLoad />
     return <>
       <SRangeSlider

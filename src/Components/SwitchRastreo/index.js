@@ -63,7 +63,7 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
                 nombre: "Title notification",
                 label: "Body notification",
                 minTime: 1000,
-                minDistance: 0
+                minDistance: 1
             }).then(e => {
 
             }).catch(e => {

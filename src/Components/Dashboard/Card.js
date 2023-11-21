@@ -16,7 +16,7 @@ class index extends Component<CategoriaCardPropsType> {
     render() {
         if (!this.props.data) return <SView />
         // console.log(this.props.data);
-        var {  cantidad_clientes, cantidad_pedidos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas,empnom, empcod, key } = this.props.data;
+        var { cantidad_clientes, cantidad_pedidos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas, empnom, empcod, usuario, clientes_con_ubicacion, clientes_sin_ubicacion } = this.props.data;
         console.log(this.props.data.key);
 
         return (
@@ -49,10 +49,15 @@ class index extends Component<CategoriaCardPropsType> {
                         </SView>
                     </SView>
                     <SView col={"xs-7"} height>
-                        <SText fontSize={15} bold style={{ lineHeight: 25 }}>{empnom}</SText>
-                        <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}</SText>
+                        <SText fontSize={15} bold style={{ lineHeight: 25 }} onPress={() => {
+                            SNavigation.navigate("/tbemp/profile", { pk: idemp })
+                        }}>{empnom}</SText>
+                        <SText fontSize={12} style={{ lineHeight: 20 }} onPress={() => { SNavigation.navigate("/usuario/profile", { pk: usuario?.key }) }} >User: {usuario?.Correo}</SText>
+                        <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}  -  # Zonas: {cantidad_zonas}</SText>
                     </SView>
-                    <SView col={"xs-2"} center height>
+                    <SView col={"xs-2"} center height onPress={() => {
+                        SNavigation.navigate("/gpx", { key_usuario: usuario?.key })
+                    }}>
                         <SIcon name='Iactivo' width={30} height={30} fill={STheme.color.success} />
                     </SView>
                 </SView>
@@ -62,13 +67,12 @@ class index extends Component<CategoriaCardPropsType> {
                             backgroundColor: "#D7D9FF85",
                             padding: 3,
                             borderBottomLeftRadius: 18,
-                            borderLeftWidth:2,
-                            borderBottomWidth:2,
-                            borderTopWidth:2,
+                            borderLeftWidth: 2,
+                            borderBottomWidth: 2,
+                            borderTopWidth: 2,
                             borderColor: "#6C74FF55",
                         }}>
                         <SView col={"xs-12"} center row>
-
                             <SText fontSize={10} center bold>Clientes para visitar</SText>
                         </SView>
                         <SText fontSize={20} bold center>{cantidad_visitas}/{cantidad_clientes}</SText>
@@ -76,14 +80,16 @@ class index extends Component<CategoriaCardPropsType> {
                             <SIcon name='Id1' width={20} height={20} fill={"#6C74FF90"} />
                             <SView width={10} />
                         </SView>
+                        <SText fontSize={10}>Con ubicacion: {clientes_con_ubicacion}</SText>
+                        <SText fontSize={10}>Sin ubicacion: {clientes_sin_ubicacion}</SText>
                     </SView>
                     <SView col={"xs-2.5"} center height
                         style={{
                             backgroundColor: "#E1FFD785",
                             padding: 3,
-                            borderLeftWidth:2,
-                            borderBottomWidth:2,
-                            borderTopWidth:2,
+                            borderLeftWidth: 2,
+                            borderBottomWidth: 2,
+                            borderTopWidth: 2,
                             borderColor: "#50B95455",
                         }}>
                         <SView col={"xs-12"} center row>
@@ -99,9 +105,9 @@ class index extends Component<CategoriaCardPropsType> {
                         style={{
                             backgroundColor: "#FFD7D785",
                             padding: 3,
-                            borderLeftWidth:2,
-                            borderBottomWidth:2,
-                            borderTopWidth:2,
+                            borderLeftWidth: 2,
+                            borderBottomWidth: 2,
+                            borderTopWidth: 2,
                             borderColor: "#FF4F4F55",
                         }}>
                         <SView col={"xs-12"} center row>
@@ -117,7 +123,7 @@ class index extends Component<CategoriaCardPropsType> {
                         style={{
                             backgroundColor: "#FFEAD785",
                             padding: 3,
-                            borderWidth:2,
+                            borderWidth: 2,
                             borderColor: "#FFAA2355",
                             borderBottomRightRadius: 18
 
