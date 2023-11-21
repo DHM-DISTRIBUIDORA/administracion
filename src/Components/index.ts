@@ -22,6 +22,7 @@ import Usuario from "./Usuario"
 import Visitas from "./Visitas"
 import Loader from "./Loader"
 import Dashboard from "./Dashboard"
+import Link from "./Link"
 export {
     Loader,
     TopBar,
@@ -31,6 +32,7 @@ export {
     PButtom,
     PButtom2,
     PButtom3,
+    Link,
     AccentBar,
     FloatButtomTap,
     Contador,

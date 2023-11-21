@@ -4,18 +4,37 @@ import { SDate, SLoad, SMapView, SNavigation, SPage, SRangeSlider, SText, STheme
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
+import SSocket from 'servisofts-socket';
 export default class root extends Component {
   constructor(props) {
     super(props);
     this.state = {
       key_usuario: SNavigation.getParam("key_usuario"),
-      fecha: new SDate().toString("yyyy-MM-dd"),
+      fecha: SNavigation.getParam("fecha", new SDate().toString("yyyy-MM-dd")),
       index: 0,
     }
   }
   componentDidMount() {
   }
+
+  loadActivaciones(fecha) {
+    const request = {
+      component: "location_info",
+      type: "getAll",
+      key_usuario: this.state.key_usuario,
+      fecha_inicio: fecha,
+      fecha_fin: fecha,
+    }
+
+    SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
+      console.log(e);
+      this.setState({ activaciones: Object.values(e.data), loading: false })
+    }).catch(e => {
+      console.error(e);
+    })
+  }
   loadData(fecha) {
+    this.loadActivaciones(fecha)
     getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
       console.log(e);
       this.setState({ data: e })
@@ -25,6 +44,23 @@ export default class root extends Component {
     })
   }
 
+  getActivaciones = () => {
+    if (!this.state?.activaciones) return null;
+    console.log(this.state?.activaciones)
+    return this.state.activaciones.map((o) => {
+      return <SMapView.SMarker latitude={parseFloat(o.latitude)} longitude={parseFloat(o.longitude)} fill={o.tipo == "start" ? STheme.color.success : STheme.color.danger}>
+        
+      </SMapView.SMarker>
+    })
+  }
+  getPoints = () => {
+    if (!this.state?.data) return null;
+    // console.log(this.state?.data)
+    return this.state.data.map((o) => {
+      return <SMapView.SMarker latitude={parseFloat(o.lat)} longitude={parseFloat(o.lon)} fill={"#f0f"}>
+      </SMapView.SMarker>
+    })
+  }
   getPolylines = () => {
     if (!this.state?.data) return null;
     // console.log(this.state?.data)
@@ -51,6 +87,7 @@ export default class root extends Component {
     if (this.state?.data.length == 0) return <></>;
 
     return <SMapView.SMarker key={this.state.index}
+    fill='#00f'
       ref={ref => this.marker = ref}
       latitude={parseFloat(this.state.data[this.state.index].lat)}
       longitude={parseFloat(this.state.data[this.state.index].lon)}
@@ -101,7 +138,11 @@ export default class root extends Component {
         }}>
           <></>
           {this.getPolylines()}
+          {this.getActivaciones()}
+
+          {/* {this.getPoints()} */}
           {this.getMarkers()}
+
         </SMapView>
       </SPage>
     )

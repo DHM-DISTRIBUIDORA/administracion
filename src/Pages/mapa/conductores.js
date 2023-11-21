@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SPage, SView, SText, SIcon, STheme, SForm, SInput, SNavigation, STable, SLoad, SButtom, SPopup, SMarker, SMapView2, SMapView, SThread, SDate } from 'servisofts-component';
+import { SPage, SView, SText, SIcon, STheme, SForm, SInput, SNavigation, STable, SLoad, SButtom, SPopup, SMarker, SMapView2, SMapView, SThread, SDate, SHr } from 'servisofts-component';
 import Model from '../../Model';
 class Mapa extends Component {
     constructor(props) {
@@ -27,6 +27,32 @@ class Mapa extends Component {
             this.hilo();
         })
     }
+
+    renderInfo() {
+        return <SView style={{
+            position: "absolute",
+            top: 4,
+            right: 4,
+            width: 180,
+            height: 100,
+            padding:4
+        }} card>
+            <SView row center>
+                <SView width={20} height={20} backgroundColor={STheme.color.success}></SView>
+                <SText flex font={"Roboto"}>Activados</SText>
+            </SView>
+            <SHr h={4}/>
+            <SView row center>
+                <SView width={20} height={20} backgroundColor={STheme.color.warning}></SView>
+                <SText flex font={"Roboto"}>Inactivos hace 5 minutos</SText>
+            </SView>
+            <SHr h={4}/>
+            <SView row center>
+                <SView width={20} height={20} backgroundColor={STheme.color.danger}></SView>
+                <SText flex font={"Roboto"}>Desactivados</SText>
+            </SView>
+        </SView>
+    }
     render() {
         let usuarios = Model.usuario.Action.getAll() ?? {};
         let conductores = Model.background_location.Action.getAll();
@@ -34,7 +60,7 @@ class Mapa extends Component {
         if (!conductores) {
             conductores = {};
         }
-       
+
         return (
             <SPage
                 title={`Conductores`}
@@ -49,18 +75,22 @@ class Mapa extends Component {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1
                     }}>
-                        {Object.values(conductores).map((obj) => {
+                        {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
                             return <SMapView.SMarker latitude={obj.latitude} longitude={obj.longitude} >
-                                <SView width={80} height={80} center onPress={() => {
+                                <SView width={80} height={50} center onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
                                 }}>
-                                    <SIcon name={"Marker"} width={30} fill={obj.tipo == "start" ? STheme.color.success : STheme.color.danger} />
-                                    <SText fontSize={10}>{usuarios[obj.key_usuario]?.Correo}</SText>
-                                    <SText fontSize={12}>{new SDate(obj.fecha_last).toString("hh:mm:ss")}</SText>
+                                    <SIcon name={"Marker"} width={25} fill={obj.tipo == "start" ? (new SDate(obj.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success) : STheme.color.danger} />
+                                    <SView card>
+                                        <SText fontSize={11} font={"Cascadia"} bold>{usuarios[obj.key_usuario]?.Correo}</SText>
+                                        {/* <SText fontSize={10} font={"Cascadia"}>{new SDate(obj.fecha_last).toString("yyyy-MM-dd")}</SText> */}
+                                        <SText fontSize={10} font={"Cascadia"}>{new SDate(obj.fecha_last).toString("hh:mm:ss")}</SText>
+                                    </SView>
                                 </SView>
                             </SMapView.SMarker>
                         })}
                     </SMapView>
+                    {this.renderInfo()}
                 </SView >
             </SPage>
         );

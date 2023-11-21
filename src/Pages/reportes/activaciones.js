@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SDate, SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
+import { SDate, SLoad, SMath, SNavigation, SPage, STable2, STheme, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
 import DataBase from '../../DataBase'
 export default class index extends Component {
@@ -53,7 +53,8 @@ export default class index extends Component {
                             // { key: "key_usuario", width: 150 },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm:ss") },
                             { key: "Nombres", width: 150 },
-                            { key: "tipo", width: 100 },
+                            { key: "tipo-", width: 40, component: (t) => <SView width={20} height={20} backgroundColor={t == "start" ? STheme.color.success : STheme.color.danger}></SView> },
+                            { key: "tipo", width: 80 },
                             { key: "latitude", width: 150 },
                             { key: "longitude", width: 150 },
 
