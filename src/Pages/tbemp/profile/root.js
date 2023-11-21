@@ -223,6 +223,16 @@ class index extends DPA.profile {
                 color: '#FF5A5F',
             })}
             {this.ItemCard({
+                label: "Ventas",
+                cant: this.state.cantidad_pedidos,
+                monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
+                // monto: "",
+                onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                // onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                icon: 'Icompras',
+                color: '#F9A435',
+            })}
+            {this.ItemCard({
                 label: "Pedidos",
                 cant: "Categorías",
                 monto: "",

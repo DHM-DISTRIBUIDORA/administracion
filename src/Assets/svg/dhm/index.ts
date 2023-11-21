@@ -85,6 +85,8 @@ import Ilist, { ReactComponent as IlistW } from './ilist.svg';
 import Iuser, { ReactComponent as IuserW } from './iuser.svg';
 import Isave, { ReactComponent as IsaveW } from './isave.svg';
 import Scroll, { ReactComponent as ScrollW } from './scroll.svg';
+import Ivendedor, { ReactComponent as IvendedorW } from './ivendedor.svg';
+
 
 
 const Assets = {
@@ -175,6 +177,8 @@ const Assets = {
 	"Iuser": { Native: Iuser, Web: IuserW },
 	"Isave": { Native: Isave, Web: IsaveW },
 	"Scroll": { Native: Scroll, Web: ScrollW },
+	"Ivendedor": { Native: Ivendedor, Web: IvendedorW },
+	
 	
 
 	

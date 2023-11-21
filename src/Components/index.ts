@@ -21,6 +21,7 @@ import Btn from "./Btn"
 import Usuario from "./Usuario"
 import Visitas from "./Visitas"
 import Loader from "./Loader"
+import Dashboard from "./Dashboard"
 export {
     Loader,
     TopBar,
@@ -45,5 +46,6 @@ export {
     Header,
     Btn,
     Visitas,
+    Dashboard
 
 }
