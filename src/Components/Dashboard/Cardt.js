@@ -142,7 +142,7 @@ class index extends Component<CategoriaCardPropsType> {
                             {/* <SText fontSize={15} bold center>Bs.</SText> */}
                         </SView>
                         <SView col={"xs-12"} center flex style={{ alignItems: "flex-end", position: "absolute", bottom: 5, right: 5 }}>
-                            <SIcon name='Id4' width={30} height={30} fill={"#FFAA2355"} />
+                            <SIcon name='Idt4' width={30} height={30} fill={"#FFAA2355"} />
                             <SView width={10} />
                         </SView>
                     </SView>
