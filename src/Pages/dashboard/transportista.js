@@ -9,20 +9,22 @@ export default class index extends Component {
     }
 
     componentDidMount() {
+        // this.getData();
 
     }
     getData({ fecha }) {
         const request = {
             component: "dhm",
-            type: "dashboardVendedor",
+            type: "dashboardTransportista",
             fecha: fecha
+            // type: "dashboardVendedor",
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
             console.log(e);
             let arr = Object.values(e.data)
             let promises = arr.map(async (emp) => {
-                const af = await DataBase.usuario.filtered(`idvendedor == ${parseInt(emp.idemp)}`)
+                const af = await DataBase.usuario.filtered(`idtransportista == ${parseInt(emp.idemp)}`)
                 emp.usuario = af[0]
             })
             const response = await Promise.all(promises);
@@ -35,33 +37,29 @@ export default class index extends Component {
 
 
     renderData() {
-        // const data = this.state?.data;
         if (this.state?.error) return <SText color={STheme.color.danger}>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <SLoad />
         return <SList
             data={this.state.data}
             limit={20}
             buscador
-            // filter={(a) => a.nivel == 1}
-            // order={[{ key: "idven", order: "desc" }]}
             render={(obj) => {
-                // var obj2 = this.state.usuarios.filter(e => e.idvendedor == obj.idemp)
-                // obj.key = obj2[0].key
-                return <Dashboard.Card data={obj} />
+                return <Dashboard.Cardt data={obj} />
             }}
         />
     }
     render() {
 
         return (
-            <SPage title="Pedidos por vendedores" >
+            <SPage title="Pedidos para transportistas" >
                 <Container>
                     <SelectFecha onChange={(e) => {
                         this.setState({ data: null })
                         this.getData({ fecha: e.fecha });
                     }} />
                     {this.renderData()}
-                    <SHr h={20} />
+                    <SHr height={20} />
+
                 </Container>
             </SPage>
         )

@@ -138,12 +138,12 @@ export const saveAllChanges = async () => {
             type: "getVersion",
         })
     } catch (error) {
-        SNotification.send({
-            title: "Error al guardar cambios",
-            body: "Verifique la conexion a internet.",
-            color: STheme.color.danger,
-            time: 6000,
-        })
+        // SNotification.send({
+        //     title: "Error al guardar cambios",
+        //     body: "Verifique la conexion a internet.",
+        //     color: STheme.color.danger,
+        //     time: 6000,
+        // })
         return;
     }
 

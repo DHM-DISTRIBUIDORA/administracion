@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { SForm, SHr, SIcon, SNavigation, SPopup, SText, SView } from 'servisofts-component';
 import Model from '../../../Model';
 import CryptoJS from 'crypto-js';
+import DataBase from '../../../DataBase';
 
 export default class SectionForm extends Component {
     constructor(props) {
@@ -59,7 +60,7 @@ export default class SectionForm extends Component {
                     error={this.state.error}
                     onSubmit={(data) => {
                         if (data) {
-                             data["password"] = CryptoJS.MD5(data["password"]).toString();
+                            data["password"] = CryptoJS.MD5(data["password"]).toString();
                             data["usuario"] = data["usuario"].toLowerCase();
                             // Parent.Actions.login(data, this.props);
                             Model.usuario.Action.loginByKey(data).then((resp) => {
@@ -72,6 +73,9 @@ export default class SectionForm extends Component {
                                     SNavigation.navigate("/login");
                                     this.fadeOut();
                                 } else {
+                                    DataBase.usuarioPage.sync().then(e => {
+                                        DataBase.usuarioPage.loadToReducer()
+                                    });
                                     SNavigation.replace("/");
                                 }
 
