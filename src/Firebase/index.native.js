@@ -4,6 +4,7 @@
 import { Alert, Linking, Platform } from 'react-native';
 import messaging from '@react-native-firebase/messaging';
 // import { Notifications, } from 'react-native-notifications';
+import { PERMISSIONS, request, requestNotifications } from 'react-native-permissions'
 import DeviceKey from './DeviceKey';
 import { SNotification } from 'servisofts-component';
 
@@ -32,19 +33,24 @@ class Firebase {
 
 
             await sleep(500);
+
+
+            // request(PERMISSIONS.ANDROID.)
             // await messaging().hasPermission();
-            var authorizationStatus = await messaging().requestPermission({
-                sound: true,
-                announcement: true,
-                providesAppNotificationSettings: true,
-            });
-            if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
-                console.log('User has notification permissions enabled.');
-            } else if (authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL) {
-                console.log('User has provisional notification permissions.');
-            } else {
-                console.log('User has notification permissions disabled');
-            }
+            var authorizationStatus = await requestNotifications(["sound", "provisional", "alert"])
+            console.log(authorizationStatus);
+            // var authorizationStatus = await messaging().requestPermission({
+            //     sound: true,
+            //     announcement: true,
+            //     providesAppNotificationSettings: true,
+            // });
+            // if (authorizationStatus === messaging.AuthorizationStatus.AUTHORIZED) {
+            //     console.log('User has notification permissions enabled.');
+            // } else if (authorizationStatus === messaging.AuthorizationStatus.PROVISIONAL) {
+            //     console.log('User has provisional notification permissions.');
+            // } else {
+            //     console.log('User has notification permissions disabled');
+            // }
             // await messaging().setAutoInitEnabled(true);
             messaging().getToken().then(fcmToken => {
                 if (fcmToken) {

@@ -48,7 +48,7 @@ import videos from './videos';
 import blanco from './blanco';
 import contacto from './contacto';
 import dashboard from './dashboard';
-
+import permissions from './permissions';
 // import { Example } from "servisofts-charts"
 
 // export default SPage.combinePages("/", {
@@ -104,6 +104,7 @@ export default SPage.combinePages("/", {
   test,
   ...blanco,
   ...contacto,
-  ...dashboard
+  ...dashboard,
+  ...permissions
   // "chart": Example
 });
