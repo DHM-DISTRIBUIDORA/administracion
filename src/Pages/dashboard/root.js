@@ -13,6 +13,7 @@ export default class root extends Component {
         return <SPage title="Dash Board" >
             <MenuPages path={"/dashboard/"} permiso={"page"} >
                 <MenuButtom label={"Vendedores"} url={"/dashboard/vendedor"} icon={<SIcon name={"MListUser"} />} />
+                <MenuButtom label={"Transportista"} url={"/dashboard/transportista"} icon={<SIcon name={"MListUser"} />} />
             </MenuPages>
         </SPage>
     }

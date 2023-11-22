@@ -3,18 +3,20 @@ import SSocket from 'servisofts-socket'
 import { SHr, SList, SLoad, SMath, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
 import { Container, Dashboard } from '../../Components';
 import DataBase from '../../DataBase';
+import { SelectFecha } from '../../Components/Fechas';
 export default class index extends Component {
     state = {
     }
 
     componentDidMount() {
-        this.getData();
+        // this.getData();
 
     }
-    getData() {
+    getData({ fecha }) {
         const request = {
             component: "dhm",
             type: "dashboardTransportista",
+            fecha: fecha
             // type: "dashboardVendedor",
         }
         this.setState({ loading: true })
@@ -34,27 +36,30 @@ export default class index extends Component {
     }
 
 
-    render() {
-        // const data = this.state?.data;
+    renderData() {
         if (this.state?.error) return <SText color={STheme.color.danger}>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <SLoad />
+        return <SList
+            data={this.state.data}
+            limit={20}
+            buscador
+            render={(obj) => {
+                return <Dashboard.Cardt data={obj} />
+            }}
+        />
+    }
+    render() {
+
         return (
             <SPage title="Pedidos para transportistas" >
                 <Container>
-                    {/* <SText>{JSON.stringify(this.state)}</SText> */}
-                    <SList
-                        data={this.state.data}
-                        limit={20}
-                        buscador
-                        // filter={(a) => a.nivel == 1}
-                        // order={[{ key: "idven", order: "desc" }]}
-                        render={(obj) => {
-                            // var obj2 = this.state.usuarios.filter(e => e.idvendedor == obj.idemp)
-                            // obj.key = obj2[0].key
-                            return <Dashboard.Cardt data={obj} />
-                        }}
-                    />
+                    <SelectFecha onChange={(e) => {
+                        this.setState({ data: null })
+                        this.getData({ fecha: e.fecha });
+                    }} />
+                    {this.renderData()}
                     <SHr height={20} />
+
                 </Container>
             </SPage>
         )
