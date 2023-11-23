@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SHr, SList, SLoad, SMath, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SHr, SList, SLoad, SMath, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
 import { Container, Dashboard } from '../../Components';
 import DataBase from '../../DataBase';
 import { SelectFecha } from '../../Components/Fechas';
+import Model from '../../Model';
 export default class index extends Component {
     state = {
     }
@@ -26,18 +27,41 @@ export default class index extends Component {
                 emp.usuario = af[0]
             })
             const response = await Promise.all(promises);
+
             this.setState({ data: arr, loading: false })
         }).catch(e => {
             this.setState({ loading: false, error: e.message ?? e })
             console.error(e);
         })
+
+        //background location
+        let conductores =  Model.background_location.Action.getAll();
+        (!conductores) ? this.setState({ conductores: {} }) : this.setState({ conductores: conductores });
     }
 
 
     renderData() {
-        // const data = this.state?.data;
         if (this.state?.error) return <SText color={STheme.color.danger}>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <SLoad />
+        const moving = Model.background_location.Action.getAll(); 
+
+        this.state.data.forEach((objeto) => {
+            // Verificar si 'moving' es un objeto
+            if (typeof moving === 'object' && moving !== null) {
+                for (let key in moving) {
+                    if ((moving.hasOwnProperty(key)) && (moving[key].key_usuario === objeto?.usuario?.key) && (new SDate(moving[key].fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd"))) {
+                        objeto.visita = moving[key];
+                        // console.log(objeto.visita);
+                        break; // Si se encuentra una coincidencia, salir del bucle
+                    }
+                }
+            } else {
+                console.error("'moving' no es un objeto");
+            }
+        });
+
+        console.log(this.state.data);
+
         return <SList
             data={this.state.data}
             limit={20}
@@ -52,7 +76,7 @@ export default class index extends Component {
         />
     }
     render() {
-
+      
         return (
             <SPage title="Pedidos por vendedores" >
                 <Container>

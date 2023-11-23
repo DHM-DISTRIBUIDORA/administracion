@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation } from 'servisofts-component';
+import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SDate } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 export type CategoriaCardPropsType = {
     data: any,
@@ -16,7 +16,7 @@ class index extends Component<CategoriaCardPropsType> {
     render() {
         if (!this.props.data) return <SView />
         // console.log(this.props.data);
-        var { cantidad_clientes, cantidad_pedidos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas, empnom, empcod, usuario, clientes_con_ubicacion, clientes_sin_ubicacion } = this.props.data;
+        var { cantidad_clientes, cantidad_pedidos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas, empnom, empcod, usuario, clientes_con_ubicacion, clientes_sin_ubicacion, visita } = this.props.data;
         console.log(this.props.data.key);
 
         return (
@@ -58,7 +58,11 @@ class index extends Component<CategoriaCardPropsType> {
                     <SView col={"xs-2"} center height onPress={() => {
                         SNavigation.navigate("/gpx", { key_usuario: usuario?.key })
                     }}>
-                        <SIcon name='Iactivo' width={30} height={30} fill={STheme.color.success} />
+                        {(!visita) ? <SIcon name='Iactivo' width={30} height={30} fill={STheme.color.lightGray} /> :
+                            <SIcon name='Iactivo' width={30} height={30} fill={visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success) : STheme.color.danger} />
+                        }
+                        {(!visita) ? <SText  fontSize={10} center>Ausente</SText> : <SView><SText  style={{lineHeight:12}} fontSize={10} center> {visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? "Inactivo hace poco" : "Activado") : "Desactivado"}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
+
                     </SView>
                 </SView>
                 <SView col={"xs-12"} center row>
@@ -97,7 +101,7 @@ class index extends Component<CategoriaCardPropsType> {
                         </SView>
                         <SText fontSize={22} bold center>{visitas_exitosas}</SText>
                         <SView col={"xs-12"} center flex style={{ alignItems: "flex-end", position: "absolute", bottom: 5, right: 5 }}>
-                            <SIcon name='Id2'  width={30} height={30} fill={"#50B95455"} />
+                            <SIcon name='Id2' width={30} height={30} fill={"#50B95455"} />
                             <SView width={10} />
                         </SView>
                     </SView>
@@ -115,7 +119,7 @@ class index extends Component<CategoriaCardPropsType> {
                         </SView>
                         <SText fontSize={22} bold center>{visitas_fallidas}</SText>
                         <SView col={"xs-12"} center flex style={{ alignItems: "flex-end", position: "absolute", bottom: 5, right: 5 }}>
-                            <SIcon name='Id3'  width={30} height={30} fill={"#FF4F4F40"} />
+                            <SIcon name='Id3' width={30} height={30} fill={"#FF4F4F40"} />
                             <SView width={10} />
                         </SView>
                     </SView>
@@ -136,7 +140,7 @@ class index extends Component<CategoriaCardPropsType> {
                             {/* <SText fontSize={15} bold center>Bs.</SText> */}
                         </SView>
                         <SView col={"xs-12"} center flex style={{ alignItems: "flex-end", position: "absolute", bottom: 5, right: 5 }}>
-                            <SIcon name='Id4'  width={30} height={30} fill={"#FFAA2355"} />
+                            <SIcon name='Id4' width={30} height={30} fill={"#FFAA2355"} />
                             <SView width={10} />
                         </SView>
                     </SView>
