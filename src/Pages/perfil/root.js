@@ -288,13 +288,18 @@ class index extends Component {
                     }}>{STheme.getTheme() == "default" ? <SIcon name='Moon' width={20} /> : <SIcon name='Sun' width={20} fill={"#fff"} />} {`CAMBIAR A TEMA ${STheme.getTheme() == "default" ? "OSCURO" : "CLARO"}`}</Btn>
                     <SHr h={16} />
                     <Btn col={"xs-11"} type='danger' onPress={() => {
-                        Model.tbcli.Action.setCliente(null);
-                        Model.usuario.Action.unlogin();
-                        Model.carrito.Action.removeAll()
-                        DataBase.clear();
-                        // DataBaseContainer.sync();
-                        SNavigation.reset("/");
-                        // NavBar.close();
+
+                        SPopup.confirm({
+                            title: "¿Estás seguro de cerrar sesión?\n Se eliminarán todos tus pedidos pendientes.", message: "", onPress: () => {
+                                Model.tbcli.Action.setCliente(null);
+                                Model.usuario.Action.unlogin();
+                                Model.carrito.Action.removeAll()
+                                DataBase.clear();
+                                // DataBaseContainer.sync();
+                                SNavigation.reset("/");
+                                // NavBar.close();
+                            }
+                        })
 
                     }}>CERRAR SESIÓN</Btn>
                     <SHr height={200} />
