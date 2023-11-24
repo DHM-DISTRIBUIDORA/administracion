@@ -440,7 +440,7 @@ PODS:
   - React-jsinspector (0.71.4)
   - React-logger (0.71.4):
     - glog
-  - react-native-blob-util (0.19.2):
+  - react-native-blob-util (0.19.4):
     - React-Core
   - react-native-cameraroll (5.8.0):
     - React-Core
@@ -580,7 +580,7 @@ PODS:
     - RNFBApp
   - RNFileViewer (2.1.5):
     - React-Core
-  - RNFlashList (1.6.2):
+  - RNFlashList (1.6.3):
     - React-Core
   - RNFS (2.20.0):
     - React-Core
@@ -632,7 +632,7 @@ PODS:
     - React-Core
   - servisofts-background-location (2.0.1):
     - React-Core
-  - servisofts-component (3.0.14):
+  - servisofts-component (3.0.16-beta):
     - React-Core
   - servisofts-socket (4.0.4):
     - CocoaAsyncSocket
@@ -968,7 +968,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d6b7fa9260aa3cb40afee0507e3bc1d17ecaa6f2
   React-jsinspector: 1f51e775819199d3fe9410e69ee8d4c4161c7b06
   React-logger: 0d58569ec51d30d1792c5e86a8e3b78d24b582c6
-  react-native-blob-util: c74e4ce87c76d244761c68623df78bf0d1638271
+  react-native-blob-util: 30a6c9fd067aadf9177e61a998f2c7efb670598d
   react-native-cameraroll: 8cc80e0922a6a432938a26f3b50714adcb2adb5f
   react-native-compressor: ebcf8bc36f8e44581a8f831583caee8a27e55a01
   react-native-document-picker: ec07866a30707f23660c0f3ae591d669d3e89096
@@ -1000,23 +1000,23 @@ SPEC CHECKSUMS:
   RNFBApp: e4439717c23252458da2b41b81b4b475c86f90c4
   RNFBMessaging: 40dac204b4197a2661dec5be964780c6ec39bf65
   RNFileViewer: ce7ca3ac370e18554d35d6355cffd7c30437c592
-  RNFlashList: 1983f915ae34e9253e413f31387959590d102f5e
+  RNFlashList: 4b4b6b093afc0df60ae08f9cbf6ccd4c836c667a
   RNFS: 4ac0f0ea233904cb798630b3c077808c06931688
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: d7f8368b82d94f1dec964785d496387ca7f19092
-  RNPermissions: 4e3714e18afe7141d000beae3755e5b5fb2f5e05
+  RNPermissions: a30820b19addd4964bd37c11e90c55ebd1adef3c
   RNReanimated: f186e85d9f28c9383d05ca39e11dd194f59093ec
   RNScreens: 85d3880b52d34db7b8eeebe2f1a0e807c05e69fa
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   servisofts-background-location: b5e9b23aae51b1e9a282225e774ef859ea3e818a
-  servisofts-component: 5de5e86cd50ea5a300cacaae7a344571fbb053a2
+  servisofts-component: 24c5b30b08e948518db047c37731bc7547e7ad25
   servisofts-socket: 78f4e16a21755981804751f11fd771ed59d5fb29
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 24df5c4ad1479170e77e9f179313ba8461ddf7ec
+PODFILE CHECKSUM: b5c7ae50f7beecbd8908a62b1edab9ba0ce96c47
 
 COCOAPODS: 1.11.3

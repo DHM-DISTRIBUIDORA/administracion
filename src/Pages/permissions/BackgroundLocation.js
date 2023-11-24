@@ -18,6 +18,7 @@ export default class BackgroundLocation extends Component {
             },
             ios: () => {
                 check(PERMISSIONS.IOS.LOCATION_ALWAYS).then((e) => {
+                    console.log(e);
                     this.setState({ status: e })
                 })
             },
