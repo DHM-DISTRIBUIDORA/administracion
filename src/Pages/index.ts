@@ -40,8 +40,6 @@ import buscar_cliente_codigo from './buscar_cliente_codigo';
 import version_required from './version_required';
 import notification_manager from './notification_manager';
 import notification from './notification';
-// import test2 from "./test2"
-import test from "./test"
 import gpx from './gpx';
 import storage from "./storage"
 import videos from './videos';
@@ -49,10 +47,14 @@ import blanco from './blanco';
 import contacto from './contacto';
 import dashboard from './dashboard';
 import permissions from './permissions';
-// import { Example } from "servisofts-charts"
 
+
+
+import test from "./test"
 // export default SPage.combinePages("/", {
-//   "":storage,
+//   "":test,
+//   ...gpx,
+//   ...permissions
 // });
 
 export default SPage.combinePages("/", {
