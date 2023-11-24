@@ -37,7 +37,7 @@ class login extends Component {
     render() {
         // if (!this.state.ready) return <SLoad />
         return (
-            <SPage hidden footer={<BottomNavigator url={"/login"} />} >
+            <SPage hidden footer={<BottomNavigator url={"/login"} float={100}/>} >
                 <SView col={"xs-12"} center>
                     <SView col={"xs-12"} backgroundColor={STheme.color.primary}>
                         <Container>

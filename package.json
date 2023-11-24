@@ -58,7 +58,7 @@
     "realm": "11.10.1",
     "redux": "^4.1.1",
     "redux-thunk": "^2.3.0",
-    "servisofts-background-location": "file:../../servisofts-background-location/dist",
+    "servisofts-background-location": "2.0.2",
     "servisofts-charts": "1.0.1",
     "servisofts-component": "^3.0.16-beta",
     "servisofts-db": "^1.0.6",

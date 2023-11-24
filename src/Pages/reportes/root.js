@@ -75,6 +75,7 @@ export default class root extends Component {
                         {/* <MenuButtom label={"Clientes con y sin pedidos"} url={"/reportes/clientes_con_sin_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} /> */}
 
                     </MenuPages>
+                    <SHr height={30} />
                 </SView>
             </SView>
         </SPage>
