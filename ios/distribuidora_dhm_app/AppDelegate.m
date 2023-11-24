@@ -4,7 +4,7 @@
 
 #import <GoogleMaps/GoogleMaps.h>
 #import <Firebase.h>
-
+#import <SSBackgroundLocation.h>
 
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
@@ -39,9 +39,10 @@ static void InitializeFlipper(UIApplication *application) {
   // They will be passed down to the ViewController used by React Native.
   self.initialProps = @{};
 
-
+//  [SSBackgroundLoca];
   [FIRApp configure];
   [GMSServices provideAPIKey:@"AIzaSyCrpBhYNgOIQA8-A_gtB3b5jC0aEbSL0QU"];
+  [SSBackgroundLocation componentDidMount];
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
 }

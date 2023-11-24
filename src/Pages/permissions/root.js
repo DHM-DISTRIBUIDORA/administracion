@@ -7,6 +7,7 @@ import Location from './Location'
 import BackgroundLocation from './BackgroundLocation'
 import Camera from './Camera'
 import PermisoItem from './Components/PermisoItem'
+import WriteExternalStorage from './WriteExternalStorage'
 
 
 export default class root extends Component {
@@ -17,6 +18,7 @@ export default class root extends Component {
             <Container>
                 <Notifications />
                 <Camera />
+                <WriteExternalStorage />
                 <Location />
                 <BackgroundLocation />
 

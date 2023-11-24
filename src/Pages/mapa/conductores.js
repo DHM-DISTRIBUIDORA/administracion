@@ -35,18 +35,18 @@ class Mapa extends Component {
             right: 4,
             width: 180,
             height: 100,
-            padding:4
+            padding: 4
         }} card>
             <SView row center>
                 <SView width={20} height={20} backgroundColor={STheme.color.success}></SView>
                 <SText flex font={"Roboto"}>Activados</SText>
             </SView>
-            <SHr h={4}/>
+            <SHr h={4} />
             <SView row center>
                 <SView width={20} height={20} backgroundColor={STheme.color.warning}></SView>
                 <SText flex font={"Roboto"}>Inactivos hace 5 minutos</SText>
             </SView>
-            <SHr h={4}/>
+            <SHr h={4} />
             <SView row center>
                 <SView width={20} height={20} backgroundColor={STheme.color.danger}></SView>
                 <SText flex font={"Roboto"}>Desactivados</SText>
@@ -80,7 +80,7 @@ class Mapa extends Component {
                                 <SView width={80} height={50} center onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
                                 }}>
-                                    <SIcon name={"Marker"} width={25} fill={obj.tipo == "start" ? (new SDate(obj.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success) : STheme.color.danger} />
+                                    <SIcon name={"Marker"} width={25} fill={obj.tipo == "stop" ? STheme.color.danger : (new SDate(obj.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success)} />
                                     <SView card>
                                         <SText fontSize={11} font={"Cascadia"} bold>{usuarios[obj.key_usuario]?.Correo}</SText>
                                         {/* <SText fontSize={10} font={"Cascadia"}>{new SDate(obj.fecha_last).toString("yyyy-MM-dd")}</SText> */}

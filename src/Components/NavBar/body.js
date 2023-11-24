@@ -1,5 +1,5 @@
 import React from 'react';
-import { SView, SImage, SNavigation, STheme, SIcon, SText, SScrollView2, SThread, SLoad, SScroll, SHr } from 'servisofts-component';
+import { SView, SImage, SNavigation, STheme, SIcon, SText, SScrollView2, SThread, SLoad, SScroll, SHr, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
 // import CerrarSession from '../../Pages/Usuario/Page/Perfil/CerrarSession';
@@ -219,13 +219,20 @@ export default class body extends React.Component {
                     {this.renderIcon({
                         label: "Salir", icon: "Mexit", requireUser: true,
                         onPress: () => {
-                            // Model._events.CLEAR();
-                            Model.tbcli.Action.setCliente(null);
-                            Model.usuario.Action.unlogin();
-                            Model.carrito.Action.removeAll()
-                            DataBase.clear();
-                            SNavigation.reset("/");
-                            NavBar.close();
+
+                            SPopup.confirm({
+                                title: "¿Estás seguro de cerrar sesión?\n Se eliminarán todos tus pedidos pendientes.", message: "", onPress: () => {
+                                    // Model._events.CLEAR();
+                                    Model.tbcli.Action.setCliente(null);
+                                    Model.usuario.Action.unlogin();
+                                    Model.carrito.Action.removeAll()
+                                    DataBase.clear();
+                                    SNavigation.reset("/");
+                                    NavBar.close();
+                                }
+                            })
+
+
                         }
                     })}
                     {this.renderIcon({ label: "Login", icon: "Mexit", path: "/login", noWithUser: true })}

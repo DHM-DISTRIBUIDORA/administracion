@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { SLoad, SNotification, SText, STheme, SView } from 'servisofts-component';
+import { SLoad, SText, STheme, SView } from 'servisofts-component';
 
-import { Animated, Platform } from 'react-native';
+import { Animated } from 'react-native';
 
 import { SBLocation } from 'servisofts-background-location';
 import { Linking } from 'react-native';
-import SSocket from 'servisofts-socket';
-import Model from '../../Model';
 
 type _SwitchRastreoProps = {
     colors: {
@@ -26,98 +24,62 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
     constructor(props: any) {
         super(props);
         this.state = {
-            active: "error",
+            active: SBLocation.isStarted(),
             colors: {
                 active: this.props.colors?.active ?? "#2FC25F",
                 inactive: this.props.colors?.inactive ?? "#B7B7B7",
                 acent: this.props.colors?.acent ?? "#ffffff"
             },
         };
-        this.animValue = new Animated.Value(this.state.active == "exito" ? 1 : 0);
+        this.animValue = new Animated.Value(this.state.active ? 1 : 0);
     }
     componentDidMount() {
-        if (Platform.OS == "web") return;
-        SBLocation.isActive().then(e => {
-            if (e.estado == "exito") {
-                this.fadeIn(1)
-            } else {
-                this.fadeIn(0)
+        SBLocation.addListener((data) => {
+            // this.state.active = SBLocation.isStarted();
+            // console.log(this.state.active);
+            if (this.state.active != SBLocation.isStarted()) {
+                this.fadeIn();
             }
-            this.setState({ active: e.estado })
-        }).catch(e => {
-            this.setState({ active: e.estado })
-            this.fadeIn(0)
         })
     }
-    fadeIn(val) {
+    fadeIn() {
         this.state.active = SBLocation.isStarted();
         this.animValue.stopAnimation();
         Animated.timing(this.animValue, {
-            toValue: val,
+            toValue: !SBLocation.isStarted() ? 0 : 1,
             duration: 250,
             useNativeDriver: false
         }).start(() => {
-            // this.state.active = SBLocation.isStarted();
-            // this.setState({
-            //     active: this.state.active
-            // });
+            this.state.active = SBLocation.isStarted();
+            this.setState({
+                active: this.state.active
+            });
         });
     }
 
-    callback = () => {
-        if (this.state.active != "exito") {
+    callback = (resp) => {
+        if (!resp.active) {
             SBLocation.start({
-                nombre: "Ubicación en tiempo real de DHM",
-                label: "Compartiendo ubicación en tiempo real",
+                nombre: "Title notification",
+                label: "Body notification",
                 minTime: 1000,
-                minDistance: 1,
-                // key_usuario: "04759652-b279-40ea-817d-dbfbfc39ffa5",
-                key_usuario: Model.usuario.Action.getKey(),
-                url: SSocket.api.root + "api",
-                // url: "http://192.168.2.1:30049/api",
-                // url: "https://dhm.servisofts.com/images/api",
-                component: "background_location",
-                type: "onLocationChange"
+                minDistance: 1
             }).then(e => {
-                if (e.estado == "exito") {
-                    this.fadeIn(1)
-                } else {
-                    this.fadeIn(0)
-                    SNotification.send({
-                        title: "Error al iniciar el rastreo.",
-                        body: e?.error,
-                        color: STheme.color.danger,
-                        time: 10000,
-                    })
-                }
-
-                this.setState({ active: e.estado })
 
             }).catch(e => {
-                this.fadeIn(0)
-                SNotification.send({
-                    title: "Error al iniciar el rastreo.",
-                    body: e?.error,
-                    color: STheme.color.danger,
-                    time: 10000,
-
-                })
-                // if (e.error == "permision") {
-                // Linking.openSettings();
-                // }
+                if (e.error == "permision") {
+                    Linking.openSettings();
+                }
             })
         } else {
             SBLocation.stop();
-            this.fadeIn(0)
-            this.setState({ active: "error" })
-
         }
 
     }
 
     render() {
-        // console.log("SBLocation.isStarted()?")
-        // console.log(SBLocation.isStarted())
+        console.log("SBLocation.isStarted()?")
+        console.log(SBLocation.isStarted())
         return <SView animated style={{
             width: this.props.width ?? 115,
             height: this.props.height ?? 40,
@@ -129,12 +91,12 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
             }),
         }}
             onPress={() => {
-                // this.fadeIn();
+                this.fadeIn();
                 if (this.props.callback) {
                     this.props.callback({ active: this.state.active })
                     return;
                 }
-                this.callback();
+                this.callback({ active: this.state.active });
             }}
         >
             <SView animated center style={{
@@ -146,7 +108,7 @@ export default class SwitchRastreo extends Component<_SwitchRastreoProps> {
                 }]
                 // right: ,
             }}
-            ><SText col={"xs-12"} center color={"#fff"} bold fontSize={12}>{this.state.active == "exito" ? "On" : "Off"}</SText></SView>
+            ><SText col={"xs-12"} center color={"#fff"} bold fontSize={12}>{this.state.active ? "On" : "Off"}</SText></SView>
             <SView animated style={{
                 width: 33,
                 height: 33,
