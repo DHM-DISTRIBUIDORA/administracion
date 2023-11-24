@@ -56,6 +56,8 @@ export default class index extends Component {
 		return this.getItem({ key: "pedido", title: 'Carrito', icon: 'MenuPedido', url: '/carrito/pedido' })
 	}
 	render() {
+		console.log("this.props.float")
+		console.log(this.props.float)
 		return (
 			// <SView flex col={"xs-12"}>
 			// 		<SView col={"xs-12"} flex>
@@ -78,7 +80,8 @@ export default class index extends Component {
 					</SView>
 					<SGradient deg={50} colors={[STheme.color.primary, "#71D1F0",]} style={{ zIndex: 99 }} />
 				</SView >
-				{(this.props.carrito != "no") ? <Carrito.Float bottom={209} /> : null}
+				{(this.props.carrito != "no") ? <Carrito.Float bottom={(this.props.float) ? this.props.float : 209} /> : null}
+				{/* {(this.props.carrito != "no") ? <Carrito.Float bottom={209} /> : null} */}
 			</>
 			// </SView>
 		);
