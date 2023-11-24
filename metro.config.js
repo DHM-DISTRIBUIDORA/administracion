@@ -42,6 +42,7 @@ module.exports = (async () => {
       // path.resolve(__dirname, '../../usuario/library/dist'),
       // path.resolve(__dirname, '../../chat/library/dist'),
       // path.resolve(__dirname, '../../geolocation/library/dist'),
+      path.resolve(__dirname, '../../servisofts-background-location/dist'),
     ],
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),

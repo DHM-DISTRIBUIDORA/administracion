@@ -24,7 +24,7 @@ try {
 } catch (e) {
     console.log(e);
 }
-BackgroundLocation();
+// BackgroundLocation();
 
 function App(): JSX.Element {
     return <Redux>
