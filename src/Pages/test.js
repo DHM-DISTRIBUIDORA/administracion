@@ -2,7 +2,7 @@ import { Text, View } from 'react-native'
 import React, { Component, useState } from 'react'
 import { SButtom, SHr, SMapView, SNavigation, SPage, SText, SView } from 'servisofts-component';
 import SwitchRastreo from '../Components/SwitchRastreo';
-import { SBLocation } from 'servisofts-background-location';
+import { SBLocation, SBackgroundLocation } from 'servisofts-background-location';
 // import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 export default class test extends Component {
@@ -10,11 +10,11 @@ export default class test extends Component {
     };
 
     componentDidMount() {
-        SBLocation.isActive().then(e => {
-            this.setState(e)
-        }).catch(e => {
-            this.setState(e)
-        })
+        // SBLocation.isActive().then(e => {
+        //     this.setState(e)
+        // }).catch(e => {
+        //     this.setState(e)
+        // })
     }
     render() {
 
@@ -23,20 +23,19 @@ export default class test extends Component {
                 <SView row col={"xs-12"} style={{
                     justifyContent:"space-around"
                 }}>
-                    <SButtom type='danger' onPress={() => {
-                        if (this.state.estado == "exito") {
-                            SBLocation.stop()
-                            this.setState({ estado: "error" })
+                    <SButtom type='danger' onPress={ async() => {
+                        if (this.state.tipo === "start") {
+                            let aux = await SBackgroundLocation.stop()
+                            this.setState(aux)
                             return;
                         }
-                        SBLocation.start({
+                        SBackgroundLocation.start({
                             nombre: "Ubicación en tiempo real de DHM",
                             label: "Compartiendo ubicación en tiempo real",
                             minTime: 100,
                             minDistance: 0,
                             key_usuario: "04759652-b279-40ea-817d-dbfbfc39ffa5",
                             url: "http://192.168.2.1:30049/api",
-                            
                             // url: "https://dhm.servisofts.com/images/api",
                             component: "background_location",
                             type: "onLocationChange"
@@ -44,12 +43,11 @@ export default class test extends Component {
                             console.log(e)
                             this.setState(e)
                         }).catch(e => {
-                            this.setState(e)
                             console.error(e)
                         })
-                    }}>{this.state.estado == "exito" ? "STOP" : "START"}</SButtom>
+                    }}>{this.state.tipo == "start" ? "STOP" : "START"}</SButtom>
                     <SButtom type='danger' onPress={() => {
-                        SBLocation.isActive().then(e => {
+                        SBackgroundLocation.isActive().then(e => {
                             this.setState(e)
                         }).catch(e => {
                             this.setState(e)

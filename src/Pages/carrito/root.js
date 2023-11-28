@@ -36,40 +36,26 @@ class index extends Component {
     }
     setClienteData(cli) {
         SStorage.setItem("tbcli_a_comprar", JSON.stringify(cli))
-        // Model.tbcli.Action.setCliente(cli);
         this.getClienteData();
     }
     componentDidMount() {
         this.getClienteData();
-        SStorage.getItem("tbcli_a_comprar", resp => {
-            if (!resp) return;
-            try {
-                const clidata = JSON.parse(resp);
-                this.setState({
-                    client: clidata
+        this.t1 = Trigger.addEventListener({
+            on: ["insert", "update", "delete"],
+            tables: ["tbcli"]
+        }, (evt) => {
+            if (this.state?.client) {
+                DataBase.tbcli.objectForPrimaryKey(this.state?.client?.idcli).then((e) => {
+                    this.setClienteData(e);
+                }).catch(e => {
+
                 })
-            } catch (e) {
-                console.error(e);
             }
-        })
-        // this.t1 = Trigger.addEventListener({
-        //     on: ["insert", "update", "delete"],
-        //     tables: ["tbcli"]
-        // }, (evt) => {
-        //     this.loadDataAsync();
-        // });
+        });
     }
 
     componentWillUnmount() {
         Trigger.removeEventListener(this.t1);
-    }
-
-    async loadDataAsync() {
-        // DataBase.tbcli.objectForPrimaryKey(this.idcli).then((e) => {
-        //     // e.detalle = JSON.parse(e.detalle);
-        //     this.setState({ data: e })
-        // })
-
     }
 
     loadData() {
