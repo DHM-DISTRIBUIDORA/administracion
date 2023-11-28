@@ -98,12 +98,15 @@ class index extends DPA.edit {
         inp["cliemail"].label = "Correo electrónico"
         inp["idcat"].label = "Tipo de cliente o Categoria"
         inp["idcat"].editable = false;
-        inp["idcat"].value = this.state?.data?.idcat + "";
+        inp["idcat"].defaultValue = this.state?.data?.idcat + "";
         inp["idcat"].onPress = () => {
             SNavigation.navigate("/tbcli/listCliCat", {
                 onSelect: (cat) => {
                     console.log(cat);
-                    this.setState({ idcat: cat.idcat })
+                    this.form.setValues({
+                        idcat: cat.idcat + "",
+                    })
+                    // this.setState({ idcat: cat.idcat })
                 }
             })
         }
@@ -129,18 +132,21 @@ class index extends DPA.edit {
 
         inp["idz"].label = "Zona de cliente"
         inp["idz"].editable = false;
-        inp["idz"].value = this.state?.data?.idz + "";
-        inp["idz"].onPress = () => {
-            let idemp = ""
-            if (Model.usuario.Action.getUsuarioLog().idvendedor) idemp = Model.usuario.Action.getUsuarioLog().idvendedor
-            SNavigation.navigate("/tbzon", {
-                onSelect: (zona) => {
-                    console.log(zona);
-                    this.setState({ idz: zona.idz })
-                },
-                idemp: idemp
-            })
-        }
+        inp["idz"].defaultValue = this.state?.data?.idz + "";
+        // inp["idz"].onPress = () => {
+        //     let idemp = ""
+        //     if (Model.usuario.Action.getUsuarioLog().idvendedor) idemp = Model.usuario.Action.getUsuarioLog().idvendedor
+        //     SNavigation.navigate("/tbzon", {
+        //         onSelect: (zona) => {
+        //             console.log(zona);
+        //             this.form.setValues({
+        //                 idz: zona.idz + "",
+        //             })
+        //             // this.setState({ idz: zona.idz })
+        //         },
+        //         idemp: idemp
+        //     })
+        // }
 
         return inp;
     }

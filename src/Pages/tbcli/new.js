@@ -135,13 +135,16 @@ class index extends DPA.new {
 
         inp["idz"].label = "Zona del cliente"
         inp["idz"].editable = false;
-        inp["idz"].value = (this.state.idz ?? "") + "";
+        inp["idz"].defaultValue = (this.state.idz ?? "") + "";
         inp["idz"].required = true;
         inp["idz"].onPress = () => {
             SNavigation.navigate("/tbzon", {
                 onSelect: (zona) => {
                     console.log(zona);
-                    this.setState({ idz: zona.idz + "" })
+                    this.form.setValues({
+                        idz: zona.idz + "",
+                    })
+                    // this.setState({ idz: zona.idz + "" })
                 }
             })
         }
