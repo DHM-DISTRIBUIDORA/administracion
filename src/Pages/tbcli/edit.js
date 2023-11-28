@@ -133,20 +133,20 @@ class index extends DPA.edit {
         inp["idz"].label = "Zona de cliente"
         inp["idz"].editable = false;
         inp["idz"].defaultValue = this.state?.data?.idz + "";
-        inp["idz"].onPress = () => {
-            let idemp = ""
-            if (Model.usuario.Action.getUsuarioLog().idvendedor) idemp = Model.usuario.Action.getUsuarioLog().idvendedor
-            SNavigation.navigate("/tbzon", {
-                onSelect: (zona) => {
-                    console.log(zona);
-                    this.form.setValues({
-                        idz: zona.idz + "",
-                    })
-                    // this.setState({ idz: zona.idz })
-                },
-                idemp: idemp
-            })
-        }
+        // inp["idz"].onPress = () => {
+        //     let idemp = ""
+        //     if (Model.usuario.Action.getUsuarioLog().idvendedor) idemp = Model.usuario.Action.getUsuarioLog().idvendedor
+        //     SNavigation.navigate("/tbzon", {
+        //         onSelect: (zona) => {
+        //             console.log(zona);
+        //             this.form.setValues({
+        //                 idz: zona.idz + "",
+        //             })
+        //             // this.setState({ idz: zona.idz })
+        //         },
+        //         idemp: idemp
+        //     })
+        // }
 
         return inp;
     }
