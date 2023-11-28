@@ -4,6 +4,7 @@ import { Parent } from "."
 import Model from '../../Model';
 import item from './item';
 import DataBase from '../../DataBase';
+import { SDate } from 'servisofts-component';
 // import item from './item';
 
 class index extends DPA.list {
@@ -39,21 +40,24 @@ class index extends DPA.list {
 
     async loadData() {
         let zonas_habilitadas = {};
-        if(this.idvendedor != "") {
-            zonas_habilitadas = await DataBase.zona_empleado.filtered(`idemp == ${this.idvendedor}`)
+        if (this.idvendedor != "") {
+            zonas_habilitadas = await DataBase.zona_empleado.filtered(`idemp == ${this.idvendedor} && dia == ${new SDate().date.getDay()}`)
+            let query = "";
+            zonas_habilitadas.map((z, i) => {
+                if (i > 0) query += " || "
+                query += `idz == ${z.idz}`
+            })
+            DataBase.tbzon.filtered(query).then((data) => {
+                this.setState({ data: data })
+            })
 
-        }else{
-            zonas_habilitadas = await DataBase.zona_empleado.all();
+        } else {
+            DataBase.tbzon.all().then((data) => {
+                this.setState({ data: data })
+            })
 
         }
-        let query = "";
-        zonas_habilitadas.map((z, i) => {
-            if (i > 0) query += " || "
-            query += `idz == ${z.idz}`
-        })
-        DataBase.tbzon.filtered(query).then((data) => {
-            this.setState({ data: data })
-        })
+
     }
 
     $allowNew() {
@@ -80,7 +84,7 @@ class index extends DPA.list {
         return [{ key: "ventas", order: "desc" }]
     }
     $getData() {
-        return this.state.data ?? Parent.model.Action.getAll();
+        return this.state.data;
     }
 }
 export default connect(index);
