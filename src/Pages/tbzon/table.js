@@ -14,7 +14,7 @@ class index extends DPA.table {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "table" })
     }
     $filter(data) {
-        return data.estado != 0
+        return data.zest != 1
     }
     $getData() {
         return Parent.model.Action.getAll();
