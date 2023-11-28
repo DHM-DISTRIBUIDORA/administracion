@@ -50,7 +50,7 @@ import permissions from './permissions';
 
 
 
-import test from "./test"
+// import test from "./test"
 // export default SPage.combinePages("/", {
 //   "":test,
 //   ...gpx,
@@ -103,7 +103,7 @@ export default SPage.combinePages("/", {
   ...storage,
   // test2,
   notification_manager,
-  test,
+  // test,
   ...blanco,
   ...contacto,
   ...dashboard,
