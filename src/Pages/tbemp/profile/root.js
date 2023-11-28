@@ -16,6 +16,7 @@ class index extends DPA.profile {
     state = {
         cantidad_clientes: 0,
         cantidad_zonas: 0,
+        cantidad_zonas_totales: 0,
         cantidad_compras: 0,
         cantidad_ventas: 0,
         cantidad_pedidos: 0,
@@ -37,8 +38,6 @@ class index extends DPA.profile {
             }
         });
         this.idemp = SNavigation.getParam("pk")
-
-
     }
 
     componentDidMount() {
@@ -83,10 +82,26 @@ class index extends DPA.profile {
         let query = "";
 
         try {
-
+            //zonas del dìa
             const cantidad_zonas = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp} && dia == ${new SDate(this.state.fecha, "yyyy-MM-dd").date.getDay()}`)
-            // const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
             this.setState({ cantidad_zonas: cantidad_zonas.length })
+
+            //zonas totales
+            const cantidad_zonas_totales = await DataBase.zona_empleado.filtered(`idemp == ${this.idemp}`)
+            // const cantidad_zonas = await DataBase.tbzon.filtered(`idemp == ${this.idemp}`)
+
+            let query_ = "";
+            cantidad_zonas_totales.map((z, i) => {
+                if (i > 0) query_ += " || "
+                query_ += `idz == ${z.idz}`
+            })
+            DataBase.tbzon.filtered(query_).then((data) => {
+                // this.setState({ data: data })
+                console.log("data")
+                console.log(data)
+                this.setState({ cantidad_zonas_totales: data.length })
+            })
+
             cantidad_zonas.map((z, i) => {
                 if (i > 0) query += " || "
                 query += `idz == ${z.idz}`
@@ -118,10 +133,8 @@ class index extends DPA.profile {
             monto += a.monto ?? 0
         })
         const clientes_visitados = pedidos.filter(a => !!visitas.find(v => v.idven == a.idven))
-
         // })
         this.setState({ load_cant: true, cantidad_pedidos: pedidos.length, cantidad_visitas: clientes_visitados.length, monto_visitas: parseFloat(monto ?? 0).toFixed(2) });
-
 
         return null;
     }
@@ -140,7 +153,6 @@ class index extends DPA.profile {
     $getData() {
         return this.state.data;
     }
-
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
         var montoOk = "";
@@ -174,7 +186,7 @@ class index extends DPA.profile {
                         <SText bold fontSize={14} style={{ lineHeight: 20 }}>{cant}</SText>
                         :
                         <SText bold fontSize={14} style={{ lineHeight: 20 }}>( {cant} )</SText>)}
-                    <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText>
+                    {(monto) ? <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText> : null}
                     <SText fontSize={12} color={STheme.color.gray} style={{ lineHeight: 15 }}>{label}</SText>
                 </SView>
             </SView>
@@ -206,7 +218,7 @@ class index extends DPA.profile {
             })}
             {this.ItemCard({
                 label: "Zonas",
-                cant: this.state.cantidad_zonas,
+                cant: "Hoy: " + this.state.cantidad_zonas + "  /  Semana: " + this.state.cantidad_zonas_totales,
                 monto: "",
                 icon: 'Izonas',
                 color: '#833AB4',
@@ -351,7 +363,7 @@ class index extends DPA.profile {
         </>
     }
     verZonas() {
-     
+
         return <>
             <SView col={"xs-12"} >
                 <SText >Zonas:</SText>
