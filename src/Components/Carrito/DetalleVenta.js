@@ -94,7 +94,7 @@ class index extends Component<DetalleVentaPropsType> {
                     <SView col={"xs-12"} style={{ borderColor: STheme.color.gray, borderBottomWidth: 1 }} />
                     <SView col={"xs-12"} style={{ alignItems: "flex-end", }} height={36} >
                         <SHr />
-                        <SText fontSize={15} color={STheme.color.text}  >{`Bs. ${total}`}</SText>
+                        <SText fontSize={15} color={STheme.color.text}  >{`Bs. ${SMath.formatMoney(total)}`}</SText>
                     </SView>
                 </SView>
             </>

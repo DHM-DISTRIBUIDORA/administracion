@@ -51,7 +51,8 @@ export default class index extends Component {
                 for (let key in moving) {
                     if ((moving.hasOwnProperty(key)) && (moving[key].key_usuario === objeto?.usuario?.key) && (new SDate(moving[key].fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd"))) {
                         objeto.visita = moving[key];
-                        // console.log(objeto.visita);
+                        console.log("objeto.visita");
+                        console.log(objeto.visita);
                         break; // Si se encuentra una coincidencia, salir del bucle
                     }
                 }
