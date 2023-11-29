@@ -162,7 +162,7 @@ class index extends DPA.profile {
 
     ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
         var montoOk = "";
-        if (monto) montoOk = "Bs. " + (monto ?? 1);
+        if (monto) montoOk = "Bs. " + (SMath.formatMoney(monto) ?? 1);
         return <SView col={"xs-6 md-6"} height={100} padding={6} onPress={onPress} >
             <SView card flex col={"xs-12"} style={{
                 borderRadius: 14,

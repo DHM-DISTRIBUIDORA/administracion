@@ -125,7 +125,7 @@ class index extends Component<FloatPropsType> {
                             <SIcon name={'Carrito2'} height={25} width={25} fill={STheme.color.white} />
                         </SView>
                         <SView flex height style={{ justifyContent: "center" }} >
-                            <SText fontSize={12} color={STheme.color.white} font='Roboto' >{`Bs. ${total}`}</SText>
+                            <SText fontSize={12} color={STheme.color.white} font='Roboto' >{`Bs. ${SMath.formatMoney(total)}`}</SText>
                             <SText fontSize={12} color={STheme.color.white} bold font='Roboto' >{Object.keys(productos).length} items</SText>
                             <SText fontSize={10} color={STheme.color.white} font='Roboto' >{this.state?.client?.clinom}</SText>
                         </SView>

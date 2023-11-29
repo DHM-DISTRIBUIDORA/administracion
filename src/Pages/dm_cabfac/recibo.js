@@ -176,7 +176,7 @@ class recibo extends Component {
             <SView col={"xs-12"} style={{ borderColor: STheme.color.gray, borderBottomWidth: 1 }} />
             <SView col={"xs-12"} style={{ alignItems: "flex-end", }} height={36} >
                 <SHr />
-                <SText font={'AcherusGrotesque-Regular'} fontSize={15} color={STheme.color.text}  >{`Bs. ${total}`}</SText>
+                <SText font={'AcherusGrotesque-Regular'} fontSize={15} color={STheme.color.text}  >{`Bs. ${SMath.formatMoney(total)}`}</SText>
             </SView>
         </>
     }

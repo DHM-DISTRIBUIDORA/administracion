@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation } from 'servisofts-component';
+import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SDate } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 export type CategoriaCardPropsType = {
     data: any,
@@ -18,6 +18,40 @@ class index extends Component<CategoriaCardPropsType> {
         // console.log(this.props.data);
         var { visitas, total_pedidos, cantidad_productos, monto_productos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas, empnom, empcod, usuario, clientes_con_ubicacion, clientes_sin_ubicacion, monto_visitas_exitosas, monto_visitas_fallidas, visita } = this.props.data;
         console.log(this.props.data.key);
+
+        let color = "";
+        let descripcion = "";
+        console.log(visita?.tipo);
+        switch (visita?.tipo) {
+            case "start":
+                color = STheme.color.success;
+                descripcion = "Activo";
+                break;
+            case "provider_enabled":
+                color = STheme.color.success
+                descripcion = "Activo";
+                break;
+            case "on_location_change":
+                color = STheme.color.success
+                descripcion = "Activo";
+                break;
+            case "provider_disabled":
+                color = STheme.color.warning
+
+                descripcion = "Desactivado hace poco";
+                break;
+            case "stop":
+                color = STheme.color.danger
+                descripcion = "Inactivo";
+                break;
+            // case "on_location_change":
+            //     color = STheme.color.danger
+            //     descripcion = "Inactivo";
+            //     break;
+        }
+        console.log(color);
+        console.log(descripcion);
+
 
         return (
             <SView col={"xs-12"} row >
@@ -60,9 +94,9 @@ class index extends Component<CategoriaCardPropsType> {
                     }}>
                         {/* <SIcon name='Iactivot' width={40} height={35}  fill={STheme.color.success} /> */}
                         {(!visita) ? <SIcon name='Iactivot' width={40} height={35} fill={STheme.color.lightGray} /> :
-                            <SIcon name='Iactivot' width={40} height={35} fill={visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success) : STheme.color.danger} />
+                            <SIcon name='Iactivot' width={40} height={35} fill={color} />
                         }
-                        {(!visita) ? <SText  fontSize={10} center>Ausente</SText> : <SView><SText  style={{lineHeight:12}} fontSize={10} center> {visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? "Inactivo hace poco" : "Activado") : "Desactivado"}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
+                        {(!visita) ? <SText  fontSize={10} center>Ausente</SText> : <SView><SText  style={{lineHeight:12}} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
                     </SView>
                 </SView>
                 <SView col={"xs-12"} center row>

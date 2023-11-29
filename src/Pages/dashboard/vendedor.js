@@ -21,7 +21,11 @@ export default class index extends Component {
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
             console.log(e);
+            
             let arr = Object.values(e.data)
+            if(!arr){
+                return;
+            }
             let promises = arr.map(async (emp) => {
                 const af = await DataBase.usuario.filtered(`idvendedor == ${parseInt(emp.idemp)}`)
                 emp.usuario = af[0]
