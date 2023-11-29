@@ -89,7 +89,7 @@ class index extends Component<CategoriaCardPropsType> {
                         <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}  -  # Zonas: {cantidad_zonas}</SText>
                     </SView>
                     <SView col={"xs-2"} center height onPress={() => {
-                        SNavigation.navigate("/gpx/detalle", { key_usuario: usuario?.key })
+                        SNavigation.navigate("/gpx/detalle", { key_usuario: usuario?.key, fecha:this.props.fecha })
                     }}>
                         {(!visita) ? <SIcon name='Iactivo' width={30} height={30} fill={STheme.color.lightGray} /> :
                             <SIcon name='Iactivo' width={30} height={30} fill={color} />

@@ -5,6 +5,7 @@ import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
 import SSocket from 'servisofts-socket';
+import Model from '../../Model';
 export default class detalle extends Component {
   constructor(props) {
     super(props);
@@ -16,18 +17,51 @@ export default class detalle extends Component {
     }
   }
   componentDidMount() {
-    SSocket.sendPromise({
-      component: "reporte",
-      type: "getClienteConPedidos",
-      fecha_inicio: this.state.fecha,
-      fecha_fin: this.state.fecha,
-    }).then((resp) => {
-      this.setState({ error: "", dataCliente: resp.data, loading: false })
-      console.log(resp);
-    }).catch(e => {
-      this.setState({ error: e.error, data: null, loading: false })
-      console.error(e);
+    this.usuario = Model.usuario.Action.getByKey(this.state.key_usuario);
+    // if (this.usuario?.idvendedor) {
+    // request["dia"] = 
+
+    // SSocket.sendPromise({
+    //   "component": "visita_vendedor",
+    //   "type": "getAll",
+    //   "estado": "cargando",
+    //   "fecha": this.state.fecha,
+    //   "idemp": this.usuario?.idvendedor,
+    // }).then(e => {
+    //   this.setState({ visitas: e.data })
+    // }).catch(e => {
+    //   console.error(e);
+    // })
+    // }
+    this.loadAsyncVendedor();
+  }
+
+  async loadAsyncVendedor() {
+    if (!this.usuario?.idvendedor) return;
+    const clientes = await SSocket.sendPromise({
+      "component": "tbcli",
+      "type": "getAll",
+      "estado": "cargando",
+      "cliidemp": this.usuario?.idvendedor,
+      "dia": new SDate(this.state.fecha, "yyyy-MM-dd").date.getDay(),
     })
+    // this.setState({ clientes: clientes.data })
+    const visitas = await SSocket.sendPromise({
+      "component": "visita_vendedor",
+      "type": "getAll",
+      "estado": "cargando",
+      "fecha": this.state.fecha,
+      "idemp": this.usuario?.idvendedor,
+    })
+    const arrVisitas = Object.values(visitas.data);
+    let cliarr = Object.values(clientes.data).map(cli => {
+      const visitas_del_cliente = arrVisitas.filter(v => v.idcli == cli.idcli);
+      cli.visitas = visitas_del_cliente ?? []
+      return cli;
+      // cli.visitas = !visitas_del_cliente ? [] : visitas_del_cliente;
+    })
+    this.setState({ clientes: cliarr })
+
   }
 
   loadActivaciones(fecha) {
@@ -192,21 +226,24 @@ export default class detalle extends Component {
   }
 
   getMarkersCliente() {
-    if (!this.state.dataCliente) return null;
-    var datas = this.state.dataCliente;
-    console.log("data")
-    console.log(datas)
-    return this.state.dataCliente.map((o) => {
-      return <SMapView.SMarker latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={STheme.color.success}>
+    if (!this.state?.clientes) return null;
+    return this.state.clientes.map((o) => {
+      let color = STheme.color.lightGray
+      if (o.visitas.length > 0) {
+        color = "#0ff"
+        console.log(o)
+      }
+      if (!o.clilat || !o.clilon) return null;
+      return <SMapView.SMarker key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
       </SMapView.SMarker>
     })
   }
 
 
   render() {
-    if (!this.state.dataCliente) return <SLoad />
-    console.log("dataCliente")
-    console.log(this.state.dataCliente)
+    if (!this.state.clientes) return <SLoad />
+    // console.log("dataCliente")
+    // console.log(this.state.dataCliente)
     return (
       <SPage disableScroll>
         <Container>
@@ -215,6 +252,7 @@ export default class detalle extends Component {
             this.loadData(e.fecha)
             // this.componentDidMount()
           }} />
+          <SText>{this.usuario?.Nombres}-{this.usuario?.idvendedor}</SText>
           {this.renerWithData()}
           {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
         </Container>
@@ -227,12 +265,11 @@ export default class detalle extends Component {
           ref={ref => this.mapa = ref}>
           <></>
           {this.getPolylines()}
-          {this.getActivaciones()}
+          {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
-          {this.getMarkers()}
+          {/* {this.getMarkers()} */}
           {this.getMarkersCliente()}
-
         </SMapView>
       </SPage>
     )
