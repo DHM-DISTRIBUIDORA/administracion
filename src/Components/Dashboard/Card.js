@@ -19,6 +19,39 @@ class index extends Component<CategoriaCardPropsType> {
         var { cantidad_clientes, cantidad_pedidos, cantidad_visitas, cantidad_zonas, idemp, visitas_exitosas, visitas_fallidas, empnom, empcod, usuario, clientes_con_ubicacion, clientes_sin_ubicacion, visita } = this.props.data;
         console.log(this.props.data.key);
 
+        let color = "";
+        let descripcion = "";
+        console.log(visita?.tipo);
+        switch (visita?.tipo) {
+            case "start":
+                color = STheme.color.success;
+                descripcion = "Activo";
+                break;
+            case "provider_enabled":
+                color = STheme.color.success
+                descripcion = "Activo";
+                break;
+            case "on_location_change":
+                color = STheme.color.success
+                descripcion = "Activo";
+                break;
+            case "provider_disabled":
+                color = STheme.color.warning
+
+                descripcion = "Desactivado hace poco";
+                break;
+            case "stop":
+                color = STheme.color.danger
+                descripcion = "Inactivo";
+                break;
+            // case "on_location_change":
+            //     color = STheme.color.danger
+            //     descripcion = "Inactivo";
+            //     break;
+        }
+        console.log(color);
+        console.log(descripcion);
+
         return (
             <SView col={"xs-12"} row >
                 <SView col={"xs-12"} center card row
@@ -56,12 +89,12 @@ class index extends Component<CategoriaCardPropsType> {
                         <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}  -  # Zonas: {cantidad_zonas}</SText>
                     </SView>
                     <SView col={"xs-2"} center height onPress={() => {
-                        SNavigation.navigate("/gpx", { key_usuario: usuario?.key })
+                        SNavigation.navigate("/gpx/detalle", { key_usuario: usuario?.key, fecha:this.props.fecha })
                     }}>
                         {(!visita) ? <SIcon name='Iactivo' width={30} height={30} fill={STheme.color.lightGray} /> :
-                            <SIcon name='Iactivo' width={30} height={30} fill={visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success) : STheme.color.danger} />
+                            <SIcon name='Iactivo' width={30} height={30} fill={color} />
                         }
-                        {(!visita) ? <SText  fontSize={10} center>Ausente</SText> : <SView><SText  style={{lineHeight:12}} fontSize={10} center> {visita?.tipo == "start" ? (new SDate(visita.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? "Inactivo hace poco" : "Activado") : "Desactivado"}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
+                        {(!visita) ? <SText fontSize={10} center>Ausente</SText> : <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
 
                     </SView>
                 </SView>

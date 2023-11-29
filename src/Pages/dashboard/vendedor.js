@@ -21,7 +21,11 @@ export default class index extends Component {
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
             console.log(e);
+
             let arr = Object.values(e.data)
+            if (!arr) {
+                return;
+            }
             let promises = arr.map(async (emp) => {
                 const af = await DataBase.usuario.filtered(`idvendedor == ${parseInt(emp.idemp)}`)
                 emp.usuario = af[0]
@@ -35,7 +39,7 @@ export default class index extends Component {
         })
 
         //background location
-        let conductores =  Model.background_location.Action.getAll();
+        let conductores = Model.background_location.Action.getAll();
         (!conductores) ? this.setState({ conductores: {} }) : this.setState({ conductores: conductores });
     }
 
@@ -43,7 +47,7 @@ export default class index extends Component {
     renderData() {
         if (this.state?.error) return <SText color={STheme.color.danger}>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <SLoad />
-        const moving = Model.background_location.Action.getAll(); 
+        const moving = Model.background_location.Action.getAll();
 
         this.state.data.forEach((objeto) => {
             // Verificar si 'moving' es un objeto
@@ -71,17 +75,17 @@ export default class index extends Component {
             render={(obj) => {
                 // var obj2 = this.state.usuarios.filter(e => e.idvendedor == obj.idemp)
                 // obj.key = obj2[0].key
-                return <Dashboard.Card data={obj} />
+                return <Dashboard.Card data={obj} fecha={this.state.fecha} />
             }}
         />
     }
     render() {
-      
+
         return (
             <SPage title="Pedidos por vendedores" >
                 <Container>
                     <SelectFecha onChange={(e) => {
-                        this.setState({ data: null })
+                        this.setState({ data: null, fecha: e.fecha })
                         this.getData({ fecha: e.fecha });
                     }} />
                     {this.renderData()}
