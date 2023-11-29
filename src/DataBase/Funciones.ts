@@ -81,6 +81,19 @@ export const SaveChanges = async (table: TableAbstract) => {
     tablesLoading[table.scheme.name] = true;
     const _insert = await table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'");
     if (_insert.length > 0) {
+
+        if (table.scheme.name == "dm_cabfac") {
+            const _changes_tbcli = await DataBase.tbcli.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'");
+            if (_changes_tbcli.length > 0) {
+                SNotification.send({
+                    title: table.scheme.name,
+                    body: "Se esperara a guardar tbcli.",
+                    color: STheme.color.warning,
+                    time: 10000,
+                })
+                return;
+            }
+        }
         const notify = await SNotification.send({
             title: table.scheme.name,
             body: "Guardando cambios...",
@@ -99,12 +112,24 @@ export const SaveChanges = async (table: TableAbstract) => {
                 resp.data.sync_type = "";
 
 
-
+                const old_cli_cod = obj.clicod + ""
                 await table.delete(obj[table.scheme.primaryKey]);
                 if (obj.sync_type != "delete") {
                     await table.insert(resp.data)
                 }
-                // if (table.scheme.name == "tbcli") {
+                if (table.scheme.name == "tbcli" && obj.sync_type == "insert") {
+                    try {
+                        const arr = await DataBase.dm_cabfac.filtered(`clicod == $0`, old_cli_cod)
+                        // const arr = await DataBase.dm_cabfac.all();
+                        console.log("pedidos con este clicod", arr);
+                        arr.map(o => {
+                            o.clicod = resp.data.clicod;
+                            DataBase.dm_cabfac.update(o);
+                        })
+                    } catch (error) {
+                        console.error("Error al buscar pedidos", error);
+                    }
+                }
                 //     SStorage.getItem("cliente_dhm", (cli: string) => {
                 //         if (cli) {
                 //             let client = JSON.parse(cli);
@@ -148,10 +173,14 @@ export const saveAllChanges = async () => {
     }
 
     const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista, DataBase.zona_empleado]
+    for (let i = 0; i < tables.length; i++) {
+        const element = tables[i];
+        await SaveChanges(element);
+    }
     // SNotification.send({
     //     title: "Virificando cambios",
     //     time: 2000,
     // })
-    tables.map(t => SaveChanges(t))
+    // tables.map(t => SaveChanges(t))
 
 }

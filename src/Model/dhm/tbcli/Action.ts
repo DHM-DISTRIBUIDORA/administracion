@@ -29,7 +29,7 @@ export default class Action extends SAction {
             // const cantidad: any[] = await DataBase.tbcli.filtered("id < 0");
 
             extra.data.idcli = new Date().getTime()
-            extra.data.clicod = "Pendiente"
+            extra.data.clicod = extra.data.idcli + "";
             const data = await DataBase.tbcli.insert(extra?.data)
             this._dispatch({
                 ...this.model.info,

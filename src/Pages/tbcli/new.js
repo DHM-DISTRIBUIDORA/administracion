@@ -176,8 +176,12 @@ class index extends DPA.new {
             // this.$submitFile(resp.data.key);
             if (this.onSelect) {
                 this.onSelect(resp)
+                SNavigation.goBack();
+            } else {
+                SNavigation.replace("/tbcli/profile", { pk: data.idcli })
             }
-            SNavigation.goBack();
+
+
         }).catch(e => {
             console.error(e);
 

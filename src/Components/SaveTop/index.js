@@ -32,6 +32,7 @@ class index extends React.Component {
 				}}
 					activeOpacity={1}
 					onPress={() => {
+						console.log("PRECIONO SAVE TOP")
 						DataBase.Funciones.saveAllChanges();
 						// DataBaseContainer.sync();
 					}} center>

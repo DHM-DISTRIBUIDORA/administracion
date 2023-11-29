@@ -61,7 +61,7 @@
     "servisofts-background-location": "^2.0.2",
     "servisofts-charts": "1.0.1",
     "servisofts-component": "^3.0.16-beta",
-    "servisofts-db": "^1.0.6",
+    "servisofts-db": "file:../../servisofts-db/dist",
     "servisofts-model": "1.0.5",
     "servisofts-page": "^1.0.12",
     "servisofts-rn-chat": "1.0.7",

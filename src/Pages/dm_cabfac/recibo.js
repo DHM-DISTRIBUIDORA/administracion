@@ -25,21 +25,38 @@ class recibo extends Component {
             on: ["insert", "update", "delete"],
             tables: ["dm_cabfac"]
         }, (evt) => {
-            this.loadDataAsync(); 
+            if (evt.on == "delete") {
+                if (evt.data.length > 0) {
+                    if (this.idven == evt.data[0].idven) {
+                        this.close = true;
+                        SPopup.alert("El pedido se guardo en el servidor. Vuelve a ingresar si quieres realizar modificaciones.")
+                        SNavigation.replace("/")
+                    }
+
+                }
+
+            } else {
+                this.loadDataAsync();
+            }
         });
     }
     componentWillUnmount() {
+        this.close = true;
         Trigger.removeEventListener(this.t1);
     }
 
     async loadDataAsync() {
+        if (this.close) return;
         DataBase.dm_cabfac.objectForPrimaryKey(this.idven).then((e) => {
             // e.detalle = JSON.parse(e.detalle);
             this.setState({ data: e })
+        }).then(e => {
+
         })
 
     }
     item() {
+
         if (!this.state?.data) return <SLoad />
         return <>
             <SView col={"xs-12"} row >
@@ -164,6 +181,7 @@ class recibo extends Component {
         </>
     }
     render() {
+        if (this.close) return <SLoad />
         return (<SPage >
             <Container>
                 <SHr height={20} />

@@ -48,7 +48,11 @@ class index extends DPA.profile {
             on: ["insert", "update", "delete"],
             tables: ["tbcli"]
         }, (e) => {
-            this.load()
+            if(e.on == "delete"){
+
+            }else{
+                this.load()
+            }
         })
 
     }
