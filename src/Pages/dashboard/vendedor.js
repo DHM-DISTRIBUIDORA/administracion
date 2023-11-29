@@ -21,7 +21,11 @@ export default class index extends Component {
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
             console.log(e);
+            
             let arr = Object.values(e.data)
+            if(!arr){
+                return;
+            }
             let promises = arr.map(async (emp) => {
                 const af = await DataBase.usuario.filtered(`idvendedor == ${parseInt(emp.idemp)}`)
                 emp.usuario = af[0]
@@ -51,8 +55,7 @@ export default class index extends Component {
                 for (let key in moving) {
                     if ((moving.hasOwnProperty(key)) && (moving[key].key_usuario === objeto?.usuario?.key) && (new SDate(moving[key].fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd"))) {
                         objeto.visita = moving[key];
-                        console.log("objeto.visita");
-                        console.log(objeto.visita);
+                        // console.log(objeto.visita);
                         break; // Si se encuentra una coincidencia, salir del bucle
                     }
                 }

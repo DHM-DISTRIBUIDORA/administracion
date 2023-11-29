@@ -213,6 +213,7 @@ export default class detalle extends Component {
           <SelectFecha fecha={this.state.fecha} onChange={(e) => {
             // this.state.fecha = e.fecha;
             this.loadData(e.fecha)
+            // this.componentDidMount()
           }} />
           {this.renerWithData()}
           {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
