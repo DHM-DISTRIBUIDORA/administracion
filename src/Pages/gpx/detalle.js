@@ -54,7 +54,7 @@ export default class detalle extends Component {
       "type": "getPedidos",
       "estado": "cargando",
       "fecha": this.state.fecha,
-
+      "idemp": this.usuario?.idvendedor,
     })
 
 
@@ -174,7 +174,7 @@ export default class detalle extends Component {
           // if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
         } else {
           if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
-          if (o.fecha_on.substring(0, 18) <= last_stop.fecha_on.substring(0, 18)) return;
+          if (o.fecha_on.substring(0, 19) <= last_stop.fecha_on.substring(0, 18)) return;
         }
         ITEMS.push({
           latitude: parseFloat(o.lat),
@@ -291,11 +291,12 @@ export default class detalle extends Component {
           ref={ref => this.mapa = ref}>
           <></>
           {this.getPolylines()}
+          {this.getMarkersCliente()}
+
           {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
-          {/* {this.getMarkers()} */}
-          {this.getMarkersCliente()}
+          {this.getMarkers()}
         </SMapView>
       </SPage>
     )
