@@ -46,7 +46,7 @@ class index extends Component<DetalleVentaPropsType> {
     }
 
 
-    render() {
+    render() { 
         let detalle = Model.tbvd.Action.getAll({ idven: this.props?.idven })
         let total = 0;
         console.log(this.props?.idven + " -KDSFKSDJFKSDJF")
