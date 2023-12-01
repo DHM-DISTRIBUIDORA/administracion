@@ -36,6 +36,8 @@ export default class detalle extends Component {
     this.loadAsyncVendedor();
   }
 
+
+
   async loadAsyncVendedor() {
     if (!this.usuario?.idvendedor) return;
     const clientes = await SSocket.sendPromise({
@@ -45,7 +47,17 @@ export default class detalle extends Component {
       "cliidemp": this.usuario?.idvendedor,
       "dia": new SDate(this.state.fecha, "yyyy-MM-dd").date.getDay(),
     })
-    // this.setState({ clientes: clientes.data })
+
+
+    const ventas = await SSocket.sendPromise({
+      "component": "dm_cabfac",
+      "type": "getPedidos",
+      "estado": "cargando",
+      "fecha": this.state.fecha,
+      "idemp": this.usuario?.idvendedor,
+    })
+
+
     const visitas = await SSocket.sendPromise({
       "component": "visita_vendedor",
       "type": "getAll",
@@ -54,13 +66,20 @@ export default class detalle extends Component {
       "idemp": this.usuario?.idvendedor,
     })
     const arrVisitas = Object.values(visitas.data);
+    const arrVentas = Object.values(ventas.data);
+
     let cliarr = Object.values(clientes.data).map(cli => {
+      // this.loadAsyncVentas(cli.idcli);
       const visitas_del_cliente = arrVisitas.filter(v => v.idcli == cli.idcli);
+      const ventas_del_cliente = arrVentas.filter(v => v.clicod == cli.clicod);
       cli.visitas = visitas_del_cliente ?? []
+      cli.ventas = ventas_del_cliente ?? []
       return cli;
       // cli.visitas = !visitas_del_cliente ? [] : visitas_del_cliente;
     })
     this.setState({ clientes: cliarr })
+    this.setState({ ventas: ventas })
+
 
   }
 
@@ -155,7 +174,7 @@ export default class detalle extends Component {
           // if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
         } else {
           if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
-          if (o.fecha_on.substring(0, 18) <= last_stop.fecha_on.substring(0, 18)) return;
+          if (o.fecha_on.substring(0, 19) <= last_stop.fecha_on.substring(0, 18)) return;
         }
         ITEMS.push({
           latitude: parseFloat(o.lat),
@@ -232,9 +251,10 @@ export default class detalle extends Component {
       if (o.visitas.length > 0) {
         color = "#0ff"
         console.log(o)
+        console.log("PINTAAAAR")
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker  key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
       </SMapView.SMarker>
     })
   }
@@ -242,8 +262,14 @@ export default class detalle extends Component {
 
   render() {
     if (!this.state.clientes) return <SLoad />
+    console.log("this.state.clientes")
+    console.log(this.state.clientes)
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
+
+    if (!this.state.ventas) return <SLoad />
+    console.log("this.state.ventas")
+    console.log(this.state.ventas)
     return (
       <SPage disableScroll>
         <Container>
@@ -265,11 +291,12 @@ export default class detalle extends Component {
           ref={ref => this.mapa = ref}>
           <></>
           {this.getPolylines()}
+          {this.getMarkersCliente()}
+
           {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
-          {/* {this.getMarkers()} */}
-          {this.getMarkersCliente()}
+          {this.getMarkers()}
         </SMapView>
       </SPage>
     )

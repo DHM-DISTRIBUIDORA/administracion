@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SButtom, SDate, SForm, SHr, SIcon, SInput, SLoad, SNavigation, SPage, SPopup, SStorage, SText, STheme, SThread, SUuid, SView } from 'servisofts-component';
+import { SButtom, SDate, SForm, SGeolocation, SHr, SIcon, SInput, SLoad, SNavigation, SNotification, SPage, SPopup, SStorage, SText, STheme, SThread, SUuid, SView } from 'servisofts-component';
 import SSocket from 'servisofts-socket'
 import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
@@ -62,6 +62,27 @@ class index extends Component {
 
     }
     handlePressPedido = async (tbcli) => {
+        let notify = await SNotification.send({
+            title: "Opteniendo tu ubicacion",
+            body: "Estamos buscando tu ubicacion actual.",
+            type: "loading"
+        })
+        SGeolocation.getCurrentPosition().then(e => {
+            notify.close();
+            this.handlePressPedidoUbicacion(tbcli, e.coords);
+        }).catch(e => {
+            notify.close();
+            SNotification.send({
+                title: "Opteniendo tu ubicacion",
+                body: e.message,
+                time: 5000,
+                color: STheme.color.danger
+            })
+            console.error(e);
+        })
+    }
+
+    handlePressPedidoUbicacion = async (tbcli, ubicacion) => {
         if (this.state.loading) return;
         // console.error(client)
         if (!tbcli) {
@@ -142,8 +163,8 @@ class index extends Component {
                 "vpla": 0,
                 "vdes": "0",
                 "codvendedor": tbemp.empcod,
-                "vlatitud": 0,
-                "vlongitud": 0,
+                "vlatitud": ubicacion.latitude,
+                "vlongitud": ubicacion.longitude,
                 "razonsocial": tbcli.clirazon,
                 "nit": tbcli.clinit,
                 "nombrecliente": tbcli.clinom,
@@ -280,7 +301,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/carrito/pedido"} />
+        return <BottomNavigator url={"/carrito/pedido"} carrito={"no"} />
     }
 }
 const initStates = (state) => {

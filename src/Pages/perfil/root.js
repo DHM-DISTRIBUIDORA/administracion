@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup } from 'servisofts-component';
+import { SHr, SNavigation, SPage, SText, SView, STheme, SImage, SLoad, SButtom, SIcon, SWebView, STable2, SMath, SDate, SList, SPopup, SGeolocation } from 'servisofts-component';
 import { WebView } from 'react-native';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
@@ -302,6 +302,19 @@ class index extends Component {
                         })
 
                     }}>CERRAR SESIÓN</Btn>
+                    <SHr height={30} />
+                    {/* <SButtom type='outline' onPress={() => {
+                        // console.
+                        SGeolocation.getCurrentPosition({
+
+                        }).then(e=>{
+                            // e.coords.latitude
+                            // e.coords.longitude
+                            console.log(e);
+                        }).catch(e=>{
+                            console.error(e);
+                        })
+                    }}>PROBAR</SButtom> */}
                     <SHr height={200} />
                     {/* <MenuButtom label={STheme.getTheme() == "default" ? "Oscuro" : "Claro"} icon={} onPress={() => {
                         STheme.change()
@@ -325,6 +338,7 @@ class index extends Component {
                     }
                 </SView>
                 <SHr height={30} />
+
             </SView>
         </SPage>
         );

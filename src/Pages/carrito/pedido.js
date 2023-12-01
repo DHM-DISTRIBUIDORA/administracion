@@ -114,7 +114,7 @@ class index extends Component {
     }
 
     footer() {
-        return <BottomNavigator url={"/carrito/pedido"} />
+        return <BottomNavigator url={"/carrito/pedido"} carrito={"no"}/>
     }
 }
 const initStates = (state) => {

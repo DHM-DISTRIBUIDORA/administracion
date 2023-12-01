@@ -27,7 +27,7 @@ export default class index extends Component {
                 return;
             }
             let promises = arr.map(async (emp) => {
-                const af = await DataBase.usuario.filtered(`idvendedor == ${parseInt(emp.idemp)}`)
+                const af = await DataBase.usuario.filtered(`idvendedor == '${emp.idemp}'`)
                 emp.usuario = af[0]
             })
             const response = await Promise.all(promises);
