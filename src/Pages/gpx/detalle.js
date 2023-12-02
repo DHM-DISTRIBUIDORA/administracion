@@ -212,6 +212,9 @@ export default class detalle extends Component {
   renerWithData() {
     if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
     if (!this.state.data) return <SLoad />
+    if (!this.state.ventas) return <SLoad />
+    console.log("this.state.ventas")
+    console.log(this.state.ventas)
     return <>
       <SRangeSlider
         range={[0, this.state.data.length - 1]}
@@ -226,6 +229,47 @@ export default class detalle extends Component {
             })
             //this.setState({ index: parseInt(e) })
           }
+
+          
+
+          let datav = this.state.ventas.data;
+
+          let contador = 0;
+
+          
+
+         
+          let fechaBase = this.state.fecha
+          // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
+          let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
+
+          let datos = Object.values(datav).map(a => {
+            let fecha1 = new SDate(fechaBase+ ' ' + a.vhora.substring(10, 19));
+           
+
+            if (fecha1 <= fecha2) {
+              // console.log(fecha1)
+              // console.log(fecha2)
+              // console.log("siiiii")
+              contador++;
+              // return a;
+            }
+
+          })
+          this.mensaje.setLabel("pedidos: " + contador + " / "  + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+
+
+          // console.log(datos)
+
+          // const existeVenta = Object.values(datav).map(objeto => {
+          //   const horaObjeto = this.state.data[this.state.index].fecha_on.substring(11, 19)
+          //   console.log(objeto.vhora.substring(10, 19))
+          // });
+
+
+
+
+
           if (this.mensaje) {
             if (this.mapa) {
               // this.mapa.animateToRegion({
@@ -236,7 +280,7 @@ export default class detalle extends Component {
               // }, 0)
             }
 
-            this.mensaje.setLabel("pedidos: 0     -    "+new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+            // this.mensaje.setLabel("pedidos: 0     -    " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
           }
         }} />
       <Mensajes ref={ref => this.mensaje = ref} />
@@ -247,18 +291,18 @@ export default class detalle extends Component {
   getMarkersCliente() {
     if (!this.state?.clientes) return null;
     return this.state.clientes.map((o) => {
-      console.log("CLIENTESSS")
-      console.log(o)
+      // console.log("CLIENTESSS")
+      // console.log(o)
       let color = STheme.color.lightGray
       if (o.visitas.length > 0) {
         color = "#0ff"
-        console.log(o)
-        console.log("PINTAAAAR")
-        console.log("CLIENTESSS VISITAS")
-      console.log(o)
+        //   console.log(o)
+        //   console.log("PINTAAAAR")
+        //   console.log("CLIENTESSS VISITAS")
+        // console.log(o)
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker  key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
       </SMapView.SMarker>
     })
   }
