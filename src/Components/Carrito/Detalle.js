@@ -74,7 +74,7 @@ class index extends Component<DetallePropsType> {
                                         <SText fontSize={12}>{obj?.data?.prdpoficial}</SText>
                                     </SView>
                                     <SView col={"xs-2.5"} style={{ alignItems: "flex-end" }}>
-                                        <SText fontSize={12}>{obj?.data?.prdpoficial * obj?.cantidad}</SText>
+                                        <SText fontSize={12}>{SMath.formatMoney(obj?.data?.prdpoficial * obj?.cantidad)}</SText>
                                     </SView>
                                 </SView>
                             </>
