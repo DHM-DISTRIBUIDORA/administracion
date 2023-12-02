@@ -236,7 +236,7 @@ export default class detalle extends Component {
               // }, 0)
             }
 
-            this.mensaje.setLabel(new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+            this.mensaje.setLabel("pedidos: 0     -    "+new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
           }
         }} />
       <Mensajes ref={ref => this.mensaje = ref} />
