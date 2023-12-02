@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SLoad, SMapView, SNavigation, SPage, SRangeSlider, SText, STheme, SThread } from 'servisofts-component';
+import { SDate, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -230,44 +230,29 @@ export default class detalle extends Component {
             //this.setState({ index: parseInt(e) })
           }
 
-          
-
           let datav = this.state.ventas.data;
-
           let contador = 0;
+          let total = 0;
 
-          
-
-         
           let fechaBase = this.state.fecha
           // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
           let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
 
           let datos = Object.values(datav).map(a => {
-            let fecha1 = new SDate(fechaBase+ ' ' + a.vhora.substring(10, 19));
-           
+            let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
 
             if (fecha1 <= fecha2) {
+              Object.keys(a.detalle).map((key, index) => {
+                total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+              });
               // console.log(fecha1)
               // console.log(fecha2)
               // console.log("siiiii")
               contador++;
-              // return a;
             }
-
           })
-          this.mensaje.setLabel("pedidos: " + contador + " / "  + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
-
-
-          // console.log(datos)
-
-          // const existeVenta = Object.values(datav).map(objeto => {
-          //   const horaObjeto = this.state.data[this.state.index].fecha_on.substring(11, 19)
-          //   console.log(objeto.vhora.substring(10, 19))
-          // });
-
-
-
+          
+          this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
 
 
           if (this.mensaje) {
