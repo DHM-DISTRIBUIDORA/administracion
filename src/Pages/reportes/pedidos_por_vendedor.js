@@ -25,6 +25,7 @@ export default class index extends Component {
 
     getTable() {
         if (!this.state.data) return null
+        const removeDecimal = a => parseFloat(a ?? 0).toFixed(0);
         return <STable2
             rowHeight={30}
             header={[
@@ -32,7 +33,9 @@ export default class index extends Component {
                 { key: "idemp", width: 50 },
                 { key: "empcod", width: 50 },
                 { key: "empnom", width: 200 },
-                { key: "cantidad", width: 50, cellStyle: { textAlign: "center" } },
+                { key: "cantidad_ss", label: "App Servisofts", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight:"bold" } },
                 { key: "fecha_primero", width: 130 },
                 { key: "fecha_ultimo", width: 130 },
                 { key: "idemp-ver", width: 130, component: (a) => <Link onPress={() => { SNavigation.navigate("/tbemp/profile", { pk: a }) }} >{"Ver perfil"}</Link> },
