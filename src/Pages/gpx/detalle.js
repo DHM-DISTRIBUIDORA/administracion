@@ -247,11 +247,15 @@ export default class detalle extends Component {
   getMarkersCliente() {
     if (!this.state?.clientes) return null;
     return this.state.clientes.map((o) => {
+      console.log("CLIENTESSS")
+      console.log(o)
       let color = STheme.color.lightGray
       if (o.visitas.length > 0) {
         color = "#0ff"
         console.log(o)
         console.log("PINTAAAAR")
+        console.log("CLIENTESSS VISITAS")
+      console.log(o)
       }
       if (!o.clilat || !o.clilon) return null;
       return <SMapView.SMarker  key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
