@@ -6,8 +6,7 @@ import { SBLocation, SBackgroundLocation } from 'servisofts-background-location'
 // import { check, request, PERMISSIONS, RESULTS } from 'react-native-permissions';
 
 export default class test extends Component {
-    state = {
-    };
+    state = {};
 
     componentDidMount() {
         // SBLocation.isActive().then(e => {

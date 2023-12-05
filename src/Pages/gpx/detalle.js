@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread } from 'servisofts-component';
+import { SDate, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -35,6 +35,31 @@ export default class detalle extends Component {
     // }
     this.loadAsyncVendedor();
   }
+
+  getLoad(){
+    return <SPage disableScroll>
+      <Container>
+          <SelectFecha fecha={this.state.fecha} onChange={(e) => {
+            // this.state.fecha = e.fecha;
+            this.loadData(e.fecha)
+            // this.componentDidMount()
+          }} />
+          <SText>Cargando. ..</SText>
+          
+          {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
+        </Container>
+        <SMapView initialRegion={{
+        latitude: -17.783799,
+        longitude: -63.180,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1
+      }}
+      ref={ref => this.mapa = ref}>
+      
+    </SMapView>
+    </SPage>
+  }
+
 
 
 
@@ -237,11 +262,9 @@ export default class detalle extends Component {
           let fechaBase = this.state.fecha
           // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
           let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
-
-          let datos = Object.values(datav).map(a => {
-            let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
-
-            if (fecha1 <= fecha2) {
+          if(this.state.index==(this.state.data.length-1)){
+            Object.values(datav).map(a => {
+  
               Object.keys(a.detalle).map((key, index) => {
                 total += a.detalle[key].vdpre * a.detalle[key].vdcan;
               });
@@ -249,12 +272,21 @@ export default class detalle extends Component {
               // console.log(fecha2)
               // console.log("siiiii")
               contador++;
-            }
-          })
-          
+            })
+          }else{
+            Object.values(datav).map(a => {
+              let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
+              if (fecha1 <= fecha2) {
+                Object.keys(a.detalle).map((key, index) => {
+                  total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                });
+                contador++;
+              }
+            })
+          }
+
           this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
-
-
+          
           if (this.mensaje) {
             if (this.mapa) {
               // this.mapa.animateToRegion({
@@ -276,8 +308,9 @@ export default class detalle extends Component {
   getMarkersCliente() {
     if (!this.state?.clientes) return null;
     return this.state.clientes.map((o) => {
-      // console.log("CLIENTESSS")
-      // console.log(o)
+      console.log("CLIENTESSS")
+      console.log(o)
+
       let color = STheme.color.lightGray
       if (o.visitas.length > 0) {
         color = "#0ff"
@@ -287,20 +320,54 @@ export default class detalle extends Component {
         // console.log(o)
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker onPress={()=>{SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" })}} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+        {(o.visitas.length > 0) ?
+          <SView>
+            <SView width={60} height={40} padding={4} center >
+              <SView flex col={"xs-12"} borderRadius={10} backgroundColor={STheme.color.white} style={{
+                borderWidth: 2,
+                borderColor: STheme.color.text,
+              }}>
+                <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                  overflow: "hidden",
+                }}>
+                  {/* <SImage src={src} style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "cover"
+                    }} /> */}
+                </SView>
+                <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                }} center>
+                  <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{o.clinom}</SText>
+
+                </SView>
+              </SView>
+            </SView>
+            <SIcon name={"MarcadorMapa"} width={35} height={43} fill={"#028EAF"} />
+          </SView>
+          : null}
       </SMapView.SMarker>
     })
   }
 
-
+  
   render() {
-    if (!this.state.clientes) return <SLoad />
+    if (!this.state.clientes) return this.getLoad();
     console.log("this.state.clientes")
     console.log(this.state.clientes)
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
 
-    if (!this.state.ventas) return <SLoad />
+    if (!this.state.ventas) return this.getLoad();
     console.log("this.state.ventas")
     console.log(this.state.ventas)
     return (
@@ -334,8 +401,8 @@ export default class detalle extends Component {
       </SPage>
     )
   }
-
 }
+
 
 class Mensajes extends Component {
   state = {
