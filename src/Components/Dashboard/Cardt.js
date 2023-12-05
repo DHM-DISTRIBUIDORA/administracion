@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SDate } from 'servisofts-component';
+import { SHr, SIcon, SImage, SMath, SPage, SText, STheme, SView, SNavigation, SDate, SPopup } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 export type CategoriaCardPropsType = {
     data: any,
@@ -90,6 +90,10 @@ class index extends Component<CategoriaCardPropsType> {
                         <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}  -  # Zonas: {cantidad_zonas}</SText>
                     </SView>
                     <SView col={"xs-2"} center height onPress={() => {
+                        if(!usuario?.key){
+                            SPopup.alert("No tiene usuario.")
+                            return;
+                        }
                         SNavigation.navigate("/gpx", { key_usuario: usuario?.key })
                     }}>
                         {/* <SIcon name='Iactivot' width={40} height={35}  fill={STheme.color.success} /> */}
