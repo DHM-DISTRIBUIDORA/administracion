@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread } from 'servisofts-component';
+import { SDate, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -308,8 +308,9 @@ export default class detalle extends Component {
   getMarkersCliente() {
     if (!this.state?.clientes) return null;
     return this.state.clientes.map((o) => {
-      // console.log("CLIENTESSS")
-      // console.log(o)
+      console.log("CLIENTESSS")
+      console.log(o)
+
       let color = STheme.color.lightGray
       if (o.visitas.length > 0) {
         color = "#0ff"
@@ -319,7 +320,41 @@ export default class detalle extends Component {
         // console.log(o)
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker onPress={()=>{SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" })}} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+        {(o.visitas.length > 0) ?
+          <SView>
+            <SView width={60} height={40} padding={4} center >
+              <SView flex col={"xs-12"} borderRadius={10} backgroundColor={STheme.color.white} style={{
+                borderWidth: 2,
+                borderColor: STheme.color.text,
+              }}>
+                <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                  overflow: "hidden",
+                }}>
+                  {/* <SImage src={src} style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "cover"
+                    }} /> */}
+                </SView>
+                <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                }} center>
+                  <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{o.clinom}</SText>
+
+                </SView>
+              </SView>
+            </SView>
+            <SIcon name={"MarcadorMapa"} width={35} height={43} fill={"#028EAF"} />
+          </SView>
+          : null}
       </SMapView.SMarker>
     })
   }
