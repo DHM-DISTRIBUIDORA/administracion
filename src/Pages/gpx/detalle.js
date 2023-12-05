@@ -36,6 +36,31 @@ export default class detalle extends Component {
     this.loadAsyncVendedor();
   }
 
+  getLoad(){
+    return <SPage disableScroll>
+      <Container>
+          <SelectFecha fecha={this.state.fecha} onChange={(e) => {
+            // this.state.fecha = e.fecha;
+            this.loadData(e.fecha)
+            // this.componentDidMount()
+          }} />
+          <SText>Cargando. ..</SText>
+          
+          {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
+        </Container>
+        <SMapView initialRegion={{
+        latitude: -17.783799,
+        longitude: -63.180,
+        latitudeDelta: 0.1,
+        longitudeDelta: 0.1
+      }}
+      ref={ref => this.mapa = ref}>
+      
+    </SMapView>
+    </SPage>
+  }
+
+
 
 
   async loadAsyncVendedor() {
@@ -237,11 +262,9 @@ export default class detalle extends Component {
           let fechaBase = this.state.fecha
           // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
           let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
-
-          let datos = Object.values(datav).map(a => {
-            let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
-
-            if (fecha1 <= fecha2) {
+          if(this.state.index==(this.state.data.length-1)){
+            Object.values(datav).map(a => {
+  
               Object.keys(a.detalle).map((key, index) => {
                 total += a.detalle[key].vdpre * a.detalle[key].vdcan;
               });
@@ -249,12 +272,21 @@ export default class detalle extends Component {
               // console.log(fecha2)
               // console.log("siiiii")
               contador++;
-            }
-          })
-          
+            })
+          }else{
+            Object.values(datav).map(a => {
+              let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
+              if (fecha1 <= fecha2) {
+                Object.keys(a.detalle).map((key, index) => {
+                  total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                });
+                contador++;
+              }
+            })
+          }
+
           this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
-
-
+          
           if (this.mensaje) {
             if (this.mapa) {
               // this.mapa.animateToRegion({
@@ -292,15 +324,15 @@ export default class detalle extends Component {
     })
   }
 
-
+  
   render() {
-    if (!this.state.clientes) return <SLoad />
+    if (!this.state.clientes) return this.getLoad();
     console.log("this.state.clientes")
     console.log(this.state.clientes)
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
 
-    if (!this.state.ventas) return <SLoad />
+    if (!this.state.ventas) return this.getLoad();
     console.log("this.state.ventas")
     console.log(this.state.ventas)
     return (
@@ -334,8 +366,8 @@ export default class detalle extends Component {
       </SPage>
     )
   }
-
 }
+
 
 class Mensajes extends Component {
   state = {
