@@ -17,7 +17,6 @@ export default class ExportExcel extends Component<{ table: TableAbstract, label
     }
     handlePress = () => {
         const { table, label } = this.props;
-        console.log("entro acas")
 
         table.all().then(data => {
             const properties_table = Object.keys(table.scheme.properties);
@@ -27,7 +26,8 @@ export default class ExportExcel extends Component<{ table: TableAbstract, label
             })
 
             SExcel.createAndSave({
-                name: "DHM-" + table.scheme.name + "-" + new SDate().toString("yyyyMMdd-hh:mm:ss"),
+                // name: "DHM-" + table.scheme.name + "-" + new SDate().toString("yyyyMMdd-hh:mm:ss"),
+                name: "DHM-" + table.scheme.name ,
                 styleHeader: { width: 400, },
                 header: headers,
                 data: data
