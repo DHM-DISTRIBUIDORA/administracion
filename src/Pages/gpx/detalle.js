@@ -308,8 +308,8 @@ export default class detalle extends Component {
   getMarkersCliente() {
     if (!this.state?.clientes) return null;
     return this.state.clientes.map((o) => {
-      console.log("CLIENTESSS")
-      console.log(o)
+      // console.log("CLIENTESSS")
+      // console.log(o)
 
       let color = STheme.color.lightGray
       if (o.visitas.length > 0) {
@@ -361,13 +361,13 @@ export default class detalle extends Component {
 
   
   render() {
-    if (!this.state.clientes) return this.getLoad();
+    //if (!this.state.clientes) return this.getLoad();
     console.log("this.state.clientes")
     console.log(this.state.clientes)
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
 
-    if (!this.state.ventas) return this.getLoad();
+    //if (!this.state.ventas) return this.getLoad();
     console.log("this.state.ventas")
     console.log(this.state.ventas)
     return (

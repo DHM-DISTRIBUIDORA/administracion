@@ -87,6 +87,7 @@ export default class index extends Component {
                     <SelectFecha onChange={(e) => {
                         this.setState({ data: null, fecha: e.fecha })
                         this.getData({ fecha: e.fecha });
+                        this.setState({ fecha: e.fecha })
                     }} />
                     {this.renderData()}
                     <SHr h={20} />
