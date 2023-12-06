@@ -48,6 +48,8 @@ import contacto from './contacto';
 import dashboard from './dashboard';
 import permissions from './permissions';
 
+import admin from './admin';
+
 
 
 // import test from "./test"
@@ -107,6 +109,7 @@ export default SPage.combinePages("/", {
   ...blanco,
   ...contacto,
   ...dashboard,
-  ...permissions
+  ...permissions,
+  ...admin
   // "chart": Example
 });
