@@ -1,11 +1,12 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SHr, SNavigation, SPage, SPopup, SScrollView2, SText, STheme, SView } from 'servisofts-component'
+import { SExcel, SHr, SNavigation, SPage, SPopup, SScrollView2, SText, STheme, SView } from 'servisofts-component'
 import DataBase from '../../DataBase'
 import { TableAbstract, Trigger } from 'servisofts-db'
 import SSocket from 'servisofts-socket'
 import DataBaseContainer from '../../DataBase/DataBaseContainer'
 import Model from '../../Model'
+import ExportExcel from './ExportExcel'
 
 const BtnEliminarYDescargar = ({ label, onPress }) => {
     return <SView row>
@@ -29,7 +30,6 @@ export default class test extends Component {
         const urser = Model.usuario.Action.getUsuarioLog();
 
         return <SPage disableScroll>
-            {/* <SScrollView2 horizontal> */}
             <SScrollView2 contentContainerStyle={{
                 minWidth: 850,
                 width: "100%",
@@ -66,7 +66,7 @@ export default class test extends Component {
                             DataBase.Funciones.sicronizar_vendedor()
                         }} />
                         <Table table={DataBase.tbzon} label="Zonas." />
-                        <Table table={DataBase.zona_empleado} label="Zonas por día." save/>
+                        <Table table={DataBase.zona_empleado} label="Zonas por día." save />
                         <Table table={DataBase.tbcat} label="Categorias de clientes." />
                         <Table table={DataBase.dm_cabfac} label="Pedidos." save />
                         <Table table={DataBase.tbcli} label="Clientes." save />
@@ -91,7 +91,7 @@ export default class test extends Component {
                         }} />
                         <Table table={DataBase.tbcli} label="Clientes." save />
                         <Table table={DataBase.tbzon} label="Zonas." />
-                        <Table table={DataBase.zona_empleado} label="Zonas del empleado." save/>
+                        <Table table={DataBase.zona_empleado} label="Zonas del empleado." save />
                     </>
                     : null
                 }
@@ -138,8 +138,11 @@ class Table extends Component<{ table: TableAbstract, label: string, save?: bool
         }
 
     }
+
+
     render() {
         const { table, label } = this.props;
+
         return <SView row col={"xs-12"} style={{ borderBottomWidth: 1, borderColor: "#999" }} padding={2} >
             <SText col={"xs-4"} fontSize={14}>{label} ({table.scheme.name})</SText>
             <SText col={"xs-1"} onPress={() => {
@@ -149,10 +152,11 @@ class Table extends Component<{ table: TableAbstract, label: string, save?: bool
             <SView col={"xs-2.5"} row style={{
                 justifyContent: "space-between"
             }}>
-                <SText padding={4} card onPress={() => {
+                {/* <SText padding={4} card onPress={() => {
                     table.deleteAll()
                 }}>Clear</SText>
-                {!this.props.save ? null : <SText padding={4} card
+                <SView flex />
+                {!this.props.save ? <SView width={45} /> : <SText width={45} padding={4} card
                     style={{
                         backgroundColor: !this.state.changes ? STheme.color.gray : STheme.color.warning
                     }}
@@ -160,6 +164,7 @@ class Table extends Component<{ table: TableAbstract, label: string, save?: bool
                         DataBase.Funciones.SaveChanges(table)
 
                     }}>Save</SText>}
+                <SView flex />
                 <SText padding={4} style={{
                     backgroundColor: STheme.color.danger
                 }} card onPress={() => {
@@ -168,8 +173,9 @@ class Table extends Component<{ table: TableAbstract, label: string, save?: bool
                     }).catch(e => {
                         SPopup.alert(e?.error ?? e)
                     })
-                }}>Reset</SText>
-
+                }}>Reset</SText> */}
+                {/* <SView flex /> */}
+                <ExportExcel table={this.props.table} label={this.props.label} />
             </SView>
             <SText col={"xs-2.5"} center >{this.state.fecha_sync}</SText>
         </SView>

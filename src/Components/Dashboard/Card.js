@@ -83,7 +83,7 @@ class index extends Component<CategoriaCardPropsType> {
                     </SView>
                     <SView col={"xs-7"} height>
                         <SText fontSize={15} bold style={{ lineHeight: 25 }} onPress={() => {
-                            SNavigation.navigate("/tbemp/profile", { pk: idemp })
+                            SNavigation.navigate("/admin/tbemp", { pk: idemp , fecha:this.props.fecha})
                         }}>{empnom}</SText>
                         <SText fontSize={12} style={{ lineHeight: 20 }} onPress={() => { SNavigation.navigate("/usuario/profile", { pk: usuario?.key }) }} >User: {usuario?.Correo}</SText>
                         <SText fontSize={12} style={{ lineHeight: 20 }} >Cod: {empcod}  -  # Zonas: {cantidad_zonas}</SText>
