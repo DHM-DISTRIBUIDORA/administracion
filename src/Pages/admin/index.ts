@@ -3,6 +3,8 @@ import Model from '../../Model';
 
 import tbemp from './tbemp';
 import tbempt from './tbempt';
+import pedidosEmpresa from './pedidosEmpresa';
+import picklist2 from './picklist2';
 export const Parent = {
     name: "admin",
     path: `/admin`,
@@ -11,5 +13,7 @@ export const Parent = {
 }
 export default SPage.combinePages(Parent.name, {
     tbemp,
-    tbempt
+    tbempt,
+    pedidosEmpresa,
+    picklist2
 })
