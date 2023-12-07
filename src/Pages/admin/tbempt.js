@@ -286,7 +286,7 @@ class index extends DPA.profile {
                 monto: "",
                 icon: 'Ilist',
                 color: '#1DA1F2',
-                onPress: () => SNavigation.navigate("/transporte/picklist2", { pk: this.pk, fecha: this.state?.fecha }),
+                onPress: () => SNavigation.navigate("/admin/picklist2", { pk: this.pk, fecha: this.state?.fecha }),
                 // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
             })}
             {/* {this.ItemCard({

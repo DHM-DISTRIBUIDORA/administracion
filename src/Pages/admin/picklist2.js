@@ -17,6 +17,7 @@ export default class picklist extends Component {
 
     async loadData() {
         const user = Model.usuario.Action.getUsuarioLog();
+        const ventas = await DataBase.ventas_factura.all();
         // const tbprd = await DataBase.tbprd.all();
         const tbprd = await Model.tbprd.Action.getAll();
         let productos = {};
