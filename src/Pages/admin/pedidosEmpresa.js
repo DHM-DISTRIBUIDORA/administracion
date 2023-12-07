@@ -63,14 +63,12 @@ class pedidosEmpresa extends Component {
             "idemp": this.idemp,
             "fecha": this.fecha_inicio,
         }).then((e) => {
-            console.log(e);
-            console.log("dm_cabfacccccc")
-            // console.log(dm_cabfac)
+          
 
             // return e.data;
             Object.values(e.data).map(pedido => {
-                console.log(pedido)
-                console.log(productos)
+                // console.log(pedido)
+                // console.log(productos)
                 pedido.detalle.map((detalle) => {
                     let producto = productos.find(a => a.prdcod == detalle.prdcod)
                     if (!lines[producto?.idlinea]) {
