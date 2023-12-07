@@ -90,52 +90,8 @@ class index extends DPA.profile {
         console.log(this.state.data_v)
         this.setState({load_cant: true })
 
-
-
-
-        // const arrVisitas = Object.values(visitas.data);
-        // const arrVentas = Object.values(ventas.data);
-
-        // let cliarr = Object.values(clientes.data).map(cli => {
-        //   const visitas_del_cliente = arrVisitas.filter(v => v.idcli == cli.idcli);
-        //   const ventas_del_cliente = arrVentas.filter(v => v.clicod == cli.clicod);
-        //   cli.visitas = visitas_del_cliente ?? []
-        //   cli.ventas = ventas_del_cliente ?? []
-        //   return cli;
-        // })
-        // this.setState({ clientes: cliarr })
-        // this.setState({ ventas: ventas })
-
-
     }
 
-    // getData() {
-    //     const request = {
-    //         component: "dhm",
-    //         type: "perfilEmp",
-    //         fecha_inicio: this.state?.fecha,
-    //         fecha_fin: this.state?.fecha,
-    //         idemp: this.idemp
-    //     }
-    //     this.setState({ loading: true })
-    //     SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
-    //         console.log(e);
-    //         let arr = Object.values(e.data)
-    //         let promises = arr.map(async (emp) => {
-    //             const af = await DataBase.usuario.filtered(`idtransportista == '${parseInt(emp.idemp)}'`)
-    //             emp.usuario = af[0]
-    //         })
-    //         const response = await Promise.all(promises);
-    //         this.setState({ data: arr, loading: false })
-    //     }).catch(e => {
-    //         this.setState({ loading: false, error: e.message ?? e })
-    //         console.error(e);
-    //     })
-
-    //      //background location
-    //      let conductores =  Model.background_location.Action.getAll();
-    //      (!conductores) ? this.setState({ conductores: {} }) : this.setState({ conductores: conductores });
-    // }
 
     async getDataVendedor() {
         try {
@@ -214,43 +170,6 @@ class index extends DPA.profile {
     $getData() {
         return this.state.data;
     }
-
-    // ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
-    //     var montoOk = "";
-    //     if (monto != "") montoOk = "Bs. " + monto;
-    //     return <SView col={"xxs-12 xs-6 sm-6 md-6 lg-6 xl-6 xxl-6"} height={100} padding={6} onPress={onPress} >
-    //         <SView card flex col={"xs-12"} style={{
-    //             borderRadius: 14,
-    //             borderBottomWidth: 4,
-    //             borderLeftWidth: 3,
-    //             borderRightWidth: 1,
-    //             borderColor: STheme.color.card,
-    //             padding: 15
-    //         }} row center>
-
-    //             <SView width={50} center padding={4} height
-    //                 style={{
-    //                     backgroundColor: color + "40",
-    //                     borderRadius: 50
-    //                 }}
-    //             >
-    //                 <SIcon name={icon} fill={color} height={30} />
-    //             </SView>
-    //             <SView width={4} />
-    //             <SView flex height style={{
-    //                 justifyContent: "center"
-    //             }}>
-    //                 {!this.state.load_cant ? <SLoad /> : ((montoOk == "")
-    //                     ?
-    //                     <SText bold fontSize={14} style={{ lineHeight: 20 }}>{cant}</SText>
-    //                     :
-    //                     <SText bold fontSize={14} style={{ lineHeight: 20 }}>( {cant} )</SText>)}
-    //                 {(monto) ? <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText> : null}
-    //                 <SText fontSize={12} color={STheme.color.gray} style={{ lineHeight: 15 }}>{label}</SText>
-    //             </SView>
-    //         </SView>
-    //     </SView>
-    // }
 
     $render() {
         return <>
@@ -350,7 +269,7 @@ class index extends DPA.profile {
                 cant: "Categorías",
                 monto: "",
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
-                onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => SNavigation.navigate("/admin/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha, fecha_fin: this.state?.fecha }),
                 icon: 'Icategoria',
                 color: '#61AD02',
             })}
@@ -403,57 +322,6 @@ class index extends DPA.profile {
         </SView>
     }
 
-    // getUser() {
-    //     return <>
-    //         <SView col={"xs-12"} >
-    //             <SText >Usuario:</SText>
-    //             <SView col={"xs-12"} card center row
-    //                 onPress={() => {
-    //                     SNavigation.navigate("/tbemp/profile/usuario", { pk: this.pk })
-    //                 }}
-    //             >
-    //                 <SHr height={15} />
-    //                 <SIcon name={"Iuser"} height={20} width={22} fill={STheme.color.text} />
-    //                 <SView width={5} />
-    //                 <SText>Ver Usuario</SText>
-    //                 <SHr height={15} />
-
-    //             </SView>
-    //         </SView>
-    //     </>
-    // }
-    // verZonas() {
-
-    //     return <>
-    //         <SView col={"xs-12"} >
-    //             <SText >Zonas:</SText>
-    //             <SView col={"xs-12"} card center row
-    //                 onPress={() => {
-    //                     SNavigation.navigate("/tbemp/profile/zonas_asignadas", { pk: this.pk })
-    //                 }}
-    //             >
-    //                 <SHr height={15} />
-    //                 <SIcon name={"Marker"} height={20} width={22} fill={STheme.color.text} />
-    //                 <SView width={5} />
-    //                 <SText>Zonas asignadas por día</SText>
-    //                 <SHr height={15} />
-
-    //             </SView>
-    //         </SView>
-    //     </>
-    // }
-
-    // $footer() {
-    //     return <SView col={"xs-12"} center>
-    //         <SHr />
-    //         {this.getUser()}
-    //         <SHr />
-    //         {this.verZonas()}
-    //         <SHr />
-
-
-    //     </SView>
-    // }
 
 }
 export default connect(index);

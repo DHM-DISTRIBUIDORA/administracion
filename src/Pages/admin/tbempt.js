@@ -12,6 +12,7 @@ import { Header, Usuario } from '../../Components';
 import { SelectEntreFechas, SelectFecha } from '../../Components/Fechas';
 import DataBase from '../../DataBase';
 import { requestMultiple } from 'react-native-permissions';
+import Fecha from './components/Fecha';
 // import ZonaEmpleadoComponent from './components/ZonaEmpleadoComponent';
 class index extends DPA.profile {
     state = {
@@ -24,7 +25,9 @@ class index extends DPA.profile {
         monto_total_pedidos: 0,
         monto_total_ventas: 0,
         cantidad_visitas: 0,
-        fecha: DataBase.ventas_factura.fecha
+        // fecha: DataBase.ventas_factura.fecha
+        fecha: SNavigation.getParam("fecha"),
+
     }
     constructor(props) {
         super(props, {
@@ -42,6 +45,8 @@ class index extends DPA.profile {
     }
 
     componentDidMount() {
+        this.loadAsyncData();
+
         console.log("nSASA DAKJS DASD JASD", this.idemp);
         DataBase.tbemp.objectForPrimaryKey(parseInt(this.idemp)).then(e => {
             console.log("Aqui los empleados", e)
@@ -57,6 +62,29 @@ class index extends DPA.profile {
         }).catch(e => {
             console.error(e)
         })
+    }
+
+    async loadAsyncData() {
+        // if (!this.usuario?.idvendedor) return;
+        const data_transportista = await SSocket.sendPromise({
+            "component": "dhm",
+            "type": "perfilTransportista",
+            "fecha_inicio": this.state?.fecha,
+            "fecha_fin": this.state?.fecha,
+            "idemp": this.idemp,
+        }).then((e) => {
+            console.log(e);
+            this.setState({ data_t: e.data[0] })
+           
+
+        }).catch((e) => {
+            console.error(e);
+        })
+
+
+      
+        this.setState({ load_cant: true })
+
     }
 
     async getDataVendedor() {
@@ -168,7 +196,7 @@ class index extends DPA.profile {
     //             borderColor: STheme.color.card,
     //             padding: 15
     //         }} row center>
-          
+
     //             <SView width={50} center padding={4} height
     //                 style={{
     //                     backgroundColor: color + "40",
@@ -204,8 +232,91 @@ class index extends DPA.profile {
         </>
     }
 
- 
-   
+    ItemCard = ({ label, cant, monto, icon, color, onPress }) => {
+        var montoOk = "";
+        if (monto != "") montoOk = "Bs. " + monto;
+        return <SView col={"xxs-12 xs-6 sm-6 md-6 lg-6 xl-6 xxl-6"} height={100} padding={6} onPress={onPress} >
+            <SView card flex col={"xs-12"} style={{
+                borderRadius: 14,
+                borderBottomWidth: 4,
+                borderLeftWidth: 3,
+                borderRightWidth: 1,
+                borderColor: STheme.color.card,
+                padding: 15
+            }} row center>
+                {/* <SView width={50} center padding={4} height>
+                    {icon ? icon : null}
+                </SView> */}
+                <SView width={50} center padding={4} height
+                    style={{
+                        backgroundColor: color + "40",
+                        borderRadius: 50
+                    }}
+                >
+                    <SIcon name={icon} fill={color} height={30} />
+                </SView>
+                <SView width={4} />
+                <SView flex height style={{
+                    justifyContent: "center"
+                }}>
+                    {!this.state.load_cant ? <SLoad /> : ((montoOk == "")
+                        ?
+                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>{cant}</SText>
+                        :
+                        <SText bold fontSize={14} style={{ lineHeight: 20 }}>( {cant} )</SText>)}
+                    {(monto) ? <SText fontSize={14} style={{ lineHeight: 20 }}>{montoOk}</SText> : null}
+                    <SText fontSize={12} color={STheme.color.gray} style={{ lineHeight: 15 }}>{label}</SText>
+                </SView>
+            </SView>
+        </SView>
+    }
+
+    getCardsTransportista(obj) {
+        // if (this.state.data_t) return <SLoad />
+        console.log("data_transportista.dat")
+        console.log(this.state.data_t)
+        if(!this.state.data_t) return <SLoad />
+        let data_transportista= this.state.data_t;
+        return <SView col={"xs-12"} center row style={{
+            justifyContent: "space-between"
+        }}>
+            {this.ItemCard({
+                label: "",
+                cant: "Pick List",
+                monto: "",
+                icon: 'Ilist',
+                color: '#1DA1F2',
+                onPress: () => SNavigation.navigate("/transporte/picklist2", { pk: this.pk, fecha: this.state?.fecha }),
+                // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+            })}
+            {/* {this.ItemCard({
+                label: "Entregas",
+                cant: this.state.cantidad_zonas,
+                monto: "",
+                icon: 'Izonas',
+                color: '#833AB4',
+            })} */}
+            {this.ItemCard({
+                cant: `${data_transportista?.cantidad_clientes_con_pedido} / ${data_transportista?.cantidad_total_items}`,
+                label: "Entregas",
+                monto: SMath.formatMoney(data_transportista?.monto_total_items)
+                ,
+                icon: 'Ientregas',
+                color: '#FF5A5F',
+                onPress: () => SNavigation.navigate("/transporte/list", { pk: this.pk, fecha: this.state?.fecha }),
+            })}
+            {/* <SHr height={15} />
+            {this.ItemCard({
+                label: "",
+                cant: "Detalle Pedido",
+                monto: "",
+                icon: 'Ientregas',
+                color: '#FF5A5F',
+                onPress: () => SNavigation.navigate("/transporte/pedidoDetalle"),
+            })} */}
+        </SView>
+    }
+
     $item(obj) {
         // console.log(this.state?.fecha_inicio + " AQUII")
         console.log(this.state)
@@ -235,7 +346,10 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-          
+            <Fecha idemp={this.pk} fecha={this.state?.fecha} />
+            <SHr h={30} />
+            {this.getCardsTransportista(obj)}
+            <SHr h={30} />
             <SHr />
         </SView>
     }
@@ -288,7 +402,7 @@ class index extends DPA.profile {
     //         {this.verZonas()}
     //         <SHr />
 
-            
+
     //     </SView>
     // }
 
