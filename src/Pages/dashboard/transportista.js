@@ -72,7 +72,7 @@ export default class index extends Component {
             limit={20}
             buscador
             render={(obj) => {
-                return <Dashboard.Cardt data={obj} />
+                return <Dashboard.Cardt data={obj} fecha={this.state.fecha}  />
             }}
         />
     }
@@ -84,6 +84,7 @@ export default class index extends Component {
                     <SelectFecha onChange={(e) => {
                         this.setState({ data: null })
                         this.getData({ fecha: e.fecha });
+                        this.setState({ fecha: e.fecha })
                     }} />
                     {this.renderData()}
                     <SHr height={20} />
