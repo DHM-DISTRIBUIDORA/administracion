@@ -24,6 +24,9 @@ export default class root extends Component {
                         <MenuButtom label={"Pedidos por vendedor"} url={"/reportes/pedidos_por_vendedor"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Pedidos por proveedor"} url={"/reportes/pedidos_por_proveedor"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Activaciones"} url={"/reportes/activaciones"} icon={<SIcon name={"MConPedidosMap"} />} />
+                        <MenuButtom label={"pedidos_mapa"} url={"/reportes/pedidos_mapa"} icon={<SIcon name={"MConPedidosMap"} />} />
+                        <MenuButtom label={"Clientes con pedidos"} url={"/reportes/clientes_con_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MconPedidos"} />} />
+
                     </MenuPages>
                     <SHr />
                     <SText bold>Antiguos</SText>
@@ -31,7 +34,6 @@ export default class root extends Component {
                     <MenuPages path={"/reportes/"} permiso={"page"} >
                         <MenuButtom label={"Usuarios"} url={"/reportes/usuarios"} icon={<SIcon name={"MListUser"} />} />
                         <MenuButtom label={"Productos más vendidos"} url={"/reportes/productos_mas_vendidos"} icon={<SIcon name={"MProductoMasV"} />} />
-                        <MenuButtom label={"Clientes con pedidos"} url={"/reportes/clientes_con_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Clientes con pedidos Mapa"} url={"/reportes/clientes_con_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} />
                         <MenuButtom label={"Clientes sin pedidos"} url={"/reportes/clientes_sin_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MsinPedidos"} />} />
                         <MenuButtom label={"Clientes sin pedidos Mapa"} icon={<SIcon name={"MSinPedidosMap"} />} onPress={() => {

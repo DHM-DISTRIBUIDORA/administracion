@@ -9,7 +9,7 @@ export default class index extends Component {
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
             component: "dhm",
-            type: "getPedidosProveedor",
+            type: "pedidos_mapa",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
         }
