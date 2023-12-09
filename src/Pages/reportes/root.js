@@ -22,6 +22,7 @@ export default class root extends Component {
                         <MenuButtom label={"DashBoard Vendedores"} url={"/dashboard/vendedor"} icon={<SIcon name={"Vendedor"} />} />
                         <MenuButtom label={"DashBoard Transportista"} url={"/dashboard/transportista"} icon={<SIcon name={"Vendedor"} />} />
                         <MenuButtom label={"Pedidos por vendedor"} url={"/reportes/pedidos_por_vendedor"} icon={<SIcon name={"MconPedidos"} />} />
+                        <MenuButtom label={"Pedidos por proveedor"} url={"/reportes/pedidos_por_proveedor"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Activaciones"} url={"/reportes/activaciones"} icon={<SIcon name={"MConPedidosMap"} />} />
                     </MenuPages>
                     <SHr />
