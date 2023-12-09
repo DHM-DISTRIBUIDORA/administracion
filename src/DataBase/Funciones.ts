@@ -122,10 +122,11 @@ export const SaveChanges = async (table: TableAbstract) => {
                         const arr = await DataBase.dm_cabfac.filtered(`clicod == $0`, old_cli_cod)
                         // const arr = await DataBase.dm_cabfac.all();
                         console.log("pedidos con este clicod", arr);
-                        arr.map(o => {
+                        for (let i = 0; i < arr.length; i++) {
+                            const o = arr[i];
                             o.clicod = resp.data.clicod;
-                            DataBase.dm_cabfac.update(o);
-                        })
+                            await DataBase.dm_cabfac.update(o);
+                        }
                     } catch (error) {
                         console.error("Error al buscar pedidos", error);
                     }

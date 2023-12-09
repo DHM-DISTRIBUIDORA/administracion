@@ -346,7 +346,7 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            <Fecha idemp={this.pk} fecha={this.state?.fecha} />
+            <Fecha idemp={this.pk} fecha_inicio={this.state?.fecha} />
             <SHr h={30} />
             {this.getCardsTransportista(obj)}
             <SHr h={30} />

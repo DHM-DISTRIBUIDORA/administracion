@@ -11,6 +11,8 @@ import SMapView from "servisofts-component/Component/SMapView";
 import { SelectEntreFechas } from '../../../Components/Fechas';
 import DataBase from '../../../DataBase';
 import { Trigger } from 'servisofts-db';
+import { Platform } from 'react-native';
+import SBLocation from 'servisofts-background-location';
 
 
 class index extends DPA.profile {
@@ -48,9 +50,9 @@ class index extends DPA.profile {
             on: ["insert", "update", "delete"],
             tables: ["tbcli"]
         }, (e) => {
-            if(e.on == "delete"){
+            if (e.on == "delete") {
 
-            }else{
+            } else {
                 this.load()
             }
         })
@@ -88,7 +90,7 @@ class index extends DPA.profile {
             sync_type: "insert",
             key: SUuid(),
             key_usuario: Model.usuario.Action.getKey(),
-            idcli: this.pk+" ",
+            idcli: this.pk + " ",
             descripcion: descripcion,
             tipo: tipo,
             monto: monto,
@@ -429,9 +431,23 @@ class index extends DPA.profile {
             </SView>
 
             <Btn col={"xs-11"} onPress={() => {
-                SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
-                //  Model.carrito.Action.removeAll()
-                SNavigation.navigate("/public", { idcli: obj.idcli })
+
+                if (Platform.OS == "web") {
+                    SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
+                    SNavigation.navigate("/public", { idcli: obj.idcli })
+                    return;
+                };
+                SBLocation.isActive().then(e => {
+                    if (e.estado == "exito") {
+                        SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
+                        SNavigation.navigate("/public", { idcli: obj.idcli })
+                        return;
+                    }
+                    SPopup.alert("Debe activarse en el inicio para realizar pedidos.")
+                }).catch(e => {
+                    SPopup.alert("Debe activarse en el inicio para realizar pedidos.")
+                })
+
             }}>REALIZAR PEDIDO</Btn>
             <SHr h={16} />
             {(this.visitaType && !this.visita) ? <><Btn col={"xs-11"} onPress={() => {

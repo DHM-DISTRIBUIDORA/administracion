@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
+import { SDate, SHr, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -14,9 +14,14 @@ export default class detalle extends Component {
       fecha: SNavigation.getParam("fecha", new SDate().toString("yyyy-MM-dd")),
       // fecha: "2023-11-28",
       index: 0,
+      total_cliente: 0,
+      total_visitas: 0,
     }
+
   }
+
   componentDidMount() {
+
     this.usuario = Model.usuario.Action.getByKey(this.state.key_usuario);
     // if (this.usuario?.idvendedor) {
     // request["dia"] = 
@@ -36,27 +41,27 @@ export default class detalle extends Component {
     this.loadAsyncVendedor();
   }
 
-  getLoad(){
+  getLoad() {
     return <SPage disableScroll>
       <Container>
-          <SelectFecha fecha={this.state.fecha} onChange={(e) => {
-            // this.state.fecha = e.fecha;
-            this.loadData(e.fecha)
-            // this.componentDidMount()
-          }} />
-          <SText>Cargando. ..</SText>
-          
-          {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
-        </Container>
-        <SMapView initialRegion={{
+        <SelectFecha fecha={this.state.fecha} onChange={(e) => {
+          // this.state.fecha = e.fecha;
+          this.loadData(e.fecha)
+          // this.componentDidMount()
+        }} />
+        <SText>Cargando. ..</SText>
+
+        {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
+      </Container>
+      <SMapView initialRegion={{
         latitude: -17.783799,
         longitude: -63.180,
         latitudeDelta: 0.1,
         longitudeDelta: 0.1
       }}
-      ref={ref => this.mapa = ref}>
-      
-    </SMapView>
+        ref={ref => this.mapa = ref}>
+
+      </SMapView>
     </SPage>
   }
 
@@ -93,6 +98,8 @@ export default class detalle extends Component {
     const arrVisitas = Object.values(visitas.data);
     const arrVentas = Object.values(ventas.data);
 
+    let total_cli = Object.values(clientes.data).length
+
     let cliarr = Object.values(clientes.data).map(cli => {
       // this.loadAsyncVentas(cli.idcli);
       const visitas_del_cliente = arrVisitas.filter(v => v.idcli == cli.idcli);
@@ -104,6 +111,7 @@ export default class detalle extends Component {
     })
     this.setState({ clientes: cliarr })
     this.setState({ ventas: ventas })
+    this.setState({ total_cliente: total_cli })
 
 
   }
@@ -157,7 +165,7 @@ export default class detalle extends Component {
           color = STheme.color.success
           break;
         case "provider_disabled":
-          color = STheme.color.warning
+          color = "#FFC010"
           break;
         case "stop":
           color = STheme.color.danger
@@ -262,9 +270,9 @@ export default class detalle extends Component {
           let fechaBase = this.state.fecha
           // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
           let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
-          if(this.state.index==(this.state.data.length-1)){
+          if (this.state.index == (this.state.data.length - 1)) {
             Object.values(datav).map(a => {
-  
+
               Object.keys(a.detalle).map((key, index) => {
                 total += a.detalle[key].vdpre * a.detalle[key].vdcan;
               });
@@ -273,7 +281,7 @@ export default class detalle extends Component {
               // console.log("siiiii")
               contador++;
             })
-          }else{
+          } else {
             Object.values(datav).map(a => {
               let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
               if (fecha1 <= fecha2) {
@@ -286,7 +294,7 @@ export default class detalle extends Component {
           }
 
           this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
-          
+
           if (this.mensaje) {
             if (this.mapa) {
               // this.mapa.animateToRegion({
@@ -306,21 +314,37 @@ export default class detalle extends Component {
   }
 
   getMarkersCliente() {
+    this.visit = 0;
     if (!this.state?.clientes) return null;
+    let tot_visit = 0;
     return this.state.clientes.map((o) => {
-      // console.log("CLIENTESSS")
-      // console.log(o)
+      console.log("CLIENTESSS")
+      console.log(o)
 
-      let color = STheme.color.lightGray
+      let color = STheme.color.danger
       if (o.visitas.length > 0) {
-        color = "#0ff"
+        // this.state.total_visitas = tot_visit++
+        tot_visit++;
+        this.visit = this.visit + 1;
+        console.log("CLIENTESSS VISITAS")
+        console.log(this.visit)
+        // this.setState({ total_visitas: tot_visit++ })
+        if (o.ventas.length > 0) {
+          color = STheme.color.success
+        } else {
+          color = "#FFC010"
+
+        }
+        // this.setState({ total_visitas: tot_visit })
         //   console.log(o)
         //   console.log("PINTAAAAR")
         //   console.log("CLIENTESSS VISITAS")
         // console.log(o)
+        this.state.total_visitas = this.visit
+        console.log(this.visit)
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker onPress={()=>{SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" })}} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
         {(o.visitas.length > 0) ?
           <SView>
             <SView width={60} height={40} padding={4} center >
@@ -352,24 +376,96 @@ export default class detalle extends Component {
                 </SView>
               </SView>
             </SView>
-            <SIcon name={"MarcadorMapa"} width={35} height={43} fill={"#028EAF"} />
+            <SIcon name={"MarcadorMapa"} width={28} height={34.4} fill={color} />
           </SView>
-          : null}
+          : <SIcon name={"MarcadorMapa"} width={28} height={34.4} fill={color} />}
       </SMapView.SMarker>
     })
   }
 
-  
+  cardDetalle() {
+    if (!this.state?.clientes) return null;
+    let tot_visit = 0;
+    let pedidos = 0;
+    let visitas_sin_exito = 0;
+     this.state.clientes.map((o) => {
+      console.log("CLIENTESSS")
+      console.log(o)
+
+      let color = STheme.color.danger
+      if (o.visitas.length > 0) {
+        // this.state.total_visitas = tot_visit++
+        tot_visit++;
+        // this.setState({ total_visitas: tot_visit++ })
+        if (o.ventas.length > 0) {
+          pedidos++;
+          color = STheme.color.success
+        } else {
+          color =  "#FFC010"
+          visitas_sin_exito++;
+
+        }
+        // this.setState({ total_visitas: tot_visit })
+        //   console.log(o)
+        //   console.log("PINTAAAAR")
+        //   console.log("CLIENTESSS VISITAS")
+        // console.log(o)
+      }
+
+    })
+    
+    return <SView center
+      style={{
+        position: 'absolute',
+        top: 140,
+        zIndex: 9999,
+        backgroundColor: STheme.color.card,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        padding: 6
+      }}>
+      <SView col={"xs-12"}>
+        <SView col={"xs-12"} row>
+          <SText>TOTAL CLIENTES </SText>
+          <SText bold>({this.state.total_cliente})</SText>
+        </SView>
+        <SView col={"xs-12"} row>
+          <SText>TOTAL VISITAS </SText>
+          <SText bold>({tot_visit})</SText>
+        </SView>
+        <SView col={"xs-12"} row>
+          <SView height={20} width={20} backgroundColor={STheme.color.success} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>PEDIDOS APP </SText>
+          <SText bold>({pedidos})</SText>
+        </SView>
+        <SView col={"xs-12"} row >
+          <SView height={20} width={20} backgroundColor={"#FFC010"} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>VISITAS SIN ÉXITO </SText>
+          <SText bold>({visitas_sin_exito})</SText>
+        </SView>
+        <SView col={"xs-12"} row >
+          <SView height={20} width={20} backgroundColor={STheme.color.danger} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>NO VISITADAS </SText>
+          <SText bold>({this.state.total_cliente - tot_visit})</SText>
+        </SView>
+      </SView>
+    </SView>
+  }
+
+
   render() {
     //if (!this.state.clientes) return this.getLoad();
-    console.log("this.state.clientes")
-    console.log(this.state.clientes)
+
+    let nroClientes = 0
+    // let nroClientes =(this.state?.clientes).length()
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
 
     //if (!this.state.ventas) return this.getLoad();
-    console.log("this.state.ventas")
-    console.log(this.state.ventas)
+
     return (
       <SPage disableScroll>
         <Container>
@@ -382,6 +478,8 @@ export default class detalle extends Component {
           {this.renerWithData()}
           {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
         </Container>
+        {this.cardDetalle()}
+
         <SMapView initialRegion={{
           latitude: -17.783799,
           longitude: -63.180,
@@ -392,11 +490,13 @@ export default class detalle extends Component {
           <></>
           {this.getPolylines()}
           {this.getMarkersCliente()}
+          
 
           {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
           {this.getMarkers()}
+          
         </SMapView>
       </SPage>
     )

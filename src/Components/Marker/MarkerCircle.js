@@ -53,7 +53,7 @@ export default ({ latitude, longitude, key, cantidad, src, label, onPress, size 
             <Cantidad cantidad={cantidad} />
         </SView>
         {/* {!label ? null : <SText fontSize={8} color={STheme.color.black} style={{lineHeight: 8}}  center >{label}</SText>}  */}
-        <SIcon name={"MarcadorMapa"} width={35} height={43} fill={"#028EAF"} />
+        <SIcon name={"MarcadorMapa"} width={35} height={43} fill={STheme.color.danger} />
     </SMapView.SMarker>
 }
 // export default ({ latitude, longitude, cantidad, src, label, onPress }) => {
