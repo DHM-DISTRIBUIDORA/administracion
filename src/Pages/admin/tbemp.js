@@ -25,7 +25,8 @@ class index extends DPA.profile {
         monto_total_ventas: 0,
         cantidad_visitas: 0,
         // fecha: DataBase.ventas_factura.fecha
-        fecha: SNavigation.getParam("fecha"),
+        fecha_inicio: SNavigation.getParam("fecha_inicio"),
+        fecha_fin: SNavigation.getParam("fecha_fin"),
     }
     constructor(props) {
         super(props, {
@@ -79,8 +80,8 @@ class index extends DPA.profile {
         const data_vendedor = await SSocket.sendPromise({
             "component": "dhm",
             "type": "perfilEmp",
-            "fecha_inicio": this.state?.fecha,
-            "fecha_fin": this.state?.fecha,
+            "fecha_inicio": this.state?.fecha_inicio,
+            "fecha_fin": this.state.fecha_fin ? this.state.fecha_fin : this.state?.fecha_inicio,
             "idemp": this.idemp,
         })
 
@@ -269,7 +270,7 @@ class index extends DPA.profile {
                 cant: "Categorías",
                 monto: "",
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
-                onPress: () => SNavigation.navigate("/admin/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha, fecha_fin: this.state?.fecha }),
+                onPress: () => SNavigation.navigate("/admin/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Icategoria',
                 color: '#61AD02',
             })}
@@ -315,7 +316,7 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            <Fecha idemp={this.pk} fecha={this.state?.fecha} />
+            <Fecha idemp={this.pk} fecha_inicio={this.state?.fecha_inicio} fecha_fin= {this.state.fecha_fin} />
             <SHr h={30} />
             {this.getCardsClient(obj)}
             <SHr />
