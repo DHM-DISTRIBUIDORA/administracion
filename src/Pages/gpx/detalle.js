@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
+import { SDate, SHr, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -14,9 +14,14 @@ export default class detalle extends Component {
       fecha: SNavigation.getParam("fecha", new SDate().toString("yyyy-MM-dd")),
       // fecha: "2023-11-28",
       index: 0,
+      total_cliente: 0,
+      total_visitas: 0,
     }
+
   }
+
   componentDidMount() {
+
     this.usuario = Model.usuario.Action.getByKey(this.state.key_usuario);
     // if (this.usuario?.idvendedor) {
     // request["dia"] = 
@@ -93,6 +98,8 @@ export default class detalle extends Component {
     const arrVisitas = Object.values(visitas.data);
     const arrVentas = Object.values(ventas.data);
 
+    let total_cli = Object.values(clientes.data).length
+
     let cliarr = Object.values(clientes.data).map(cli => {
       // this.loadAsyncVentas(cli.idcli);
       const visitas_del_cliente = arrVisitas.filter(v => v.idcli == cli.idcli);
@@ -104,6 +111,7 @@ export default class detalle extends Component {
     })
     this.setState({ clientes: cliarr })
     this.setState({ ventas: ventas })
+    this.setState({ total_cliente: total_cli })
 
 
   }
@@ -157,7 +165,7 @@ export default class detalle extends Component {
           color = STheme.color.success
           break;
         case "provider_disabled":
-          color = STheme.color.warning
+          color = "#FFC010"
           break;
         case "stop":
           color = STheme.color.danger
@@ -306,23 +314,34 @@ export default class detalle extends Component {
   }
 
   getMarkersCliente() {
+    this.visit = 0;
     if (!this.state?.clientes) return null;
+    let tot_visit = 0;
     return this.state.clientes.map((o) => {
       console.log("CLIENTESSS")
       console.log(o)
 
       let color = STheme.color.danger
       if (o.visitas.length > 0) {
+        // this.state.total_visitas = tot_visit++
+        tot_visit++;
+        this.visit = this.visit + 1;
+        console.log("CLIENTESSS VISITAS")
+        console.log(this.visit)
+        // this.setState({ total_visitas: tot_visit++ })
         if (o.ventas.length > 0) {
           color = STheme.color.success
         } else {
           color = "#FFC010"
 
         }
+        // this.setState({ total_visitas: tot_visit })
         //   console.log(o)
         //   console.log("PINTAAAAR")
         //   console.log("CLIENTESSS VISITAS")
         // console.log(o)
+        this.state.total_visitas = this.visit
+        console.log(this.visit)
       }
       if (!o.clilat || !o.clilon) return null;
       return <SMapView.SMarker onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
@@ -364,17 +383,89 @@ export default class detalle extends Component {
     })
   }
 
+  cardDetalle() {
+    if (!this.state?.clientes) return null;
+    let tot_visit = 0;
+    let pedidos = 0;
+    let visitas_sin_exito = 0;
+     this.state.clientes.map((o) => {
+      console.log("CLIENTESSS")
+      console.log(o)
+
+      let color = STheme.color.danger
+      if (o.visitas.length > 0) {
+        // this.state.total_visitas = tot_visit++
+        tot_visit++;
+        // this.setState({ total_visitas: tot_visit++ })
+        if (o.ventas.length > 0) {
+          pedidos++;
+          color = STheme.color.success
+        } else {
+          color =  "#FFC010"
+          visitas_sin_exito++;
+
+        }
+        // this.setState({ total_visitas: tot_visit })
+        //   console.log(o)
+        //   console.log("PINTAAAAR")
+        //   console.log("CLIENTESSS VISITAS")
+        // console.log(o)
+      }
+
+    })
+    
+    return <SView center
+      style={{
+        position: 'absolute',
+        top: 140,
+        zIndex: 9999,
+        backgroundColor: STheme.color.card,
+        borderTopRightRadius: 10,
+        borderBottomRightRadius: 10,
+        padding: 6
+      }}>
+      <SView col={"xs-12"}>
+        <SView col={"xs-12"} row>
+          <SText>TOTAL CLIENTES </SText>
+          <SText bold>({this.state.total_cliente})</SText>
+        </SView>
+        <SView col={"xs-12"} row>
+          <SText>TOTAL VISITAS </SText>
+          <SText bold>({tot_visit})</SText>
+        </SView>
+        <SView col={"xs-12"} row>
+          <SView height={20} width={20} backgroundColor={STheme.color.success} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>PEDIDOS APP </SText>
+          <SText bold>({pedidos})</SText>
+        </SView>
+        <SView col={"xs-12"} row >
+          <SView height={20} width={20} backgroundColor={"#FFC010"} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>VISITAS SIN ÉXITO </SText>
+          <SText bold>({visitas_sin_exito})</SText>
+        </SView>
+        <SView col={"xs-12"} row >
+          <SView height={20} width={20} backgroundColor={STheme.color.danger} style={{ borderRadius: 40 }} />
+          <SView width={5} />
+          <SText>NO VISITADAS </SText>
+          <SText bold>({this.state.total_cliente - tot_visit})</SText>
+        </SView>
+      </SView>
+    </SView>
+  }
+
 
   render() {
     //if (!this.state.clientes) return this.getLoad();
-    console.log("this.state.clientes")
-    console.log(this.state.clientes)
+
+    let nroClientes = 0
+    // let nroClientes =(this.state?.clientes).length()
     // console.log("dataCliente")
     // console.log(this.state.dataCliente)
 
     //if (!this.state.ventas) return this.getLoad();
-    console.log("this.state.ventas")
-    console.log(this.state.ventas)
+
     return (
       <SPage disableScroll>
         <Container>
@@ -387,34 +478,7 @@ export default class detalle extends Component {
           {this.renerWithData()}
           {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
         </Container>
-        <SView center
-          style={{
-            position: 'absolute',
-            top: 140,
-            zIndex: 999,
-            backgroundColor: STheme.color.card,
-            borderTopRightRadius: 10,
-            borderBottomRightRadius: 10,
-            padding: 6
-          }}>
-          <SView col={"xs-12"}>
-            <SView col={"xs-12"}  row>
-              <SView height={20} width={20} backgroundColor={STheme.color.success} style={{ borderRadius: 40 }} />
-              <SView width={5} />
-              <SText>PEDIDOS</SText>
-            </SView>
-            <SView col={"xs-12"} row >
-              <SView height={20} width={20} backgroundColor={STheme.color.warning} style={{ borderRadius: 40 }} />
-              <SView width={5} />
-              <SText>VISITAS</SText>
-            </SView>
-            <SView col={"xs-12"} row >
-              <SView height={20} width={20} backgroundColor={STheme.color.danger} style={{ borderRadius: 40 }} />
-              <SView width={5} />
-              <SText>NO VISITADAS</SText>
-            </SView>
-          </SView>
-        </SView>
+        {this.cardDetalle()}
 
         <SMapView initialRegion={{
           latitude: -17.783799,
@@ -426,11 +490,13 @@ export default class detalle extends Component {
           <></>
           {this.getPolylines()}
           {this.getMarkersCliente()}
+          
 
           {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
           {this.getMarkers()}
+          
         </SMapView>
       </SPage>
     )

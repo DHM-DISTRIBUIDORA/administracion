@@ -139,7 +139,7 @@ class index extends DPA.profile {
         return null;
     }
 
-    $allowEdit() {
+    $allowEdit() { 
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
     $allowDelete() {
