@@ -436,7 +436,7 @@ export default class detalle extends Component {
         <SView col={"xs-12"} row>
           <SView height={20} width={20} backgroundColor={STheme.color.success} style={{ borderRadius: 40 }} />
           <SView width={5} />
-          <SText>PEDIDOS </SText>
+          <SText>PEDIDOS APP </SText>
           <SText bold>({pedidos})</SText>
         </SView>
         <SView col={"xs-12"} row >
