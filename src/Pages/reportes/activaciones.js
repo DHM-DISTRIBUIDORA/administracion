@@ -31,6 +31,7 @@ export default class index extends Component {
             Object.keys(data).map((item) => {
                 itemNew = newDataUser.find(dataItem => dataItem.key === data[item].key_usuario);
                 data[item].Nombres = itemNew ? itemNew.Nombres : null
+                data[item].usuario = itemNew;
             });
             this.setState({ data: data, loading: false })
 
@@ -52,7 +53,18 @@ export default class index extends Component {
                             { key: "index" },
                             // { key: "key_usuario", width: 150 },
                             { key: "fecha_on", label: "Fecha registro", width: 130, order: "desc", render: a => new SDate(a).toString("yyyy-MM-dd hh:mm:ss") },
-                            { key: "Nombres", width: 150 },
+                            { key: "usuario/Nombres", width: 150 },
+                            { key: "usuario/Apellidos", width: 150 },
+                            {
+                                key: "usuario-tipo", width: 150, render: u => {
+                                    if (u.idvendedor) {
+                                        return "VENDEDOR";
+                                    } else if (u.idtransportista) {
+                                        return "TRANSPORTISTA";
+                                    }
+                                    return "S/T";
+                                }
+                            },
                             { key: "tipo-", width: 40, component: (t) => <SView width={20} height={20} backgroundColor={t == "start" ? STheme.color.success : STheme.color.danger}></SView> },
                             { key: "tipo", width: 80 },
                             { key: "latitude", width: 150 },

@@ -209,9 +209,6 @@ export default class detalle extends Component {
           if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
           if (o.fecha_on.substring(0, 19) <= last_stop.fecha_on.substring(0, 18)) return;
         }
-        if (o.accuracy > 10) {
-          return;
-        }
         ITEMS.push({
           latitude: parseFloat(o.lat),
           longitude: parseFloat(o.lon)
@@ -300,15 +297,12 @@ export default class detalle extends Component {
 
           if (this.mensaje) {
             if (this.mapa) {
-              // new SThread(500, "asd", true).start(() => {
-              //   this.mapa.animateToRegion({
-              //     latitude: parseFloat(this.state.data[this.state.index].lat),
-              //     longitude: parseFloat(this.state.data[this.state.index].lon),
-              //     latitudeDelta: 0.01,
-              //     longitudeDelta: 0.01
-              //   }, 100)
-              // })
-
+              // this.mapa.animateToRegion({
+              //   latitude: parseFloat(this.state.data[this.state.index].lat),
+              //   longitude: parseFloat(this.state.data[this.state.index].lon),
+              //   latitudeDelta: 0.01,
+              //   longitudeDelta: 0.01
+              // }, 0)
             }
 
             // this.mensaje.setLabel("pedidos: 0     -    " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
@@ -350,21 +344,41 @@ export default class detalle extends Component {
         console.log(this.visit)
       }
       if (!o.clilat || !o.clilon) return null;
-      return <SMapView.SMarker width={68} height={73} onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
+      return <SMapView.SMarker onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
         {(o.visitas.length > 0) ?
-          <SView center flex col={"xs-12"} height={73} style={{zIndex:999, position:"relative"}}>
-            <SView col={"xs-12"} height={40} center >
-                <SView  width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
+          <SView>
+            <SView width={60} height={40} center >
+              <SView flex width={60} height={40} borderRadius={10} backgroundColor={STheme.color.white} style={{
                 borderWidth: 2,
                 borderColor: STheme.color.text,
-                position: "absolute",
-              }} center>
+              }}>
+                {/* <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                  overflow: "hidden",
+                }}> */}
+                {/* <SImage src={src} style={{
+                        width: "100%",
+                        height: "100%",
+                        resizeMode: "cover"
+                    }} /> */}
+                {/* </SView> */}
+                <SView style={{
+                  position: "absolute",
+                  width: "100%",
+                  height: "100%",
+                  borderRadius: 100,
+                }} center>
                   <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{o.clinom}</SText>
+
                 </SView>
+              </SView>
             </SView>
-            <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
+            <SIcon name={"MarcadorMapa"} width={34} height={34} fill={color} />
           </SView>
-          : <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />}
+          : <SIcon name={"MarcadorMapa"} width={34} height={34} fill={color} />}
       </SMapView.SMarker>
     })
   }

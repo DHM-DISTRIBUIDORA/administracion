@@ -255,7 +255,7 @@ class index extends DPA.profile {
                 icon: 'Ipedidos',
                 color: '#FF5A5F',
             })}
-            {this.ItemCard({
+            {/* {this.ItemCard({
                 label: "Ventas",
                 cant: this.state?.data_v?.cantidad_ventas,
                 monto: SMath.formatMoney(this.state.data_v.monto_total_ventas ?? 0),
@@ -264,7 +264,7 @@ class index extends DPA.profile {
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Icompras',
                 color: '#F9A435',
-            })}
+            })} */}
             {this.ItemCard({
                 label: "Pedidos",
                 cant: "Categorías",
