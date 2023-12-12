@@ -99,7 +99,7 @@ class index extends Component<CategoriaCardPropsType> {
                     </SView>
                 </SView>
                 <SView col={"xs-12"} center row>
-                    <SView col={"xs-3.5"} center height
+                    <SView col={"xs-4"} center height
                         style={{
                             backgroundColor: "#D7D9FF85",
                             padding: 3,
@@ -156,7 +156,7 @@ class index extends Component<CategoriaCardPropsType> {
                             <SView width={10} />
                         </SView>
                     </SView>
-                    <SView col={"xs-3.5"} center height
+                    <SView col={"xs-3"} center height
                         style={{
                             backgroundColor: "#FFEAD785",
                             padding: 3,
