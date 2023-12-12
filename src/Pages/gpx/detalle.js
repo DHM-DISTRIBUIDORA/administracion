@@ -209,6 +209,9 @@ export default class detalle extends Component {
           if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
           if (o.fecha_on.substring(0, 19) <= last_stop.fecha_on.substring(0, 18)) return;
         }
+        if (o.accuracy > 10) {
+          return;
+        }
         ITEMS.push({
           latitude: parseFloat(o.lat),
           longitude: parseFloat(o.lon)
@@ -297,12 +300,15 @@ export default class detalle extends Component {
 
           if (this.mensaje) {
             if (this.mapa) {
-              // this.mapa.animateToRegion({
-              //   latitude: parseFloat(this.state.data[this.state.index].lat),
-              //   longitude: parseFloat(this.state.data[this.state.index].lon),
-              //   latitudeDelta: 0.01,
-              //   longitudeDelta: 0.01
-              // }, 0)
+              // new SThread(500, "asd", true).start(() => {
+              //   this.mapa.animateToRegion({
+              //     latitude: parseFloat(this.state.data[this.state.index].lat),
+              //     longitude: parseFloat(this.state.data[this.state.index].lon),
+              //     latitudeDelta: 0.01,
+              //     longitudeDelta: 0.01
+              //   }, 100)
+              // })
+
             }
 
             // this.mensaje.setLabel("pedidos: 0     -    " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
@@ -388,7 +394,7 @@ export default class detalle extends Component {
     let tot_visit = 0;
     let pedidos = 0;
     let visitas_sin_exito = 0;
-     this.state.clientes.map((o) => {
+    this.state.clientes.map((o) => {
       console.log("CLIENTESSS")
       console.log(o)
 
@@ -401,7 +407,7 @@ export default class detalle extends Component {
           pedidos++;
           color = STheme.color.success
         } else {
-          color =  "#FFC010"
+          color = "#FFC010"
           visitas_sin_exito++;
 
         }
@@ -413,7 +419,7 @@ export default class detalle extends Component {
       }
 
     })
-    
+
     return <SView center
       style={{
         position: 'absolute',
@@ -490,13 +496,13 @@ export default class detalle extends Component {
           <></>
           {this.getPolylines()}
           {this.getMarkersCliente()}
-          
+
 
           {/* {this.getActivaciones()} */}
 
           {/* {this.getPoints()} */}
           {this.getMarkers()}
-          
+
         </SMapView>
       </SPage>
     )
