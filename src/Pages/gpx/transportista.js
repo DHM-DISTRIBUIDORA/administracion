@@ -352,7 +352,7 @@ export default class transportista extends Component {
 
     renerWithData() {
         if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
-        // if (!this.state?.data) return <SLoad />
+        if (!this.state?.data) return <SLoad />
         if (!this.state?.ventas) return <SLoad />
         console.log("this.state.ventas")
         console.log(this.state.ventas)
