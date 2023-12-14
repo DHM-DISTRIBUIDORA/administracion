@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SIcon, SInput, SLoad, SMapView, SNavigation, SPage, SRangeSlider, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SIcon, SInput, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
@@ -12,6 +12,7 @@ export default class transportista extends Component {
         this.state = {
             fecha: SNavigation.getParam("fecha"),
             // fecha_recorrido: new SDate().toString("yyyy-MM-dd"),
+            index:0,
             idemp: SNavigation.getParam("idemp"),
             key_usuario: SNavigation.getParam("key_usuario")
         }
@@ -371,37 +372,37 @@ export default class transportista extends Component {
                         //this.setState({ index: parseInt(e) })
                     }
 
-                    let datav = this.state.ventas.data;
+                    let datav = this.state.ventas;
                     let contador = 0;
                     let total = 0;
 
                     let fechaBase = this.state.fecha
                     // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
-                    let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
-                    if (this.state.index == (this.state.data.length - 1)) {
-                        Object.values(datav).map(a => {
+                    // let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
+                    // if (this.state.index == (this.state.data.length - 1)) {
+                    //     Object.values(datav).map(a => {
 
-                            Object.keys(a.detalle).map((key, index) => {
-                                total += a.detalle[key].vdpre * a.detalle[key].vdcan;
-                            });
-                            // console.log(fecha1)
-                            // console.log(fecha2)
-                            // console.log("siiiii")
-                            contador++;
-                        })
-                    } else {
-                        Object.values(datav).map(a => {
-                            let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
-                            if (fecha1 <= fecha2) {
-                                Object.keys(a.detalle).map((key, index) => {
-                                    total += a.detalle[key].vdpre * a.detalle[key].vdcan;
-                                });
-                                contador++;
-                            }
-                        })
-                    }
+                    //         Object.keys(a.detalle).map((key, index) => {
+                    //             total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                    //         });
+                    //         // console.log(fecha1)
+                    //         // console.log(fecha2)
+                    //         // console.log("siiiii")
+                    //         contador++;
+                    //     })
+                    // } else {
+                    //     Object.values(datav).map(a => {
+                    //         let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
+                    //         if (fecha1 <= fecha2) {
+                    //             Object.keys(a.detalle).map((key, index) => {
+                    //                 total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                    //             });
+                    //             contador++;
+                    //         }
+                    //     })
+                    // }
 
-                    this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+                    this.mensaje.setLabel("visitas: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
 
                     if (this.mensaje) {
                         if (this.mapa) {
@@ -436,7 +437,7 @@ export default class transportista extends Component {
             <SMapView ref={ref => this.mapa = ref}>
                 {this.getPolylines()}
                 {this.renderMarkers()}
-                {/* {this.getMarkers()} */}
+                {this.getMarkers()}
 
             </SMapView>
         </SPage>
