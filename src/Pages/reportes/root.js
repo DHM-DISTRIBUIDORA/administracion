@@ -23,6 +23,7 @@ export default class root extends Component {
                         <MenuButtom label={"DashBoard Transportista"} url={"/dashboard/transportista"} icon={<SIcon name={"Vendedor"} />} />
                         <MenuButtom label={"Pedidos por vendedor"} url={"/reportes/pedidos_por_vendedor"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Pedidos por proveedor"} url={"/reportes/pedidos_por_proveedor"} icon={<SIcon name={"MconPedidos"} />} />
+                        <MenuButtom label={"Entregas del transportista"} url={"/reportes/entregas_del_transportista"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Activaciones"} url={"/reportes/activaciones"} icon={<SIcon name={"MConPedidosMap"} />} />
                         <MenuButtom label={"pedidos_mapa"} url={"/reportes/pedidos_mapa"} icon={<SIcon name={"MConPedidosMap"} />} />
                         <MenuButtom label={"Clientes con pedidos"} url={"/reportes/clientes_con_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MconPedidos"} />} />
