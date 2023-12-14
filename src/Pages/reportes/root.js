@@ -36,6 +36,16 @@ export default class root extends Component {
                         <MenuButtom label={"Productos más vendidos"} url={"/reportes/productos_mas_vendidos"} icon={<SIcon name={"MProductoMasV"} />} />
                         <MenuButtom label={"Clientes con pedidos Mapa"} url={"/reportes/clientes_con_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} />
                         <MenuButtom label={"Clientes sin pedidos"} url={"/reportes/clientes_sin_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MsinPedidos"} />} />
+                        {/* <MenuButtom label={"Clientes sin pedidos"} icon={<SIcon name={"MsinPedidos"} />}   onPress={() => {
+                            SNavigation.navigate("/tbemt/profile/tbemp?pk=1", {
+                                onSelect: (empleado) => {
+                                    new SThread(100, "asdasd").start(() => {
+                                        SNavigation.navigate("/reportes/clientes_sin_pedidos", { idemp: empleado.idemp })
+                                    })
+
+                                }
+                            })
+                        }} /> */}
                         <MenuButtom label={"Clientes sin pedidos Mapa"} icon={<SIcon name={"MSinPedidosMap"} />} onPress={() => {
                             SNavigation.navigate("/tbzon", {
                                 onSelect: (zona) => {

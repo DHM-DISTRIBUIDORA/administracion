@@ -1,9 +1,10 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SInput, SLoad, SMapView, SNavigation, SPage, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SIcon, SInput, SLoad, SMapView, SNavigation, SPage, SRangeSlider, SText, STheme, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
+import { Container } from '../../Components';
 
 export default class transportista extends Component {
     constructor(props) {
@@ -68,10 +69,47 @@ export default class transportista extends Component {
     }
 
 
+    loadActivaciones(fecha) {
+        const request = {
+            component: "location_info",
+            type: "getAll",
+            key_usuario: this.state.key_usuario,
+            fecha_inicio: fecha,
+            fecha_fin: fecha,
+        }
+
+        SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
+            console.log(e);
+            let arr = Object.values(e.data);
+
+            this.setState({ activaciones: arr, loading: false })
+        }).catch(e => {
+            console.error(e);
+        })
+    }
+    loadData(fecha) {
+        console.log("FECHAAA AQUIII: " + fecha);
+        this.loadActivaciones(fecha)
+        this.setState({ data: null, error: "" })
+        getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
+            e.sort((a, b) => a.fecha_on > b.fecha_on ? 1 : -1)
+            console.log(e);
+            this.setState({ data: e, error: "" })
+        }).catch(e => {
+            if (!e) {
+                e = {
+                    error: "No hay datos en esta fecha."
+                }
+            }
+            this.setState({ data: null, error: e?.message ?? e?.error })
+            console.error(e);
+        })
+    }
 
     loadGpx(fecha) {
         getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
             e.sort((a, b) => a.fecha_on > b.fecha_on ? 1 : -1)
+            this.setState({ data: e, error: "" })
             if (this.mapa) {
                 console.log("centrando", e)
                 let arr = []
@@ -126,7 +164,27 @@ export default class transportista extends Component {
                     }
                 }
             }
-            return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color}></SMapView.SMarker>
+            // console.log("obj")
+            // console.log(obj)
+            // console.log("VISITAS")
+            // console.log(this.state.visita[obj.idven])
+            return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color}>
+                {(this.state.visita[obj.idven]?.tipo == "ENTREGADO") ?
+                    <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative" }}>
+                        <SView col={"xs-12"} height={40} center >
+                            <SView width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
+                                borderWidth: 2,
+                                borderColor: STheme.color.text,
+                                position: "absolute",
+                            }} center>
+                                <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{obj.clinom} </SText>
+                            </SView>
+                        </SView>
+                        <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
+                    </SView>
+                    : <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />}
+
+            </SMapView.SMarker>
         })
     }
 
@@ -144,7 +202,11 @@ export default class transportista extends Component {
                 </SView>
                 <SView width={8} />
                 <SView width={150}>
-                    <SInput defaultValue={this.state.fecha} label={"Fecha de los pedidos"} type='date' />
+                    <SInput defaultValue={this.state.fecha} label={"Fecha de los pedidos"} type='date' onChange={(e) => {
+                        // this.state.fecha = e.fecha;
+                        this.loadData(e)
+                        // this.componentDidMount()
+                    }} />
                 </SView>
             </SView>
         </SView>
@@ -190,15 +252,205 @@ export default class transportista extends Component {
 
         })
     }
+
+    cardDetalle() {
+        if (!this.state?.ventas) return null;
+        let total_cliente = this.state?.ventas.length ?? 0;
+        let entrega_parcial = 0;
+        let pedidos = 0;
+        let no_entregado = 0;
+        let no_visitados = 0;
+        this.state.ventas.map((o) => {
+            // console.log("CLIENTESSS")
+            // console.log(o)
+
+            if (this.state.visita) {
+                let visita = this.state.visita[o.idven];
+                if (visita) {
+                    if (visita.tipo == "ENTREGADO") {
+                        pedidos++;
+                    } else if (visita.tipo == "ENTREGADO PARCIALMENTE") {
+                        entrega_parcial++;
+                    } else {
+                        no_entregado++;
+                    }
+                }
+            } else {
+                no_visitados++;
+            }
+
+            // let color = STheme.color.danger
+            //   if (o.visitas.length > 0) {
+            //     tot_visit++;
+            //     if (o.ventas.length > 0) {
+            //       pedidos++;
+            //       color = STheme.color.success
+            //     } else {
+            //       color = "#FFC010"
+            //       visitas_sin_exito++;
+            //     }
+            //   }
+        })
+
+        return <SView center
+            style={{
+                position: 'absolute',
+                top: 140,
+                zIndex: 9999,
+                backgroundColor: STheme.color.card,
+                borderTopRightRadius: 10,
+                borderBottomRightRadius: 10,
+                padding: 6
+            }}>
+            <SView col={"xs-12"}>
+                <SView col={"xs-12"} row>
+                    <SText>TOTAL CLIENTES </SText>
+                    <SText bold>({total_cliente})</SText>
+                </SView>
+                <SView col={"xs-12"} row>
+                    <SView height={20} width={20} backgroundColor={STheme.color.success} style={{ borderRadius: 40 }} />
+                    <SView width={5} />
+                    <SText>ENTREGADOS </SText>
+                    <SText bold>({pedidos})</SText>
+                </SView>
+                <SView col={"xs-12"} row>
+                    <SView height={20} width={20} backgroundColor={STheme.color.warning} style={{ borderRadius: 40 }} />
+                    <SView width={5} />
+                    <SText>ENTREGA PARCIAL </SText>
+                    <SText bold>({entrega_parcial})</SText>
+                </SView>
+                <SView col={"xs-12"} row>
+                    <SView height={20} width={20} backgroundColor={STheme.color.danger} style={{ borderRadius: 40 }} />
+                    <SView width={5} />
+                    <SText>NO ENTREGADO </SText>
+                    <SText bold>({no_entregado})</SText>
+                </SView>
+                <SView col={"xs-12"} row>
+                    <SView height={20} width={20} backgroundColor={"#666"} style={{ borderRadius: 40 }} />
+                    <SView width={5} />
+                    <SText>NO VISITADOS </SText>
+                    <SText bold>({no_visitados})</SText>
+                </SView>
+            </SView>
+        </SView>
+
+
+    }
+
+    getMarkers = () => {
+        if (!this.state?.data) return <></>;
+        if (this.state?.data.length == 0) return <></>;
+
+        return <SMapView.SMarker key={this.state.index}
+            fill='#00f'
+            ref={ref => this.marker = ref}
+            latitude={parseFloat(this.state.data[this.state.index].lat)}
+            longitude={parseFloat(this.state.data[this.state.index].lon)}
+            fecha_on={this.state.data[this.state.index].fecha_on}
+        ></SMapView.SMarker >
+    }
+
+    renerWithData() {
+        if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
+        // if (!this.state?.data) return <SLoad />
+        if (!this.state?.ventas) return <SLoad />
+        console.log("this.state.ventas")
+        console.log(this.state.ventas)
+        return <>
+            <SRangeSlider
+                range={[0, this.state.data.length - 1]}
+                defaultValue={this.state.index}
+                onChange={(e) => {
+                    this.state.index = parseInt(e);
+                    if (this.marker) {
+                        // console.log(this.state.data[this.state.index]);
+                        this.marker.setCoordinate({
+                            latitude: parseFloat(this.state.data[this.state.index].lat),
+                            longitude: parseFloat(this.state.data[this.state.index].lon)
+                        })
+                        //this.setState({ index: parseInt(e) })
+                    }
+
+                    let datav = this.state.ventas.data;
+                    let contador = 0;
+                    let total = 0;
+
+                    let fechaBase = this.state.fecha
+                    // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
+                    let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
+                    if (this.state.index == (this.state.data.length - 1)) {
+                        Object.values(datav).map(a => {
+
+                            Object.keys(a.detalle).map((key, index) => {
+                                total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                            });
+                            // console.log(fecha1)
+                            // console.log(fecha2)
+                            // console.log("siiiii")
+                            contador++;
+                        })
+                    } else {
+                        Object.values(datav).map(a => {
+                            let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
+                            if (fecha1 <= fecha2) {
+                                Object.keys(a.detalle).map((key, index) => {
+                                    total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                                });
+                                contador++;
+                            }
+                        })
+                    }
+
+                    this.mensaje.setLabel("pedidos: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+
+                    if (this.mensaje) {
+                        if (this.mapa) {
+                            // new SThread(500, "asd", true).start(() => {
+                            //   this.mapa.animateToRegion({
+                            //     latitude: parseFloat(this.state.data[this.state.index].lat),
+                            //     longitude: parseFloat(this.state.data[this.state.index].lon),
+                            //     latitudeDelta: 0.01,
+                            //     longitudeDelta: 0.01
+                            //   }, 100)
+                            // })
+
+                        }
+
+                        // this.mensaje.setLabel("pedidos: 0     -    " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
+                    }
+                }} />
+            <Mensajes ref={ref => this.mensaje = ref} />
+            {/* <SText>{new SDate(this.state.data[this.state.index].fecha_on, "yyyy-MM-ddThh:mm:ss.SSSZ").toString("yyyy-MM-dd hh:mm:ss")}</SText> */}
+        </>
+    }
+
+
     render() {
         // console.log(this.state)
         return <SPage disableScroll>
-            {this.getHeader()}
+            <Container>
+                {this.getHeader()}
+                {this.renerWithData()}
+            </Container>
+            {this.cardDetalle()}
             <SMapView ref={ref => this.mapa = ref}>
                 {this.getPolylines()}
                 {this.renderMarkers()}
+                {/* {this.getMarkers()} */}
 
             </SMapView>
         </SPage>
+    }
+}
+
+class Mensajes extends Component {
+    state = {
+        label: "FECHA"
+    }
+    setLabel(label) {
+        this.setState({ label: label })
+    }
+    render() {
+        return <SText>{this.state.label}</SText>
     }
 }
