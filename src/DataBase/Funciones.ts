@@ -78,7 +78,6 @@ const tablesLoading: any = {};
 
 export const SaveChanges = async (table: TableAbstract) => {
     if (tablesLoading[table.scheme.name]) return;
-    tablesLoading[table.scheme.name] = true;
     const _insert = await table.filtered("sync_type == 'insert' || sync_type == 'update' || sync_type == 'delete'");
     if (_insert.length > 0) {
 
@@ -103,6 +102,7 @@ export const SaveChanges = async (table: TableAbstract) => {
         for (const key in _insert) {
             const obj = _insert[key];
             try {
+                tablesLoading[table.scheme.name] = true;
                 const resp = await SSocket.sendHttpAsync(SSocket.api.root + "api", {
                     component: table.scheme.name,
                     type: "save",
@@ -141,6 +141,7 @@ export const SaveChanges = async (table: TableAbstract) => {
                 //     })
                 // }
             } catch (error: any) {
+                tablesLoading[table.scheme.name] = false;
                 SNotification.send({
                     title: table.scheme.name,
                     body: "Error al guardar cambios " + (JSON.stringify(error?.error) ?? JSON.stringify(error)) ?? "",
@@ -152,7 +153,6 @@ export const SaveChanges = async (table: TableAbstract) => {
         }
         notify.close();
     }
-    tablesLoading[table.scheme.name] = false;
 }
 
 export const TimeHilo = 1000 * 45;

@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { SDate, SHr, SNavigation, SPopup, SText, STheme, SView } from 'servisofts-component'
 import { Btn } from '../../../../Components'
