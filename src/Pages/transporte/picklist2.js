@@ -66,7 +66,7 @@ export default class picklist extends Component {
                 { key: "prdnom", width: 300 },
                 // { key: "cantidad_vendido-unid", label: "Unid.", width: 100, cellStyle: { textAlign: "right" } },
                 // { key: "cantidad_vendido-cantp", label: "Cantidad Preventa", width: 100, cellStyle: { textAlign: "right" } },
-                { key: "cantidad_vendido-cant", label: "C. Vendida", width: 60,sumar: true,renderTotal:a=>parseInt(a), cellStyle: { textAlign: "right" }},
+                { key: "cantidad_vendido-cant", label: "C. Vendida", width: 60, sumar: true, renderTotal: a => parseInt(a), cellStyle: { textAlign: "right" } },
                 // { key: "-dif", label: "Diferencia Devolucion", width: 100, cellStyle: { textAlign: "right" }, render: a => 0 },
                 { key: "-precio", label: "Precio de Venta", width: 100, cellStyle: { textAlign: "right" }, render: (a) => SMath.formatMoney((a.total_vendido ?? 0) / (a.cantidad_vendido ?? 0)) },
                 { key: "total_vendido", label: "Total Vendido Bs.", width: 100, sumar: true, cellStyle: { textAlign: "right" }, render: (a) => SMath.formatMoney(a) },
