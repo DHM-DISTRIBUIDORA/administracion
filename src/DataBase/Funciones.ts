@@ -1,7 +1,7 @@
 import { TableAbstract } from "servisofts-db"
 import SSocket from "servisofts-socket"
 import DataBase from "."
-import { SDate, SNotification, SPopup, SStorage, STheme } from "servisofts-component"
+import { SDate, SNotification, SPopup, SStorage, STheme, SThread } from "servisofts-component"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -103,6 +103,9 @@ export const SaveChanges = async (table: TableAbstract) => {
             const obj = _insert[key];
             try {
                 tablesLoading[table.scheme.name] = true;
+                new SThread(5000, "no_murio_" + table.scheme.name, true).start(() => {
+                    tablesLoading[table.scheme.name] = false;
+                })
                 const resp = await SSocket.sendHttpAsync(SSocket.api.root + "api", {
                     component: table.scheme.name,
                     type: "save",
