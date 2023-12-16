@@ -2,21 +2,31 @@ import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
 import { SLoad, SMath, SNavigation, SPage, SPopup, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../Components/Fechas'
+import DataBase from '../../DataBase'
 export default class index extends Component {
+    state = {
+    }
+    
     componentDidMount(){
         // if(!SNavigation.getParam("idemp")){
         //     SNavigation.goBack();
         //     SPopup.alert("Usted no tiene un idemp")
         // }
+
+        // DataBase.tbemp.objectForPrimaryKey(parseInt(SNavigation.getParam("pk"))).then(e => {
+        //     this.setState({ dataEmp: e })
+        // }).catch(e => {
+        //     console.error(e)
+        // })
     }
-    getData({ fecha_inicio, fecha_fin }) {
+    getData({ fecha_inicio, fecha_fin }) { 
 
         const request = {
             component: "reporte",
             type: "getClienteSinPedidos",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            // idemp:SNavigation.getParam("idemp")
+            idemp:SNavigation.getParam("idemp")
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
