@@ -328,7 +328,7 @@ class pedidoDetalle extends Component {
                                 }}
                             >
                                 <SMapView.SMarker latitude={objeto?.clilat} longitude={objeto?.clilon}  >
-                                    <SIcon name="MarcadorMapa" width={35} height={55} fill={STheme.color.primary} />
+                                    <SIcon name="MarcadorMapa" width={25} height={45} fill={STheme.color.primary} />
                                 </SMapView.SMarker>
                             </SMapView>
                             <SView col={"xs-12"} height style={{
