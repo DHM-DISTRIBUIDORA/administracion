@@ -26,7 +26,7 @@ export default ({ state }) => {
     const fecha = SNavigation.getParam("fecha")
 
 
-    return <SView col={"xs-12"}
+    return <SView 
         // backgroundColor={STheme.color.background}
         style={{
             position: "absolute"

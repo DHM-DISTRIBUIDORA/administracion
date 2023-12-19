@@ -97,6 +97,8 @@ export default class MapaComponent extends Component {
                 }}
                 renderMarker={renderCluster}
                 renderCluster={renderCluster}
+                showsUserLocation={true} // here is what I thought should show it
+                showsMyLocationButton={true}
                 data={data}
             />
             <Btn onPress={() => {
