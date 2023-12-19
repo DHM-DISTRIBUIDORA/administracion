@@ -32,11 +32,17 @@ export default class index extends Component {
     render() {
         return (
             <SPage title="Clientes con pedidos" disableScroll>
-                <SelectEntreFechas fecha_inicio={"2023-12-08"} onChange={e => this.getData(e)} />
+                <SelectEntreFechas
+                    fecha_inicio={"2023-12-18"}
+                    onChange={e => this.getData(e)} />
                 <SView flex>
                     <STable2
                         header={[
                             { key: "index" },
+                            { key: "lincod", width: 150 },
+                            { key: "linnom", width: 150 },
+                            { key: "prdcod", width: 150 },
+                            { key: "prdnom", width: 150 },
                             { key: "empcod", width: 150 },
                             { key: "empnom", width: 300 },
                             { key: "clicod", width: 150, label: "Código cliente" },
@@ -45,11 +51,13 @@ export default class index extends Component {
                             { key: "clilon", width: 100, },
                             { key: "pedidolat", width: 100, },
                             { key: "pedidolon", width: 100, },
-                            // { key: "cantidad", width: 100, cellStyle: { textAlign: "end" }, sumar: true, order: "desc" },
-                            // { key: "monto", width: 100, cellStyle: { textAlign: "end" }, sumar: true, render: a => SMath.formatMoney(a), renderTotal: a => SMath.formatMoney(a) },
+                            { key: "vfec", width: 100, render: a => (a + "").substring(0, 10) },
+                            { key: "vhora", width: 100, render: a => (a + "").substring(11, 19) },
+                            // {key: "cantidad", width: 100, cellStyle: {textAlign: "end" }, sumar: true, order: "desc" },
+                            // {key: "monto", width: 100, cellStyle: {textAlign: "end" }, sumar: true, render: a => SMath.formatMoney(a), renderTotal: a => SMath.formatMoney(a) },
 
-                            // { key: "clilat", width: 150 },
-                            // { key: "clilon", width: 150 },
+                            // {key: "clilat", width: 150 },
+                            // {key: "clilon", width: 150 },
                         ]}
                         limit={50}
                         rowHeight={30}
