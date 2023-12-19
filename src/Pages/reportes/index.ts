@@ -14,6 +14,7 @@ import pedidos_por_proveedor from "./pedidos_por_proveedor"
 import entregas_del_transportista from "./entregas_del_transportista"
 import pedidos_mapa from "./pedidos_mapa"
 import activaciones from "./activaciones"
+import pedidos_rebotados from "./pedidos_rebotados"
 import profile from './profile/index';
 import log from "./log"
 import Model from '../../Model';
@@ -42,6 +43,7 @@ export default SPage.combinePages("reportes", {
     pedidos_por_proveedor,
     entregas_del_transportista,
     pedidos_mapa,
+    pedidos_rebotados,
     log,
     ...profile
 });

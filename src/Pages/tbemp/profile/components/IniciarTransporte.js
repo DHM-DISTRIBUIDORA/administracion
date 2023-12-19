@@ -22,6 +22,7 @@ export default class IniciarTransporte extends Component {
                     SBLocation.isActive().then(e => {
                         if (e.estado == "exito") {
                             SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.props.fecha })
+                            return;
                         }
                         SPopup.alert("Debe activarse en el inicio para realizar pedidos.")
                     }).catch(e => {

@@ -1,9 +1,10 @@
-import { Text, View } from 'react-native'
+import { Platform, Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { SBuscador, SButtom, SDate, SHr, SIcon, SInput, SList, SLoad, SMapView, SNavigation, SPage, SPopup, SText, STheme, SView } from 'servisofts-component'
 import { Btn, Container, Popups } from '../../Components'
 import DataBase from '../../DataBase'
 import { Trigger } from 'servisofts-db'
+import SBLocation from 'servisofts-background-location'
 export default class root extends Component {
     constructor(props) {
         super(props);
@@ -123,13 +124,41 @@ export default class root extends Component {
                                     // if (!vd.clilat || !vd.clilon) {
                                     //     SPopup.open({ content: <Popups.AgregarUbicacion /> });
                                     // }
-                                    SNavigation.navigate("/transporte/pedidoDetalle", {
-                                        idven: vd.idven + "",
-                                        idemp: this.props?.state?.idemp,
-                                        visitaType: "transporte",
-                                        visita: curvisita,
-                                        pk: vd.idcli + "",
+                                    if (Platform.OS == "web") {
+                                        SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                            idven: vd.idven + "",
+                                            idemp: this.props?.state?.idemp,
+                                            visitaType: "transporte",
+                                            visita: curvisita,
+                                            pk: vd.idcli + "",
+                                         })
+                                        return;
+                                    };
+                                    SBLocation.isActive().then(e => {
+                                        if (e.estado == "exito") {
+                                            SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                                idven: vd.idven + "",
+                                                idemp: this.props?.state?.idemp,
+                                                visitaType: "transporte",
+                                                visita: curvisita,
+                                                pk: vd.idcli + "",
+                                             })
+                                            return;
+                                        }
+                                        SPopup.alert("Debe activarse en el inicio para realizar pedidos.")
+                                    }).catch(e => {
+                                        SPopup.alert("Debe activarse en el inicio para realizar pedidos.")
                                     })
+
+
+
+                                    // SNavigation.navigate("/transporte/pedidoDetalle", {
+                                    //     idven: vd.idven + "",
+                                    //     idemp: this.props?.state?.idemp,
+                                    //     visitaType: "transporte",
+                                    //     visita: curvisita,
+                                    //     pk: vd.idcli + "",
+                                    // })
                                 }}
                             >
                                 <SView col={"xs-9"} >

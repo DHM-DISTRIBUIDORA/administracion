@@ -1,21 +1,29 @@
 import React, { Component } from 'react'
-import { SBuscador, SMapView, SNavigation, SText, STheme, SView } from 'servisofts-component'
+import { SBuscador, SMapView, SNavigation, SText, STheme, SThread, SView } from 'servisofts-component'
 import SRC from '../../Components/SRC';
 import MarkerCircle from '../../Components/Marker/MarkerCircle';
 import SSocket from 'servisofts-socket'
 import Model from '../../Model';
+import { Btn } from '../../Components';
 
 
 
 export default class MapaComponent extends Component {
+
+    center(arrLatLng2) {
+        if (!this.map) return;
+        if (!arrLatLng2.length) return;
+        this.map.fitToCoordinates(arrLatLng2, {})
+    }
+
     render() {
         const { state, setState } = this.props;
 
         const clientes = state.data ?? []
-        let visitas_ok= {}
+        let visitas_ok = {}
         let arrLatLng = [];
         let arrLatLng2 = [];
-       
+
         clientes.map(o => {
             console.log("00000000")
             console.log(o)
@@ -28,9 +36,6 @@ export default class MapaComponent extends Component {
             }
             console.log("visitaaaaaaaaaaaaaaas")
             console.log(visitas_ok)
-
-
-
 
             // if (state.busqueda) {
 
@@ -93,7 +98,7 @@ export default class MapaComponent extends Component {
                             idven: o.idven + "",
                             idemp: this.props?.state?.idemp,
                             visitaType: "transporte",
-                            visita: visitas[0],
+                            visita: state?.visitas[0],
                         })
                     }
 
@@ -101,27 +106,46 @@ export default class MapaComponent extends Component {
             })
         })
         // if (!arrLatLng.length) return <SText>NO HAY UBICACIONES</SText>;
+        if (!arrLatLng2.length) return <SView col={"xs-12"} flex center>
+            <SText bold fontSize={18}>NO HAY UBICACIONES PARA VISITAR</SText>
+        </SView>
+        new SThread(1000, "centermap", true).start(() => {
+            this.center(arrLatLng2)
+        })
         return <SView col={"xs-12"} flex>
-            <SMapView ref={map => {
-                if (map) {
-                    if (!arrLatLng.length) return;
-                    map.fitToCoordinates(arrLatLng2, {
-                        edgePadding: {
-                            top: 100,
-                            right: 100,
-                            bottom: 100,
-                            left: 100
-                        },
-                        animated: true,
-                    
-                    })
-                    console.log("RTRTRTRT")
-                }
+            <SMapView
+                showsUserLocation={true} // here is what I thought should show it
+                showsMyLocationButton={true}
+                initialRegion={{
+                    latitude: -17.783799,
+                    longitude: -63.180,
+                    latitudeDelta: 0.1,
+                    longitudeDelta: 0.1
+                  }}
+                  
+                ref={map => {
+                    if (map) {
+                        if (!arrLatLng.length) return;
+                        map.fitToCoordinates(arrLatLng2, {
+                            edgePadding: {
+                                top: 100,
+                                right: 100,
+                                bottom: 100,
+                                left: 100
+                            },
+                            animated: true,
 
-            }}>
+                        })
+                        console.log("RTRTRTRT")
+                    }
+
+                }}>
                 <></>
                 {arrLatLng.map(o => MarkerCircle(o))}
             </SMapView>
+            {/* <Btn onPress={() => {
+                this.center(arrLatLng2)
+            }}>CENTRAR</Btn> */}
         </SView>
     }
 }
