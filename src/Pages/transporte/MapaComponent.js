@@ -42,6 +42,11 @@ export default class MapaComponent extends Component {
             //     if (JSON.stringify(o).indexOf(state.busqueda) <= -1) return;
             // }
             if (!o.clilat || !o.clilon) return;
+            if (state?.busqueda) {
+                console.log(state.busqueda)
+                console.log(o.clinom)
+                if (!o.clinom.toLowerCase().includes(state.busqueda.toLowerCase())) return
+            }
             arrLatLng2.push({
                 latitude: o.clilat,
                 longitude: o.clilon,
