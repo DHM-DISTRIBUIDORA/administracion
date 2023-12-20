@@ -22,7 +22,9 @@ class index extends DPA.profile {
         cantidad_pedidos: 0,
         minima_venta: 0,
         primer_venta: "0000-00-00",
-        ultima_venta: "0000-00-00"
+        ultima_venta: "0000-00-00",
+        fecha_inicio: SNavigation.getParam("fecha_inicio"),
+        fecha_fin: SNavigation.getParam("fecha_fin"),
         // primer_compra: new SDate(),
         // ultima_compra: new SDate()
 
@@ -70,18 +72,18 @@ class index extends DPA.profile {
     }
 
     loadData({ fecha_inicio, fecha_fin }) {
-        // SSocket.sendPromise({
-        //     component: "tbcli",
-        //     type: "getPerfil",
-        //     idcli: this.pk + "",
-        //     fecha_inicio,
-        //     fecha_fin
-        // }).then((e) => {
-        //     const obj = e.data[0]
-        //     console.log("tbcli getPerfil", obj)
-        //     this.setState({ ...obj })
-        // }).catch(e => console.error(e))
-        // this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
+        SSocket.sendPromise({
+            component: "tbcli",
+            type: "getPerfil",
+            idcli: this.pk + "",
+            fecha_inicio,
+            fecha_fin
+        }).then((e) => {
+            const obj = e.data[0]
+            console.log("tbcli getPerfil", obj)
+            this.setState({ ...obj })
+        }).catch(e => console.error(e))
+        this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
     }
 
     visitaRegistro({ descripcion, tipo, monto }) {
@@ -502,7 +504,7 @@ class index extends DPA.profile {
             {this.getDetalleCarga()}
             <SHr h={8} />
             {this.getUbicacion(obj)}
-            <SelectEntreFechas onChange={e => {
+            <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => {
                 this.loadData(e)
             }} />
             <SHr height={20} />
@@ -510,22 +512,23 @@ class index extends DPA.profile {
             <SView col={"xs-12"} center row style={{
                 justifyContent: "space-between"
             }}>
+
                 {this.ItemCard({
-                    label: "Total ventas",
-                    cant: this.state.cantidad_ventas ?? 0,
-                    monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
-                    icon: 'Icompras',
-                    color: '#8CB45F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
-                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
-                })}
-                {this.ItemCard({
-                    label: "Total pedidos",
-                    cant: this.state.cantidad_pedidos,
-                    monto: SMath.formatMoney(this.state.monto_total_pedidos ?? 0),
+                    label: "Total productos",
+                    cant: this.state.cantidad_productos,
+                    monto: this.state.monto_pedidos ?? 0,
                     icon: 'Ipedidos',
                     color: '#FF5A5F',
-                    onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                })}
+                {this.ItemCard({
+                    label: "Rechazos",
+                    cant: this.state.cantidad_ventas ?? 0,
+                    // monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
+                    icon: 'Alert',
+                    color: '#FF5A5F',
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
                 })}
                 {/* {this.ItemCard({
                     label: "Máxima venta",

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
 import { SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
-import { SelectEntreFechas } from '../../Components/Fechas'
-import { Link } from '../../Components'
+import { SelectEntreFechas } from '../../../Components/Fechas'
+import { Link } from '../../../Components'
 export default class index extends Component {
     state = {
     }
@@ -13,7 +13,7 @@ export default class index extends Component {
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
         }
-        this.setState({ loading: true })
+        this.setState({ loading: true, fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             console.log(e);
             this.setState({ data: e.data, loading: false })
@@ -33,20 +33,30 @@ export default class index extends Component {
                 // { key: "idemp", width: 50 },
                 { key: "lincod", width: 50 },
                 { key: "linnom", width: 200 },
-                { key: "montos", label: "Monto", width: 70, order: "desc", sumar: true,  renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "montos", label: "Monto", width: 70, order: "desc", sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 { key: "productos", label: "Cant. Productos", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "clientes", width: 70,  cellStyle: { textAlign: "center" } },
                 // { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 // { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight:"bold" } },
                 // { key: "fecha_primero", width: 130 },
                 // { key: "fecha_ultimo", width: 130 },
-                // { key: "idemp-ver", width: 130, component: (a) => <Link onPress={() => { SNavigation.navigate("/tbemp/profile", { pk: a }) }} >{"Ver perfil"}</Link> },
+                {
+                    key: "-clientes", width: 130, component: (a) => <Link onPress={() => {
+                        SNavigation.navigate("/reportes/pedidos_por_proveedor/clientes", {
+                            lincod: a.lincod,
+                            fecha_inicio: this.state.fecha_inicio,
+                            fecha_fin: this.state.fecha_fin,
+                        })
+                    }
+                    } >{"Ver clientes"}</Link>
+                },
             ]}
             limit={50}
             data={this.state?.data} />
     }
     render() {
         return (
-            <SPage title="Pedidos por vendedores" disableScroll>
+            <SPage title="Pedidos por proveedor" disableScroll>
                 <SelectEntreFechas onChange={e => this.getData(e)} />
                 <SView flex>
                     {this.getTable()}
