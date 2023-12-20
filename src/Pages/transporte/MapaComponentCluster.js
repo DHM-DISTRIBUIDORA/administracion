@@ -40,6 +40,11 @@ export default class MapaComponent extends Component {
 
         clientes.map(o => {
             if (!o.clilat || !o.clilon) return;
+            if (state?.busqueda) {
+                console.log(state.busqueda)
+                console.log(o.clinom)
+                if (!o.clinom.toLowerCase().includes(state.busqueda.toLowerCase())) return
+            }
             data.push({ id: o.idven, clinom: o.clinom, tbvd: o.tbvd, location: { latitude: o.clilat, longitude: o.clilon } });
             dataLatLng.push({ latitude: o.clilat, longitude: o.clilon });
         });
