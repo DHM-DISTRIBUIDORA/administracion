@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Parent } from '.';
 
-import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SInput, SPopup, SGeolocation, SMapView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SInput, SPopup, SGeolocation, } from 'servisofts-component';
 // import { AccentBar, PButtom } from '../../Components';
 import Model from '../../Model';
 import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
 import Btn from '../../Components/PButtom';
-// import SMapView from 'servisofts-component/Component/SMapView';
 // import PopupAutoCompleteDireccion from './profile/Components/PopupAutoCompleteDireccion';
 // import PopupAutoCompleteDireccion from './Components/PopupAutoCompleteDireccion';
 class index extends Component {
@@ -39,9 +38,9 @@ class index extends Component {
     }
 
     componentDidMount() {
-        // if (this.state.nodefault) {
-        //     this.center();
-        // }
+        if (this.state.nodefault) {
+            this.center();
+        }
     }
 
     center() {
@@ -87,8 +86,11 @@ class index extends Component {
                             padding: 4,
                         }}
                         type='textArea'
+                        // editable={false}
                         placeholder={"Escribe la dirección"}
+                        // value={this.state?.data?.direccion ? `${this.state?.data?.direccion.substring(0, 50)}${this.state?.data?.direccion.length > 50 ? "..." : ""}` : ""}
                         defaultValue={this?.obj?.clidir}
+                    // iconR={<SIcon name={"SearchTapeke"} width={40} height={18} fill={STheme.color.primary} />}
                     />
                 </SView>
             </SView>
@@ -136,38 +138,34 @@ class index extends Component {
         </SView>
     }
     render() {
+        // if (!this.state.ready) return <SLoad />
         return (
             <SPage center disableScroll>
-                <SView col={"xs-12"} flex center>
-                    <SMapView
-                        showsUserLocation={true} 
-                        showsMyLocationButton={true}
-                        onRegionChangeComplete={(evt) => {
-                            // this.setState({ lat: evt.latitude, lon: evt.longitude })
-                            this.state.lat = evt.latitude;
-                            this.state.lon = evt.longitude;
-                            console.log("onRegionChangeComplete")
-                            console.log(evt)
-                        }}
-                        initialRegion={{
-                            latitude: (this?.state?.lat != 0) ? this?.state?.lat : -17.783799,
-                            longitude: (this?.state?.lon != 0) ? this?.state?.lon : -63.180,
-                            latitudeDelta: 0.1,
-                            longitudeDelta: 0.1
-                        }}
-                    >
-                        <></>
-                    </SMapView>
-                        <SView width={25} height={39.5} center style={{position: "absolute", }}>
-                            <SImage src={require('../../Assets/img/markerc.png')}
-                                style={{
-                                    position: "relative",
-                                    top: -15,
-                                }}
-                            />
-                        </SView>
-                </SView>
+                <GeolocationMapSelect
+                    initialRegion={{
+                        // latitude: (this?.all?.lat != 0) ? this?.all?.lat : -17.783799,
+                        // longitude: (this?.all?.lon != 0) ? this?.all?.lon : -63.180,
+                        latitude: this.state.lat,
+                        longitude: this.state.lon,
+                        latitudeDelta: 0.005,
+                        longitudeDelta: 0.005
+                    }}
+                    ref={(map) => this.map = map}
+                    icon={<SIcon name="MarcadorMapa" width={25} height={40} fill={STheme.color.primary} />}
+                    onChange={(evt) => {
+                        this.setState({ lat: evt.latitude, lon: evt.longitude })
+                    }} />
                 {this.getComponentBottom()}
+                <SView style={{
+                    width: 50,
+                    height: 50,
+                    position: "absolute",
+                    bottom: 200,
+                    right: 4,
+                }} center card padding={8} onPress={() => { this.center() }}>
+                    <SIcon name="Marker" width={20} height={20} />
+                    <SText center fontSize={10} font='Roboto' underLine>Centrar</SText>
+                </SView>
             </SPage>
         );
     }

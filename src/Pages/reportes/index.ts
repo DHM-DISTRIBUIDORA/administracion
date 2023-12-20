@@ -40,10 +40,10 @@ export default SPage.combinePages("reportes", {
     visita_transportista,
     clientes_con_sin_pedidos_mapa,
     pedidos_por_vendedor,
-    pedidos_por_proveedor,
     entregas_del_transportista,
     pedidos_mapa,
     pedidos_rebotados,
     log,
+    ...pedidos_por_proveedor,
     ...profile
 });
