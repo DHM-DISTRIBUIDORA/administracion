@@ -514,6 +514,13 @@ class index extends DPA.profile {
             }}>
 
                 {this.ItemCard({
+                    label: "Total pedidos",
+                    cant: this.state.cantidad_pedidos,
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                })}
+                {this.ItemCard({
                     label: "Total productos",
                     cant: this.state.cantidad_productos,
                     monto: this.state.monto_pedidos ?? 0,
