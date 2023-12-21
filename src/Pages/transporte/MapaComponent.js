@@ -27,7 +27,7 @@ export default class MapaComponent extends Component {
 
     componentDidMount() {
 
-        SStorage.getItem("last_location2", resp => {
+        SStorage.getItem("last_location", resp => {
             if (!resp) {
                 this.setState({ loading: true })
                 return;
@@ -189,7 +189,7 @@ export default class MapaComponent extends Component {
 
                 }}
                 onRegionChangeComplete={(evt) => {
-                    SStorage.setItem("last_location2", JSON.stringify(evt))
+                    SStorage.setItem("last_location", JSON.stringify(evt))
                     console.log("onRegionChangeComplete")
                     console.log(evt)
                 }}

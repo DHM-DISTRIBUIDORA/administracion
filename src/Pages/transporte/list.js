@@ -105,7 +105,7 @@ export default class root extends Component {
                     initSpace={8}
                     space={5}
                     buscador
-                    // limit={20}
+                    limit={10}
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {

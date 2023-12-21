@@ -508,7 +508,7 @@ class index extends DPA.profile {
             {/* <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => {
                 this.loadData(e)
             }} /> */}
-            <SHr height={20} />
+            <SHr height={50} />
             {!this.state?.data?.clicod ? < SLoad /> : <ListaDePedidos clicod={this.state?.data?.clicod} />}
             <SHr />
         </SView>
