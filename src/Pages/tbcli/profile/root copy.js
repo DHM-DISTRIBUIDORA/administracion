@@ -505,11 +505,73 @@ class index extends DPA.profile {
             {this.getDetalleCarga()}
             <SHr h={8} />
             {this.getUbicacion(obj)}
-            {/* <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => {
+            <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => {
                 this.loadData(e)
-            }} /> */}
+            }} />
             <SHr height={20} />
             {!this.state?.data?.clicod ? < SLoad /> : <ListaDePedidos clicod={this.state?.data?.clicod} />}
+            <SView col={"xs-12"} center row style={{
+                justifyContent: "space-between"
+            }}>
+
+                {this.ItemCard({
+                    label: "Total pedidos",
+                    cant: this.state.cantidad_pedidos,
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                })}
+                {this.ItemCard({
+                    label: "Total productos",
+                    cant: this.state.cantidad_productos,
+                    monto: this.state.monto_pedidos ?? 0,
+                    icon: 'Ipedidos',
+                    color: '#FF5A5F',
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VD", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                })}
+                {this.ItemCard({
+                    label: "Rechazos",
+                    cant: this.state.cantidad_ventas ?? 0,
+                    // monto: SMath.formatMoney(this.state?.monto_total_ventas ?? 0),
+                    icon: 'Alert',
+                    color: '#FF5A5F',
+                    // onPress: () => SNavigation.navigate("/tbcli/profile/tbven", { pk: this.pk, tipo: "VF", fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbcli", { pk: this.pk }) : null
+                })}
+                {/* {this.ItemCard({
+                    label: "Máxima venta",
+                    cant: (this.state.maxima_venta ?? 0).toFixed(2),
+                    icon: 'ImaxCompra',
+                    color: '#B622B5',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })}
+                {this.ItemCard({
+                    label: "Mínima venta",
+                    cant: (this.state.minima_venta ?? 0).toFixed(2),
+                    icon: 'IminCompra',
+                    color: '#00A0AA',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })} */}
+                {/* {this.ItemCard({
+                    label: "Primer venta",
+                    cant: this.state.primer_venta.split(' ')[0],
+                    icon: 'Ifirst',
+                    color: '#DC7D3C',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })}
+                {this.ItemCard({
+                    label: "Última venta",
+                    cant: this.state.ultima_venta.split(' ')[0],
+                    icon: 'Ilast',
+                    color: '#FF64B4',
+                    // onPress: () => (this.state.cantidad_clientes != 0) ? SNavigation.navigate("/tbemp/profile/tbzon", { pk: this.pk }) : null,
+                })} */}
+
+
+                {/* {this.getGrafo()} */}
+
+            </SView>
+
             <SHr />
         </SView>
     }
