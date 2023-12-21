@@ -42,7 +42,7 @@ export default SPage.combinePages("reportes", {
     pedidos_por_vendedor,
     entregas_del_transportista,
     pedidos_mapa,
-    pedidos_rebotados,
+    ...pedidos_rebotados,
     log,
     ...pedidos_por_proveedor,
     ...profile
