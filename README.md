@@ -32,4 +32,3 @@ ORDER BY
     TotalSpaceKB DESC, s.Name, t.Name
 
 ``````
-https://admin.tapekeapp.com/pedido/profile?pk=f1e92692-609f-4861-af27-2047ef1fd332
