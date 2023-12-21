@@ -9,7 +9,8 @@ export default class MapaComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            last_loc: { latitude: -17.79, longitude: -63.13, latitudeDelta: 0.1, longitudeDelta: 0.1}
+            loading: false,
+            last_loc: { latitude: -17.79, longitude: -63.13, latitudeDelta: 0.1, longitudeDelta: 0.1 }
         };
     }
 
@@ -22,14 +23,20 @@ export default class MapaComponent extends Component {
     componentDidMount() {
 
         SStorage.getItem("last_location", resp => {
-            if (!resp) return;
+            if (!resp) {
+                this.setState({ loading: true })
+                return;
+            };
             try {
                 const last_ubicacion = JSON.parse(resp);
                 // this.setState({
                 //     last_loc: last_ubicacion
                 // })
                 this.state.last_loc = last_ubicacion
+                this.state.loading = true;
+                this.setState({ ...this.state })
             } catch (e) {
+                this.setState({ loading: true })
                 console.error(e);
             }
         })
@@ -89,7 +96,7 @@ export default class MapaComponent extends Component {
 
             }
             if (data.count == 1) {
-                 onPress = this.handlePressClient.bind(this, data, visita, data.tbvd)
+                onPress = this.handlePressClient.bind(this, data, visita, data.tbvd)
             }
             return MarkerCircle({
                 borderColor: !visita ? STheme.color.primary : "#0f0",
@@ -114,8 +121,9 @@ export default class MapaComponent extends Component {
         //     }
         // })
 
-console.log("this.state?.last_loc")
-console.log(this.state?.last_loc)
+        console.log("this.state?.last_loc")
+        console.log(this.state?.last_loc)
+        if (!this.state.loading) return <SLoad />
         return <SView col={"xs-12"} flex>
             <SMapView.Cluster
                 ref={map => {
