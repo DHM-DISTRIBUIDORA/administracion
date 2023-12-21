@@ -1,20 +1,46 @@
 import React, { Component } from 'react'
-import { SMapView, SView, SLoad, SNavigation, SThread, SText, STheme } from 'servisofts-component'
+import { SMapView, SView, SLoad, SNavigation, SThread, SText, STheme, SMapView2, SStorage } from 'servisofts-component'
 
 // import ClusteredMapView from "react-native-maps-super-cluster"
 import { Text, View } from 'react-native';
 import MarkerCircle from '../../Components/Marker/MarkerCircle';
 import { Btn } from '../../Components';
 export default class MapaComponent extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: false,
+            last_loc: { latitude: -17.79, longitude: -63.13, latitudeDelta: 0.1, longitudeDelta: 0.1 }
+        };
+    }
 
     center(arrLatLng2) {
         if (!this.map) return;
         if (!arrLatLng2.length) return;
         this.map.fitToCoordinates(arrLatLng2, {})
-    } 
+    }
+
+    componentDidMount() {
+        SStorage.getItem("last_location", resp => {
+            if (!resp) {
+                this.setState({ loading: true })
+                return;
+            };
+            try {
+                const last_ubicacion = JSON.parse(resp);
+                this.state.last_loc = last_ubicacion
+                this.state.loading = true;
+                this.setState({ ...this.state })
+            } catch (e) {
+                this.setState({ loading: true })
+                console.error(e);
+            }
+        })
+    }
+
 
     handlePressClient = (data, visita, tbvd) => {
-       
+
         SNavigation.navigate("/transporte/pedidoDetalle", {
             idven: data.id + "",
             idemp: this.props?.state?.idemp,
@@ -31,6 +57,7 @@ export default class MapaComponent extends Component {
         //     tbvd: tbvd
         // })
     }
+
     render() {
         const { state, setState } = this.props;
         const clientes = state.data ?? []
@@ -50,11 +77,11 @@ export default class MapaComponent extends Component {
         });
 
         const renderCluster = (data, onPressCluster, keys) => {
-            console.log("dataaaaaaaaaaaa");
-            console.log(data);
-            console.log("this.props.stateeeeee");
+            // console.log("dataaaaaaaaaaaa");
+            // console.log(data);
 
-            console.log(this.props.state);
+
+            // console.log(this.props.state);
             let onPress = onPressCluster;
             // const visita = null;
 
@@ -81,19 +108,34 @@ export default class MapaComponent extends Component {
         if (!dataLatLng.length) return <SView col={"xs-12"} flex center>
             <SText bold fontSize={18}>NO HAY UBICACIONES PARA VISITAR</SText>
         </SView>
-        new SThread(1000, "centermap", true).start(() => {
-            this.center(dataLatLng)
-        })
+        // new SThread(1000, "centermap", true).start(() => {
+        //     if(this.state?.last_loc?.latitude == -17.79) {
+        //         this.center(dataLatLng)
+        //         // return;
+        //     }else{
+        //         this.center(this.state?.last_loc)
+        //     }
+        // })
+
+        console.log("this.state?.last_loc")
+        console.log(this.state?.last_loc)
+        if (!this.state.loading) return <SLoad />
         return <SView col={"xs-12"} flex>
             <SMapView.Cluster
                 ref={map => {
                     this.map = map;
                 }}
                 initialRegion={{
-                    latitude: -17.79,
-                    longitude: -63.13,
-                    latitudeDelta: 0.1,
-                    longitudeDelta: 0.1,
+
+                    latitude: this.state?.last_loc?.latitude,
+                    longitude: this.state?.last_loc?.longitude,
+                    latitudeDelta: this.state?.last_loc?.latitudeDelta,
+                    longitudeDelta: this.state?.last_loc?.longitudeDelta
+
+                    // latitude: -17.79,
+                    // longitude: -63.13,
+                    // latitudeDelta: 0.1,
+                    // longitudeDelta: 0.1,
                 }}
                 onClusterPress={(data, markers) => {
                     console.log(data, markers);
@@ -105,10 +147,17 @@ export default class MapaComponent extends Component {
                 showsUserLocation={true} // here is what I thought should show it
                 showsMyLocationButton={true}
                 data={data}
+                onRegionChangeComplete={(evt) => {
+                    SStorage.setItem("last_location", JSON.stringify(evt))
+                    console.log("onRegionChangeComplete")
+                    console.log(evt)
+                }}
+
             />
+
             <Btn onPress={() => {
                 this.center(dataLatLng)
-            }}>CENTRAR</Btn>
+            }}>CENTRAR PEDIDOS</Btn>
         </SView>
     }
 }

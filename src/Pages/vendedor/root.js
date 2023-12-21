@@ -23,7 +23,7 @@ export default class root extends Component {
         this.loadDataAsync(); 
         this.t1 = Trigger.addEventListener({
             on: ["insert", "update", "delete"],
-            tables: ["visita_vendedor"]
+            tables: ["visita_vendedor", "tbcli"]
         }, (evt) => {
             console.log("ENTRO EN EL TRIGGERRRRRR", evt)
             this.loadDataAsync();

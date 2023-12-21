@@ -26,7 +26,7 @@ export default ({ state }) => {
     const clientes_visitados = clientes.filter(a => !!visitas.find(v => v.idcli == a.idcli))
 
 
-    return <SView col={"xs-12"}
+    return <SView 
         // backgroundColor={STheme.color.background}
         style={{
             position: "absolute"

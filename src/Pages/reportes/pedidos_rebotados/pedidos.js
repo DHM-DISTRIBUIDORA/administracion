@@ -7,17 +7,17 @@ export default class index extends Component {
     state = {
         fecha_inicio: SNavigation.getParam("fecha_inicio"),
         fecha_fin: SNavigation.getParam("fecha_fin"),
-        empcod: SNavigation.getParam("empcod"),
-        lincod: SNavigation.getParam("lincod")
+        idemp: SNavigation.getParam("idemp"),
+        // lincod: SNavigation.getParam("lincod")
     }
     getData({ fecha_inicio, fecha_fin }) {
         const request = {
-            component: "dhm",
-            type: "getPedidosProveedorProductos",
+            component: "reporte",
+            type: "getPedidosRebotadosVendedor",
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
-            lincod: this.state.lincod,
-            empcod:this.state.empcod
+            // lincod: this.state.lincod,
+            idemp: this.state.idemp
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
@@ -36,16 +36,23 @@ export default class index extends Component {
             rowHeight={30}
             header={[
                 { key: "index", width: 50 },
-                { key: "prdcod", width: 50 },
-                { key: "prdnom", width: 250 },
+                { key: "vdoc", width: 80 },
+                { key: "vnum", width: 80 },
+                { key: "clicod", width: 80 },
+                { key: "clinom", width: 150 },
+                { key: "vfec", width: 150 },
+                { key: "vobs", width: 250 },
+                { key: "cantidad", width: 60, label: "Cantidad P.", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "monto", width: 60, label: "Monto", width: 70, sumar: true, renderTotal: a => parseFloat(a).toFixed(2), render: a => parseFloat(a).toFixed(2), cellStyle: { textAlign: "right" } },
+
                 // { key: "cant", width: 50 },
                 // { key: "monto", width: 50 },
                 // { key: "clicod", width: 70 },
                 // { key: "clinom", width: 200 },
                 // // { key: "cantidad", width: 50 },
-                // { key: "monto", width: 200 },
-                { key: "monto", label: "Monto", width: 70, order: "desc", sumar: true, renderTotal: a => parseFloat(a).toFixed(2), render: a => parseFloat(a).toFixed(2),  cellStyle: { textAlign: "center" } },
-                { key: "cant", label: "Cant. Productos", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                // // { key: "monto", width: 200 },
+                // { key: "monto", label: "Monto", width: 70, order: "desc", sumar: true, renderTotal: a => parseFloat(a).toFixed(2), render: a => parseFloat(a).toFixed(2), cellStyle: { textAlign: "center" } },
+                // { key: "cant", label: "Cant. Productos", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
 
                 // // { key: "clientes", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 // // // { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
@@ -66,7 +73,7 @@ export default class index extends Component {
     }
     render() {
         return (
-            <SPage title="Pedidos por proveedor productos" disableScroll>
+            <SPage title="Pedidos rebotados por vendedor" disableScroll>
                 <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => this.getData(e)} />
                 <SView flex>
                     {this.getTable()}
