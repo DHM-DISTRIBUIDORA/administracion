@@ -21,7 +21,6 @@ export default class MapaComponent extends Component {
     }
 
     componentDidMount() {
-
         SStorage.getItem("last_location", resp => {
             if (!resp) {
                 this.setState({ loading: true })
@@ -29,9 +28,6 @@ export default class MapaComponent extends Component {
             };
             try {
                 const last_ubicacion = JSON.parse(resp);
-                // this.setState({
-                //     last_loc: last_ubicacion
-                // })
                 this.state.last_loc = last_ubicacion
                 this.state.loading = true;
                 this.setState({ ...this.state })
@@ -152,7 +148,6 @@ export default class MapaComponent extends Component {
                 showsMyLocationButton={true}
                 data={data}
                 onRegionChangeComplete={(evt) => {
-
                     SStorage.setItem("last_location", JSON.stringify(evt))
                     console.log("onRegionChangeComplete")
                     console.log(evt)
@@ -162,7 +157,7 @@ export default class MapaComponent extends Component {
 
             <Btn onPress={() => {
                 this.center(dataLatLng)
-            }}>CENTRAR</Btn>
+            }}>CENTRAR PEDIDOS</Btn>
         </SView>
     }
 }
