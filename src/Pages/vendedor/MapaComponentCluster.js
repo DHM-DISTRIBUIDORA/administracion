@@ -43,6 +43,7 @@ export default class MapaComponent extends Component {
         const renderCluster = (data, onPressCluster, keys) => {
             let onPress = onPressCluster;
             let visita;
+          
             if (this.props.state?.visitas) {
                 visita = this.props.state?.visitas.find(a => a.idcli == data.id);
             }
