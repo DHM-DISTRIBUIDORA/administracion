@@ -20,21 +20,6 @@ export default class MapaComponent extends Component {
     }
 
     componentDidMount() {
-        // SStorage.getItem("last_location").then((last_location) => {
-        //     this.setState({ last_ubicacion: last_location })
-        //     if (last_location) {
-        //         last_location = JSON.parse(last_location)
-        //         this.map.animateToRegion(last_location)
-        //     }
-        // }).catch((e) => {
-        //     console.log(e)
-        // });
-        // var last_ubicacion = SStorage.getItem("last_location")
-        // if (last_ubicacion) {
-        //     // last_ubicacion = JSON.parse(last_ubicacion)
-        //     // this.setState({ last_ubicacionOk: last_ubicacion })
-        //     // this.map.animateToRegion(last_ubicacion)
-        // }
 
         SStorage.getItem("last_location", resp => {
             if (!resp) return;
@@ -137,17 +122,11 @@ console.log(this.state?.last_loc)
                     this.map = map;
                 }}
                 initialRegion={{
-                    // latitude: (this.state?.last_loc?.latitude) ? this.state?.last_loc?.latitude : -17.79,
-                    // longitude: (this.state?.last_loc?.longitude) ? this.state?.last_loc?.longitude : -63.13,
-                    // latitudeDelta: (this.state?.last_loc?.latitudeDelta) ? this.state?.last_loc?.latitudeDelta : 0.1,
-                    // longitudeDelta: (this.state?.last_loc?.longitudeDelta) ? this.state?.last_loc?.longitudeDelta : 0.1,
-
 
                     latitude: this.state?.last_loc?.latitude,
                     longitude: this.state?.last_loc?.longitude,
                     latitudeDelta: this.state?.last_loc?.latitudeDelta,
                     longitudeDelta: this.state?.last_loc?.longitudeDelta
-
 
                     // latitude: -17.79,
                     // longitude: -63.13,
@@ -166,14 +145,10 @@ console.log(this.state?.last_loc)
                 data={data}
                 onRegionChangeComplete={(evt) => {
 
-                    // this.state.lat = evt.latitude;
-                    // this.state.lon = evt.longitude;
                     SStorage.setItem("last_location", JSON.stringify(evt))
                     console.log("onRegionChangeComplete")
                     console.log(evt)
                 }}
-
-
 
             />
 
