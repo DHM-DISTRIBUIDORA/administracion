@@ -139,7 +139,7 @@ class index extends DPA.profile {
         return null;
     }
 
-    $allowEdit() { 
+    $allowEdit() {
         return Model.usuarioPage.Action.getPermiso({ url: Parent.path, permiso: "edit" })
     }
     $allowDelete() {
@@ -234,7 +234,7 @@ class index extends DPA.profile {
                 icon: 'Ipedidos',
                 color: '#FF5A5F',
             })}
-            {this.ItemCard({
+            {/* {this.ItemCard({
                 label: "Ventas",
                 cant: this.state.cantidad_pedidos,
                 monto: SMath.formatMoney(this.state.monto_pedidos ?? 0),
@@ -243,13 +243,37 @@ class index extends DPA.profile {
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 icon: 'Icompras',
                 color: '#F9A435',
-            })}
+            })} */}
             {this.ItemCard({
                 label: "Pedidos",
                 cant: "Categorías",
                 monto: "",
                 // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
                 onPress: () => SNavigation.navigate("/tbemp/profile/pedidosEmpresa", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                icon: 'Icategoria',
+                color: '#61AD02',
+            })}
+            {this.ItemCard({
+                label: "Mapa",
+                cant: "Ruta",
+                monto: "",
+                // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => {
+                    if (!this.data) return;
+                    const idemt = this.data.idemt;
+                    let key = "";
+                    if (idemt == 1) {
+                        key = "idvendedor"
+                    } else if (idemt == 4) {
+                        key = "idtransportista"
+                    }
+                    if (!key) return
+                    let users = Model.usuario.Action.getAll();
+                    if (!users) return;
+                    let user = Object.values(users).find(o => o[key] == this.pk)
+                    if(!user) return;
+                    SNavigation.navigate("/gpx/detalle", { key_usuario: user.key, fecha: this.state?.fecha })
+                },
                 icon: 'Icategoria',
                 color: '#61AD02',
             })}

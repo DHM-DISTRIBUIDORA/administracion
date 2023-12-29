@@ -25,7 +25,7 @@ export default ({ latitude, longitude, key, cantidad, src, label, onPress, size 
             <SView flex col={"xs-12"} borderRadius={10} backgroundColor={STheme.color.white} onPress={onPress} style={{
                 borderWidth: 2,
                 borderColor: borderColor ?? STheme.color.text,
-            }}>
+            }} center>
                 <SView style={{
                     position: "absolute",
                     width: "100%",
