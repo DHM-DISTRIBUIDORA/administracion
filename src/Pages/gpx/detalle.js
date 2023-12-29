@@ -6,6 +6,7 @@ import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
 import SSocket from 'servisofts-socket';
 import Model from '../../Model';
+import MarkerCircle from '../../Components/Marker/MarkerCircle';
 export default class detalle extends Component {
   constructor(props) {
     super(props);
@@ -202,7 +203,7 @@ export default class detalle extends Component {
       let ITEMS = [];
       const fact = new SDate(activacion.fecha_on);
       this.state.data.map((o) => {
-	if(!last_start) return;
+        if (!last_start) return;
         if (o.fecha_on.substring(0, 18) <= last_start.fecha_on.substring(0, 18)) return;
         if (!last_stop) {
           // if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
@@ -237,12 +238,18 @@ export default class detalle extends Component {
     if (!this.state?.data) return <></>;
     if (this.state?.data.length == 0) return <></>;
 
+    // return MarkerCircle({
+    //   latitude: parseFloat(this.state.data[this.state.index].lat),
+    //   longitude: parseFloat(this.state.data[this.state.index].lon)
+    // })
     return <SMapView.SMarker key={this.state.index}
       fill='#00f'
       ref={ref => this.marker = ref}
       latitude={parseFloat(this.state.data[this.state.index].lat)}
       longitude={parseFloat(this.state.data[this.state.index].lon)}
       fecha_on={this.state.data[this.state.index].fecha_on}
+      width={60}
+      height={60}
     ></SMapView.SMarker >
   }
 
@@ -325,16 +332,11 @@ export default class detalle extends Component {
     if (!this.state?.clientes) return null;
     let tot_visit = 0;
     return this.state.clientes.map((o) => {
-      console.log("CLIENTESSS")
-      console.log(o)
-
       let color = STheme.color.danger
       if (o.visitas.length > 0) {
         // this.state.total_visitas = tot_visit++
         tot_visit++;
         this.visit = this.visit + 1;
-        console.log("CLIENTESSS VISITAS")
-        console.log(this.visit)
         // this.setState({ total_visitas: tot_visit++ })
         if (o.ventas.length > 0) {
           color = STheme.color.success
@@ -348,20 +350,26 @@ export default class detalle extends Component {
         //   console.log("CLIENTESSS VISITAS")
         // console.log(o)
         this.state.total_visitas = this.visit
-        console.log(this.visit)
       }
       if (!o.clilat || !o.clilon) return null;
+      return MarkerCircle({
+        latitude: parseFloat(o.clilat ?? 0),
+        longitude: parseFloat(o.clilon ?? 0),
+        borderColor:color,
+        label:o.clinom
+      })
+
       return <SMapView.SMarker width={68} height={73} onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
         {(o.visitas.length > 0) ?
-          <SView center flex col={"xs-12"} height={73} style={{zIndex:999, position:"relative"}}>
+          <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative" }}>
             <SView col={"xs-12"} height={40} center >
-                <SView  width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
+              <SView width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
                 borderWidth: 2,
                 borderColor: STheme.color.text,
                 position: "absolute",
               }} center>
-                  <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{o.clinom}</SText>
-                </SView>
+                <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{o.clinom}</SText>
+              </SView>
             </SView>
             <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
           </SView>

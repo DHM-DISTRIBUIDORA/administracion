@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Parent } from '.';
 
-import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SInput, SPopup, SGeolocation, SMapView } from 'servisofts-component';
+import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, SView, SInput, SPopup, SGeolocation, SMapView, SThread } from 'servisofts-component';
 // import { AccentBar, PButtom } from '../../Components';
 import Model from '../../Model';
 import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
@@ -140,8 +140,21 @@ class index extends Component {
             <SPage center disableScroll>
                 <SView col={"xs-12"} flex center>
                     <SMapView
-                        showsUserLocation={true} 
+                        showsUserLocation={true}
                         showsMyLocationButton={true}
+                        ref={(ref) => {
+                            // this._ref[ref]
+                            this.map = ref;
+                            console.log(this.state)
+                            if (this.state.nodefault) {
+                                if (ref) {
+                                    new SThread(100, "center").start(() => {
+                                        ref.center();
+
+                                    })
+                                }
+                            }
+                        }}
                         onRegionChangeComplete={(evt) => {
                             // this.setState({ lat: evt.latitude, lon: evt.longitude })
                             this.state.lat = evt.latitude;
@@ -152,23 +165,23 @@ class index extends Component {
                         initialRegion={{
                             latitude: (this?.state?.lat != 0) ? this?.state?.lat : -17.783799,
                             longitude: (this?.state?.lon != 0) ? this?.state?.lon : -63.180,
-                            latitudeDelta: 0.1,
-                            longitudeDelta: 0.1
+                            latitudeDelta: 0.01,
+                            longitudeDelta: 0.01
                         }}
                     >
                         <></>
                     </SMapView>
-                        <SView width={25} height={39.5} center style={{position: "absolute", }}>
-                            <SImage src={require('../../Assets/img/markerc.png')}
-                                style={{
-                                    position: "relative",
-                                    top: -15,
-                                }}
-                            />
-                        </SView>
+                    <SView width={25} height={39.5} center style={{ position: "absolute", }}>
+                        <SImage src={require('../../Assets/img/markerc.png')}
+                            style={{
+                                position: "relative",
+                                top: -15,
+                            }}
+                        />
+                    </SView>
                 </SView>
                 {this.getComponentBottom()}
-            </SPage>
+            </SPage >
         );
     }
 }
