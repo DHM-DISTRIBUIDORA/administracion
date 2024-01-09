@@ -40,16 +40,21 @@ class index extends DPA.list {
 
     async loadData() {
         let zonas_habilitadas = {};
-        if (this.idvendedor != "") {
+        if (!!this.idvendedor) {
             zonas_habilitadas = await DataBase.zona_empleado.filtered(`idemp == ${this.idvendedor} && dia == ${new SDate().date.getDay()}`)
             let query = "";
             zonas_habilitadas.map((z, i) => {
                 if (i > 0) query += " || "
                 query += `idz == ${z.idz}`
             })
-            DataBase.tbzon.filtered(query).then((data) => {
-                this.setState({ data: data })
-            })
+            if (!!query) {
+                DataBase.tbzon.filtered(query).then((data) => {
+                    this.setState({ data: data })
+                })
+            } else {
+                this.setState({ data: [] })
+            }
+
 
         } else {
             DataBase.tbzon.all().then((data) => {
