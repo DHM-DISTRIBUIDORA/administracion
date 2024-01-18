@@ -12,7 +12,7 @@ export default class transportista extends Component {
         this.state = {
             fecha: SNavigation.getParam("fecha"),
             // fecha_recorrido: new SDate().toString("yyyy-MM-dd"),
-            index:0,
+            index: 0,
             idemp: SNavigation.getParam("idemp"),
             key_usuario: SNavigation.getParam("key_usuario")
         }
@@ -169,9 +169,20 @@ export default class transportista extends Component {
             // console.log(obj)
             // console.log("VISITAS")
             // console.log(this.state.visita[obj.idven])
-            return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color}>
+            let opacity = 1;
+            if (this.state.find) {
+                if (JSON.stringify(obj).toLowerCase().indexOf((this.state.find ?? "").toLowerCase()) <= -1) {
+                    // opacity = 0.1
+                // } else {
+                    return null;
+                }
+            }
+
+            return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color} onPress={() => {
+                SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
+            }}>
                 {(this.state.visita[obj.idven]?.tipo == "ENTREGADO") ?
-                    <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative" }}>
+                    <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative", opacity: opacity }}>
                         <SView col={"xs-12"} height={40} center >
                             <SView width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
                                 borderWidth: 2,
@@ -432,6 +443,9 @@ export default class transportista extends Component {
             <Container>
                 {this.getHeader()}
                 {this.renerWithData()}
+                <SInput type='' placeholder={"Buscar..."} onChangeText={e => {
+                    this.setState({ find: e })
+                }} />
             </Container>
             {this.cardDetalle()}
             <SMapView ref={ref => this.mapa = ref}>

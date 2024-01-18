@@ -42,6 +42,19 @@ export default class index extends Component {
                 { key: "fecha_primero", width: 130 },
                 { key: "fecha_ultimo", width: 130 },
                 { key: "idemp-ver", width: 130, component: (a) => <Link onPress={() => { SNavigation.navigate("/admin/tbemp", { pk: a , fecha_inicio: this.state?.fecha_inicio, fecha_fin : this.state.fecha_fin}) }} >{"Ver perfil"}</Link> },
+                {
+                    key: "-pedidos", width: 100, component: (a) => <Link onPress={() => {
+                        SNavigation.navigate("/reportes/pedidos_por_vendedor_detalle", {
+                            idemp: a.idemp,
+                            empcod: a.empcod,
+                            fecha_inicio: this.state.fecha_inicio,
+                            fecha_fin: this.state.fecha_fin,
+                            // empcod: this.state.empcod
+
+                        })
+                    }
+                    } >{"Ver pedidos"}</Link>
+                },
             ]}
             limit={50}
             data={this.state?.data} />

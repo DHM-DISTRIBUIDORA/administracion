@@ -10,6 +10,7 @@ import visita_vendedor from "./visita_vendedor"
 import visita_transportista from "./visita_transportista"
 import clientes_con_sin_pedidos_mapa from "./clientes_con_sin_pedidos_mapa"
 import pedidos_por_vendedor from "./pedidos_por_vendedor"
+import pedidos_por_vendedor_detalle from "./pedidos_por_vendedor_detalle"
 import pedidos_por_proveedor from "./pedidos_por_proveedor"
 import entregas_del_transportista from "./entregas_del_transportista"
 import pedidos_mapa from "./pedidos_mapa"
@@ -40,6 +41,7 @@ export default SPage.combinePages("reportes", {
     visita_transportista,
     clientes_con_sin_pedidos_mapa,
     pedidos_por_vendedor,
+    pedidos_por_vendedor_detalle,
     entregas_del_transportista,
     pedidos_mapa,
     ...pedidos_rebotados,
