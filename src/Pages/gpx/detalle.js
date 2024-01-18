@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SHr, SIcon, SImage, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SThread, SView } from 'servisofts-component';
+import { SDate, SHr, SIcon, SImage, SInput, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SSwitch, SText, STheme, SThread, SView } from 'servisofts-component';
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
@@ -333,6 +333,9 @@ export default class detalle extends Component {
     let tot_visit = 0;
     return this.state.clientes.map((o) => {
       let color = STheme.color.danger
+      if (o.ventas.length <= 0 && this.state.sin_pedidos) {
+        return;
+      }
       if (o.visitas.length > 0) {
         // this.state.total_visitas = tot_visit++
         tot_visit++;
@@ -343,6 +346,7 @@ export default class detalle extends Component {
         } else {
           color = "#FFC010"
 
+
         }
         // this.setState({ total_visitas: tot_visit })
         //   console.log(o)
@@ -352,11 +356,24 @@ export default class detalle extends Component {
         this.state.total_visitas = this.visit
       }
       if (!o.clilat || !o.clilon) return null;
+
+      if (this.state.find) {
+        if (JSON.stringify(o).toLowerCase().indexOf((this.state.find ?? "").toLowerCase()) <= -1) {
+          // opacity = 0.1
+          // } else {
+          return null;
+        }
+      }
+
+
       return MarkerCircle({
         latitude: parseFloat(o.clilat ?? 0),
         longitude: parseFloat(o.clilon ?? 0),
-        borderColor:color,
-        label:o.clinom
+        borderColor: color,
+        label: o.clinom,
+        onPress: e => {
+          SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" })
+        }
       })
 
       return <SMapView.SMarker width={68} height={73} onPress={() => { SNavigation.navigate("/tbcli/profile", { pk: o.idcli + "" }) }} key={o.idcli} latitude={parseFloat(o.clilat)} longitude={parseFloat(o.clilon)} fill={color}>
@@ -463,16 +480,7 @@ export default class detalle extends Component {
 
     return (
       <SPage disableScroll>
-        <Container>
-          <SelectFecha fecha={this.state.fecha} onChange={(e) => {
-            // this.state.fecha = e.fecha;
-            this.loadData(e.fecha)
-            // this.componentDidMount()
-          }} />
-          <SText>{this.usuario?.Nombres}-{this.usuario?.idvendedor}</SText>
-          {this.renerWithData()}
-          {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
-        </Container>
+
         {this.cardDetalle()}
 
         <SMapView initialRegion={{
@@ -493,6 +501,25 @@ export default class detalle extends Component {
           {this.getMarkers()}
 
         </SMapView>
+        <Container>
+          <SelectFecha fecha={this.state.fecha} onChange={(e) => {
+            // this.state.fecha = e.fecha;
+            this.loadData(e.fecha)
+            // this.componentDidMount()
+          }} />
+          <SText>{this.usuario?.Nombres}-{this.usuario?.idvendedor}</SText>
+          {this.renerWithData()}
+          <SInput type='' placeholder={"Buscar..."} onChangeText={e => {
+            this.setState({ find: e })
+          }} />
+          <SView row center>
+            <SText>Ocultar sin pedidos.</SText>
+            <SSwitch onChange={e => {
+              this.setState({ sin_pedidos: e })
+            }} />
+          </SView>
+          {/* <SText>Numero entre 0 y {this.state.data ? this.state.data.length : 0}</SText> */}
+        </Container>
       </SPage>
     )
   }

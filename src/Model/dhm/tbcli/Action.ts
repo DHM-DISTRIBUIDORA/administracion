@@ -112,6 +112,17 @@ export default class Action extends SAction {
         })
     }
 
+    getByCliCod(clicod: any, extra: {}, _default: any) {
+        return SSocket.sendPromise({
+            ...this.model.info,
+            type: "getByCliCod",
+            clicod: clicod + "",
+        }).then((e: any) => {
+            const data = e.data[0];
+            if (!data) throw { error: `No existe el código de cliente '${clicod}'` }
+            return data;
+        })
+    }
     // editar(extra?: any): Promise<unknown> {
     //     return new Promise((resolve, reject) => {
     //         return DataBase.tbcli.update(extra.data);

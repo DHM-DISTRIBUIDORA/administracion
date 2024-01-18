@@ -252,8 +252,8 @@ class index extends DPA.profile {
                                 initialRegion={{
                                     latitude: objeto?.clilat,
                                     longitude: objeto?.clilon,
-                                    latitudeDelta: 0.0222,
-                                    longitudeDelta: 0.0221,
+                                    latitudeDelta: 0.0122,
+                                    longitudeDelta: 0.0121,
                                 }} preventCenter
                                 options={{
                                     zoomControl: false,
@@ -264,14 +264,16 @@ class index extends DPA.profile {
                                 }}
                             >
                                 <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
-                                    <SIcon name="MarcadorMapa" width={25} height={45} fill={STheme.color.primary} />
+                                    {/* <SView> */}
+                                        <SIcon name="MarcadorMapa" width={25} height={45} fill={STheme.color.primary} />
+                                    {/* </SView> */}
                                 </SMarker>
                             </SMapView>
-                            <SView col={"xs-12"} height style={{
+                            {/* <SView col={"xs-12"} height style={{
                                 position: "absolute"
                             }} withoutFeedback>
 
-                            </SView>
+                            </SView> */}
                         </SView>
                     </SView>
 
