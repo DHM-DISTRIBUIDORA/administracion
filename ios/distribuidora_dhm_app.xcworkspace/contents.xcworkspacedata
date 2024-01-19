@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PruebaGPX.gpx">
+   </FileRef>
+   <FileRef
       location = "group:distribuidora_dhm_app.xcodeproj">
    </FileRef>
    <FileRef
