@@ -630,9 +630,9 @@ PODS:
     - React-Core
   - RNSVG (12.5.1):
     - React-Core
-  - servisofts-background-location (2.0.1):
+  - servisofts-background-location (2.0.3):
     - React-Core
-  - servisofts-component (3.0.16-beta):
+  - servisofts-component (3.0.19):
     - React-Core
   - servisofts-socket (4.0.4):
     - CocoaAsyncSocket
@@ -1010,8 +1010,8 @@ SPEC CHECKSUMS:
   RNShare: a5dc3b9c53ddc73e155b8cd9a94c70c91913c43c
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
-  servisofts-background-location: b5e9b23aae51b1e9a282225e774ef859ea3e818a
-  servisofts-component: 24c5b30b08e948518db047c37731bc7547e7ad25
+  servisofts-background-location: 848ddaf74f11525258aa4f7444fd684768534632
+  servisofts-component: 6f064c25419905ca3eb41a5f32dbc852e16884f1
   servisofts-socket: 78f4e16a21755981804751f11fd771ed59d5fb29
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
