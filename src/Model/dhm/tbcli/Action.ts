@@ -8,7 +8,9 @@ export default class Action extends SAction {
     editar(extra?: { data: any }): Promise<unknown> {
         return new Promise(async (resolve, reject) => {
             if (!extra) return;
-            extra.data.sync_type = "update";
+            if(extra.data.sync_type != "insert"){
+                extra.data.sync_type = "update";
+            }
             extra.data.fecmod = new SDate().toString("yyyy-MM-dd hh:mm:ss.0")
             const update = await DataBase.tbcli.update(extra?.data)
             this._dispatch({
