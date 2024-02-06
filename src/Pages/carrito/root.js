@@ -16,6 +16,7 @@ class index extends Component {
         super(props);
         this.state = {
             detalle: "",
+            location: 0,
         }
         this.idcli = SNavigation.getParam("pk");
     }
@@ -63,8 +64,8 @@ class index extends Component {
     }
     handlePressPedido = async (tbcli) => {
         let notify = await SNotification.send({
-            title: "Opteniendo tu ubicacion",
-            body: "Estamos buscando tu ubicacion actual.",
+            title: "Obteniendo tu ubicación",
+            body: "Estamos buscando tu ubicación actual.",
             type: "loading"
         })
         SGeolocation.getCurrentPosition().then(e => {
@@ -73,7 +74,7 @@ class index extends Component {
         }).catch(e => {
             notify.close();
             SNotification.send({
-                title: "Opteniendo tu ubicacion",
+                title: "Obteniendo tu ubicación",
                 body: e.message,
                 time: 5000,
                 color: STheme.color.danger
@@ -95,8 +96,9 @@ class index extends Component {
             return;
         }
 
-        if (!tbcli.clilat || !tbcli.clilon) {
-            SPopup.alert("Para realizar el pedido, debe registrar ubicacion al cliente.")
+        // if (!tbcli.clilat || !tbcli.clilon) {
+        if (this.state.location == 0) {
+            SPopup.alert("Para realizar el pedido, debe registrar ubicación al cliente.")
             SNavigation.navigate("/tbcli/mapa",
                 {
                     callback2: (resp) => {
@@ -108,6 +110,7 @@ class index extends Component {
                     obj: tbcli
                 },
             )
+            this.state.location = 1;
             return;
         }
         try {
@@ -187,7 +190,7 @@ class index extends Component {
                 idcli: tbcli.idcli + "",
                 idemp: tbemp.idemp + "",
                 descripcion: dm_cabfac.vobs,
-                tipo: "REALIZO PEDIDO",
+                tipo: "REALIZÓ PEDIDO",
                 fecha: new SDate().toString("yyyy-MM-dd"),
             })
 

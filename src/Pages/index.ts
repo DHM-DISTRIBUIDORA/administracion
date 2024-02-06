@@ -49,19 +49,19 @@ import dashboard from './dashboard';
 import permissions from './permissions';
 
 import admin from './admin';
-
+// import { Example } from 'servisofts-charts'
 
 
 // import test from "./test"
 // export default SPage.combinePages("/", {
+
 //   "":test,
 //   ...gpx,
 //   ...permissions
 // });
 
 export default SPage.combinePages("/", {
-  // "":test3,
-  // "": storage,
+  // "":Example,
   "": carga,
   "root": root,
   wiki,
@@ -111,5 +111,4 @@ export default SPage.combinePages("/", {
   ...dashboard,
   ...permissions,
   ...admin
-  // "chart": Example
 });

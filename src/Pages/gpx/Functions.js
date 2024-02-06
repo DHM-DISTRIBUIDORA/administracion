@@ -3,7 +3,7 @@ import DomSelector from 'react-native-dom-parser';
 type PropsTypes = { key_usuario: string, fecha: string }
 
 const state = {
-    url: "https://repo.dhm.servisofts.com/dhm/gpx"
+    url: "https://dhm.servisofts.com/repo/dhm/gpx"
 };
 
 
