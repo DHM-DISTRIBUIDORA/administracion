@@ -49,7 +49,7 @@ import dashboard from './dashboard';
 import permissions from './permissions';
 
 import admin from './admin';
-import { Example } from 'servisofts-charts'
+// import { Example } from 'servisofts-charts'
 
 
 // import test from "./test"
