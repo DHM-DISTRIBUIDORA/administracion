@@ -167,7 +167,14 @@ export default class editar extends Component {
                 // "vfec": { label: "vfec", defaultValue: data["vfec"] },
                 // "nombrecliente": { label: "nombrecliente", defaultValue: data["nombrecliente"] },
                 "nit": { label: "Nit", defaultValue: data["nit"], isRequired: true },
-                "vobs": { label: "Observación", defaultValue: data["vobs"], type: "textArea" },
+                "vobs": {
+                    label: "Observación", placeholder: "Escribe un detalle de maximo 65 caracteres.", defaultValue: data["vobs"], type: "textArea", onChangeText: (val) => {
+                        if ((val + "").length > 65) {
+                            return val.substring(0, 65);
+                        }
+                        this.state.detalle = val;
+                    }
+                }
                 // "detalle": { label: "detalle", defaultValue: JSON.stringify(data["detalle"]), type: "textArea" },
                 // "fecha": { defaultValue: data["fecha"] /}
             }}
