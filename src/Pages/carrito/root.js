@@ -276,9 +276,12 @@ class index extends Component {
                 <SInput label="CI/NIT" value={this.state?.client?.clinit} onChangeText={(val) => {
                     this.state.client.clinit = val;
                 }} />
-                <SInput type='textArea' style={{ padding: 10 }} label="DETALLE" defaultValue={this.state?.detalle} onChangeText={(val) => {
+                <SInput ref={ref => this.inpDetalle = ref} type='textArea' style={{ padding: 10 }} label="DETALLE" defaultValue={this.state?.detalle} onChangeText={(val) => {
+                    if ((val + "").length > 65) {
+                        return val.substring(0, 65);
+                    }
                     this.state.detalle = val;
-                }} />
+                }}  placeholder={"Escribe un detalle de maximo 65 caracteres."}/>
                 <SHr height={15} />
                 <Carrito.Detalle />
                 <SHr height={45} />

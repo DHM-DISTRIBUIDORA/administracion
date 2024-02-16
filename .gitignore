@@ -117,3 +117,4 @@ yarn-error.log*
 
 # END
 .eslintcache
+android/.settings/org.eclipse.buildship.core.prefs
