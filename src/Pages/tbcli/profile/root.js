@@ -265,7 +265,7 @@ class index extends DPA.profile {
                             >
                                 <SMarker lat={objeto?.clilat} lng={objeto?.clilon}  >
                                     {/* <SView> */}
-                                        <SIcon name="MarcadorMapa" width={25} height={45} fill={STheme.color.primary} />
+                                    <SIcon name="MarcadorMapa" width={25} height={45} fill={STheme.color.primary} />
                                     {/* </SView> */}
                                 </SMarker>
                             </SMapView>
@@ -387,6 +387,8 @@ class index extends DPA.profile {
     }
     $item(obj) {
         if (!obj) return <SLoad />
+        console.log("obj")
+        console.log(obj)
         return <SView col={"xs-12"} center>
             <SHr />
             <SView col={"xs-12"} height={260} center>
@@ -436,12 +438,16 @@ class index extends DPA.profile {
             </SView>
 
             <Btn col={"xs-11"} onPress={() => {
-
+                if (obj.idcat == 0) {
+                    SPopup.alert("El cliente no tiene categoría asignada, clic en Editar para asignar Tipo de cliente o Categoría.")
+                    return;
+                }
                 if (Platform.OS == "web") {
                     SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))
                     SNavigation.navigate("/public", { idcli: obj.idcli })
                     return;
                 };
+
                 SBLocation.isActive().then(e => {
                     if (e.estado == "exito") {
                         SStorage.setItem("tbcli_a_comprar", JSON.stringify(obj))

@@ -42,9 +42,10 @@ class pedidos extends Component {
         // SSocket.sendPromise({
         //     component: "dm_cabfac",
         //     type: "getPedidos",
+        //     fecha: this.fecha_inicio,
         //     idemp: this.idemp
         // }).then((a) => {
-        //     this.setState({ data: a.data })
+        //     this.setState({ dataPruebaPedidos: a.data })
         // })
     }
 
@@ -99,6 +100,8 @@ class pedidos extends Component {
     }
     render() {
         var cont = 0;
+        // console.log("this.state.dataPruebaPedidos")
+        // console.log(this.state.dataPruebaPedidos)
         return (
             <SPage title={'Pedidos'} >
                 <Container >
