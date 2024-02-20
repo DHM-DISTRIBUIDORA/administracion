@@ -71,6 +71,10 @@ class index extends DPA.new {
                     clirazon: e
                 })
             }
+
+            if (e.length > 150) {
+                return e.substring(0, 150);
+            }
         }
         inp["clirazon"].label = "Razón social"
         inp["clirazon"].onChangeText = (e) => {
@@ -79,11 +83,20 @@ class index extends DPA.new {
                 return;
             }
             this.state.clirazon = e;
+            if (e.length > 150) {
+                return e.substring(0, 150);
+            }
         }
         inp["clirazon"].onSubmitEditing = (evt) => {
             this.form.focus("clinit");
         }
         inp["clinit"].label = "NIT"
+        inp["clinit"].onChangeText = (e) => {
+            if (e.length > 150) {
+                console.log(e.length)
+                return e.substring(0, 150);
+            }
+        }
         inp["clinit"].onSubmitEditing = (evt) => {
             this.form.focus("clitel");
         }
@@ -149,6 +162,13 @@ class index extends DPA.new {
             })
         }
 
+        inp["clidir"].onChangeText = (e) => {
+            if (e.length > 100) {
+                console.log(e.length)
+                return e.substring(0, 100);
+            }
+        }
+
         return inp;
     }
     $onSubmit(data) {
@@ -160,7 +180,12 @@ class index extends DPA.new {
         data.clilat = parseFloat(data.clilat ?? 0)
         data.clilon = parseFloat(data.clilon ?? 0)
 
-        if (this.pk) data.cliidemp = this.pk;
+        if (Model.usuario.Action.getUsuarioLog().idvendedor) {
+            data.cliidemp = Model.usuario.Action.getUsuarioLog().idvendedor
+        } else if (Model.usuario.Action.getUsuarioLog().idtransportista) {
+            data.cliidemp = Model.usuario.Action.getUsuarioLog().idtransportista
+        } else if (this.pk) data.cliidemp = this.pk;
+
 
         data.cliest = 0;
 
