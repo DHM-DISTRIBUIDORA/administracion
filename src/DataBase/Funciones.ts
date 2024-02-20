@@ -2,6 +2,7 @@ import { TableAbstract } from "servisofts-db"
 import SSocket from "servisofts-socket"
 import DataBase from "."
 import { SDate, SNotification, SPopup, SStorage, STheme, SThread } from "servisofts-component"
+import Model from "../Model"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -109,7 +110,10 @@ export const SaveChanges = async (table: TableAbstract) => {
                 const resp = await SSocket.sendHttpAsync(SSocket.api.root + "api", {
                     component: table.scheme.name,
                     type: "save",
-                    data: obj
+                    data: obj,
+                    key_usuario: Model.usuario.Action.getUsuarioLog()?.key,
+                    idvendedor: Model.usuario.Action.getUsuarioLog()?.idvendedor,
+                    idtransportista: Model.usuario.Action.getUsuarioLog()?.idtransportista,
                 })
                 if (resp.estado != "exito") throw resp;
                 resp.data.sync_type = "";
