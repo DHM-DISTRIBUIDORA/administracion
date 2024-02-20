@@ -91,7 +91,19 @@ class index extends DPA.edit {
         // }
         inp["clicod"].label = "Código de cliente"
         inp["clinom"].label = "Nombre completo"
+        inp["clinom"].onChangeText = (e) => {
+            if (e.length > 150) {
+                console.log(e.length)
+                return e.substring(0, 150);
+            }
+        }
         inp["clinit"].label = "NIT"
+        inp["clinit"].onChangeText = (e) => {
+            if (e.length > 150) {
+                console.log(e.length)
+                return e.substring(0, 150);
+            }
+        }
         inp["clidir"].label = "Dirección"
         inp["clitel"].label = "Teléfono"
         inp["clitel"].type = "phone"
@@ -114,6 +126,13 @@ class index extends DPA.edit {
         // inp["cliforpag"].label = "Forma de pago"
         // inp["clitipdoc"].label = "Tipo de documento"
         inp["clirazon"].label = "Razón"
+        inp["clirazon"].onChangeText = (e) => {
+            if (e.length > 150) {
+                console.log(e.length)
+                return e.substring(0, 150);
+            }
+        }
+
 
         inp["clilat"].label = "Latitud"
         inp["clilat"].col = "xs-5.5"
@@ -147,6 +166,12 @@ class index extends DPA.edit {
         //         idemp: idemp
         //     })
         // }
+        inp["clidir"].onChangeText = (e) => {
+            if (e.length > 100) {
+                console.log(e.length)
+                return e.substring(0, 100);
+            }
+        }
 
         return inp;
     }
