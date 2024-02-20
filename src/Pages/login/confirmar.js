@@ -75,7 +75,7 @@ class login extends Component {
                         <CardUser datas={this.state?.data} />
                         <SHr height={32} />
                         <SInput ref={ref => this.input = ref}
-                            type='number'
+                            type='phone'
                             placeholder={"Teléfono"}
                         />
                         <SText color={STheme.color.danger}>{this.state.error}</SText>
