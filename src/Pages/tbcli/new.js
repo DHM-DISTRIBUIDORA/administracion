@@ -159,8 +159,13 @@ class index extends DPA.new {
         data.idcat = parseInt(data.idcat)
         data.clilat = parseFloat(data.clilat ?? 0)
         data.clilon = parseFloat(data.clilon ?? 0)
+        
+        if (Model.usuario.Action.getUsuarioLog().idvendedor) {
+            data.cliidemp = Model.usuario.Action.getUsuarioLog().idvendedor
+        } else if (Model.usuario.Action.getUsuarioLog().idtransportista) {
+            data.cliidemp = Model.usuario.Action.getUsuarioLog().idtransportista
+        } else if (this.pk) data.cliidemp = this.pk;
 
-        if (this.pk) data.cliidemp = this.pk;
 
         data.cliest = 0;
 
