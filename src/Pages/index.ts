@@ -49,6 +49,8 @@ import dashboard from './dashboard';
 import permissions from './permissions';
 
 import admin from './admin';
+
+import sql2 from './sql2';
 // import { Example } from 'servisofts-charts'
 
 
@@ -70,6 +72,7 @@ export default SPage.combinePages("/", {
   "favoritos": favoritos,
   ...pedidos_clientes,
   sql,
+  sql2,
   "privacidad": privacidad,
   "privacy": privacidad,
   ...producto,
