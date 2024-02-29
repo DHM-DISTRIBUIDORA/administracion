@@ -168,7 +168,7 @@ export default class editar extends Component {
                 // "nombrecliente": { label: "nombrecliente", defaultValue: data["nombrecliente"] },
                 "nit": { label: "Nit", defaultValue: data["nit"], isRequired: true },
                 "vobs": {
-                    label: "Observación", placeholder: "Escribe un detalle de maximo 65 caracteres.", defaultValue: data["vobs"], type: "textArea", onChangeText: (val) => {
+                    label: "Observación", placeholder: "Escribe un detalle de máximo 65 caracteres.", defaultValue: data["vobs"], type: "textArea", onChangeText: (val) => {
                         if ((val + "").length > 65) {
                             return val.substring(0, 65);
                         }

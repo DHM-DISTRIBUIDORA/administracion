@@ -96,8 +96,8 @@ class index extends Component {
             return;
         }
 
-        // if (!tbcli.clilat || !tbcli.clilon) {
-        if (this.state.location == 0) {
+        if (!tbcli.clilat || !tbcli.clilon) {
+        // if (this.state.location == 0) {
             SPopup.alert("Para realizar el pedido, debe registrar ubicación al cliente.")
             SNavigation.navigate("/tbcli/mapa",
                 {
@@ -110,7 +110,7 @@ class index extends Component {
                     obj: tbcli
                 },
             )
-            this.state.location = 1;
+            // this.state.location = 1;
             return;
         }
         try {
@@ -281,7 +281,7 @@ class index extends Component {
                         return val.substring(0, 65);
                     }
                     this.state.detalle = val;
-                }}  placeholder={"Escribe un detalle de maximo 65 caracteres."}/>
+                }}  placeholder={"Escribe un detalle de máximo 65 caracteres."}/>
                 <SHr height={15} />
                 <Carrito.Detalle />
                 <SHr height={45} />
