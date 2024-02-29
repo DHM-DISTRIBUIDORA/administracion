@@ -28,6 +28,7 @@ export default class root extends Component {
                         <MenuButtom label={"pedidos_mapa"} url={"/reportes/pedidos_mapa"} icon={<SIcon name={"MConPedidosMap"} />} />
                         <MenuButtom label={"Clientes con pedidos"} url={"/reportes/clientes_con_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Pedidos rebotados por vendedor"} url={"/reportes/pedidos_rebotados"} icon={<SIcon name={"MconPedidos"} />} />
+                        <MenuButtom label={"Conductores"} url='/mapa/conductores' icon={<SIcon name={"IConductores"} />} />
 
                     </MenuPages>
                     <SHr />

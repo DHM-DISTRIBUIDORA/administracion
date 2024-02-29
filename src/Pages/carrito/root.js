@@ -62,6 +62,17 @@ class index extends Component {
     loadData() {
 
     }
+    calc_distance = (lat1, lon1, lat2, lon2) => {
+        var rad = function (x) { return x * Math.PI / 180; }
+        var R = 6378.137;
+        var dLat = rad(lat2 - lat1);
+        var dLong = rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) *
+            Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c * 1000;
+        return d;
+    }
     handlePressPedido = async (tbcli) => {
         let notify = await SNotification.send({
             title: "Obteniendo tu ubicación",
@@ -112,6 +123,13 @@ class index extends Component {
             )
             this.state.location = 1;
             return;
+        }
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
+        if (distancia > 200) {
+            if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
+                SPopup.alert("No tiene permisos para levantar pedidos lejos del cliente, porfavor contactese con la administracion.")
+                return;
+            }
         }
         try {
             this.state.loading = true;
@@ -281,7 +299,7 @@ class index extends Component {
                         return val.substring(0, 65);
                     }
                     this.state.detalle = val;
-                }}  placeholder={"Escribe un detalle de maximo 65 caracteres."}/>
+                }} placeholder={"Escribe un detalle de maximo 65 caracteres."} />
                 <SHr height={15} />
                 <Carrito.Detalle />
                 <SHr height={45} />
