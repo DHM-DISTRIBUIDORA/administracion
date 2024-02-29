@@ -107,8 +107,8 @@ class index extends Component {
             return;
         }
 
-        // if (!tbcli.clilat || !tbcli.clilon) {
-        if (this.state.location == 0) {
+        if (!tbcli.clilat || !tbcli.clilon) {
+        // if (this.state.location == 0) {
             SPopup.alert("Para realizar el pedido, debe registrar ubicación al cliente.")
             SNavigation.navigate("/tbcli/mapa",
                 {
@@ -121,7 +121,7 @@ class index extends Component {
                     obj: tbcli
                 },
             )
-            this.state.location = 1;
+            // this.state.location = 1;
             return;
         }
         let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
