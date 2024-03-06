@@ -57,6 +57,7 @@ class index extends Component {
             data={productos}
             limit={30}
             buscador
+            // flex
             order={[{ key: "stock", order: "desc" }]}
             // filter={}
             render={obj => <Producto.Card
@@ -68,9 +69,9 @@ class index extends Component {
             />} />
     }
     renderContainer() {
-        return <Container>
+        return <Container flex>
             {this.renderProductos()}
-            <SHr height={20} />
+            <SHr height={10} />
         </Container>
     }
     render() {
@@ -79,6 +80,7 @@ class index extends Component {
                 this.componentDidMount();
                 if (e) e()
             }}
+            disableScroll
         >
             {this.renderContainer()}
         </SPage >

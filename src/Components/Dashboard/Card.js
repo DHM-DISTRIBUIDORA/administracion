@@ -21,7 +21,6 @@ class index extends Component<CategoriaCardPropsType> {
 
         let color = "";
         let descripcion = "";
-        console.log(visita?.tipo);
         switch (visita?.tipo) {
             case "start":
                 color = STheme.color.success;
@@ -49,8 +48,6 @@ class index extends Component<CategoriaCardPropsType> {
             //     descripcion = "Inactivo";
             //     break;
         }
-        console.log(color);
-        console.log(descripcion);
 
         return (
             <SView col={"xs-12"} row >

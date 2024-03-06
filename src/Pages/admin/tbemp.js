@@ -86,10 +86,14 @@ class index extends DPA.profile {
         })
 
         console.log("data_vendedor.dataaaaaaaa")
-       
-        this.setState({ data_v: data_vendedor.data[0] })
-        console.log(this.state.data_v)
-        this.setState({load_cant: true })
+        console.log(data_vendedor)
+
+        if (data_vendedor?.data) {
+            this.setState({ data_v: data_vendedor?.data[0] })
+            console.log(this.state.data_v)
+            this.setState({ load_cant: true })
+        }
+
 
     }
 
@@ -223,7 +227,7 @@ class index extends DPA.profile {
     }
 
     getCardsClient(obj) {
-        if(!this.state?.data_v) return <SLoad/>
+        if (!this.state?.data_v) return <SLoad />
         console.log("obj")
         console.log(obj)
         return <SView col={"xs-12"} center row style={{
@@ -316,7 +320,7 @@ class index extends DPA.profile {
                 {/* <SText>{`${obj.}`}</SText> */}
             </SView>
             <SHr h={30} />
-            <Fecha idemp={this.pk} fecha_inicio={this.state?.fecha_inicio} fecha_fin= {this.state.fecha_fin} />
+            <Fecha idemp={this.pk} fecha_inicio={this.state?.fecha_inicio} fecha_fin={this.state.fecha_fin} />
             <SHr h={30} />
             {this.getCardsClient(obj)}
             <SHr />

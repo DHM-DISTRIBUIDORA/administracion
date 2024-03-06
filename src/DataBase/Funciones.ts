@@ -120,7 +120,11 @@ export const SaveChanges = async (table: TableAbstract) => {
 
 
                 const old_cli_cod = obj.clicod + ""
-                await table.delete(obj[table.scheme.primaryKey]);
+                try {
+                    await table.delete(obj[table.scheme.primaryKey]);
+                } catch (error) {
+                    console.log("Ya no se encontraba en la base.")
+                }
                 if (obj.sync_type != "delete") {
                     await table.insert(resp.data)
                 }
