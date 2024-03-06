@@ -79,7 +79,11 @@ class index extends Component {
             body: "Estamos buscando tu ubicación actual.",
             type: "loading"
         })
-        SGeolocation.getCurrentPosition().then(e => {
+        SGeolocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 10000
+        }).then(e => {
             notify.close();
             this.handlePressPedidoUbicacion(tbcli, e.coords);
         }).catch(e => {
@@ -108,7 +112,7 @@ class index extends Component {
         }
 
         if (!tbcli.clilat || !tbcli.clilon) {
-        // if (this.state.location == 0) {
+            // if (this.state.location == 0) {
             SPopup.alert("Para realizar el pedido, debe registrar ubicación al cliente.")
             SNavigation.navigate("/tbcli/mapa",
                 {
