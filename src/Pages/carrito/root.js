@@ -208,7 +208,7 @@ class index extends Component {
                 idcli: tbcli.idcli + "",
                 idemp: tbemp.idemp + "",
                 descripcion: dm_cabfac.vobs,
-                tipo: "REALIZÓ PEDIDO",
+                tipo: "REALIZO PEDIDO",
                 fecha: new SDate().toString("yyyy-MM-dd"),
             })
 

@@ -44,7 +44,7 @@ class Cantidad extends Component {
             // this.state.cantidad = cantidad;
         }
         this.setState({ open: true });
-        new SThread(2000, "Cantidad_hilo_" + this.state.key, true).start(() => {
+        new SThread(1500, "Cantidad_hilo_" + this.state.key, true).start(() => {
             if (this.close) return;
             this.handleEnd();
 
