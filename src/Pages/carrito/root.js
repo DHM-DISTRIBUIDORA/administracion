@@ -80,8 +80,8 @@ class index extends Component {
             type: "loading"
         })
         SGeolocation.getCurrentPosition({
-            enableHighAccuracy: true,
-            maximumAge: 0,
+            enableHighAccuracy: false,
+            maximumAge: 1,
             timeout: 10000
         }).then(e => {
             notify.close();

@@ -27,7 +27,9 @@ module.exports = (async () => {
       }),
     },
     watchFolders: [
-      // path.resolve(__dirname, '../../servisofts-component/dist'),
+      path.resolve(__dirname, '../../servisofts-component/dist'),
+      path.resolve(__dirname, '../../servisofts-sql/dist'),
+      path.resolve(__dirname, '../../servisofts-table/dist'),
       // path.resolve(__dirname, '../../servisofts-socket/dist'),
       // path.resolve(__dirname, '../../react-native-maps-super-cluster'),
       // path.resolve(__dirname, '../../servisofts-charts/dist'),
