@@ -3,6 +3,7 @@ import SSocket from "servisofts-socket"
 import DataBase from "."
 import { SDate, SNotification, SPopup, SStorage, STheme, SThread } from "servisofts-component"
 import Model from "../Model"
+import { Data } from "servisofts-background-location"
 
 export const sincronizar_productos = async () => {
     const tables = [DataBase.tbprd, DataBase.tbprdlin, DataBase.tbemp]
@@ -46,7 +47,7 @@ export const sincronizar_transportista = async () => {
 }
 
 export const sincronizar_admin = async () => {
-    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.tbcli]
+    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.tbcli, DataBase.tbcat]
     tables.map((t) => {
         syncWithNotify(t);
     })

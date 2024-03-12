@@ -20,7 +20,7 @@ import * as Funciones from "./Funciones"
 
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 20,
+    version: 21,
     tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista, ventas_factura, enviroments, zona_empleado]
 }
 

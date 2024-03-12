@@ -5,6 +5,8 @@ import { SHr, SImage, SInput, SList, SLoad, SText, SView } from 'servisofts-comp
 import Model from '../../../Model';
 import item from '../item';
 import item2 from '../../tbprd/item';
+import DataBase from '../../../DataBase';
+import SSocket from 'servisofts-socket';
 // import ListaUsuarios from './Components/ListaUsuarios';
 // import item from '../../tbp/item';
 class index extends DPA.profile {
@@ -59,11 +61,21 @@ class Lista extends DPA.list {
         });
     }
 
-    componentDidMount(){
-        
+    componentDidMount() {
+        SSocket.sendPromise({
+            "version": "1.0",
+            "component": "tbprd",
+            "type": "getAllSimple",
+            "idalm": this.props?.pi?.pk,
+        }).then(e => {
+            this.setState({ data: e.data })
+        })
     }
-   
+
+    $filter(a){
+        return a.stock > 0
+    }
     $getData() {
-        return Parent2.model.Action.getAllSimple({ idalm: this.props.pi.pk })
+        return this.state.data
     }
 }
