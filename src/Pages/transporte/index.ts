@@ -7,11 +7,15 @@ import picklist2 from './picklist2';
 import list from './list';
 import desgrup from './desgrup';
 import pedidoDetalle from './pedidoDetalle';
+import listVendedor from './listVendedor';
+import listVendedorPedidos from './listVendedorPedidos';
 export default SPage.combinePages("transporte", {
     "": root,
     list,
     picklist,
     picklist2,
     pedidoDetalle,
-    desgrup
+    desgrup,
+    listVendedor,
+    listVendedorPedidos
 })
