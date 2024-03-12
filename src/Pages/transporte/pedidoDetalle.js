@@ -50,20 +50,20 @@ class pedidoDetalle extends Component {
                     <SText fontSize={14} bold  >FECHA: </SText>
                     <SText font={'AcherusGrotesque-Regular'} fontSize={14} color={STheme.color.gray}>{new SDate(this.state?.data?.vfec, "yyyy-MM-dd hh:mm:ss.s").toString("DAY, dd de MON del yyyy")} a las {new SDate(this.state?.data?.vhora, "yyyy-MM-dd hh:mm:ss.s").toString("hh:mm:ss")}</SText>
                 </SView>
-                <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
+                {/* <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14} bold >NIT/CI: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.vnit}</SText>
-                </SView>
+                </SView> */}
             </SView>
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
                     <SText fontSize={14} bold >NOMBRE: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.clinom}</SText>
                 </SView>
-                <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
+                {/* <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14} bold >ID CLIENTE: </SText>
                     <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.codigo}</SText>
-                </SView>
+                </SView> */}
             </SView>
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-8"} style={{ alignItems: "flex-start" }} row>
@@ -74,12 +74,19 @@ class pedidoDetalle extends Component {
                         <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.clitel}</SText>
                     </SView>
                 </SView>
-                <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
+                {/* <SView col={"xs-12 sm-4"} style={{ alignItems: "flex-end" }} row>
                     <SText fontSize={14}   >ID VENTA: </SText>
                     <SText color={STheme.color.gray} font={'AcherusGrotesque-Regular'} >{this.state?.data?.idven}</SText>
+                </SView> */}
+            </SView>
+            <SView col={"xs-12"} style={{ alignItems: "flex-start" }} row>
+                <SView width={90} style={{ alignItems: "flex-start" }} >
+                    <SText fontSize={14} bold >VENDEDOR: </SText>
+                </SView>
+                <SView flex >
+                    <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.empnom}</SText>
                 </SView>
             </SView>
-
             <SView col={"xs-12"} row>
                 <SView col={"xs-12 sm-6"} style={{ alignItems: "flex-start" }} row>
                     <SView width={70} style={{ alignItems: "flex-start" }} row>
@@ -97,6 +104,7 @@ class pedidoDetalle extends Component {
                         <SText font={'AcherusGrotesque-Regular'} color={STheme.color.gray}>{this.state?.data?.direccion}</SText>
                     </SView>
                 </SView>
+
             </SView>
         </>
     }
@@ -184,7 +192,7 @@ class pedidoDetalle extends Component {
             idcli: this.state?.data?.idcli + "",
             descripcion: descripcion,
             tipo: tipo,
-            monto: parseFloat(monto??0),
+            monto: parseFloat(monto ?? 0),
             fecha: new SDate(this?.state?.data?.fecha, "yyyy-MM-dd hh:mm:ss").toString("yyyy-MM-ddThh:mm:ss"),
         }
         data.idemp = Model.usuario.Action.getUsuarioLog()?.idtransportista;

@@ -24,6 +24,7 @@ export default class index extends Component {
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(async e => {
             console.log(e);
             let arr = Object.values(e.data)
+            console.log(arr);
             let promises = arr.map(async (emp) => {
                 const af = await DataBase.usuario.filtered(`idtransportista == '${parseInt(emp.idemp)}'`)
                 emp.usuario = af[0]
