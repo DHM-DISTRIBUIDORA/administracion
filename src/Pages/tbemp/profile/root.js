@@ -271,7 +271,7 @@ class index extends DPA.profile {
                     let users = Model.usuario.Action.getAll();
                     if (!users) return;
                     let user = Object.values(users).find(o => o[key] == this.pk)
-                    if(!user) return;
+                    if (!user) return;
                     SNavigation.navigate("/gpx/detalle", { key_usuario: user.key, fecha: this.state?.fecha })
                 },
                 icon: 'Icategoria',
@@ -315,6 +315,15 @@ class index extends DPA.profile {
                 icon: 'Ientregas',
                 color: '#FF5A5F',
                 onPress: () => SNavigation.navigate("/transporte/list", { pk: this.pk, fecha: this.state?.fecha }),
+            })}
+
+            {this.ItemCard({
+                cant: "Pedidos por vendedor",
+                label: "",
+                monto: "",
+                icon: 'Ilist',
+                color: '#F9A435',
+                onPress: () => SNavigation.navigate("/transporte/listVendedor", { pk: this.pk, fecha: this.state?.fecha }),
             })}
             {/* <SHr height={15} />
             {this.ItemCard({

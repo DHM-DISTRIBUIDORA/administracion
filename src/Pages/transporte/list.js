@@ -74,9 +74,13 @@ export default class root extends Component {
 
         clientes_filter = clientes_data;
         if (this.state?.ubicacion) {
-            (this.state?.ubicacion == "true") ?
-                clientes_filter = clientes_data.filter(a => !!a.clilat && !!a.clilon) :
+            if (this.state?.ubicacion == "true") {
+                clientes_filter = clientes_data.filter(a => !!a.clilat && !!a.clilon)
+            } else {
                 clientes_filter = clientes_data.filter(a => !a.clilat || !a.clilon)
+
+            }
+
         }
         if (this.state?.datas) {
             // clientes_filter = this.state?.datas;
@@ -97,7 +101,7 @@ export default class root extends Component {
             <Container flex>
                 <SView col={"xs-12"}>
                     <Btn padding={4} onPress={() => {
-                          SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.state.fecha })
+                        SNavigation.navigate("/transporte", { idemp: this.props.idemp, fecha: this.state.fecha })
                     }}>Ver en mapa</Btn>
                 </SView>
                 <SHr />
@@ -125,24 +129,24 @@ export default class root extends Component {
                                     //     SPopup.open({ content: <Popups.AgregarUbicacion /> });
                                     // }
                                     if (Platform.OS == "web") {
-                                        SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                        SNavigation.navigate("/transporte/pedidoDetalle", {
                                             idven: vd.idven + "",
                                             idemp: this.props?.state?.idemp,
                                             visitaType: "transporte",
                                             visita: curvisita,
                                             pk: vd.idcli + "",
-                                         })
+                                        })
                                         return;
                                     };
                                     SBLocation.isActive().then(e => {
                                         if (e.estado == "exito") {
-                                            SNavigation.navigate("/transporte/pedidoDetalle", { 
+                                            SNavigation.navigate("/transporte/pedidoDetalle", {
                                                 idven: vd.idven + "",
                                                 idemp: this.props?.state?.idemp,
                                                 visitaType: "transporte",
                                                 visita: curvisita,
                                                 pk: vd.idcli + "",
-                                             })
+                                            })
                                             return;
                                         }
                                         SPopup.alert("Debe activarse en el inicio para realizar pedidos.")

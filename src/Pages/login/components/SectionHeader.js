@@ -17,21 +17,21 @@ export default class SectionHeader extends Component {
                 </SView>
                 <SHr height={20} />
                 <SView col={"xs-12"} height={50} row>
-                    <SView col={"xs-4"} height >
+                    <SView col={"xs-6"} height >
                         <PButtom2 outline={this.props.select != "codigo"} onPress={() => {
                             SNavigation.replace("/login")
                         }}>Código</PButtom2>
                     </SView>
-                    <SView col={"xs-4"} height >
+                    <SView col={"xs-6"} height >
                         <PButtom2 outline={this.props.select != "user"} onPress={() => {
                             SNavigation.replace("/login/user")
                         }}>Inicio Sesión</PButtom2>
                     </SView>
-                    <SView col={"xs-4"} height >
+                    {/* <SView col={"xs-4"} height >
                         <PButtom2 outline={true} onPress={() => {
                             SNavigation.navigate("/registro")
                         }}>Registro</PButtom2>
-                    </SView>
+                    </SView> */}
                 </SView>
             </SView>
         );
