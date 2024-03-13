@@ -38,7 +38,7 @@ export default ({ state }) => {
                 SNavigation.navigate("/transporte/list", { pk: state.idemp, ubicacion: "true" })
             }} />
             <Card label={"Clientes sin ubicación"} value={clientes_sin_ubicacion.length} backgroundColor={STheme.color.danger + "99"} onPress={() => {
-                SNavigation.navigate("/transporte/list", { pk: state.idemp, ubicacion: false })
+                SNavigation.navigate("/transporte/list", { pk: state.idemp, ubicacion: "false" })
             }} />
             <Card label={"Visitas"} value={`${clientes_visitados.length} / ${clientes.length}`}
                 onPress={() => {

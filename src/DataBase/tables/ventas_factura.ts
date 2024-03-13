@@ -47,6 +47,8 @@ export default new class ventas_factura extends TableAbstract {
             "tipo": "string?",
             "vtipp": "int?",
             "zona": "string?",
+            "empnom": "string?",
+            "idemp": "int?",
             detalle: "json?",
         }
     }
