@@ -47,7 +47,7 @@ class index extends DPA.profile {
     componentDidMount() {
         this.loadAsyncData();
 
-        console.log("nSASA DAKJS DASD JASD", this.idemp);
+        console.log("nSASA DAKJS DASD JASD", this.idemp); 
         DataBase.tbemp.objectForPrimaryKey(parseInt(this.idemp)).then(e => {
             console.log("Aqui los empleados", e)
             this.setState({ data: e })

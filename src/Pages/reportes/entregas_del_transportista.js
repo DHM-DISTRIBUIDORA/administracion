@@ -53,7 +53,7 @@ export default class index extends Component {
                 // { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight:"bold" } },
                 // { key: "fecha_primero", width: 130 },
                 // { key: "fecha_ultimo", width: 130 },
-                { key: "idemp-ver", width: 70, component: (a) => <Link onPress={() => { SNavigation.navigate("/admin/tbemp", { pk: a, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state.fecha_fin }) }} >{"Ver perfil"}</Link> },
+                { key: "idemp-ver", width: 70, component: (a) => <Link onPress={() => { SNavigation.navigate("/admin/tbempt", { pk: a, fecha: this.state?.fecha_inicio, fecha_fin: this.state.fecha_fin }) }} >{"Ver perfil"}</Link> },
             ]}
             limit={50}
             data={this.state?.data} />
