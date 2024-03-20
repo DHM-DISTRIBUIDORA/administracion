@@ -15,7 +15,7 @@ export default class transportista extends Component {
             index: 0,
             idemp: SNavigation.getParam("idemp"),
             key_usuario: SNavigation.getParam("key_usuario"),
-            visita:[]
+            visita: []
         }
     }
 
@@ -35,6 +35,7 @@ export default class transportista extends Component {
             this.loadGpx(fecha_recorrido)
             this.setState({ visita: e.data, fecha_recorrido: fecha_recorrido })
         }).catch((e) => {
+            console.error("SAdasdas");
 
         })
 
@@ -98,6 +99,7 @@ export default class transportista extends Component {
             console.log(e);
             this.setState({ data: e, error: "" })
         }).catch(e => {
+            alert("Asdsada")
             if (!e) {
                 e = {
                     error: "No hay datos en esta fecha."
@@ -106,9 +108,11 @@ export default class transportista extends Component {
             this.setState({ data: null, error: e?.message ?? e?.error })
             console.error(e);
         })
-    } 
+    }
 
     loadGpx(fecha) {
+        console.log("ENTRO AL LOAD GPX", fecha)
+
         getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
             e.sort((a, b) => a.fecha_on > b.fecha_on ? 1 : -1)
             this.setState({ data: e, error: "" })
@@ -131,6 +135,7 @@ export default class transportista extends Component {
             }
             this.setState({ points: e, error: "" })
         }).catch(e => {
+            this.setState({ data: [], error: "" })
             console.error(e);
         })
         const request = {
@@ -174,7 +179,7 @@ export default class transportista extends Component {
             if (this.state.find) {
                 if (JSON.stringify(obj).toLowerCase().indexOf((this.state.find ?? "").toLowerCase()) <= -1) {
                     // opacity = 0.1
-                // } else {
+                    // } else {
                     return null;
                 }
             }
@@ -366,7 +371,7 @@ export default class transportista extends Component {
     renerWithData() {
         if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <> <SLoad />  <SText>Buscando ruta...</SText></>
-        if (!this.state?.ventas) return  <> <SLoad />  <SText>Buscando ruta...</SText></>
+        if (!this.state?.ventas) return <> <SLoad />  <SText>Buscando ventas...</SText></>
         console.log("this.state.ventas")
         console.log(this.state.ventas)
         return <>
@@ -441,7 +446,7 @@ export default class transportista extends Component {
     render() {
         // console.log(this.state)
         return <SPage disableScroll>
-           
+
             {this.cardDetalle()}
             <SMapView ref={ref => this.mapa = ref}>
                 {this.getPolylines()}
@@ -450,13 +455,13 @@ export default class transportista extends Component {
 
             </SMapView>
             <Container>
-                {this.getHeader()} 
+                {this.getHeader()}
                 {this.renerWithData()}
                 <SInput type='' placeholder={"Buscar..."} onChangeText={e => {
                     this.setState({ find: e })
                 }} />
             </Container>
-            <SHr height={30}/>
+            <SHr height={30} />
         </SPage>
     }
 }
