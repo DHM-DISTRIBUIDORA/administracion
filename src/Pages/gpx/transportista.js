@@ -1,6 +1,6 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SDate, SIcon, SInput, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SHr, SIcon, SInput, SLoad, SMapView, SMath, SNavigation, SPage, SRangeSlider, SText, STheme, SView } from 'servisofts-component'
 import SSocket from 'servisofts-socket'
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
@@ -14,7 +14,8 @@ export default class transportista extends Component {
             // fecha_recorrido: new SDate().toString("yyyy-MM-dd"),
             index: 0,
             idemp: SNavigation.getParam("idemp"),
-            key_usuario: SNavigation.getParam("key_usuario")
+            key_usuario: SNavigation.getParam("key_usuario"),
+            visita: []
         }
     }
 
@@ -34,6 +35,7 @@ export default class transportista extends Component {
             this.loadGpx(fecha_recorrido)
             this.setState({ visita: e.data, fecha_recorrido: fecha_recorrido })
         }).catch((e) => {
+            console.error("SAdasdas");
 
         })
 
@@ -97,6 +99,7 @@ export default class transportista extends Component {
             console.log(e);
             this.setState({ data: e, error: "" })
         }).catch(e => {
+            alert("Asdsada")
             if (!e) {
                 e = {
                     error: "No hay datos en esta fecha."
@@ -108,6 +111,8 @@ export default class transportista extends Component {
     }
 
     loadGpx(fecha) {
+        console.log("ENTRO AL LOAD GPX", fecha)
+
         getGPXDiaUsuario({ fecha: fecha, key_usuario: this.state.key_usuario }).then(e => {
             e.sort((a, b) => a.fecha_on > b.fecha_on ? 1 : -1)
             this.setState({ data: e, error: "" })
@@ -130,6 +135,7 @@ export default class transportista extends Component {
             }
             this.setState({ points: e, error: "" })
         }).catch(e => {
+            this.setState({ data: [], error: "" })
             console.error(e);
         })
         const request = {
@@ -153,8 +159,8 @@ export default class transportista extends Component {
         if (!this.state.ventas) return null;
         return this.state.ventas.map(obj => {
             let color = "#666"
-            if (this.state.visita) {
-                let visita = this.state.visita[obj.idven];
+            if (this.state?.visita) {
+                let visita = this.state?.visita[obj.idven];
                 if (visita) {
                     if (visita.tipo == "ENTREGADO") {
                         color = STheme.color.success;
@@ -173,7 +179,7 @@ export default class transportista extends Component {
             if (this.state.find) {
                 if (JSON.stringify(obj).toLowerCase().indexOf((this.state.find ?? "").toLowerCase()) <= -1) {
                     // opacity = 0.1
-                // } else {
+                    // } else {
                     return null;
                 }
             }
@@ -276,8 +282,8 @@ export default class transportista extends Component {
             // console.log("CLIENTESSS")
             // console.log(o)
 
-            if (this.state.visita) {
-                let visita = this.state.visita[o.idven];
+            if (this.state?.visita) {
+                let visita = this.state?.visita[o.idven];
                 if (visita) {
                     if (visita.tipo == "ENTREGADO") {
                         pedidos++;
@@ -364,8 +370,8 @@ export default class transportista extends Component {
 
     renerWithData() {
         if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
-        if (!this.state?.data) return <SLoad />
-        if (!this.state?.ventas) return <SLoad />
+        if (!this.state?.data) return <> <SLoad />  <SText>Buscando ruta...</SText></>
+        if (!this.state?.ventas) return <> <SLoad />  <SText>Buscando ventas...</SText></>
         console.log("this.state.ventas")
         console.log(this.state.ventas)
         return <>
@@ -440,13 +446,7 @@ export default class transportista extends Component {
     render() {
         // console.log(this.state)
         return <SPage disableScroll>
-            <Container>
-                {this.getHeader()}
-                {this.renerWithData()}
-                <SInput type='' placeholder={"Buscar..."} onChangeText={e => {
-                    this.setState({ find: e })
-                }} />
-            </Container>
+
             {this.cardDetalle()}
             <SMapView ref={ref => this.mapa = ref}>
                 {this.getPolylines()}
@@ -454,6 +454,14 @@ export default class transportista extends Component {
                 {this.getMarkers()}
 
             </SMapView>
+            <Container>
+                {this.getHeader()}
+                {this.renerWithData()}
+                <SInput type='' placeholder={"Buscar..."} onChangeText={e => {
+                    this.setState({ find: e })
+                }} />
+            </Container>
+            <SHr height={30} />
         </SPage>
     }
 }

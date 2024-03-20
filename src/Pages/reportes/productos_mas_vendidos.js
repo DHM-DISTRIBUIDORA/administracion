@@ -27,13 +27,12 @@ export default class index extends Component {
             header={[
                 { key: "index", width: 50 },
                 { key: "idprd", width: 70 },
-                { key: "prdcod", width: 70 , label: "Código"},
-                { key: "prdnom", width: 300 , label: "Nombre producto"},
-                { key: "cantidad", width: 100, cellStyle: { textAlign: "end" }, sumar: true, order: "desc" },
-                { key: "monto", width: 100, cellStyle: { textAlign: "end" }, sumar: true, render: a => SMath.formatMoney(a), renderTotal: a => SMath.formatMoney(a) },
+                { key: "prdcod", width: 70, label: "Código" },
+                { key: "prdnom", width: 300, label: "Nombre producto" },
+                { key: "cantidad", width: 100, sumar: true, order: "desc" },
+                { key: "monto", width: 100, sumar: true, render: a => SMath.formatMoney(a), renderTotal: a => SMath.formatMoney(a) },
             ]}
             limit={50}
-            // rowHeight={30}
             data={this.state?.data} />
     }
     render() {
@@ -42,7 +41,6 @@ export default class index extends Component {
                 <SelectEntreFechas onChange={e => this.getData(e)} />
                 <SView flex>
                     {this.getTable()}
-                    {/* <SLoad type='window' hidden={!this.state?.loading} /> */}
                 </SView>
             </SPage>
         )
