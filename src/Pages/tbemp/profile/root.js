@@ -325,6 +325,32 @@ class index extends DPA.profile {
                 color: '#F9A435',
                 onPress: () => SNavigation.navigate("/transporte/listVendedor", { pk: this.pk, fecha: this.state?.fecha }),
             })}
+
+            {this.ItemCard({
+                label: "Mapa",
+                cant: "Recorrido",
+                monto: "",
+                // onPress: () => SNavigation.navigate("/tbemp/profile/pedidos", { pk: this.pk, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state?.fecha_fin }),
+                onPress: () => {
+                    if (!this.data) return;
+                    const idemt = this.data.idemt;
+                    let key = "";
+                    if (idemt == 1) {
+                        key = "idvendedor"
+                    } else if (idemt == 4) {
+                        key = "idtransportista"
+                    }
+                    if (!key) return
+                    let users = Model.usuario.Action.getAll();
+                    if (!users) return;
+                    let user = Object.values(users).find(o => o[key] == this.pk)
+                    if (!user) return;
+                    SNavigation.navigate("/gpx/transportista", { key_usuario: user.key, fecha: this.state?.fecha, idemp: idemt})
+                },
+                icon: 'Icategoria',
+                color: '#61AD02',
+            })}
+
             {/* <SHr height={15} />
             {this.ItemCard({
                 label: "",
