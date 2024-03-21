@@ -188,8 +188,11 @@ class index extends Component {
                 "vpla": 0,
                 "vdes": "0",
                 "codvendedor": tbemp.empcod,
-                "vlatitud": ubicacion.latitude,
-                "vlongitud": ubicacion.longitude,
+                // tbcli.clilat, tbcli.clilon
+                // "vlatitud": ubicacion.latitude,
+                // "vlongitud": ubicacion.longitude,
+                "vlatitud": tbcli.clilat,
+                "vlongitud": tbcli.clilon,
                 "razonsocial": tbcli.clirazon,
                 "nit": tbcli.clinit,
                 "nombrecliente": tbcli.clinom,

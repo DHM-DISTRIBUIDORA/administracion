@@ -248,12 +248,12 @@ export default class transportista extends Component {
             let ITEMS = [];
             const fact = new SDate(activacion.fecha_on);
             this.state.points.map((o) => {
-                if (o.fecha_on.substring(0, 18) <= last_start.fecha_on.substring(0, 18)) return;
+                if (o.fecha_on.substring(0, 18) <= last_start?.fecha_on.substring(0, 18)) return;
                 if (!last_stop) {
                     // if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
                 } else {
                     if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
-                    if (o.fecha_on.substring(0, 18) <= last_stop.fecha_on.substring(0, 18)) return;
+                    if (o.fecha_on.substring(0, 18) <= last_stop?.fecha_on.substring(0, 18)) return;
                 }
                 ITEMS.push({
                     latitude: parseFloat(o.lat),
