@@ -101,14 +101,14 @@ export default class root extends Component {
         last_start = activacion;
       }
       let ITEMS = [];
-      const fact = new SDate(activacion.fecha_on);
+      const fact = new SDate(activacion?.fecha_on);
       this.state.data.map((o) => {
-        if (o.fecha_on.substring(0, 18) <= last_start.fecha_on.substring(0, 18)) return;
+        if (o.fecha_on.substring(0, 18) <= last_start?.fecha_on.substring(0, 18)) return;
         if (!last_stop) {
           // if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
         } else {
-          if (o.fecha_on.substring(0, 18) > activacion.fecha_on.substring(0, 18)) return;
-          if (o.fecha_on.substring(0, 18) <= last_stop.fecha_on.substring(0, 18)) return;
+          if (o.fecha_on.substring(0, 18) > activacion?.fecha_on.substring(0, 18)) return;
+          if (o.fecha_on.substring(0, 18) <= last_stop?.fecha_on.substring(0, 18)) return;
         }
         ITEMS.push({
           latitude: parseFloat(o.lat),
@@ -145,7 +145,7 @@ export default class root extends Component {
 
   renerWithData() {
     if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
-    if (!this.state.data) return <SLoad />
+    if (!this.state.data) return <><SLoad /> <SText>Buscando rutas...</SText></> 
     return <>
       <SRangeSlider
         range={[0, this.state.data.length - 1]}
