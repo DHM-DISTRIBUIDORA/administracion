@@ -6,6 +6,7 @@ import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 import DataBase from '../../DataBase'
 import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
+import PButtomSmall from '../../Components/PButtomSmall';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -217,6 +218,12 @@ class pedidoDetalle extends Component {
                 <SText>{tipo}</SText>
                 <SText>Bs. {SMath.formatMoney(monto)}</SText>
                 <SText>{descripcion}</SText>
+                <SView col={"xs-12"} row>
+                    <PButtomSmall colorBg={STheme.color.danger} onPress={() => {
+                         
+                         this.state.visita=null;
+                    }}>{"EDITAR"}</PButtomSmall>
+                </SView>
             </SView>
         }
         return <SView col={"xs-12"} center row>

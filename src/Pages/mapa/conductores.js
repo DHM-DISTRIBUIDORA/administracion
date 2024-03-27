@@ -6,7 +6,8 @@ class Mapa extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            select: false,
+            select: "TODOS",
+
         };
         this.circles = {};
         this.isRun = false;
@@ -57,11 +58,27 @@ class Mapa extends Component {
         let usuarios = Model.usuario.Action.getAll() ?? {};
         let conductores = Model.background_location.Action.getAll();
         // if (!usuarios) return <SLoad />
+        let conductoresOk ={};
         if (!conductores) {
             conductores = {};
         }
+        
 
+        if (this.state.select == "TODOS") {
+            conductoresOk = conductores;
+        } else if (this.state.select == "VENDEDORES") {
+            conductoresOk = Object.values(conductores).filter(obj => usuarios[obj.key_usuario] &&
+                !!usuarios[obj.key_usuario].idvendedor);
+        } else if (this.state.select == "TRANSPORTISTAS") {
+            conductoresOk = Object.values(conductores).filter(obj => usuarios[obj.key_usuario] &&
+                !!usuarios[obj.key_usuario].idtransportista);
+        }
+
+       
+        let opts = []
+        opts = ["TODOS", "VENDEDORES", "TRANSPORTISTAS"]
         return (
+          
             <SPage
                 title={`Conductores`}
                 disableScroll
@@ -69,6 +86,13 @@ class Mapa extends Component {
                 {/* {(Object.keys(conductores).length === 0) ? <SView height={40} center backgroundColor={STheme.color.primary}><SText color={STheme.color.white}>Actualmente no hay conductores disponibles.</SText></SView> : null}
                 <SView></SView> */}
                 <SView center height >
+                    <SView row center>
+                        <SInput type={"select"} width={200} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts}
+                            onChangeText={(val) => {
+                                this.setState({ select: val });
+                            }}
+                        />
+                    </SView>
                     <SMapView ref={ref => this.map = ref} initialRegion={{
                         latitude: -17.783799,
                         longitude: -63.180,
@@ -76,6 +100,7 @@ class Mapa extends Component {
                         longitudeDelta: 0.1
                     }}>
                         {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
+                        //  {Object.values(conductoresOk).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().addDay(-1).toString("yyyy-MM-dd")).map((obj) => {
                             return <SMapView.SMarker latitude={obj.latitude} longitude={obj.longitude} width={100} height={80}
                                 onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
@@ -83,7 +108,7 @@ class Mapa extends Component {
                                 <SView width={100} heigh={80} center >
                                     <SIcon name={"Marker"} width={25} height={40} fill={obj.tipo == "stop" ? STheme.color.danger : (new SDate(obj.fecha_last).diffTime(new SDate()) >= 1000 * 60 * 5 ? STheme.color.warning : STheme.color.success)} />
                                     <SView card height={50} center>
-                                        <SText fontSize={11} font={"Cascadia"} bold>{(usuarios[obj.key_usuario]?.Correo ?? "").substring(0, 15)}</SText>
+                                        <SText fontSize={11} font={"Cascadia"} bold>{(usuarios[obj.key_usuario]?.Nombres ?? "").substring(0, 15)}</SText>
                                         <SText fontSize={10} font={"Cascadia"}>{new SDate(obj.fecha_last).toString("hh:mm:ss")}</SText>
                                     </SView>
                                 </SView>
