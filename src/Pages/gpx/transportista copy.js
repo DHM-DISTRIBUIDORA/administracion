@@ -370,8 +370,8 @@ export default class transportista extends Component {
 
     renerWithData() {
         if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
-        if (!this.state?.data) return <><SLoad /><SText>Buscando ruta...</SText></>
-        if (!this.state?.ventas) return <><SLoad /><SText>Buscando ventas...</SText></>
+        if (!this.state?.data) return <> <SLoad />  <SText>Buscando ruta...</SText></>
+        if (!this.state?.ventas) return <> <SLoad />  <SText>Buscando ventas...</SText></>
        
         return <>
             <SRangeSlider
@@ -380,28 +380,64 @@ export default class transportista extends Component {
                 onChange={(e) => {
                     this.state.index = parseInt(e);
                     if (this.marker) {
+                        // console.log(this.state.data[this.state.index]);
                         this.marker.setCoordinate({
                             latitude: parseFloat(this.state.data[this.state.index].lat),
                             longitude: parseFloat(this.state.data[this.state.index].lon)
                         })
+                        //this.setState({ index: parseInt(e) })
                     }
 
-                    let datav = this.state.ventas;
+                    let datav = this.state?.ventas;
                     let contador = 0;
                     let total = 0;
 
-                    let fechaBase = this.state.fecha
+                    let fechaBase = this.state?.fecha
+                    // const fecha1 = new SDate(fechaBase.toDateString() + ' ' + hora1);
+                    // let fecha2 = new SDate(fechaBase + ' ' + this.state.data[this.state.index].fecha_on.substring(11, 19));
+                    // if (this.state.index == (this.state.data.length - 1)) {
+                    //     Object.values(datav).map(a => {
+
+                    //         Object.keys(a.detalle).map((key, index) => {
+                    //             total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                    //         });
+                    //         // console.log(fecha1)
+                    //         // console.log(fecha2)
+                    //         // console.log("siiiii")
+                    //         contador++;
+                    //     })
+                    // } else {
+                    //     Object.values(datav).map(a => {
+                    //         let fecha1 = new SDate(fechaBase + ' ' + a.vhora.substring(10, 19));
+                    //         if (fecha1 <= fecha2) {
+                    //             Object.keys(a.detalle).map((key, index) => {
+                    //                 total += a.detalle[key].vdpre * a.detalle[key].vdcan;
+                    //             });
+                    //             contador++;
+                    //         }
+                    //     })
+                    // }
 
                     this.mensaje.setLabel("visitas: " + contador + " / total: Bs. " + SMath.formatMoney(total) + " / " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
 
                     if (this.mensaje) {
                         if (this.mapa) {
-                           
+                            // new SThread(500, "asd", true).start(() => {
+                            //   this.mapa.animateToRegion({
+                            //     latitude: parseFloat(this.state.data[this.state.index].lat),
+                            //     longitude: parseFloat(this.state.data[this.state.index].lon),
+                            //     latitudeDelta: 0.01,
+                            //     longitudeDelta: 0.01
+                            //   }, 100)
+                            // })
+
                         }
 
+                        // this.mensaje.setLabel("pedidos: 0     -    " + new SDate(this.state.data[this.state.index]?.fecha_on, "yyyy-MM-ddThh:mm:ss").toString("yyyy-MM-dd hh:mm:ss"))
                     }
                 }} />
             <Mensajes ref={ref => this.mensaje = ref} />
+            {/* <SText>{new SDate(this.state.data[this.state.index].fecha_on, "yyyy-MM-ddThh:mm:ss.SSSZ").toString("yyyy-MM-dd hh:mm:ss")}</SText> */}
         </>
     }
 
