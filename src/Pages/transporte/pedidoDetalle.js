@@ -222,6 +222,7 @@ class pedidoDetalle extends Component {
                     <PButtomSmall colorBg={STheme.color.danger} onPress={() => {
                          
                          this.state.visita=null;
+                         this.setState({visita:null})
                     }}>{"EDITAR"}</PButtomSmall>
                 </SView>
             </SView>
