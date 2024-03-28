@@ -6,6 +6,7 @@ import Model from '../../Model'
 import SSocket from 'servisofts-socket'
 import DataBase from '../../DataBase'
 import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
+import PButtomSmall from '../../Components/PButtomSmall';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -14,6 +15,7 @@ class pedidoDetalle extends Component {
             curdate: new SDate(),
             idemp: SNavigation.getParam("idemp"),
             fecha: SNavigation.getParam("fecha"),
+            edito: false,
         }
         this.idven = SNavigation.getParam("idven");
         this.visita = SNavigation.getParam("visita", false);
@@ -196,14 +198,30 @@ class pedidoDetalle extends Component {
             fecha: new SDate(this?.state?.data?.fecha, "yyyy-MM-dd hh:mm:ss").toString("yyyy-MM-ddThh:mm:ss"),
         }
         data.idemp = Model.usuario.Action.getUsuarioLog()?.idtransportista;
-        DataBase.visita_transportista.insert(data).then(e => {
-            this.setState({ loading: false })
-            SNavigation.goBack();
 
-        }).catch(e => {
-            console.error(e)
-            this.setState({ loading: false })
-        })
+        if (this.visita) {
+            data.sync_type = "update";
+            data.key = this.visita.key;
+            DataBase.visita_transportista.update(data).then(e => {
+                this.setState({ loading: false })
+                SNavigation.goBack();
+
+            }).catch(e => {
+                console.error(e)
+                this.setState({ loading: false })
+            })
+            
+        } else {
+            DataBase.visita_transportista.insert(data).then(e => {
+                this.setState({ loading: false })
+                SNavigation.goBack();
+
+            }).catch(e => {
+                console.error(e)
+                this.setState({ loading: false })
+            })
+        }
+        return;
 
     }
 
@@ -217,6 +235,14 @@ class pedidoDetalle extends Component {
                 <SText>{tipo}</SText>
                 <SText>Bs. {SMath.formatMoney(monto)}</SText>
                 <SText>{descripcion}</SText>
+                <SView col={"xs-12"} row>
+                    <PButtomSmall colorBg={STheme.color.danger} onPress={() => {
+
+                        this.state.visita = null;
+                        this.setState({ visita: null })
+                        this.setState({ edito: true })
+                    }}>{"EDITAR"}</PButtomSmall>
+                </SView>
             </SView>
         }
         return <SView col={"xs-12"} center row>

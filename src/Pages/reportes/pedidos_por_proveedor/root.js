@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
+import { SHr, SInput, SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../../Components/Fechas'
-import { Link } from '../../../Components'
+import { Container, Link } from '../../../Components'
 export default class index extends Component {
     state = {
         fecha_inicio: SNavigation.getParam("fecha_inicio"),
@@ -10,6 +10,7 @@ export default class index extends Component {
         empcod: SNavigation.getParam("empcod"),
     }
     getData({ fecha_inicio, fecha_fin }) {
+        this.state.fecha = { fecha_inicio, fecha_fin };
         const request = {
             component: "dhm",
             type: "getPedidosProveedor",
@@ -37,7 +38,7 @@ export default class index extends Component {
                 // { key: "idemp", width: 50 },
                 { key: "lincod", width: 50 },
                 { key: "linnom", width: 200 },
-                { key: "montos", label: "Monto", width: 70, order: "desc", render: a => SMath.formatMoney(a), sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                { key: "montos", label: "Monto", width: 70, order: "desc",render: a => SMath.formatMoney(a), sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 { key: "productos", label: "Cant. Productos", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 { key: "clientes", width: 70, cellStyle: { textAlign: "center" } },
                 // { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
@@ -71,13 +72,28 @@ export default class index extends Component {
                 },
 
             ]}
+            filter={a => a.montos > 0}
             limit={50}
             data={this.state?.data} />
     }
     render() {
         return (
             <SPage title="Pedidos por proveedor" disableScroll>
-                <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => this.getData(e)} />
+                <Container>
+                    <SelectEntreFechas fecha_inicio={this.state.fecha_inicio} fecha_fin={this.state.fecha_fin} onChange={e => this.getData(e)} />
+                    <SInput label="Vendedor" placeholder={"Todos los vendedores"} value={this?.state?.emp?.empnom} onPress={() => {
+                        SNavigation.navigate("/tbemt/profile/tbemp", {
+                            pk: 1, onSelect: (e) => {
+                                this.state.emp = e;
+                                this.state.data = null;
+                                this.state.empcod = e.empcod
+                                this.getData(this.state.fecha)
+                                this.setState({ ...this.state })
+                            }
+                        })
+                    }} />
+                </Container>
+                <SHr />
                 <SView flex>
                     {this.getTable()}
                 </SView>
