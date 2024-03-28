@@ -38,10 +38,11 @@ export default class index extends Component {
                 { key: "empnom", width: 200 },
                 { key: "cantidad_ss", label: "App Servisofts", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
-                { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight:"bold" } },
+                { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight: "bold" } },
+                { key: "monto", label: "Monto", width: 70, render: a => SMath.formatMoney(a), sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 { key: "fecha_primero", width: 130 },
                 { key: "fecha_ultimo", width: 130 },
-                { key: "idemp-ver", width: 130, component: (a) => <Link onPress={() => { SNavigation.navigate("/admin/tbemp", { pk: a , fecha_inicio: this.state?.fecha_inicio, fecha_fin : this.state.fecha_fin}) }} >{"Ver perfil"}</Link> },
+                { key: "idemp-ver", width: 130, component: (a) => <Link onPress={() => { SNavigation.navigate("/admin/tbemp", { pk: a, fecha_inicio: this.state?.fecha_inicio, fecha_fin: this.state.fecha_fin }) }} >{"Ver perfil"}</Link> },
                 {
                     key: "-pedidos", width: 100, component: (a) => <Link onPress={() => {
                         SNavigation.navigate("/reportes/pedidos_por_vendedor_detalle", {
