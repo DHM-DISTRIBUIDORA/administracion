@@ -41,7 +41,7 @@ export default class index extends Component {
                 { key: "vzona", width: 80 },
                 { key: "clicod", width: 100 },
                 { key: "nombrecliente", width: 200 },
-
+                { key: "monto", label: "Monto", width: 70, render: a => SMath.formatMoney(!a ? 0 : a), sumar: true, cellStyle: { textAlign: "center" } },
                 {
                     key: "-fecha", order: "asc", width: 120, render: a => {
 
