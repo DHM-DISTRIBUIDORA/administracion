@@ -107,7 +107,11 @@ class index extends Component<CategoriaCardPropsType> {
                         {(!visita) ? <SText fontSize={10} center>Ausente</SText> : <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>} */}
 
                         <SIcon name='Iactivot' width={40} height={35} fill={color} />
-                        <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita?.fecha_last).toString("hh:mm:ss")}</SText></SView>
+                        <SView>
+                            <SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText>
+                            {(descripcion == "Ausente") ? null : <SText center fontSize={10} bold >{new SDate(visita?.fecha_last).toString("hh:mm:ss")}</SText>}
+                            {/* <SText center fontSize={10} bold >{new SDate(visita?.fecha_last).toString("hh:mm:ss")}</SText> */}
+                        </SView>
                     </SView>
                 </SView>
                 <SView col={"xs-12"} center row>
