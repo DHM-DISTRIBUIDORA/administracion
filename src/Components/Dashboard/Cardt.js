@@ -44,10 +44,14 @@ class index extends Component<CategoriaCardPropsType> {
                 color = STheme.color.danger
                 descripcion = "Inactivo";
                 break;
+            default:
+                color = STheme.color.lightGray
+                descripcion = "Ausente";
+                break;
             // case "on_location_change":
             //     color = STheme.color.danger
             //     descripcion = "Inactivo";
-            //     break;
+            //     break; 
         }
         console.log(color);
         console.log(descripcion);
@@ -97,11 +101,13 @@ class index extends Component<CategoriaCardPropsType> {
                         }
                         SNavigation.navigate("/gpx/transportista", { key_usuario: usuario?.key, fecha: this.props.fecha, idemp: idemp })
                     }}>
-                        {/* <SIcon name='Iactivot' width={40} height={35}  fill={STheme.color.success} /> */}
-                        {(!visita) ? <SIcon name='Iactivot' width={40} height={35} fill={STheme.color.lightGray} /> :
+                        {/* {(!visita) ? <SIcon name='Iactivot' width={40} height={35} fill={STheme.color.lightGray} /> :
                             <SIcon name='Iactivot' width={40} height={35} fill={color} />
                         }
-                        {(!visita) ? <SText fontSize={10} center>Ausente</SText> : <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>}
+                        {(!visita) ? <SText fontSize={10} center>Ausente</SText> : <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita.fecha_last).toString("hh:mm:ss")}</SText></SView>} */}
+
+                        <SIcon name='Iactivot' width={40} height={35} fill={color} />
+                        <SView><SText style={{ lineHeight: 12 }} fontSize={10} center> {descripcion}</SText><SText center fontSize={10} bold >{new SDate(visita?.fecha_last).toString("hh:mm:ss")}</SText></SView>
                     </SView>
                 </SView>
                 <SView col={"xs-12"} center row>
