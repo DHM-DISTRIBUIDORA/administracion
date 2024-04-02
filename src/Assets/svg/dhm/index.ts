@@ -96,6 +96,11 @@ import Idt1, { ReactComponent as Idt1W } from './idt1.svg';
 import Idt2, { ReactComponent as Idt2W } from './idt2.svg';
 import Idt3, { ReactComponent as Idt3W } from './idt3.svg';
 import Idt4, { ReactComponent as Idt4W } from './idt4.svg';
+import Entregado, { ReactComponent as EntregadoW } from './entregado.svg';
+import NoEntregado, { ReactComponent as NoEntregadoW } from './noEntregado.svg';
+import NoEntregado2, { ReactComponent as NoEntregado2W } from './noEntregado2.svg';
+
+
 
 
 
@@ -198,6 +203,9 @@ const Assets = {
 	"Idt2": { Native: Idt2, Web: Idt2W },
 	"Idt3": { Native: Idt3, Web: Idt3W },
 	"Idt4": { Native: Idt4, Web: Idt4W },
+	"Entregado": { Native: Entregado, Web: EntregadoW },
+	"NoEntregado": { Native: NoEntregado, Web: NoEntregadoW },
+	"NoEntregado2": { Native: NoEntregado2, Web: NoEntregado2W },
 	
 	
 	

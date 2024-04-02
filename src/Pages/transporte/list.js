@@ -94,6 +94,8 @@ export default class root extends Component {
             }));
         }
 
+        console.log(this.state.visitas, clientes_filter)
+
         return <SPage
             title={(this.state?.ubicacion) ? ((this.state?.ubicacion == "true") ? "CLIENTES CON UBICACIÓN" : "CLIENTES SIN UBICACIÓN") : "MIS CLIENTES"}
             disableScroll
@@ -115,6 +117,10 @@ export default class root extends Component {
                     render={(vd) => {
                         // console.log(vd)
                         const curvisita = (this.state.visitas ?? []).find(a => a.idven == vd.idven);
+                        console.log("curvisita")
+                        console.log(curvisita)
+                        console.log("-----------------")
+
                         return <>
                             <SView col={"xs-12"} row center
                                 card
@@ -165,11 +171,33 @@ export default class root extends Component {
                                     // })
                                 }}
                             >
-                                <SView col={"xs-9"} >
+                                
+                                <SView col={"xs-8"} >
                                     <SText fontSize={14} bold>{vd?.codigo} - {vd?.clinom}</SText>
                                     <SText fontSize={12}>{vd?.clidir}</SText>
                                 </SView>
-                                <SView col={"xs-3"} style={{ alignItems: "flex-end" }}>
+                                <SView col={"xs-2"} >
+                                    {(curvisita?.monto == null) ?
+                                        // <SView center>
+                                        //     <SIcon name='NoEntregado2' height={30} width={30} fill={STheme.color.gray} />
+                                        // </SView>
+                                        null
+                                        : (curvisita?.monto > 0) ?
+                                            <SView center>
+                                                <SIcon name='Entregado' height={30} width={30} fill={STheme.color.success} />
+                                                <SHr height={2} />
+                                                <SText fontSize={7.5}>{curvisita?.tipo}</SText>
+                                            </SView>
+                                            :
+                                            <SView center>
+                                                <SIcon name='NoEntregado' height={30} width={30} fill={STheme.color.danger} />
+                                                <SHr height={2} />
+                                                <SText center fontSize={7.5}>{curvisita?.tipo}</SText>
+                                            </SView>
+
+                                    }
+                                </SView>
+                                <SView col={"xs-2"} style={{ alignItems: "flex-end" }}>
                                     {curvisita ?
                                         <SView center>
                                             <SIcon name='VisitSi' height={25} width={25} fill={STheme.color.success} />
@@ -184,6 +212,7 @@ export default class root extends Component {
                                         </SView>
                                     }
                                 </SView>
+
                             </SView>
                         </>
                     }}
