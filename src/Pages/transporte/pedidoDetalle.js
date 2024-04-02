@@ -210,7 +210,7 @@ class pedidoDetalle extends Component {
                 console.error(e)
                 this.setState({ loading: false })
             })
-            
+
         } else {
             DataBase.visita_transportista.insert(data).then(e => {
                 this.setState({ loading: false })
@@ -230,14 +230,32 @@ class pedidoDetalle extends Component {
             let { descripcion, fecha, fecha_on, tipo, monto } = this.state.visita
             if (monto == null) monto = 0;
             console.log(monto);
-            return <SView>
-                <SText bold color={STheme.color.success} >Visitado el {new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("DAY dd de MONTH del yyyy a las hh:mm")}. </SText>
+            return <SView
+                style={{
+                    borderWidth: 2,
+                    borderRadius: 10,
+                    borderColor: (monto != 0) ? STheme.color.success + "95" : STheme.color.danger + "95",
+                    padding: 10,
+                    backgroundColor: (monto != 0) ? STheme.color.success + "10" : STheme.color.danger + "10",
+                }}
+            >
+                <SText bold  >Visitado el {new SDate(fecha_on, "yyyy-MM-ddThh:mm:ss").toString("DAY dd de MONTH del yyyy a las hh:mm")}. </SText>
+                {(monto > 0) ?
+                    <SView center style={{left:10}}>
+                        <SIcon name='Entregado' height={50} width={50} fill={STheme.color.success} />
+                    </SView>
+                    :
+                    <SView center style={{left:10}}>
+                        <SIcon name='NoEntregado' height={50} width={50} fill={STheme.color.danger} />
+                    </SView>}
                 <SText>{tipo}</SText>
                 <SText>Bs. {SMath.formatMoney(monto)}</SText>
-                <SText>{descripcion}</SText>
-                <SView col={"xs-12"} row>
-                    <PButtomSmall colorBg={STheme.color.danger} onPress={() => {
+                {(monto == 0) ? <SText>{descripcion}</SText> : null}
+                <SHr height={10} />
+                {/* <SText>{descripcion}</SText> */}
+                <SView col={"xs-12"} flex style={{ alignItems: 'flex-end' }}>
 
+                    <PButtomSmall width={100} center height={40} colorBg={STheme.color.danger} onPress={() => {
                         this.state.visita = null;
                         this.setState({ visita: null })
                         this.setState({ edito: true })
