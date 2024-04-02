@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SDate, SHr, SList, SLoad, SMath, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
+import { SDate, SHr, SList, SLoad, SMath, SNavigation, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
 import { Container, Dashboard } from '../../Components';
 import DataBase from '../../DataBase';
 import { SelectFecha } from '../../Components/Fechas';
 import Model from '../../Model';
 export default class index extends Component {
     state = {
+        fecha: SNavigation.getParam("fecha")
     }
 
     componentDidMount() {
@@ -36,9 +37,9 @@ export default class index extends Component {
             console.error(e);
         })
 
-         //background location
-         let conductores =  Model.background_location.Action.getAll();
-         (!conductores) ? this.setState({ conductores: {} }) : this.setState({ conductores: conductores });
+        //background location
+        let conductores = Model.background_location.Action.getAll();
+        (!conductores) ? this.setState({ conductores: {} }) : this.setState({ conductores: conductores });
     }
 
 
@@ -46,7 +47,7 @@ export default class index extends Component {
         if (this.state?.error) return <SText color={STheme.color.danger}>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <SLoad />
 
-        const moving = Model.background_location.Action.getAll(); 
+        const moving = Model.background_location.Action.getAll();
 
         this.state.data.forEach((objeto) => {
             // Verificar si 'moving' es un objeto
@@ -56,7 +57,7 @@ export default class index extends Component {
                         objeto.visita = moving[key];
                         console.log("objeto.visita");
                         console.log(objeto.visita);
-                        
+
                         break; // Si se encuentra una coincidencia, salir del bucle
                     }
                 }
@@ -73,7 +74,7 @@ export default class index extends Component {
             limit={20}
             buscador
             render={(obj) => {
-                return <Dashboard.Cardt data={obj} fecha={this.state.fecha}  />
+                return <Dashboard.Cardt data={obj} fecha={this.state.fecha} />
             }}
         />
     }
@@ -82,7 +83,7 @@ export default class index extends Component {
         return (
             <SPage title="Pedidos para transportistas" >
                 <Container>
-                    <SelectFecha onChange={(e) => {
+                    <SelectFecha fecha={this.state.fecha} onChange={(e) => {
                         this.setState({ data: null })
                         this.getData({ fecha: e.fecha });
                         this.setState({ fecha: e.fecha })

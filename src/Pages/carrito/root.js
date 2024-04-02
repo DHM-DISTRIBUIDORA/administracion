@@ -306,7 +306,7 @@ class index extends Component {
                         return val.substring(0, 65);
                     }
                     this.state.detalle = val;
-                }} placeholder={"Escribe un detalle de maximo 65 caracteres."} />
+                }} placeholder={"Escribe un detalle de máximo 65 caracteres."} />
                 <SHr height={15} />
                 <Carrito.Detalle />
                 <SHr height={45} />

@@ -99,8 +99,8 @@ class Mapa extends Component {
                         latitudeDelta: 0.1,
                         longitudeDelta: 0.1
                     }}>
-                        {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
-                        //  {Object.values(conductoresOk).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().addDay(-1).toString("yyyy-MM-dd")).map((obj) => {
+                        {/* {Object.values(conductores).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => { */}
+                         {Object.values(conductoresOk).filter(obj => new SDate(obj.fecha_last).toString("yyyy-MM-dd") == new SDate().toString("yyyy-MM-dd")).map((obj) => {
                             return <SMapView.SMarker latitude={obj.latitude} longitude={obj.longitude} width={100} height={80}
                                 onPress={() => {
                                     SNavigation.navigate("/usuario/profile", { pk: obj.key_usuario })
