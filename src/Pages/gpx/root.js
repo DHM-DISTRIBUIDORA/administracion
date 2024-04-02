@@ -145,7 +145,7 @@ export default class root extends Component {
 
   renerWithData() {
     if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
-    if (!this.state.data) return <><SLoad /> <SText>Buscando rutas...</SText></> 
+    if (!this.state.data) return <><SLoad /><SText>Buscando rutas...</SText></> 
     return <>
       <SRangeSlider
         range={[0, this.state.data.length - 1]}
@@ -198,10 +198,8 @@ export default class root extends Component {
           <></>
           {this.getPolylines()}
           {this.getActivaciones()}
-
           {/* {this.getPoints()} */}
           {this.getMarkers()}
-
         </SMapView>
       </SPage>
     )

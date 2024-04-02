@@ -113,7 +113,7 @@ export default class root extends Component {
                     data={clientes_filter}
                     order={[{ key: "clinom", order: "asc" }]}
                     render={(vd) => {
-                        console.log(vd)
+                        // console.log(vd)
                         const curvisita = (this.state.visitas ?? []).find(a => a.idven == vd.idven);
                         return <>
                             <SView col={"xs-12"} row center
