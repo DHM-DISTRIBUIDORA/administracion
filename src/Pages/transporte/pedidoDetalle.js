@@ -88,17 +88,18 @@ class pedidoDetalle extends Component {
 
     handlePressVisitaUbicacion = async (tbcli, ubicacion, visit) => {
 
-        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
-        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
+        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
         if (distancia > 200) {
             console.log("DISTANCIA MAYOR A 200 METROS");
-            SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
-            return;
+            // SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
+            // return;
 
-            // if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
-            //     SPopup.alert("No tiene permisos para levantar pedidos lejos del cliente, porfavor contactese con la administracion.")
-            //     return;
-            // }
+            if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
+                console.log("DISTANCIA MAYOR A 200 METROS entró al if");
+                SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
+                return;
+            }
         } else {
             if (visit) {
                 SPopup.openContainer({
