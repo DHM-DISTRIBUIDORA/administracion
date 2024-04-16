@@ -157,6 +157,8 @@ export default class transportista extends Component {
     }
     renderMarkers() {
         if (!this.state.ventas) return null;
+        const grupos = {};
+        const colores = {};
         return this.state.ventas.map(obj => {
             let color = "#666"
             if (this.state?.visita) {
@@ -184,23 +186,46 @@ export default class transportista extends Component {
                 }
             }
 
+            if (!grupos[obj.idven]) {
+                grupos.push(idven = obj.idven)
+            }
+
+
+
             return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color} onPress={() => {
                 SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
             }}>
                 {(this.state.visita[obj.idven]?.tipo == "ENTREGADO") ?
                     <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative", opacity: opacity }}>
                         <SView col={"xs-12"} height={40} center >
-                            <SView width={68} height={30} borderRadius={10} backgroundColor={STheme.color.white} style={{
+                            <SView width={73} height={35} borderRadius={10} backgroundColor={STheme.color.white} style={{
                                 borderWidth: 2,
                                 borderColor: STheme.color.text,
                                 position: "absolute",
                             }} center>
-                                <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{obj.clinom} </SText>
+                                <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{obj.clinom}</SText>
+                                <SHr height={3} />
+                                <SText fontSize={8} color={STheme.color.black} style={{ lineHeight: 7 }} center >{"(" + (obj.empnom).split(' ')[0] + ")"}</SText>
+
                             </SView>
                         </SView>
                         <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
                     </SView>
-                    : <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />}
+                    : <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative", opacity: opacity }}>
+                        <SView col={"xs-12"} height={40} center >
+                            <SView width={68} height={35} borderRadius={10} backgroundColor={STheme.color.white} style={{
+                                borderWidth: 2,
+                                borderColor: STheme.color.text,
+                                position: "absolute",
+                            }} center>
+                                <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{obj.clinom}</SText>
+                                <SHr height={3} />
+                                <SText fontSize={8} color={STheme.color.black} style={{ lineHeight: 7 }} center >{"(" + (obj.empnom).split(' ')[0] + ")"}</SText>
+
+                            </SView>
+                        </SView>
+                        <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
+                    </SView>}
 
             </SMapView.SMarker>
         })
@@ -372,7 +397,7 @@ export default class transportista extends Component {
         if (this.state.error) return <SText>{JSON.stringify(this.state.error)}</SText>
         if (!this.state?.data) return <><SLoad /><SText>Buscando ruta...</SText></>
         if (!this.state?.ventas) return <><SLoad /><SText>Buscando ventas...</SText></>
-       
+
         return <>
             <SRangeSlider
                 range={[0, this.state.data.length - 1]}
@@ -396,7 +421,7 @@ export default class transportista extends Component {
 
                     if (this.mensaje) {
                         if (this.mapa) {
-                           
+
                         }
 
                     }
