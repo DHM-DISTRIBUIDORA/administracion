@@ -88,8 +88,8 @@ class pedidoDetalle extends Component {
 
     handlePressVisitaUbicacion = async (tbcli, ubicacion, visit) => {
 
-        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
-        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
+        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
         if (distancia > 200) {
             console.log("DISTANCIA MAYOR A 200 METROS");
             SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
