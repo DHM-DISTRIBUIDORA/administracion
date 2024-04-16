@@ -186,9 +186,9 @@ export default class transportista extends Component {
                 }
             }
 
-            if (!grupos[obj.idven]) {
-                grupos.push(idven = obj.idven)
-            }
+            // if (!grupos[obj.idven]) {
+            //     grupos.push(idven = obj.idven)
+            // }
 
 
 
