@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import SSocket from 'servisofts-socket'
-import { SLoad, SMath, SNavigation, SPage, STable2, SView } from 'servisofts-component'
+import { SLoad, SMath, SNavigation, SPage, STable2, SText, STheme, SView } from 'servisofts-component'
 import { SelectEntreFechas } from '../../../Components/Fechas'
 import { Link } from '../../../Components'
 export default class index extends Component {
     state = {
         fecha_inicio: SNavigation.getParam("fecha_inicio"),
         fecha_fin: SNavigation.getParam("fecha_fin"),
-        idemp: SNavigation.getParam("idemp"),
+        idvendedor: SNavigation.getParam("idvendedor"),
+        idtransportista: SNavigation.getParam("idtransportista"),
         // lincod: SNavigation.getParam("lincod")
     }
     getData({ fecha_inicio, fecha_fin }) {
@@ -17,11 +18,18 @@ export default class index extends Component {
             fecha_inicio: fecha_inicio,
             fecha_fin: fecha_fin,
             // lincod: this.state.lincod,
-            idemp: this.state.idemp
+            idvendedor: this.state.idvendedor,
+            idtransportista: this.state.idtransportista
         }
         this.setState({ loading: true })
         SSocket.sendHttpAsync(SSocket.api.root + "api", request).then(e => {
             console.log(e);
+            e.data.map(a => {
+                // a.entregado = e?.data_entrega_parcial[a?.idemp];
+                // a.monto_diferencia = (a?.monto ?? 0) - (a?.entregado?.monto ?? 0)
+                // a.cantidad_diferencia = (a?.cantidad ?? 0) - (a?.entregado?.cantidad ?? 0)
+                a.rebotado = e?.data_rebotados[a?.idven];
+            })
             this.setState({ data: e.data, loading: false })
         }).catch(e => {
             this.setState({ loading: false, error: e?.error })
@@ -36,14 +44,32 @@ export default class index extends Component {
             rowHeight={30}
             header={[
                 { key: "index", width: 50 },
-                { key: "vdoc", width: 80 },
-                { key: "vnum", width: 80 },
-                { key: "clicod", width: 80 },
+                { key: "idven", width: 80 },
+                {
+                    key: "rebotado/tipo", width: 200, component: (a) => {
+                        let color = STheme.color.text;
+                        if (a == "ENTREGADO") {
+                            color = STheme.color.success;
+                        } else if (a == "ENTREGADO PARCIALMENTE") {
+                            color = STheme.color.warning;
+                        } else {
+                            color = STheme.color.danger;
+                        }
+                        return <SText col={"xs-12"} row color={color} fontSize={12}>{a}</SText>
+                    }
+                },
+                { key: "rebotado/monto", width: 60, label: "Monto", width: 70, sumar: true, render: (a) => parseFloat(a).toFixed(2) <= 0 ? "" : a, renderTotal: a => parseFloat(a).toFixed(2), cellStyle: { textAlign: "right" } },
+                { key: "rebotado/descripcion", width: 120 },
+
+
+                // { key: "vdoc", width: 80 },
+                // { key: "vnum", width: 80 },
+                { key: "clicod", width: 120 },
                 { key: "clinom", width: 150 },
-                { key: "vfec", width: 150 },
+                // { key: "vfec", width: 150 },
                 { key: "vobs", width: 250 },
-                { key: "cantidad", width: 60, label: "Cantidad P.", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
-                { key: "monto", width: 60, label: "Monto", width: 70, sumar: true, renderTotal: a => parseFloat(a).toFixed(2), render: a => parseFloat(a).toFixed(2), cellStyle: { textAlign: "right" } },
+                // { key: "cantidad", width: 60, label: "Cantidad P.", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
+                // { key: "monto", width: 60, label: "Monto", width: 70, sumar: true, renderTotal: a => parseFloat(a).toFixed(2), render: a => parseFloat(a).toFixed(2), cellStyle: { textAlign: "right" } },
 
                 // { key: "cant", width: 50 },
                 // { key: "monto", width: 50 },
