@@ -5,6 +5,7 @@ import SSocket from 'servisofts-socket'
 import { getGPXDiaUsuario } from './Functions';
 import { SelectFecha } from '../../Components/Fechas';
 import { Container } from '../../Components';
+import datos from '../rol/profile/datos';
 
 export default class transportista extends Component {
     constructor(props) {
@@ -15,11 +16,29 @@ export default class transportista extends Component {
             index: 0,
             idemp: SNavigation.getParam("idemp"),
             key_usuario: SNavigation.getParam("key_usuario"),
-            visita: []
+            visita: [],
+            coloresE: [
+                "#3379FF", // Rojo
+                "#E233FF", // Naranja
+                "#33FFD4", // Amarillo
+                "#D4FF33", // Lima
+                "#7BFF33", // Verde lima
+                "#33FF93", // Verde menta
+                "#5ECF5C", // Verde azulado
+                "#33B7FF", // Azul claro
+                "#C4AA68", // Azul
+                "#8A33FF", // Morado
+                "#322F40", // Rosa
+                "#FF33C4", // Rosa fuerte
+            ],
+            datosEmpleados: {},
         }
+
+
     }
 
     componentDidMount() {
+        this.state.datosEmpleados = {}
         SSocket.sendHttpAsync(SSocket.api.root + "api", {
             "component": "visita_transportista",
             "type": "getAll",
@@ -157,9 +176,10 @@ export default class transportista extends Component {
     }
     renderMarkers() {
         if (!this.state.ventas) return null;
-        const grupos = {};
-        const colores = {};
-        return this.state.ventas.map(obj => {
+        const empleados = {};
+        let j = 0;
+        // return this.state.ventas.map(obj =>  {
+        return this.state.ventas.map((obj, index) => {
             let color = "#666"
             if (this.state?.visita) {
                 let visita = this.state?.visita[obj.idven];
@@ -173,11 +193,9 @@ export default class transportista extends Component {
                     }
                 }
             }
-            // console.log("obj")
-            // console.log(obj)
-            // console.log("VISITAS")
-            // console.log(this.state.visita[obj.idven])
+
             let opacity = 1;
+
             if (this.state.find) {
                 if (JSON.stringify(obj).toLowerCase().indexOf((this.state.find ?? "").toLowerCase()) <= -1) {
                     // opacity = 0.1
@@ -186,11 +204,18 @@ export default class transportista extends Component {
                 }
             }
 
-            // if (!grupos[obj.idven]) {
-            //     grupos.push(idven = obj.idven)
-            // }
+            if (!empleados[obj.idemp]) {
 
-
+                // let colors = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+                let colors = this.state.coloresE[j];
+                empleados[obj.idemp] = {
+                    idemp: obj.idemp,
+                    color: colors,
+                    nombre: obj.empnom.split('/')[0]
+                };
+                this.state.datosEmpleados = empleados
+                j++;
+            }
 
             return <SMapView.SMarker latitude={obj.clilat} longitude={obj.clilon} fill={color} onPress={() => {
                 SNavigation.navigate("/tbcli/profile", { pk: obj.idcli })
@@ -201,18 +226,18 @@ export default class transportista extends Component {
                             <SView width={73} height={35} borderRadius={10} backgroundColor={STheme.color.white} style={{
                                 borderWidth: 2,
                                 borderColor: STheme.color.text,
+                                borderColor: empleados[obj.idemp].color,
                                 position: "absolute",
                             }} center>
                                 <SText fontSize={8} bold color={STheme.color.black} style={{ lineHeight: 8 }} center >{obj.clinom}</SText>
-                                <SHr height={3} />
-                                <SText fontSize={8} color={STheme.color.black} style={{ lineHeight: 7 }} center >{"(" + (obj.empnom).split(' ')[0] + ")"}</SText>
-
+                                {/* <SHr height={3} />
+                                <SText fontSize={8} color={STheme.color.black} style={{ lineHeight: 7 }} center >{"(" + (obj.empnom).split(' ')[0] + ")"}</SText> */}
                             </SView>
                         </SView>
                         <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
                     </SView>
                     : <SView center flex col={"xs-12"} height={73} style={{ zIndex: 999, position: "relative", opacity: opacity }}>
-                        <SView col={"xs-12"} height={40} center >
+                        {/* <SView col={"xs-12"} height={40} center >
                             <SView width={68} height={35} borderRadius={10} backgroundColor={STheme.color.white} style={{
                                 borderWidth: 2,
                                 borderColor: STheme.color.text,
@@ -223,6 +248,17 @@ export default class transportista extends Component {
                                 <SText fontSize={8} color={STheme.color.black} style={{ lineHeight: 7 }} center >{"(" + (obj.empnom).split(' ')[0] + ")"}</SText>
 
                             </SView>
+                        </SView> */}
+                        <SView width={13} height={13} borderRadius={45} backgroundColor={empleados[obj.idemp].color} style={{
+                            borderWidth: 1,
+                            borderColor: STheme.color.text,
+                            position: "absolute",
+                            top: 14,
+                            right: 0,
+                            overflow: "hidden",
+                            zIndex: 999
+
+                        }} center>
                         </SView>
                         <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
                     </SView>}
@@ -295,6 +331,26 @@ export default class transportista extends Component {
 
         })
     }
+    getVendedores = () => {
+        if (!this.state.datosEmpleados) return null;
+        return Object.values(this.state.datosEmpleados).map((o) => {
+            return <SView row>
+
+                <SView width={20} height={20} borderRadius={45} backgroundColor={o.color} style={{
+                    borderWidth: 1,
+                    borderColor: STheme.color.text,
+                    position: "absolute",
+                    top: 5,
+                    left: 0,
+                }} center>
+                </SView>
+                <SView width={25} />
+                <SText>{o.nombre}</SText>
+            </SView>
+        }
+        )
+    }
+
 
     cardDetalle() {
         if (!this.state?.ventas) return null;
@@ -334,11 +390,14 @@ export default class transportista extends Component {
             //     }
             //   }
         })
+        console.log("this.state.datosEmpleados")
+        console.log(this.state.datosEmpleados)
+        if (!this.state.datosEmpleados) return <></>
 
         return <SView center
             style={{
                 position: 'absolute',
-                top: 140,
+                top: 90,
                 zIndex: 9999,
                 backgroundColor: STheme.color.card,
                 borderTopRightRadius: 10,
@@ -374,6 +433,9 @@ export default class transportista extends Component {
                     <SText>NO VISITADOS </SText>
                     <SText bold>({no_visitados})</SText>
                 </SView>
+                <SText bold>VENDEDORES: </SText>
+                    {this.getVendedores()}
+
             </SView>
         </SView>
 
@@ -435,13 +497,14 @@ export default class transportista extends Component {
         // console.log(this.state)
         return <SPage disableScroll>
 
-            {this.cardDetalle()}
+
             <SMapView ref={ref => this.mapa = ref}>
                 {this.getPolylines()}
                 {this.renderMarkers()}
                 {this.getMarkers()}
 
             </SMapView>
+            {this.cardDetalle()}
             <Container>
                 {this.getHeader()}
                 {this.renerWithData()}
