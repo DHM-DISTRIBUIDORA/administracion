@@ -171,10 +171,11 @@ export default class root extends Component {
                                     // })
                                 }}
                             >
-                                
+
                                 <SView col={"xs-8"} >
                                     <SText fontSize={14} bold>{vd?.codigo} - {vd?.clinom}</SText>
                                     <SText fontSize={12}>{vd?.clidir}</SText>
+                                    <SText fontSize={12} color={STheme.color.gray}>Vend.: {vd?.empnom}</SText>
                                 </SView>
                                 <SView col={"xs-2"} >
                                     {(curvisita?.monto == null) ?

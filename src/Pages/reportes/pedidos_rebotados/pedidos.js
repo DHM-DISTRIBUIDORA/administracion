@@ -58,15 +58,15 @@ export default class index extends Component {
                 // // // { key: "cantidad_otros", label: "Otros", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center" } },
                 // // // { key: "cantidad", label: "Total", width: 70, sumar: true, renderTotal: removeDecimal, cellStyle: { textAlign: "center", fontWeight:"bold" } },
                 // // // { key: "fecha_primero", width: 130 },
-                // // // { key: "fecha_ultimo", width: 130 },
-                // {
-                //     key: "-clientes", width: 130, component: (a) => <Link onPress={() => {
-                //         SNavigation.navigate("/tbcli/profile", {
-                //             pk: a.idcli,
-                //             fecha_inicio: this.state.fecha_inicio, fecha_fin: this.state.fecha_fin
-                //         })
-                //     }} >{"Ver perfil"}</Link>
-                // },
+                // // { key: "fecha_ultimo", width: 130 },
+                {
+                    key: "-clientes", width: 130, component: (a) => <Link onPress={() => {
+                        SNavigation.navigate("/tbcli/profile", {
+                            pk: a.idcli,
+                            fecha_inicio: this.state.fecha_inicio, fecha_fin: this.state.fecha_fin
+                        })
+                    }} >{"Ver perfil"}</Link>
+                },
             ]}
             limit={50}
             data={this.state?.data} />
