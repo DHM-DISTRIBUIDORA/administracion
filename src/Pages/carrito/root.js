@@ -128,10 +128,10 @@ class index extends Component {
             // this.state.location = 1;
             return;
         }
-        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude); 
         if (distancia > 200) {
             if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
-                SPopup.alert("No tiene permisos para levantar pedidos lejos del cliente, porfavor contactese con la administracion.")
+                SPopup.alert("No tiene permisos para levantar pedidos lejos del cliente, porfavor contáctese con la administración.")
                 return;
             }
         }
