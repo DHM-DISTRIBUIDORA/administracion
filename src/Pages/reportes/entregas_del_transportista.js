@@ -62,8 +62,8 @@ export default class index extends Component {
         return (
             <SPage title="Entregas del transportista" disableScroll>
                 <SelectEntreFechas
-                    // fecha_inicio={"2023-12-12"}
-                    // fecha_fin={"2023-12-12"}
+                    fecha_inicio={"2024-03-05"}
+                    fecha_fin={"2024-03-05"}
                     onChange={e => this.getData(e)} />
                 <SView flex>
                     {this.getTable()}

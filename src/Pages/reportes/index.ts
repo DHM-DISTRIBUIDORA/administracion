@@ -18,6 +18,7 @@ import activaciones from "./activaciones"
 import pedidos_rebotados from "./pedidos_rebotados"
 import profile from './profile/index';
 import log from "./log"
+import mapa_calor_por_linea from './mapa_calor_por_linea';
 import Model from '../../Model';
 
 
@@ -31,6 +32,7 @@ export const Parent = {
 export default SPage.combinePages("reportes", {
     "": root,
     activaciones,
+    mapa_calor_por_linea,
     productos_mas_vendidos,
     usuarios,
     clientes_con_pedidos,

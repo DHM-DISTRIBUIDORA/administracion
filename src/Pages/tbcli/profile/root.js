@@ -67,9 +67,36 @@ class index extends DPA.profile {
     load() {
         DataBase.tbcli.objectForPrimaryKey(this.pk).then(e => {
             this.setState({ data: e })
+            console.log("EEEEEEEEEEEEE")
+            console.log(e)
+
+            DataBase.tbcat.objectForPrimaryKey(e.idcat).then(i => {
+                console.log("CATTTT")
+                console.log(i)
+                this.setState({ dataCategoria: i })
+            }).catch(i => {
+                console.error(i)
+            })
+
+            DataBase.tbzon.objectForPrimaryKey(e.idz).then(f => {
+                console.log("FFFFFFFFFFFF")
+                console.log(f)
+                this.setState({ dataZone: f })
+                DataBase.tbemp.objectForPrimaryKey(f.idemp).then(g => {
+                    console.log("GGGGGGGGGG")
+                    console.log(g)
+                    this.setState({ dataEmpleado: g })
+                }).catch(g => {
+                    console.error(g)
+                })
+            }).catch(f => {
+                console.error(f)
+            })
         }).catch(e => {
             console.error(e)
         })
+
+
     }
 
     loadData({ fecha_inicio, fecha_fin }) {
@@ -385,6 +412,53 @@ class index extends DPA.profile {
             <SText bold>Total = Bs. {SMath.formatMoney(total)} </SText>
         </SView>
     }
+
+    getEmpleado() {
+        if (!this.state.dataEmpleado) return null;
+        let obj = this.state.dataEmpleado;
+        return <SView col={"xs-7.5"} padding={8} row>
+            <SText bold>DATOS VENDEDOR</SText>
+            <SHr h={4} />
+            <SView col={"xs-3"} >
+                <SView width={40} height={40} card style={{
+                    borderRadius: 28,
+                    overflow: "hidden",
+                    backgroundColor: STheme.color.white
+                }} center>
+                    <SImage enablePreview src={require('../../../Assets/img/sinFoto.png')} style={{
+                        resizeMode: "contain",
+                        position: "absolute",
+                        zIndex: 90,
+                        top: 0,
+                        width: 50
+                    }} />
+                    <SImage enablePreview src={Model.tbemp._get_image_download_path(SSocket.api, obj.idemp) + "?date=" + new Date().getTime()} style={{
+                        resizeMode: "cover",
+                        zIndex: 99,
+                    }} />
+                </SView>
+            </SView>
+            <SView col={"xs-9"} >
+                <SText fontSize={12}>{obj.empnom}</SText>
+                <SHr h={2} />
+                <SText fontSize={12}>{`Cod.: ${obj.empcod}`}</SText>
+            </SView>
+        </SView>
+    }
+
+    getTipoCliente() {
+        if (!this.state.dataCategoria) return null;
+        let obj = this.state.dataCategoria;
+      
+
+        return <SView col={"xs-4.5"} padding={8} flex >
+            <SText bold>TIPO DE CLIENTE</SText>
+            {/* <SHr h={4} /> */}
+            <SText center fontSize={15}>{obj.catnom}</SText>
+        </SView>
+    }
+
+
     $item(obj) {
         if (!obj) return <SLoad />
         console.log("obj")
@@ -436,6 +510,14 @@ class index extends DPA.profile {
                 <SHr h={4} />
                 <SText fontSize={12}>{`Dir.: ${obj.clidir}`}</SText>
             </SView>
+
+            <SHr color={STheme.color.lightGray} height={1} ></SHr>
+            <SHr h={20} />
+            <SView col={"xs-12"} row >
+                {this.getEmpleado()}
+                {this.getTipoCliente()}
+            </SView>
+            <SHr h={20} />
 
             <Btn col={"xs-11"} onPress={() => {
                 if (obj.idcat == 0) {
