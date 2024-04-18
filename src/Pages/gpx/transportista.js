@@ -205,7 +205,6 @@ export default class transportista extends Component {
             }
 
             if (!empleados[obj.idemp]) {
-
                 // let colors = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
                 let colors = this.state.coloresE[j];
                 empleados[obj.idemp] = {
@@ -257,17 +256,13 @@ export default class transportista extends Component {
                             right: 0,
                             overflow: "hidden",
                             zIndex: 999
-
                         }} center>
                         </SView>
                         <SIcon name={"MarcadorMapa"} width={25.45} height={33.9} fill={color} />
                     </SView>}
-
             </SMapView.SMarker>
         })
     }
-
-
 
     getHeader() {
         if (!this.state.fecha_recorrido) return <SLoad />
@@ -295,9 +290,7 @@ export default class transportista extends Component {
         if (!this.state?.points) return null;
         if (!this.state?.activaciones) return null;
 
-        // console.log(this.state?.data)
         const colores = ['#85BFD0', '#9B9AD9', '#90D598', '#F5AD76', '#F18684', '#E36188', '#76DEFC', '#D289E1', '#5097F8', '#17C3A5', '#A7C1D4', '#87e4ec'];
-
 
         let last_start = null
         let last_stop = null
@@ -335,7 +328,6 @@ export default class transportista extends Component {
         if (!this.state.datosEmpleados) return null;
         return Object.values(this.state.datosEmpleados).map((o) => {
             return <SView row>
-
                 <SView width={20} height={20} borderRadius={45} backgroundColor={o.color} style={{
                     borderWidth: 1,
                     borderColor: STheme.color.text,
@@ -435,7 +427,6 @@ export default class transportista extends Component {
                 </SView>
                 <SText bold>VENDEDORES: </SText>
                     {this.getVendedores()}
-
             </SView>
         </SView>
 
