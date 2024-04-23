@@ -327,6 +327,8 @@ export default class transportista extends Component {
     getVendedores = () => {
         if (!this.state.datosEmpleados) return null;
         return Object.values(this.state.datosEmpleados).map((o) => {
+            console.log(this.state.datosEmpleados)
+            let cantiad = (this.state.ventas.filter(a => a.idemp == o.idemp) ?? []).length
             return <SView row>
                 <SView width={20} height={20} borderRadius={45} backgroundColor={o.color} style={{
                     borderWidth: 1,
@@ -337,7 +339,7 @@ export default class transportista extends Component {
                 }} center>
                 </SView>
                 <SView width={25} />
-                <SText>{o.nombre}</SText>
+                <SText>{o.nombre} ({cantiad})</SText>
             </SView>
         }
         )
@@ -426,7 +428,7 @@ export default class transportista extends Component {
                     <SText bold>({no_visitados})</SText>
                 </SView>
                 <SText bold>VENDEDORES: </SText>
-                    {this.getVendedores()}
+                {this.getVendedores()}
             </SView>
         </SView>
 

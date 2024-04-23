@@ -1,16 +1,23 @@
 import { Text, View } from 'react-native'
 import React, { Component } from 'react'
-import { SIcon, SNavigation, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component'
+import { SIcon, SLoad, SNavigation, SPage, SPopup, SText, STheme, SThread, SView } from 'servisofts-component'
 import { MenuButtom, MenuPages } from 'servisofts-rn-roles_permisos'
 import Model from '../../Model'
 import { SHr } from 'servisofts-component'
 
 export default class root extends Component {
 
+    state = {}
+    componentDidMount() {
+        new SThread(200, "adasd", false).start(() => {
+            this.setState({ load: true })
+        })
+    }
     navegar() {
 
     }
     render() {
+        if (!this.state.load) return <SLoad />
         const idemp = Model.usuario.Action.getUsuarioLog().idvendedor;
         return <SPage title="Reportes" >
             <SView col={"xs-12"} center >
@@ -29,6 +36,7 @@ export default class root extends Component {
                         <MenuButtom label={"Clientes con pedidos"} url={"/reportes/clientes_con_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Pedidos rebotados por vendedor"} url={"/reportes/pedidos_rebotados"} icon={<SIcon name={"MconPedidos"} />} />
                         <MenuButtom label={"Conductores"} url='/mapa/conductores' icon={<SIcon name={"IConductores"} />} />
+                        <MenuButtom label={"Mapa de calor"} url='/reportes/mapa_calor_por_linea' icon={<SIcon name={"MConPedidosMap"} />} />
 
                     </MenuPages>
                     <SHr />
@@ -40,14 +48,14 @@ export default class root extends Component {
                         <MenuButtom label={"Clientes con pedidos Mapa"} url={"/reportes/clientes_con_pedidos_mapa"} params={{ idemp: idemp }} icon={<SIcon name={"MConPedidosMap"} />} />
                         {/* <MenuButtom label={"Clientes sin pedidos"} url={"/reportes/clientes_sin_pedidos"} params={{ idemp: idemp }} icon={<SIcon name={"MsinPedidos"} />} /> */}
                         <MenuButtom label={"Clientes sin pedidos"} icon={<SIcon name={"MsinPedidos"} />} onPress={() => {
-                            SNavigation.navigate("/tbemp",{
+                            SNavigation.navigate("/tbemp", {
                                 onSelect: (empleado) => {
                                     new SThread(100, "asdasd").start(() => {
                                         SNavigation.navigate("/reportes/clientes_sin_pedidos", { idemp: empleado.idemp })
                                     })
                                 }
                             },
-                            //  { pk: 1 }
+                                //  { pk: 1 }
                             )
                         }} />
                         <MenuButtom label={"Clientes sin pedidos Mapa"} icon={<SIcon name={"MSinPedidosMap"} />} onPress={() => {
