@@ -7,6 +7,7 @@ import SSocket from 'servisofts-socket'
 import DataBase from '../../DataBase'
 import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
 import PButtomSmall from '../../Components/PButtomSmall';
+import { SBackgroundLocation } from 'servisofts-background-location';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -66,11 +67,10 @@ class pedidoDetalle extends Component {
         SGeolocation.getCurrentPosition({
             enableHighAccuracy: false,
             maximumAge: 3600,
-            timeout: 10000
+            timeout: 3000
         }).then(e => {
             notify.close();
             console.log("COORDENADAS OBTENIDAAAAAAAS");
-
             console.log(e.coords);
             console.log(tbcli);
             this.handlePressVisitaUbicacion(tbcli, e.coords, visit);
