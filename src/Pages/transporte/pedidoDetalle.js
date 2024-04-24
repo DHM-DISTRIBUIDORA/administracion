@@ -7,6 +7,7 @@ import SSocket from 'servisofts-socket'
 import DataBase from '../../DataBase'
 import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
 import PButtomSmall from '../../Components/PButtomSmall';
+import { SBackgroundLocation } from 'servisofts-background-location';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -66,11 +67,10 @@ class pedidoDetalle extends Component {
         SGeolocation.getCurrentPosition({
             enableHighAccuracy: false,
             maximumAge: 3600,
-            timeout: 10000
+            timeout: 3000
         }).then(e => {
             notify.close();
             console.log("COORDENADAS OBTENIDAAAAAAAS");
-
             console.log(e.coords);
             console.log(tbcli);
             this.handlePressVisitaUbicacion(tbcli, e.coords, visit);
@@ -88,87 +88,84 @@ class pedidoDetalle extends Component {
 
     handlePressVisitaUbicacion = async (tbcli, ubicacion, visit) => {
 
-        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
-        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
+        // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
         if (distancia > 200) {
             console.log("DISTANCIA MAYOR A 200 METROS");
-            // SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
-            // return;
-
+          
             if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
                 console.log("DISTANCIA MAYOR A 200 METROS entró al if");
-                SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, porfavor contáctese con la administración.")
+                SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, por favor contáctese con la administración.")
                 return;
             }
-        } else {
-            if (visit) {
-                SPopup.openContainer({
-                    key: "popup_concretar_visita_si",
-                    render: (e) => {
-                        let opts = []
-                        if (this.visitaType == "transporte") {
-                            opts = ["ENTREGADO", "ENTREGADO PARCIALMENTE"]
-                        }
-                        return <SView col={"xs-12"} padding={8} center>
-                            <SHr />
-                            <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
-                            <SHr />
-                            <SHr />
-                            <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
-                            <SHr />
-                            <SInput defaultValue={(parseFloat(this.total).toFixed(2))} ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
-                            {/* <SHr />
+        }
+        if (visit) {
+            SPopup.openContainer({
+                key: "popup_concretar_visita_si",
+                render: (e) => {
+                    let opts = []
+                    if (this.visitaType == "transporte") {
+                        opts = ["ENTREGADO", "ENTREGADO PARCIALMENTE"]
+                    }
+                    return <SView col={"xs-12"} padding={8} center>
+                        <SHr />
+                        <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
+                        <SHr />
+                        <SHr />
+                        <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
+                        <SHr />
+                        <SInput defaultValue={(parseFloat(this.total).toFixed(2))} ref={ref => this.total_pagado = ref} type={"money"} placeholder={"Monto"} />
+                        {/* <SHr />
                     <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Resumen de la visita."} /> */}
-                            <SHr />
-                            <Btn padding={8} onPress={() => {
-                                let monto = 0;
-                                if (this.visitaType == "venta") {
-                                    monto = 0;
-                                } else if (this.visitaType == "transporte") {
-                                    monto = this.total_pagado.getValue();
-                                }
-                                this.visitaRegistro({
-                                    // descripcion: this.visita_descripcion.getValue(),
-                                    tipo: this.visita_tipo.getValue(),
-                                    monto: monto
-                                })
-                                SPopup.close("popup_concretar_visita_si");
-                            }}>CONFIRMAR</Btn>
-                            <SHr />
-                        </SView>
-                    }
-                })
-            } else {
-                SPopup.openContainer({
-                    key: "popup_concretar_visita_no",
-                    render: (e) => {
+                        <SHr />
+                        <Btn padding={8} onPress={() => {
+                            let monto = 0;
+                            if (this.visitaType == "venta") {
+                                monto = 0;
+                            } else if (this.visitaType == "transporte") {
+                                monto = this.total_pagado.getValue();
+                            }
+                            this.visitaRegistro({
+                                // descripcion: this.visita_descripcion.getValue(),
+                                tipo: this.visita_tipo.getValue(),
+                                monto: monto
+                            })
+                            SPopup.close("popup_concretar_visita_si");
+                        }}>CONFIRMAR</Btn>
+                        <SHr />
+                    </SView>
+                }
+            })
+        } else {
+            SPopup.openContainer({
+                key: "popup_concretar_visita_no",
+                render: (e) => {
 
-                        let opts = []
-                        if (this.visitaType == "transporte") {
-                            opts = ["NO TIENE DINERO", "NO ESTÁN LOS ENCARGADOS", "CERRADO", "PEDIDO MAL GENERADO"]
-                        }
-                        return <SView col={"xs-12"} padding={8} center>
-                            <SHr />
-                            <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
-                            <SHr />
-                            <SHr />
-                            <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
-                            <SHr />
-                            <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Razón o motivo"} />
-                            <SHr />
-                            <Btn padding={8} onPress={() => {
-                                this.visitaRegistro({
-                                    descripcion: (this.visita_descripcion?.getValue()) ? this.visita_descripcion?.getValue() : "",
-                                    tipo: this.visita_tipo.getValue(),
-                                    // monto: monto
-                                })
-                                SPopup.close("popup_concretar_visita_no");
-                            }}>CONFIRMAR</Btn>
-                            <SHr />
-                        </SView>
+                    let opts = []
+                    if (this.visitaType == "transporte") {
+                        opts = ["NO TIENE DINERO", "NO ESTÁN LOS ENCARGADOS", "CERRADO", "PEDIDO MAL GENERADO"]
                     }
-                })
-            }
+                    return <SView col={"xs-12"} padding={8} center>
+                        <SHr />
+                        <SText fontSize={20} center>Cuéntanos, ¿cómo te fue en la visita?</SText>
+                        <SHr />
+                        <SHr />
+                        <SInput type={"select"} ref={ref => this.visita_tipo = ref} defaultValue={opts[0]} options={opts} />
+                        <SHr />
+                        <SInput ref={ref => this.visita_descripcion = ref} type={"textArea"} placeholder={"Razón o motivo"} />
+                        <SHr />
+                        <Btn padding={8} onPress={() => {
+                            this.visitaRegistro({
+                                descripcion: (this.visita_descripcion?.getValue()) ? this.visita_descripcion?.getValue() : "",
+                                tipo: this.visita_tipo.getValue(),
+                                // monto: monto
+                            })
+                            SPopup.close("popup_concretar_visita_no");
+                        }}>CONFIRMAR</Btn>
+                        <SHr />
+                    </SView>
+                }
+            })
         }
     }
 

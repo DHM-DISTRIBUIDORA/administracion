@@ -105,8 +105,8 @@ android {
         applicationId "com.distribuidora_dhm_app"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10074
-        versionName "1.0.74"
+        versionCode 10076
+        versionName "1.0.76"
     }
     splits {
         abi {
