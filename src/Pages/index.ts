@@ -9,6 +9,7 @@ import pedidos_clientes from './pedidos_clientes';
 import producto from './producto';
 import sql from './sql/index';
 import privacidad from './privacidad';
+import politica_de_privacidad from './politica_de_privacidad';
 import clientes from './clientes';
 import perfil from './perfil';
 
@@ -72,6 +73,7 @@ export default SPage.combinePages("/", {
   sql,
   "privacidad": privacidad,
   "privacy": privacidad,
+  "politica_de_privacidad": politica_de_privacidad,
   ...producto,
   ...gpx,
   ...dm_cabfac,
