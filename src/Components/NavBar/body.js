@@ -206,7 +206,7 @@ export default class body extends React.Component {
 
                     {/* {this.renderIcon({ label: "Novedades", icon: "Novedades", path: "/novedades" })} */}
                     {/* {this.renderIcon({ label: "Contactos", icon: "Mcontact", path: "/contacto" })} */}
-                    {this.renderIcon({ label: "Política de privacidad", icon: "IconTerminos", path: "/politica_de_privacidad" })}
+                    {this.renderIcon({ label: "Política de privacidad", icon: "IconTerminos", path: "/privacy" })}
                     {this.renderIcon({
                         label: "Storage", icon: "Reload", onPress: () => {
                             DataBaseContainer.sync();
