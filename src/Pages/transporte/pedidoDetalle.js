@@ -8,6 +8,7 @@ import DataBase from '../../DataBase'
 import { Btn, BtnNavegar, Container, PButtom3 } from '../../Components';
 import PButtomSmall from '../../Components/PButtomSmall';
 import { SBackgroundLocation } from 'servisofts-background-location';
+import SGeolocation2 from '../../Components/SGeolocation2';
 
 class pedidoDetalle extends Component {
     constructor(props) {
@@ -64,10 +65,15 @@ class pedidoDetalle extends Component {
             body: "Estamos buscando tu ubicación actual.",
             type: "loading"
         })
-        SGeolocation.getCurrentPosition({
-            enableHighAccuracy: false,
-            maximumAge: 3600,
-            timeout: 3000
+        // SGeolocation.getCurrentPosition({
+        //     enableHighAccuracy: false,
+        //     maximumAge: 3600,
+        //     timeout: 3000
+        // }).then(e => {
+        SGeolocation2.getCurrentPosition({
+            enableHighAccuracy: true,
+            maximumAge: 10000,
+            timeout: 15000
         }).then(e => {
             notify.close();
             console.log("COORDENADAS OBTENIDAAAAAAAS");
@@ -92,7 +98,7 @@ class pedidoDetalle extends Component {
         // let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, -17.777669171299607, -63.17510496606445);
         if (distancia > 200) {
             console.log("DISTANCIA MAYOR A 200 METROS");
-          
+
             if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
                 console.log("DISTANCIA MAYOR A 200 METROS entró al if");
                 SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, por favor contáctese con la administración.")
