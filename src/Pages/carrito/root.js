@@ -6,6 +6,7 @@ import { BottomNavigator, Carrito, Container, PButtom } from '../../Components';
 import Model from '../../Model';
 import DataBase from '../../DataBase';
 import { Trigger } from 'servisofts-db';
+import SGeolocation2 from '../../Components/SGeolocation2';
 
 
 class index extends Component {
@@ -79,10 +80,15 @@ class index extends Component {
             body: "Estamos buscando tu ubicación actual.",
             type: "loading"
         })
-        SGeolocation.getCurrentPosition({
-            enableHighAccuracy: false,
-            maximumAge: 3600,
-            timeout: 10000
+        // SGeolocation.getCurrentPosition({
+        //     enableHighAccuracy: false,
+        //     maximumAge: 3600,
+        //     timeout: 10000
+        // }).then(e => {
+        SGeolocation2.getCurrentPosition({
+            enableHighAccuracy: true,
+            maximumAge: 10000,
+            timeout: 15000
         }).then(e => {
             notify.close();
             this.handlePressPedidoUbicacion(tbcli, e.coords);
@@ -128,7 +134,7 @@ class index extends Component {
             // this.state.location = 1;
             return;
         }
-        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude); 
+        let distancia = this.calc_distance(tbcli.clilat, tbcli.clilon, ubicacion.latitude, ubicacion.longitude);
         if (distancia > 200) {
             if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
                 SPopup.alert("No tiene permisos para levantar pedidos lejos del cliente, porfavor contáctese con la administración.")

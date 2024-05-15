@@ -7,6 +7,7 @@ import { SButtom, SHr, SIcon, SImage, SLoad, SNavigation, SPage, SText, STheme, 
 import Model from '../../Model';
 import { GeolocationMapSelect } from 'servisofts-rn-geolocation'
 import Btn from '../../Components/PButtom';
+import SGeolocation2 from '../../Components/SGeolocation2';
 // import SMapView from 'servisofts-component/Component/SMapView';
 // import PopupAutoCompleteDireccion from './profile/Components/PopupAutoCompleteDireccion';
 // import PopupAutoCompleteDireccion from './Components/PopupAutoCompleteDireccion';
@@ -45,7 +46,7 @@ class index extends Component {
     }
 
     center() {
-        SGeolocation.getCurrentPosition({
+        SGeolocation2.getCurrentPosition({
         }).then(e => {
             this.map.getMap().animateToRegion({
                 latitude: e.coords.latitude,
