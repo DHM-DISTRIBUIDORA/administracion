@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Options, Position, SGeolocationInterface } from "./type";
 
 export default new class SGeolocation2 implements SGeolocationInterface {

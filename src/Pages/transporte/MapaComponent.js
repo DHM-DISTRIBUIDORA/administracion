@@ -98,7 +98,7 @@ export default class MapaComponent extends Component {
                             idven: o.idven + "",
                             idemp: this.props?.state?.idemp,
                             visitaType: "transporte",
-                            visita: visitas_ok[0],
+                            visita: visitas_ok,
 
                             onVisitaSuccess: ({ descripcion, tipo }) => {
                                 // if (this.state.loading) return null;
