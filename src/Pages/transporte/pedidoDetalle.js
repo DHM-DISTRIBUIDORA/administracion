@@ -149,7 +149,7 @@ class pedidoDetalle extends Component {
 
                     let opts = []
                     if (this.visitaType == "transporte") {
-                        opts = ["NO TIENE DINERO", "NO ESTÁN LOS ENCARGADOS", "CERRADO", "PEDIDO MAL GENERADO"]
+                        opts = ["PENDIENTE DE ENTREGA", "NO TIENE DINERO", "NO ESTÁN LOS ENCARGADOS", "CERRADO", "PEDIDO MAL GENERADO"]
                     }
                     return <SView col={"xs-12"} padding={8} center>
                         <SHr />

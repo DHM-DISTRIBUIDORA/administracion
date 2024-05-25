@@ -84,14 +84,19 @@ export default class root extends Component {
         }
         if (this.state?.datas) {
             // clientes_filter = this.state?.datas;
-            clientes_filter = this.state?.datas.map(item => ({
-                "idcli": item.id,
-                "clinom": item.clinom,
-                "clidir": item.clidir,
-                "clicod": item.clicod,
-                "clilat": item.location.latitude,
-                "clilon": item.location.longitude
-            }));
+            console.log("sadsad", this.state.datas, clientes_filter)
+            clientes_filter = clientes_filter.filter(a => {
+                let itm = this.state.datas.find(b => b.id == a.idven);
+                return !!itm
+            })
+            // clientes_filter = this.state?.datas.map(item => ({
+            //     "idcli": item.id,
+            //     "clinom": item.clinom,
+            //     "clidir": item.clidir,
+            //     "clicod": item.clicod,
+            //     "clilat": item.location.latitude,
+            //     "clilon": item.location.longitude
+            // }));
         }
 
         console.log(this.state.visitas, clientes_filter)
@@ -117,9 +122,6 @@ export default class root extends Component {
                     render={(vd) => {
                         // console.log(vd)
                         const curvisita = (this.state.visitas ?? []).find(a => a.idven == vd.idven);
-                        console.log("curvisita")
-                        console.log(curvisita)
-                        console.log("-----------------")
 
                         return <>
                             <SView col={"xs-12"} row center
