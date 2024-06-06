@@ -441,6 +441,26 @@ class index extends DPA.profile {
             </SView>
         </>
     }
+    verAlmacenes() {
+
+        return <>
+            <SView col={"xs-12"} >
+                <SText >Almacenes:</SText>
+                <SView col={"xs-12"} card center row
+                    onPress={() => {
+                        SNavigation.navigate("/tbemp/profile/almacenes", { pk: this.pk })
+                    }}
+                >
+                    <SHr height={15} />
+                    <SIcon name={"Marker"} height={20} width={22} fill={STheme.color.text} />
+                    <SView width={5} />
+                    <SText>Almacenes</SText>
+                    <SHr height={15} />
+
+                </SView>
+            </SView>
+        </>
+    }
 
     $footer() {
         return <SView col={"xs-12"} center>
@@ -449,7 +469,7 @@ class index extends DPA.profile {
             <SHr />
             {this.verZonas()}
             <SHr />
-
+            {this.verAlmacenes()}
             {/* <ZonaEmpleadoComponent idemp={this.pk}/> */}
             {/* <MenuPages path={Parent.path + "/profile/"} permiso={"view"} params={{
                 pk: this.pk

@@ -27,12 +27,14 @@ export default new class tbprd extends TableAbstract {
 
     sync(): Promise<any> {
         return new Promise((resolve, reject) => {
+            let idemp = Model.usuario.Action.getUsuarioLog()?.idvendedor;
             SSocket.sendPromise2({
                 "version": "1.0",
                 "component": "tbprd",
                 "type": "getAllSimple",
                 "estado": "cargando",
-                idalm:"1",
+                idemp: idemp,
+                idalm: "1",
             }).then((e: any) => {
                 SDB.deleteAll(this.scheme.name).then((ex) => {
                     SDB.insertArray(this.scheme.name, e.data).then(a => {

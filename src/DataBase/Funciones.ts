@@ -47,7 +47,7 @@ export const sincronizar_transportista = async () => {
 }
 
 export const sincronizar_admin = async () => {
-    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.tbcli, DataBase.tbcat]
+    const tables = [DataBase.tbzon, DataBase.zona_empleado, DataBase.almacen_empleado, DataBase.tbcli, DataBase.tbcat]
     tables.map((t) => {
         syncWithNotify(t);
     })
@@ -185,7 +185,7 @@ export const saveAllChanges = async () => {
         return;
     }
 
-    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista, DataBase.zona_empleado]
+    const tables = [DataBase.tbcli, DataBase.dm_cabfac, DataBase.visita_vendedor, DataBase.visita_transportista, DataBase.zona_empleado, DataBase.almacen_empleado]
     for (let i = 0; i < tables.length; i++) {
         const element = tables[i];
         await SaveChanges(element);

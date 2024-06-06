@@ -15,13 +15,14 @@ import visita_transportista from './tables/visita_transportista'
 import ventas_factura from './tables/ventas_factura'
 import enviroments from './tables/enviroments'
 import zona_empleado from './tables/zona_empleado'
+import almacen_empleado from './tables/almacen_empleado'
 import { SThread } from 'servisofts-component'
 import * as Funciones from "./Funciones"
 
 export const DB: DBProps = {
     db_name: "dhm",
-    version: 23,
-    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista, ventas_factura, enviroments, zona_empleado]
+    version: 24,
+    tables: [sync_data, usuarioPage, usuario, tbemp, tbprd, tbprdlin, tbzon, dm_cabfac, tbcli, tbcat, background_location, visita_vendedor, visita_transportista, ventas_factura, enviroments, zona_empleado,almacen_empleado]
 }
 
 export default {
@@ -60,7 +61,8 @@ export default {
     visita_transportista,
     ventas_factura,
     enviroments,
-    zona_empleado
+    zona_empleado,
+    almacen_empleado
 }
 
 
