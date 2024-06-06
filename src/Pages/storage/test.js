@@ -93,6 +93,7 @@ export default class test extends Component {
                         <Table table={DataBase.tbzon} label="Zonas." />
                         <Table table={DataBase.tbcat} label="Categorias de clientes." />
                         <Table table={DataBase.zona_empleado} label="Zonas del empleado." save />
+                        <Table table={DataBase.almacen_empleado} label="Almacenes del empleado." save />
                     </>
                     : null
                 }

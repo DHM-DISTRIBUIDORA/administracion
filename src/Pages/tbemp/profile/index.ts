@@ -10,6 +10,7 @@ import pedidos from "./pedidos";
 import pedidosEmpresa from "./pedidosEmpresa";
 import usuario from "./usuario";
 import zonas_asignadas from "./zonas_asignadas";
+import almacenes from "./almacenes";
 export default SPage.combinePages("profile", {
     "": root,
     tbzon,
@@ -20,6 +21,7 @@ export default SPage.combinePages("profile", {
     tbtg,
     pedidos,
     pedidosEmpresa,
-    usuario
+    usuario,
+    almacenes
 
 })
