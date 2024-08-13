@@ -14,6 +14,7 @@ import { Trigger } from 'servisofts-db';
 import { Platform } from 'react-native';
 import SBLocation from 'servisofts-background-location';
 import ListaDePedidos from './Components/ListaDePedidos';
+import SGeolocation2 from '../../../Components/SGeolocation2';
 
 
 class index extends DPA.profile {
@@ -113,6 +114,18 @@ class index extends DPA.profile {
         }).catch(e => console.error(e))
         this.setState({ fecha_inicio: fecha_inicio, fecha_fin: fecha_fin })
     }
+    calc_distance = (lat1, lon1, lat2, lon2) => {
+        console.log(lat1, lon1, lat2, lon2)
+        var rad = function (x) { return x * Math.PI / 180; }
+        var R = 6378.137;
+        var dLat = rad(lat2 - lat1);
+        var dLong = rad(lon2 - lon1);
+        var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(rad(lat1)) *
+            Math.cos(rad(lat2)) * Math.sin(dLong / 2) * Math.sin(dLong / 2);
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var d = R * c * 1000;
+        return d;
+    }
 
     visitaRegistro({ descripcion, tipo, monto }) {
         this.setState({ loading: true })
@@ -139,14 +152,47 @@ class index extends DPA.profile {
             })
         } else {
             data.idemp = Model.usuario.Action.getUsuarioLog()?.idvendedor;
-            DataBase.visita_vendedor.insert(data).then(e => {
-                this.setState({ loading: false })
-                SNavigation.goBack();
 
+            SGeolocation2.getCurrentPosition({
+                enableHighAccuracy: true,
+                maximumAge: 10000,
+                timeout: 15000
+            }).then(e => {
+                const { latitude, longitude } = e.coords
+                const distance = this.calc_distance(latitude, longitude, this.state?.data?.clilat ?? 0, this.state?.data?.clilon ?? 0);
+                // console.log(e, data, this.state);
+                console.log(distance);
+                if (distance > 200) {
+                    console.log("DISTANCIA MAYOR A 200 METROS");
+                    if (!Model.usuarioPage.Action.getPermiso({ url: "/global", permiso: "levantar_pedido_fuera_zona" })) {
+                        console.log("DISTANCIA MAYOR A 200 METROS entró al if");
+                        SPopup.alert("No tiene permisos para realizar la visita lejos del cliente, por favor contáctese con la administración.")
+                        return;
+                    }
+                }
+
+                DataBase.visita_vendedor.insert(data).then(e => {
+                    this.setState({ loading: false })
+                    SNavigation.goBack();
+
+                }).catch(e => {
+                    console.error(e)
+                    this.setState({ loading: false })
+                })
+
+                // notify.close();
+                // this.handlePressPedidoUbicacion(tbcli, e.coords);
             }).catch(e => {
-                console.error(e)
-                this.setState({ loading: false })
+                // notify.close();
+                // SNotification.send({
+                //     title: "Obteniendo tu ubicación",
+                //     body: e.message,
+                //     time: 5000,
+                //     color: STheme.color.danger
+                // })
+                console.error(e);
             })
+
         }
 
         return;
@@ -449,7 +495,7 @@ class index extends DPA.profile {
     getTipoCliente() {
         if (!this.state.dataCategoria) return null;
         let obj = this.state.dataCategoria;
-      
+
 
         return <SView col={"xs-4.5"} padding={8} flex >
             <SText bold>TIPO DE CLIENTE</SText>

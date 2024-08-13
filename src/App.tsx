@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React, { useEffect } from 'react';
 import { Platform, Text } from 'react-native';
-import { SComponentContainer, SNavigation, SText, STheme } from 'servisofts-component';
+import { SComponentContainer, SMapView, SNavigation, SText, STheme } from 'servisofts-component';
 import SSocket from 'servisofts-socket';
 import Redux, { store } from './Redux';
 import Config from "./Config";
@@ -24,6 +24,8 @@ try {
 } catch (e) {
     console.log(e);
 }
+
+SMapView.bootstrapURLKeys.key = "AIzaSyC4rcy6GRVM5_i9ZF0vGFmb1HRc0mXsAdk"
 // BackgroundLocation();
 
 function App(): JSX.Element {

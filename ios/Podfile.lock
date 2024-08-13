@@ -440,7 +440,7 @@ PODS:
   - React-jsinspector (0.71.4)
   - React-logger (0.71.4):
     - glog
-  - react-native-blob-util (0.19.4):
+  - react-native-blob-util (0.19.8):
     - React-Core
   - react-native-cameraroll (5.8.0):
     - React-Core
@@ -465,6 +465,8 @@ PODS:
     - React
   - react-native-geolocation (3.1.0):
     - React-Core
+  - react-native-geolocation-service (5.3.1):
+    - React
   - react-native-google-maps (1.7.1):
     - Google-Maps-iOS-Utils (= 4.1.0)
     - GoogleMaps (= 7.4.0)
@@ -632,7 +634,7 @@ PODS:
     - React-Core
   - servisofts-background-location (2.0.3):
     - React-Core
-  - servisofts-component (3.0.19):
+  - servisofts-component (3.0.27):
     - React-Core
   - servisofts-socket (4.0.4):
     - CocoaAsyncSocket
@@ -698,6 +700,7 @@ DEPENDENCIES:
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
   - react-native-fbsdk (from `../node_modules/react-native-fbsdk`)
   - "react-native-geolocation (from `../node_modules/@react-native-community/geolocation`)"
+  - react-native-geolocation-service (from `../node_modules/react-native-geolocation-service`)
   - react-native-google-maps (from `../node_modules/react-native-maps`)
   - react-native-image-picker (from `../node_modules/react-native-image-picker`)
   - react-native-image-resizer (from `../node_modules/react-native-image-resizer`)
@@ -832,6 +835,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-fbsdk"
   react-native-geolocation:
     :path: "../node_modules/@react-native-community/geolocation"
+  react-native-geolocation-service:
+    :path: "../node_modules/react-native-geolocation-service"
   react-native-google-maps:
     :path: "../node_modules/react-native-maps"
   react-native-image-picker:
@@ -968,12 +973,13 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d6b7fa9260aa3cb40afee0507e3bc1d17ecaa6f2
   React-jsinspector: 1f51e775819199d3fe9410e69ee8d4c4161c7b06
   React-logger: 0d58569ec51d30d1792c5e86a8e3b78d24b582c6
-  react-native-blob-util: 30a6c9fd067aadf9177e61a998f2c7efb670598d
+  react-native-blob-util: 26f1fb0c91f2b437380d4f3875769a7c3e06080e
   react-native-cameraroll: 8cc80e0922a6a432938a26f3b50714adcb2adb5f
   react-native-compressor: ebcf8bc36f8e44581a8f831583caee8a27e55a01
   react-native-document-picker: ec07866a30707f23660c0f3ae591d669d3e89096
   react-native-fbsdk: 8e92c7a334fd8d9c2b5d8b8fcd7ae2c314161099
   react-native-geolocation: ef66fb798d96284c6043f0b16c15d9d1d4955db4
+  react-native-geolocation-service: 608e1da71a1ac31b4de64d9ef2815f697978c55b
   react-native-google-maps: dd12cdd86b8e3fedbbb671676aedaa2f656e2ccd
   react-native-image-picker: 8cb4280e2c1efc3daeb2d9d597f9429a60472e40
   react-native-image-resizer: d9fb629a867335bdc13230ac2a58702bb8c8828f
@@ -1011,12 +1017,12 @@ SPEC CHECKSUMS:
   RNSound: 6c156f925295bdc83e8e422e7d8b38d33bc71852
   RNSVG: d7d7bc8229af3842c9cfc3a723c815a52cdd1105
   servisofts-background-location: 848ddaf74f11525258aa4f7444fd684768534632
-  servisofts-component: 6f064c25419905ca3eb41a5f32dbc852e16884f1
+  servisofts-component: 84e871b3b076f4fef9168d17f945c8991539a0d3
   servisofts-socket: 78f4e16a21755981804751f11fd771ed59d5fb29
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17
   Yoga: 79dd7410de6f8ad73a77c868d3d368843f0c93e0
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: b5c7ae50f7beecbd8908a62b1edab9ba0ce96c47
+PODFILE CHECKSUM: bce2b6114db436dc83c145af4693a3696e2b855e
 
 COCOAPODS: 1.15.2
