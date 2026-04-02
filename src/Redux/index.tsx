@@ -13,9 +13,11 @@ export const store = createStore(
 
 Model._events.setStore(store)
 
+const ReduxProvider = ProviderRedux as React.ComponentType<React.PropsWithChildren<{ store: typeof store }>>;
+
 const Redux = (props:any) => {
-    return (<ProviderRedux store={store} >
+    return (<ReduxProvider store={store} >
         {props.children}
-    </ProviderRedux>)
+    </ReduxProvider>)
 }
 export default Redux;

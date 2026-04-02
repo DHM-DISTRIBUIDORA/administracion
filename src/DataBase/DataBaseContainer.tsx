@@ -11,6 +11,9 @@ import Model from '../Model';
 type DataBaseContainerPropsType = {
     children?: any
 }
+
+const SaveTopComponent = SaveTop as unknown as React.ComponentType<any>;
+
 export default class DataBaseContainer extends Component<DataBaseContainerPropsType> {
 
     static sync = async () => {
@@ -59,7 +62,7 @@ export default class DataBaseContainer extends Component<DataBaseContainerPropsT
         </SView>
         return <>
             {this.props.children}
-            <SaveTop />
+            <SaveTopComponent />
         </>
     }
 }

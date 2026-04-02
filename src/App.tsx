@@ -25,7 +25,9 @@ try {
     console.log(e);
 }
 
-SMapView.bootstrapURLKeys.key = "AIzaSyC4rcy6GRVM5_i9ZF0vGFmb1HRc0mXsAdk"
+// SMapView.bootstrapURLKeys.key = "AIzaSyC4rcy6GRVM5_i9ZF0vGFmb1HRc0mXsAdk"
+// SMapView.bootstrapURLKeys.key = "AIzaSyC3YyO8nw0Bm-4TmzvvG3BjQl7xteAfe0E"
+
 // BackgroundLocation();
 
 function App(): JSX.Element {
